@@ -32,7 +32,7 @@ install.packages("openxlsx", dependencies = TRUE)
 ```R
 install.packages(c("Rcpp", "devtools"), dependencies = TRUE)
 require(devtools)
-install_github("awalker89/openxlsx")
+install_github("david-f1976/openxlsx")
 ```
 
 ## Bug/feature request
