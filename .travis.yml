@@ -6,13 +6,18 @@ r:
   
 os:
   - linux
-  - osx
 
   
 cache: packages
 
 r_github_packages:
   - jimhester/covr
+  
+r_build_args: '--compact-vignettes="gs+qpdf"'
+
+
+r_check_args: "--as-cran"
+  
   
 warnings_are_errors: true
 

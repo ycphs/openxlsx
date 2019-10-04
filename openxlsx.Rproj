@@ -15,5 +15,5 @@ LaTeX: pdfLaTeX
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
-PackageCheckArgs: --as-cran
+PackageCheckArgs: --as-cran --compact-vignettes="gs+qpdf"
 PackageRoxygenize: rd,collate,namespace
