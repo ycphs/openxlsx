@@ -40,11 +40,11 @@ Please let me know which version of openxlsx you are using when posting bug repo
 ```R
 packageVersion("openxlsx")
 ```
-Thanks, [here](https://github.com/awalker89/openxlsx/issues). 
+Thanks, [here](https://github.com/ycphs/openxlsx/issues). 
 
 ## News
-[Here](https://raw.githubusercontent.com/awalker89/openxlsx/master/NEWS). 
+[Here](https://raw.githubusercontent.com/ycphs/openxlsx/master/NEWS). 
 
 ## Authors and Contributors
 A list is automagically maintained
-[here](https://github.com/awalker89/openxlsx/graphs/contributors). 
+[here](https://github.com/ycphs/openxlsx/graphs/contributors). 
