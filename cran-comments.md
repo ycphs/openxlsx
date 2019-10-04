@@ -1,19 +1,10 @@
-
 ## Test environments
-* local Windows 7, R 3.5.0 & R devel
-* local Ubuntu 17.10, R 3.3.2
+* local OS X install, R 3.6.0
+* ubuntu 14.04 (on travis-ci), R 3.6.0
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs.
 
-On Ubuntu there were no ERRORs or WARNINGs.
+0 errors | 0 warnings | 1 note
 
-A NOTE on Ubuntu:
-installed size is 6.8Mb
-sub-directoris of 1Mb or more:
-  libs  5.3Mb
-
-## Downstream dependencies
-I have also run R CMD check on downstream dependencies of openxlsx.
-All packages that I could install passed.
+* This is a new release.
