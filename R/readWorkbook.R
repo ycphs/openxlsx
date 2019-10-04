@@ -23,12 +23,14 @@
 #' @param na.strings A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.
 #' @param fillMergedCells If TRUE, the value in a merged cell is given to all cells within the merge.
 #' @param skipEmptyCols If \code{TRUE}, empty columns are skipped.
+#' @param asdatatable If return object is a data.table
 #' @seealso \code{\link{getNamedRegions}}
 #' @details Formulae written using writeFormula to a Workbook object will not get picked up by read.xlsx().
 #' This is because only the formula is written and left to be evaluated when the file is opened in Excel.
 #' Opening, saving and closing the file with Excel will resolve this.
 #' @author Alexander Walker
-#' @return data.frame
+#' @author Philipp Schauberger
+#' @return data.frame or data.table
 #' @export
 #' @examples
 #' xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
@@ -74,7 +76,8 @@ read.xlsx <- function(xlsxFile,
                       check.names = FALSE,
                       namedRegion = NULL,
                       na.strings = "NA",
-                      fillMergedCells = FALSE){
+                      fillMergedCells = FALSE,
+                      asdatatable=TRUE){
   
   UseMethod("read.xlsx", xlsxFile) 
   
@@ -94,7 +97,8 @@ read.xlsx.default <- function(xlsxFile,
                               check.names = FALSE,
                               namedRegion = NULL,
                               na.strings = "NA",
-                              fillMergedCells = FALSE){
+                              fillMergedCells = FALSE,
+                              asdatatable=TRUE){
   
   
   ## Validate inputs and get files
@@ -463,6 +467,10 @@ read.xlsx.default <- function(xlsxFile,
     m[[1]] <- NULL
   }
   
+  if(asdatatable==TRUE){
+    setDT(m)
+  }
+  
   return(m)
   
 }
@@ -504,7 +512,8 @@ readWorkbook <- function(xlsxFile,
                          check.names = FALSE,
                          namedRegion = NULL,
                          na.strings = "NA",
-                         fillMergedCells = FALSE){
+                         fillMergedCells = FALSE,
+                         asdatatable=TRUE){
   
   read.xlsx(xlsxFile = xlsxFile,
             sheet = sheet,
@@ -519,7 +528,8 @@ readWorkbook <- function(xlsxFile,
             check.names = check.names,
             namedRegion = namedRegion,
             na.strings = na.strings,
-            fillMergedCells = fillMergedCells)
+            fillMergedCells = fillMergedCells,
+            asdatatable=asdatatable)
 }
 
 

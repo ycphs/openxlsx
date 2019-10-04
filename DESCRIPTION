@@ -3,13 +3,13 @@ Type: Package
 Title: Read, Write and Edit XLSX Files
 Version: 4.1.1.1003
 Date: 2018-11-19
-Authors@R: c(
+Authors@R: c(person("Philipp", "Schauberger",email="philipp@schauberger.co.at",role=c("ctb")),
     person("Alexander", "Walker",
     email = "Alexander.Walker1989@gmail.com", role = c("aut", "cre")),
     person("Luca", "Braglia", role = "ctb"))
 URL: https://github.com/awalker89/openxlsx
-BugReports: https://github.com/awalker89/openxlsx/issues
-Maintainer: Alexander Walker <Alexander.Walker1989@gmail.com>
+BugReports: https://github.com/ycphs/openxlsx/issues
+Maintainer: Philipp Schauberger <philipp@schauberger.co.at>
 Description: Simplifies the creation of Excel .xlsx files by providing a high
     level interface to writing, styling and editing worksheets. Through the use of
     'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages
@@ -25,7 +25,8 @@ Imports:
     grDevices,
     stats,
     utils,
-    zip
+    zip,
+    data.table
 VignetteBuilder: knitr
 Suggests:
     knitr,

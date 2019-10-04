@@ -41,25 +41,32 @@ test_that("Maintaining Named Regions on Load", {
   df2 <- read.xlsx(out_file, namedRegion = "iris")
   expect_equal(object = df1, expected = df2)
   
-  df1 <- read.xlsx(wb, namedRegion = "region1")
+  df1 <- read.xlsx(wb, namedRegion = "region1", asdatatable = FALSE)
   expect_equal(object = class(df1), expected = "data.frame")
   expect_equal(object = nrow(df1), expected = 0)
   expect_equal(object = ncol(df1), expected = 1)
   
-  df1 <- read.xlsx(wb, namedRegion = "region1", colNames = FALSE)
+  dt1 <- read.xlsx(wb, namedRegion = "region1", asdatatable = TRUE)
+  expect_equal(object = sort(class(dt1)), expected = sort(c("data.frame","data.table")))
+  expect_equal(object = nrow(dt1), expected = 0)
+  expect_equal(object = ncol(dt1), expected = 1)
+  
+  
+  
+  df1 <- read.xlsx(wb, namedRegion = "region1", colNames = FALSE, asdatatable = FALSE)
   expect_equal(object = class(df1), expected = "data.frame")
   expect_equal(object = nrow(df1), expected = 1)
   expect_equal(object = ncol(df1), expected = 1)
   
-  df1 <- read.xlsx(wb, namedRegion = "region1", rowNames = TRUE)
-  expect_equal(object = class(df1), expected = "data.frame")
-  expect_equal(object = nrow(df1), expected = 0)
-  expect_equal(object = ncol(df1), expected = 0)
+  dt1 <- read.xlsx(wb, namedRegion = "region1", rowNames = TRUE , asdatatable = TRUE)
+  expect_equal(object = sort(class(dt1)), expected = sort(c("data.frame","data.table")))
+  expect_equal(object = nrow(dt1), expected = 0)
+  expect_equal(object = ncol(dt1), expected = 0)
   
   
 })
 
-test_that("Correctly Loading Named Regions Created in Excel",{
+test_that("Correctly Loading Named Regions Created in Excel DF",{
   
   # Load an excel workbook (in the repo, it's located in the /inst folder;
   # when installed on the user's system, it is located in the installation folder
@@ -72,9 +79,11 @@ test_that("Correctly Loading Named Regions Created in Excel",{
   
   # NamedTable refers to Sheet1!$C$5:$D$8
   table_f <- read.xlsx(filename,
-                       namedRegion = "NamedTable")
+                       namedRegion = "NamedTable"
+                       , asdatatable = FALSE)
   table_w <- read.xlsx(wb,
-                       namedRegion = "NamedTable")
+                       namedRegion = "NamedTable"
+                       , asdatatable = FALSE)
   
   expect_equal(object = table_f, expected = table_w)
   expect_equal(object = class(table_f), expected = "data.frame")
@@ -87,12 +96,12 @@ test_that("Correctly Loading Named Regions Created in Excel",{
   cell_f <- read.xlsx(filename,
                       namedRegion = "NamedCell",
                       colNames = FALSE,
-                      rowNames = FALSE)
+                      rowNames = FALSE, asdatatable = FALSE)
   
   cell_w <- read.xlsx(wb,
                       namedRegion = "NamedCell",
                       colNames = FALSE,
-                      rowNames = FALSE)
+                      rowNames = FALSE, asdatatable = FALSE)
   
   expect_equal(object = cell_f, expected = cell_w)
   expect_equal(object = class(cell_f), expected = "data.frame")
@@ -103,15 +112,75 @@ test_that("Correctly Loading Named Regions Created in Excel",{
   cell2_f <- read.xlsx(filename,
                        namedRegion = "NamedCell2",
                        colNames = FALSE,
-                       rowNames = FALSE)
+                       rowNames = FALSE, asdatatable = FALSE)
   
   cell2_w <- read.xlsx(wb,
                        namedRegion = "NamedCell2",
                        colNames = FALSE,
-                       rowNames = FALSE)
+                       rowNames = FALSE, asdatatable = FALSE)
   
   expect_equal(object = cell2_f, expected = cell2_w)
   expect_equal(object = class(cell2_f), expected = "data.frame")
+  expect_equal(object = ncol(cell2_f), expected = 1)
+  expect_equal(object = nrow(cell2_f), expected = 1)
+  
+})
+
+test_that("Correctly Loading Named Regions Created in Excel DT",{
+  
+  # Load an excel workbook (in the repo, it's located in the /inst folder;
+  # when installed on the user's system, it is located in the installation folder
+  # of the package)
+  filename <- system.file("namedRegions.xlsx", package = "openxlsx")
+  
+  # Load this workbook. We will test read.xlsx by passing both the object wb and
+  # the filename. Both should produce the same results.
+  wb <- loadWorkbook(filename)
+  
+  # NamedTable refers to Sheet1!$C$5:$D$8
+  table_f <- read.xlsx(filename,
+                       namedRegion = "NamedTable"
+                       , asdatatable = TRUE)
+  table_w <- read.xlsx(wb,
+                       namedRegion = "NamedTable"
+                       , asdatatable = TRUE)
+  
+  expect_equal(object = table_f, expected = table_w)
+  expect_equal(object = sort(class(table_f)), expected=sort(c("data.frame","data.table")))
+  expect_equal(object = ncol(table_f), expected = 2)
+  expect_equal(object = nrow(table_f), expected = 3)
+  
+  # NamedCell refers to Sheet1!$C$2
+  # This proeduced an error in an earlier version of the pacage when the object
+  # wb was passed, but worked correctly when the filename was passed to read.xlsx
+  cell_f <- read.xlsx(filename,
+                      namedRegion = "NamedCell",
+                      colNames = FALSE,
+                      rowNames = FALSE, asdatatable = TRUE)
+  
+  cell_w <- read.xlsx(wb,
+                      namedRegion = "NamedCell",
+                      colNames = FALSE,
+                      rowNames = FALSE, asdatatable = TRUE)
+  
+  expect_equal(object = cell_f, expected = cell_w)
+  expect_equal(object = sort(class(cell_f)), expected=sort(c("data.frame","data.table")))
+  expect_equal(object = ncol(cell_f), expected = 1)
+  expect_equal(object = nrow(cell_f), expected = 1)
+  
+  # NamedCell2 refers to Sheet1!$C$2:$C$2
+  cell2_f <- read.xlsx(filename,
+                       namedRegion = "NamedCell2",
+                       colNames = FALSE,
+                       rowNames = FALSE, asdatatable = TRUE)
+  
+  cell2_w <- read.xlsx(wb,
+                       namedRegion = "NamedCell2",
+                       colNames = FALSE,
+                       rowNames = FALSE, asdatatable = TRUE)
+  
+  expect_equal(object = cell2_f, expected = cell2_w)
+  expect_equal(object = sort(class(cell2_f)), expected=sort(c("data.frame","data.table")))
   expect_equal(object = ncol(cell2_f), expected = 1)
   expect_equal(object = nrow(cell2_f), expected = 1)
   
@@ -290,8 +359,80 @@ test_that("Missing columns in named regions", {
 
 
 
-test_that("Matching Substrings breaks reading named regions", {
+test_that("Matching Substrings breaks reading named regions DF", {
   
+  temp_file <- tempfile(fileext = ".xlsx")
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, "table")
+  addWorksheet(wb, "table2")
+  
+  df1 <- as.data.frame(head(iris))
+  df1$Species <- as.character(df1$Species)
+  df2 <- as.data.frame(head(mtcars))
+  
+  
+  
+  # setDF(df1)
+  # setDF(df2)
+  writeData(wb, sheet = "table", x = df1, name = "t", startCol = 3, startRow = 12)
+  writeData(wb, sheet = "table2", x = df2, name = "t1", startCol = 5, startRow = 24, rowNames = TRUE)
+  
+  writeData(wb, sheet = "table", x = head(df1, 3), name = "df1", startCol = 9, startRow = 3)
+  writeData(wb, sheet = "table2", x = head(df2, 3), name = "df2", startCol = 15, startRow = 12, rowNames = TRUE)
+  
+  saveWorkbook(wb, file = temp_file, overwrite = TRUE)
+  
+  r1 <- getNamedRegions(wb)
+  expect_equal(attr(r1, "sheet"), c("table", "table2", "table", "table2"))
+  expect_equal(attr(r1, "position"), c("C12:G18", "E24:P30", "I3:M6", "O12:Z15"))
+  expect_equal(r1, c("t", "t1", "df1", "df2"), check.attributes = FALSE)
+  
+  r2 <- getNamedRegions(temp_file)
+  expect_equal(attr(r2, "sheet"), c("table", "table2", "table", "table2"))
+  expect_equal(attr(r1, "position"), c("C12:G18", "E24:P30", "I3:M6", "O12:Z15"))
+  expect_equal(r2, c("t", "t1", "df1", "df2"), check.attributes = FALSE)
+  
+  
+  ## read file named region
+  expect_equal(df1, read.xlsx(xlsxFile = temp_file, namedRegion = "t", asdatatable = FALSE))
+  df2c<-read.xlsx(xlsxFile = temp_file, namedRegion = "t1", asdatatable = FALSE, rowNames = TRUE)
+  attributes(df2c)$row.names<-as.integer(row.names(df2c))
+  expect_equal(df2,df2c )
+  expect_equal(data.frame(head(df1, 3)), read.xlsx(xlsxFile = temp_file, namedRegion = "df1", asdatatable = FALSE))
+  
+  df2c<-read.xlsx(xlsxFile = temp_file, namedRegion = "df2", asdatatable = FALSE, rowNames = TRUE)
+  attributes(df2c)$row.names<-as.integer(row.names(df2c))
+  expect_equal(data.frame(head(df2, 3)),df2c )
+  
+  
+  ## read Workbook named region
+  expect_equal(df1, read.xlsx(xlsxFile = wb, namedRegion = "t", asdatatable = FALSE))
+  df2c<-read.xlsx(xlsxFile = wb, namedRegion = "t1", asdatatable = FALSE, rowNames = TRUE)
+  attributes(df2c)$row.names<-as.integer(row.names(df2c))
+  expect_equal(df2,df2c )
+  expect_equal(data.frame(head(df1, 3)), read.xlsx(xlsxFile = wb, namedRegion = "df1", asdatatable = FALSE))
+  
+  df2c<-read.xlsx(xlsxFile = wb, namedRegion = "df2", asdatatable = FALSE, rowNames = TRUE)
+  attributes(df2c)$row.names<-as.integer(row.names(df2c))
+  expect_equal(data.frame(head(df2, 3)),df2c )
+  
+  
+
+  
+  
+  
+  unlink(temp_file)
+  
+  
+})
+
+
+
+
+test_that("Matching Substrings breaks reading named regions DT", {
+  
+  library(data.table)
   temp_file <- tempfile(fileext = ".xlsx")
   
   wb <- createWorkbook()
@@ -301,7 +442,8 @@ test_that("Matching Substrings breaks reading named regions", {
   t1 <- head(iris)
   t1$Species <- as.character(t1$Species)
   t2 <- head(mtcars)
-  
+  setDT(t1)
+  setDT(t2)
   writeData(wb, sheet = "table", x = t1, name = "t", startCol = 3, startRow = 12)
   writeData(wb, sheet = "table2", x = t2, name = "t2", startCol = 5, startRow = 24, rowNames = TRUE)
   

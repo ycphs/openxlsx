@@ -8,6 +8,8 @@ test_that("Writing then reading returns identical data.frame 1", {
 
   df1 <- data.frame(1:2)
   df2 <- data.frame(1:3)
+  dt1 <- data.table(1:2)
+  dt2 <- data.table(1:3)
   x <- list(df1, df2)
   
   write.xlsx(file = tmp_file,
@@ -31,9 +33,10 @@ test_that("Writing then reading returns identical data.frame 1", {
   expect_true(object = grepl('showGridLines="0"', wb$worksheets[[1]]$sheetViews))
   expect_true(object = grepl('showGridLines="1"', wb$worksheets[[2]]$sheetViews))
   
-  expect_equal(read.xlsx(tmp_file, sheet = 1), df1)
-  expect_equal(read.xlsx(tmp_file, sheet = 2), df2)
+  expect_equal(read.xlsx(tmp_file, sheet = 1,asdatatable = FALSE), df1)
+  expect_equal(read.xlsx(tmp_file, sheet = 2,asdatatable = FALSE), df2)
   
+
   unlink(tmp_file, recursive = TRUE, force = TRUE)
   
 })

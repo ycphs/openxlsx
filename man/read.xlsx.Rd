@@ -8,7 +8,7 @@ read.xlsx(xlsxFile, sheet = 1, startRow = 1, colNames = TRUE,
   rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
   skipEmptyCols = TRUE, rows = NULL, cols = NULL,
   check.names = FALSE, namedRegion = NULL, na.strings = "NA",
-  fillMergedCells = FALSE)
+  fillMergedCells = FALSE, asdatatable = TRUE)
 }
 \arguments{
 \item{xlsxFile}{An xlsx file, Workbook object or URL to xlsx file.}
@@ -43,9 +43,11 @@ are checked to ensure that they are syntactically valid variable names}
 \item{na.strings}{A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.}
 
 \item{fillMergedCells}{If TRUE, the value in a merged cell is given to all cells within the merge.}
+
+\item{asdatatable}{If return object is a data.table}
 }
 \value{
-data.frame
+data.frame or data.table
 }
 \description{
 Read data from an Excel file or Workbook object into a data.frame
@@ -91,4 +93,6 @@ df3 <- read.xlsx(wb, sheet = 2, skipEmptyRows = FALSE,
 }
 \author{
 Alexander Walker
+
+Philipp Schauberger
 }

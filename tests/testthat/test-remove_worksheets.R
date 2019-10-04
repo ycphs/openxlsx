@@ -9,7 +9,7 @@ context("Removing worksheets.")
 
 test_that("Deleting worksheets", {
   
-  
+  library(data.table)
   tempFile <- file.path(tempdir(), "temp.xlsx")
   genWS <- function(wb, sheetName){
     addWorksheet(wb, sheetName)
@@ -44,12 +44,12 @@ test_that("Deleting worksheets", {
   expect_equal(names(wb), c("Sheet 3", "Sheet 1", "Sheet 2"))  
   
   writeData(wb, sheet = "Sheet 2", x = iris[1:10, 1:4], startRow = 5)
-  expect_equal(iris[1:10, 1:4], read.xlsx(wb, "Sheet 2", startRow = 5))  
-
+  expect_equal(data.table(iris[1:10, 1:4]), read.xlsx(wb, "Sheet 2", startRow = 5))  
+  expect_equal(data.frame(iris[1:10, 1:4]), read.xlsx(wb, "Sheet 2", startRow = 5,asdatatable = F))  
   
   writeData(wb, sheet = 1, x = iris[1:20, 1:4], startRow = 5)
-  expect_equal(iris[1:20, 1:4], read.xlsx(wb, "Sheet 3", startRow = 5))  
-  
+  expect_equal(data.table(iris[1:20, 1:4]), read.xlsx(wb, "Sheet 3", startRow = 5))  
+  expect_equal(data.frame(iris[1:20, 1:4]), read.xlsx(wb, "Sheet 3", startRow = 5,asdatatable = F))  
   
   removeWorksheet(wb, sheet = 1)
   expect_equal("This is sheet: Sheet 1", read.xlsx(wb, 1, startRow = 1)[[1]])  

@@ -11,6 +11,7 @@
 #' @importFrom Rcpp sourceCpp 
 #' @importFrom zip zip
 #' @importFrom utils download.file head menu unzip
+#' @importFrom data.table setDT
 #' 
 #' @seealso
 #' \itemize{

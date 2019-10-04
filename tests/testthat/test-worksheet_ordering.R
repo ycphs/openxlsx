@@ -46,24 +46,24 @@ test_that("Worksheet ordering from new Workbook", {
   wb <- loadWorkbook(file = tempFile)
   expect_equal(names(wb),  sprintf("Sheet %s", 3:1))
   
-  x <- read.xlsx(tempFile, sheet = 1)[[1]]
+  x <- read.xlsx(tempFile, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(tempFile, sheet = 2)[[1]]
+  x <- read.xlsx(tempFile, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(tempFile, sheet = 3)[[1]]
+  x <- read.xlsx(tempFile, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
   
   ## reloading  - reordered - reading from the workbook object  
-  x <- read.xlsx(wb, sheet = 1)[[1]]
+  x <- read.xlsx(wb, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(wb, sheet = 2)[[1]]
+  x <- read.xlsx(wb, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet  = 3)[[1]]
+  x <- read.xlsx(wb, sheet  = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
   
@@ -73,22 +73,22 @@ test_that("Worksheet ordering from new Workbook", {
   wb <- loadWorkbook(tempFile)
   expect_equal(names(wb),  sprintf("Sheet %s", 3:1))
   
-  x <- read.xlsx(wb, sheet = 1)[[1]]
+  x <- read.xlsx(wb, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(wb, sheet = 2)[[1]]
+  x <- read.xlsx(wb, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet = 3)[[1]]
+  x <- read.xlsx(wb, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
-  x <- read.xlsx(wb, sheet = 1)[[1]]
+  x <- read.xlsx(wb, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(wb, sheet = 2)[[1]]
+  x <- read.xlsx(wb, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet  = 3)[[1]]
+  x <- read.xlsx(wb, sheet  = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
   
@@ -98,26 +98,26 @@ test_that("Worksheet ordering from new Workbook", {
   worksheetOrder(wb) <- c(2, 3, 1)
   saveWorkbook(wb, tempFile, overwrite = TRUE)
   
-  x <- read.xlsx(tempFile, sheet = 1)[[1]]
+  x <- read.xlsx(tempFile, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(tempFile, sheet = 2)[[1]]
+  x <- read.xlsx(tempFile, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
-  x <- read.xlsx(tempFile, sheet = 3)[[1]]
+  x <- read.xlsx(tempFile, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
   
   wb <- loadWorkbook(tempFile)
   expect_equal(names(wb),  sprintf("Sheet %s", c(2, 1, 3)))
   
-  x <- read.xlsx(wb, sheet = 1)[[1]]
+  x <- read.xlsx(wb, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet = 2)[[1]]
+  x <- read.xlsx(wb, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
-  x <- read.xlsx(wb, sheet = 3)[[1]]
+  x <- read.xlsx(wb, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
   
@@ -136,28 +136,28 @@ test_that("Worksheet ordering from new Workbook", {
   saveWorkbook(wb, tempFile, overwrite = TRUE)
   
   ## read from file
-  x <- read.xlsx(tempFile, sheet = 1)[[1]]
+  x <- read.xlsx(tempFile, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(tempFile, sheet = 2)[[1]]
+  x <- read.xlsx(tempFile, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(tempFile, sheet = 3)[[1]]
+  x <- read.xlsx(tempFile, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 4")
   
-  x <- read.xlsx(tempFile, sheet = 4)[[1]]
+  x <- read.xlsx(tempFile, sheet = 4,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
-  x <- read.xlsx(tempFile, sheet = "Sheet 3")[[1]]
+  x <- read.xlsx(tempFile, sheet = "Sheet 3",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(tempFile, sheet = "Sheet 2")[[1]]
+  x <- read.xlsx(tempFile, sheet = "Sheet 2",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(tempFile, sheet = "Sheet 4")[[1]]
+  x <- read.xlsx(tempFile, sheet = "Sheet 4",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 4")
   
-  x <- read.xlsx(tempFile, sheet = "Sheet 1")[[1]]
+  x <- read.xlsx(tempFile, sheet = "Sheet 1",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
   
@@ -168,16 +168,16 @@ test_that("Worksheet ordering from new Workbook", {
   
   ## read from workbook
   wb <- loadWorkbook(tempFile)
-  x <- read.xlsx(wb, sheet = 1)[[1]]
+  x <- read.xlsx(wb, sheet = 1,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(wb, sheet = 2)[[1]]
+  x <- read.xlsx(wb, sheet = 2,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet = 3)[[1]]
+  x <- read.xlsx(wb, sheet = 3,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 4")
   
-  x <- read.xlsx(wb, sheet = 4)[[1]]
+  x <- read.xlsx(wb, sheet = 4,asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
   
@@ -185,57 +185,57 @@ test_that("Worksheet ordering from new Workbook", {
   
   ## read from workbook using name
   wb <- loadWorkbook(tempFile)
-  x <- read.xlsx(wb, sheet = "Sheet 3")[[1]]
+  x <- read.xlsx(wb, sheet = "Sheet 3",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 3")
   
-  x <- read.xlsx(wb, sheet = "Sheet 2")[[1]]
+  x <- read.xlsx(wb, sheet = "Sheet 2",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 2")
   
-  x <- read.xlsx(wb, sheet = "Sheet 1")[[1]]
+  x <- read.xlsx(wb, sheet = "Sheet 1",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 1")
   
-  x <- read.xlsx(wb, sheet = "Sheet 4")[[1]]
+  x <- read.xlsx(wb, sheet = "Sheet 4",asdatatable = FALSE)[[1]]
   expect_equal(x, "This is sheet: Sheet 4")
   
     
   writeData(wb, sheet = "Sheet 3", iris[1:10, 1:4], startRow = 5)
-  x  <- read.xlsx(wb, sheet = "Sheet 3", startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = "Sheet 3", startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:10, 1:4])
   
 
   writeData(wb, sheet = 4, iris[1:20, 1:4], startRow = 5)
-  x  <- read.xlsx(wb, sheet = 4, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = 4, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:20, 1:4])
   
   
   writeData(wb, sheet = 2, iris[1:30, 1:4], startRow = 5)
-  x  <- read.xlsx(wb, sheet = 2, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = 2, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:30, 1:4])
   
   
   ## reading from saved file
   saveWorkbook(wb, tempFile, TRUE)
   
-  x  <- read.xlsx(tempFile, sheet = "Sheet 3", startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(tempFile, sheet = "Sheet 3", startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:10, 1:4])
   
-  x  <- read.xlsx(tempFile, sheet = 4, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(tempFile, sheet = 4, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:20, 1:4])
   
-  x  <- read.xlsx(tempFile, sheet = 2, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(tempFile, sheet = 2, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:30, 1:4])
   
   
   ## And finally load again
   wb <- loadWorkbook(tempFile)
   
-  x  <- read.xlsx(wb, sheet = "Sheet 3", startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = "Sheet 3", startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:10, 1:4])
 
-  x  <- read.xlsx(wb, sheet = 4, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = 4, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:20, 1:4])
   
-  x  <- read.xlsx(wb, sheet = 2, startRow = 5, colNames = TRUE)
+  x  <- read.xlsx(wb, sheet = 2, startRow = 5, colNames = TRUE,asdatatable = FALSE)
   expect_equal(x, iris[1:30, 1:4])
   
   

@@ -16,7 +16,8 @@ read.xlsx.Workbook <- function(xlsxFile,
                                check.names = FALSE,
                                namedRegion = NULL,
                                na.strings = "NA",
-                               fillMergedCells = FALSE){
+                               fillMergedCells = FALSE,
+                               asdatatable=TRUE){
   
   
   ## Validate inputs and get files
@@ -337,6 +338,10 @@ read.xlsx.Workbook <- function(xlsxFile,
   if(rowNames){
     rownames(m) <- m[[1]]
     m[[1]] <- NULL
+  }
+  
+  if(asdatatable==TRUE){
+    setDT(m)
   }
   
   return(m)

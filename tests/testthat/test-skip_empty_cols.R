@@ -8,7 +8,7 @@ context("Skip Empty Cols")
 
 test_that("skip empty rows", {
   
-  
+  library(data.table)
   xlsxfile <- tempfile()
   df <- data.frame("x" = c(1, NA, NA, 2), "y" = c(1, NA, NA, 3))
   
@@ -16,11 +16,24 @@ test_that("skip empty rows", {
   
   wb <- loadWorkbook(xlsxfile)
   
-  df1 <- readWorkbook(xlsxfile, skipEmptyRows = FALSE)
-  df2 <- readWorkbook(wb, skipEmptyRows = FALSE)
+  df1 <- readWorkbook(xlsxfile, skipEmptyRows = FALSE, asdatatable = FALSE)
+  df2 <- readWorkbook(wb, skipEmptyRows = FALSE, asdatatable = FALSE)
   
   expect_equal(df, df1)
   expect_equal(df, df2)
+  
+
+  dt <- data.table("x" = c(1, NA, NA, 2), "y" = c(1, NA, NA, 3))
+  
+  write.xlsx(dt, xlsxfile)
+  
+  wb <- loadWorkbook(xlsxfile)
+  
+  dt1 <- readWorkbook(xlsxfile, skipEmptyRows = FALSE, asdatatable = TRUE)
+  dt2 <- readWorkbook(wb, skipEmptyRows = FALSE, asdatatable = TRUE)
+  
+  expect_equal(dt, dt1)
+  expect_equal(dt, dt2)
   
   
   v <- c("A1", "B1", "A2", "B2", "A5", "B5")
