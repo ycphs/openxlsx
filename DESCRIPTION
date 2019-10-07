@@ -25,7 +25,9 @@ Imports:
     stats,
     utils,
     zip,
-    data.table
+    data.table,
+    stringi
+
 VignetteBuilder: knitr
 Suggests:
     knitr,
