@@ -1,8 +1,20 @@
-language: R
+language: r
+r:
+  - oldrel
+  - release
+  - devel
+  
+os:
+  - linux
+
+  
 cache: packages
 
 r_github_packages:
   - jimhester/covr
+  
+r_check_args: "--as-cran"
+  
   
 warnings_are_errors: true
 
