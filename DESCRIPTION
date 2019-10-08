@@ -3,7 +3,7 @@ Type: Package
 Title: Read, Write and Edit xlsx Files
 Version: 4.1.1
 Date: 2019-10-08
-Authors@R: c(person("Philipp","Schauberger",role=c("aut","cre")),
+Authors@R: c(person("Philipp","Schauberger",email="philipp@schauberger.co.at",role=c("aut","cre")),
     person("Alexander", "Walker",
     email = "Alexander.Walker1989@gmail.com", role = c( "aut")),
     person("Luca", "Braglia", role = "ctb"))
