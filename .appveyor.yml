@@ -50,3 +50,4 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+    
