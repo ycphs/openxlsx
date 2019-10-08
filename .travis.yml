@@ -1,4 +1,6 @@
+# Use R language
 language: r
+#Define multiple R-versions, one from bioconductor
 r:
   - oldrel
   - release
@@ -12,11 +14,50 @@ cache: packages
 
 r_github_packages:
   - jimhester/covr
-  
-r_check_args: "--as-cran"
-  
-  
-warnings_are_errors: true
 
-after_success:
-  - Rscript -e 'library(covr); codecov()'
+
+matrix:
+  include:
+  - r: release
+    script:
+      - R CMD build . --compact-vignettes=gs+qpdf
+      - xvfb-run R CMD check *tar.gz --as-cran
+    after_success:
+      - tar -C .. -xf $PKG_TARBALL
+      - xvfb-run Rscript -e 'covr::codecov(type=c("tests", "vignettes", "examples"))'
+      - rm -rf RTest.Rcheck
+      - Rscript -e 'pkgdown::build_site()'
+    deploy:
+      - provider: releases
+        api_key: $GITHUB_TOKEN
+        file: $PKG_TARBALL
+        skip_cleanup: true
+        on:
+          tags: true
+      - provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: false
+        local-dir: docs
+        on:
+          branch: master
+  - r: devel
+    script:
+      - R CMD build . --compact-vignettes=gs+qpdf
+      - xvfb-run R CMD check *tar.gz --as-cran
+  - r: release
+    os: osx
+    osx_image: xcode8
+    before_install:
+      - brew update
+      - brew cask reinstall xquartz
+      - brew install tcl-tk
+      - brew link --overwrite --force tcl-tk; brew unlink tcl-tk
+      - sudo tlmgr install framed titling
+    # FROM https://github.com/travis-ci/travis-ci/issues/7313
+    before_script:
+      - "export DISPLAY=:99.0"
+      - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok ) & fi
+    script:
+      - R CMD build . --compact-vignettes=gs+qpdf
+      - R CMD check *tar.gz --as-cran
