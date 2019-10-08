@@ -9,7 +9,6 @@ Authors@R: c(person("Philipp","Schauberger",role="aut"),
     person("Luca", "Braglia", role = "ctb"))
 URL: https://github.com/ycphs/openxlsx
 BugReports: https://github.com/ycphs/openxlsx/issues
-Maintainer: Alexander Walker <Alexander.Walker1989@gmail.com>
 Description: Simplifies the creation of Excel .xlsx files by providing a high
     level interface to writing, styling and editing worksheets. Through the use of
     'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages
