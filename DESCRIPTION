@@ -2,7 +2,7 @@ Package: openxlsx
 Type: Package
 Title: Read, Write and Edit xlsx Files
 Version: 4.1.1
-Date: 2018-05-26
+Date: 2019-10-08
 Authors@R: c(person("Philipp","Schauberger",role="aut"),
     person("Alexander", "Walker",
     email = "Alexander.Walker1989@gmail.com", role = c( "cre")),
