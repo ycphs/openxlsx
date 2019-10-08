@@ -773,9 +773,9 @@ getSharedStringsFromFile <- function(sharedStringsFile, isFile){
 }
 
 
-clean_names <- function(x){
+clean_names <- function(x,schar){
   x <- gsub("^[[:space:]]+|[[:space:]]+$", "", x)
-  x <- gsub("[[:space:]]+", ".", x)
+  x <- gsub("[[:space:]]+", schar, x)
   return(x)
 }
 

@@ -609,7 +609,7 @@ SEXP read_workbook(IntegerVector cols_in,
   // Rcout << "is_date.size(): " << is_date.size() << endl;
   // Rcout << "v.size(): " << v.size() << endl;
   // Rcout << "has_date: " << has_date << endl;
-
+  
   if(allNumeric){
     
     m = buildMatrixNumeric(v, rows, cols, col_names, nRows, nCols);
@@ -702,4 +702,3 @@ int calc_number_rows(CharacterVector x, bool skipEmptyRows){
   return(nRows);
   
 }
-

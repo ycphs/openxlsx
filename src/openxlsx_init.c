@@ -1,13 +1,12 @@
-
 #include <R.h>
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
 /* 
-generated with
-tools::package_native_routine_registration_skeleton(".")
-*/
+ generated with
+ tools::package_native_routine_registration_skeleton(".")
+ */
 
 /* .Call calls */
 extern SEXP _openxlsx_build_cell_merges(SEXP);
@@ -89,6 +88,3 @@ void R_init__openxlsx(DllInfo *dll)
   R_useDynamicSymbols(dll, TRUE);
   R_forceSymbols(dll, FALSE);
 }
-
-
-
