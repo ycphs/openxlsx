@@ -6,6 +6,8 @@ NEW FEATURES
 
 * sep.names allows choose other separator than '.' for variable names with a blank inside
 
+* Improve handling of non-region names in getNamedRegions and add related test
+
 openxlsx 4.1.0
 ----------------------------------------------------------------
 
