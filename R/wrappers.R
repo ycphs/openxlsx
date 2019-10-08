@@ -725,15 +725,15 @@ createStyle <- function(fontName = NULL,
   
   if(!is.null(fontSize))
     if(fontSize < 1) stop("Font size must be greater than 0!")
-
+  
   if(!is.null(locked))
     if (!is.logical(locked)) stop("Cell attribute locked must be TRUE or FALSE")
   if(!is.null(hidden))
     if (!is.logical(hidden)) stop("Cell attribute hidden must be TRUE or FALSE")
   
-
   
-    
+  
+  
   
   ######################### error checking complete #############################
   style <- Style$new()
@@ -2066,9 +2066,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
 #' addWorksheet(wb, "S1")
 #' writeDataTable(wb, 1, x = iris[1:30,])
 #' # Formatting cells / columns is allowed , but inserting / deleting columns is protected:
-#' protectWorksheet(wb, "S1", protect = TRUE, 
-#'                   lockFormattingCells = FALSE, lockFormattingColumns = FALSE,
-#'                   lockInsertingColumns = TRUE, lockDeletingColumns = TRUE)
+#' protectWorksheet(wb, "S1", protect = TRUE, lockFormattingCells = FALSE, lockFormattingColumns = FALSE, lockInsertingColumns = TRUE, lockDeletingColumns = TRUE)
 #' 
 #' # Remove the protection
 #' protectWorksheet(wb, "S1", protect = FALSE)
@@ -2081,9 +2079,9 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
                              lockDeletingColumns = NULL, lockDeletingRows = NULL,
                              lockSorting = NULL, lockAutoFilter = NULL, lockPivotTables = NULL, 
                              lockObjects = NULL, lockScenarios = NULL
-                      ){
+){
   
-
+  
   if (!"Workbook" %in% class(wb))
     stop("First argument must be a Workbook.")
   
@@ -2148,7 +2146,7 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
   } else {
     wb$worksheets[[sheet]]$sheetProtection = ""
   }
-
+  
 }
 
 
@@ -2172,7 +2170,7 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
 #' protectWorkbook(wb, protect = FALSE)
 #' saveWorkbook(wb, "WorkBook_Protection_unprotected.xlsx")
 protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure = FALSE, lockWindows = FALSE) {
-
+  
   if (!"Workbook" %in% class(wb))
     stop("First argument must be a Workbook.")
   
@@ -3063,7 +3061,15 @@ getSheetNames <- function(file){
   workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
   workbook <- readLines(workbook, warn=FALSE, encoding="UTF-8")
   workbook <-  removeHeadTag(workbook)
-  sheets <- unlist(regmatches(workbook, gregexpr("<sheet .*/sheets>", workbook, perl = TRUE)))
+  sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
+  sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl=TRUE)))
+  
+  ## Some veryHidden sheets do not have a sheet content and their rId is empty.
+  ## Such sheets need to be filtered out because otherwise their sheet names
+  ## occur in the list of all sheet names, leading to a wrong association
+  ## of sheet names with sheet indeces.
+  sheets <- grep('r:id="[[:blank:]]*"', sheets, invert = TRUE, value = TRUE)
+  
   sheetNames <- unlist(regmatches(sheets, gregexpr('(?<=name=")[^"]+', sheets, perl = TRUE)))
   sheetNames <- replaceXMLEntities(sheetNames)
   
@@ -4001,3 +4007,4 @@ removeTable <- function(wb, sheet, table){
   
   
 }
+
