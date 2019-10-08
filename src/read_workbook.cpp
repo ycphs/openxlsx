@@ -491,7 +491,7 @@ SEXP read_workbook(IntegerVector cols_in,
   if(hasColNames){
     
     int row_1 = rows[0];
-    char name[6];
+    char name[7];
     
     IntegerVector row1_inds = which_cpp(rows == row_1);
     IntegerVector header_cols = cols[row1_inds];
@@ -504,13 +504,17 @@ SEXP read_workbook(IntegerVector cols_in,
       if(missing_header[i]){  // a missing header element
         
         sprintf(&(name[0]), "X%d", i+1);
+        sprintf(&(name[0]), "X%u", i+1);
+        //snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          sprintf(&(name[0]), "X%d", i+1);
+          // sprintf(&(name[0]), "X%d", i+1);
+          sprintf(&(name[0]), "X%u", i+1);
+          //snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
           col_names[i] = name;
         }
         
@@ -567,7 +571,9 @@ SEXP read_workbook(IntegerVector cols_in,
   }else{ // else col_names is FALSE
     char name[6];
     for(int i =0; i < nCols; i++){
-      sprintf(&(name[0]), "X%d", i+1);
+      //sprintf(&(name[0]), "X%d", i+1);
+      // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
+      sprintf(&(name[0]), "X%u", i+1);
       col_names[i] = name;
     }
   }
