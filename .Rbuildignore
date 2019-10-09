@@ -6,3 +6,4 @@ cran-comments.md
 .travis.yml
 .appveyor.yml
 ^cran-comments\.md$
+^CRAN-RELEASE$
