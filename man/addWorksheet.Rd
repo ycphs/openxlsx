@@ -105,7 +105,7 @@ writeData(wb, sheet = 7, 1:400)
 writeData(wb, sheet = 8, 1:400)
 
 ## Save workbook
-saveWorkbook(wb, "addWorksheetExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "addWorksheetExample.xlsx", overwrite = TRUE)}
 }
 \author{
 Alexander Walker

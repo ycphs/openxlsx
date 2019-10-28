@@ -32,7 +32,7 @@ setRowHeights(wb, 1, rows = c(1,4,22,2,19), heights = c(24,28,32,42,33))
 setRowHeights(wb, 1, rows = 1, heights = 40)
 
 ## Save workbook
-saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{removeRowHeights}}

@@ -139,7 +139,7 @@ pageSetup(wb, sheet = "print_title_rows", printTitleRows = 1) ## first row
 pageSetup(wb, sheet = "print_title_cols", printTitleCols = 1, printTitleRows = 1)
 
 
-saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)}
 }
 \author{
 Alexander Walker

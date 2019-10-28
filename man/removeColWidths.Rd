@@ -18,11 +18,11 @@ Remove column widths from a worksheet
 }
 \examples{
 ## Create a new workbook
-wb <- loadWorkbook(file = system.file("loadExample.xlsx", package = "openxlsx"))
+wb <- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package = "openxlsx"))
 
 ## remove column widths in columns 1 to 20
 removeColWidths(wb, 1, cols = 1:20)
-saveWorkbook(wb, "removeColWidthsExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "removeColWidthsExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{setColWidths}}

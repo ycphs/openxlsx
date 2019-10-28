@@ -69,6 +69,8 @@ write.xlsx(df, file = "writeXLSXTable3.xlsx", asTable = TRUE)
 
 
 
+
+
 ## Additional styling
 ## define a style for column headers
 hs <- createStyle(fontColour = "#ffffff", fgFill = "#4F80BD",
@@ -466,6 +468,20 @@ addStyle(wb, "Reconstructed Images", style=boldStyle,
 
 ## save workbook to working directory
 saveWorkbook(wb, "Image dimensionality reduction.xlsx", overwrite = TRUE) 
+
+
+
+
+## remove example files for cran test
+if (identical(Sys.getenv("NOT_CRAN", unset = "true"), "false")) {
+file_list<-list.files(pattern="\\.xlsx",recursive = T)
+file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
+
+if(length(file_list)>0){
+rm(file_list)
+}
+
+}
 \end{verbatim}
 
 \end{document}

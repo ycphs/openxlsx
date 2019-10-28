@@ -45,14 +45,18 @@
 #' ## Link to file - No text to display
 #' writeFormula(wb, "Sheet1", startRow = 4
 #'  , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'    , file = system.file("loadExample.xlsx", package = "openxlsx")))
+#'    , file = system.file("extdata","loadExample.xlsx", package = "openxlsx")))
 #' 
 #' ## Link to file - Text to display
 #' writeFormula(wb, "Sheet1", startRow = 3
 #'   , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'     , file = system.file("loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
+#'     , file = system.file("extdata",loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
 #' 
-#' saveWorkbook(wb, "internalHyperlinks.xlsx")
+#' \dontrun{
+#' saveWorkbook(wb, "internalHyperlinks.xlsx",overwrite=TRUE)
+#' }
+#' 
+#' 
 makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NULL){
   
   od <- getOption("OutDec")

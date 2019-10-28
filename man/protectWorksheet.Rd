@@ -67,7 +67,9 @@ protectWorksheet(wb, "S1", protect = TRUE,
 # Remove the protection
 protectWorksheet(wb, "S1", protect = FALSE)
 
+\dontrun{
 saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
+}
 }
 \author{
 Reinhold Kainhofer

@@ -40,7 +40,7 @@ freezePane(wb, 3, firstRow = TRUE)  ## shortcut to firstActiveRow = 2
 freezePane(wb, 4, firstActiveRow = 1, firstActiveCol = "D")
  
 ## Save workbook
-saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)}
 }
 \author{
 Alexander Walker

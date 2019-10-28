@@ -29,7 +29,7 @@ createNamedRegion(wb = wb,
 
 ## using writeData 'name' argument to create a named region
 writeData(wb, sheet = 1, x = iris, name = "iris2", startCol = 10)
-
+\dontrun{
 out_file <- tempfile(fileext = ".xlsx")
 saveWorkbook(wb, out_file, overwrite = TRUE)
 
@@ -42,7 +42,7 @@ df <- read.xlsx(wb, namedRegion = "iris")
 head(df)
 
 df <- read.xlsx(out_file, namedRegion = "iris2")
-head(df)
+head(df)}
 }
 \seealso{
 \code{\link{createNamedRegion}}

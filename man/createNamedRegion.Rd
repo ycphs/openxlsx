@@ -41,7 +41,7 @@ createNamedRegion(wb = wb,
 writeData(wb, sheet = 1, x = iris, name = "iris2", startCol = 10)
 
 out_file <- tempfile(fileext = ".xlsx")
-saveWorkbook(wb, out_file, overwrite = TRUE)
+\dontrun{saveWorkbook(wb, out_file, overwrite = TRUE)
 
 ## see named regions
 getNamedRegions(wb) ## From Workbook object
@@ -52,7 +52,7 @@ df <- read.xlsx(wb, namedRegion = "iris")
 head(df)
 
 df <- read.xlsx(out_file, namedRegion = "iris2")
-head(df)
+head(df)}
 }
 \seealso{
 \code{\link{getNamedRegions}}

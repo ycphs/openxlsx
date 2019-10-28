@@ -28,7 +28,7 @@ Create a new Workbook object
 wb <- createWorkbook()
 
 ## Save workbook to working directory
-saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)}
 
 ## Set Workbook properties
 wb <- createWorkbook(creator = "Me"
