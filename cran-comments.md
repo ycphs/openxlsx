@@ -10,3 +10,12 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
+
+
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* I updated the packages with the pull requests from the orphaned packages repository.
+
+* I changed the maintainer, beacuse the former maintainer seems not to take care of the on going development.
