@@ -499,7 +499,7 @@ SEXP read_workbook(IntegerVector cols_in,
     LogicalVector missing_header = is_na(header_inds);
     
     // looping over each column
-    for(int i=0; i < nCols; i++){
+    for(unsigned short i=0; i < nCols; i++){
       
       if(missing_header[i]){  // a missing header element
         
@@ -572,7 +572,7 @@ SEXP read_workbook(IntegerVector cols_in,
     
   }else{ // else col_names is FALSE
     char name[6];
-    for(int i =0; i < nCols; i++){
+    for(unsigned short i =0; i < nCols; i++){
       sprintf(&(name[0]), "X%d", i+1);
        // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
       // sprintf(&(name[0]), "X%u", i+1);
