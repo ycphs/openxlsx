@@ -134,7 +134,7 @@
 #' ## Save workbook
 #' ## Open in excel without saving file: openXL(wb)
 #' 
-#' saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)}
 writeData <- function(wb, 
                       sheet,
                       x,
@@ -441,7 +441,7 @@ writeData <- function(wb,
 #' writeData(wb, sheet = 2, x = v2, startCol = 10, startRow = 2)
 #' 
 #' ## Save workbook
-#' saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)}
 #' 
 #' 
 #' ## Writing internal hyperlinks
@@ -449,7 +449,7 @@ writeData <- function(wb,
 #' addWorksheet(wb, "Sheet1")
 #' addWorksheet(wb, "Sheet2")
 #' writeFormula(wb, "Sheet1", x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")')
-#' saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)}
 #' 
 writeFormula <- function(wb, 
                          sheet,

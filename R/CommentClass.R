@@ -94,7 +94,7 @@ Comment$methods(show = function(){
 #' 
 #' writeComment(wb, 1, col = 6 , row = 3, comment = c2)
 #' 
-#' saveWorkbook(wb, file = "createCommentExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, file = "createCommentExample.xlsx", overwrite = TRUE)}
 createComment <- function(comment,
                           author = Sys.getenv("USERNAME"),
                           style = NULL,
@@ -171,7 +171,7 @@ createComment <- function(comment,
 #' 
 #' writeComment(wb, 1, col = 6 , row = 3, comment = c2)
 #' 
-#' saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)}
 writeComment <- function(wb, sheet, col, row, comment, xy = NULL){
   
   if(!"Workbook" %in% class(wb))

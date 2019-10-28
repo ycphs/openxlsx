@@ -86,7 +86,7 @@
 #' ## Save workbook
 #' ## Open in excel without saving file: openXL(wb)
 #' 
-#' saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)}
 #' 
 #' 
 #' 
@@ -113,7 +113,7 @@
 #' } 
 #' 
 #' ## openXL(wb)
-#' saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)
+#' \dontrun{saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)}
 #' 
 writeDataTable <- function(wb, sheet, x,
                            startCol = 1,

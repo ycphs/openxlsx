@@ -164,7 +164,7 @@ writeData(wb, sheet = "Formula", x = df)
 ## Save workbook
 ## Open in excel without saving file: openXL(wb)
 
-saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{writeDataTable}}
