@@ -87,7 +87,8 @@
 #' hs <- createStyle(textDecoration = "BOLD", fontColour = "#FFFFFF", fontSize=12,
 #'                   fontName="Arial Narrow", fgFill = "#4F80BD")
 #' 
-#' \dontrun{write.xlsx(iris, file = "writeXLSX3.xlsx", colNames = TRUE, borders = "rows", headerStyle = hs)}
+#' \dontrun{write.xlsx(iris, file = "writeXLSX3.xlsx", 
+#'                      colNames = TRUE, borders = "rows", headerStyle = hs)}
 #' 
 #' ## Lists elements are written to individual worksheets, using list names as sheet names if available
 #' l <- list("IRIS" = iris, "MTCATS" = mtcars, matrix(runif(1000), ncol = 5))
