@@ -7,7 +7,7 @@ context("Load Workbook Object")
 
 test_that("Loading readTest.xlsx Sheet 1", {
   
-  fl <- system.file("readTest.xlsx", package = "openxlsx")
+  fl <- system.file("extdata","readTest.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
   
   sheet_data <- wb$worksheets[[2]]$sheet_data
@@ -109,7 +109,7 @@ test_that("Loading readTest.xlsx Sheet 1", {
 
 test_that("Loading readTest.xlsx Sheet 1", {
   
-  fl <- system.file("readTest.xlsx", package = "openxlsx")
+  fl <- system.file("extdata","readTest.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
   
   sheet_data <- wb$worksheets[[1]]$sheet_data

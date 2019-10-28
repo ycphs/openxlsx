@@ -63,7 +63,7 @@ test_that("Correctly Loading Named Regions Created in Excel",{
   # Load an excel workbook (in the repo, it's located in the /inst folder;
   # when installed on the user's system, it is located in the installation folder
   # of the package)
-  filename <- system.file("namedRegions.xlsx", package = "openxlsx")
+  filename <- system.file("extdata","namedRegions.xlsx", package = "openxlsx")
   
   # Load this workbook. We will test read.xlsx by passing both the object wb and
   # the filename. Both should produce the same results.
@@ -118,7 +118,7 @@ test_that("Correctly Loading Named Regions Created in Excel",{
 
 
 test_that("Load names from an Excel file with funky non-region names", {
-  filename <- system.file("namedRegions2.xlsx", package = "openxlsx")
+  filename <- system.file("extdata","namedRegions2.xlsx", package = "openxlsx")
   wb <- loadWorkbook(filename)
   names <- getNamedRegions(wb)
   sheets <- attr(names, "sheet")
