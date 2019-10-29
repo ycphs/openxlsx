@@ -503,6 +503,8 @@ read.xlsx.default <- function(xlsxFile,
 #' 
 #' xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 #' df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1, rows = c(1, 3, 5), cols = 1:3)
+#' 
+#' 
 readWorkbook <- function(xlsxFile,
                          sheet = 1,
                          startRow = 1,
