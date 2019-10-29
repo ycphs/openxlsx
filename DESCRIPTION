@@ -1,13 +1,13 @@
 Package: openxlsx
 Type: Package
 Title: Read, Write and Edit xlsx Files
-Version: 4.1.2
+Version: 4.1.2.1
 Date: 2019-10-28
 Authors@R: c(person("Philipp","Schauberger",email="philipp@schauberger.co.at",role=c("aut","cre")),
     person("Alexander", "Walker",
     email = "Alexander.Walker1989@gmail.com", role = c( "aut")),
     person("Luca", "Braglia", role = "ctb"))
-URL: https://github.com/ycphs/openxlsx
+URL: https://ycphs.github.io/openxlsx/index.html, https://github.com/ycphs/openxlsx
 BugReports: https://github.com/ycphs/openxlsx/issues
 Description: Simplifies the creation of Excel .xlsx files by providing a high
     level interface to writing, styling and editing worksheets. Through the use of
