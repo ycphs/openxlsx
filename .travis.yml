@@ -2,6 +2,7 @@
 
 language: r
 
+
 r:
   - oldrel
   - release
@@ -15,7 +16,7 @@ before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
     script: Rscript -e 'pkgdown::deploy_site_github()'
     skip_cleanup: true
     
-cache: packages
+
 
 os:
   - linux
