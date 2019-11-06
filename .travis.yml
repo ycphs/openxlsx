@@ -8,20 +8,31 @@ r:
   - release
   - devel
   
-  
-before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
-  deploy:
-    provider: script
-    script: Rscript -e 'pkgdown::deploy_site_github()'
-    skip_cleanup: true
-    
+
+cache: packages 
 
 
 os:
   - linux
 
 r_github_packages:
-  - jimhester/covr
+  - r-lib/covr
+  - r-lib/pkgdown
+  
+script:
+  - R CMD build . --compact-vignettes=gs+qpdf
+  - R CMD check *tar.gz --as-cran
 
 after_success:
   - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'
+  - Rscript -e 'pkgdown::build_site()'
+  
+  
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PAT
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master

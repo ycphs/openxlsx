@@ -28,7 +28,7 @@ Imports:
 VignetteBuilder: knitr
 Suggests:
     knitr,
-    testthat
+    testthat,pkgdown
 RoxygenNote: 6.1.1
 Collate: 
     'CommentClass.R'
