@@ -25,7 +25,7 @@ script:
 
 after_success:
   - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'
-  - Rscript -e 'pkgdown::build_site()'
+  - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'pkgdown::build_site()'
   
   
 deploy:
