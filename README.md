@@ -28,7 +28,7 @@ install.packages("openxlsx", dependencies = TRUE)
 ```R
 install.packages(c("Rcpp", "devtools"), dependencies = TRUE)
 require(devtools)
-install_github("david-f1976/openxlsx")
+install_github("ycphs/openxlsx")
 ```
 
 ## Bug/feature request
@@ -42,11 +42,5 @@ Thanks, [here](https://github.com/ycphs/openxlsx/issues).
 [Here](https://raw.githubusercontent.com/ycphs/openxlsx/master/NEWS). 
 
 ## Authors and Contributors
-A list is automagically maintained
-<<<<<<< HEAD
-[here](https://github.com/ycphs/openxlsx/graphs/contributors). 
-||||||| merged common ancestors
-[here](https://github.com/awalker89/openxlsx/graphs/contributors). 
-=======
-[here](https://github.com/awalker89/openxlsx/graphs/contributors). 
->>>>>>> a9f00beff7158145926d3c98c5afcccb550c5e2a
+A list is automagically maintained [here](https://github.com/ycphs/openxlsx/graphs/contributors). 
+
