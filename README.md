@@ -8,23 +8,18 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/openxlsx)](https://cran.r-project.org/package=openxlsx)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/openxlsx)](https://cran.r-project.org/package=openxlsx)
 
-This [R](https://www.R-project.org/) package simplifies the
-creation of `.xlsx` files by providing 
-a high level interface to writing, styling and editing
-worksheets. Through the use of
-[`Rcpp`](https://CRAN.R-project.org/package=Rcpp), 
-read/write times are comparable to the
-[`xlsx`](https://CRAN.R-project.org/package=xlsx)
-and
-[`XLConnect`](https://CRAN.R-project.org/package=XLConnect)
-packages with the added benefit of removing the dependency on
+This [R](https://www.R-project.org/) package simplifies the creation of `.xlsx` files by providing 
+a high level interface to writing, styling and editing worksheets. Through the use of [`Rcpp`](https://CRAN.R-project.org/package=Rcpp), read/write times are comparable to the [`xlsx`](https://CRAN.R-project.org/package=xlsx) and
+[`XLConnect`](https://CRAN.R-project.org/package=XLConnect) packages with the added benefit of removing the dependency on
 Java. 
 
 ## Installation
 
 ### Stable version
+
 Current stable version is available on
 [CRAN](https://CRAN.R-project.org/) via
+
 ```R
 install.packages("openxlsx", dependencies = TRUE)
 ```
@@ -33,7 +28,7 @@ install.packages("openxlsx", dependencies = TRUE)
 ```R
 install.packages(c("Rcpp", "devtools"), dependencies = TRUE)
 require(devtools)
-install_github("ycphs/openxlsx")
+install_github("david-f1976/openxlsx")
 ```
 
 ## Bug/feature request
@@ -48,4 +43,10 @@ Thanks, [here](https://github.com/ycphs/openxlsx/issues).
 
 ## Authors and Contributors
 A list is automagically maintained
+<<<<<<< HEAD
 [here](https://github.com/ycphs/openxlsx/graphs/contributors). 
+||||||| merged common ancestors
+[here](https://github.com/awalker89/openxlsx/graphs/contributors). 
+=======
+[here](https://github.com/awalker89/openxlsx/graphs/contributors). 
+>>>>>>> a9f00beff7158145926d3c98c5afcccb550c5e2a
