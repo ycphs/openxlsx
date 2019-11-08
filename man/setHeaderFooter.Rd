@@ -76,7 +76,7 @@ setHeaderFooter(wb, sheet = 4,
                 firstFooter = c("FIRST ONLY L", NA, "FIRST ONLY R"))
 
 
-saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{addWorksheet}} to set headers and footers when adding a worksheet

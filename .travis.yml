@@ -1,10 +1,38 @@
-language: R
-cache: packages
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: r
+
+
+r:
+  - oldrel
+  - release
+  - devel
+  
+
+cache: packages 
+
+
+os:
+  - linux
 
 r_github_packages:
-  - jimhester/covr
+  - r-lib/covr
+  - r-lib/pkgdown
   
-warnings_are_errors: true
+script:
+  - R CMD build . --compact-vignettes=gs+qpdf
+  - R CMD check *tar.gz --as-cran
 
 after_success:
-  - Rscript -e 'library(covr); codecov()'
+  - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'pkgdown::build_site()'
+  
+  
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PAT
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master

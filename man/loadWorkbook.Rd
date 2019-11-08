@@ -22,14 +22,16 @@ formatting of the original .xlsx file.
 }
 \examples{
 ## load existing workbook from package folder
-wb <- loadWorkbook(file = system.file("loadExample.xlsx", package= "openxlsx"))
+wb <- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package= "openxlsx"))
 names(wb)  #list worksheets
 wb ## view object
 ## Add a worksheet
 addWorksheet(wb, "A new worksheet")
 
 ## Save workbook
-saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)}
+
+
 }
 \seealso{
 \code{\link{removeWorksheet}}

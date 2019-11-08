@@ -278,3 +278,4 @@ List buildCellList( CharacterVector r, CharacterVector t, CharacterVector v) {
   
   return wrap(cells) ;
 }
+

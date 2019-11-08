@@ -6,8 +6,9 @@
 \usage{
 readWorkbook(xlsxFile, sheet = 1, startRow = 1, colNames = TRUE,
   rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-  skipEmptyCols = TRUE, rows = NULL, cols = NULL, check.names = FALSE,
-  namedRegion = NULL, na.strings = "NA", fillMergedCells = FALSE)
+  skipEmptyCols = TRUE, rows = NULL, cols = NULL,
+  check.names = FALSE, sep.names = ".", namedRegion = NULL,
+  na.strings = "NA", fillMergedCells = FALSE)
 }
 \arguments{
 \item{xlsxFile}{An xlsx file, Workbook object or URL to xlsx file.}
@@ -37,6 +38,8 @@ If NULL, all columns are read.}
 \item{check.names}{logical. If TRUE then the names of the variables in the data frame 
 are checked to ensure that they are syntactically valid variable names}
 
+\item{sep.names}{One character which substitutes blanks in column names. By default, "."}
+
 \item{namedRegion}{A named region in the Workbook. If not NULL startRow, rows and cols parameters are ignored.}
 
 \item{na.strings}{A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.}
@@ -53,11 +56,13 @@ Read data from an Excel file or Workbook object into a data.frame
 Creates a data.frame of all data in worksheet.
 }
 \examples{
-xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
+xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1)
 
-xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
+xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1, rows = c(1, 3, 5), cols = 1:3)
+
+
 }
 \seealso{
 \code{\link{getNamedRegions}}

@@ -1,36 +1,51 @@
-Package: openxlsx
 Type: Package
-Title: Read, Write and Edit XLSX Files
-Version: 4.1.1
-Date: 2018-05-26
-Authors@R: c(
-    person("Alexander", "Walker",
-    email = "Alexander.Walker1989@gmail.com", role = c("aut", "cre")),
-    person("Luca", "Braglia", role = "ctb"))
-URL: https://github.com/awalker89/openxlsx
-BugReports: https://github.com/awalker89/openxlsx/issues
-Maintainer: Alexander Walker <Alexander.Walker1989@gmail.com>
-Description: Simplifies the creation of Excel .xlsx files by providing a high
-    level interface to writing, styling and editing worksheets. Through the use of
-    'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages
-    with the added benefit of removing the dependency on Java.
+Package: openxlsx
+Title: Read, Write and Edit xlsx Files
+Version: 4.1.3
+Date: 2019-11-07
+Authors@R: 
+    c(person(given = "Philipp",
+             family = "Schauberger",
+             role = c("aut", "cre"),
+             email = "philipp@schauberger.co.at"),
+      person(given = "Alexander",
+             family = "Walker",
+             role = "aut",
+             email = "Alexander.Walker1989@gmail.com"),
+      person(given = "Luca",
+             family = "Braglia",
+             role = "ctb"))
+Description: Simplifies the creation of Excel .xlsx files by
+    providing a high level interface to writing, styling and editing
+    worksheets. Through the use of 'Rcpp', read/write times are comparable
+    to the 'xlsx' and 'XLConnect' packages with the added benefit of
+    removing the dependency on Java.
 License: MIT + file LICENSE
-LinkingTo: Rcpp
-Encoding: UTF-8
+URL: https://ycphs.github.io/openxlsx/index.html,
+    https://github.com/ycphs/openxlsx
+BugReports: https://github.com/ycphs/openxlsx/issues
 Depends:
     R (>= 3.3.0)
 Imports:
+    grDevices,
     methods,
     Rcpp,
-    grDevices,
     stats,
+    stringi,
     utils,
-    zip
-VignetteBuilder: knitr
+    zip,
+    rlang (>= 0.1.2)
 Suggests:
     knitr,
-    testthat
-RoxygenNote: 6.0.1.9000
+    pkgdown,
+    testthat,
+    roxygen2
+LinkingTo: 
+    Rcpp
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+RoxygenNote: 6.1.1
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'

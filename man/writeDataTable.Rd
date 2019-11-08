@@ -113,7 +113,7 @@ writeDataTable(wb, sheet = 1, x = iris, startCol = 7, headerStyle = createStyle(
 ## Save workbook
 ## Open in excel without saving file: openXL(wb)
 
-saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)}
 
 
 
@@ -140,7 +140,7 @@ for(i in 1:11) {
 } 
 
 ## openXL(wb)
-saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)}
 
 }
 \seealso{

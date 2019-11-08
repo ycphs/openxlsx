@@ -5,9 +5,9 @@
 \title{Set page margins, orientation and print scaling}
 \usage{
 pageSetup(wb, sheet, orientation = NULL, scale = 100, left = 0.7,
-  right = 0.7, top = 0.75, bottom = 0.75, header = 0.3, footer = 0.3,
-  fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
-  printTitleRows = NULL, printTitleCols = NULL)
+  right = 0.7, top = 0.75, bottom = 0.75, header = 0.3,
+  footer = 0.3, fitToWidth = FALSE, fitToHeight = FALSE,
+  paperSize = NULL, printTitleRows = NULL, printTitleCols = NULL)
 }
 \arguments{
 \item{wb}{A workbook object}
@@ -139,7 +139,7 @@ pageSetup(wb, sheet = "print_title_rows", printTitleRows = 1) ## first row
 pageSetup(wb, sheet = "print_title_cols", printTitleCols = 1, printTitleRows = 1)
 
 
-saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)}
 }
 \author{
 Alexander Walker

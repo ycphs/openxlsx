@@ -40,7 +40,7 @@ writeData(wb, 2, 'This is still the "mtcars" worksheet', startCol = 15)
 worksheetOrder(wb)
 names(wb)  ## ordering within workbook is not changed
 
-saveWorkbook(wb, "worksheetOrderExample.xlsx",  overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "worksheetOrderExample.xlsx",  overwrite = TRUE)}
 worksheetOrder(wb) <- c(3,2,1)
-saveWorkbook(wb, "worksheetOrderExample2.xlsx",  overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "worksheetOrderExample2.xlsx",  overwrite = TRUE)}
 }

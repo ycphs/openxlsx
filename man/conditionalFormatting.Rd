@@ -130,7 +130,7 @@ writeData(wb, "containsText", sapply(1:10, fn))
 conditionalFormatting(wb, "containsText", cols = 1, rows = 1:10, type = "contains", rule = "A")
 
 ## colourscale colours cells based on cell value
-df <- read.xlsx(system.file("readTest.xlsx", package = "openxlsx"), sheet = 4)
+df <- read.xlsx(system.file("extdata","readTest.xlsx", package = "openxlsx"), sheet = 4)
 writeData(wb, "colourScale", df, colNames=FALSE)  ## write data.frame
 
 ## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())
@@ -158,7 +158,7 @@ writeData(wb, "logical operators", 1:10)
 conditionalFormatting(wb, "logical operators", cols = 1, rows = 1:10,
  rule = "OR($A1=1,$A1=3,$A1=5,$A1=7)")
 
-saveWorkbook(wb, "conditionalFormattingExample.xlsx", TRUE)
+\dontrun{saveWorkbook(wb, "conditionalFormattingExample.xlsx", TRUE)}
 
 
 #########################################################################
@@ -186,7 +186,7 @@ writeData(wb, "databar", -5:5, startCol = 9)
 conditionalFormatting(wb, "databar", cols = 9, rows = 1:11, 
   type = "databar", style = c("#a6a6a6", "#a6a6a6"), showValue = FALSE, gradient = FALSE)
 
-saveWorkbook(wb, file = "databarExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, file = "databarExample.xlsx", overwrite = TRUE)}
  
 
 }

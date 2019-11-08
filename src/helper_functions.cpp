@@ -228,7 +228,7 @@ SEXP write_file(std::string head = "", std::string body = "", std::string tail =
   xmlFile << tail;
   xmlFile.close();
   
-  return 0;
+  return R_NilValue;
 }
 
 

@@ -60,12 +60,16 @@ wb <- createWorkbook()
 addWorksheet(wb, "S1")
 writeDataTable(wb, 1, x = iris[1:30,])
 # Formatting cells / columns is allowed , but inserting / deleting columns is protected:
-protectWorksheet(wb, "S1", protect = TRUE, lockFormattingCells = FALSE, lockFormattingColumns = FALSE, lockInsertingColumns = TRUE, lockDeletingColumns = TRUE)
+protectWorksheet(wb, "S1", protect = TRUE, 
+                  lockFormattingCells = FALSE, lockFormattingColumns = FALSE, 
+                  lockInsertingColumns = TRUE, lockDeletingColumns = TRUE)
 
 # Remove the protection
 protectWorksheet(wb, "S1", protect = FALSE)
 
+\dontrun{
 saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
+}
 }
 \author{
 Reinhold Kainhofer

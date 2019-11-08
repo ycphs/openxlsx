@@ -33,7 +33,7 @@ deleteData(wb, sheet = 1, cols = 3:5, rows = 5:7, gridExpand = TRUE)
 deleteData(wb, sheet = 1, cols = 7:9, rows = 5:7, gridExpand = TRUE)
 deleteData(wb, sheet = 1, cols = LETTERS, rows = 18, gridExpand = TRUE)
 
-saveWorkbook(wb, "deleteDataExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "deleteDataExample.xlsx", overwrite = TRUE)}
 }
 \author{
 Alexander Walker

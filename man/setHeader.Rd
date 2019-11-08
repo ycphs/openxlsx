@@ -32,7 +32,7 @@ setFooter(wb, "Center Footer Here", position="center")
 setFooter(wb, "Bottom left", position="left")
 setFooter(wb, Sys.Date(), position="right")
 
-saveWorkbook(wb, "headerHeaderExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "headerHeaderExample.xlsx", overwrite = TRUE)}
 }
 }
 \author{

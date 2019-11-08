@@ -50,7 +50,8 @@ writeData(wb, sheet = 2, x = iris)
 setColWidths(wb, sheet = 2, cols = 1:5, widths = "auto")
   
 ## Save workbook
-saveWorkbook(wb, "setColWidthsExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "setColWidthsExample.xlsx", overwrite = TRUE)}
+
 }
 \seealso{
 \code{\link{removeColWidths}}

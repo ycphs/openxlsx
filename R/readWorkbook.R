@@ -19,6 +19,7 @@
 #' If NULL, all rows are read.
 #' @param check.names logical. If TRUE then the names of the variables in the data frame 
 #' are checked to ensure that they are syntactically valid variable names
+#' @param sep.names One character which substitutes blanks in column names. By default, "."
 #' @param namedRegion A named region in the Workbook. If not NULL startRow, rows and cols parameters are ignored.
 #' @param na.strings A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.
 #' @param fillMergedCells If TRUE, the value in a merged cell is given to all cells within the merge.
@@ -31,7 +32,8 @@
 #' @return data.frame
 #' @export
 #' @examples
-#' xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
+#' 
+#' xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 #' df1 <- read.xlsx(xlsxFile = xlsxFile, sheet = 1, skipEmptyRows = FALSE)
 #' sapply(df1, class)
 #' 
@@ -45,19 +47,21 @@
 #' sapply(df2, class)
 #' head(df2)
 #' 
-#' wb <- loadWorkbook(system.file("readTest.xlsx", package = "openxlsx"))
+#' wb <- loadWorkbook(system.file("extdata","readTest.xlsx", package = "openxlsx"))
 #' df3 <- read.xlsx(wb, sheet = 2, skipEmptyRows = FALSE, colNames = TRUE)
 #' df4 <- read.xlsx(xlsxFile, sheet = 2, skipEmptyRows = FALSE, colNames = TRUE)
 #' all.equal(df3, df4)
 #' 
-#' wb <- loadWorkbook(system.file("readTest.xlsx", package = "openxlsx"))
+#' wb <- loadWorkbook(system.file("extdata",readTest.xlsx", package = "openxlsx"))
 #' df3 <- read.xlsx(wb, sheet = 2, skipEmptyRows = FALSE,
 #'  cols = c(1, 4), rows = c(1, 3, 4))
 #' 
 #' ## URL
 #' ## 
-#' #xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"
-#' #head(read.xlsx(xlsxFile))
+#' \dontrun{
+#'  xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"
+#'  head(read.xlsx(xlsxFile))
+#'  }
 #' 
 #' 
 #' @export
@@ -72,6 +76,7 @@ read.xlsx <- function(xlsxFile,
                       rows = NULL,
                       cols = NULL,
                       check.names = FALSE,
+                      sep.names = ".",
                       namedRegion = NULL,
                       na.strings = "NA",
                       fillMergedCells = FALSE){
@@ -92,6 +97,7 @@ read.xlsx.default <- function(xlsxFile,
                               rows = NULL,
                               cols = NULL,
                               check.names = FALSE,
+                              sep.names = ".",
                               namedRegion = NULL,
                               na.strings = "NA",
                               fillMergedCells = FALSE){
@@ -120,6 +126,9 @@ read.xlsx.default <- function(xlsxFile,
   
   if(!is.logical(check.names))
     stop("check.names must be TRUE/FALSE.")
+  
+  if(!is.character(sep.names) | nchar(sep.names)!=1)
+    stop("sep.names must be a character and only one.")
   
   if(length(sheet) > 1)
     stop("sheet must be of length 1.")
@@ -153,11 +162,21 @@ read.xlsx.default <- function(xlsxFile,
   
   workbook <- unlist(readLines(workbook, warn = FALSE, encoding = "UTF-8"))
   workbook <- removeHeadTag(workbook)
-  sheets <- unlist(regmatches(workbook, gregexpr("<sheet .*/sheets>", workbook, perl = TRUE)))
+  
+  sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
+  sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl=TRUE)))
+  ## Some veryHidden sheets do not have a sheet content and their rId is empty.
+  ## Such sheets need to be filtered out because otherwise their sheet names
+  ## occur in the list of all sheet names, leading to a wrong association
+  ## of sheet names with sheet indeces.
+  sheets <- grep('r:id="[[:blank:]]*"', sheets, invert = TRUE, value = TRUE)
+  
   
   ## make sure sheetId is 1 based
   sheetrId <- unlist(getRId(sheets))
   sheetNames <- unlist(regmatches(sheets, gregexpr('(?<=name=")[^"]+', sheets, perl = TRUE)))
+  sheetNames <- replaceXMLEntities(sheetNames)
+  
   
   nSheets <- length(sheetrId)
   if(nSheets == 0)
@@ -440,6 +459,7 @@ read.xlsx.default <- function(xlsxFile,
                      string_inds = string_refs,
                      is_date = isDate,
                      hasColNames = colNames,
+                     hasSepNames = sep.names,
                      skipEmptyRows = skipEmptyRows,
                      skipEmptyCols = skipEmptyCols,
                      nRows = nRows,
@@ -478,11 +498,13 @@ read.xlsx.default <- function(xlsxFile,
 #' @seealso \code{\link{read.xlsx}}
 #' @export
 #' @examples
-#' xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
+#' xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 #' df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1)
 #' 
-#' xlsxFile <- system.file("readTest.xlsx", package = "openxlsx")
+#' xlsxFile <- system.file("extdata","readTest.xlsx", package = "openxlsx")
 #' df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1, rows = c(1, 3, 5), cols = 1:3)
+#' 
+#' 
 readWorkbook <- function(xlsxFile,
                          sheet = 1,
                          startRow = 1,
@@ -494,6 +516,7 @@ readWorkbook <- function(xlsxFile,
                          rows = NULL,
                          cols = NULL,
                          check.names = FALSE,
+                         sep.names = ".",
                          namedRegion = NULL,
                          na.strings = "NA",
                          fillMergedCells = FALSE){
@@ -509,6 +532,7 @@ readWorkbook <- function(xlsxFile,
             rows = rows,
             cols = cols,
             check.names = check.names,
+            sep.names = ".",
             namedRegion = namedRegion,
             na.strings = na.strings,
             fillMergedCells = fillMergedCells)

@@ -1,8 +1,33 @@
+openxlsx 4.1.3
+----------------------------------------------------------------
+
+NEW FEATURES
+
+* added pkgdown to create site
+
+BUG FIXES
+
+* return values for cpp changed to R_NilValue for r-devel tests
+
+* added empty lines at the end of files
+
+
+
+
+
+openxlsx 4.1.2
+
+* changed maintainer
+
 
 openxlsx 4.1.1
 ----------------------------------------------------------------
 
+NEW FEATURES
 
+* sep.names allows choose other separator than '.' for variable names with a blank inside
+
+* Improve handling of non-region names in getNamedRegions and add related test
 
 openxlsx 4.1.0
 ----------------------------------------------------------------

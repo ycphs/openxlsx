@@ -27,7 +27,7 @@ pageBreak(wb, sheet = 1, i = 10, type = "row")
 pageBreak(wb, sheet = 1, i = 20, type = "row")
 pageBreak(wb, sheet = 1, i = 2, type = "column")
 
-saveWorkbook(wb, "pageBreakExample.xlsx", TRUE)
+\dontrun{saveWorkbook(wb, "pageBreakExample.xlsx", TRUE)}
 ## In Excel: View tab -> Page Break Preview
 }
 \seealso{

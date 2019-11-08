@@ -4,7 +4,8 @@
 \alias{addStyle}
 \title{Add a style to a set of cells}
 \usage{
-addStyle(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = FALSE)
+addStyle(wb, sheet, style, rows, cols, gridExpand = FALSE,
+  stack = FALSE)
 }
 \arguments{
 \item{wb}{A Workbook object containing a worksheet.}
@@ -48,7 +49,7 @@ bodyStyle <- createStyle(border="TopBottom", borderColour = "#4F81BD")
 addStyle(wb, sheet = 1, bodyStyle, rows = 2:6, cols = 1:6, gridExpand = TRUE)
 setColWidths(wb, 1, cols=1, widths = 21) ## set column width for row names column
 
-saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{createStyle}}

@@ -5,7 +5,7 @@ context("Read xlsx")
 
 test_that("read.xlsx correct sheet", {
   
-  fl <- system.file("readTest.xlsx", package = "openxlsx")
+  fl <- system.file("extdata","readTest.xlsx", package = "openxlsx")
   sheet_names <- getSheetNames(file = fl)
   
   expected_sheet_names <- c("Sheet1", "Sheet2", "Sheet 3",

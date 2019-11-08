@@ -46,7 +46,7 @@ removeCellMerge(wb, 2, cols = 1, rows = 1) # removes any intersecting merges
 mergeCells(wb, 2, cols = 1, rows = 1:10) # Now this works
 
 ## Save workbook
-saveWorkbook(wb, "mergeCellsExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, "mergeCellsExample.xlsx", overwrite = TRUE)}
 }
 \seealso{
 \code{\link{removeCellMerge}}

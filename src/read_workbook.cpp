@@ -423,6 +423,7 @@ SEXP read_workbook(IntegerVector cols_in,
                    IntegerVector string_inds,
                    LogicalVector is_date,
                    bool hasColNames,
+                   char hasSepNames,
                    bool skipEmptyRows,
                    bool skipEmptyCols,
                    int nRows,
@@ -498,18 +499,24 @@ SEXP read_workbook(IntegerVector cols_in,
     LogicalVector missing_header = is_na(header_inds);
     
     // looping over each column
-    for(int i=0; i < nCols; i++){
+    for(unsigned short i=0; i < nCols; i++){
       
       if(missing_header[i]){  // a missing header element
         
-        sprintf(&(name[0]), "X%d", i+1);
+        sprintf(&(name[0]), "X%hu", i+1);
+        // sprintf(&(name[0]), "X%u", i+1);
+        // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
+        // snprintf(&(name[0]), 10, "X%d", i+1);
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          sprintf(&(name[0]), "X%d", i+1);
+          sprintf(&(name[0]), "X%hu", i+1);
+          // sprintf(&(name[0]), "X%du", i+1);
+          // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
+          // snprintf(&(name[0]), 10, "X%d", i+1);
           col_names[i] = name;
         }
         
@@ -520,7 +527,7 @@ SEXP read_workbook(IntegerVector cols_in,
     }
     
     // tidy up column names
-    col_names = clean_names(col_names);
+    col_names = clean_names(col_names,hasSepNames);
     
     //--------------------------------------------------------------------------------
     // Remove elements from rows, cols, v that have been used as headers
@@ -565,8 +572,10 @@ SEXP read_workbook(IntegerVector cols_in,
     
   }else{ // else col_names is FALSE
     char name[6];
-    for(int i =0; i < nCols; i++){
-      sprintf(&(name[0]), "X%d", i+1);
+    for(unsigned short i =0; i < nCols; i++){
+      sprintf(&(name[0]), "X%hu", i+1);
+       // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
+      // sprintf(&(name[0]), "X%u", i+1);
       col_names[i] = name;
     }
   }
@@ -608,7 +617,7 @@ SEXP read_workbook(IntegerVector cols_in,
   // Rcout << "is_date.size(): " << is_date.size() << endl;
   // Rcout << "v.size(): " << v.size() << endl;
   // Rcout << "has_date: " << has_date << endl;
-
+  
   if(allNumeric){
     
     m = buildMatrixNumeric(v, rows, cols, col_names, nRows, nCols);
@@ -701,4 +710,3 @@ int calc_number_rows(CharacterVector x, bool skipEmptyRows){
   return(nRows);
   
 }
-

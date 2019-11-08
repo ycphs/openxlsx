@@ -33,5 +33,5 @@ writeDataTable(wb, 3, iris)
 removeFilter(wb, 1:2) ## remove filters
 removeFilter(wb, 3) ## Does not affect tables!
 
-saveWorkbook(wb, file = "removeFilterExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, file = "removeFilterExample.xlsx", overwrite = TRUE)}
 }

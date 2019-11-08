@@ -5,8 +5,8 @@
 \title{Create a new Workbook object}
 \usage{
 createWorkbook(creator = ifelse(.Platform$OS.type == "windows",
-  Sys.getenv("USERNAME"), Sys.getenv("USER")), title = NULL, subject = NULL,
-  category = NULL)
+  Sys.getenv("USERNAME"), Sys.getenv("USER")), title = NULL,
+  subject = NULL, category = NULL)
 }
 \arguments{
 \item{creator}{Creator of the workbook (your name). Defaults to login username}
@@ -28,7 +28,7 @@ Create a new Workbook object
 wb <- createWorkbook()
 
 ## Save workbook to working directory
-saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)
+\dontrun{saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)}
 
 ## Set Workbook properties
 wb <- createWorkbook(creator = "Me"

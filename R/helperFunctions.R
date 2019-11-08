@@ -45,14 +45,18 @@
 #' ## Link to file - No text to display
 #' writeFormula(wb, "Sheet1", startRow = 4
 #'  , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'    , file = system.file("loadExample.xlsx", package = "openxlsx")))
+#'    , file = system.file("extdata","loadExample.xlsx", package = "openxlsx")))
 #' 
 #' ## Link to file - Text to display
 #' writeFormula(wb, "Sheet1", startRow = 3
 #'   , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'     , file = system.file("loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
+#'     , file = system.file("extdata",loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
 #' 
-#' saveWorkbook(wb, "internalHyperlinks.xlsx")
+#' \dontrun{
+#' saveWorkbook(wb, "internalHyperlinks.xlsx",overwrite=TRUE)
+#' }
+#' 
+#' 
 makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NULL){
   
   od <- getOption("OutDec")
@@ -103,7 +107,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     
     ## style hyperlinks
     inds <- which(sapply(colClasses, function(x) "hyperlink" %in% x))
-
+    
     hyperlinkstyle <- createStyle(textDecoration = "underline")
     hyperlinkstyle$fontColour <- list("theme"="10")
     styleElements <- list("style" = hyperlinkstyle,
@@ -177,14 +181,14 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
                           "sheet" =  wb$sheet_names[sheet],
                           "rows" = rep.int(rowInds, times = length(inds)),
                           "cols" = rep(inds + startCol, each = length(rowInds)))
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
   
   ## style big mark
   if("scientific" %in% allColClasses){
     inds <- which(sapply(colClasses, function(x) "scientific" %in% x))
-
+    
     styleElements <- list("style" = createStyle(numFmt = "scientific"),
                           "sheet" =  wb$sheet_names[sheet],
                           "rows" = rep.int(rowInds, times = length(inds)),
@@ -196,7 +200,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   ## style big mark
   if("3" %in% allColClasses | "comma" %in% allColClasses){
     inds <- which(sapply(colClasses, function(x) "3" %in% tolower(x) | "comma" %in% tolower(x)))
-
+    
     styleElements <- list("style" = createStyle(numFmt = "3"),
                           "sheet" =  wb$sheet_names[sheet],
                           "rows" = rep.int(rowInds, times = length(inds)),
@@ -235,7 +239,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     }
     
   }
-    
+  
   
   
   invisible(1)
@@ -307,7 +311,7 @@ writeCommentXML <- function(comment_list, file_name){
   xml <- '<comments xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
   xml <- c(xml, paste0('<authors>', paste(sprintf('<author>%s</author>', authors), collapse = ""), '</authors><commentList>'))
   
-
+  
   for(i in 1:length(comment_list)){
     
     authorInd <- which(authors == comment_list[[i]]$author) - 1L
@@ -348,7 +352,7 @@ replaceIllegalCharacters <- function(v){
   v <- gsub("\b", "", v, fixed = TRUE)
   v <- gsub("\v", "", v, fixed = TRUE)
   v <- gsub("\f", "", v, fixed = TRUE)
-
+  
   return(v)
 }
 
@@ -512,15 +516,20 @@ get_named_regions_from_string <- function(dn){
   dn <- gsub("</workbook>", "", dn, fixed = TRUE)
   
   dn <- unique(unlist(strsplit(dn, split = "</definedName>", fixed = TRUE)))
+  dn <- dn[grepl("<definedName", dn, fixed=TRUE)]
   
   dn_names <- regmatches(dn, regexpr('(?<=name=")[^"]+', dn, perl = TRUE))
   
   dn_pos <- regmatches(dn, regexpr("(?<=>).*", dn, perl = TRUE))
-  dn_coords <- regmatches(dn_pos, regexpr("(?<=!).*", dn_pos, perl = TRUE))
-  dn_coords <- gsub("$", "", dn_coords, fixed = TRUE)
+  dn_pos <- gsub("[$']", "", dn_pos)
   
-  dn_sheets <- regmatches(dn_pos, regexpr(".*(?=!)", dn_pos, perl = TRUE))
-  dn_sheets <- gsub("'", "", dn_sheets, fixed = TRUE)
+  has_bang <- grepl("!", dn_pos, fixed=TRUE)
+  dn_sheets <- ifelse(has_bang,
+                      gsub("^(.*)!.*$", "\\1", dn_pos),
+                      "")
+  dn_coords <- ifelse(has_bang,
+                      gsub("^.*!(.*)$", "\\1", dn_pos),
+                      "")
   
   attr(dn_names, "sheet") <- dn_sheets
   attr(dn_names, "position") <- dn_coords
@@ -582,7 +591,7 @@ buildBorder <- function(x){
     if(length(tmp) == 1)
       sideBorder[[i]] <- tmp
   }
-
+  
   sideBorder <- sideBorder[sideBorder != ""]
   x <- x[sideBorder != ""]
   if(length(sideBorder) == 0)
@@ -768,9 +777,9 @@ getSharedStringsFromFile <- function(sharedStringsFile, isFile){
 }
 
 
-clean_names <- function(x){
+clean_names <- function(x,schar){
   x <- gsub("^[[:space:]]+|[[:space:]]+$", "", x)
-  x <- gsub("[[:space:]]+", ".", x)
+  x <- gsub("[[:space:]]+", schar, x)
   return(x)
 }
 

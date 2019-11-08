@@ -5,7 +5,7 @@ context("Load Workbook Object Tables")
 
 test_that("Tables loaded correctly", {
   
-  wb <- loadWorkbook(system.file("loadExample.xlsx", package = "openxlsx"))
+  wb <- loadWorkbook(system.file("extdata","loadExample.xlsx", package = "openxlsx"))
 
   expect_equal(unname(attr(wb$tables, "tableName")), c("Table2", "Table3"))
   expect_equal(names(attr(wb$tables, "tableName")), c("A1:E51", "A1:K30"))
