@@ -31,10 +31,8 @@ Imports:
     methods,
     Rcpp,
     stats,
-    stringi,
     utils,
-    zip,
-    rlang (>= 0.1.2)
+    zip
 Suggests:
     knitr,
     pkgdown,
