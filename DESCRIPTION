@@ -32,7 +32,8 @@ Imports:
     Rcpp,
     stats,
     utils,
-    zip
+    zip,
+    stringi
 Suggests:
     knitr,
     pkgdown,

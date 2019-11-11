@@ -65,7 +65,7 @@ each column. If "\code{all}" all cell borders are drawn.}
 
 \item{name}{If not NULL, a named region is defined.}
 
-\item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
+\item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, stri_join, collapse = sep).}
 }
 \value{
 invisible(0)
@@ -142,7 +142,7 @@ writeData(wb, "Cars", x, colNames = TRUE, rowNames = TRUE,
 ## - vectors/columns with class 'hyperlink' are written as hyperlinks'
 
 v <- rep("https://CRAN.R-project.org/", 4)
-names(v) <- paste("Hyperlink", 1:4) # Optional: names will be used as display text
+names(v) <- paste0("Hyperlink", 1:4) # Optional: names will be used as display text
 class(v) <- 'hyperlink'
 writeData(wb, "Cars", x = v, xy = c("B", 32))
 
@@ -152,7 +152,7 @@ writeData(wb, "Cars", x = v, xy = c("B", 32))
 ## - vectors/columns with class 'formula' are written as formulas'
 
 df <- data.frame(x=1:3, y = 1:3,
-                 z = paste(paste0("A", 1:3+1L), paste0("B", 1:3+1L), sep = " + "),
+                 z = paste0(paste0("A", 1:3+1L), paste0("B", 1:3+1L), sep = " + "),
                  stringsAsFactors = FALSE)
 
 class(df$z) <- c(class(df$z), "formula")
