@@ -422,7 +422,7 @@ writeData <- function(wb,
 #' 
 #' df <- data.frame(x=1:3,
 #'                  y = 1:3,
-#'                  z = stri_join(stri_join("A", 1:3+1L), stri_join("B", 1:3+1L), sep = " + "),
+#'                  z = paste(paste0("A", 1:3+1L), paste0("B", 1:3+1L), sep = " + "),
 #'                  z2 = sprintf("ADDRESS(1,%s)", 1:3),
 #'                  stringsAsFactors = FALSE)
 #' 
