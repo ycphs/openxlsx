@@ -4,8 +4,14 @@
 \alias{setColWidths}
 \title{Set worksheet column widths}
 \usage{
-setColWidths(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE,
-  length(cols)), ignoreMergedCells = FALSE)
+setColWidths(
+  wb,
+  sheet,
+  cols,
+  widths = 8.43,
+  hidden = rep(FALSE, length(cols)),
+  ignoreMergedCells = FALSE
+)
 }
 \arguments{
 \item{wb}{A workbook object}

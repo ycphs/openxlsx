@@ -4,8 +4,14 @@
 \alias{createComment}
 \title{create a Comment object}
 \usage{
-createComment(comment, author = Sys.getenv("USERNAME"), style = NULL,
-  visible = TRUE, width = 2, height = 4)
+createComment(
+  comment,
+  author = Sys.getenv("USERNAME"),
+  style = NULL,
+  visible = TRUE,
+  width = 2,
+  height = 4
+)
 }
 \arguments{
 \item{comment}{Comment text. Character vector.}

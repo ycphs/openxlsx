@@ -4,12 +4,24 @@
 \alias{writeData}
 \title{Write an object to a worksheet}
 \usage{
-writeData(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL,
-  colNames = TRUE, rowNames = FALSE, headerStyle = NULL,
+writeData(
+  wb,
+  sheet,
+  x,
+  startCol = 1,
+  startRow = 1,
+  xy = NULL,
+  colNames = TRUE,
+  rowNames = FALSE,
+  headerStyle = NULL,
   borders = c("none", "surrounding", "rows", "columns", "all"),
   borderColour = getOption("openxlsx.borderColour", "black"),
   borderStyle = getOption("openxlsx.borderStyle", "thin"),
-  withFilter = FALSE, keepNA = FALSE, name = NULL, sep = ", ")
+  withFilter = FALSE,
+  keepNA = FALSE,
+  name = NULL,
+  sep = ", "
+)
 }
 \arguments{
 \item{wb}{A Workbook object containing a worksheet.}

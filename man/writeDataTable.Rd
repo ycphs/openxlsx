@@ -4,11 +4,27 @@
 \alias{writeDataTable}
 \title{Write to a worksheet as an Excel table}
 \usage{
-writeDataTable(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL,
-  colNames = TRUE, rowNames = FALSE, tableStyle = "TableStyleLight9",
-  tableName = NULL, headerStyle = NULL, withFilter = TRUE,
-  keepNA = FALSE, sep = ", ", stack = FALSE, firstColumn = FALSE,
-  lastColumn = FALSE, bandedRows = TRUE, bandedCols = FALSE)
+writeDataTable(
+  wb,
+  sheet,
+  x,
+  startCol = 1,
+  startRow = 1,
+  xy = NULL,
+  colNames = TRUE,
+  rowNames = FALSE,
+  tableStyle = "TableStyleLight9",
+  tableName = NULL,
+  headerStyle = NULL,
+  withFilter = TRUE,
+  keepNA = FALSE,
+  sep = ", ",
+  stack = FALSE,
+  firstColumn = FALSE,
+  lastColumn = FALSE,
+  bandedRows = TRUE,
+  bandedCols = FALSE
+)
 }
 \arguments{
 \item{wb}{A Workbook object containing a 

@@ -4,11 +4,23 @@
 \alias{read.xlsx}
 \title{Read from an Excel file or Workbook object}
 \usage{
-read.xlsx(xlsxFile, sheet = 1, startRow = 1, colNames = TRUE,
-  rowNames = FALSE, detectDates = FALSE, skipEmptyRows = TRUE,
-  skipEmptyCols = TRUE, rows = NULL, cols = NULL,
-  check.names = FALSE, sep.names = ".", namedRegion = NULL,
-  na.strings = "NA", fillMergedCells = FALSE)
+read.xlsx(
+  xlsxFile,
+  sheet = 1,
+  startRow = 1,
+  colNames = TRUE,
+  rowNames = FALSE,
+  detectDates = FALSE,
+  skipEmptyRows = TRUE,
+  skipEmptyCols = TRUE,
+  rows = NULL,
+  cols = NULL,
+  check.names = FALSE,
+  sep.names = ".",
+  namedRegion = NULL,
+  na.strings = "NA",
+  fillMergedCells = FALSE
+)
 }
 \arguments{
 \item{xlsxFile}{An xlsx file, Workbook object or URL to xlsx file.}

@@ -4,8 +4,7 @@
 \alias{modifyBaseFont}
 \title{Modify the default font}
 \usage{
-modifyBaseFont(wb, fontSize = 11, fontColour = "black",
-  fontName = "Calibri")
+modifyBaseFont(wb, fontSize = 11, fontColour = "black", fontName = "Calibri")
 }
 \arguments{
 \item{wb}{A workbook object}

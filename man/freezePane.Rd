@@ -4,8 +4,14 @@
 \alias{freezePane}
 \title{Freeze a worksheet pane}
 \usage{
-freezePane(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL,
-  firstRow = FALSE, firstCol = FALSE)
+freezePane(
+  wb,
+  sheet,
+  firstActiveRow = NULL,
+  firstActiveCol = NULL,
+  firstRow = FALSE,
+  firstCol = FALSE
+)
 }
 \arguments{
 \item{wb}{A workbook object}

@@ -4,9 +4,16 @@
 \alias{setHeaderFooter}
 \title{Set document headers and footers}
 \usage{
-setHeaderFooter(wb, sheet, header = NULL, footer = NULL,
-  evenHeader = NULL, evenFooter = NULL, firstHeader = NULL,
-  firstFooter = NULL)
+setHeaderFooter(
+  wb,
+  sheet,
+  header = NULL,
+  footer = NULL,
+  evenHeader = NULL,
+  evenFooter = NULL,
+  firstHeader = NULL,
+  firstFooter = NULL
+)
 }
 \arguments{
 \item{wb}{A workbook object}

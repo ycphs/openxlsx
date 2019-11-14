@@ -5,8 +5,16 @@
 \alias{databar}
 \title{Add conditional formatting to cells}
 \usage{
-conditionalFormatting(wb, sheet, cols, rows, rule = NULL, style = NULL,
-  type = "expression", ...)
+conditionalFormatting(
+  wb,
+  sheet,
+  cols,
+  rows,
+  rule = NULL,
+  style = NULL,
+  type = "expression",
+  ...
+)
 }
 \arguments{
 \item{wb}{A workbook object}

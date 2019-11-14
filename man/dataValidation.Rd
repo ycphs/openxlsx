@@ -4,8 +4,18 @@
 \alias{dataValidation}
 \title{Add data validation to cells}
 \usage{
-dataValidation(wb, sheet, cols, rows, type, operator, value,
-  allowBlank = TRUE, showInputMsg = TRUE, showErrorMsg = TRUE)
+dataValidation(
+  wb,
+  sheet,
+  cols,
+  rows,
+  type,
+  operator,
+  value,
+  allowBlank = TRUE,
+  showInputMsg = TRUE,
+  showErrorMsg = TRUE
+)
 }
 \arguments{
 \item{wb}{A workbook object}

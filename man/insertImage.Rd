@@ -4,8 +4,17 @@
 \alias{insertImage}
 \title{Insert an image into a worksheet}
 \usage{
-insertImage(wb, sheet, file, width = 6, height = 3, startRow = 1,
-  startCol = 1, units = "in", dpi = 300)
+insertImage(
+  wb,
+  sheet,
+  file,
+  width = 6,
+  height = 3,
+  startRow = 1,
+  startCol = 1,
+  units = "in",
+  dpi = 300
+)
 }
 \arguments{
 \item{wb}{A workbook object}

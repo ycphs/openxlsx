@@ -4,13 +4,25 @@
 \alias{createStyle}
 \title{Create a cell style}
 \usage{
-createStyle(fontName = NULL, fontSize = NULL, fontColour = NULL,
-  numFmt = "GENERAL", border = NULL,
+createStyle(
+  fontName = NULL,
+  fontSize = NULL,
+  fontColour = NULL,
+  numFmt = "GENERAL",
+  border = NULL,
   borderColour = getOption("openxlsx.borderColour", "black"),
   borderStyle = getOption("openxlsx.borderStyle", "thin"),
-  bgFill = NULL, fgFill = NULL, halign = NULL, valign = NULL,
-  textDecoration = NULL, wrapText = FALSE, textRotation = NULL,
-  indent = NULL, locked = NULL, hidden = NULL)
+  bgFill = NULL,
+  fgFill = NULL,
+  halign = NULL,
+  valign = NULL,
+  textDecoration = NULL,
+  wrapText = FALSE,
+  textRotation = NULL,
+  indent = NULL,
+  locked = NULL,
+  hidden = NULL
+)
 }
 \arguments{
 \item{fontName}{A name of a font. Note the font name is not validated. If fontName is NULL,

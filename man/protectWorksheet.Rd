@@ -4,14 +4,27 @@
 \alias{protectWorksheet}
 \title{Protect a worksheet from modifications}
 \usage{
-protectWorksheet(wb, sheet, protect = TRUE, password = NULL,
-  lockSelectingLockedCells = NULL, lockSelectingUnlockedCells = NULL,
-  lockFormattingCells = NULL, lockFormattingColumns = NULL,
-  lockFormattingRows = NULL, lockInsertingColumns = NULL,
-  lockInsertingRows = NULL, lockInsertingHyperlinks = NULL,
-  lockDeletingColumns = NULL, lockDeletingRows = NULL,
-  lockSorting = NULL, lockAutoFilter = NULL, lockPivotTables = NULL,
-  lockObjects = NULL, lockScenarios = NULL)
+protectWorksheet(
+  wb,
+  sheet,
+  protect = TRUE,
+  password = NULL,
+  lockSelectingLockedCells = NULL,
+  lockSelectingUnlockedCells = NULL,
+  lockFormattingCells = NULL,
+  lockFormattingColumns = NULL,
+  lockFormattingRows = NULL,
+  lockInsertingColumns = NULL,
+  lockInsertingRows = NULL,
+  lockInsertingHyperlinks = NULL,
+  lockDeletingColumns = NULL,
+  lockDeletingRows = NULL,
+  lockSorting = NULL,
+  lockAutoFilter = NULL,
+  lockPivotTables = NULL,
+  lockObjects = NULL,
+  lockScenarios = NULL
+)
 }
 \arguments{
 \item{wb}{A workbook object}

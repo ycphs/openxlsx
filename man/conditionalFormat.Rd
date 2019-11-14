@@ -4,8 +4,15 @@
 \alias{conditionalFormat}
 \title{Add conditional formatting to cells}
 \usage{
-conditionalFormat(wb, sheet, cols, rows, rule = NULL, style = NULL,
-  type = "expression")
+conditionalFormat(
+  wb,
+  sheet,
+  cols,
+  rows,
+  rule = NULL,
+  style = NULL,
+  type = "expression"
+)
 }
 \arguments{
 \item{wb}{A workbook object}

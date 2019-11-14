@@ -4,8 +4,13 @@
 \alias{protectWorkbook}
 \title{Protect a workbook from modifications}
 \usage{
-protectWorkbook(wb, protect = TRUE, password = NULL,
-  lockStructure = FALSE, lockWindows = FALSE)
+protectWorkbook(
+  wb,
+  protect = TRUE,
+  password = NULL,
+  lockStructure = FALSE,
+  lockWindows = FALSE
+)
 }
 \arguments{
 \item{wb}{A workbook object}
