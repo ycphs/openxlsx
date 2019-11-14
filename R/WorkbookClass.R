@@ -1025,16 +1025,10 @@ Workbook$methods(
         getOption("openxlsx.compresssionLevel"),
         getOption("openxlsx.compresssionevel", 6)
       )
-    zip::zip(
-      zipfile = tmpFile,
-      files = list.files(
-        tmpDir,
-        full.names = FALSE,
-        recursive = TRUE,
-        include.dirs = FALSE,
-        all.files = TRUE
-      ),
-      compression_level = cl
+    zipr(zipfile = tmpFile, include_directories = FALSE,
+              files = list.files(path = tmpDir, all.files = FALSE), 
+              recurse = TRUE,
+              compression_level = cl
     )
     
     ## reset styles - maintain any changes to base font
