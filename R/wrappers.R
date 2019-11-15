@@ -984,7 +984,32 @@ addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = F
 #' @author Alexander Walker
 #' @param cellCoords A data.frame with two columns coordinate pairs. 
 #' @return Excel alphanumeric cell reference
+#' @example 
+#' getCellRefs(data.frame(1,2)) # "B1"
+#' @export
 getCellRefs <- function(cellCoords){
+  
+  
+  
+  
+  if(!"data.frame"%in%class(cellCoords)){
+    stop("Provide a data.frame!")
+  }
+  
+ 
+  
+  if(!("numeric"%in%sapply(cellCoords[,1],class)|
+     "integer"%in%sapply(cellCoords[,1],class))
+     &("numeric"%in%sapply(cellCoords[,2],class)|
+       "integer"%in%sapply(cellCoords[,2],class))
+     
+     ){
+    stop("Provide a data.frame containing integers!")
+  }
+  
+  
+  
+  
   
   od <- getOption("OutDec")
   options("OutDec" = ".")
