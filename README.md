@@ -36,11 +36,12 @@ Please let me know which version of openxlsx you are using when posting bug repo
 ```R
 packageVersion("openxlsx")
 ```
-Thanks, [here](https://github.com/ycphs/openxlsx/issues). 
+
+
+
 
 ## News
 [Here](https://raw.githubusercontent.com/ycphs/openxlsx/master/NEWS). 
 
 ## Authors and Contributors
-A list is automagically maintained [here](https://github.com/ycphs/openxlsx/graphs/contributors). 
-
+[&#x0040;aadler](https://github.com/aadler), [&#x0040;aavanesy](https://github.com/aavanesy), [&#x0040;david-f1976](https://github.com/david-f1976), [&#x0040;davidgohel](https://github.com/davidgohel), [&#x0040;dovrosenberg](https://github.com/dovrosenberg), [&#x0040;GegznaV](https://github.com/GegznaV), [&#x0040;gwselke](https://github.com/gwselke), [&#x0040;hjia222](https://github.com/hjia222), and [&#x0040;ycphs](https://github.com/ycphs)
