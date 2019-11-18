@@ -981,10 +981,10 @@ addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = F
 #' @name getCellRefs
 #' @title Return excel cell coordinates from (x,y) coordinates
 #' @description Return excel cell coordinates from (x,y) coordinates
-#' @author Alexander Walker
+#' @author Philipp Schauberger, Alexander Walker
 #' @param cellCoords A data.frame with two columns coordinate pairs. 
 #' @return Excel alphanumeric cell reference
-#' @example 
+#' @examples 
 #' getCellRefs(data.frame(1,2)) # "B1"
 #' @export
 getCellRefs <- function(cellCoords){
