@@ -985,7 +985,10 @@ addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = F
 #' @param cellCoords A data.frame with two columns coordinate pairs. 
 #' @return Excel alphanumeric cell reference
 #' @examples 
-#' getCellRefs(data.frame(1,2)) # "B1"
+#' getCellRefs(data.frame(1,2)) 
+#' # "B1"
+#' getCellRefs(data.frame(1:3,2:4))
+#' 
 #' @export
 getCellRefs <- function(cellCoords){
   
