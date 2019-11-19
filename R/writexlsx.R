@@ -412,6 +412,9 @@ write.xlsx <- function(x, file, asTable = FALSE, ...){
     if(length(keepNA) != nSheets)
       keepNA <- rep_len(keepNA, length.out = nSheets)
     
+    if(length(na.string) != nSheets & !is.null(na.string))
+      na.string <- rep_len(na.string, length.out = nSheets)
+    
     if(length(asTable) != nSheets)
       asTable <- rep_len(asTable, length.out = nSheets)
     
@@ -440,7 +443,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...){
                        headerStyle = headerStyle[[i]],
                        withFilter = withFilter[[i]],
                        keepNA = keepNA[[i]],
-                       na.string = na.string)
+                       na.string = na.string[[i]])
         
       }else{
         
@@ -457,7 +460,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...){
                   borderColour = borderColour[[i]],
                   borderStyle = borderStyle[[i]],
                   keepNA = keepNA[[i]],
-                  na.string = na.string)
+                  na.string = na.string[[i]])
         
       }
       
