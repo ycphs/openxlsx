@@ -27,7 +27,7 @@ readWorkbook(
 
 \item{sheet}{The name or index of the sheet to read data from.}
 
-\item{startRow}{first row to begin looking for data.  Empty rows at the top of a file are always skipped, 
+\item{startRow}{first row to begin looking for data.  Empty rows at the top of a file are always skipped,
 regardless of the value of startRow.}
 
 \item{colNames}{If \code{TRUE}, the first row of data will be used as column names.}
@@ -36,18 +36,18 @@ regardless of the value of startRow.}
 
 \item{detectDates}{If \code{TRUE}, attempt to recognise dates and perform conversion.}
 
-\item{skipEmptyRows}{If \code{TRUE}, empty rows are skipped else empty rows after the first row containing data 
+\item{skipEmptyRows}{If \code{TRUE}, empty rows are skipped else empty rows after the first row containing data
 will return a row of NAs.}
 
 \item{skipEmptyCols}{If \code{TRUE}, empty columns are skipped.}
 
-\item{rows}{A numeric vector specifying which rows in the Excel file to read. 
+\item{rows}{A numeric vector specifying which rows in the Excel file to read.
 If NULL, all rows are read.}
 
-\item{cols}{A numeric vector specifying which columns in the Excel file to read. 
+\item{cols}{A numeric vector specifying which columns in the Excel file to read.
 If NULL, all columns are read.}
 
-\item{check.names}{logical. If TRUE then the names of the variables in the data frame 
+\item{check.names}{logical. If TRUE then the names of the variables in the data frame
 are checked to ensure that they are syntactically valid variable names}
 
 \item{sep.names}{One character which substitutes blanks in column names. By default, "."}

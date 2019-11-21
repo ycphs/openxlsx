@@ -8,6 +8,8 @@
 
 * update to rogygen2 7.0.0
 
+* Added parameter for customizing na.strings
+
 # openxlsx 4.1.3
 
 * Added a `NEWS.md` file to track changes to the package.

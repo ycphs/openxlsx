@@ -144,12 +144,12 @@ writeData(wb, "colourScale", df, colNames=FALSE)  ## write data.frame
 ## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())
 ## If rule is NULL, min and max of cells is used. Rule must be the same length as style or NULL.
 conditionalFormatting(wb, "colourScale", cols=1:ncol(df), rows=1:nrow(df),
-   style = c("black", "white"), 
-   rule = c(0, 255), 
+   style = c("black", "white"),
+   rule = c(0, 255),
    type = "colourScale")
 
 setColWidths(wb, "colourScale", cols = 1:ncol(df), widths = 1.07)
-setRowHeights(wb, "colourScale", rows = 1:nrow(df), heights = 7.5) 
+setRowHeights(wb, "colourScale", rows = 1:nrow(df), heights = 7.5)
 
 ## Databars
 writeData(wb, "databar", -5:5)
@@ -183,19 +183,19 @@ writeData(wb, "databar", -5:5, startCol = 3)
 conditionalFormatting(wb, "databar", cols = 3, rows = 1:11, type = "databar", border = FALSE)
 
 writeData(wb, "databar", -5:5, startCol = 5)
-conditionalFormatting(wb, "databar", cols = 5, rows = 1:11, 
-  type = "databar", style = c("#a6a6a6"), showValue = FALSE) 
+conditionalFormatting(wb, "databar", cols = 5, rows = 1:11,
+  type = "databar", style = c("#a6a6a6"), showValue = FALSE)
 
 writeData(wb, "databar", -5:5, startCol = 7)
-conditionalFormatting(wb, "databar", cols = 7, rows = 1:11, 
-  type = "databar", style = c("#a6a6a6"), showValue = FALSE, gradient = FALSE) 
+conditionalFormatting(wb, "databar", cols = 7, rows = 1:11,
+  type = "databar", style = c("#a6a6a6"), showValue = FALSE, gradient = FALSE)
 
 writeData(wb, "databar", -5:5, startCol = 9)
-conditionalFormatting(wb, "databar", cols = 9, rows = 1:11, 
+conditionalFormatting(wb, "databar", cols = 9, rows = 1:11,
   type = "databar", style = c("#a6a6a6", "#a6a6a6"), showValue = FALSE, gradient = FALSE)
 
 \dontrun{saveWorkbook(wb, file = "databarExample.xlsx", overwrite = TRUE)}
- 
+
 
 }
 \seealso{

@@ -19,6 +19,7 @@ writeData(
   borderStyle = getOption("openxlsx.borderStyle", "thin"),
   withFilter = FALSE,
   keepNA = FALSE,
+  na.string = NULL,
   name = NULL,
   sep = ", "
 )
@@ -73,7 +74,9 @@ each column. If "\code{all}" all cell borders are drawn.}
 
 \item{withFilter}{If \code{TRUE}, add filters to the column name row. NOTE can only have one filter per worksheet.}
 
-\item{keepNA}{If \code{TRUE}, NA values are converted to #N/A in Excel else NA cells will be empty.}
+\item{keepNA}{If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.}
+
+\item{na.string}{If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.}
 
 \item{name}{If not NULL, a named region is defined.}
 
