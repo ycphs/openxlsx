@@ -18,7 +18,8 @@ matrix:
       github-token: $GITHUB_PAT	
       keep-history: true	
       on:	
-        branch: gh_pages
+        branch: master
+      target_branch: gh-pages
   - r: release
     pandoc: false
     env: PANDOC='none'
