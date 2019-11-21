@@ -180,6 +180,7 @@ test_that("Empty workbook", {
 test_that("Reading NAs and NaN values", {
   
   fileName <- file.path(tempdir(), "NaN.xlsx")
+  na.string <- "*"
   
   ## data
   a <- data.frame("X" = c(-pi/0, NA, NaN),
@@ -192,6 +193,12 @@ test_that("Reading NAs and NaN values", {
   b[b == -Inf] <- NaN
   b[b == Inf] <- NaN
   
+  c <- b
+  is_na <- sapply(c, is.na)
+  is_nan <- sapply(c, is.nan)
+  c[is_na & !is_nan] <- na.string
+  is_nan_after <- sapply(c, is.nan)
+  c[is_nan & !is_nan_after] <- NA
   
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
@@ -199,6 +206,9 @@ test_that("Reading NAs and NaN values", {
   
   addWorksheet(wb, "Sheet 2")
   writeData(wb, 2, a, keepNA = TRUE)
+  
+  addWorksheet(wb, "Sheet 3")
+  writeData(wb, 3, a, keepNA = TRUE, na.string = na.string)
   
   saveWorkbook(wb, file = fileName, overwrite = TRUE)
   
@@ -236,6 +246,10 @@ test_that("Reading NAs and NaN values", {
   
   expect_equal(b, read.xlsx(wb, sheet = 2))  
   expect_equal(b, read.xlsx(fileName, sheet = 2)) 
+  
+  ## keepNA = TRUE, na.string = "*"
+  expect_equal(c, read.xlsx(wb, sheet = 3))
+  expect_equal(c, read.xlsx(fileName, sheet = 3))
   
   unlink(fileName, recursive = TRUE, force = TRUE)
   

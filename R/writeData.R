@@ -39,7 +39,8 @@
 #'    \item{\bold{slantDashDot}}{ slanted dash-dot border}
 #'   }
 #' @param withFilter If \code{TRUE}, add filters to the column name row. NOTE can only have one filter per worksheet. 
-#' @param keepNA If \code{TRUE}, NA values are converted to #N/A in Excel else NA cells will be empty.
+#' @param keepNA If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.
+#' @param na.string If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
 #' @seealso \code{\link{writeDataTable}}
@@ -150,6 +151,7 @@ writeData <- function(wb,
                       borderStyle = getOption("openxlsx.borderStyle", "thin"),
                       withFilter = FALSE,
                       keepNA = FALSE,
+                      na.string = NULL,
                       name = NULL,
                       sep = ", "){
   
@@ -299,6 +301,7 @@ writeData <- function(wb,
                colClasses = colClasss2,
                hlinkNames = hlinkNames,
                keepNA = keepNA,
+               na.string = na.string,
                list_sep = sep)
   
   ## header style  

@@ -248,6 +248,30 @@ test_that("Writing then reading returns identical data.frame 4", {
   
 })
 
+test_that("Writing then reading returns identical data.frame 5", {
+  
+  ## data
+  df <- head(iris[,1:4])
+  df[1,2] <- NA
+  df[3,1] <- NA
+  df[6, 4] <- NA
+  
+  na.string <- "*"
+  df_expected <- df
+  df_expected[1,2] <- na.string
+  df_expected[3,1] <- na.string
+  df_expected[6, 4] <- na.string
+  
+  
+  tf <- tempfile(fileext = ".xlsx")
+  write.xlsx(x = df, file = tf, keepNA = TRUE, na.string = na.string)
+  x <- read.xlsx(tf)
+  
+  expect_equal(object = x, expected = df_expected, check.attributes = TRUE)
+  unlink(tf, recursive = TRUE, force = TRUE)
+  
+})
+
 
 
 
