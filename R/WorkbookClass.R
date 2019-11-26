@@ -1395,7 +1395,7 @@ Workbook$methods(
       
       if (!is.null(style$wrapText)) {
         if (style$wrapText)
-          alignNode <- stri_join(alignNode, 'wrapText="1"')
+          alignNode <- stri_join(alignNode, 'wrapText="1"', sep = " ")
       }
       
       
