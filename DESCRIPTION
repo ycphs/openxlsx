@@ -38,7 +38,9 @@ Suggests:
     knitr,
     pkgdown,
     testthat,
-    roxygen2
+    roxygen2,
+    xml2,
+    covr
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
