@@ -7,9 +7,7 @@
 [![Coverage Status](https://codecov.io/github/ycphs/openxlsx/coverage.svg?branch=master)](https://codecov.io/github/ycphs/openxlsx?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/openxlsx)](https://cran.r-project.org/package=openxlsx)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/openxlsx)](https://cran.r-project.org/package=openxlsx)
-[![Azure pipelines build status](https://img.shields.io/azure-devops/build/ycphs/openxlsx/2)](https://dev.azure.com/ycphs/openxlsx/_build/latest?definitionId=1&branchName=master)
-[![Azure pipelines test status](https://img.shields.io/azure-devops/tests/ycphs/openxlsx/2?color=brightgreen&compact_message)](https://dev.azure.com/ycphs/openxlsx/_build/latest?definitionId=1&branchName=Dev)
- [![Azure pipelines coverage status](https://img.shields.io/azure-devops/coverage/ycphs/openxlsx/2)](https://dev.azure.com/ycphs/openxlsx/_build/latest?definitionId=1&branchName=master)
+
  
  
  
