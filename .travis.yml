@@ -10,6 +10,7 @@ matrix:
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
+    - Rscript -e 'pkgdown::use_pkgdown(config_file = "_pkgdown.yml", destdir = "docs")'
     deploy:	
       provider: pages	
       github-token: $GITHUB_PAT	

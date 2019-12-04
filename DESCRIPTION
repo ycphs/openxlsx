@@ -36,7 +36,6 @@ Imports:
     stringi
 Suggests:
     knitr,
-    pkgdown,
     testthat,
     roxygen2
 LinkingTo: 
