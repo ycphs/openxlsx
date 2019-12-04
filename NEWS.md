@@ -12,6 +12,8 @@
 
 * Add space surrounding "wrapText" [#17](https://github.com/ycphs/openxlsx/issues/17)
 
+* Corrected Percentage, Accounting, Comma, Currency class on column level
+
 # openxlsx 4.1.3
 
 * Added a `NEWS.md` file to track changes to the package.

@@ -72,6 +72,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     cInds <- which(sapply(colClasses, function(x) any(c("accounting", "currency", "percentage", "3", "comma") %in% tolower(x))))
     for(i in cInds)
       df[[i]] <- as.numeric(gsub("[^0-9\\.-]", "", df[[i]], perl = TRUE))
+    class(df[[i]]) <- "numeric"
   }
   
   ## convert scientific

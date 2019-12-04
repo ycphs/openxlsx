@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.1.3.9005
-Date: 2019-11-18
+Version: 4.1.3.9010
+Date: 2019-12-04
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -36,7 +36,6 @@ Imports:
     stringi
 Suggests:
     knitr,
-    pkgdown,
     testthat,
     roxygen2
 LinkingTo: 
@@ -44,7 +43,7 @@ LinkingTo:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.1
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
