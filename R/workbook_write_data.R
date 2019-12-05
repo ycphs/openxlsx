@@ -114,33 +114,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
       class(df[[i]]) <- "character"
   }
   
-  # if("currency" %in% allColClasses){
-  #   for(i in which(sapply(colClasses, function(x) "currency" %in% x)))
-  #     class(df[[i]]) <- "character"
-  # }
-  # 
-  # if("accounting" %in% allColClasses){
-  #   for(i in which(sapply(colClasses, function(x) "accounting" %in% x)))
-  #     class(df[[i]]) <- "character"
-  # }
-  # 
-  # 
-  # if("percentage" %in% allColClasses){
-  #   for(i in which(sapply(colClasses, function(x) "percentage" %in% x)))
-  #     class(df[[i]]) <- "character"
-  # }
-  # 
-  # 
-  # if("comma" %in% allColClasses){
-  #   for(i in which(sapply(colClasses, function(x) "comma" %in% x)))
-  #     class(df[[i]]) <- "character"
-  # }
-  # 
-  # if("3" %in% allColClasses){
-  #   for(i in which(sapply(colClasses, function(x) "3" %in% x)))
-  #     class(df[[i]]) <- "character"
-  # }
-  # 
+ 
   
   
   
