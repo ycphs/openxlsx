@@ -101,6 +101,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   
   colClasses <- sapply(df, function(x) tolower(class(x))[[1]]) ## by here all cols must have a single class only
   
+  
   ## convert logicals (Excel stores logicals as 0 & 1)
   if("logical" %in% allColClasses){
     for(i in which(sapply(colClasses, function(x) "logical" %in% x)))
@@ -108,38 +109,38 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   }
   
   ## convert all numerics to character (this way preserves digits)
-  if("numeric" %in% allColClasses){
+  if("numeric" %in% colClasses){
     for(i in which(sapply(colClasses, function(x) "numeric" %in% x)))
       class(df[[i]]) <- "character"
   }
   
-  if("currency" %in% allColClasses){
-    for(i in which(sapply(colClasses, function(x) "currency" %in% x)))
-      class(df[[i]]) <- "character"
-  }
-
-  if("accounting" %in% allColClasses){
-    for(i in which(sapply(colClasses, function(x) "accounting" %in% x)))
-      class(df[[i]]) <- "character"
-  }
-
-
-  if("percentage" %in% allColClasses){
-    for(i in which(sapply(colClasses, function(x) "percentage" %in% x)))
-      class(df[[i]]) <- "character"
-  }
-
-
-  if("comma" %in% allColClasses){
-    for(i in which(sapply(colClasses, function(x) "comma" %in% x)))
-      class(df[[i]]) <- "character"
-  }
-
-  if("3" %in% allColClasses){
-    for(i in which(sapply(colClasses, function(x) "3" %in% x)))
-      class(df[[i]]) <- "character"
-  }
-  
+  # if("currency" %in% allColClasses){
+  #   for(i in which(sapply(colClasses, function(x) "currency" %in% x)))
+  #     class(df[[i]]) <- "character"
+  # }
+  # 
+  # if("accounting" %in% allColClasses){
+  #   for(i in which(sapply(colClasses, function(x) "accounting" %in% x)))
+  #     class(df[[i]]) <- "character"
+  # }
+  # 
+  # 
+  # if("percentage" %in% allColClasses){
+  #   for(i in which(sapply(colClasses, function(x) "percentage" %in% x)))
+  #     class(df[[i]]) <- "character"
+  # }
+  # 
+  # 
+  # if("comma" %in% allColClasses){
+  #   for(i in which(sapply(colClasses, function(x) "comma" %in% x)))
+  #     class(df[[i]]) <- "character"
+  # }
+  # 
+  # if("3" %in% allColClasses){
+  #   for(i in which(sapply(colClasses, function(x) "3" %in% x)))
+  #     class(df[[i]]) <- "character"
+  # }
+  # 
   
   
   
