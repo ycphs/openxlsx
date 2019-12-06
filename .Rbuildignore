@@ -12,3 +12,4 @@ cran-comments.md
 ^pkgdown$
 ^\.travis\.yml$
 ^\.github$
+^azure-pipelines\.yml$

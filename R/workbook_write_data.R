@@ -72,6 +72,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     cInds <- which(sapply(colClasses, function(x) any(c("accounting", "currency", "percentage", "3", "comma") %in% tolower(x))))
     for(i in cInds)
       df[[i]] <- as.numeric(gsub("[^0-9\\.-]", "", df[[i]], perl = TRUE))
+    class(df[[i]]) <- "numeric"
   }
   
   ## convert scientific
@@ -100,6 +101,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   
   colClasses <- sapply(df, function(x) tolower(class(x))[[1]]) ## by here all cols must have a single class only
   
+  
   ## convert logicals (Excel stores logicals as 0 & 1)
   if("logical" %in% allColClasses){
     for(i in which(sapply(colClasses, function(x) "logical" %in% x)))
@@ -107,10 +109,14 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   }
   
   ## convert all numerics to character (this way preserves digits)
-  if("numeric" %in% allColClasses){
+  if("numeric" %in% colClasses){
     for(i in which(sapply(colClasses, function(x) "numeric" %in% x)))
       class(df[[i]]) <- "character"
   }
+  
+ 
+  
+  
   
   ## End standardise all column types
   ###################################################################### 
@@ -126,9 +132,6 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   v <- as.character(t(as.matrix(
     data.frame(df, stringsAsFactors = FALSE, check.names = FALSE, fix.empty.names = FALSE)
   )));
-  
-  
-  
   
   
   if(keepNA){
