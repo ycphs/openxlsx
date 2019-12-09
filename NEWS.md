@@ -1,5 +1,9 @@
 # openxlsx 4.1.4
 
+* include tests for cloneWorksheet
+
+# openxlsx 4.1.4
+
 * Use `zip::zipr()` instead of zip::zip().
 
 * Keep correct visibility option for loadWorkbook. [#12](https://github.com/ycphs/openxlsx/issues/12])
