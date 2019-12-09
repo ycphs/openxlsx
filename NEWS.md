@@ -1,4 +1,4 @@
-# openxlsx (development version)
+# openxlsx 4.1.4
 
 * include tests for cloneWorksheet
 
