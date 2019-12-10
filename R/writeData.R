@@ -448,12 +448,15 @@ writeData <- function(wb,
 #' \dontrun{saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)}
 #' 
 #' 
-#' ## Writing internal hyperlinks
+#' ## 4. - Writing internal hyperlinks
+#' 
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "Sheet1")
 #' addWorksheet(wb, "Sheet2")
 #' writeFormula(wb, "Sheet1", x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")')
-#' \dontrun{saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)}
+#' 
+#' ## Save workbook
+#'  \dontrun{saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)}
 #' 
 writeFormula <- function(wb, 
                          sheet,
