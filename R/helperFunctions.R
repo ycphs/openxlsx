@@ -50,13 +50,17 @@
 #' ## Link to file - Text to display
 #' writeFormula(wb, "Sheet1", startRow = 3
 #'   , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'     , file = system.file("extdata",loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
+#'     , file = system.file("extdata","loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
+#' 
+#' ## Link to external file - Text to display
+#' writeFormula(wb, "Sheet1", startRow = 10, startCol=1
+#'   , x= "=HYPERLINK(\"[C:/Users]\", \"Link to an external file\")")
 #' 
 #' \dontrun{
 #' saveWorkbook(wb, "internalHyperlinks.xlsx",overwrite=TRUE)
 #' }
 #' 
-#' 
+
 makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NULL){
   
   od <- getOption("OutDec")
