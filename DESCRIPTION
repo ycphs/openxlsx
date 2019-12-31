@@ -35,6 +35,7 @@ Imports:
     zip,
     stringi
 Suggests:
+	covr,
     knitr,
     testthat,
     roxygen2
