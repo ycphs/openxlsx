@@ -39,6 +39,8 @@ Suggests:
     knitr,
     testthat,
     roxygen2
+Remotes:
+	ropenscilabs/travis
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
