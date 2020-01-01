@@ -16,8 +16,6 @@ jobs:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
       skip_cleanup: true
-    pandoc: false
-    env: PANDOC='none'
   - r: oldrel
   - r: 3.3
   - r: 3.4
