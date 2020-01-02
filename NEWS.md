@@ -1,362 +1,362 @@
 # openxlsx development version
 
-* include tests for cloneWorksheet
+*  include tests for cloneWorksheet
 
-* Fixed NEWS hyperlink
+*  Fixed NEWS hyperlink
 
 # openxlsx 4.1.4
 
-* Use `zip::zipr()` instead of zip::zip().
+*  Use `zip::zipr()` instead of `zip::zip()`.
 
-* Keep correct visibility option for loadWorkbook. [#12](https://github.com/ycphs/openxlsx/issues/12])
+*  Keep correct visibility option for loadWorkbook. [#12](https://github.com/ycphs/openxlsx/issues/12])
 
-* Added getCellRefs as function. [#7](https://github.com/ycphs/openxlsx/issues/7)
+*  Added getCellRefs as function. [#7](https://github.com/ycphs/openxlsx/issues/7)
 
-* update to rogygen2 7.0.0
+*  update to rogygen2 7.0.0
 
-* Added parameter for customizing na.strings
+*  Added parameter for customizing na.strings
 
-* Add space surrounding "wrapText" [#17](https://github.com/ycphs/openxlsx/issues/17)
+*  Add space surrounding "wrapText" [#17](https://github.com/ycphs/openxlsx/issues/17)
 
-* Corrected Percentage, Accounting, Comma, Currency class on column level
+*  Corrected Percentage, Accounting, Comma, Currency class on column level
 
 # openxlsx 4.1.3
 
 ## New Features
 
-* Added a `NEWS.md` file to track changes to the package.
-* Added `pkgdown` to create site.
+*  Added a `NEWS.md` file to track changes to the package.
+*  Added `pkgdown` to create site.
 
 ## Bug Fixes
 
-* Return values for cpp changed to R_NilValue for r-devel tests
+*  Return values for cpp changed to R_NilValue for r-devel tests
 
-* Added empty lines at the end of files
+*  Added empty lines at the end of files
 
 # openxlsx 4.1.2
 
-* Changed maintainer
+*  Changed maintainer
 
 # openxlsx 4.1.1
 
 ## New Features
 
-* `sep.names` allows choose other separator than '.' for variable names with a blank inside
+*  `sep.names` allows choose other separator than '.' for variable names with a blank inside
 
-* Improve handling of non-region names in `getNamedRegions` and add related test
+*  Improve handling of non-region names in `getNamedRegions` and add related test
 
 # openxlsx 4.1.0
 
 ## New Features
 
-* `deleteNamedRegions` to delete named region and optionally the worksheet data
+*  `deleteNamedRegions` to delete named region and optionally the worksheet data
 
-* set Workbook properties 'title', 'subject', 'category' 
+*  set Workbook properties 'title', 'subject', 'category' 
 
 ## Bug Fixes
 
-* `pageSetup` fails when passing in sheet by name
+*  `pageSetup` fails when passing in sheet by name
 
-* matching sheet names with special characters now works 
+*  matching sheet names with special characters now works 
 
-* `skipEmptyCols` being ignored by `read.xlsx.Workbook`
+*  `skipEmptyCols` being ignored by `read.xlsx.Workbook`
 
-* zero column data.frames would throw an error.
+*  zero column data.frames would throw an error.
 
-* `read.xlsx` on files created using apache poi failed to match sheet name to xml file. 
+*  `read.xlsx` on files created using apache poi failed to match sheet name to xml file. 
 
-* deleted table re-appearing after save & load.
+*  deleted table re-appearing after save & load.
 
-* newline characters in table names would corrupt file
+*  newline characters in table names would corrupt file
 
-* datetime precision
+*  datetime precision
 
 # openxlsx 4.0.17
 
 ## New Features
 
-* `getNamedRegions` returns sheet name and cell references along with the named regions.
+*  `getNamedRegions` returns sheet name and cell references along with the named regions.
 
-* `borderStyle` and `borderColour` can be vector to specify different values for each side
+*  `borderStyle` and `borderColour` can be vector to specify different values for each side
 
-* `dataValidation` type "list"
+*  `dataValidation` type "list"
 
-* `dataBar showValue`, gradient and border can now be set through conditionalFormatting()
+*  `dataBar showValue`, gradient and border can now be set through conditionalFormatting()
 
-* options("openxlsx.zipflags") to pass additional flags to zip application e.g. compression level
+*  options("openxlsx.zipflags") to pass additional flags to zip application e.g. compression level
 
-* `getTables()` and `removeTable()` to show and remove Excel table objects 
+*  `getTables()` and `removeTable()` to show and remove Excel table objects 
 
-* set column to 'hidden' with `setColWidths()`
+*  set column to 'hidden' with `setColWidths()`
 
 ## Bug Fixes
 
-* `skipEmptyRows` & `skipEmptyCols` was being ignored by read.xlsx
+*  `skipEmptyRows` & `skipEmptyCols` was being ignored by `read.xlsx`
 
-* date detection basic_string error
+*  date detection basic_string error
 
-* multiple spaces in table column names were not being maintained thus corrupting the xlsx file.
+*  multiple spaces in table column names were not being maintained thus corrupting the xlsx file.
 
-* openXL fail silently on relative paths
+*  openXL fail silently on relative paths
 
-* `headerStyle` failed when writing a list of length 1 using write.xlsx
+*  `headerStyle` failed when writing a list of length 1 using `write.xlsx`
 
-* `detectDate` for read.xlsx issues
+*  `detectDate` for `read.xlsx` issues
 
-* some Excel column types causing existing styling to be removed
+*  some Excel column types causing existing styling to be removed
 
-* `na.strings` no longer ignored for `read.xlsx.Workbook`
+*  `na.strings` no longer ignored for `read.xlsx.Workbook`
 
-* partial dollar matches on 'font' and 'fill' fixed
+*  partial dollar matches on 'font' and 'fill' fixed
 
-* maintain hidden columns and their custom widths in `loadWorkbook()`
+*  maintain hidden columns and their custom widths in `loadWorkbook()`
 
-* overwriting cells with borders sometimes removed the border styling
+*  overwriting cells with borders sometimes removed the border styling
 
 # openxlsx 4.0.0
 
 ## New Features
 
-* Reduced RAM usage and improved performance
+*  Reduced RAM usage and improved performance
 
-* maintain vbaProject, slicers, pivotTables on load
+*  maintain vbaProject, slicers, pivotTables on load
 
-* Read and load from URL
+*  Read and load from URL
 
 ## Bug Fixes
 
-* Fix date time conversion accuracy issues. 
+*  Fix date time conversion accuracy issues. 
 
-* Allow multibyte characters in names and comments.
+*  Allow multibyte characters in names and comments.
 
-* Remove `tolower()` over style number formats to allow uppercase cell formatting
+*  Remove `tolower()` over style number formats to allow uppercase cell formatting
 
-* Stacking styles fixed.
+*  Stacking styles fixed.
 
 # openxlsx 3.0.2
 
 ## New Features
 
-* "between" type for conditional formatting values in some interval.
+*  "between" type for conditional formatting values in some interval.
 
-* `colWidths` parameter added to `write.xlsx` for auto column widths.
+*  `colWidths` parameter added to `write.xlsx` for auto column widths.
 
-* `freezePane` parameter handling added to `write.xlsx`.
+*  `freezePane` parameter handling added to `write.xlsx`.
 
-* `visible` parameter to `addWorksheet` to hide worksheets.
+*  `visible` parameter to `addWorksheet` to hide worksheets.
 
-* `sheetVisible` function to get and assign worksheet visibility state "hidden"/"visible"
+*  `sheetVisible` function to get and assign worksheet visibility state "hidden"/"visible"
 
-* `pageBreak` function to add page breaks to worksheets.
+*  `pageBreak` function to add page breaks to worksheets.
 
 ## Bug Fixes
 
-* `keepNA` parameter added to `write.xlsx`. Passed to `writeData`/`writeDataTable`
+*  `keepNA` parameter added to `write.xlsx`. Passed to `writeData`/`writeDataTable`
 
 # openxlsx 3.0.1
 
 ## New Features
 
-* improved performance of `read.xlsx` and `loadWorkbook`
+*  improved performance of `read.xlsx` and `loadWorkbook`
 
-* `writeFormula` funciton added to write cell formulas. Also columns
+*  `writeFormula` funciton added to write cell formulas. Also columns
   with class "formula" are written as cell formulas similar how column
   classes determine cell styling
 
-* Functionality to write comments and maintain comments with `loadWorkbook`
+*  Functionality to write comments and maintain comments with `loadWorkbook`
 
-* `check.names` argument added `read.xlsx` to make syntactically valid variable names
+*  `check.names` argument added `read.xlsx` to make syntactically valid variable names
 
-* `loadWorkbook` maintains cell indents
+*  `loadWorkbook` maintains cell indents
 
-* `namedRegion` parameter added to `read.xlsx` to read a named region.
+*  `namedRegion` parameter added to `read.xlsx` to read a named region.
 
-* `getNamed` regions to return names of named regions in a workbook
+*  `getNamed` regions to return names of named regions in a workbook
 
-* `getSheetNames` to get worksheet names within an xlsx file.
+*  `getSheetNames` to get worksheet names within an xlsx file.
 
 ## Bug Fixes
 
-* `convertToDateTime` now handles NA values
+*  `convertToDateTime` now handles NA values
 
-* `read.xlsx` rows bug fixed where non-consecutive cells were skipped.
+*  `read.xlsx` rows bug fixed where non-consecutive cells were skipped.
 
-* `convertToDate` & `convertToDateTime` now handle NA values.
+*  `convertToDate` & `convertToDateTime` now handle NA values.
 
-* out of bounds worksheet fixed for libre office xlsx files.
+*  out of bounds worksheet fixed for libre office xlsx files.
 
-* `loadWorkbook` now maintains `chartSheets `
+*  `loadWorkbook` now maintains `chartSheets `
 
 # openxlsx 2.4.0
 
 ## New Features
 
-* stackable cell styling
+*  stackable cell styling
 
-* `getDateOrigin` function to return the date origin used internally by the xlsx file to pass to
+*  `getDateOrigin` function to return the date origin used internally by the xlsx file to pass to
   `convertToDate`
   
-* Auto-detection of date cells. Cells that "look" like dates will be converted to dates when reading from file.
+*  Auto-detection of date cells. Cells that "look" like dates will be converted to dates when reading from file.
 
-* `read.xlsx.Workbook` to read from workbook objects
+*  `read.xlsx.Workbook` to read from workbook objects
 
-* `colIndex`, `rowIndex` added to `read.xlsx` to only read specified rows and columns
+*  `colIndex`, `rowIndex` added to `read.xlsx` to only read specified rows and columns
 
-* Excel slicers now maintained by `loadWorkbook`
+*  Excel slicers now maintained by `loadWorkbook`
 
-* fill styles extended to support `gradientFill`
+*  fill styles extended to support `gradientFill`
 
 ## Bug Fixes
 
-* Encoding fixed and multi-byte characters now supported.
+*  Encoding fixed and multi-byte characters now supported.
 
-* `read.xlsx` now maintains multiple consecutive spaces and newline characters.
+*  `read.xlsx` now maintains multiple consecutive spaces and newline characters.
 
-* `convertToDate` & `convertToDateTime` now handle NA values.
+*  `convertToDate` & `convertToDateTime` now handle NA values.
 
-* multiple selected worksheet issue whioch preventing adding of new worksheets in Excel.
+*  multiple selected worksheet issue whioch preventing adding of new worksheets in Excel.
 
-* `zoom` parameter now limited to [10, 400] and documentation updated.
+*  `zoom` parameter now limited to [10, 400] and documentation updated.
 
-* `write.xlsx` colnames parameter being assigned to rownames
+*  `write.xlsx` colnames parameter being assigned to rownames
 
-* Handling of NaN and Inf values in `writeData`
+*  Handling of NaN and Inf values in `writeData`
 
 # openxlsx 2.1.3
 
 ## New Features
 
-* `conditionalFormatting` type "databar"
+*  `conditionalFormatting` type "databar"
 
-* `asTable` parameter to `write.xlsx` to writing using `writeDataTable`.
+*  `asTable` parameter to `write.xlsx` to writing using `writeDataTable`.
 
-* extended `numFmt` formatting to numeric rounding also added option("openxlsx.numFmt" = ...)
+*  extended `numFmt` formatting to numeric rounding also added option("openxlsx.numFmt" = ...)
  for default number formatting of numeric columns
 
-* additional `numFmt` "comma" to format numerics with "," thousands separator 
+*  additional `numFmt` "comma" to format numerics with "," thousands separator 
 
-* `tableName` parameter to `writeDataTable` to assign the table a name
+*  `tableName` parameter to `writeDataTable` to assign the table a name
 
-* `headerStyle` parameter to `writeDataTable` for additional column names styling
+*  `headerStyle` parameter to `writeDataTable` for additional column names styling
 
-* `textRotation` parameter to `createStyle` to rotate cell text
+*  `textRotation` parameter to `createStyle` to rotate cell text
 
-* functions `addFilter` & `removeFilter` to add filters to columns
+*  functions `addFilter` & `removeFilter` to add filters to columns
 
-* Headers & footers extended, can now be set with `addWorksheet` and `setHeaderFooter`.
+*  Headers & footers extended, can now be set with `addWorksheet` and `setHeaderFooter`.
   `setHeader` & `setFooter` deprecated.  
 
-* "fitToWidth" and "fitToHeight" logicals in `pageSetup`.
+*  "fitToWidth" and "fitToHeight" logicals in `pageSetup`.
 
-* "zoom" parameter in addWorksheet to set worksheet zoom level.
+*  "zoom" parameter in addWorksheet to set worksheet zoom level.
 
-* "withFilter"" parameter to writeDataTable and writeData to remove table filters
+*  "withFilter"" parameter to writeDataTable and writeData to remove table filters
 
-* `keepNa` parameter to `writeDataTable` and `writeData` to write NA values as #N/A
+*  `keepNa` parameter to `writeDataTable` and `writeData` to write NA values as #N/A
 
-* auto column widths can now be set with width = "auto"
+*  auto column widths can now be set with width = "auto"
 
 ## VIGNETTE
 
-* section on `write.xlsx` in Introductory vignette
+*  section on `write.xlsx` in Introductory vignette
 
 ## Bug Fixes
 
-* Fix reading in of apostrophes
+*  Fix reading in of apostrophes
 
-* Styling blank cells no longer corrupts workbooks
+*  Styling blank cells no longer corrupts workbooks
 
-* `read.xlsx` now correctly reads `sharedStrings` with inline styling
+*  `read.xlsx` now correctly reads `sharedStrings` with inline styling
 
-* `sharedStrings` now exact matches true/false to determine logical values from workbooks.
+*  `sharedStrings` now exact matches true/false to determine logical values from workbooks.
 
-* fomulas in column caused openxlsx to crash. This has been fixed.
+*  fomulas in column caused openxlsx to crash. This has been fixed.
 
 # openxlsx 2.0.15
 
 ## New Features
 
-* `writeData` now style based on column class the same as `writeDataTable`
+*  `writeData` now style based on column class the same as `writeDataTable`
 
-* Vignette "Formatting" for examples focussed on formatting
+*  Vignette "Formatting" for examples focussed on formatting
 
-* Customizable date formatting with `createStyle` and also through option("openxlsx.dateFormat" = ...)
+*  Customizable date formatting with `createStyle` and also through option("openxlsx.dateFormat" = ...)
 
-* Customizable POSIX formatting with `createStyle` and also through option("openxlsx.datetimeFormat" = ...)
+*  Customizable POSIX formatting with `createStyle` and also through option("openxlsx.datetimeFormat" = ...)
 
-* Generalised `conditionalFormat` function to complex expressions and color scales.
+*  Generalised `conditionalFormat` function to complex expressions and color scales.
 
-* `writeData` border type "all" to draw all borders and maintain column styling.
+*  `writeData` border type "all" to draw all borders and maintain column styling.
 
-* Deprecated "sheets" and replaced with "names" function
+*  Deprecated "sheets" and replaced with "names" function
 
-* column class "scientific" to automatically style as scientific numbers
+*  column class "scientific" to automatically style as scientific numbers
 
-* `writeData` now handles additional object classes: coxph, cox.zph, summary.coxph1 from Survival package
+*  `writeData` now handles additional object classes: coxph, cox.zph, summary.coxph1 from Survival package
 
 ## Bug Fixes
 
-* Invalid XML characters in hyperlinks now replaced.
+*  Invalid XML characters in hyperlinks now replaced.
 
-* Encoding issues when writing data read in with `read.xlsx`
+*  Encoding issues when writing data read in with `read.xlsx`
 
-* scientific notation resulting in corrupt workbooks fix
+*  scientific notation resulting in corrupt workbooks fix
 
-* Multiple saves of Workbooks containing conditional formatting were corrupt.
+*  Multiple saves of Workbooks containing conditional formatting were corrupt.
 
-* Latin1 characters now write correctly.
+*  Latin1 characters now write correctly.
 
-* logicals written as 0/1 instead of TRUE/FALSE
+*  logicals written as 0/1 instead of TRUE/FALSE
 
 # openxlsx 2.0.1
 
 ## New Features
 
-* `write.xlsx` function to write data directly to file via the `writeData` function
+*  `write.xlsx` function to write data directly to file via the `writeData` function
  with basic cell styling.
 
-* `writeDataTable` now styles columns of class 'Date', 'POSIXct', 'POSIXt', 'currency', 'accounting', 'percentage'
+*  `writeDataTable` now styles columns of class 'Date', 'POSIXct', 'POSIXt', 'currency', 'accounting', 'percentage'
  as Excel formats Date, Date, Date, Currency, Accounting, Percentage respectively.
 
-* Data of class 'Date', 'POSIXct', 'POSIXt', 'currency', 'accounting' are converted to integers
+*  Data of class 'Date', 'POSIXct', 'POSIXt', 'currency', 'accounting' are converted to integers
  upon writing (as opposed to characters).
 
-* `writeDataTable` converts columns of class 'hyperlink' to hyperlinks.
+*  `writeDataTable` converts columns of class 'hyperlink' to hyperlinks.
 
-* logicals are converted to Excel booleans
+*  logicals are converted to Excel booleans
 
-* hyperlinks in loaded workbooks are now maintained
+*  hyperlinks in loaded workbooks are now maintained
 
-* `borderStyle` argument to `createStyle` to modify border line type.
+*  `borderStyle` argument to `createStyle` to modify border line type.
 
-* `borderStyle` argument to `writeData` to modify border line type.
+*  `borderStyle` argument to `writeData` to modify border line type.
 
-* "worksheetOrder" function to shuffle order of worksheets when writing to file
+*  "worksheetOrder" function to shuffle order of worksheets when writing to file
 
-* `openXL` function to open an excel file or Workbook object
+*  `openXL` function to open an excel file or Workbook object
 
 ## Bug Fixes
 
-* conversion of numeric data to integer in `read.xlsx` fixed.
+*  conversion of numeric data to integer in `read.xlsx` fixed.
 
-* `readWorkbook`/`read.xlsx` should work now. Empty values are 
+*  `readWorkbook`/`read.xlsx` should work now. Empty values are 
   now padded with NA. Many other bugs fixed.
 
-* borders on single row and/or column data.frames now work.
+*  borders on single row and/or column data.frames now work.
 
-* `readWorkbook`/`read.xlsx` check for TRUE/FALSE values is now case-insensitive.
+*  `readWorkbook`/`read.xlsx` check for TRUE/FALSE values is now case-insensitive.
 
-* sheet names containing invalid xml charcters (&, <, >, ', ") now work when referencing
+*  sheet names containing invalid xml charcters (&, <, >, ', ") now work when referencing
   by name and will not result in a corrupt workbook.
 
-* sheet names containing non-local characters can now be referenced by name.
+*  sheet names containing non-local characters can now be referenced by name.
 
-* Invalid factor level when missing values in `writeData`
+*  Invalid factor level when missing values in `writeData`
 
-* `saveWorkbook` now accepts relative paths.
+*  `saveWorkbook` now accepts relative paths.
 
-* Non-local character encoding issues.
+*  Non-local character encoding issues.
 
-* errors in vignette examples.
+*  errors in vignette examples.
 
-* numbers with > 8 digits were rounded in `writeData`
+*  numbers with > 8 digits were rounded in `writeData`
