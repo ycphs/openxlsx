@@ -2388,8 +2388,8 @@ Workbook$methods(
     xmlData <-
       stri_join(data_val, formula, sqref, '</x14:dataValidation>')
     
-    worksheets[[sheet]]$extLst <<-
-      c(worksheets[[sheet]]$extLst, xmlData)
+    worksheets[[sheet]]$dataValidationsLst <<-
+      c(worksheets[[sheet]]$dataValidationsLst, xmlData)
     
     invisible(0)
   }

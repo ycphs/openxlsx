@@ -59,6 +59,7 @@ WorkSheet$methods(initialize = function(showGridLines = TRUE,
   mergeCells <<- character(0)
   conditionalFormatting <<- character(0)
   dataValidations <<- NULL
+  dataValidationsLst <<- character(0)
   hyperlinks <<- list()
   pageMargins <<- '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>'
   pageSetup <<- sprintf('<pageSetup paperSize="%s" orientation="%s" horizontalDpi="%s" verticalDpi="%s" r:id="rId2"/>', paperSize, orientation, hdpi, vdpi)  ## will always be 2
@@ -217,11 +218,16 @@ WorkSheet$methods(get_post_sheet_data = function(){
   }
   
   
-  if(length(extLst) > 0) 
-    xml <- paste0(xml
-                  , sprintf('<extLst><ext uri="{CCE6A557-97BC-4b89-ADB6-D9C93CAAB3DF}" xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><x14:dataValidations count="%s" xmlns:xm="http://schemas.microsoft.com/office/excel/2006/main">'
-                  , length(extLst))
-                  , paste0(pxml(extLst), '</x14:dataValidations></ext></extLst>'), collapse = "") 
+  if(length(dataValidationsLst) > 0) {
+    dataValidationsLst_xml <- paste0(sprintf('<ext uri="{CCE6A557-97BC-4b89-ADB6-D9C93CAAB3DF}" xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><x14:dataValidations count="%s" xmlns:xm="http://schemas.microsoft.com/office/excel/2006/main">', length(dataValidationsLst))
+                                     , paste0(pxml(dataValidationsLst), '</x14:dataValidations></ext>'), collapse = "")
+  }else{
+    dataValidationsLst_xml <- character(0)
+  }
+  
+  
+  if(length(extLst) > 0 || length(dataValidationsLst) > 0)
+    xml <- paste0(xml, sprintf("<extLst>%s</extLst>", paste0(pxml(extLst), dataValidationsLst_xml)))
   
   xml <- paste0(xml, "</worksheet>") 
   

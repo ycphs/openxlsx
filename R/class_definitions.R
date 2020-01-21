@@ -121,6 +121,7 @@ WorkSheet <- setRefClass("WorkSheet",
                                     "mergeCells" = "ANY",
                                     "conditionalFormatting" = "character",
                                     "dataValidations" = "ANY", 
+                                    "dataValidationsLst" = "character", 
                                     
                                     "freezePane" = "character",
                                     "hyperlinks" = "ANY",
