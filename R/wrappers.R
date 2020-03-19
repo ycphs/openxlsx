@@ -2882,8 +2882,8 @@ setFooter <- function(wb, text, position = "center"){
 #' @description Add Excel data validation to cells 
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param cols Columns to apply conditional formatting to
-#' @param rows Rows to apply conditional formatting to
+#' @param cols Contiguous columns to apply conditional formatting to
+#' @param rows Contiguous rows to apply conditional formatting to
 #' @param type One of 'whole', 'decimal', 'date', 'time', 'textLength', 'list' (see examples)
 #' @param operator One of 'between', 'notBetween', 'equal',
 #'  'notEqual', 'greaterThan', 'lessThan', 'greaterThanOrEqual', 'lessThanOrEqual'

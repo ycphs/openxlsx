@@ -22,9 +22,9 @@ dataValidation(
 
 \item{sheet}{A name or index of a worksheet}
 
-\item{cols}{Columns to apply conditional formatting to}
+\item{cols}{Contiguous columns to apply conditional formatting to}
 
-\item{rows}{Rows to apply conditional formatting to}
+\item{rows}{Contiguous rows to apply conditional formatting to}
 
 \item{type}{One of 'whole', 'decimal', 'date', 'time', 'textLength', 'list' (see examples)}
 
