@@ -69,7 +69,8 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-          sudo apt -y install texlive libicu-dev libicu55
+          sudo apt -y install texlive libicu-dev 
+          sudo apt-get install -f
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
