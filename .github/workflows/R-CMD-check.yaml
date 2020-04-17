@@ -67,9 +67,8 @@ jobs:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sysreqs=$(Rscript -e "cat(paste(sysreqs::sysreq_commands('DESCRIPTION'),'texlive libicu-dev')))
           sudo -s eval "$sysreqs"
-          sudo apt -y install texlive r-cran-stringi  
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
