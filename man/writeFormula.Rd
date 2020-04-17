@@ -22,7 +22,19 @@ writeFormula(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL)
 \code{c(startCol, startRow)}.}
 }
 \description{
-Write a a character vector containing Excel formula to a worksheet
+Write a a character vector containing Excel formula to a worksheet.
+}
+\details{
+Currently only the english version of functions are supported. Please don't use the local translation. 
+The examples below show a small list of possible formulas:
+\itemize{
+    \item{SUM(B2:B4)}
+    \item{AVERAGE(B2:B4)}
+    \item{MIN(B2:B4)}
+    \item{MAX(B2:B4)}
+    \item{...}
+    
+}
 }
 \examples{
 
@@ -68,7 +80,7 @@ writeData(wb, sheet = 2, x = v2, startCol = 10, startRow = 2)
 \dontrun{saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)}
 
 
-## 4. - WWriting internal hyperlinks
+## 4. - Writing internal hyperlinks
 
 wb <- createWorkbook()
 addWorksheet(wb, "Sheet1")

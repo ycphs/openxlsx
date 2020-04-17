@@ -8,7 +8,7 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/openxlsx)](https://cran.r-project.org/package=openxlsx)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/openxlsx)](https://cran.r-project.org/package=openxlsx)
 
- 
+
  
  
 This [R](https://www.R-project.org/) package simplifies the creation of `.xlsx` files by providing 

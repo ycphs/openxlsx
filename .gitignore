@@ -13,4 +13,5 @@ src-x64/*.so
 src-x64/*.o
 src-x64/*.cpp
 Rprof.out
-docs/*
+docs/*.*
+docs/reference/*.html
