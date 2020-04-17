@@ -49,8 +49,9 @@
 #' 
 #' ## Link to file - Text to display
 #' writeFormula(wb, "Sheet1", startRow = 3
-#'   , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
-#'     , file = system.file("extdata","loadExample.xlsx", package = "openxlsx"), text = "Link to File."))
+#'     , x = makeHyperlinkString(sheet = "testing", row = 3, col = 10
+#'     , file = system.file("extdata","loadExample.xlsx", package = "openxlsx")
+#'     , text = "Link to File."))
 #' 
 #' ## Link to external file - Text to display
 #' writeFormula(wb, "Sheet1", startRow = 10, startCol=1

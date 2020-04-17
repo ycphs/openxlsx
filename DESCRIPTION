@@ -43,7 +43,7 @@ LinkingTo:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
@@ -59,6 +59,7 @@ Collate:
     'loadWorkbook.R'
     'onUnload.R'
     'openXL.R'
+    'openxlsx-package.R'
     'openxlsx.R'
     'openxlsxCoerce.R'
     'readWorkbook.R'
