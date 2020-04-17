@@ -67,7 +67,7 @@ jobs:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(paste(sysreqs::sysreq_commands('DESCRIPTION'),'texlive libicu-dev')))
+          sysreqs=$(Rscript -e "cat(paste(sysreqs::sysreq_commands('DESCRIPTION'),'texlive libicu-dev'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: |
