@@ -71,8 +71,8 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
                 43169.4375000000, 14, 43169.5208333333, 15, 43169.8541666667, 16,
                 43170.3958333333, 17)
   
-  expect_equal(object = round(wd, 12), expected = expected)
-  expect_equal(object = round(wdt, 12), expected = expected)
+  expect_equal(object = wd, expected = expected)
+  expect_equal(object = wdt, expected = expected)
   expect_equal(object = wd, expected = wdt)
   
   options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
