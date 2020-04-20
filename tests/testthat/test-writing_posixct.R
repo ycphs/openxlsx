@@ -63,16 +63,13 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   wd <- as.numeric(wb$worksheets[[1]]$sheet_data$v)
   wdt <- as.numeric(wb$worksheets[[2]]$sheet_data$v)
   
+  expected <- c(0, 1, 43171.354166666700621, 2, 43171.361111111102218, 3, 43171.375, 4, 43171.395833333299379,
+                5, 43171.4375, 6, 43171.520833333299379, 7, 43171.854166666700621, 8, 43172.354166666700621,
+                9, 43169.354166666700621, 10, 43169.361111111102218, 11, 43169.375, 12, 43169.395833333299379,
+                13, 43169.4375, 14, 43169.520833333299379, 15, 43169.854166666700621, 16, 43170.395833333299379, 17)
   
-  expected <- c(0, 1, 43171.3541666667, 2, 43171.3611111111, 3, 43171.3750000000,
-                4, 43171.3958333333, 5, 43171.4375000000, 6, 43171.5208333333, 7, 
-                43171.8541666667, 8, 43172.3541666667, 9, 43169.3541666667, 10, 
-                43169.3611111111, 11, 43169.3750000000, 12, 43169.3958333333, 13, 
-                43169.4375000000, 14, 43169.5208333333, 15, 43169.8541666667, 16,
-                43170.3958333333, 17)
-  
-  expect_equal(object = wd, expected = expected)
-  expect_equal(object = wdt, expected = expected)
+  expect_equal(object = round(wd, 12), expected = round(expected, 12))
+  expect_equal(object = round(wdt, 12), expected = round(expected, 12))
   expect_equal(object = wd, expected = wdt)
   
   options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
