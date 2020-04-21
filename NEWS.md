@@ -4,6 +4,8 @@
 
 *  Fixed NEWS hyperlink
 
+*  Fixed writing of mixed EST/EDT datetimes.
+
 # openxlsx 4.1.4
 
 *  Use `zip::zipr()` instead of `zip::zip()`.
