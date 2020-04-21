@@ -4,7 +4,7 @@
 
 *  Fixed NEWS hyperlink
 
-*  Fixed writing of mixed EST/EDT datetimes.
+*  Fixed writing of mixed EST/EDT datetimes
 
 # openxlsx 4.1.4
 
