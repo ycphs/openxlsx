@@ -40,30 +40,25 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     for(i in dInds)
       df[[i]] <- as.integer(df[[i]]) + origin
     
-    
-    
     pInds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
-    if(length(pInds) > 0 & nRows > 0){
-      t <- sapply(pInds,  function(i) {
-        tzi <- format(df[[i]][[1]], "%z")
-        if(is.na(tzi)){
-          tz_tmp <- na.omit(df[[i]])
-          tzi <- ifelse(length(tz_tmp) > 0, format(tz_tmp[1], "%z"), NA)
-        }
-        return(tzi)
-      })
+    if(length(pInds) > 0 & nRows > 0) {
       
-      offSet <- suppressWarnings(ifelse(substr(t,1,1) == "+", 1L, -1L) * (as.integer(substr(t,2,3)) + as.integer(substr(t,4,5)) / 60) / 24)
+      parseOffset <- function(tz) {
+        suppressWarnings(
+          ifelse(stri_sub(tz, 1, 1) == "+", 1L, -1L) 
+          * (as.integer(stri_sub(tz, 2, 3)) + as.integer(stri_sub(tz, 4, 5)) / 60) / 24
+        )
+      }
+      
+      t      <- lapply(df[pInds], function(x) format(x, "%z"))
+      offSet <- lapply(t, parseOffset)
+      offSet <- lapply(offSet, function(x) ifelse(is.na(x), 0, x))
       
       for(i in 1:length(pInds)){
-        
-        if(is.na(offSet[i]))
-          offSet[i] <- 0
-        
-        df[[pInds[i]]] <- as.numeric(as.POSIXct(df[[pInds[i]]])) / 86400 + origin + offSet[i]
-        
+        df[[pInds[i]]] <- as.numeric(as.POSIXct(df[[pInds[i]]])) / 86400 + origin + offSet[[i]]
       }
     }
+    
   }
   
   
