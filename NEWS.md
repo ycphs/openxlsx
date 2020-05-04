@@ -6,6 +6,8 @@
 
 *  Fixed writing of mixed EST/EDT datetimes
 
+*  Added description for `writeFormula` to use only english function names
+
 # openxlsx 4.1.4
 
 *  Use `zip::zipr()` instead of `zip::zip()`.
