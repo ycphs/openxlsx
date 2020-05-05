@@ -8,6 +8,12 @@
 
 *  Added description for `writeFormula` to use only english function names
 
+*  Fixed validateSheet for special characters
+
+*  Add functions to get and set the creator of the xlsx-file
+
+*  add function to set the name of the user who last modified the xlsx-file
+
 # openxlsx 4.1.4
 
 *  Use `zip::zipr()` instead of `zip::zip()`.

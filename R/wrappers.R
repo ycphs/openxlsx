@@ -4079,3 +4079,77 @@ removeTable <- function(wb, sheet, table){
   
 }
 
+
+
+
+
+#' @name addCreator
+#' @title Add another author to the meta data of the file.
+#' @description Just a wrapper of wb$addCreator() 
+#' @param wb A workbook object 
+#' @param Creator A string object with the name of the creator
+#' @examples
+#' 
+#' wb <- createWorkbook()  
+#' addCreator(wb,"test")
+#' 
+#' 
+#' 
+#' @export
+addCreator <- function(wb,Creator){
+  
+  if(!inherits(wb, "Workbook"))
+    stop("argument must be a Workbook.")
+  
+  invisible(wb$addCreator(Creator))
+  
+}
+
+#' @name setLastModifiedBy
+#' @title Add another author to the meta data of the file.
+#' @description Just a wrapper of wb$changeLastModifiedBy() 
+#' @param wb A workbook object 
+#' @param LastModifiedBy A string object with the name of the LastModifiedBy-User
+#' @examples
+#' 
+#' wb <- createWorkbook()  
+#' setLastModifiedBy(wb,"test")
+#' 
+#' 
+#' 
+#' @export
+setLastModifiedBy <- function(wb,LastModifiedBy){
+  
+  if(!inherits(wb, "Workbook"))
+    stop("argument must be a Workbook.")
+  
+  invisible(wb$changeLastModifiedBy(LastModifiedBy))
+  
+}
+
+
+
+#' @name getCreators
+#' @title Add another author to the meta data of the file.
+#' @description Just a wrapper of wb$getCreators() 
+#' Get the names of the 
+#' @param wb A workbook object 
+#' @return vector of creators
+#' @examples
+#' 
+#' wb <- createWorkbook()  
+#' getCreators(wb)
+#' 
+#' 
+#' 
+#' @export
+getCreators <- function(wb){
+  
+  if(!inherits(wb, "Workbook"))
+    stop("argument must be a Workbook.")
+  
+  return(wb$getCreators())
+  
+}
+
+

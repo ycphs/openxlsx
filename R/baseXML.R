@@ -73,23 +73,102 @@ genBaseCore <- function(creator = "", title = NULL, subject = NULL, category = N
   
   core <- '<coreProperties xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
   
-  core <- c(core, sprintf('<dc:creator>%s</dc:creator>', creator))
-  core <- c(core, sprintf('<dcterms:created xsi:type="dcterms:W3CDTF">%s</dcterms:created>', format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ")))
+  core <- stri_c(core, sprintf('<dc:creator>%s</dc:creator>', creator))
+  core <- stri_c(core, sprintf('<cp:lastModifiedBy>%s</cp:lastModifiedBy>', creator))
+  core <- stri_c(core, sprintf('<dcterms:created xsi:type="dcterms:W3CDTF">%s</dcterms:created>', format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ")))
   
   if(!is.null(title))
-    core <- c(core, sprintf('<dc:title>%s</dc:title>', replaceIllegalCharacters(title)))
+    core <- stri_c(core, sprintf('<dc:title>%s</dc:title>', replaceIllegalCharacters(title)))
   
   if(!is.null(subject))
-    core <- c(core, sprintf('<dc:subject>%s</dc:subject>', replaceIllegalCharacters(subject)))
+    core <- stri_c(core, sprintf('<dc:subject>%s</dc:subject>', replaceIllegalCharacters(subject)))
   
   if(!is.null(category))
-    core <- c(core, sprintf('<cp:category>%s</cp:category>', replaceIllegalCharacters(category)))
+    core <- stri_c(core, sprintf('<cp:category>%s</cp:category>', replaceIllegalCharacters(category)))
 
-  core <- c(core, '</coreProperties>')
+  core <- stri_c(core, '</coreProperties>')
   
   return(core)
   
 } 
+
+# 
+# addAuthor <- function(wb,Author = NULL){  
+#   
+#   if (!is.null(Author)) {
+#     current_creator <-
+#       stri_match(wb$core, regex = "<dc:creator>(.*?)</dc:creator>")[1, 2]
+#     wb$core <-
+#       stri_replace_all_fixed(
+#         wb$core,
+#         pattern = current_creator,
+#         replacement = stri_c(current_creator, Author, sep = ";")
+#       )
+#   }
+#   
+#   
+# }
+# 
+# 
+# setAuthor <- function(wb,Author = NULL){  
+#   
+#   if (!is.null(Author)) {
+#     current_creator <-
+#       stri_match(wb$core, regex = "<dc:creator>(.*?)</dc:creator>")[1, 2]
+#     wb$core <-
+#       stri_replace_all_fixed(
+#         wb$core,
+#         pattern = current_creator,
+#         replacement =  Author
+#       )
+#   }
+#   
+#   
+# }
+# 
+# setLastModifiedBy <- function(wb,ModifiedBy=NULL){  
+#   
+#   if (!is.null(addmodifier)) {
+#     current_lastmodifier <-
+#       stri_match(wb$core, regex = "<cp:lastModifiedBy>(.*?)</cp:lastModifiedBy>")[1, 2]
+#     wb$core <-
+#       stri_replace_all_fixed(
+#         wb$core,
+#         pattern = current_lastmodifier,
+#         replacement = ModifiedBy
+#       )
+#   }
+#   
+#   
+# }
+#   
+#   
+
+#    
+# 
+# setBaseCore <- function(core,setcreator="",setmodifier="",
+#                         title = NULL, subject = NULL, category = NULL){  
+#   
+#   
+#   core <- c(core, sprintf('<dc:creator>%s</dc:creator>', setcreator))
+#   core <- c(core, sprintf('<dcterms:created xsi:type="dcterms:W3CDTF">%s</dcterms:created>', format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ")))
+#   
+#   if(!is.null(title))
+#     core <- c(core, sprintf('<dc:title>%s</dc:title>', replaceIllegalCharacters(title)))
+#   
+#   if(!is.null(subject))
+#     core <- c(core, sprintf('<dc:subject>%s</dc:subject>', replaceIllegalCharacters(subject)))
+#   
+#   if(!is.null(category))
+#     core <- c(core, sprintf('<cp:category>%s</cp:category>', replaceIllegalCharacters(category)))
+#   
+#   core <- c(core, '</coreProperties>')
+#   
+#   return(core)
+#   
+# } 
+
+
 
 
 genBaseWorkbook.xml.rels <- function(){

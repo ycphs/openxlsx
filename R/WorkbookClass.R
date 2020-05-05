@@ -17887,3 +17887,63 @@ Workbook$methods(
     }
   }
 )
+
+
+
+
+
+
+
+Workbook$methods(
+  addCreator = function(Creator=NULL){
+    if (!is.null(Creator)) {
+      current_creator <-
+        stri_match(core, regex = "<dc:creator>(.*?)</dc:creator>")[1, 2]
+      core <<-
+        stri_replace_all_fixed(
+          core,
+          pattern = current_creator,
+          replacement = stri_c(current_creator, Creator, sep = ";")
+        )
+    }
+    
+  }
+)
+
+
+
+
+
+Workbook$methods(
+  getCreators = function() {
+    current_creator <-
+      stri_match(core, regex = "<dc:creator>(.*?)</dc:creator>")[1, 2]
+    
+    current_creator_vec <- as.character(stri_split_fixed(
+      str = current_creator,
+      pattern = ";",
+      simplify = T
+    ))
+    
+    return(current_creator_vec)
+    
+  }
+)
+
+
+
+Workbook$methods(
+  changeLastModifiedBy = function(LastModifiedBy=NULL) {
+    if (!is.null(LastModifiedBy)) {
+      current_LastModifiedBy <-
+        stri_match(core, regex = "<cp:lastModifiedBy>(.*?)</cp:lastModifiedBy>")[1, 2]
+      core <<-
+        stri_replace_all_fixed(
+          core,
+          pattern = current_LastModifiedBy,
+          replacement = LastModifiedBy
+        )
+    }
+    
+  }
+)
