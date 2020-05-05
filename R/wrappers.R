@@ -4085,6 +4085,7 @@ removeTable <- function(wb, sheet, table){
 
 #' @name addCreator
 #' @title Add another author to the meta data of the file.
+#' @author Philipp Schauberger 
 #' @description Just a wrapper of wb$addCreator() 
 #' @param wb A workbook object 
 #' @param Creator A string object with the name of the creator
@@ -4107,6 +4108,7 @@ addCreator <- function(wb,Creator){
 
 #' @name setLastModifiedBy
 #' @title Add another author to the meta data of the file.
+#' @author Philipp Schauberger 
 #' @description Just a wrapper of wb$changeLastModifiedBy() 
 #' @param wb A workbook object 
 #' @param LastModifiedBy A string object with the name of the LastModifiedBy-User
@@ -4133,7 +4135,8 @@ setLastModifiedBy <- function(wb,LastModifiedBy){
 #' @title Add another author to the meta data of the file.
 #' @description Just a wrapper of wb$getCreators() 
 #' Get the names of the 
-#' @param wb A workbook object 
+#' @param wb A workbook object
+#' @author Philipp Schauberger 
 #' @return vector of creators
 #' @examples
 #' 
