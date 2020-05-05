@@ -1064,7 +1064,7 @@ Workbook$methods(
 Workbook$methods(
   validateSheet = function(sheetName) {
     if (!is.numeric(sheetName))
-      sheetName <- replaceIllegalCharacters(sheetName)
+      # sheetName <- replaceIllegalCharacters(sheetName)
     
     if (is.null(sheet_names))
       stop("Workbook does not contain any worksheets.", call. = FALSE)
