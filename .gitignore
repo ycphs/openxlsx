@@ -15,3 +15,4 @@ src-x64/*.cpp
 Rprof.out
 docs/*.*
 docs/reference/*.html
+docs/

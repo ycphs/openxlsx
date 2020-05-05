@@ -8,16 +8,6 @@ matrix:
   - r: devel
     env: _R_CHECK_LENGTH_1_LOGIC2_=true
   - r: release
-    after_success:
-    - Rscript -e 'covr::codecov()'
-    - Rscript -e 'pkgdown::build_site()'
-    deploy:	
-      provider: pages	
-      github-token: $GITHUB_PAT	
-      local-dir: docs	
-      on:	
-        branch: master
-  - r: release
     pandoc: false
     env: PANDOC='none'
   - r: oldrel
