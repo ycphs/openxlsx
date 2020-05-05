@@ -3,6 +3,7 @@ Package: openxlsx
 Title: Read, Write and Edit xlsx Files
 Version: 4.1.5
 Date: 2020-04-17
+Language: en-US
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
