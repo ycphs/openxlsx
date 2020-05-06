@@ -20,11 +20,13 @@ addWorksheet(wb, "Sheet 1")
 
 ## specify region
 writeData(wb, sheet = 1, x = iris, startCol = 1, startRow = 1)
-createNamedRegion(wb = wb,
-                  sheet = 1,
-                  name = "iris",
-                  rows = 1:(nrow(iris)+1),
-                  cols = 1:ncol(iris))
+createNamedRegion(
+  wb = wb,
+  sheet = 1,
+  name = "iris",
+  rows = 1:(nrow(iris) + 1),
+  cols = 1:ncol(iris)
+)
 
 
 ## using writeData 'name' argument to create a named region
@@ -42,7 +44,8 @@ df <- read.xlsx(wb, namedRegion = "iris")
 head(df)
 
 df <- read.xlsx(out_file, namedRegion = "iris2")
-head(df)}
+head(df)
+}
 }
 \seealso{
 \code{\link{createNamedRegion}}

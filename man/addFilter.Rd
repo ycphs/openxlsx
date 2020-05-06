@@ -37,8 +37,9 @@ writeData(wb, 2, x = iris, withFilter = TRUE)
 
 ## Similarly
 writeDataTable(wb, 3, iris)
-
-\dontrun{saveWorkbook(wb, file = "addFilterExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, file = "addFilterExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{writeData}}

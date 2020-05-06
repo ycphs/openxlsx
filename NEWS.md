@@ -1,4 +1,4 @@
-# openxlsx development version
+# openxlsx 4.1.5
 
 *  include tests for cloneWorksheet
 
@@ -13,6 +13,8 @@
 *  Add functions to get and set the creator of the xlsx-file
 
 *  add function to set the name of the user who last modified the xlsx-file
+
+*  applied the tidyverse-style to the package `styler::style_pkg()`
 
 # openxlsx 4.1.4
 

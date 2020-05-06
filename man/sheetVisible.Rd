@@ -32,7 +32,6 @@ addWorksheet(wb, sheetName = "S3", visible = FALSE)
 sheetVisible(wb)
 sheetVisible(wb)[1] <- TRUE ## show sheet 1
 sheetVisible(wb)[2] <- FALSE ## hide sheet 2
-
 }
 \author{
 Alexander Walker

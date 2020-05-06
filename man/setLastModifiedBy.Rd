@@ -16,9 +16,9 @@ Just a wrapper of wb$changeLastModifiedBy()
 }
 \examples{
 
-wb <- createWorkbook()  
-setLastModifiedBy(wb,"test")
-
-
-
+wb <- createWorkbook()
+setLastModifiedBy(wb, "test")
+}
+\author{
+Philipp Schauberger
 }

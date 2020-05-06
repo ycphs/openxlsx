@@ -31,7 +31,9 @@ modifyBaseFont(wb, fontSize = 10, fontColour = "#FF0000", fontName = "Arial Narr
 
 writeData(wb, "S1", iris)
 writeDataTable(wb, "S1", x = iris, startCol = 10) ## font colour does not affect tables
-\dontrun{saveWorkbook(wb, "modifyBaseFontExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "modifyBaseFontExample.xlsx", overwrite = TRUE)
+}
 }
 \author{
 Alexander Walker

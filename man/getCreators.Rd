@@ -13,14 +13,14 @@ getCreators(wb)
 vector of creators
 }
 \description{
-Just a wrapper of wb$getCreators() 
+Just a wrapper of wb$getCreators()
 Get the names of the
 }
 \examples{
 
-wb <- createWorkbook()  
+wb <- createWorkbook()
 getCreators(wb)
-
-
-
+}
+\author{
+Philipp Schauberger
 }

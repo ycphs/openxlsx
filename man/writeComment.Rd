@@ -37,9 +37,10 @@ s2 <- createStyle(fontSize = 9, fontColour = "black")
 c2 <- createComment(comment = c("This Part Bold red\n\n", "This part black"), style = c(s1, s2))
 c2
 
-writeComment(wb, 1, col = 6 , row = 3, comment = c2)
-
-\dontrun{saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)}
+writeComment(wb, 1, col = 6, row = 3, comment = c2)
+\dontrun{
+saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{createComment}}

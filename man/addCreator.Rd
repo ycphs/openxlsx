@@ -16,9 +16,9 @@ Just a wrapper of wb$addCreator()
 }
 \examples{
 
-wb <- createWorkbook()  
-addCreator(wb,"test")
-
-
-
+wb <- createWorkbook()
+addCreator(wb, "test")
+}
+\author{
+Philipp Schauberger
 }

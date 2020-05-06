@@ -28,7 +28,9 @@ addWorksheet(wb, "Sheet 1")
 cloneWorksheet(wb, "Sheet 2", clonedSheet = "Sheet 1")
 
 ## Save workbook
-\dontrun{saveWorkbook(wb, "cloneWorksheetExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "cloneWorksheetExample.xlsx", overwrite = TRUE)
+}
 }
 \author{
 Reinhold Kainhofer

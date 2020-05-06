@@ -18,11 +18,13 @@ Remove row heights from a worksheet
 }
 \examples{
 ## Create a new workbook
-wb <- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package = "openxlsx"))
+wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
 
 ## remove any custom row heights in rows 1 to 10
 removeRowHeights(wb, 1, rows = 1:10)
-\dontrun{saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{setRowHeights}}

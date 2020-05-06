@@ -25,6 +25,4 @@ writeDataTable(wb, sheet = "Sheet 1", x = iris)
 writeDataTable(wb, sheet = 1, x = mtcars, tableName = "mtcars", startCol = 10)
 
 getTables(wb, sheet = "Sheet 1")
-
-
 }

@@ -65,7 +65,7 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
    \item{\bold{TopBottomLeftRight} or \bold{c("top", "bottom", "left", "right")}}{ All borders}
   }}
 
-\item{borderColour}{Colour of cell border vector the same length as the number of sides specified in "border" 
+\item{borderColour}{Colour of cell border vector the same length as the number of sides specified in "border"
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#"}
 
 \item{borderStyle}{Border line style vector the same length as the number of sides specified in "border"
@@ -87,7 +87,7 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
   }}
 
 \item{bgFill}{Cell background fill colour.
-A valid colour (belonging to colours()) or a valid hex colour beginning with "#". 
+A valid colour (belonging to colours()) or a valid hex colour beginning with "#".
 --  \bold{Use for conditional formatting styles only.}}
 
 \item{fgFill}{Cell foreground fill colour.
@@ -141,21 +141,25 @@ options("openxlsx.borderColour" = "#4F80BD")
 options("openxlsx.borderStyle" = "thin")
 
 ## Size 18 Arial, Bold, left horz. aligned, fill colour #1A33CC, all borders,
-style <- createStyle(fontSize = 18, fontName = "Arial",
-  textDecoration = "bold", halign = "left", fgFill = "#1A33CC", border= "TopBottomLeftRight")
+style <- createStyle(
+  fontSize = 18, fontName = "Arial",
+  textDecoration = "bold", halign = "left", fgFill = "#1A33CC", border = "TopBottomLeftRight"
+)
 
 ## Red, size 24, Bold, italic, underline, center aligned Font, bottom border
-style <- createStyle(fontSize = 24, fontColour = rgb(1,0,0),
-   textDecoration = c("bold", "italic", "underline"), 
-   halign = "center", valign = "center", border = "Bottom")
- 
+style <- createStyle(
+  fontSize = 24, fontColour = rgb(1, 0, 0),
+  textDecoration = c("bold", "italic", "underline"),
+  halign = "center", valign = "center", border = "Bottom"
+)
+
 # borderColour is recycled for each border or all colours can be supplied
 
 # colour is recycled 3 times for "Top", "Bottom" & "Right" sides.
-createStyle(border = "TopBottomRight", borderColour = "red") 
+createStyle(border = "TopBottomRight", borderColour = "red")
 
 # supply all colours
-createStyle(border = "TopBottomLeft", borderColour = c("red","yellow", "green"))
+createStyle(border = "TopBottomLeft", borderColour = c("red", "yellow", "green"))
 }
 \seealso{
 \code{\link{addStyle}}
