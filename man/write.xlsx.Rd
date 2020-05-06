@@ -42,7 +42,7 @@ Optional parameters are:
 \itemize{
   \item{\bold{sheetName}}{ Name of the worksheet}
   \item{\bold{gridLines}}{ A logical. If \code{FALSE}, the worksheet grid lines will be hidden.}
-  \item{\bold{tabColour}}{ Colour of the worksheet tab. A valid colour (belonging to colours()) 
+  \item{\bold{tabColour}}{ Colour of the worksheet tab. A valid colour (belonging to colours())
   or a valid hex colour beginning with "#".}
   \item{\bold{zoom}}{ A numeric between 10 and 400. Worksheet zoom level as a percentage.}
 }
@@ -51,7 +51,7 @@ Optional parameters are:
 \itemize{
   \item{\bold{startCol}}{ A vector specifying the starting column(s) to write df}
   \item{\bold{startRow}}{ A vector specifying the starting row(s) to write df}
-  \item{\bold{xy}}{ An alternative to specifying startCol and startRow individually. 
+  \item{\bold{xy}}{ An alternative to specifying startCol and startRow individually.
  A vector of the form c(startCol, startRow)}
   \item{\bold{colNames or col.names}}{ If \code{TRUE}, column names of x are written.}
   \item{\bold{rowNames or row.names}}{ If \code{TRUE}, row names of x are written.}
@@ -92,23 +92,36 @@ styled as dates and datetimes respectively.
 
 ## write to working directory
 options("openxlsx.borderColour" = "#4F80BD") ## set default border colour
-\dontrun{write.xlsx(iris, file = "writeXLSX1.xlsx", colNames = TRUE, borders = "columns")
-write.xlsx(iris, file = "writeXLSX2.xlsx", colNames = TRUE, borders = "surrounding")}
+\dontrun{
+write.xlsx(iris, file = "writeXLSX1.xlsx", colNames = TRUE, borders = "columns")
+write.xlsx(iris, file = "writeXLSX2.xlsx", colNames = TRUE, borders = "surrounding")
+}
 
 
-hs <- createStyle(textDecoration = "BOLD", fontColour = "#FFFFFF", fontSize=12,
-                  fontName="Arial Narrow", fgFill = "#4F80BD")
-
-\dontrun{write.xlsx(iris, file = "writeXLSX3.xlsx", 
-                     colNames = TRUE, borders = "rows", headerStyle = hs)}
+hs <- createStyle(
+  textDecoration = "BOLD", fontColour = "#FFFFFF", fontSize = 12,
+  fontName = "Arial Narrow", fgFill = "#4F80BD"
+)
+\dontrun{
+write.xlsx(iris,
+  file = "writeXLSX3.xlsx",
+  colNames = TRUE, borders = "rows", headerStyle = hs
+)
+}
 
 ## Lists elements are written to individual worksheets, using list names as sheet names if available
 l <- list("IRIS" = iris, "MTCATS" = mtcars, matrix(runif(1000), ncol = 5))
-\dontrun{write.xlsx(l, "writeList1.xlsx", colWidths = c(NA, "auto", "auto"))}
+\dontrun{
+write.xlsx(l, "writeList1.xlsx", colWidths = c(NA, "auto", "auto"))
+}
 
 ## different sheets can be given different parameters
-\dontrun{write.xlsx(l, "writeList2.xlsx", startCol = c(1,2,3), startRow = 2,
-           asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE))}
+\dontrun{
+write.xlsx(l, "writeList2.xlsx",
+  startCol = c(1, 2, 3), startRow = 2,
+  asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE)
+)
+}
 
 }
 \seealso{

@@ -36,10 +36,12 @@ names(wb) <- c("A", "B", "C")
 ## Rename worksheet 1 & 3
 renameWorksheet(wb, 1, "New name for sheet 1")
 names(wb)[[1]] <- "New name for sheet 1"
-names(wb)[[3]] <-  "A better name"
+names(wb)[[3]] <- "A better name"
 
 ## Save workbook
-\dontrun{saveWorkbook(wb, "renameWorksheetExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "renameWorksheetExample.xlsx", overwrite = TRUE)
+}
 }
 \author{
 Alexander Walker

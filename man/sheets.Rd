@@ -35,7 +35,6 @@ names(wb)
 names(wb) <- c("A", "B", "C")
 names(wb)
 # openXL(wb)
-
 }
 \seealso{
 \code{\link{names}} to rename a worksheet in a Workbook

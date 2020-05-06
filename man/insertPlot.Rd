@@ -39,7 +39,7 @@ insertPlot(
 \item{dpi}{Image resolution}
 }
 \description{
-The current plot is saved to a temporary image file using dev.copy.  
+The current plot is saved to a temporary image file using dev.copy.
 This file is then written to the workbook using insertImage.
 }
 \examples{
@@ -48,22 +48,25 @@ This file is then written to the workbook using insertImage.
 wb <- createWorkbook()
 
 ## Add a worksheet
-addWorksheet(wb, "Sheet 1", gridLines = FALSE) 
+addWorksheet(wb, "Sheet 1", gridLines = FALSE)
 
 ## create plot objects
 require(ggplot2)
-p1 <- qplot(mpg, data=mtcars, geom="density",
-  fill=as.factor(gear), alpha=I(.5), main="Distribution of Gas Mileage")
+p1 <- qplot(mpg,
+  data = mtcars, geom = "density",
+  fill = as.factor(gear), alpha = I(.5), main = "Distribution of Gas Mileage"
+)
 p2 <- qplot(age, circumference,
-  data = Orange, geom = c("point", "line"), colour = Tree)
+  data = Orange, geom = c("point", "line"), colour = Tree
+)
 
 ## Insert currently displayed plot to sheet 1, row 1, column 1
-print(p1) #plot needs to be showing
+print(p1) # plot needs to be showing
 insertPlot(wb, 1, width = 5, height = 3.5, fileType = "png", units = "in")
 
 ## Insert plot 2
 print(p2)
-insertPlot(wb, 1, xy = c("J", 2), width = 16, height = 10,  fileType = "png", units = "cm")
+insertPlot(wb, 1, xy = c("J", 2), width = 16, height = 10, fileType = "png", units = "cm")
 
 ## Save workbook
 saveWorkbook(wb, "insertPlotExample.xlsx", overwrite = TRUE)

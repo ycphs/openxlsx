@@ -19,7 +19,7 @@ addStyle(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = FALSE)
 
 \item{gridExpand}{If \code{TRUE}, style will be applied to all combinations of rows and cols.}
 
-\item{stack}{If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any 
+\item{stack}{If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.}
 }
 \description{
@@ -32,23 +32,26 @@ Function adds a style to a specified set of cells.
 wb <- createWorkbook("My name here")
 
 ## Add a worksheets
-addWorksheet(wb, "Expenditure", gridLines = FALSE) 
+addWorksheet(wb, "Expenditure", gridLines = FALSE)
 
-##write data to worksheet 1
+## write data to worksheet 1
 writeData(wb, sheet = 1, USPersonalExpenditure, rowNames = TRUE)
 
 ## create and add a style to the column headers
-headerStyle <- createStyle(fontSize = 14, fontColour = "#FFFFFF", halign = "center",
-                        fgFill = "#4F81BD", border="TopBottom", borderColour = "#4F81BD")
+headerStyle <- createStyle(
+  fontSize = 14, fontColour = "#FFFFFF", halign = "center",
+  fgFill = "#4F81BD", border = "TopBottom", borderColour = "#4F81BD"
+)
 
 addStyle(wb, sheet = 1, headerStyle, rows = 1, cols = 1:6, gridExpand = TRUE)
 
-## style for body 
-bodyStyle <- createStyle(border="TopBottom", borderColour = "#4F81BD")
+## style for body
+bodyStyle <- createStyle(border = "TopBottom", borderColour = "#4F81BD")
 addStyle(wb, sheet = 1, bodyStyle, rows = 2:6, cols = 1:6, gridExpand = TRUE)
-setColWidths(wb, 1, cols=1, widths = 21) ## set column width for row names column
-
-\dontrun{saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)}
+setColWidths(wb, 1, cols = 1, widths = 21) ## set column width for row names column
+\dontrun{
+saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{createStyle}}

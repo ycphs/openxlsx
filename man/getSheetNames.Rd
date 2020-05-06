@@ -16,8 +16,7 @@ Character vector of worksheet names.
 Returns the worksheet names within an xlsx file
 }
 \examples{
-getSheetNames(system.file("extdata","readTest.xlsx", package = "openxlsx"))
-
+getSheetNames(system.file("extdata", "readTest.xlsx", package = "openxlsx"))
 }
 \author{
 Alexander Walker

@@ -38,15 +38,17 @@ mergeCells(wb, 1, cols = 1:10, rows = 10:20)
 ## Intersecting merges
 mergeCells(wb, 2, cols = 1:10, rows = 1)
 mergeCells(wb, 2, cols = 5:10, rows = 2)
-mergeCells(wb, 2, cols = c(1,10), rows = 12) ## equivalent to 1:10 as only min/max are used
-#mergeCells(wb, 2, cols = 1, rows = c(1,10)) # Throws error because intersects existing merge
+mergeCells(wb, 2, cols = c(1, 10), rows = 12) ## equivalent to 1:10 as only min/max are used
+# mergeCells(wb, 2, cols = 1, rows = c(1,10)) # Throws error because intersects existing merge
 
 ## remove merged cells
 removeCellMerge(wb, 2, cols = 1, rows = 1) # removes any intersecting merges
 mergeCells(wb, 2, cols = 1, rows = 1:10) # Now this works
 
 ## Save workbook
-\dontrun{saveWorkbook(wb, "mergeCellsExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "mergeCellsExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{removeCellMerge}}
