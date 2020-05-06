@@ -13,4 +13,4 @@ cran-comments.md
 ^\.travis\.yml$
 ^\.github$
 ^azure-pipelines\.yml$
-
+^vignettes/*
