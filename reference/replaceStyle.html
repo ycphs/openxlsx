@@ -147,8 +147,8 @@ Replace a style object" />
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## load a workbook </span>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
+<span class='co'>## load a workbook</span>
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
 
 <span class='co'>## create a new style and replace style 2</span>
 
@@ -184,7 +184,9 @@ Replace a style object" />
 #&gt; </div><div class='input'><span class='fu'>replaceStyle</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>newStyle</span> <span class='kw'>=</span> <span class='no'>newStyle</span>)
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"replaceStyleExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"replaceStyleExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

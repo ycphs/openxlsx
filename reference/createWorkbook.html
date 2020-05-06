@@ -162,13 +162,17 @@
 <span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>createWorkbook</span>()
 
 <span class='co'>## Save workbook to working directory</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"createWorkbookExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"createWorkbookExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
 
 <span class='co'>## Set Workbook properties</span>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>createWorkbook</span>(<span class='kw'>creator</span> <span class='kw'>=</span> <span class='st'>"Me"</span>
-, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title here"</span>
-, <span class='kw'>subject</span> <span class='kw'>=</span> <span class='st'>"this &amp; that"</span>
-, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"something"</span>)</div></pre>
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'>createWorkbook</span>(
+  <span class='kw'>creator</span> <span class='kw'>=</span> <span class='st'>"Me"</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title here"</span>,
+  <span class='kw'>subject</span> <span class='kw'>=</span> <span class='st'>"this &amp; that"</span>,
+  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"something"</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

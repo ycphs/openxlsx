@@ -148,7 +148,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>wb</th>
-      <td><p>A Workbook object containing a 
+      <td><p>A Workbook object containing a
 worksheet.</p></td>
     </tr>
     <tr>
@@ -210,7 +210,7 @@ A vector of the form c(startCol, startRow)</p></td>
     </tr>
     <tr>
       <th>stack</th>
-      <td><p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any 
+      <td><p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.
 <br /><br />
 <br /><b>The below options correspond to Excel table options:</b>
@@ -237,7 +237,7 @@ existing style is replaced by the new style.
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>columns of x with class Date/POSIXt, currency, accounting, 
+    <p>columns of x with class Date/POSIXt, currency, accounting,
 hyperlink, percentage are automatically styled as dates, currency, accounting,
 hyperlinks, percentages respectively.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -264,16 +264,20 @@ hyperlinks, percentages respectively.</p>
 
 <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>)
 
-<span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='st'>"S2"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>xy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B"</span>, <span class='fl'>3</span>), <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>tableStyle</span> <span class='kw'>=</span> <span class='st'>"TableStyleLight9"</span>)
+<span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='st'>"S2"</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>xy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B"</span>, <span class='fl'>3</span>), <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>tableStyle</span> <span class='kw'>=</span> <span class='st'>"TableStyleLight9"</span>
+)
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>"Date"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()-<span class='fl'>0</span>:<span class='fl'>19</span>,
-                 <span class='st'>"T"</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='st'>"F"</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-                 <span class='st'>"Time"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()-<span class='fl'>0</span>:<span class='fl'>19</span>*<span class='fl'>60</span>*<span class='fl'>60</span>,
-                 <span class='st'>"Cash"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"$"</span>,<span class='fl'>1</span>:<span class='fl'>20</span>), <span class='st'>"Cash2"</span> <span class='kw'>=</span> <span class='fl'>31</span>:<span class='fl'>50</span>,
-                 <span class='st'>"hLink"</span> <span class='kw'>=</span> <span class='st'>"https://CRAN.R-project.org/"</span>,
-                 <span class='st'>"Percentage"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length.out</span><span class='kw'>=</span><span class='fl'>20</span>),
-                 <span class='st'>"TinyNumbers"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>20</span>) / <span class='fl'>1E9</span>,  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='st'>"Date"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>() - <span class='fl'>0</span>:<span class='fl'>19</span>,
+  <span class='st'>"T"</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='st'>"F"</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='st'>"Time"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() - <span class='fl'>0</span>:<span class='fl'>19</span> * <span class='fl'>60</span> * <span class='fl'>60</span>,
+  <span class='st'>"Cash"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"$"</span>, <span class='fl'>1</span>:<span class='fl'>20</span>), <span class='st'>"Cash2"</span> <span class='kw'>=</span> <span class='fl'>31</span>:<span class='fl'>50</span>,
+  <span class='st'>"hLink"</span> <span class='kw'>=</span> <span class='st'>"https://CRAN.R-project.org/"</span>,
+  <span class='st'>"Percentage"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fl'>20</span>),
+  <span class='st'>"TinyNumbers"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>20</span>) / <span class='fl'>1E9</span>, <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='co'>## openxlsx will apply default Excel styling for these classes</span>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>Cash</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>Cash</span>), <span class='st'>"currency"</span>)
@@ -287,42 +291,56 @@ hyperlinks, percentages respectively.</p>
 <span class='co'>#####################################################################################</span>
 <span class='co'>## Additional Header Styling and remove column filters</span>
 
-<span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>textRotation</span> <span class='kw'>=</span> <span class='fl'>45</span>),
-                 <span class='kw'>withFilter</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>writeDataTable</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>textRotation</span> <span class='kw'>=</span> <span class='fl'>45</span>),
+  <span class='kw'>withFilter</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 
-<span class='co'>##################################################################################### </span>
+<span class='co'>#####################################################################################</span>
 <span class='co'>## Save workbook</span>
 <span class='co'>## Open in excel without saving file: openXL(wb)</span>
-
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeDataTableExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-
-
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeDataTableExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
 
 
-<span class='co'>##################################################################################### </span>
+
+
+
+<span class='co'>#####################################################################################</span>
 <span class='co'>## Pre-defined table styles gallery</span>
 
 <span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"tableStylesGallery.xlsx"</span>))
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Style Samples"</span>)
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>21</span>) {
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>21</span>) {
   <span class='no'>style</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"TableStyleLight"</span>, <span class='no'>i</span>)
-  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>tableStyle</span><span class='kw'>=</span><span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span>*<span class='fl'>3</span>-<span class='fl'>2</span>)
+  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>,
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <span class='kw'>tableStyle</span> <span class='kw'>=</span> <span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span> * <span class='fl'>3</span> - <span class='fl'>2</span>
+  )
 }
 
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>28</span>) {
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>28</span>) {
   <span class='no'>style</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"TableStyleMedium"</span>, <span class='no'>i</span>)
-  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>tableStyle</span><span class='kw'>=</span><span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span>*<span class='fl'>3</span>-<span class='fl'>2</span>)
+  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>,
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <span class='kw'>tableStyle</span> <span class='kw'>=</span> <span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span> * <span class='fl'>3</span> - <span class='fl'>2</span>
+  )
 }
 
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>11</span>) {
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>11</span>) {
   <span class='no'>style</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"TableStyleDark"</span>, <span class='no'>i</span>)
-  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>tableStyle</span><span class='kw'>=</span><span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span>*<span class='fl'>3</span>-<span class='fl'>2</span>)
+  <span class='fu'>writeDataTable</span>(<span class='no'>wb</span>,
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>style</span>), <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <span class='kw'>tableStyle</span> <span class='kw'>=</span> <span class='no'>style</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='no'>i</span> * <span class='fl'>3</span> - <span class='fl'>2</span>
+  )
 }
 
 <span class='co'>## openXL(wb)</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"tableStylesGallery.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"tableStylesGallery.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -180,7 +180,7 @@ recycled to the length of cols.</p></td>
 
 
 <span class='co'>## set col widths</span>
-<span class='fu'>setColWidths</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>6</span>,<span class='fl'>7</span>,<span class='fl'>9</span>), <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16</span>,<span class='fl'>15</span>,<span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>33</span>))
+<span class='fu'>setColWidths</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>7</span>, <span class='fl'>9</span>), <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16</span>, <span class='fl'>15</span>, <span class='fl'>12</span>, <span class='fl'>18</span>, <span class='fl'>33</span>))
 
 <span class='co'>## auto columns</span>
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet 2"</span>)
@@ -188,7 +188,9 @@ recycled to the length of cols.</p></td>
 <span class='fu'>setColWidths</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>widths</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setColWidthsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setColWidthsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

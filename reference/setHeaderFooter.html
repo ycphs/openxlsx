@@ -197,30 +197,38 @@
 <span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='fl'>3</span>, <span class='fl'>3</span>:<span class='fl'>400</span>)
 <span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='fl'>4</span>, <span class='fl'>3</span>:<span class='fl'>400</span>)
 
-<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"S1"</span>,
-                <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD HEAD LEFT"</span>, <span class='st'>"ODD HEAD CENTER"</span>, <span class='st'>"ODD HEAD RIGHT"</span>),
-                <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD FOOT RIGHT"</span>, <span class='st'>"ODD FOOT CENTER"</span>, <span class='st'>"ODD FOOT RIGHT"</span>),
-                <span class='kw'>evenHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN HEAD LEFT"</span>, <span class='st'>"EVEN HEAD CENTER"</span>, <span class='st'>"EVEN HEAD RIGHT"</span>),
-                <span class='kw'>evenFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN FOOT RIGHT"</span>, <span class='st'>"EVEN FOOT CENTER"</span>, <span class='st'>"EVEN FOOT RIGHT"</span>),
-                <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TOP"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>),
-                <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BOTTOM"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>))
+<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"S1"</span>,
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD HEAD LEFT"</span>, <span class='st'>"ODD HEAD CENTER"</span>, <span class='st'>"ODD HEAD RIGHT"</span>),
+  <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD FOOT RIGHT"</span>, <span class='st'>"ODD FOOT CENTER"</span>, <span class='st'>"ODD FOOT RIGHT"</span>),
+  <span class='kw'>evenHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN HEAD LEFT"</span>, <span class='st'>"EVEN HEAD CENTER"</span>, <span class='st'>"EVEN HEAD RIGHT"</span>),
+  <span class='kw'>evenFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN FOOT RIGHT"</span>, <span class='st'>"EVEN FOOT CENTER"</span>, <span class='st'>"EVEN FOOT RIGHT"</span>),
+  <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TOP"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>),
+  <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BOTTOM"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>)
+)
 
-<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-                <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Date]"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"&amp;[Page] / &amp;[Pages]"</span>),
-                <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Path]&amp;[File]"</span>, <span class='fl'>NA</span>, <span class='st'>"&amp;[Tab]"</span>),
-                <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Header of First Page"</span>, <span class='fl'>NA</span>),
-                <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Footer of First Page"</span>, <span class='fl'>NA</span>))
+<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Date]"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"&amp;[Page] / &amp;[Pages]"</span>),
+  <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Path]&amp;[File]"</span>, <span class='fl'>NA</span>, <span class='st'>"&amp;[Tab]"</span>),
+  <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Header of First Page"</span>, <span class='fl'>NA</span>),
+  <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Footer of First Page"</span>, <span class='fl'>NA</span>)
+)
 
-<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-                <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL HEAD LEFT 2"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"ALL HEAD RIGHT 2"</span>),
-                <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL FOOT RIGHT 2"</span>, <span class='st'>"ALL FOOT CENTER 2"</span>, <span class='st'>"ALL FOOT RIGHT 2"</span>))
+<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>header</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL HEAD LEFT 2"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"ALL HEAD RIGHT 2"</span>),
+  <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL FOOT RIGHT 2"</span>, <span class='st'>"ALL FOOT CENTER 2"</span>, <span class='st'>"ALL FOOT RIGHT 2"</span>)
+)
 
-<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-                <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>),
-                <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>))
-
-
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setHeaderFooterExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='fu'>setHeaderFooter</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>firstHeader</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>),
+  <span class='kw'>firstFooter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>)
+)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setHeaderFooterExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

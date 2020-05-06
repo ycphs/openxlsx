@@ -169,35 +169,52 @@
 
 
 <span class='co'>## Internal Hyperlink - create hyperlink formula manually</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>'=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")'</span>
-  , <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>'=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")'</span>,
+  <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>3</span>
+)
 
 <span class='co'>## Internal - No text to display using makeHyperlinkString() function</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>
-, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(<span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 3"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>2</span>))
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(<span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 3"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+)
 
 <span class='co'>## Internal - Text to display</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(<span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 3"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>2</span>
-    , <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Link to Sheet 3"</span>))
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(
+    <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Sheet 3"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+    <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Link to Sheet 3"</span>
+  )
+)
 
 <span class='co'>## Link to file - No text to display</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>4</span>
- , <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(<span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"testing"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>10</span>
-   , <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)))
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(
+    <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"testing"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+    <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
+  )
+)
 
 <span class='co'>## Link to file - Text to display</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>3</span>
-    , <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(<span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"testing"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>10</span>
-    , <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
-    , <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Link to File."</span>))
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>makeHyperlinkString</span>(
+    <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"testing"</span>, <span class='kw'>row</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+    <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"loadExample.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>),
+    <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Link to File."</span>
+  )
+)
 
 <span class='co'>## Link to external file - Text to display</span>
-<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>startCol</span><span class='kw'>=</span><span class='fl'>1</span>
-  , <span class='kw'>x</span><span class='kw'>=</span> <span class='st'>"=HYPERLINK(\"[C:/Users]\", \"Link to an external file\")"</span>)
-
+<span class='fu'><a href='writeFormula.html'>writeFormula</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>'=HYPERLINK(\\"[C:/Users]\\", \\"Link to an external file\\")'</span>
+)
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"internalHyperlinks.xlsx"</span>,<span class='kw'>overwrite</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"internalHyperlinks.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

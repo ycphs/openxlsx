@@ -227,15 +227,16 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>)
-<span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>30</span>,])
+<span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>30</span>, ])
 <span class='co'># Formatting cells / columns is allowed , but inserting / deleting columns is protected:</span>
-<span class='fu'>protectWorksheet</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                  <span class='kw'>lockFormattingCells</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lockFormattingColumns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-                  <span class='kw'>lockInsertingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>lockDeletingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>protectWorksheet</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>,
+  <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>lockFormattingCells</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lockFormattingColumns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lockInsertingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>lockDeletingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
 <span class='co'># Remove the protection</span>
 <span class='fu'>protectWorksheet</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"pageSetupExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 }</div></pre>

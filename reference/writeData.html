@@ -248,7 +248,7 @@ This is because only the formula is written and left to Excel to evaluate the fo
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## See formatting vignette for further examples. </span>
+<span class='co'>## See formatting vignette for further examples.</span>
 
 <span class='co'>## Options for default styling (These are the defaults)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"openxlsx.borderColour"</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
@@ -270,70 +270,87 @@ This is because only the formula is written and left to Excel to evaluate the fo
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Formula"</span>)
 
 
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>6</span>,]
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>6</span>, ]
 <span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>#####################################################################################</span>
 <span class='co'>## Bordering</span>
 
-<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-         <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>"surrounding"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"black"</span>) <span class='co'>## black border</span>
+<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>,
+  <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>borders</span> <span class='kw'>=</span> <span class='st'>"surrounding"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"black"</span>
+) <span class='co'>## black border</span>
 
-<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-         <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>"columns"</span>)
+<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>,
+  <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='st'>"columns"</span>
+)
 
-<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-         <span class='kw'>startCol</span><span class='kw'>=</span><span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>"rows"</span>)
+<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>,
+  <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='st'>"rows"</span>
+)
 
 
 <span class='co'>#####################################################################################</span>
 <span class='co'>## Header Styles</span>
 
-<span class='no'>hs1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#DCE6F1"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"CENTER"</span>, <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='st'>"italic"</span>,
-                   <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"Bottom"</span>)
+<span class='no'>hs1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(
+  <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#DCE6F1"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"CENTER"</span>, <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='st'>"italic"</span>,
+  <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"Bottom"</span>
+)
 
-<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>startCol</span><span class='kw'>=</span><span class='st'>"B"</span>,
-     <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>23</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>"rows"</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='no'>hs1</span>, <span class='kw'>borderStyle</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>)
-
-
-<span class='no'>hs2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='st'>"#ffffff"</span>, <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#4F80BD"</span>,
-                   <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>valign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
-                   <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottomLeftRight"</span>)
-
-<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>, <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-          <span class='kw'>startCol</span><span class='kw'>=</span><span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>23</span>, <span class='kw'>borders</span><span class='kw'>=</span><span class='st'>"columns"</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='no'>hs2</span>)
+<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>,
+  <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='st'>"B"</span>,
+  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>23</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='st'>"rows"</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='no'>hs1</span>, <span class='kw'>borderStyle</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>
+)
 
 
+<span class='no'>hs2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(
+  <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='st'>"#ffffff"</span>, <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#4F80BD"</span>,
+  <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>valign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
+  <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottomLeftRight"</span>
+)
+
+<span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='no'>x</span>,
+  <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='st'>"O"</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>23</span>, <span class='kw'>borders</span> <span class='kw'>=</span> <span class='st'>"columns"</span>, <span class='kw'>headerStyle</span> <span class='kw'>=</span> <span class='no'>hs2</span>
+)
 
 
-<span class='co'>##################################################################################### </span>
+
+
+<span class='co'>#####################################################################################</span>
 <span class='co'>## Hyperlinks</span>
 <span class='co'>## - vectors/columns with class 'hyperlink' are written as hyperlinks'</span>
 
 <span class='no'>v</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"https://CRAN.R-project.org/"</span>, <span class='fl'>4</span>)
 <span class='fu'><a href='names.html'>names</a></span>(<span class='no'>v</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Hyperlink"</span>, <span class='fl'>1</span>:<span class='fl'>4</span>) <span class='co'># Optional: names will be used as display text</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>v</span>) <span class='kw'>&lt;-</span> <span class='st'>'hyperlink'</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>v</span>) <span class='kw'>&lt;-</span> <span class='st'>"hyperlink"</span>
 <span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='st'>"Cars"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>v</span>, <span class='kw'>xy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B"</span>, <span class='fl'>32</span>))
 
 
-<span class='co'>##################################################################################### </span>
+<span class='co'>#####################################################################################</span>
 <span class='co'>## Formulas</span>
 <span class='co'>## - vectors/columns with class 'formula' are written as formulas'</span>
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-                 <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"A"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>+<span class='fl'>1L</span>), <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"B"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>+<span class='fl'>1L</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" + "</span>),
-                 <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"A"</span>, <span class='fl'>1</span>:<span class='fl'>3</span> + <span class='fl'>1L</span>), <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"B"</span>, <span class='fl'>1</span>:<span class='fl'>3</span> + <span class='fl'>1L</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" + "</span>),
+  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z</span>), <span class='st'>"formula"</span>)
 
 <span class='fu'>writeData</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Formula"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>df</span>)
 
 
-<span class='co'>##################################################################################### </span>
+<span class='co'>#####################################################################################</span>
 <span class='co'>## Save workbook</span>
 <span class='co'>## Open in excel without saving file: openXL(wb)</span>
-
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeDataExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeDataExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

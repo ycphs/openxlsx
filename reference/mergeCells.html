@@ -167,15 +167,17 @@
 <span class='co'>## Intersecting merges</span>
 <span class='fu'>mergeCells</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='fu'>mergeCells</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>10</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'>mergeCells</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>10</span>), <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>12</span>) <span class='co'>## equivalent to 1:10 as only min/max are used</span>
-<span class='co'>#mergeCells(wb, 2, cols = 1, rows = c(1,10)) # Throws error because intersects existing merge</span>
+<span class='fu'>mergeCells</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>10</span>), <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>12</span>) <span class='co'>## equivalent to 1:10 as only min/max are used</span>
+<span class='co'># mergeCells(wb, 2, cols = 1, rows = c(1,10)) # Throws error because intersects existing merge</span>
 
 <span class='co'>## remove merged cells</span>
 <span class='fu'><a href='removeCellMerge.html'>removeCellMerge</a></span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># removes any intersecting merges</span>
 <span class='fu'>mergeCells</span>(<span class='no'>wb</span>, <span class='fl'>2</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>) <span class='co'># Now this works</span>
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"mergeCellsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"mergeCellsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

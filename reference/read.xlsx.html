@@ -222,7 +222,7 @@ Opening, saving and closing the file with Excel will resolve this.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
+<span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
 <span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='kw'>xlsxFile</span> <span class='kw'>=</span> <span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>df1</span>, <span class='no'>class</span>)</div><div class='output co'>#&gt;        Var1        Var2        Var3        Var4        Var5        Var6 
 #&gt;   "logical"   "numeric"   "numeric" "character"   "numeric" "character" 
@@ -238,8 +238,10 @@ Opening, saving and closing the file with Excel will resolve this.</p>
 #&gt; 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z
 #&gt; 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z
 #&gt; 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</div><div class='input'>
-<span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='kw'>xlsxFile</span> <span class='kw'>=</span> <span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-                   <span class='kw'>detectDates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(
+  <span class='kw'>xlsxFile</span> <span class='kw'>=</span> <span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>detectDates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>df2</span>, <span class='no'>class</span>)</div><div class='output co'>#&gt;        Date       value        word        bool      wordZ2 
 #&gt;      "Date"   "numeric" "character"   "logical" "character" </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt;         Date     value      word  bool  wordZ2
 #&gt; 1 2014-04-28 0.8390764 N-U-B-R-A FALSE FALSE-Z
@@ -248,20 +250,22 @@ Opening, saving and closing the file with Excel will resolve this.</p>
 #&gt; 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z
 #&gt; 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z
 #&gt; 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</div><div class='input'>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
 <span class='no'>df3</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>df4</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='all.equal.html'>all.equal</a></span>(<span class='no'>df3</span>, <span class='no'>df4</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
-<span class='no'>df3</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
- <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>))
+<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
+<span class='no'>df3</span> <span class='kw'>&lt;-</span> <span class='fu'>read.xlsx</span>(<span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)
+)
 
 <span class='co'>## URL</span>
 <span class='co'>##</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='st'>"https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"</span>
- <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>read.xlsx</span>(<span class='no'>xlsxFile</span>))
- }</div></pre>
+<span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='st'>"https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>read.xlsx</span>(<span class='no'>xlsxFile</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

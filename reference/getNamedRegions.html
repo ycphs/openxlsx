@@ -144,11 +144,13 @@ Workbook object</p>
 
 <span class='co'>## specify region</span>
 <span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'><a href='createNamedRegion.html'>createNamedRegion</a></span>(<span class='kw'>wb</span> <span class='kw'>=</span> <span class='no'>wb</span>,
-                  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-                  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"iris"</span>,
-                  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>iris</span>)+<span class='fl'>1</span>),
-                  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>iris</span>))
+<span class='fu'><a href='createNamedRegion.html'>createNamedRegion</a></span>(
+  <span class='kw'>wb</span> <span class='kw'>=</span> <span class='no'>wb</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"iris"</span>,
+  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>iris</span>) + <span class='fl'>1</span>),
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>iris</span>)
+)
 
 
 <span class='co'>## using writeData 'name' argument to create a named region</span>
@@ -166,7 +168,8 @@ Workbook object</p>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df</span>)
 
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='no'>out_file</span>, <span class='kw'>namedRegion</span> <span class='kw'>=</span> <span class='st'>"iris2"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df</span>)}</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

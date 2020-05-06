@@ -151,7 +151,7 @@
     </tr>
     <tr>
       <th>stack</th>
-      <td><p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any 
+      <td><p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.</p></td>
     </tr>
     </table>
@@ -170,21 +170,24 @@ existing style is replaced by the new style.</p></td>
 <span class='co'>## Add a worksheets</span>
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Expenditure"</span>, <span class='kw'>gridLines</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'>##write data to worksheet 1</span>
+<span class='co'>## write data to worksheet 1</span>
 <span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>USPersonalExpenditure</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'>## create and add a style to the column headers</span>
-<span class='no'>headerStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>,
-                        <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>)
+<span class='no'>headerStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(
+  <span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>,
+  <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>
+)
 
 <span class='fu'>addStyle</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>headerStyle</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>gridExpand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'>## style for body </span>
-<span class='no'>bodyStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>border</span><span class='kw'>=</span><span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>)
+<span class='co'>## style for body</span>
+<span class='no'>bodyStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>)
 <span class='fu'>addStyle</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>bodyStyle</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>6</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>gridExpand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='setColWidths.html'>setColWidths</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>cols</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fl'>21</span>) <span class='co'>## set column width for row names column</span>
-
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='fu'><a href='setColWidths.html'>setColWidths</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fl'>21</span>) <span class='co'>## set column width for row names column</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

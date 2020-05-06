@@ -170,13 +170,15 @@
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet 4"</span>)
 
 <span class='co'>## Freeze Panes</span>
-<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='st'>"Sheet 1"</span> ,  <span class='kw'>firstActiveRow</span> <span class='kw'>=</span> <span class='fl'>5</span>,  <span class='kw'>firstActiveCol</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='st'>"Sheet 2"</span>, <span class='kw'>firstCol</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)  <span class='co'>## shortcut to firstActiveCol = 2</span>
-<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='fl'>3</span>, <span class='kw'>firstRow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)  <span class='co'>## shortcut to firstActiveRow = 2</span>
+<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='st'>"Sheet 1"</span>, <span class='kw'>firstActiveRow</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>firstActiveCol</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='st'>"Sheet 2"</span>, <span class='kw'>firstCol</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='co'>## shortcut to firstActiveCol = 2</span>
+<span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='fl'>3</span>, <span class='kw'>firstRow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='co'>## shortcut to firstActiveRow = 2</span>
 <span class='fu'>freezePane</span>(<span class='no'>wb</span>, <span class='fl'>4</span>, <span class='kw'>firstActiveRow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>firstActiveCol</span> <span class='kw'>=</span> <span class='st'>"D"</span>)
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"freezePaneExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"freezePaneExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Insert the current plot into a worksheet — insertPlot" />
-<meta property="og:description" content="The current plot is saved to a temporary image file using dev.copy.  
+<meta property="og:description" content="The current plot is saved to a temporary image file using dev.copy.
 This file is then written to the workbook using insertImage." />
 
 
@@ -118,7 +118,7 @@ This file is then written to the workbook using insertImage." />
     </div>
 
     <div class="ref-description">
-    <p>The current plot is saved to a temporary image file using dev.copy.  
+    <p>The current plot is saved to a temporary image file using dev.copy.
 This file is then written to the workbook using insertImage.</p>
     </div>
 
@@ -194,18 +194,21 @@ This file is then written to the workbook using insertImage.</p>
 
 <span class='co'>## create plot objects</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggplot2</span>)
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>qplot</span>(<span class='no'>mpg</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>mtcars</span>, <span class='kw'>geom</span><span class='kw'>=</span><span class='st'>"density"</span>,
-  <span class='kw'>fill</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>gear</span>), <span class='kw'>alpha</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>.5</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Distribution of Gas Mileage"</span>)
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>qplot</span>(<span class='no'>mpg</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"density"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>gear</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>.5</span>), <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Distribution of Gas Mileage"</span>
+)
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>qplot</span>(<span class='no'>age</span>, <span class='no'>circumference</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Orange</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"point"</span>, <span class='st'>"line"</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>Tree</span>)
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>Orange</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"point"</span>, <span class='st'>"line"</span>), <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>Tree</span>
+)
 
 <span class='co'>## Insert currently displayed plot to sheet 1, row 1, column 1</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>p1</span>) <span class='co'>#plot needs to be showing</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>p1</span>) <span class='co'># plot needs to be showing</span>
 <span class='fu'>insertPlot</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>fileType</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"in"</span>)
 
 <span class='co'>## Insert plot 2</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>p2</span>)
-<span class='fu'>insertPlot</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>xy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"J"</span>, <span class='fl'>2</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10</span>,  <span class='kw'>fileType</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"cm"</span>)
+<span class='fu'>insertPlot</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>xy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"J"</span>, <span class='fl'>2</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>fileType</span> <span class='kw'>=</span> <span class='st'>"png"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"cm"</span>)
 
 <span class='co'>## Save workbook</span>
 <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"insertPlotExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)

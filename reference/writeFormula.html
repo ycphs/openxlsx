@@ -155,7 +155,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Currently only the english version of functions are supported. Please don't use the local translation. 
+    <p>Currently only the english version of functions are supported. Please don't use the local translation.
 The examples below show a small list of possible formulas:</p><ul>
 <li><p>SUM(B2:B4)</p></li>
 <li><p>AVERAGE(B2:B4)</p></li>
@@ -187,11 +187,13 @@ The examples below show a small list of possible formulas:</p><ul>
 
 <span class='co'>## 2. - As a data.frame column with class "formula" using writeData</span>
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>,
-                 <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-                 <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"A"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>+<span class='fl'>1L</span>), <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"B"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>+<span class='fl'>1L</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" + "</span>),
-                 <span class='kw'>z2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"ADDRESS(1,%s)"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>),
-                 <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"A"</span>, <span class='fl'>1</span>:<span class='fl'>3</span> + <span class='fl'>1L</span>), <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"B"</span>, <span class='fl'>1</span>:<span class='fl'>3</span> + <span class='fl'>1L</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" + "</span>),
+  <span class='kw'>z2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"ADDRESS(1,%s)"</span>, <span class='fl'>1</span>:<span class='fl'>3</span>),
+  <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z</span>), <span class='st'>"formula"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>df</span>$<span class='no'>z2</span>), <span class='st'>"formula"</span>)
@@ -209,7 +211,9 @@ The examples below show a small list of possible formulas:</p><ul>
 <span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>v2</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeFormulaExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeFormulaExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
 
 
 <span class='co'>## 4. - Writing internal hyperlinks</span>
@@ -220,7 +224,9 @@ The examples below show a small list of possible formulas:</p><ul>
 <span class='fu'>writeFormula</span>(<span class='no'>wb</span>, <span class='st'>"Sheet1"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>'=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")'</span>)
 
 <span class='co'>## Save workbook</span>
- <span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeFormulaHyperlinkExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"writeFormulaHyperlinkExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

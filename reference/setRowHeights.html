@@ -155,13 +155,15 @@
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet 1"</span>)
 
 <span class='co'>## set row heights</span>
-<span class='fu'>setRowHeights</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>,<span class='fl'>22</span>,<span class='fl'>2</span>,<span class='fl'>19</span>), <span class='kw'>heights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24</span>,<span class='fl'>28</span>,<span class='fl'>32</span>,<span class='fl'>42</span>,<span class='fl'>33</span>))
+<span class='fu'>setRowHeights</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>22</span>, <span class='fl'>2</span>, <span class='fl'>19</span>), <span class='kw'>heights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24</span>, <span class='fl'>28</span>, <span class='fl'>32</span>, <span class='fl'>42</span>, <span class='fl'>33</span>))
 
 <span class='co'>## overwrite row 1 height</span>
 <span class='fu'>setRowHeights</span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>heights</span> <span class='kw'>=</span> <span class='fl'>40</span>)
 
 <span class='co'>## Save workbook</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setRowHeightsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"setRowHeightsExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
