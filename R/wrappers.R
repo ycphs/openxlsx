@@ -940,7 +940,8 @@ createStyle <- function(fontName = NULL,
     if (numFmt %in% validNumFmt) {
       style$numFmt <- numFmtMapping[[numFmt[[1]]]]
     } else {
-      style$numFmt <- list("numFmtId" = 9999, formatCode = numFmt) ## Custom numFmt
+      
+      style$numFmt <- list("numFmtId" = 165, formatCode = numFmt) ## Custom numFmt
     }
   }
 
@@ -1004,7 +1005,16 @@ addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = F
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
-
+  
+  
+  
+  
+  if(!is.null(style$numFmt)&length(wb$styleObjects)>0){
+  if(style$numFmt$numFmtId==165){
+    maxnumFmtId<-max(c(sapply(wb$styleObjects, function(i) as.integer(i$style$numFmt$numFmtId)),9999))
+    style$numFmt$numFmtId<-maxnumFmtId+1
+  }
+  }
   sheet <- wb$validateSheet(sheet)
 
   if (!"Workbook" %in% class(wb)) {

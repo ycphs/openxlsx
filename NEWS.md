@@ -1,3 +1,8 @@
+# openxlsx 4.1.5.1
+
+*  fixed issue [#68](https://github.com/ycphs/openxlsx/issues/68])
+
+
 # openxlsx 4.1.5
 
 *  include tests for cloneWorksheet
