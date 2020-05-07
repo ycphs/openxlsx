@@ -70,7 +70,6 @@ Workbook$methods(
 
     workbook <<- genBaseWorkbook()
     workbook.xml.rels <<- genBaseWorkbook.xml.rels()
-    workbookProtection <<- NULL
 
     worksheets <<- list()
     worksheets_rels <<- list()
@@ -1013,20 +1012,6 @@ Workbook$methods(
           "</definedNames>"
         )
     }
-
-
-
-    if (length(workbookProtection) > 0) {
-      # Worksheet protection needs to be right after fileVersion, fileSharing and workbookPr, otherwise Excel will complain
-      workbookXML <-
-        append(workbookXML,
-          list(workbookProtection = workbookProtection),
-          after = max(which(
-            names(workbookXML) %in% c("fileVersion", "fileSharing", "workbookPr")
-          ))
-        )
-    }
-
 
     write_file(
       head = '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
@@ -17971,8 +17956,9 @@ Workbook$methods(
     if (!missing(lockWindows) && !is.null(lockWindows)) {
       attr["lockWindows"] <- toString(as.numeric(lockWindows))
     }
+    # TODO: Shall we parse the existing protection settings and preserve all unchanged attributes?
     if (protect) {
-      workbookProtection <<-
+      workbook$workbookProtection <<-
         sprintf(
           "<workbookProtection %s/>",
           stri_join(
@@ -17985,7 +17971,7 @@ Workbook$methods(
           )
         )
     } else {
-      workbookProtection <<- ""
+      workbook$workbookProtection <<- ""
     }
   }
 )
