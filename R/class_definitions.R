@@ -5,7 +5,6 @@
 Workbook <- setRefClass("Workbook",
   fields = c(
     "sheet_names" = "character",
-    "workbookProtection" = "ANY",
 
     "charts" = "ANY",
     "isChartSheet" = "logical",
