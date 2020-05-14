@@ -170,7 +170,7 @@ SEXP convert_to_excel_ref_expand(const std::vector<int>& cols, const std::vector
       c++;
     }
     
-    r.attr("names") = names;
+  r.attr("names") = names;
   return wrap(r) ;
   
 }
