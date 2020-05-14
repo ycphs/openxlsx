@@ -4,3 +4,6 @@ checks.noindex
 library.noindex
 data.sqlite
 *.html
+README.md
+failures.md
+problems.md
