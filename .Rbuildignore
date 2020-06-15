@@ -14,3 +14,4 @@ cran-comments.md
 ^\.github$
 ^azure-pipelines\.yml$
 ^vignettes/*
+^\.pre-commit-config\.yaml$
