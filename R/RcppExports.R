@@ -133,7 +133,7 @@ build_table_xml <- function(table, tableStyleXML, ref, colNames, showColNames, w
     .Call(`_openxlsx_build_table_xml`, table, tableStyleXML, ref, colNames, showColNames, withFilter)
 }
 
-write_worksheet_xml_2 <- function(prior, post, sheet_data, row_heights, R_fileName) {
-    .Call(`_openxlsx_write_worksheet_xml_2`, prior, post, sheet_data, row_heights, R_fileName)
+write_worksheet_xml_2 <- function(prior, post, sheet_data, row_heights_ = NULL, outline_levels_ = NULL, R_fileName = "output") {
+    .Call(`_openxlsx_write_worksheet_xml_2`, prior, post, sheet_data, row_heights_, outline_levels_, R_fileName)
 }
 

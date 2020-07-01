@@ -1371,6 +1371,7 @@ setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, len
 
 #' @name removeColWidths
 #' @title Remove column widths from a worksheet
+
 #' @description Remove column widths from a worksheet
 #' @author Alexander Walker
 #' @param wb A workbook object
@@ -4054,7 +4055,7 @@ removeTable <- function(wb, sheet, table){
   
   table_names[inds] <- paste0(table_name_original, "_openxlsx_deleted")
   attr(wb$tables, "tableName") <- table_names
-  
+  hidden
   ## delete reference from worksheet to table
   worksheet_table_names <- attr(wb$worksheets[[sheet]]$tableParts, "tableName")
   to_remove <- which(worksheet_table_names == table_name_original)
@@ -4079,3 +4080,139 @@ removeTable <- function(wb, sheet, table){
   
 }
 
+
+#' @name groupColumns
+#' @title Group columns
+#' @description Group a selection of columns
+#' @author Joshua Sturm
+#' @param wb A workbook object.
+#' @param sheet A name or index of a worksheet.
+#' @param cols Indices of cols to group.
+#' @param hiddens Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
+#' @details Group columns together, with the option to hide them.
+#'
+#' NOTE: [setColWidths()] has a conflicting `hidden` parameter; changing one will reset the other.
+#' @seealso [groupRows()] for grouping rows.
+#' @export
+#' 
+groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
+  
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+  
+  sheet <- wb$validateSheet(sheet)
+
+  if(!"Workbook" %in% class(wb))
+    stop("First argument must be a Workbook.")
+
+  levels <- rep("1", length(cols))
+  
+  if(length(hidden) > length(cols))
+    stop("Hidden argument is of greater length than number of cols.")
+  
+  hidden <- rep(hidden, length.out = length(cols))
+  
+  hidden <- hidden[!duplicated(cols)]
+  levels <- levels[!duplicated(cols)]
+  cols <- cols[!duplicated(cols)]
+  cols <- convertFromExcelRef(cols)
+
+  
+  if(length(wb$colOutlineLevels[[sheet]]) > 0){
+    
+    existing_cols <- names(wb$colOutlineLevels[[sheet]])
+    existing_levels <- unname(wb$colOutlineLevels[[sheet]])
+    existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
+    
+    # check for existing column groupings
+    flag <- existing_cols %in% cols
+    if(any(flag)){
+      existing_cols <- existing_cols[!flag]
+      existing_levels <- existing_levels[!flag]
+      existing_hidden <- existing_hidden[!flag]
+    }
+    
+    all_names <- c(existing_cols, cols)
+    all_levels <- c(existing_levels, levels)
+    all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
+    
+    ord <- order(as.integer(all_names))
+    all_names <- all_names[ord]
+    all_levels <- all_levels[ord]
+    all_hidden <- all_hidden[ord]
+    
+    
+    names(all_levels) <- all_names
+    wb$colOutlineLevels[[sheet]] <- all_levels
+    levels <- all_levels
+    attr(wb$colOutlineLevels[[sheet]], "hidden") <- all_hidden
+    hidden <- all_hidden
+    
+    
+  }else{
+    
+    names(levels) <- cols
+    wb$colOutlineLevels[[sheet]] <- levels
+    attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
+  }
+
+
+  
+  invisible(0) 
+}
+
+#' @name groupRows
+#' @title Group Rows
+#' @description Group a selection of rows
+#' @author Joshua Sturm
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param rows Indices of rows to group
+#' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to false
+#' @seealso \code{\link{groupColumns}}
+#' @export
+#' @examples
+#' ## Create a new workbook
+#' wb <- createWorkbook()
+#' 
+#' ## Add a worksheet
+#' addWorksheet(wb, "Sheet 1") 
+#'
+#' ## Group first two rows
+#' groupRows(wb, 1, rows = 1:2, hidden = FALSE)
+#' 
+#' 
+#' ## Save workbook
+#' \dontrun{saveWorkbook(wb, "groupRowsExample.xlsx", overwrite = TRUE)}
+
+groupRows <- function(wb, sheet, rows, hidden = FALSE){
+
+  if(!"Workbook" %in% class(wb))
+    stop("First argument must be a Workbook.")
+
+  sheet <- wb$validateSheet(sheet)
+  
+  if(length(hidden) > length(rows))
+    stop("Hidden argument is of greater length than number of rows.")
+
+  if (!is.logical(hidden))
+    stop("Hidden should be a logical value (TRUE/FALSE).")
+
+  hidden <- rep(hidden, length.out = length(rows))
+  
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+
+  levels <- rep("1", length(rows))
+
+  # Remove duplicates
+  hidden <- hidden[!duplicated(rows)]
+  levels <- levels[!duplicated(rows)]
+  rows <- rows[!duplicated(rows)]
+    
+  names(levels) <- rows
+
+  wb$groupRows(sheet, rows, hidden, levels)
+}

@@ -136,8 +136,6 @@ WorkSheet$methods(get_post_sheet_data = function(){
   if(length(mergeCells) > 0)
     xml <- paste0(xml, paste0(sprintf('<mergeCells count="%s">', length(mergeCells)), pxml(mergeCells), '</mergeCells>'), collapse = "")
   
-  
-  
   if(length(conditionalFormatting) > 0){
     
     nms <- names(conditionalFormatting)
@@ -189,10 +187,7 @@ WorkSheet$methods(get_post_sheet_data = function(){
                   , paste0(sprintf('<colBreaks count="%s" manualBreakCount="%s">', length(colBreaks), length(colBreaks)), paste(colBreaks, collapse = ""),'</colBreaks>')
                   , collapse = "")
   }
-  
-  
-  
-  
+
   
   
   
