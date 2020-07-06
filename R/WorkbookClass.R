@@ -2108,51 +2108,64 @@ Workbook$methods(
 
   sheet <- validateSheet(sheet)
 
-  # hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
-
-  # flag <- names(colOutlineLevels[[sheet]]) %in% cols
-  # if (any(flag))
-  #   colOutlineLevels[[sheet]] <<- colOutlineLevels[[sheet]][!flag]
-
-  # nms <- c(names(colOutlineLevels[[sheet]]), cols)
-
-  # allColOutlineLevels <- unlist(c(colOutlineLevels[[sheet]]), levels)
-  # names(allColOutlineLevels) <- nms
-
-  # existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
-  # all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
-
-  # allColOutlineLevels <-
-  #   allColOutlineLevels[order(as.integer(names(allColOutlineLevels)))]
-
-  # colOutlineLevels[[sheet]] <<- allColOutlineLevels
-
   levels <- colOutlineLevels[[sheet]]
-  hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
+  hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden", exact = TRUE)
   # hidden <- as.logical(as.integer(hidden[1]))
   cols <- names(levels)
+
+  # Check if column is already created (by `setColWidths()`)
+  if (length(wb$colWidths[[sheet]]) > 0) {
+    existing_cols   <- names(wb$colWidths[[sheet]])
+    # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
+
+    if (any(existing_cols %in% cols)) {
+
+      for (i in intersect(existing_cols, cols)) {
+
+        width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
+        outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+
+        if (width_hidden != outline_hidden) {
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+          attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
+        } else {
+          worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", worksheets[[sheet]]$cols[[i]], perl = TRUE)
+        }
+        #   
+        # attr(wb$colWidths[[1]], "hidden")[attr(wb$colWidths[[1]], "names") == "2"]
+        # attr(wb$colWidths[[sheet]], "hidden")[i] <<- as.character(as.integer(hidden[i]))
+
+      }
+
+      cols <- cols[!cols %in% existing_cols]
+      hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
+
+    }
+
+  }
 
 
 
   if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
-    worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
+    worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
   }
 
-  # colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', min(cols), max(cols), hidden)
-  # worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+  colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+  worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+  names(worksheets[[sheet]]$cols) <<- cols
 
-  if (is.null(worksheets[[sheet]]$cols)) {
+  # if (is.null(worksheets[[sheet]]$cols)) {
 
-    colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden = "%s">', cols, cols, hidden)
-    worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+  #   colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden = "%s">', cols, cols, hidden)
+  #   worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
 
-  } else {
+  # } else {
 
-    hidden <- as.logical(as.integer(hidden[1]))
+  #   hidden <- as.logical(as.integer(hidden[1]))
 
-    if (!grepl("outlineLevel", worksheets[[sheet]]$cols))
-      worksheets[[sheet]]$cols <<- gsub("((?<=hidden=\")(\\w{4,5})\")", paste0(hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols, perl = T)
-  }
+  #   if (!grepl("outlineLevel", worksheets[[sheet]]$cols))
+  #     worksheets[[sheet]]$cols <<- gsub("((?<=hidden=\")(\\w{4,5})\")", paste0(hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols, perl = T)
+  # }
 
   
 }

@@ -4103,42 +4103,48 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
   
   sheet <- wb$validateSheet(sheet)
 
-  if(!"Workbook" %in% class(wb))
+  if (!"Workbook" %in% class(wb))
     stop("First argument must be a Workbook.")
 
-  levels <- rep("1", length(cols))
+  if (any(cols) < 1L)
+    stop("Invalid columns selected (<= 0).")
+
+  if (!is.logical(hidden))
+    stop("Hidden should be a logical value (TRUE/FALSE).")
   
-  if(length(hidden) > length(cols))
+  if (length(hidden) > length(cols))
     stop("Hidden argument is of greater length than number of cols.")
+
+  levels <- rep("1", length(cols))
   
   hidden <- rep(hidden, length.out = length(cols))
   
   hidden <- hidden[!duplicated(cols)]
   levels <- levels[!duplicated(cols)]
-  cols <- cols[!duplicated(cols)]
-  cols <- convertFromExcelRef(cols)
+  cols   <- cols[!duplicated(cols)]
+  cols   <- convertFromExcelRef(cols)
 
   
-  if(length(wb$colOutlineLevels[[sheet]]) > 0){
+  if (length(wb$colOutlineLevels[[sheet]]) > 0) {
     
-    existing_cols <- names(wb$colOutlineLevels[[sheet]])
+    existing_cols   <- names(wb$colOutlineLevels[[sheet]])
     existing_levels <- unname(wb$colOutlineLevels[[sheet]])
     existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
     
-    # check for existing column groupings
+    # check if column is already grouped
     flag <- existing_cols %in% cols
     if(any(flag)){
-      existing_cols <- existing_cols[!flag]
+      existing_cols   <- existing_cols[!flag]
       existing_levels <- existing_levels[!flag]
       existing_hidden <- existing_hidden[!flag]
     }
     
-    all_names <- c(existing_cols, cols)
+    all_names  <- c(existing_cols, cols)
     all_levels <- c(existing_levels, levels)
     all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
     
     ord <- order(as.integer(all_names))
-    all_names <- all_names[ord]
+    all_names  <- all_names[ord]
     all_levels <- all_levels[ord]
     all_hidden <- all_hidden[ord]
     
@@ -4146,7 +4152,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     names(all_levels) <- all_names
     wb$colOutlineLevels[[sheet]] <- all_levels
     levels <- all_levels
-    attr(wb$colOutlineLevels[[sheet]], "hidden") <- all_hidden
+    attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
     hidden <- all_hidden
     
     
@@ -4188,16 +4194,19 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 
 groupRows <- function(wb, sheet, rows, hidden = FALSE){
 
-  if(!"Workbook" %in% class(wb))
+  if (!"Workbook" %in% class(wb))
     stop("First argument must be a Workbook.")
 
   sheet <- wb$validateSheet(sheet)
   
-  if(length(hidden) > length(rows))
+  if (length(hidden) > length(rows))
     stop("Hidden argument is of greater length than number of rows.")
 
   if (!is.logical(hidden))
     stop("Hidden should be a logical value (TRUE/FALSE).")
+
+  if (any(rows) < 1L)
+    stop("Invalid rows entered (<= 0).")
 
   hidden <- rep(hidden, length.out = length(rows))
   
@@ -4210,7 +4219,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE){
   # Remove duplicates
   hidden <- hidden[!duplicated(rows)]
   levels <- levels[!duplicated(rows)]
-  rows <- rows[!duplicated(rows)]
+  rows   <- rows[!duplicated(rows)]
     
   names(levels) <- rows
 
