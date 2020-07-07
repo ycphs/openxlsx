@@ -423,6 +423,9 @@ write.xlsx <- function(x, file, asTable = FALSE, ...){
     
     if(length(colWidths) != nSheets)
       colWidths <- rep_len(colWidths, length.out = nSheets)
+
+    if(length(colOutlineLevels) != nSheets)
+      colOutlineLevels <- rep_len(colOutlineLevels, length.out = nSheets)
     
     for(i in 1:nSheets){
       

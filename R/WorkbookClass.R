@@ -2114,8 +2114,8 @@ Workbook$methods(
   cols <- names(levels)
 
   # Check if column is already created (by `setColWidths()`)
-  if (length(wb$colWidths[[sheet]]) > 0) {
-    existing_cols   <- names(wb$colWidths[[sheet]])
+  if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
+    existing_cols  <- names(wb$colWidths[[sheet]])
     # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
 
     if (any(existing_cols %in% cols)) {
@@ -2131,9 +2131,6 @@ Workbook$methods(
         } else {
           worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", worksheets[[sheet]]$cols[[i]], perl = TRUE)
         }
-        #   
-        # attr(wb$colWidths[[1]], "hidden")[attr(wb$colWidths[[1]], "names") == "2"]
-        # attr(wb$colWidths[[sheet]], "hidden")[i] <<- as.character(as.integer(hidden[i]))
 
       }
 

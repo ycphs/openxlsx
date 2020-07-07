@@ -31,7 +31,7 @@ SEXP write_worksheet_xml_2( std::string prior
   }
   
 
-  // sheet_data will be in order, jsut need to check for row_heights
+  // sheet_data will be in order, just need to check for row_heights
   CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
   CharacterVector cell_types = map_cell_types_to_char(sheet_data.field("t"));
   CharacterVector cell_value = sheet_data.field("v");
