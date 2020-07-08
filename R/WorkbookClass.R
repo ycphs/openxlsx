@@ -2113,33 +2113,33 @@ Workbook$methods(
   # hidden <- as.logical(as.integer(hidden[1]))
   cols <- names(levels)
 
-  # Check if column is already created (by `setColWidths()`)
-  if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
-    existing_cols  <- names(wb$colWidths[[sheet]])
-    # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
+  # # Check if column is already created (by `setColWidths()`)
+  # if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
+  #   existing_cols  <- names(wb$colWidths[[sheet]])
+  #   # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
 
-    if (any(existing_cols %in% cols)) {
+  #   if (any(existing_cols %in% cols)) {
 
-      for (i in intersect(existing_cols, cols)) {
+  #     for (i in intersect(existing_cols, cols)) {
 
-        width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-        outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
+  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
 
-        if (width_hidden != outline_hidden) {
-          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
-          attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
-        } else {
-          worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", worksheets[[sheet]]$cols[[i]], perl = TRUE)
-        }
+  #       if (width_hidden != outline_hidden) {
+  #         worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+  #         attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
+  #       } else {
+  #         worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", worksheets[[sheet]]$cols[[i]], perl = TRUE)
+  #       }
 
-      }
+  #     }
 
-      cols <- cols[!cols %in% existing_cols]
-      hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
+  #     cols <- cols[!cols %in% existing_cols]
+  #     hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
 
-    }
+  #   }
 
-  }
+  # }
 
 
 
@@ -2147,23 +2147,20 @@ Workbook$methods(
     worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
   }
 
+  if (any(cols %in% names(worksheets[[sheet]]$cols))) {
+
+    for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
+
+      outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+      worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+    }
+
+    cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
+  }
+
   colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
   worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
   names(worksheets[[sheet]]$cols) <<- cols
-
-  # if (is.null(worksheets[[sheet]]$cols)) {
-
-  #   colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden = "%s">', cols, cols, hidden)
-  #   worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
-
-  # } else {
-
-  #   hidden <- as.logical(as.integer(hidden[1]))
-
-  #   if (!grepl("outlineLevel", worksheets[[sheet]]$cols))
-  #     worksheets[[sheet]]$cols <<- gsub("((?<=hidden=\")(\\w{4,5})\")", paste0(hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols, perl = T)
-  # }
-
   
 }
 

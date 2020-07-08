@@ -141,33 +141,33 @@ Workbook$methods(setColWidths = function(sheet){
     
   }
   
-  # Check if any conflicting column outline levels
-  if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colOutlineLevels[[sheet]]) > 0)) {
+  # # Check if any conflicting column outline levels
+  # if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colOutlineLevels[[sheet]]) > 0)) {
     
-    existing_cols <- names(wb$colOutlineLevels[[sheet]])
+  #   existing_cols <- names(wb$colOutlineLevels[[sheet]])
 
-    if (any(existing_cols %in% cols)) {
+  #   if (any(existing_cols %in% cols)) {
 
-      for (i in intersect(existing_cols, cols)) {
+  #     for (i in intersect(existing_cols, cols)) {
 
-        width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-        outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
+  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
 
-        if (width_hidden != outline_hidden) {
+  #       if (width_hidden != outline_hidden) {
 
-          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", width_hidden, worksheets[[sheet]]$cols[[i]], perl = TRUE)
-          attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i] <<- width_hidden
+  #         worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", width_hidden, worksheets[[sheet]]$cols[[i]], perl = TRUE)
+  #         attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i] <<- width_hidden
 
-        }
+  #       }
 
-      }
+  #     }
 
-      cols <- cols[!cols %in% existing_cols]
-      hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "name") %in% cols]
+  #     cols <- cols[!cols %in% existing_cols]
+  #     hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "name") %in% cols]
 
-    }
+  #   }
 
-  }
+  # }
 
   ## Calculate width of auto
   colNodes <- sprintf('<col min="%s" max="%s" width="%s" hidden="%s" customWidth="1"/>', cols, cols, widths, hidden)
