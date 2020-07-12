@@ -2110,43 +2110,14 @@ Workbook$methods(
 
   levels <- colOutlineLevels[[sheet]]
   hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden", exact = TRUE)
-  # hidden <- as.logical(as.integer(hidden[1]))
   cols <- names(levels)
-
-  # # Check if column is already created (by `setColWidths()`)
-  # if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
-  #   existing_cols  <- names(wb$colWidths[[sheet]])
-  #   # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
-
-  #   if (any(existing_cols %in% cols)) {
-
-  #     for (i in intersect(existing_cols, cols)) {
-
-  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-
-  #       if (width_hidden != outline_hidden) {
-  #         worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #         attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
-  #       } else {
-  #         worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #       }
-
-  #     }
-
-  #     cols <- cols[!cols %in% existing_cols]
-  #     hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
-
-  #   }
-
-  # }
-
 
 
   if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
     worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
   }
 
+  # Check if column is already created (by `setColWidths()`)
   if (any(cols %in% names(worksheets[[sheet]]$cols))) {
 
     for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
@@ -2156,6 +2127,7 @@ Workbook$methods(
     }
 
     cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
+    hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") %in% cols]
   }
 
   colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
@@ -2180,7 +2152,7 @@ Workbook$methods(
   allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
   names(allOutlineLevels) <- nms
 
-  existing_hidden <- attr(wb$outlineLevels[[sheet]], "hidden")
+  existing_hidden <- attr(wb$outlineLevels[[sheet]], "hidden", exact = TRUE)
   all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
 
   allOutlineLevels <-

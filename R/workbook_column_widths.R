@@ -141,33 +141,18 @@ Workbook$methods(setColWidths = function(sheet){
     
   }
   
-  # # Check if any conflicting column outline levels
-  # if ((length(worksheets[[sheet]]$cols) > 0) & (length(wb$colOutlineLevels[[sheet]]) > 0)) {
-    
-  #   existing_cols <- names(wb$colOutlineLevels[[sheet]])
+  # Check if any conflicting column outline levels
+  if (any(cols %in% names(worksheets[[sheet]]$cols))) {
 
-  #   if (any(existing_cols %in% cols)) {
+    for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
 
-  #     for (i in intersect(existing_cols, cols)) {
+      width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
+      width_widths <- attr(wb$colWidths[[sheet]], "widths")[attr(wb$colWidths[[sheet]], "names") == i]
+      worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(width_hidden, "\" width=\"", width_widths, "\" customWidth=\"1\"/>"), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+    }
 
-  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-
-  #       if (width_hidden != outline_hidden) {
-
-  #         worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", width_hidden, worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #         attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i] <<- width_hidden
-
-  #       }
-
-  #     }
-
-  #     cols <- cols[!cols %in% existing_cols]
-  #     hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "name") %in% cols]
-
-  #   }
-
-  # }
+    cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
+  }
 
   ## Calculate width of auto
   colNodes <- sprintf('<col min="%s" max="%s" width="%s" hidden="%s" customWidth="1"/>', cols, cols, widths, hidden)
