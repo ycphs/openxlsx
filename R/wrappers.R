@@ -4153,63 +4153,6 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
   cols   <- cols[!duplicated(cols)]
   cols   <- convertFromExcelRef(cols)
 
-
-  # if ((length(wb$colOutlineLevels[[sheet]]) > 0) & (length(wb$worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
-
-  #   existing_cols   <- names(wb$colOutlineLevels[[sheet]])
-  #   existing_levels <- unname(wb$colOutlineLevels[[sheet]])
-  #   existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
-    
-  #   # check if column is already grouped
-  #   flag <- existing_cols %in% cols
-  #   if(any(flag)){
-  #     existing_cols   <- existing_cols[!flag]
-  #     existing_levels <- existing_levels[!flag]
-  #     existing_hidden <- existing_hidden[!flag]
-  #   }
-    
-  #   all_names  <- c(existing_cols, cols)
-  #   all_levels <- c(existing_levels, levels)
-  #   all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
-    
-  #   ord <- order(as.integer(all_names))
-  #   all_names  <- all_names[ord]
-  #   all_levels <- all_levels[ord]
-  #   all_hidden <- all_hidden[ord]
-
-  #   existing_cols   <- names(wb$colWidths[[sheet]])
-  #   existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
-
-  #   if (any(existing_cols %in% all_names)) {
-
-  #     for (i in intersect(existing_cols, all_names)) {
-
-  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-
-  #       if (width_hidden != outline_hidden) {
-  #         wb$worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #         attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
-  #       } else {
-  #         wb$worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #       }
-
-  #     }
-
-  #     all_names <- all_names[!all_names %in% existing_cols]
-  #     all_levels <- all_levels[names(all_levels) %in% all_names]
-  #     hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% all_names]
-
-  #     print(c("here1", all_levels))
-
-  #     wb$colOutlineLevels[[sheet]] <- all_levels
-  #     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-
-
-  #   }
-
-  # } else 
-
   if (length(wb$colWidths[[sheet]]) > 0) {
 
     existing_cols   <- names(wb$colWidths[[sheet]])
@@ -4279,110 +4222,60 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
   }
 
-  # else if ((length(wb$worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
-
-
-    # existing_cols   <- names(wb$colWidths[[sheet]])
-    # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
-
-    # if (any(existing_cols %in% cols)) {
-
-    #   for (i in intersect(existing_cols, cols)) {
-
-    #     width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-    #     outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-
-    #     if (width_hidden != outline_hidden) {
-    #       wb$worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-    #       attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
-    #     } else {
-    #       wb$worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-    #     }
-
-    #   }
-
-    #   print(c("here3", cols))
-
-    #   cols <- cols[!cols %in% existing_cols]
-    #   hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
-
-    #   wb$colOutlineLevels[[sheet]] <- cols
-    #   attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-
-    # }
-
-  # } else if (length(wb$colWidths[[sheet]]) > 0) {
-
-
-  #   existing_cols   <- names(wb$colWidths[[sheet]])
-  #   existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
-
-  #   if (any(existing_cols %in% cols)) {
-
-  #     for (i in intersect(existing_cols, cols)) {
-
-  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-  #       # outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-  #       outline_hidden <- hidden[i]
-
-  #       if (width_hidden != outline_hidden) {
-  #         attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <- outline_hidden
-  #       }
-  #     }
-
-  #     cols <- cols[!cols %in% existing_cols]
-  #     hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
-  #     wb$colOutlineLevels[[sheet]] <- cols
-  #     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-  #   } else {
-
-  #   wb$colOutlineLevels[[sheet]] <- cols
-  #     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-  #   }
-
-
-  # } else{
-
-  #   print(c("else", cols))
-    
-  #   names(levels) <- cols
-  #   wb$colOutlineLevels[[sheet]] <- levels
-  #   attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-  # }
-
-  # # Check if column is already created (by `setColWidths()`)
-  # if ((length(wb$worksheets[[sheet]]$cols) > 0) & (length(wb$colWidths[[sheet]]) > 0)) {
-  #   existing_cols  <- names(wb$colWidths[[sheet]])
-  #   # existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
-
-  #   if (any(existing_cols %in% names(levels))) {
-
-  #     for (i in intersect(existing_cols, names(levels))) {
-
-  #       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-  #       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-
-  #       if (width_hidden != outline_hidden) {
-  #         wb$worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #         attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <<- outline_hidden
-  #       } else {
-  #         wb$worksheets[[sheet]]$cols[[i]] <<- sub("/>", " outlineLevel=\"1\"/>", wb$worksheets[[sheet]]$cols[[i]], perl = TRUE)
-  #       }
-
-  #     }
-
-  #     # cols <- cols[!cols %in% existing_cols]
-  #     # hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "name") %in% cols]
-
-
-  #   }
-
-  # }
-
-
-  
   invisible(0) 
 }
+
+#' @name ungroupCols
+#' @title Ungroup Columns
+#' @description Ungroup a selection of columns
+#' @author Joshua Sturm
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param cols Indices of columns to ungroup
+#' @details If column was previously hidden, it will now be shown
+#' @seealso [ungroupRows()] To ungroup rows
+#' @export
+
+ungroupCols <- function(wb, sheet, cols) {
+  if (!"Workbook" %in% class(wb))
+  stop("First argument must be a Workbook.")
+
+  sheet <- wb$validateSheet(sheet)
+
+  if (!is.numeric(cols)) {
+    cols <- convertFromExcelRef(cols)
+  }
+
+  if (any(cols) < 1L)
+  stop("Invalid columns selected (<= 0).")
+
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+
+  customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
+  removeInds <- which(customCols %in% cols)
+
+  if (length(removeInds) > 0) {
+    remainingCols <- customCols[-removeInds]
+    if (length(remainingCols) == 0) {
+      wb$colOutlineLevels[[sheet]] <- list()
+      } else {
+        rem_widths <- wb$colOutlineLevels[[sheet]][-removeInds]
+        names(rem_widths) <- as.character(remainingCols)
+        wb$colOutlineLevels[[sheet]] <- rem_widths
+      }
+    }
+  if (length(wb$colWidths[[sheet]]) > 0) {
+    if (any(cols %in% names(wb$colWidths[[sheet]]))) {
+      attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") %in% cols] <- "0"
+    }
+  }
+}
+
+
+
+
 
 #' @name groupRows
 #' @title Group Rows
@@ -4408,7 +4301,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 #' ## Save workbook
 #' \dontrun{saveWorkbook(wb, "groupRowsExample.xlsx", overwrite = TRUE)}
 
-groupRows <- function(wb, sheet, rows, hidden = FALSE){
+groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   if (!"Workbook" %in% class(wb))
     stop("First argument must be a Workbook.")
