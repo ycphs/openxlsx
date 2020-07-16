@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.1.4.9000
-Date: 2019-12-04
+Version: 4.2.0
+Date: 2020-07-16
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -14,6 +14,9 @@ Authors@R:
              email = "Alexander.Walker1989@gmail.com"),
       person(given = "Luca",
              family = "Braglia",
+             role = "ctb"),
+      person(given = "Joshua",
+             family = "Sturm",
              role = "ctb"))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
@@ -23,7 +26,7 @@ Description: Simplifies the creation of Excel .xlsx files by
 License: MIT + file LICENSE
 URL: https://joshuasturm.github.io/openxlsx/index.html,
     https://github.com/joshuasturm/openxlsx
-BugReports: https://github.com/ycphs/openxlsx/issues
+BugReports: https://github.com/joshuasturm/openxlsx/issues
 Depends:
     R (>= 3.3.0)
 Imports:
@@ -35,12 +38,9 @@ Imports:
     zip,
     stringi
 Suggests:
-	covr,
     knitr,
     testthat,
     roxygen2
-Remotes:
-	ropenscilabs/travis
 LinkingTo: 
     Rcpp
 VignetteBuilder: 

@@ -68,7 +68,7 @@ writeData(wb, sheet = 2, x = v2, startCol = 10, startRow = 2)
 \dontrun{saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)}
 
 
-## 4. - WWriting internal hyperlinks
+## 4. - Writing internal hyperlinks
 
 wb <- createWorkbook()
 addWorksheet(wb, "Sheet1")

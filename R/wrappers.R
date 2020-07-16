@@ -4225,7 +4225,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
   invisible(0) 
 }
 
-#' @name ungroupCols
+#' @name ungroupColumns
 #' @title Ungroup Columns
 #' @description Ungroup a selection of columns
 #' @author Joshua Sturm
@@ -4236,7 +4236,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 #' @seealso [ungroupRows()] To ungroup rows
 #' @export
 
-ungroupCols <- function(wb, sheet, cols) {
+ungroupColumns <- function(wb, sheet, cols) {
   if (!"Workbook" %in% class(wb))
   stop("First argument must be a Workbook.")
 
@@ -4256,6 +4256,7 @@ ungroupCols <- function(wb, sheet, cols) {
   customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
   removeInds <- which(customCols %in% cols)
 
+  # Check if any selected columns are already grouped
   if (length(removeInds) > 0) {
     remainingCols <- customCols[-removeInds]
     if (length(remainingCols) == 0) {
