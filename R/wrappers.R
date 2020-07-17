@@ -4109,7 +4109,6 @@ removeTable <- function(wb, sheet, table){
   
 }
 
-
 #' @name groupColumns
 #' @title Group columns
 #' @description Group a selection of columns
@@ -4274,10 +4273,6 @@ ungroupColumns <- function(wb, sheet, cols) {
   }
 }
 
-
-
-
-
 #' @name groupRows
 #' @title Group Rows
 #' @description Group a selection of rows
@@ -4288,19 +4283,6 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
 #' @seealso \code{\link{groupColumns}}
 #' @export
-#' @examples
-#' ## Create a new workbook
-#' wb <- createWorkbook()
-#' 
-#' ## Add a worksheet
-#' addWorksheet(wb, "Sheet 1") 
-#'
-#' ## Group first two rows
-#' groupRows(wb, 1, rows = 1:2, hidden = FALSE)
-#' 
-#' 
-#' ## Save workbook
-#' \dontrun{saveWorkbook(wb, "groupRowsExample.xlsx", overwrite = TRUE)}
 
 groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
@@ -4334,4 +4316,38 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
   names(levels) <- rows
 
   wb$groupRows(sheet, rows, hidden, levels)
+}
+
+#' @name ungroupRows
+#' @title Ungroup Rows
+#' @description Ungroup a selection of rows
+#' @author Joshua Sturm
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param rows Indices of rows to ungroup
+#' @details If row was previously hidden, it will now be shown
+#' @seealso \code{\link{ungroupColumns}}
+#' @export
+
+ungroupRows <- function(wb, sheet, rows){
+  
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+
+  if (!"Workbook" %in% class(wb))
+    stop("First argument must be a Workbook.")
+
+  sheet <- wb$validateSheet(sheet)
+
+  if (any(rows) < 1L)
+    stop("Invalid rows entered (<= 0).")
+  
+  customRows <- as.integer(names(wb$outlineLevels[[sheet]]))
+  removeInds <- which(customRows %in% rows)
+  if (length(removeInds) > 0)
+    wb$outlineLevels[[sheet]] <- wb$outlineLevels[[sheet]][-removeInds]
+
+  if (length(wb$outlineLevels[[sheet]]) == 0)
+    wb$worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelRow="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
 }
