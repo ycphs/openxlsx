@@ -1,4 +1,4 @@
-[openxlsx](https://ycphs.github.io/openxlsx/)
+[openxlsx](https://joshuasturm.github.io/openxlsx/)
 ========
 
 
@@ -7,6 +7,7 @@
 [![Coverage Status](https://codecov.io/github/ycphs/openxlsx/coverage.svg?branch=master)](https://codecov.io/github/ycphs/openxlsx?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/openxlsx)](https://cran.r-project.org/package=openxlsx)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/openxlsx)](https://cran.r-project.org/package=openxlsx)
+![R-CMD-check](https://github.com/JoshuaSturm/openxlsx/workflows/R-CMD-check/badge.svg?branch=add-groups)
 
  
  
