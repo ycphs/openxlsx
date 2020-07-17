@@ -4120,8 +4120,8 @@ removeTable <- function(wb, sheet, table){
 #' @param hiddens Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
 #' @details Group columns together, with the option to hide them.
 #'
-#' NOTE: [setColWidths()] has a conflicting `hidden` parameter; changing one will reset the other.
-#' @seealso [groupRows()] for grouping rows.
+#' NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will reset the other.
+#' @seealso \code{\link{groupRows}} for grouping rows.
 #' @export
 #' 
 groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
@@ -4233,7 +4233,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 #' @param sheet A name or index of a worksheet
 #' @param cols Indices of columns to ungroup
 #' @details If column was previously hidden, it will now be shown
-#' @seealso [ungroupRows()] To ungroup rows
+#' @seealso \code{\link{ungroupRows}} To ungroup rows
 #' @export
 
 ungroupColumns <- function(wb, sheet, cols) {
@@ -4285,7 +4285,7 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param rows Indices of rows to group
-#' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to false
+#' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
 #' @seealso \code{\link{groupColumns}}
 #' @export
 #' @examples
