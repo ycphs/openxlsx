@@ -13,7 +13,7 @@ groupColumns(wb, sheet, cols, hidden = FALSE)
 
 \item{cols}{Indices of cols to group.}
 
-\item{hiddens}{Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.}
+\item{hidden}{Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.}
 }
 \description{
 Group a selection of columns
@@ -21,10 +21,10 @@ Group a selection of columns
 \details{
 Group columns together, with the option to hide them.
 
-NOTE: [setColWidths()] has a conflicting `hidden` parameter; changing one will reset the other.
+NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will reset the other.
 }
 \seealso{
-[groupRows()] for grouping rows.
+\code{\link{groupRows}} for grouping rows.
 }
 \author{
 Joshua Sturm

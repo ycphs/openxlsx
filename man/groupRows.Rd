@@ -13,7 +13,7 @@ groupRows(wb, sheet, rows, hidden = FALSE)
 
 \item{rows}{Indices of rows to group}
 
-\item{hidden}{Logical vector. If TRUE the grouped columns are hidden. Defaults to false}
+\item{hidden}{Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE}
 }
 \description{
 Group a selection of rows
