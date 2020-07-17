@@ -4117,7 +4117,7 @@ removeTable <- function(wb, sheet, table){
 #' @param wb A workbook object.
 #' @param sheet A name or index of a worksheet.
 #' @param cols Indices of cols to group.
-#' @param hiddens Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
+#' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
 #' @details Group columns together, with the option to hide them.
 #'
 #' NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will reset the other.
