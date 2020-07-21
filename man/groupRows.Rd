@@ -18,20 +18,6 @@ groupRows(wb, sheet, rows, hidden = FALSE)
 \description{
 Group a selection of rows
 }
-\examples{
-## Create a new workbook
-wb <- createWorkbook()
-
-## Add a worksheet
-addWorksheet(wb, "Sheet 1") 
-
-## Group first two rows
-groupRows(wb, 1, rows = 1:2, hidden = FALSE)
-
-
-## Save workbook
-\dontrun{saveWorkbook(wb, "groupRowsExample.xlsx", overwrite = TRUE)}
-}
 \seealso{
 \code{\link{groupColumns}}
 }

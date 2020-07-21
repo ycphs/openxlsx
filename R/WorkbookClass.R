@@ -1970,7 +1970,6 @@ Workbook$methods(
         ## reorder sheet data
         worksheets[[i]]$order_sheetdata()
         
-        
         prior <- ws$get_prior_sheet_data()
         post <- ws$get_post_sheet_data()
         
@@ -2117,13 +2116,12 @@ Workbook$methods(
     worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
   }
 
-  # Check if column is already created (by `setColWidths()`)
+  # Check if column is already created (by `setColWidths()` or on import)
   if (any(cols %in% names(worksheets[[sheet]]$cols))) {
 
     for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
-
       outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-      worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+      worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
     }
 
     cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
@@ -2143,6 +2141,7 @@ Workbook$methods(
 
   sheet <- validateSheet(sheet)
 
+
   flag <- names(outlineLevels[[sheet]]) %in% rows
     if (any(flag))
       outlineLevels[[sheet]] <<- outlineLevels[[sheet]][!flag]
@@ -2161,6 +2160,7 @@ Workbook$methods(
   outlineLevels[[sheet]] <<- allOutlineLevels
 
   attr(wb$outlineLevels[[sheet]], "hidden") <- all_hidden
+
 
   if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr))
     worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
@@ -3266,7 +3266,7 @@ Workbook$methods(
         }
       }
       
-      ## write colwidth XML
+      ## write colwidth and coloutline XML
       if (length(colWidths[[i]]) > 0)
         invisible(.self$setColWidths(i))
       
@@ -3568,7 +3568,7 @@ Workbook$methods(
           tmpTxt <-
             append(tmpTxt,
               c(
-                "\n\tGrouped rows:n\t",
+                "\n\tGrouped rows:\n\t",
                 stri_join(
                   sprintf("%s", names(outlineLevels[[i]])),
                 collapse = ", ",
@@ -3582,7 +3582,7 @@ Workbook$methods(
           tmpTxt <-
             append(tmpTxt,
               c(
-                "\n\tGrouped columns:n\t",
+                "\n\tGrouped columns:\n\t",
                 stri_join(
                   sprintf("%s", names(colOutlineLevels[[i]])),
                 collapse = ", ",
