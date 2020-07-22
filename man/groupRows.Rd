@@ -19,7 +19,7 @@ groupRows(wb, sheet, rows, hidden = FALSE)
 Group a selection of rows
 }
 \seealso{
-\code{\link{groupColumns}}
+\code{\link{ungroupRows}} to ungroup rows. \code{\link{groupColumns}} for grouping columns.
 }
 \author{
 Joshua Sturm

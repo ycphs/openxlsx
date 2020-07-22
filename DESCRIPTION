@@ -62,6 +62,7 @@ Collate:
     'loadWorkbook.R'
     'onUnload.R'
     'openXL.R'
+    'openxlsx-package.R'
     'openxlsx.R'
     'openxlsxCoerce.R'
     'readWorkbook.R'

@@ -4258,7 +4258,7 @@ removeTable <- function(wb, sheet, table) {
 #' @details Group columns together, with the option to hide them.
 #'
 #' NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will update the other.
-#' @seealso \code{\link{ungroupColums}} to ungroup columns. \code{\link{groupRows}} for grouping rows.
+#' @seealso \code{\link{ungroupColumns}} to ungroup columns. \code{\link{groupRows}} for grouping rows.
 #' @export
 #' 
 groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
