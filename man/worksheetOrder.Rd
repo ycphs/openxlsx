@@ -35,12 +35,15 @@ writeData(wb = wb, sheet = 3, x = Formaldehyde)
 
 worksheetOrder(wb)
 names(wb)
-worksheetOrder(wb) <- c(1,3,2) # switch position of sheets 2 & 3 
+worksheetOrder(wb) <- c(1, 3, 2) # switch position of sheets 2 & 3
 writeData(wb, 2, 'This is still the "mtcars" worksheet', startCol = 15)
 worksheetOrder(wb)
-names(wb)  ## ordering within workbook is not changed
-
-\dontrun{saveWorkbook(wb, "worksheetOrderExample.xlsx",  overwrite = TRUE)}
-worksheetOrder(wb) <- c(3,2,1)
-\dontrun{saveWorkbook(wb, "worksheetOrderExample2.xlsx",  overwrite = TRUE)}
+names(wb) ## ordering within workbook is not changed
+\dontrun{
+saveWorkbook(wb, "worksheetOrderExample.xlsx", overwrite = TRUE)
+}
+worksheetOrder(wb) <- c(3, 2, 1)
+\dontrun{
+saveWorkbook(wb, "worksheetOrderExample2.xlsx", overwrite = TRUE)
+}
 }

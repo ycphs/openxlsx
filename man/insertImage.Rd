@@ -48,13 +48,15 @@ addWorksheet(wb, "Sheet 2")
 addWorksheet(wb, "Sheet 3")
 
 ## Insert images
-img <- system.file("extdata","einstein.jpg", package = "openxlsx")
-insertImage(wb, "Sheet 1", img, startRow = 5,  startCol = 3, width = 6, height = 5)
-insertImage(wb, 2, img, startRow = 2,  startCol = 2)
-insertImage(wb, 3 , img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
- 
+img <- system.file("extdata", "einstein.jpg", package = "openxlsx")
+insertImage(wb, "Sheet 1", img, startRow = 5, startCol = 3, width = 6, height = 5)
+insertImage(wb, 2, img, startRow = 2, startCol = 2)
+insertImage(wb, 3, img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
+
 ## Save workbook
-\dontrun{saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{insertPlot}}

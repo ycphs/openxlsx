@@ -20,19 +20,19 @@ DEPRECATED
 \dontrun{
 wb <- createWorkbook("Edgar Anderson")
 addWorksheet(wb, "S1")
-writeDataTable(wb, "S1", x = iris[1:30,], xy = c("C", 5))
+writeDataTable(wb, "S1", x = iris[1:30, ], xy = c("C", 5))
 
 ## set all headers
-setHeader(wb, "This is a header", position="center")
-setHeader(wb, "To the left", position="left")
-setHeader(wb, "On the right", position="right")
+setHeader(wb, "This is a header", position = "center")
+setHeader(wb, "To the left", position = "left")
+setHeader(wb, "On the right", position = "right")
 
 ## set all footers
-setFooter(wb, "Center Footer Here", position="center")
-setFooter(wb, "Bottom left", position="left")
-setFooter(wb, Sys.Date(), position="right")
+setFooter(wb, "Center Footer Here", position = "center")
+setFooter(wb, "Bottom left", position = "left")
+setFooter(wb, Sys.Date(), position = "right")
 
-\dontrun{saveWorkbook(wb, "headerFooterExample.xlsx", overwrite = TRUE)}
+saveWorkbook(wb, "headerFooterExample.xlsx", overwrite = TRUE)
 }
 }
 \author{

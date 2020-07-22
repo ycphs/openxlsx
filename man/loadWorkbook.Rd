@@ -17,20 +17,21 @@ loadWorkbook(file, xlsxFile = NULL, isUnzipped = FALSE)
 Workbook object.
 }
 \description{
-loadWorkbook returns a workbook object conserving styles and 
+loadWorkbook returns a workbook object conserving styles and
 formatting of the original .xlsx file.
 }
 \examples{
 ## load existing workbook from package folder
-wb <- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package= "openxlsx"))
-names(wb)  #list worksheets
+wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
+names(wb) # list worksheets
 wb ## view object
 ## Add a worksheet
 addWorksheet(wb, "A new worksheet")
 
 ## Save workbook
-\dontrun{saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)}
-
+\dontrun{
+saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
+}
 
 }
 \seealso{

@@ -28,7 +28,7 @@ writeDataTable(
 )
 }
 \arguments{
-\item{wb}{A Workbook object containing a 
+\item{wb}{A Workbook object containing a
 worksheet.}
 
 \item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
@@ -60,7 +60,7 @@ A vector of the form c(startCol, startRow)}
 
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
 
-\item{stack}{If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any 
+\item{stack}{If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.
 \cr\cr
 \cr\bold{The below options correspond to Excel table options:}
@@ -80,7 +80,7 @@ existing style is replaced by the new style.
 Write to a worksheet and format as an Excel table
 }
 \details{
-columns of x with class Date/POSIXt, currency, accounting, 
+columns of x with class Date/POSIXt, currency, accounting,
 hyperlink, percentage are automatically styled as dates, currency, accounting,
 hyperlinks, percentages respectively.
 }
@@ -101,16 +101,20 @@ addWorksheet(wb, "S3")
 
 writeDataTable(wb, "S1", x = iris)
 
-writeDataTable(wb, "S2", x = mtcars, xy = c("B", 3), rowNames = TRUE,
-  tableStyle = "TableStyleLight9")
+writeDataTable(wb, "S2",
+  x = mtcars, xy = c("B", 3), rowNames = TRUE,
+  tableStyle = "TableStyleLight9"
+)
 
-df <- data.frame("Date" = Sys.Date()-0:19,
-                 "T" = TRUE, "F" = FALSE,
-                 "Time" = Sys.time()-0:19*60*60,
-                 "Cash" = paste("$",1:20), "Cash2" = 31:50,
-                 "hLink" = "https://CRAN.R-project.org/", 
-                 "Percentage" = seq(0, 1, length.out=20),
-                 "TinyNumbers" = runif(20) / 1E9,  stringsAsFactors = FALSE)
+df <- data.frame(
+  "Date" = Sys.Date() - 0:19,
+  "T" = TRUE, "F" = FALSE,
+  "Time" = Sys.time() - 0:19 * 60 * 60,
+  "Cash" = paste("$", 1:20), "Cash2" = 31:50,
+  "hLink" = "https://CRAN.R-project.org/",
+  "Percentage" = seq(0, 1, length.out = 20),
+  "TinyNumbers" = runif(20) / 1E9, stringsAsFactors = FALSE
+)
 
 ## openxlsx will apply default Excel styling for these classes
 class(df$Cash) <- c(class(df$Cash), "currency")
@@ -124,42 +128,56 @@ writeDataTable(wb, "S3", x = df, startRow = 4, rowNames = TRUE, tableStyle = "Ta
 #####################################################################################
 ## Additional Header Styling and remove column filters
 
-writeDataTable(wb, sheet = 1, x = iris, startCol = 7, headerStyle = createStyle(textRotation = 45),
-                 withFilter = FALSE)
+writeDataTable(wb,
+  sheet = 1, x = iris, startCol = 7, headerStyle = createStyle(textRotation = 45),
+  withFilter = FALSE
+)
 
 
-##################################################################################### 
+#####################################################################################
 ## Save workbook
 ## Open in excel without saving file: openXL(wb)
-
-\dontrun{saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)}
-
-
-
+\dontrun{
+saveWorkbook(wb, "writeDataTableExample.xlsx", overwrite = TRUE)
+}
 
 
-##################################################################################### 
+
+
+
+#####################################################################################
 ## Pre-defined table styles gallery
 
 wb <- createWorkbook(paste0("tableStylesGallery.xlsx"))
 addWorksheet(wb, "Style Samples")
-for(i in 1:21) {
+for (i in 1:21) {
   style <- paste0("TableStyleLight", i)
-  writeDataTable(wb, x=data.frame(style), sheet=1, tableStyle=style, startRow = 1, startCol = i*3-2)
+  writeDataTable(wb,
+    x = data.frame(style), sheet = 1,
+    tableStyle = style, startRow = 1, startCol = i * 3 - 2
+  )
 }
 
-for(i in 1:28) {
+for (i in 1:28) {
   style <- paste0("TableStyleMedium", i)
-  writeDataTable(wb, x=data.frame(style), sheet=1, tableStyle=style, startRow = 4, startCol = i*3-2)
+  writeDataTable(wb,
+    x = data.frame(style), sheet = 1,
+    tableStyle = style, startRow = 4, startCol = i * 3 - 2
+  )
 }
 
-for(i in 1:11) {
+for (i in 1:11) {
   style <- paste0("TableStyleDark", i)
-  writeDataTable(wb, x=data.frame(style), sheet=1, tableStyle=style, startRow = 7, startCol = i*3-2)
-} 
+  writeDataTable(wb,
+    x = data.frame(style), sheet = 1,
+    tableStyle = style, startRow = 7, startCol = i * 3 - 2
+  )
+}
 
 ## openXL(wb)
-\dontrun{saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)
+}
 
 }
 \seealso{

@@ -22,7 +22,19 @@ writeFormula(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL)
 \code{c(startCol, startRow)}.}
 }
 \description{
-Write a a character vector containing Excel formula to a worksheet
+Write a a character vector containing Excel formula to a worksheet.
+}
+\details{
+Currently only the english version of functions are supported. Please don't use the local translation.
+The examples below show a small list of possible formulas:
+\itemize{
+    \item{SUM(B2:B4)}
+    \item{AVERAGE(B2:B4)}
+    \item{MIN(B2:B4)}
+    \item{MAX(B2:B4)}
+    \item{...}
+
+}
 }
 \examples{
 
@@ -43,11 +55,13 @@ writeFormula(wb, 1, x = "A2 + B2", startCol = 10, startRow = 10)
 
 ## 2. - As a data.frame column with class "formula" using writeData
 
-df <- data.frame(x=1:3,
-                 y = 1:3,
-                 z = paste(paste0("A", 1:3+1L), paste0("B", 1:3+1L), sep = " + "),
-                 z2 = sprintf("ADDRESS(1,\%s)", 1:3),
-                 stringsAsFactors = FALSE)
+df <- data.frame(
+  x = 1:3,
+  y = 1:3,
+  z = paste(paste0("A", 1:3 + 1L), paste0("B", 1:3 + 1L), sep = " + "),
+  z2 = sprintf("ADDRESS(1,\%s)", 1:3),
+  stringsAsFactors = FALSE
+)
 
 class(df$z) <- c(class(df$z), "formula")
 class(df$z2) <- c(class(df$z2), "formula")
@@ -65,7 +79,9 @@ class(v2) <- c(class(v2), "formula")
 writeData(wb, sheet = 2, x = v2, startCol = 10, startRow = 2)
 
 ## Save workbook
-\dontrun{saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)
+}
 
 
 ## 4. - Writing internal hyperlinks
@@ -76,7 +92,9 @@ addWorksheet(wb, "Sheet2")
 writeFormula(wb, "Sheet1", x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")')
 
 ## Save workbook
- \dontrun{saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)}
+\dontrun{
+saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
+}
 
 }
 \seealso{

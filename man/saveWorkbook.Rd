@@ -22,7 +22,9 @@ wb <- createWorkbook("Creator of workbook")
 addWorksheet(wb, sheetName = "My first worksheet")
 
 ## Save workbook to working directory
-\dontrun{saveWorkbook(wb, file = "saveWorkbookExample.xlsx", overwrite = TRUE) }
+\dontrun{
+saveWorkbook(wb, file = "saveWorkbookExample.xlsx", overwrite = TRUE)
+}
 }
 \seealso{
 \code{\link{createWorkbook}}
