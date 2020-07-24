@@ -2,7 +2,7 @@ Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
 Version: 4.2.0
-Date: 2020-07-16
+Date: 2020-07-24
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -24,9 +24,9 @@ Description: Simplifies the creation of Excel .xlsx files by
     to the 'xlsx' and 'XLConnect' packages with the added benefit of
     removing the dependency on Java.
 License: MIT + file LICENSE
-URL: https://joshuasturm.github.io/openxlsx/index.html,
-    https://github.com/joshuasturm/openxlsx
-BugReports: https://github.com/joshuasturm/openxlsx/issues
+URL: https://ycphs.github.io/openxlsx/index.html,
+    https://github.com/ycphs/openxlsx
+BugReports: https://github.com/ycphs/openxlsx/issues
 Depends:
     R (>= 3.3.0)
 Imports:

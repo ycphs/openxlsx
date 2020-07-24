@@ -614,7 +614,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             } else {
               endPos = cell.find(attrEnd, pos + 8);
               posVal = cell.substr(pos + 8, endPos - pos - 8);
-              outline_hidden[j] = posVal;
+              // outline_hidden[j] = posVal;
               // Ignore if there's no grouping for that row
               if (!CharacterVector::is_na(outlines[j])) {
                 outline_hidden[j] = posVal;

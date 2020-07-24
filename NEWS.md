@@ -2,11 +2,11 @@
 
 ## New Features
 
-* Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows,
+* Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
 ## Misc.
 
-* Simplified issue and bug report templates.
+* Updated roxygen2 to 7.1.1
 
 # openxlsx 4.1.5.1
 
@@ -36,7 +36,7 @@
 
 *  applied the tidyverse-style to the package `styler::style_pkg()`
 
-*  include tests for cloneWorksheet
+*  include tests for `cloneWorksheet`
 
 # openxlsx 4.1.4
 
