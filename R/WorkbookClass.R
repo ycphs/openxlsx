@@ -1981,7 +1981,10 @@ Workbook$methods(
         )
       }
 
-
+      # outlineLevelRow in SheetformatPr
+      if ((length(outlineLevels[[i]]) > 0) && (!grepl("outlineLevelRow", worksheets[[i]]$sheetFormatPr))) {
+        worksheets[[i]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[i]]$sheetFormatPr)
+      }
 
       if (isChartSheet[i]) {
         chartSheetDir <- file.path(dirname(xlworksheetsDir), "chartsheets")
@@ -2201,7 +2204,7 @@ Workbook$methods(
 
   outlineLevels[[sheet]] <<- allOutlineLevels
 
-  attr(wb$outlineLevels[[sheet]], "hidden") <- all_hidden
+  attr(wb$outlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
 
 
   if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr))

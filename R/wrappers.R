@@ -4436,7 +4436,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
   if (any(rows) < 1L)
     stop("Invalid rows entered (<= 0).")
 
-  hidden <- rep(hidden, length.out = length(rows))
+  hidden <- rep(as.character(as.integer(hidden)), length.out = length(rows))
   
   od <- getOption("OutDec")
   options("OutDec" = ".")

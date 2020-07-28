@@ -614,7 +614,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             } else {
               endPos = cell.find(attrEnd, pos + 8);
               posVal = cell.substr(pos + 8, endPos - pos - 8);
-              // outline_hidden[j] = posVal;
+              outline_hidden[j] = posVal;
               // Ignore if there's no grouping for that row
               if (!CharacterVector::is_na(outlines[j])) {
                 outline_hidden[j] = posVal;
@@ -630,20 +630,23 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         }  // END OF CELL AND ATTRIBUTION GATHERING
         
         
-        rowNumbers = rowNumbers[!is_na(heights)];
-        if(rowNumbers.size() > 0){
-          heights = heights[!is_na(heights)];
-          heights.attr("names") = rowNumbers;
-          rowHeights[i] = heights;
+        CharacterVector heightsRows(rowNumbers);
+        CharacterVector outlineRows(rowNumbers);
+
+        heightsRows = heightsRows[!is_na(heights)];
+        if (heightsRows.size() > 0) {
+        	heights = heights[!is_na(heights)];
+        	heights.attr("names") = heightsRows;
+        	rowHeights[i] = heights;
         }
 
-        rowNumbers = rowNumbers[!is_na(outlines)];
-        outline_hidden = outline_hidden[!is_na(outline_hidden)];
-        if(rowNumbers.size() > 0){
-          outlines = outlines[!is_na(outlines)];
-          outlines.attr("names") = rowNumbers;
-          outlines.attr("hidden") = outline_hidden;
-          outlineLevels[i] = outlines;
+        outlineRows = outlineRows[!is_na(outlines)];
+        if (outlineRows.size() > 0) {
+        	outline_hidden = outline_hidden[!is_na(outline_hidden)];
+        	outlines = outlines[!is_na(outlines)];
+        	outlines.attr("names") = outlineRows;
+        	outlines.attr("hidden") = outline_hidden;
+        	outlineLevels[i] = outlines;
         }
 
 
