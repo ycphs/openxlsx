@@ -4,7 +4,7 @@
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
-## Misc.
+## Internal
 
 * Updated roxygen2 to 7.1.1
 
@@ -32,7 +32,7 @@
 
 *  Fixed validateSheet for special characters
 
-## Misc.
+## Internal
 
 *  applied the tidyverse-style to the package `styler::style_pkg()`
 
@@ -56,7 +56,7 @@
 
 *  Corrected Percentage, Accounting, Comma, Currency class on column level
 
-## Misc.
+## Internal
 
 *  update to rogygen2 7.0.0
 
