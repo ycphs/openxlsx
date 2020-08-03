@@ -60,6 +60,7 @@ jobs:
       - name: Install roxygen2
         if: runner.os == 'Windows'
         run: install.packages('roxygen2')
+        shell: Rscript {0}
 
       - name: Cache R packages
         if: runner.os != 'Windows'
