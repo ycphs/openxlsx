@@ -1,9 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.1.5.1
-Date: 2020-05-07
-Language: en-US
+Version: 4.2.0
+Date: 2020-07-24
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -15,6 +14,9 @@ Authors@R:
              email = "Alexander.Walker1989@gmail.com"),
       person(given = "Luca",
              family = "Braglia",
+             role = "ctb"),
+      person(given = "Joshua",
+             family = "Sturm",
              role = "ctb"))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
@@ -44,7 +46,7 @@ LinkingTo:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'

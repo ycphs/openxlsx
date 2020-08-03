@@ -459,8 +459,9 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     if (length(colWidths) != nSheets) {
       colWidths <- rep_len(colWidths, length.out = nSheets)
     }
+    
+    for(i in 1:nSheets){
 
-    for (i in 1:nSheets) {
       wb$addWorksheet(nms[[i]], showGridLines = gridLines[i], tabColour = tabColour[i], zoom = zoom[i])
 
       if (asTable[i]) {

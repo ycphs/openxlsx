@@ -1,7 +1,3 @@
-
-
-
-
 Workbook <- setRefClass("Workbook",
   fields = c(
     "sheet_names" = "character",
@@ -9,6 +5,7 @@ Workbook <- setRefClass("Workbook",
     "charts" = "ANY",
     "isChartSheet" = "logical",
 
+    "colOutlineLevels" = "ANY",
     "colWidths" = "ANY",
     "connections" = "ANY",
     "Content_Types" = "character",
@@ -21,6 +18,7 @@ Workbook <- setRefClass("Workbook",
 
     "headFoot" = "ANY",
     "media" = "ANY",
+    "outlineLevels" = "ANY",
 
     "pivotTables" = "ANY",
     "pivotTables.xml.rels" = "ANY",

@@ -16,6 +16,8 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
   List colWidths(n_sheets);
   List rowHeights(n_sheets);
   List wbstyleObjects(0);
+  List outlineLevels(n_sheets);
+  List colOutlineLevels(n_sheets);
 
   // loop over each worksheet file
   for(int i = 0; i < n_sheets; i++){
@@ -24,11 +26,15 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       
       colWidths[i] = List(0);
       rowHeights[i] = List(0);
+      outlineLevels[i] = List(0);
+      colOutlineLevels[i] = List(0);
       
     }else{
       
       colWidths[i] = List(0);
       rowHeights[i] = List(0);
+      outlineLevels[i] = List(0);
+      colOutlineLevels[i] = List(0);
       Reference this_worksheet(worksheets[i]);
       Reference sheet_data(this_worksheet.field("sheet_data"));
       
@@ -98,7 +104,9 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         
         NumericVector widths;
         IntegerVector columns;
-        CharacterVector column_hidden;  
+        CharacterVector column_hidden;
+        CharacterVector col_outline;
+        // CharacterVector col_hidden;
         
         for(size_t ci = 0; ci < cols.size(); ci++){
           
@@ -106,8 +114,10 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           std::string tmp_hidden;
           int min_c = 0;
           int max_c = 0;
+          std::string tmp_coloutline;
+          // std::string tmp_col_hidden;
           buf = cols[ci];
-          if(buf.find("customWidth", 0) != string::npos){
+          if((buf.find("customWidth", 0) != string::npos) | (buf.find("outlineLevel", 0) != string::npos)){
             
             tmp_pos = buf.find("min=\"", 0);
             endPos = buf.find(tagEnd, tmp_pos + 5);
@@ -122,23 +132,38 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             tmp_width = atof(buf.substr(tmp_pos + 7, endPos - tmp_pos - 7).c_str()) - 0.71;
             
             tmp_pos = buf.find("hidden=\"", 0);
+
             if(tmp_pos != string::npos){
               endPos = buf.find(tagEnd, tmp_pos + 8);
               tmp_hidden = buf.substr(tmp_pos + 8, endPos - tmp_pos - 8);
             }else{
               tmp_hidden = "0";
             }
+
+            tmp_pos = buf.find("outlineLevel=\"", 0);
+            endPos = buf.find(tagEnd, tmp_pos + 14);
+            tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);
             
 
             while(min_c <= max_c){
               widths.push_back(tmp_width);
               columns.push_back(min_c);
               column_hidden.push_back(tmp_hidden);
+              col_outline.push_back(tmp_coloutline);
+              // col_hidden.push_back(tmp_hidden);
               min_c++;
             }
 
           }
-          
+
+          // if (buf.find("outlineLevel", 0) != string::npos) {
+
+          //   tmp_pos = buf.find("outlineLevel=\"", 0);
+          //   endPos = buf.find(tagEnd, tmp_pos + 14);
+          //   tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);
+          //   col_outline.push_back(tmp_coloutline);
+          //   col_hidden.push_back(tmp_hidden);
+          // }
         }
         
         if(widths.size() > 0){
@@ -146,6 +171,13 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           tmp_widths.attr("names") = columns;
           tmp_widths.attr("hidden") = column_hidden;
           colWidths[i] = tmp_widths;
+        }
+
+        if(col_outline.size() > 0) {
+          CharacterVector columns_outline(col_outline);
+          columns_outline.attr("names") = columns;
+          columns_outline.attr("hidden") = column_hidden;
+          colOutlineLevels[i] = columns_outline;
         }
         
       }
@@ -524,6 +556,8 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         
         CharacterVector rowNumbers(row_ocs);
         CharacterVector heights(row_ocs);
+        CharacterVector outlines(row_ocs);
+        CharacterVector outline_hidden(row_ocs);
         
         
         // PULL OUT CELL AND ATTRIBUTES
@@ -531,6 +565,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         pos = xml.find("<row ", 0);
         std::string htTag = " ht=\"";
         std::string attrEnd = "\"";
+        std::string posVal;
         
         while(j < row_ocs){
           
@@ -553,9 +588,40 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             }else{  
               endPos = cell.find(attrEnd, pos + 5);
               heights[j] = cell.substr(pos + 5, endPos - pos - 5);
-            }
+            };
+
+            // Is row grouped?
+            pos = cell.find("outlineLevel=\"", 0);
+            if(pos == std::string::npos){
+              outlines[j] = NA_STRING;
+            } else {
+              endPos = cell.find(attrEnd, pos + 14);
+              posVal = cell.substr(pos + 14, endPos - pos - 14);
+              // outlines[j] = posVal;
+              // Ignore if value is 0
+              if (posVal != "0") {
+                outlines[j] = posVal;
+              } else {
+                outlines[j] = NA_STRING;
+              }
+            };
             
-            
+            // Is grouped row hidden?
+            pos = cell.find("hidden=\"", 0);
+            if(pos == std::string::npos){
+              // outline_hidden[j] = "0";   // NA_STRING;
+              outline_hidden[j] = NA_STRING;
+            } else {
+              endPos = cell.find(attrEnd, pos + 8);
+              posVal = cell.substr(pos + 8, endPos - pos - 8);
+              outline_hidden[j] = posVal;
+              // Ignore if there's no grouping for that row
+              if (!CharacterVector::is_na(outlines[j])) {
+                outline_hidden[j] = posVal;
+              } else {
+                outline_hidden[j] = NA_STRING;
+              }
+            };
             
             j++; // INCREMENT OVER OCCURENCES
             pos = nextPos;
@@ -564,12 +630,26 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         }  // END OF CELL AND ATTRIBUTION GATHERING
         
         
-        rowNumbers = rowNumbers[!is_na(heights)];
-        if(rowNumbers.size() > 0){
-          heights = heights[!is_na(heights)];
-          heights.attr("names") = rowNumbers;
-          rowHeights[i] = heights;
+        CharacterVector heightsRows(rowNumbers);
+        CharacterVector outlineRows(rowNumbers);
+
+        heightsRows = heightsRows[!is_na(heights)];
+        if (heightsRows.size() > 0) {
+        	heights = heights[!is_na(heights)];
+        	heights.attr("names") = heightsRows;
+        	rowHeights[i] = heights;
         }
+
+        outlineRows = outlineRows[!is_na(outlines)];
+        if (outlineRows.size() > 0) {
+        	outline_hidden = outline_hidden[!is_na(outline_hidden)];
+        	outlines = outlines[!is_na(outlines)];
+        	outlines.attr("names") = outlineRows;
+        	outlines.attr("hidden") = outline_hidden;
+        	outlineLevels[i] = outlines;
+        }
+
+
         
         // styleObjects
         std::string this_sheetname = as<std::string>(sheetNames[i]);
@@ -634,6 +714,8 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
   wb.field("rowHeights") = rowHeights;
   wb.field("colWidths") = colWidths;
   wb.field("styleObjects") = wbstyleObjects;
+  wb.field("outlineLevels") = outlineLevels;
+  wb.field("colOutlineLevels") = colOutlineLevels;
 
   
   return wrap(wb);

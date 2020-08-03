@@ -204,14 +204,6 @@ WorkSheet$methods(get_post_sheet_data = function() {
     )
   }
 
-
-
-
-
-
-
-
-
   if (length(drawing) > 0) {
     xml <- paste0(xml, drawing, collapse = "")
   }

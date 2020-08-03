@@ -38,6 +38,8 @@ The global min and max column width for "auto" columns is set by (default values
 }
 
 NOTE: The calculation of column widths can be slow for large worksheets.
+
+NOTE: The \code{hidden} parameter may conflict with the one set in \code{groupColumns}; changing one will update the other.
 }
 \examples{
 ## Create a new workbook
