@@ -29,14 +29,10 @@ jobs:
           - {os: macOS-latest, r: '3.5'}
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: '4.0'}
-          - {os: macOS-latest, r: 'devel'}
           - {os: ubuntu-16.04, r: '3.4'}
           - {os: ubuntu-16.04, r: '3.5'}
           - {os: ubuntu-16.04, r: '3.6'}
           - {os: ubuntu-16.04, r: '4.0'}
-          - {os: ubuntu-18.04, r: '3.4'}
-          - {os: ubuntu-18.04, r: '3.5'}
-          - {os: ubuntu-18.04, r: '3.6'}
           - {os: ubuntu-18.04, r: '4.0'}
           - {os: ubuntu-18.04, r: 'devel'}
             
