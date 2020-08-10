@@ -4,6 +4,8 @@
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
+* Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
+
 ## Internal
 
 * Updated roxygen2 to 7.1.1

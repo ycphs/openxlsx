@@ -1086,9 +1086,13 @@ Workbook$methods(
 
 Workbook$methods(
   validateSheet = function(sheetName) {
-    if (!is.numeric(sheetName)) {
-      # sheetName <- replaceIllegalCharacters(sheetName)
+    
 
+    
+    if (!is.numeric(sheetName)) {
+      
+      
+       
       if (is.null(sheet_names)) {
         stop("Workbook does not contain any worksheets.", call. = FALSE)
       }
@@ -1104,7 +1108,7 @@ Workbook$methods(
 
       return(sheetName)
     } else if (!sheetName %in% sheet_names) {
-      stop(sprintf("Sheet '%s' does not exist.", sheetName), call. = FALSE)
+      stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)), call. = FALSE)
     }
 
     return(which(sheet_names == sheetName))
@@ -1119,7 +1123,7 @@ Workbook$methods(
       stop(sprintf("Workbook only contains %s sheet(s).", length(sheet_names)))
     }
 
-    replaceXMLEntities(sheet_names[sheetIndex])
+    sheet_names[sheetIndex]
   }
 )
 
