@@ -141,7 +141,7 @@ Workbook$methods(
         workbook$sheets,
         sprintf(
           '<sheet name="%s" sheetId="%s" state="%s" r:id="rId%s"/>',
-          sheetName,
+          replaceIllegalCharacters(sheetName),
           sheetId,
           visible,
           newSheetIndex
@@ -214,7 +214,7 @@ Workbook$methods(
     outlineLevels[[newSheetIndex]] <<- list()
 
     sheetOrder <<- c(sheetOrder, as.integer(newSheetIndex))
-    sheet_names <<- c(sheet_names, sheetName)
+    sheet_names <<- c(sheet_names, replaceIllegalCharacters(sheetName))
 
     invisible(newSheetIndex)
   }
@@ -552,7 +552,7 @@ Workbook$methods(
 
     colOutlineLevels[[newSheetIndex]] <<- list()
     outlineLevels[[newSheetIndex]] <<- list()
-    
+
     vml_rels[[newSheetIndex]] <<- list()
     vml[[newSheetIndex]] <<- list()
 
@@ -1119,7 +1119,7 @@ Workbook$methods(
       stop(sprintf("Workbook only contains %s sheet(s).", length(sheet_names)))
     }
 
-    sheet_names[sheetIndex]
+    replaceXMLEntities(sheet_names[sheetIndex])
   }
 )
 
@@ -2021,18 +2021,15 @@ Workbook$methods(
 
         worksheets[[i]]$sheet_data$style_id <<-
           as.character(worksheets[[i]]$sheet_data$style_id)
-        
-        if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) == 0)) {
 
+        if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) == 0)) {
           write_worksheet_xml(
             prior = prior,
             post = post,
             sheet_data = ws$sheet_data,
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
           )
-          
         } else if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) > 0)) {
-
           write_worksheet_xml_2(
             prior = prior,
             post = post,
@@ -2041,9 +2038,7 @@ Workbook$methods(
             outline_levels_ = unlist(outlineLevels[[i]]),
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
           )
-          
         } else if ((length(rowHeights[[i]]) > 0) & (length(outlineLevels[[i]]) == 0)) {
-          
           write_worksheet_xml_2(
             prior = prior,
             post = post,
@@ -2052,7 +2047,6 @@ Workbook$methods(
             outline_levels_ = NULL,
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
           )
-
         } else {
           ## row heights will always be in order and all row heights are given rows in preSaveCleanup
           write_worksheet_xml_2(
@@ -2149,66 +2143,63 @@ Workbook$methods(
 
 Workbook$methods(
   groupColumns = function(sheet) {
+    sheet <- validateSheet(sheet)
 
-  sheet <- validateSheet(sheet)
-
-  levels <- colOutlineLevels[[sheet]]
-  hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden", exact = TRUE)
-  cols <- names(levels)
+    levels <- colOutlineLevels[[sheet]]
+    hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden", exact = TRUE)
+    cols <- names(levels)
 
 
-  if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
-    worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
-  }
-
-  # Check if column is already created (by `setColWidths()` or on import)
-  if (any(cols %in% names(worksheets[[sheet]]$cols))) {
-
-    for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
-      outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
-      worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+    if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
     }
 
-    cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
-    hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") %in% cols]
+    # Check if column is already created (by `setColWidths()` or on import)
+    if (any(cols %in% names(worksheets[[sheet]]$cols))) {
+      for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
+        outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+        worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+      }
+
+      cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
+      hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") %in% cols]
+    }
+
+    colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+    worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+    names(worksheets[[sheet]]$cols) <<- cols
   }
-
-  colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
-  worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
-  names(worksheets[[sheet]]$cols) <<- cols
-  
-}
-
 )
 
 Workbook$methods(
   groupRows = function(sheet, rows, hidden, levels) {
+    sheet <- validateSheet(sheet)
 
-  sheet <- validateSheet(sheet)
 
-
-  flag <- names(outlineLevels[[sheet]]) %in% rows
-    if (any(flag))
+    flag <- names(outlineLevels[[sheet]]) %in% rows
+    if (any(flag)) {
       outlineLevels[[sheet]] <<- outlineLevels[[sheet]][!flag]
+    }
 
-  nms <- c(names(outlineLevels[[sheet]]), rows)
+    nms <- c(names(outlineLevels[[sheet]]), rows)
 
-  allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
-  names(allOutlineLevels) <- nms
+    allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
+    names(allOutlineLevels) <- nms
 
-  existing_hidden <- attr(wb$outlineLevels[[sheet]], "hidden", exact = TRUE)
-  all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
+    existing_hidden <- attr(wb$outlineLevels[[sheet]], "hidden", exact = TRUE)
+    all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
 
-  allOutlineLevels <-
-    allOutlineLevels[order(as.integer(names(allOutlineLevels)))]
+    allOutlineLevels <-
+      allOutlineLevels[order(as.integer(names(allOutlineLevels)))]
 
-  outlineLevels[[sheet]] <<- allOutlineLevels
+    outlineLevels[[sheet]] <<- allOutlineLevels
 
-  attr(wb$outlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
+    attr(wb$outlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
 
 
-  if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr))
-    worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
+    if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr)) {
+      worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
+    }
   }
 )
 
@@ -3343,11 +3334,13 @@ Workbook$methods(
       }
 
       ## write colwidth and coloutline XML
-      if (length(colWidths[[i]]) > 0)
+      if (length(colWidths[[i]]) > 0) {
         invisible(.self$setColWidths(i))
-      
-      if (length(colOutlineLevels[[i]]) > 0)
+      }
+
+      if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
+      }
     }
   }
 )
@@ -3632,32 +3625,34 @@ Workbook$methods(
 
         if (length(outlineLevels[[i]]) > 0) {
           tmpTxt <-
-            append(tmpTxt,
+            append(
+              tmpTxt,
               c(
                 "\n\tGrouped rows:\n\t",
                 stri_join(
                   sprintf("%s", names(outlineLevels[[i]])),
-                collapse = ", ",
-                sep = " "
+                  collapse = ", ",
+                  sep = " "
+                )
               )
             )
-              )
         }
 
         if (length(colOutlineLevels[[i]]) > 0) {
           tmpTxt <-
-            append(tmpTxt,
+            append(
+              tmpTxt,
               c(
                 "\n\tGrouped columns:\n\t",
                 stri_join(
                   sprintf("%s", names(colOutlineLevels[[i]])),
-                collapse = ", ",
-                sep = " "
+                  collapse = ", ",
+                  sep = " "
+                )
               )
             )
-              )
         }
-        
+
         if (length(colWidths[[i]]) > 0) {
           cols <- names(colWidths[[i]])
           widths <- unname(colWidths[[i]])
