@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>save a Workbook object to file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>saveWorkbook</span>(<span class='no'>wb</span>, <span class='no'>file</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>saveWorkbook</span>(<span class='kw'>wb</span>, <span class='kw'>file</span>, overwrite = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,12 +152,12 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Create a new workbook and add a worksheet</span>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>(<span class='st'>"Creator of workbook"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='kw'>sheetName</span> <span class='kw'>=</span> <span class='st'>"My first worksheet"</span>)
+<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>(<span class='st'>"Creator of workbook"</span>)
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, sheetName = <span class='st'>"My first worksheet"</span>)
 
 <span class='co'>## Save workbook to working directory</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>saveWorkbook</span>(<span class='no'>wb</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"saveWorkbookExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>saveWorkbook</span>(<span class='kw'>wb</span>, file = <span class='st'>"saveWorkbookExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

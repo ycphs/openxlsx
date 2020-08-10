@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -121,23 +121,23 @@
     </div>
 
     <pre class="usage"><span class='fu'>createStyle</span>(
-  <span class='kw'>fontName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>numFmt</span> <span class='kw'>=</span> <span class='st'>"GENERAL"</span>,
-  <span class='kw'>border</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"openxlsx.borderColour"</span>, <span class='st'>"black"</span>),
-  <span class='kw'>borderStyle</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"openxlsx.borderStyle"</span>, <span class='st'>"thin"</span>),
-  <span class='kw'>bgFill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>halign</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>valign</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>wrapText</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>textRotation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>indent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>locked</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hidden</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  fontName = <span class='kw'>NULL</span>,
+  fontSize = <span class='kw'>NULL</span>,
+  fontColour = <span class='kw'>NULL</span>,
+  numFmt = <span class='st'>"GENERAL"</span>,
+  border = <span class='kw'>NULL</span>,
+  borderColour = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"openxlsx.borderColour"</span>, <span class='st'>"black"</span>),
+  borderStyle = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"openxlsx.borderStyle"</span>, <span class='st'>"thin"</span>),
+  bgFill = <span class='kw'>NULL</span>,
+  fgFill = <span class='kw'>NULL</span>,
+  halign = <span class='kw'>NULL</span>,
+  valign = <span class='kw'>NULL</span>,
+  textDecoration = <span class='kw'>NULL</span>,
+  wrapText = <span class='fl'>FALSE</span>,
+  textRotation = <span class='kw'>NULL</span>,
+  indent = <span class='kw'>NULL</span>,
+  locked = <span class='kw'>NULL</span>,
+  hidden = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -289,26 +289,26 @@ Vertical alignment of cell contents</p><ul>
     <pre class="examples"><div class='input'><span class='co'>## See package vignettes for further examples</span>
 
 <span class='co'>## Modify default values of border colour and border line style</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"openxlsx.borderColour"</span> <span class='kw'>=</span> <span class='st'>"#4F80BD"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"openxlsx.borderStyle"</span> <span class='kw'>=</span> <span class='st'>"thin"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"openxlsx.borderColour"</span> = <span class='st'>"#4F80BD"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='st'>"openxlsx.borderStyle"</span> = <span class='st'>"thin"</span>)
 
 <span class='co'>## Size 18 Arial, Bold, left horz. aligned, fill colour #1A33CC, all borders,</span>
-<span class='no'>style</span> <span class='kw'>&lt;-</span> <span class='fu'>createStyle</span>(
-  <span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='fl'>18</span>, <span class='kw'>fontName</span> <span class='kw'>=</span> <span class='st'>"Arial"</span>,
-  <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='st'>"bold"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#1A33CC"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottomLeftRight"</span>
+<span class='kw'>style</span> <span class='op'>&lt;-</span> <span class='fu'>createStyle</span>(
+  fontSize = <span class='fl'>18</span>, fontName = <span class='st'>"Arial"</span>,
+  textDecoration = <span class='st'>"bold"</span>, halign = <span class='st'>"left"</span>, fgFill = <span class='st'>"#1A33CC"</span>, border = <span class='st'>"TopBottomLeftRight"</span>
 )
 
 <span class='co'>## Red, size 24, Bold, italic, underline, center aligned Font, bottom border</span>
-<span class='no'>style</span> <span class='kw'>&lt;-</span> <span class='fu'>createStyle</span>(
-  <span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='fl'>24</span>, <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/rgb.html'>rgb</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>),
-  <span class='kw'>textDecoration</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bold"</span>, <span class='st'>"italic"</span>, <span class='st'>"underline"</span>),
-  <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>valign</span> <span class='kw'>=</span> <span class='st'>"center"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"Bottom"</span>
+<span class='kw'>style</span> <span class='op'>&lt;-</span> <span class='fu'>createStyle</span>(
+  fontSize = <span class='fl'>24</span>, fontColour = <span class='fu'><a href='https://rdrr.io/r/grDevices/rgb.html'>rgb</a></span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>),
+  textDecoration = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bold"</span>, <span class='st'>"italic"</span>, <span class='st'>"underline"</span>),
+  halign = <span class='st'>"center"</span>, valign = <span class='st'>"center"</span>, border = <span class='st'>"Bottom"</span>
 )
 
 <span class='co'># borderColour is recycled for each border or all colours can be supplied</span>
 
 <span class='co'># colour is recycled 3 times for "Top", "Bottom" &amp; "Right" sides.</span>
-<span class='fu'>createStyle</span>(<span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottomRight"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='output co'>#&gt; A custom cell style. 
+<span class='fu'>createStyle</span>(border = <span class='st'>"TopBottomRight"</span>, borderColour = <span class='st'>"red"</span>)</div><div class='output co'>#&gt; A custom cell style. 
 #&gt; 
 #&gt;  Cell formatting: GENERAL 
 #&gt;  Cell borders: Top: thin, Bottom: thin, Right: thin 
@@ -316,7 +316,7 @@ Vertical alignment of cell contents</p><ul>
 #&gt;  
 #&gt; </div><div class='input'>
 <span class='co'># supply all colours</span>
-<span class='fu'>createStyle</span>(<span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottomLeft"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>))</div><div class='output co'>#&gt; A custom cell style. 
+<span class='fu'>createStyle</span>(border = <span class='st'>"TopBottomLeft"</span>, borderColour = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"yellow"</span>, <span class='st'>"green"</span>))</div><div class='output co'>#&gt; A custom cell style. 
 #&gt; 
 #&gt;  Cell formatting: GENERAL 
 #&gt;  Cell borders: Top: thin, Bottom: thin, Left: thin 

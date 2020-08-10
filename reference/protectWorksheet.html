@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -121,25 +121,25 @@
     </div>
 
     <pre class="usage"><span class='fu'>protectWorksheet</span>(
-  <span class='no'>wb</span>,
-  <span class='no'>sheet</span>,
-  <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockSelectingLockedCells</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockSelectingUnlockedCells</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockFormattingCells</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockFormattingColumns</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockFormattingRows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockInsertingColumns</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockInsertingRows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockInsertingHyperlinks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockDeletingColumns</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockDeletingRows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockSorting</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockAutoFilter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockPivotTables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockObjects</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lockScenarios</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>wb</span>,
+  <span class='kw'>sheet</span>,
+  protect = <span class='fl'>TRUE</span>,
+  password = <span class='kw'>NULL</span>,
+  lockSelectingLockedCells = <span class='kw'>NULL</span>,
+  lockSelectingUnlockedCells = <span class='kw'>NULL</span>,
+  lockFormattingCells = <span class='kw'>NULL</span>,
+  lockFormattingColumns = <span class='kw'>NULL</span>,
+  lockFormattingRows = <span class='kw'>NULL</span>,
+  lockInsertingColumns = <span class='kw'>NULL</span>,
+  lockInsertingRows = <span class='kw'>NULL</span>,
+  lockInsertingHyperlinks = <span class='kw'>NULL</span>,
+  lockDeletingColumns = <span class='kw'>NULL</span>,
+  lockDeletingRows = <span class='kw'>NULL</span>,
+  lockSorting = <span class='kw'>NULL</span>,
+  lockAutoFilter = <span class='kw'>NULL</span>,
+  lockPivotTables = <span class='kw'>NULL</span>,
+  lockObjects = <span class='kw'>NULL</span>,
+  lockScenarios = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -228,20 +228,20 @@
     <p>Reinhold Kainhofer</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>)
-<span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>30</span>, ])
+    <pre class="examples"><div class='input'><span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"S1"</span>)
+<span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span>(<span class='kw'>wb</span>, <span class='fl'>1</span>, x = <span class='kw'>iris</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>30</span>, ])
 <span class='co'># Formatting cells / columns is allowed , but inserting / deleting columns is protected:</span>
-<span class='fu'>protectWorksheet</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>,
-  <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>lockFormattingCells</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lockFormattingColumns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>lockInsertingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>lockDeletingColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='fu'>protectWorksheet</span>(<span class='kw'>wb</span>, <span class='st'>"S1"</span>,
+  protect = <span class='fl'>TRUE</span>,
+  lockFormattingCells = <span class='fl'>FALSE</span>, lockFormattingColumns = <span class='fl'>FALSE</span>,
+  lockInsertingColumns = <span class='fl'>TRUE</span>, lockDeletingColumns = <span class='fl'>TRUE</span>
 )
 
 <span class='co'># Remove the protection</span>
-<span class='fu'>protectWorksheet</span>(<span class='no'>wb</span>, <span class='st'>"S1"</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"pageSetupExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>protectWorksheet</span>(<span class='kw'>wb</span>, <span class='st'>"S1"</span>, protect = <span class='fl'>FALSE</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"pageSetupExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Create a named region</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createNamedRegion</span>(<span class='no'>wb</span>, <span class='no'>sheet</span>, <span class='no'>cols</span>, <span class='no'>rows</span>, <span class='no'>name</span>)</pre>
+    <pre class="usage"><span class='fu'>createNamedRegion</span>(<span class='kw'>wb</span>, <span class='kw'>sheet</span>, <span class='kw'>cols</span>, <span class='kw'>rows</span>, <span class='kw'>name</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,37 +159,37 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## create named regions</span>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Sheet 1"</span>)
+<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Sheet 1"</span>)
 
 <span class='co'>## specify region</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, sheet = <span class='fl'>1</span>, x = <span class='kw'>iris</span>, startCol = <span class='fl'>1</span>, startRow = <span class='fl'>1</span>)
 <span class='fu'>createNamedRegion</span>(
-  <span class='kw'>wb</span> <span class='kw'>=</span> <span class='no'>wb</span>,
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"iris"</span>,
-  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>iris</span>) + <span class='fl'>1</span>),
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>iris</span>)
+  wb = <span class='kw'>wb</span>,
+  sheet = <span class='fl'>1</span>,
+  name = <span class='st'>"iris"</span>,
+  rows = <span class='fl'>1</span><span class='op'>:</span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>iris</span>) <span class='op'>+</span> <span class='fl'>1</span>),
+  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>iris</span>)
 )
 
 
 <span class='co'>## using writeData 'name' argument</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"iris2"</span>, <span class='kw'>startCol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, sheet = <span class='fl'>1</span>, x = <span class='kw'>iris</span>, name = <span class='st'>"iris2"</span>, startCol = <span class='fl'>10</span>)
 
-<span class='no'>out_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".xlsx"</span>)
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='no'>out_file</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>out_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(fileext = <span class='st'>".xlsx"</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='kw'>out_file</span>, overwrite = <span class='fl'>TRUE</span>)
 
 <span class='co'>## see named regions</span>
-<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span>(<span class='no'>wb</span>) <span class='co'>## From Workbook object</span>
-<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span>(<span class='no'>out_file</span>) <span class='co'>## From xlsx file</span>
+<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span>(<span class='kw'>wb</span>) <span class='co'>## From Workbook object</span>
+<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span>(<span class='kw'>out_file</span>) <span class='co'>## From xlsx file</span>
 
 <span class='co'>## read named regions</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='no'>wb</span>, <span class='kw'>namedRegion</span> <span class='kw'>=</span> <span class='st'>"iris"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='kw'>wb</span>, namedRegion = <span class='st'>"iris"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>df</span>)
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='no'>out_file</span>, <span class='kw'>namedRegion</span> <span class='kw'>=</span> <span class='st'>"iris2"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>df</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='kw'>out_file</span>, namedRegion = <span class='st'>"iris2"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>df</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

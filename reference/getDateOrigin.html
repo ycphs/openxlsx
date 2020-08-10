@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Return the date origin used internally by an xlsx or xlsm file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getDateOrigin</span>(<span class='no'>xlsxFile</span>)</pre>
+    <pre class="usage"><span class='fu'>getDateOrigin</span>(<span class='kw'>xlsxFile</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,13 +148,13 @@ checks the date origin being used in an Excel file and returns is so it can be u
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## create a file with some dates</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='write.xlsx.html'>write.xlsx</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2015-01-10"</span>) - (<span class='fl'>0</span>:<span class='fl'>4</span>), <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"getDateOriginExample.xlsx"</span>)
-<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='st'>"getDateOriginExample.xlsx"</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='write.xlsx.html'>write.xlsx</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2015-01-10"</span>) <span class='op'>-</span> (<span class='fl'>0</span><span class='op'>:</span><span class='fl'>4</span>), file = <span class='st'>"getDateOriginExample.xlsx"</span>)
+<span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='st'>"getDateOriginExample.xlsx"</span>)
 
 <span class='co'>## convert to dates</span>
-<span class='no'>do</span> <span class='kw'>&lt;-</span> <span class='fu'>getDateOrigin</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>))
-<span class='fu'><a href='convertToDate.html'>convertToDate</a></span>(<span class='no'>m</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='no'>do</span>)
+<span class='kw'>do</span> <span class='op'>&lt;-</span> <span class='fu'>getDateOrigin</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package = <span class='st'>"openxlsx"</span>))
+<span class='fu'><a href='convertToDate.html'>convertToDate</a></span>(<span class='kw'>m</span>[[<span class='fl'>1</span>]], <span class='kw'>do</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

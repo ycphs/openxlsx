@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get/set worksheet visible state — sheetVisibility • openxlsx</title>
+<title>Ungroup Columns — ungroupColumns • openxlsx</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get/set worksheet visible state — sheetVisibility" />
-<meta property="og:description" content="Get and set worksheet visible state" />
+<meta property="og:title" content="Ungroup Columns — ungroupColumns" />
+<meta property="og:description" content="Ungroup a selection of columns" />
 
 
 
@@ -111,18 +111,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get/set worksheet visible state</h1>
+    <h1>Ungroup Columns</h1>
     <small class="dont-index">Source: <a href='https://github.com/ycphs/openxlsx/blob/master/R/wrappers.R'><code>R/wrappers.R</code></a></small>
-    <div class="hidden name"><code>sheetVisibility.Rd</code></div>
+    <div class="hidden name"><code>ungroupColumns.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get and set worksheet visible state</p>
+    <p>Ungroup a selection of columns</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)
-
-<span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>) <span class='op'>&lt;-</span> <span class='kw'>value</span></pre>
+    <pre class="usage"><span class='fu'>ungroupColumns</span>(<span class='kw'>wb</span>, <span class='kw'>sheet</span>, <span class='kw'>cols</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,27 +130,25 @@
       <td><p>A workbook object</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>a logical/character vector the same length as sheetVisibility(wb)</p></td>
+      <th>sheet</th>
+      <td><p>A name or index of a worksheet</p></td>
+    </tr>
+    <tr>
+      <th>cols</th>
+      <td><p>Indices of columns to ungroup</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Character vector of worksheet names.</p>
-<p>Vector of "hidden", "visible", "veryHidden"</p>
+    <p>If column was previously hidden, it will now be shown</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, sheetName = <span class='st'>"S1"</span>, visible = <span class='fl'>FALSE</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, sheetName = <span class='st'>"S2"</span>, visible = <span class='fl'>TRUE</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, sheetName = <span class='st'>"S3"</span>, visible = <span class='fl'>FALSE</span>)
+    <div class='dont-index'><p><code><a href='ungroupRows.html'>ungroupRows</a></code> To ungroup rows</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-<span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)</div><div class='output co'>#&gt; [1] "hidden"  "visible" "hidden" </div><div class='input'><span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)[<span class='fl'>1</span>] <span class='op'>&lt;-</span> <span class='fl'>TRUE</span> <span class='co'>## show sheet 1</span>
-<span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)[<span class='fl'>2</span>] <span class='op'>&lt;-</span> <span class='fl'>FALSE</span> <span class='co'>## hide sheet 2</span>
-<span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)[<span class='fl'>3</span>] <span class='op'>&lt;-</span> <span class='st'>"hidden"</span> <span class='co'>## hide sheet 3</span>
-<span class='fu'>sheetVisibility</span>(<span class='kw'>wb</span>)[<span class='fl'>3</span>] <span class='op'>&lt;-</span> <span class='st'>"veryHidden"</span> <span class='co'>## hide sheet 3 from UI</span></div></pre>
+    <p>Joshua Sturm</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

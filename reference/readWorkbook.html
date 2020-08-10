@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -121,21 +121,21 @@
     </div>
 
     <pre class="usage"><span class='fu'>readWorkbook</span>(
-  <span class='no'>xlsxFile</span>,
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>startRow</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>colNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>detectDates</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>skipEmptyRows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>skipEmptyCols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>check.names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sep.names</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>namedRegion</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>na.strings</span> <span class='kw'>=</span> <span class='st'>"NA"</span>,
-  <span class='kw'>fillMergedCells</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>xlsxFile</span>,
+  sheet = <span class='fl'>1</span>,
+  startRow = <span class='fl'>1</span>,
+  colNames = <span class='fl'>TRUE</span>,
+  rowNames = <span class='fl'>FALSE</span>,
+  detectDates = <span class='fl'>FALSE</span>,
+  skipEmptyRows = <span class='fl'>TRUE</span>,
+  skipEmptyCols = <span class='fl'>TRUE</span>,
+  rows = <span class='kw'>NULL</span>,
+  cols = <span class='kw'>NULL</span>,
+  check.names = <span class='fl'>FALSE</span>,
+  sep.names = <span class='st'>"."</span>,
+  namedRegion = <span class='kw'>NULL</span>,
+  na.strings = <span class='st'>"NA"</span>,
+  fillMergedCells = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -223,11 +223,11 @@ are checked to ensure that they are syntactically valid variable names</p></td>
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
-<span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'>readWorkbook</span>(<span class='kw'>xlsxFile</span> <span class='kw'>=</span> <span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='kw'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package = <span class='st'>"openxlsx"</span>)
+<span class='kw'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span>(xlsxFile = <span class='kw'>xlsxFile</span>, sheet = <span class='fl'>1</span>)
 
-<span class='no'>xlsxFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"openxlsx"</span>)
-<span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'>readWorkbook</span>(<span class='kw'>xlsxFile</span> <span class='kw'>=</span> <span class='no'>xlsxFile</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>)</div></pre>
+<span class='kw'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package = <span class='st'>"openxlsx"</span>)
+<span class='kw'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span>(xlsxFile = <span class='kw'>xlsxFile</span>, sheet = <span class='fl'>1</span>, rows = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

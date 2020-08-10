@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.0</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Function adds a style to a specified set of cells.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addStyle</span>(<span class='no'>wb</span>, <span class='no'>sheet</span>, <span class='no'>style</span>, <span class='no'>rows</span>, <span class='no'>cols</span>, <span class='kw'>gridExpand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>stack</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>addStyle</span>(<span class='kw'>wb</span>, <span class='kw'>sheet</span>, <span class='kw'>style</span>, <span class='kw'>rows</span>, <span class='kw'>cols</span>, gridExpand = <span class='fl'>FALSE</span>, stack = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,28 +168,28 @@ existing style is replaced by the new style.</p></td>
     <pre class="examples"><div class='input'><span class='co'>## See package vignette for more examples.</span>
 
 <span class='co'>## Create a new workbook</span>
-<span class='no'>wb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>(<span class='st'>"My name here"</span>)
+<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>(<span class='st'>"My name here"</span>)
 
 <span class='co'>## Add a worksheets</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='no'>wb</span>, <span class='st'>"Expenditure"</span>, <span class='kw'>gridLines</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Expenditure"</span>, gridLines = <span class='fl'>FALSE</span>)
 
 <span class='co'>## write data to worksheet 1</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>USPersonalExpenditure</span>, <span class='kw'>rowNames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, sheet = <span class='fl'>1</span>, <span class='kw'>USPersonalExpenditure</span>, rowNames = <span class='fl'>TRUE</span>)
 
 <span class='co'>## create and add a style to the column headers</span>
-<span class='no'>headerStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(
-  <span class='kw'>fontSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>fontColour</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>, <span class='kw'>halign</span> <span class='kw'>=</span> <span class='st'>"center"</span>,
-  <span class='kw'>fgFill</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>
+<span class='kw'>headerStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(
+  fontSize = <span class='fl'>14</span>, fontColour = <span class='st'>"#FFFFFF"</span>, halign = <span class='st'>"center"</span>,
+  fgFill = <span class='st'>"#4F81BD"</span>, border = <span class='st'>"TopBottom"</span>, borderColour = <span class='st'>"#4F81BD"</span>
 )
 
-<span class='fu'>addStyle</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>headerStyle</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>gridExpand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>addStyle</span>(<span class='kw'>wb</span>, sheet = <span class='fl'>1</span>, <span class='kw'>headerStyle</span>, rows = <span class='fl'>1</span>, cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, gridExpand = <span class='fl'>TRUE</span>)
 
 <span class='co'>## style for body</span>
-<span class='no'>bodyStyle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(<span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"TopBottom"</span>, <span class='kw'>borderColour</span> <span class='kw'>=</span> <span class='st'>"#4F81BD"</span>)
-<span class='fu'>addStyle</span>(<span class='no'>wb</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>bodyStyle</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>6</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>gridExpand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='setColWidths.html'>setColWidths</a></span>(<span class='no'>wb</span>, <span class='fl'>1</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fl'>21</span>) <span class='co'>## set column width for row names column</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='no'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='kw'>bodyStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(border = <span class='st'>"TopBottom"</span>, borderColour = <span class='st'>"#4F81BD"</span>)
+<span class='fu'>addStyle</span>(<span class='kw'>wb</span>, sheet = <span class='fl'>1</span>, <span class='kw'>bodyStyle</span>, rows = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>6</span>, cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, gridExpand = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='setColWidths.html'>setColWidths</a></span>(<span class='kw'>wb</span>, <span class='fl'>1</span>, cols = <span class='fl'>1</span>, widths = <span class='fl'>21</span>) <span class='co'>## set column width for row names column</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
