@@ -25,6 +25,14 @@ bottom=20mm,
 \texttt{Alexander.Walker1989@gmail.com}}
 \maketitle
 
+% \VignetteEngine{knitr::knitr}
+% \VignetteEncoding{UTF-8}
+% \VignetteIndexEntry{Formatting Examples}
+% \VignetteDepends{openxlsx}
+% \VignetteKeyword{excel}
+% \VignetteKeyword{xlsx}
+% \VignetteKeyword{spreadsheet}
+
 
 \newpage
 \section{Basic Examples}

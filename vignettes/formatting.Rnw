@@ -3,7 +3,8 @@
 \usepackage{graphicx, verbatim}
 
 % \VignetteEngine{knitr::knitr}
-% \VignetteIndexEntry{Formatting Examples}
+% \VignetteEncoding{UTF-8}
+% \VignetteIndexEntry{Examples to use openxlsx}
 % \VignetteDepends{openxlsx}
 % \VignetteKeyword{excel}
 % \VignetteKeyword{xlsx}

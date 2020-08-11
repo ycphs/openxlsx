@@ -3,6 +3,7 @@ Package: openxlsx
 Title: Read, Write and Edit xlsx Files
 Version: 4.2.0
 Date: 2020-07-24
+Language: en-US
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -40,7 +41,8 @@ Imports:
 Suggests:
     knitr,
     testthat,
-    roxygen2
+    roxygen2,
+    rmarkdown 
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
