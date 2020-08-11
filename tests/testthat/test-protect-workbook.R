@@ -22,7 +22,7 @@ test_that("Reading protected Workbook", {
   addWorksheet(wb, "s1")
   protectWorkbook(wb, password = "abcdefghij")
   saveWorkbook(wb, tmp_file, overwrite = TRUE)
-  
+
   wb2 <- loadWorkbook(file = tmp_file)
   # Check that the order of teh sub-elements is preserved
   expect_equal(names(wb2$workbook), names(wb$workbook))

@@ -271,19 +271,19 @@ writeData <- function(wb,
   colClasss2 <- colClasses
   colClasss2[sapply(colClasses, function(x) "formula" %in% x) & sapply(colClasses, function(x) "hyperlink" %in% x)] <- "formula"
 
-  if(is.numeric(sheet)){
+  if (is.numeric(sheet)) {
     sheetX <- wb$validateSheet(sheet)
-  }else{
+  } else {
     sheetX <- wb$validateSheet(replaceXMLEntities(sheet))
     sheet <- replaceXMLEntities(sheet)
   }
-  
+
   if (wb$isChartSheet[[sheetX]]) {
     stop("Cannot write to chart sheet.")
     return(NULL)
   }
 
-  
+
 
   ## Check not overwriting existing table headers
   wb$check_overwrite_tables(

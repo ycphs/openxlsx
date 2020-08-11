@@ -940,7 +940,6 @@ createStyle <- function(fontName = NULL,
     if (numFmt %in% validNumFmt) {
       style$numFmt <- numFmtMapping[[numFmt[[1]]]]
     } else {
-      
       style$numFmt <- list("numFmtId" = 165, formatCode = numFmt) ## Custom numFmt
     }
   }
@@ -1005,18 +1004,19 @@ addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = F
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
-  
-  
-  
-  
-  if(!is.null(style$numFmt)&length(wb$styleObjects)>0){
-  if(style$numFmt$numFmtId==165){
-    maxnumFmtId<-max(c(sapply(wb$styleObjects, function(i) as.integer(
-      max(c(i$style$numFmt$numFmtId,0))
-    )),165))
-    style$numFmt$numFmtId<-maxnumFmtId+1
-    
-  }
+
+
+
+
+  if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
+    if (style$numFmt$numFmtId == 165) {
+      maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+        as.integer(
+          max(c(i$style$numFmt$numFmtId, 0))
+        )
+      }), 165))
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+    }
   }
   sheet <- wb$validateSheet(sheet)
 
@@ -1452,29 +1452,21 @@ setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, len
 
   # Check if any conflicting column outline levels
   if (length(wb$colOutlineLevels[[sheet]]) > 0) {
-    
     existing_cols <- names(wb$colOutlineLevels[[sheet]])
 
     if (any(existing_cols %in% cols)) {
-
       for (i in intersect(existing_cols, cols)) {
-
         width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
         outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
 
         if (outline_hidden != width_hidden) {
-
           attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i] <- width_hidden
-
         }
-
       }
 
       cols <- cols[!cols %in% existing_cols]
       hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "name") %in% cols]
-
     }
-
   }
 
   invisible(0)
@@ -4260,52 +4252,51 @@ removeTable <- function(wb, sheet, table) {
 #' NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will update the other.
 #' @seealso \code{\link{ungroupColumns}} to ungroup columns. \code{\link{groupRows}} for grouping rows.
 #' @export
-#' 
+#'
 groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
-  
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
-  
+
   sheet <- wb$validateSheet(sheet)
 
-  if (!"Workbook" %in% class(wb))
+  if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
 
-  if (any(cols) < 1L)
+  if (any(cols) < 1L) {
     stop("Invalid columns selected (<= 0).")
+  }
 
-  if (!is.logical(hidden))
+  if (!is.logical(hidden)) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
-  
-  if (length(hidden) > length(cols))
+  }
+
+  if (length(hidden) > length(cols)) {
     stop("Hidden argument is of greater length than number of cols.")
+  }
 
   levels <- rep("1", length(cols))
-  
+
   hidden <- rep(hidden, length.out = length(cols))
-  
+
   hidden <- hidden[!duplicated(cols)]
   levels <- levels[!duplicated(cols)]
-  cols   <- cols[!duplicated(cols)]
-  cols   <- convertFromExcelRef(cols)
+  cols <- cols[!duplicated(cols)]
+  cols <- convertFromExcelRef(cols)
 
   if (length(wb$colWidths[[sheet]]) > 0) {
-
-    existing_cols   <- names(wb$colWidths[[sheet]])
+    existing_cols <- names(wb$colWidths[[sheet]])
     existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
 
     if (any(existing_cols %in% cols)) {
-
       for (i in intersect(existing_cols, cols)) {
-
         width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
         outline_hidden <- as.character(as.integer(hidden[i]))
 
         if (width_hidden != outline_hidden) {
           attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <- outline_hidden
         }
-
       }
 
       # cols <- cols[!cols %in% existing_cols]
@@ -4313,49 +4304,44 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 
       # wb$colOutlineLevels[[sheet]] <- cols
       # attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
-
     }
   }
 
   if (length(wb$colOutlineLevels[[sheet]]) > 0) {
-    
-    existing_cols   <- names(wb$colOutlineLevels[[sheet]])
+    existing_cols <- names(wb$colOutlineLevels[[sheet]])
     existing_levels <- unname(wb$colOutlineLevels[[sheet]])
     existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
-    
+
     # check if column is already grouped
     flag <- existing_cols %in% cols
-    if(any(flag)){
-      existing_cols   <- existing_cols[!flag]
+    if (any(flag)) {
+      existing_cols <- existing_cols[!flag]
       existing_levels <- existing_levels[!flag]
       existing_hidden <- existing_hidden[!flag]
     }
-    
-    all_names  <- c(existing_cols, cols)
+
+    all_names <- c(existing_cols, cols)
     all_levels <- c(existing_levels, levels)
     all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
-    
+
     ord <- order(as.integer(all_names))
-    all_names  <- all_names[ord]
+    all_names <- all_names[ord]
     all_levels <- all_levels[ord]
     all_hidden <- all_hidden[ord]
-    
-    
+
+
     names(all_levels) <- all_names
     wb$colOutlineLevels[[sheet]] <- all_levels
     levels <- all_levels
     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
     hidden <- all_hidden
-    
-    
   } else {
-
     names(levels) <- cols
     wb$colOutlineLevels[[sheet]] <- levels
     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
   }
 
-  invisible(0) 
+  invisible(0)
 }
 
 #' @name ungroupColumns
@@ -4370,8 +4356,9 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 #' @export
 
 ungroupColumns <- function(wb, sheet, cols) {
-  if (!"Workbook" %in% class(wb))
-  stop("First argument must be a Workbook.")
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
 
   sheet <- wb$validateSheet(sheet)
 
@@ -4379,8 +4366,9 @@ ungroupColumns <- function(wb, sheet, cols) {
     cols <- convertFromExcelRef(cols)
   }
 
-  if (any(cols) < 1L)
-  stop("Invalid columns selected (<= 0).")
+  if (any(cols) < 1L) {
+    stop("Invalid columns selected (<= 0).")
+  }
 
   od <- getOption("OutDec")
   options("OutDec" = ".")
@@ -4421,23 +4409,26 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @export
 
 groupRows <- function(wb, sheet, rows, hidden = FALSE) {
-
-  if (!"Workbook" %in% class(wb))
+  if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
 
   sheet <- wb$validateSheet(sheet)
-  
-  if (length(hidden) > length(rows))
+
+  if (length(hidden) > length(rows)) {
     stop("Hidden argument is of greater length than number of rows.")
+  }
 
-  if (!is.logical(hidden))
+  if (!is.logical(hidden)) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
+  }
 
-  if (any(rows) < 1L)
+  if (any(rows) < 1L) {
     stop("Invalid rows entered (<= 0).")
+  }
 
   hidden <- rep(as.character(as.integer(hidden)), length.out = length(rows))
-  
+
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -4447,8 +4438,8 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
   # Remove duplicates
   hidden <- hidden[!duplicated(rows)]
   levels <- levels[!duplicated(rows)]
-  rows   <- rows[!duplicated(rows)]
-    
+  rows <- rows[!duplicated(rows)]
+
   names(levels) <- rows
 
   wb$groupRows(sheet = sheet, rows = rows, hidden = hidden, levels = levels)
@@ -4465,27 +4456,30 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 #' @seealso \code{\link{ungroupColumns}}
 #' @export
 
-ungroupRows <- function(wb, sheet, rows){
-  
+ungroupRows <- function(wb, sheet, rows) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
 
-  if (!"Workbook" %in% class(wb))
+  if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
 
   sheet <- wb$validateSheet(sheet)
 
-  if (any(rows) < 1L)
+  if (any(rows) < 1L) {
     stop("Invalid rows entered (<= 0).")
-  
+  }
+
   customRows <- as.integer(names(wb$outlineLevels[[sheet]]))
   removeInds <- which(customRows %in% rows)
-  if (length(removeInds) > 0)
+  if (length(removeInds) > 0) {
     wb$outlineLevels[[sheet]] <- wb$outlineLevels[[sheet]][-removeInds]
+  }
 
-  if (length(wb$outlineLevels[[sheet]]) == 0)
+  if (length(wb$outlineLevels[[sheet]]) == 0) {
     wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+  }
 }
 
 

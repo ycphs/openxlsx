@@ -135,12 +135,10 @@ Workbook$methods(setColWidths = function(sheet) {
 
     widths[missingAuto] <- 9.15
   }
-  
+
   # Check if any conflicting column outline levels
   if (any(cols %in% names(worksheets[[sheet]]$cols))) {
-
     for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
-
       width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
       width_widths <- attr(wb$colWidths[[sheet]], "widths")[attr(wb$colWidths[[sheet]], "names") == i]
       worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w)\")", paste0(width_hidden, "\" width=\"", width_widths, "\" customWidth=\"1\"/>"), worksheets[[sheet]]$cols[[i]], perl = TRUE)
@@ -151,7 +149,7 @@ Workbook$methods(setColWidths = function(sheet) {
 
   ## Calculate width of auto
   colNodes <- sprintf('<col min="%s" max="%s" width="%s" hidden="%s" customWidth="1"/>', cols, cols, widths, hidden)
-  
+
   ## Append new col widths XML to worksheets[[sheet]]$cols
   worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
   names(worksheets[[sheet]]$cols) <<- cols

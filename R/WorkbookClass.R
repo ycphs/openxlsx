@@ -1086,13 +1086,7 @@ Workbook$methods(
 
 Workbook$methods(
   validateSheet = function(sheetName) {
-    
-
-    
     if (!is.numeric(sheetName)) {
-      
-      
-       
       if (is.null(sheet_names)) {
         stop("Workbook does not contain any worksheets.", call. = FALSE)
       }
