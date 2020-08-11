@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.com/ycphs/openxlsx.svg?branch=master)](https://travis-ci.com/ycphs/openxlsx)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ycphs/openxlsx?branch=master&svg=true)](https://ci.appveyor.com/project/ycphs/openxlsx)
-[![Coverage Status](https://codecov.io/gh/ycphs/openxlsx/branch/master/graphs/badge.svg?branch=master)](http://codecov.io/github/ycphs/openxlsx?branch=master)
+[![codecov](https://codecov.io/gh/ycphs/openxlsx/branch/master/graph/badge.svg)](https://codecov.io/gh/ycphs/openxlsx)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/openxlsx)](https://cran.r-project.org/package=openxlsx)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/openxlsx)](https://cran.r-project.org/package=openxlsx)
 ![R-CMD-check](https://github.com/ycphs/openxlsx/workflows/R-CMD-check/badge.svg?branch=master)
