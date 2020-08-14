@@ -42,12 +42,12 @@ SEXP write_worksheet_xml_2( std::string prior
 
   CharacterVector row_heights;
   CharacterVector row_heights_rows;
-  size_t n_row_heights;
+  size_t n_row_heights = 0;
 
   CharacterVector outline_levels;
   CharacterVector outline_levels_rows;
   CharacterVector outline_levels_hidden;
-  size_t n_outline_levels;
+  size_t n_outline_levels = 0;
 
   if (row_heights_.isNotNull()) {
     row_heights = row_heights_;
