@@ -141,7 +141,7 @@ Workbook$methods(
         workbook$sheets,
         sprintf(
           '<sheet name="%s" sheetId="%s" state="%s" r:id="rId%s"/>',
-          replaceIllegalCharacters(sheetName),
+          sheetName,
           sheetId,
           visible,
           newSheetIndex
@@ -214,7 +214,7 @@ Workbook$methods(
     outlineLevels[[newSheetIndex]] <<- list()
 
     sheetOrder <<- c(sheetOrder, as.integer(newSheetIndex))
-    sheet_names <<- c(sheet_names, replaceIllegalCharacters(sheetName))
+    sheet_names <<- c(sheet_names, sheetName)
 
     invisible(newSheetIndex)
   }
@@ -1101,11 +1101,11 @@ Workbook$methods(
       }
 
       return(sheetName)
-    } else if (!sheetName %in% sheet_names) {
+    } else if (!sheetName %in% replaceXMLEntities(sheet_names)) {
       stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)), call. = FALSE)
     }
 
-    return(which(sheet_names == sheetName))
+    return(which(replaceXMLEntities(sheet_names) == sheetName))
   }
 )
 

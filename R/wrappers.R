@@ -3307,7 +3307,7 @@ getSheetNames <- function(file) {
   sheets <- grep('r:id="[[:blank:]]*"', sheets, invert = TRUE, value = TRUE)
 
   sheetNames <- unlist(regmatches(sheets, gregexpr('(?<=name=")[^"]+', sheets, perl = TRUE)))
-  sheetNames <- replaceXMLEntities(replaceXMLEntities(sheetNames))
+  sheetNames <- replaceXMLEntities(sheetNames)
 
   return(sheetNames)
 }
