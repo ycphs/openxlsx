@@ -1,3 +1,9 @@
+# openxlsx (development version)
+
+* Added return value for `saveWorkbook()` the default value for `returnValue` is `FALSE` ([#71])(https://github.com/ycphs/openxlsx/issues/71)
+
+* Added Tests for new parameter of `saveWorkbook()`
+
 # openxlsx 4.2.0
 
 ## New Features
@@ -5,6 +11,8 @@
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
+
+
 
 ## Internal
 

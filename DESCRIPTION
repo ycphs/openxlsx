@@ -1,7 +1,7 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.0
+Version: 4.2.0.9000
 Date: 2020-07-24
 Language: en-US
 Authors@R: 
