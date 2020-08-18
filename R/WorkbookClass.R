@@ -2144,7 +2144,7 @@ Workbook$methods(
     sheet <- validateSheet(sheet)
 
     levels <- colOutlineLevels[[sheet]]
-    hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden", exact = TRUE)
+    hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
     cols <- names(levels)
 
 
@@ -2155,12 +2155,12 @@ Workbook$methods(
     # Check if column is already created (by `setColWidths()` or on import)
     if (any(cols %in% names(worksheets[[sheet]]$cols))) {
       for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
-        outline_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") == i]
+        outline_hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") == i]
         worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
       }
 
       cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
-      hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")[attr(wb$colOutlineLevels[[sheet]], "names") %in% cols]
+      attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") %in% cols] <<- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") %in% cols]
     }
 
     colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
@@ -2184,7 +2184,7 @@ Workbook$methods(
     allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
     names(allOutlineLevels) <- nms
 
-    existing_hidden <- attr(wb$outlineLevels[[sheet]], "hidden", exact = TRUE)
+    existing_hidden <- attr(outlineLevels[[sheet]], "hidden", exact = TRUE)
     all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
 
     allOutlineLevels <-
@@ -2192,7 +2192,7 @@ Workbook$methods(
 
     outlineLevels[[sheet]] <<- allOutlineLevels
 
-    attr(wb$outlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
+    attr(outlineLevels[[sheet]], "hidden") <<- as.character(as.integer(all_hidden))
 
 
     if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr)) {
