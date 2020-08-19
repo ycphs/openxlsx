@@ -1,12 +1,21 @@
+
+# openxlsx development version
+
+## New Features
+
+* Added features for `conditionalFormatting` to support also 'contains not', 'begins with' and 'ends with'
+
 # openxlsx 4.2.0
 
 ## New Features
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
+
+## Bug Fixes 
+
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
 
-* Added features for `conditionalFormatting` to support also 'contains not', 'begins with' and 'ends with'
 
 ## Internal
 
