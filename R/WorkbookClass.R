@@ -2750,6 +2750,43 @@ Workbook$methods(
           values,
           unlist(strsplit(sqref, split = ":"))[[1]]
         )
+    } else if (type == "notContainsText") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="notContainsText" dxfId="%s" priority="1" operator="notContains" text="%s">
+                        	<formula>ISERROR(SEARCH("%s", %s))</formula>
+                       </cfRule>',
+          dxfId,
+          values,
+          values,
+          unlist(strsplit(sqref, split = ":"))[[1]]
+        )
+    } else if (type == "beginsWith") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="beginsWith" dxfId="%s" priority="1" operator="beginsWith" text="%s">
+                        	<formula>LEFT(%s,LEN("%s"))="%s"</formula>
+                       </cfRule>',
+          dxfId,
+          values,
+          
+          unlist(strsplit(sqref, split = ":"))[[1]],
+          values,
+          values
+        )
+    } else if (type == "endsWith") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="endsWith" dxfId="%s" priority="1" operator="endsWith" text="%s">
+                        	<formula>RIGHT(%s,LEN("%s"))="%s"</formula>
+                       </cfRule>',
+          dxfId,
+          values,
+          
+          unlist(strsplit(sqref, split = ":"))[[1]],
+          values,
+          values
+        )
     } else if (type == "between") {
       cfRule <-
         sprintf(

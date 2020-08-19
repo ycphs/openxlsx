@@ -6,6 +6,8 @@
 
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
 
+* Added features for `conditionalFormatting` to support also 'contains not', 'begins with' and 'ends with'
+
 ## Internal
 
 * Updated roxygen2 to 7.1.1
