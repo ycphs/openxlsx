@@ -77,9 +77,9 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   expected <- df$timeval[order(df$timeval)]
 
   # compare
-  expect_equal(object = wd, expected = expected, tolerance = 10^-10)
-  expect_equal(object = wdt, expected = expected, tolerance = 10^-10)
-  expect_equal(object = wd, expected = wdt)
+  expect_equal(object = wd, expected = expected, tolerance = 10^-10, check.tzone = FALSE)
+  expect_equal(object = wdt, expected = expected, tolerance = 10^-10, check.tzone = FALSE)
+  expect_equal(object = wd, expected = wdt, check.tzone = FALSE)
 
   options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
 })
