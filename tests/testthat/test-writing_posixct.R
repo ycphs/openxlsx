@@ -77,9 +77,23 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   expected <- df$timeval[order(df$timeval)]
 
   # compare
-  expect_equal(object = as.POSIXlt(wd), expected = as.POSIXlt(expected), tolerance = 10^-10, check.tzone = FALSE)
-  expect_equal(object = as.POSIXlt(wdt), expected = as.POSIXlt(expected), tolerance = 10^-10, check.tzone = FALSE)
-  expect_equal(object = as.POSIXlt(wd), expected = as.POSIXlt(wdt), check.tzone = FALSE)
-
+  expect_equal(
+    object = as.POSIXlt(wd, tz = "CET"),
+    expected = as.POSIXlt(expected, tz = "CET"),
+    tolerance = 10 ^ -10,
+    check.tzone = FALSE
+  )
+  expect_equal(
+    object = as.POSIXlt(wdt, tz = "CET"),
+    expected = as.POSIXlt(expected, tz = "CET"),
+    tolerance = 10 ^ -10,
+    check.tzone = FALSE
+  )
+  expect_equal(
+    object = as.POSIXlt(wd, tz = "CET"),
+    expected = as.POSIXlt(wdt, tz = "CET"),
+    check.tzone = FALSE
+  )
+  
   options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
 })
