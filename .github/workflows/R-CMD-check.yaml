@@ -26,10 +26,12 @@ jobs:
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: '4.0'}
           - {os: macOS-latest, r: 'devel'}
-          - {os: ubuntu-16.04, r: '3.6'}
+          - {os: ubuntu-latest, r: '3.6'}
+          - {os: ubuntu-latest, r: '4.0'}
+          - {os: ubuntu-latest, r: 'devel'}
+          - {os: ubuntu-16.04, r: '3.6'} 
           - {os: ubuntu-18.04, r: '4.0'}
-          - {os: ubuntu-18.04, r: 'devel'}
-            
+          - {os: ubuntu-18.04, r: 'devel'} 
             
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
