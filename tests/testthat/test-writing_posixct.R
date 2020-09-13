@@ -45,8 +45,8 @@ test_that("Writing Posixct with writeData & writeDataTable", {
 test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   options("openxlsx.datetimeFormat" = "dd/mm/yy hh:mm")
 
-  tstart1 <- strptime("12/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "America/New_York")
-  tstart2 <- strptime("10/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "America/New_York")
+  tstart1 <- as.POSIXlt("12/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "Europe/Vienna")
+  tstart2 <- as.POSIXlt("10/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "Europe/Vienna")
   TimeDT1 <- c(NA, 0, 10, 30, 60, 120, 240, 720, 1440) * 60 + tstart1
   TimeDT2 <- c(0, 10, 30, 60, 120, 240, 720, NA, 1440) * 60 + tstart2
 
