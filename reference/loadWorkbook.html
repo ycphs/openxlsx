@@ -169,7 +169,9 @@ formatting of the original .xlsx file.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## load existing workbook from package folder</span>
 <span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'>loadWorkbook</span>(file = <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"loadExample.xlsx"</span>, package = <span class='st'>"openxlsx"</span>))
-<span class='fu'><a href='names.html'>names</a></span>(<span class='kw'>wb</span>) <span class='co'># list worksheets</span></div><div class='output co'>#&gt; [1] "IrisSample"   "testing"      "mtcars"       "mtCars Pivot"</div><div class='input'><span class='kw'>wb</span> <span class='co'>## view object</span></div><div class='output co'>#&gt; A Workbook object.
+<span class='fu'><a href='names.html'>names</a></span>(<span class='kw'>wb</span>) <span class='co'># list worksheets</span>
+</div><div class='output co'>#&gt; [1] "IrisSample"   "testing"      "mtcars"       "mtCars Pivot"</div><div class='input'><span class='kw'>wb</span> <span class='co'>## view object</span>
+</div><div class='output co'>#&gt; A Workbook object.
 #&gt;  
 #&gt; Worksheets:
 #&gt;  Sheet 1: "IrisSample"
@@ -206,18 +208,18 @@ formatting of the original .xlsx file.</p>
 #&gt;  
 #&gt;  
 #&gt; Images:
-#&gt;  Image 1: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/media/image2.jpeg"
-#&gt;  Image 2: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/media/image1.jpeg"
+#&gt;  Image 1: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/media/image2.jpeg"
+#&gt;  Image 2: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/media/image1.jpeg"
 #&gt;  
 #&gt; Charts:
-#&gt;  Chart 1: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/colors2.xml"
-#&gt;  Chart 2: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/style2.xml"
-#&gt;  Chart 3: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/chart2.xml"
-#&gt;  Chart 4: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/chart1.xml"
-#&gt;  Chart 5: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/style1.xml"
-#&gt;  Chart 6: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/colors1.xml"
-#&gt;  Chart 7: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/_rels/chart2.xml.rels"
-#&gt;  Chart 8: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRvI8Od//file86f748def6d_openxlsx_loadWorkbook/xl/charts/_rels/chart1.xml.rels"
+#&gt;  Chart 1: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/colors2.xml"
+#&gt;  Chart 2: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/style2.xml"
+#&gt;  Chart 3: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/chart2.xml"
+#&gt;  Chart 4: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/chart1.xml"
+#&gt;  Chart 5: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/style1.xml"
+#&gt;  Chart 6: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/colors1.xml"
+#&gt;  Chart 7: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/_rels/chart2.xml.rels"
+#&gt;  Chart 8: "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp65Tpsc//filea0b7f60d08b_openxlsx_loadWorkbook/xl/charts/_rels/chart1.xml.rels"
 #&gt;  Worksheet write order: 1, 2, 3, 4</div><div class='input'><span class='co'>## Add a worksheet</span>
 <span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"A new worksheet"</span>)
 
@@ -225,6 +227,7 @@ formatting of the original .xlsx file.</p>
 <span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"loadExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
 }
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -241,7 +244,7 @@ formatting of the original .xlsx file.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
