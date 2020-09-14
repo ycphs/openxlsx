@@ -81,18 +81,18 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
     object = as.POSIXlt(wd, tz = "CET"),
     expected = as.POSIXlt(expected, tz = "CET"),
     tolerance = 10 ^ -10,
-    check.tzone = FALSE
+    check.tzone = TRUE
   )
   expect_equal(
     object = as.POSIXlt(wdt, tz = "CET"),
     expected = as.POSIXlt(expected, tz = "CET"),
     tolerance = 10 ^ -10,
-    check.tzone = FALSE
+    check.tzone = TRUE
   )
   expect_equal(
     object = as.POSIXlt(wd, tz = "CET"),
     expected = as.POSIXlt(wdt, tz = "CET"),
-    check.tzone = FALSE
+    check.tzone = TRUE
   )
   
   options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
