@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2</span>
       </span>
     </div>
 
@@ -129,6 +129,27 @@
       <small>Source: <a href='https://github.com/ycphs/openxlsx/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="openxlsx-422" class="section level1">
+<h1 class="page-header" data-toc-text="4.2.2">
+<a href="#openxlsx-422" class="anchor"></a>openxlsx 4.2.2<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li><p>Added features for <code>conditionalFormatting</code> to support also ‘contains not’, ‘begins with’ and ‘ends with’</p></li>
+<li><p>Added return value for <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code> the default value for <code>returnValue</code> is <code>FALSE</code> ([<a href='https://github.com/ycphs/openxlsx/issues/71'>#71</a>])(<a href="https://github.com/ycphs/openxlsx/issues/71" class="uri">https://github.com/ycphs/openxlsx/issues/71</a>)</p></li>
+<li><p>Added Tests for new parameter of <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code></p></li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>Solved CRAN check errors based on the change disussed in (PR<a href='https://github.com/ycphs/openxlsx/issues/17277'>#17277</a>)[<a href="https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277" class="uri">https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277</a>]</li>
+</ul>
+</div>
+</div>
     <div id="openxlsx-420" class="section level1">
 <h1 class="page-header" data-toc-text="4.2.0">
 <a href="#openxlsx-420" class="anchor"></a>openxlsx 4.2.0<small> Unreleased </small>
@@ -140,9 +161,9 @@
 <li>Added <code><a href="../reference/groupColumns.html">groupColumns()</a></code>, <code><a href="../reference/groupRows.html">groupRows()</a></code>, <code><a href="../reference/ungroupColumns.html">ungroupColumns()</a></code>, and <code><a href="../reference/ungroupRows.html">ungroupRows()</a></code> to group/ugroup columns/rows (<a href="https://github.com/ycphs/openxlsx/issues/32"><a href='https://github.com/ycphs/openxlsx/issues/32'>#32</a></a>)</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Allow xml-sensitve characters in sheetnames (<a href="https://github.com/ycphs/openxlsx/issues/78"><a href='https://github.com/ycphs/openxlsx/issues/78'>#78</a></a>)</li>
 </ul>
@@ -159,9 +180,9 @@
 <h1 class="page-header" data-toc-text="4.1.5.1">
 <a href="#openxlsx-4151" class="anchor"></a>openxlsx 4.1.5.1<small> Unreleased </small>
 </h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>fixed issue <a href="https://github.com/ycphs/openxlsx/issues/68%5D"><a href='https://github.com/ycphs/openxlsx/issues/68'>#68</a></a>
 </li>
@@ -180,9 +201,9 @@
 <li><p>add function to set the name of the user who last modified the xlsx file</p></li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Fixed NEWS hyperlink</p></li>
 <li><p>Fixed writing of mixed EST/EDT datetimes</p></li>
@@ -211,9 +232,9 @@
 <li><p>Added parameter for customizing na.strings</p></li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Use <code><a href="https://rdrr.io/pkg/zip/man/zip.html">zip::zipr()</a></code> instead of <code><a href="https://rdrr.io/pkg/zip/man/zip.html">zip::zip()</a></code>.</p></li>
 <li><p>Keep correct visibility option for loadWorkbook. <a href="https://github.com/ycphs/openxlsx/issues/12%5D"><a href='https://github.com/ycphs/openxlsx/issues/12'>#12</a></a></p></li>
@@ -241,9 +262,9 @@
 <li>Added <code>pkgdown</code> to create site.</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Return values for cpp changed to R_NilValue for r-devel tests</p></li>
 <li><p>Added empty lines at the end of files</p></li>
@@ -283,9 +304,9 @@
 <li><p>set Workbook properties ‘title’, ‘subject’, ‘category’</p></li>
 </ul>
 </div>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p><code>pageSetup</code> fails when passing in sheet by name</p></li>
 <li><p>matching sheet names with special characters now works</p></li>
@@ -315,9 +336,9 @@
 <li><p>set column to ‘hidden’ with <code><a href="../reference/setColWidths.html">setColWidths()</a></code></p></li>
 </ul>
 </div>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p><code>skipEmptyRows</code> &amp; <code>skipEmptyCols</code> was being ignored by <code>read.xlsx</code></p></li>
 <li><p>date detection basic_string error</p></li>
@@ -346,9 +367,9 @@
 <li><p>Read and load from URL</p></li>
 </ul>
 </div>
-<div id="bug-fixes-7" class="section level2">
+<div id="bug-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-7" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-8" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Fix date time conversion accuracy issues.</p></li>
 <li><p>Allow multibyte characters in names and comments.</p></li>
@@ -373,9 +394,9 @@
 <li><p><code>pageBreak</code> function to add page breaks to worksheets.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-8" class="section level2">
+<div id="bug-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-8" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-9" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>
 <code>keepNA</code> parameter added to <code>write.xlsx</code>. Passed to <code>writeData</code>/<code>writeDataTable</code>
@@ -401,9 +422,9 @@
 <li><p><code>getSheetNames</code> to get worksheet names within an xlsx file.</p></li>
 </ul>
 </div>
-<div id="bug-fixes-9" class="section level2">
+<div id="bug-fixes-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-9" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-10" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p><code>convertToDateTime</code> now handles NA values</p></li>
 <li><p><code>read.xlsx</code> rows bug fixed where non-consecutive cells were skipped.</p></li>
@@ -430,9 +451,9 @@
 <li><p>fill styles extended to support <code>gradientFill</code></p></li>
 </ul>
 </div>
-<div id="bug-fixes-10" class="section level2">
+<div id="bug-fixes-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-10" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-11" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Encoding fixed and multi-byte characters now supported.</p></li>
 <li><p><code>read.xlsx</code> now maintains multiple consecutive spaces and newline characters.</p></li>
@@ -475,9 +496,9 @@
 <li>section on <code>write.xlsx</code> in Introductory vignette</li>
 </ul>
 </div>
-<div id="bug-fixes-11" class="section level2">
+<div id="bug-fixes-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-11" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-12" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Fix reading in of apostrophes</p></li>
 <li><p>Styling blank cells no longer corrupts workbooks</p></li>
@@ -506,9 +527,9 @@
 <li><p><code>writeData</code> now handles additional object classes: coxph, cox.zph, summary.coxph1 from Survival package</p></li>
 </ul>
 </div>
-<div id="bug-fixes-12" class="section level2">
+<div id="bug-fixes-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-12" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-13" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>Invalid XML characters in hyperlinks now replaced.</p></li>
 <li><p>Encoding issues when writing data read in with <code>read.xlsx</code></p></li>
@@ -539,9 +560,9 @@
 <li><p><code>openXL</code> function to open an excel file or Workbook object</p></li>
 </ul>
 </div>
-<div id="bug-fixes-13" class="section level2">
+<div id="bug-fixes-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-13" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-14" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>conversion of numeric data to integer in <code>read.xlsx</code> fixed.</p></li>
 <li><p><code>readWorkbook</code>/<code>read.xlsx</code> should work now. Empty values are now padded with NA. Many other bugs fixed.</p></li>
