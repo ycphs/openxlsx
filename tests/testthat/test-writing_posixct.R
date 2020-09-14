@@ -45,8 +45,8 @@ test_that("Writing Posixct with writeData & writeDataTable", {
 test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   options("openxlsx.datetimeFormat" = "dd/mm/yy hh:mm")
 
-  tstart1 <- as.POSIXlt("12/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "CET")
-  tstart2 <- as.POSIXlt("10/03/2018 08:30", "%d/%m/%Y %H:%M", tz = "CET")
+  tstart1 <- as.POSIXct("12/03/2018 08:30", format = "%d/%m/%Y %H:%M")
+  tstart2 <- as.POSIXct("10/03/2018 08:30", format = "%d/%m/%Y %H:%M")
   TimeDT1 <- c(NA, 0, 10, 30, 60, 120, 240, 720, 1440) * 60 + tstart1
   TimeDT2 <- c(0, 10, 30, 60, 120, 240, 720, NA, 1440) * 60 + tstart2
 
@@ -68,8 +68,8 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
   wdt <- wdt[wb$worksheets[[2]]$sheet_data$cols == 2]
 
   # drop any integer indexes introduced in write
-  wd <- wd[wd %% 1 > 0 | is.na(wd)]
-  wdt <- wdt[wdt %% 1 > 0 | is.na(wdt)]
+  wd <- wd[wd != 0 | is.na(wd)]
+  wdt <- wdt[wdt  != 0 | is.na(wdt)]
 
   # sort everything
   wd <- convertToDateTime(wd[order(wd)])
@@ -78,20 +78,20 @@ test_that("Writing mixed EDT/EST Posixct with writeData & writeDataTable", {
 
   # compare
   expect_equal(
-    object = as.POSIXlt(wd, tz = "CET"),
-    expected = as.POSIXlt(expected, tz = "CET"),
+    object = wd,
+    expected = expected,
+    tolerance = 10 ^ -10,
+    check.tzone = FALSE
+  )
+  expect_equal(
+    object = wdt,
+    expected = expected,
     tolerance = 10 ^ -10,
     check.tzone = TRUE
   )
   expect_equal(
-    object = as.POSIXlt(wdt, tz = "CET"),
-    expected = as.POSIXlt(expected, tz = "CET"),
-    tolerance = 10 ^ -10,
-    check.tzone = TRUE
-  )
-  expect_equal(
-    object = as.POSIXlt(wd, tz = "CET"),
-    expected = as.POSIXlt(wdt, tz = "CET"),
+    object = wd,
+    expected = wdt,
     check.tzone = TRUE
   )
   
