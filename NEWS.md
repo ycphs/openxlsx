@@ -1,4 +1,3 @@
-
 # openxlsx 4.2.2
 
 ## New Features
@@ -23,7 +22,6 @@
 ## Bug Fixes 
 
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
-
 
 ## Internal
 
