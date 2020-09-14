@@ -1,8 +1,16 @@
-# openxlsx (development version)
+# openxlsx 4.2.2
+
+## New Features
+
+* Added features for `conditionalFormatting` to support also 'contains not', 'begins with' and 'ends with'
 
 * Added return value for `saveWorkbook()` the default value for `returnValue` is `FALSE` ([#71])(https://github.com/ycphs/openxlsx/issues/71)
 
 * Added Tests for new parameter of `saveWorkbook()`
+
+## Bug Fixes 
+ 
+* Solved CRAN check errors based on the change disussed in  (PR#17277)[https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277]
 
 # openxlsx 4.2.0
 
@@ -10,9 +18,10 @@
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
+
+## Bug Fixes 
+
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
-
-
 
 ## Internal
 

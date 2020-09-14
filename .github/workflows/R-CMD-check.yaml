@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+    branches: 
       - master
   pull_request:
     branches:
@@ -21,20 +21,17 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.4'}
-          - {os: windows-latest, r: '3.5'}
           - {os: windows-latest, r: '3.6'}
           - {os: windows-latest, r: '4.0'}
-          - {os: macOS-latest, r: '3.4'}
-          - {os: macOS-latest, r: '3.5'}
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: '4.0'}
-          - {os: ubuntu-16.04, r: '3.4'}
-          - {os: ubuntu-16.04, r: '3.5'}
-          - {os: ubuntu-16.04, r: '3.6'}
+          - {os: macOS-latest, r: 'devel'}
+          - {os: ubuntu-latest, r: '3.6'}
+          - {os: ubuntu-latest, r: '4.0'}
+          - {os: ubuntu-latest, r: 'devel'}
+          - {os: ubuntu-16.04, r: '3.6'} 
           - {os: ubuntu-18.04, r: '4.0'}
-          - {os: ubuntu-18.04, r: 'devel'}
-            
+          - {os: ubuntu-18.04, r: 'devel'} 
             
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true

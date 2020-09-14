@@ -29,7 +29,8 @@ conditionalFormatting(
 
 \item{style}{A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")}
 
-\item{type}{Either 'expression', 'colorscale', 'databar', 'duplicates' or "contains' (case insensitive).}
+\item{type}{Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
+'endsWith', 'contains' or 'notContains' (case insensitive).}
 
 \item{...}{See below}
 }
@@ -90,6 +91,9 @@ addWorksheet(wb, "Moving Col")
 addWorksheet(wb, "Dependent on")
 addWorksheet(wb, "Duplicates")
 addWorksheet(wb, "containsText")
+addWorksheet(wb, "notcontainsText")
+addWorksheet(wb, "beginsWith")
+addWorksheet(wb, "endsWith")
 addWorksheet(wb, "colourScale", zoom = 30)
 addWorksheet(wb, "databar")
 addWorksheet(wb, "between")
@@ -167,6 +171,24 @@ fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
 writeData(wb, "containsText", sapply(1:10, fn))
 conditionalFormatting(wb, "containsText", cols = 1, rows = 1:10, type = "contains", rule = "A")
 
+## cells not containing text
+fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+writeData(wb, "containsText", sapply(1:10, fn))
+conditionalFormatting(wb, "notcontainsText", cols = 1, 
+                     rows = 1:10, type = "notcontains", rule = "A")
+
+
+## cells begins with text
+fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+writeData(wb, "beginsWith", sapply(1:100, fn))
+conditionalFormatting(wb, "beginsWith", cols = 1, rows = 1:100, type = "beginsWith", rule = "A")
+
+
+## cells ends with text
+fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+writeData(wb, "endsWith", sapply(1:100, fn))
+conditionalFormatting(wb, "endsWith", cols = 1, rows = 1:100, type = "endsWith", rule = "A")
+
 ## colourscale colours cells based on cell value
 df <- read.xlsx(system.file("extdata", "readTest.xlsx", package = "openxlsx"), sheet = 4)
 writeData(wb, "colourScale", df, colNames = FALSE) ## write data.frame
@@ -243,5 +265,5 @@ saveWorkbook(wb, file = "databarExample.xlsx", overwrite = TRUE)
 \code{\link{createStyle}}
 }
 \author{
-Alexander Walker
+Alexander Walker, Philipp Schauberger
 }

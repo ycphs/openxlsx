@@ -7,14 +7,15 @@
 #' @aliases databar
 #' @title Add conditional formatting to cells
 #' @description Add conditional formatting to cells
-#' @author Alexander Walker
+#' @author Alexander Walker, Philipp Schauberger
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param cols Columns to apply conditional formatting to
 #' @param rows Rows to apply conditional formatting to
 #' @param rule The condition under which to apply the formatting. See examples.
 #' @param style A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
-#' @param type Either 'expression', 'colorscale', 'databar', 'duplicates' or "contains' (case insensitive).
+#' @param type Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
+#' 'endsWith', 'contains' or 'notContains' (case insensitive).
 #' @param ... See below
 #' @details See Examples.
 #'
@@ -71,6 +72,9 @@
 #' addWorksheet(wb, "Dependent on")
 #' addWorksheet(wb, "Duplicates")
 #' addWorksheet(wb, "containsText")
+#' addWorksheet(wb, "notcontainsText")
+#' addWorksheet(wb, "beginsWith")
+#' addWorksheet(wb, "endsWith")
 #' addWorksheet(wb, "colourScale", zoom = 30)
 #' addWorksheet(wb, "databar")
 #' addWorksheet(wb, "between")
@@ -147,6 +151,24 @@
 #' fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
 #' writeData(wb, "containsText", sapply(1:10, fn))
 #' conditionalFormatting(wb, "containsText", cols = 1, rows = 1:10, type = "contains", rule = "A")
+#' 
+#' ## cells not containing text
+#' fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+#' writeData(wb, "containsText", sapply(1:10, fn))
+#' conditionalFormatting(wb, "notcontainsText", cols = 1, 
+#'                      rows = 1:10, type = "notcontains", rule = "A")
+#' 
+#' 
+#' ## cells begins with text
+#' fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+#' writeData(wb, "beginsWith", sapply(1:100, fn))
+#' conditionalFormatting(wb, "beginsWith", cols = 1, rows = 1:100, type = "beginsWith", rule = "A")
+#' 
+#' 
+#' ## cells ends with text
+#' fn <- function(x) paste(sample(LETTERS, 10), collapse = "-")
+#' writeData(wb, "endsWith", sapply(1:100, fn))
+#' conditionalFormatting(wb, "endsWith", cols = 1, rows = 1:100, type = "endsWith", rule = "A")
 #'
 #' ## colourscale colours cells based on cell value
 #' df <- read.xlsx(system.file("extdata", "readTest.xlsx", package = "openxlsx"), sheet = 4)
@@ -243,11 +265,17 @@ conditionalFormatting <-
       type <- "duplicatedValues"
     } else if (type == "contains") {
       type <- "containsText"
+    } else if (type == "notcontains") {
+      type <- "notContainsText"
+    } else if (type == "beginswith") {
+      type <- "beginsWith"
+    } else if (type == "endswith") {
+      type <- "endsWith"
     } else if (type == "between") {
       type <- "between"
     } else if (type != "expression") {
       stop(
-        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates' or 'contains'"
+        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 'endsWith', 'contains' or 'notContains'"
       )
     }
 
@@ -389,20 +417,87 @@ conditionalFormatting <-
       # type == "contains"
       # - style is Style object
       # - rule is text to look for
-
+      
       if (is.null(style)) {
         style <-
           createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
       }
-
+      
+      
       if (!"character" %in% class(rule)) {
         stop("If type == 'contains', rule must be a character vector of length 1.")
       }
-
+      
       if (!"Style" %in% class(style)) {
         stop("If type == 'contains', style must be a Style object.")
       }
-
+      
+      invisible(dxfId <- wb$addDXFS(style))
+      values <- rule
+      rule <- style
+    } else if (type == "notContainsText") {
+      # type == "contains"
+      # - style is Style object
+      # - rule is text to look for
+      
+      if (is.null(style)) {
+        style <-
+          createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
+      }
+      
+      
+      if (!"character" %in% class(rule)) {
+        stop("If type == 'notContains', rule must be a character vector of length 1.")
+      }
+      
+      if (!"Style" %in% class(style)) {
+        stop("If type == 'notContains', style must be a Style object.")
+      }
+      
+      invisible(dxfId <- wb$addDXFS(style))
+      values <- rule
+      rule <- style
+    } else if (type == "beginsWith") {
+      # type == "contains"
+      # - style is Style object
+      # - rule is text to look for
+      
+      if (is.null(style)) {
+        style <-
+          createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
+      }
+      
+      
+      if (!"character" %in% class(rule)) {
+        stop("If type == 'beginsWith', rule must be a character vector of length 1.")
+      }
+      
+      if (!"Style" %in% class(style)) {
+        stop("If type == 'beginsWith', style must be a Style object.")
+      }
+      
+      invisible(dxfId <- wb$addDXFS(style))
+      values <- rule
+      rule <- style
+    } else if (type == "endsWith") {
+      # type == "contains"
+      # - style is Style object
+      # - rule is text to look for
+      
+      if (is.null(style)) {
+        style <-
+          createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
+      }
+      
+      
+      if (!"character" %in% class(rule)) {
+        stop("If type == 'endsWith', rule must be a character vector of length 1.")
+      }
+      
+      if (!"Style" %in% class(style)) {
+        stop("If type == 'endsWith', style must be a Style object.")
+      }
+      
       invisible(dxfId <- wb$addDXFS(style))
       values <- rule
       rule <- style
