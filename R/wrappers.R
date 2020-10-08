@@ -4294,9 +4294,8 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
   }
   
   levels <- rep("1", length(cols))
-  
   hidden <- rep(hidden, length.out = length(cols))
-  
+
   hidden <- hidden[!duplicated(cols)]
   levels <- levels[!duplicated(cols)]
   cols <- cols[!duplicated(cols)]
@@ -4309,8 +4308,8 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     if (any(existing_cols %in% cols)) {
       for (i in intersect(existing_cols, cols)) {
         width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-        outline_hidden <- as.character(as.integer(hidden[i]))
-        
+        outline_hidden <- as.character(as.integer(hidden))[cols == i]
+
         if (width_hidden != outline_hidden) {
           attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <- outline_hidden
         }
