@@ -1,6 +1,6 @@
 # openxlsx 4.2.2.1
  
-## Fixes
+## Fixes for Check issues
  
 * Fix to pass the tests for link-time optimization type mismatches
 
