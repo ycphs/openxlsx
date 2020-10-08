@@ -6,8 +6,6 @@
 #' @name openxlsx
 #' @docType package
 #' @useDynLib openxlsx, .registration=TRUE
-#' @import grDevices
-#' @import stats
 #' @importFrom Rcpp sourceCpp
 #' @importFrom zip zipr
 #' @importFrom utils download.file head menu unzip

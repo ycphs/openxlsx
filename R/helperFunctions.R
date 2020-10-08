@@ -285,9 +285,14 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
 
 
 
-
-
-
+#' @name validateColour
+#' @description validate the colour input
+#' @param colour colour
+#' @param errorMsg Error message
+#' @author Philipp Schauberger
+#' @importFrom grDevices colours
+#' @keywords internal
+#' @noRd
 validateColour <- function(colour, errorMsg = "Invalid colour!") {
 
   ## check if
@@ -310,7 +315,13 @@ validateColour <- function(colour, errorMsg = "Invalid colour!") {
   return(colour)
 }
 
-## color helper function: eg col2hex(colors())
+#' @name col2hex
+#' @description convert rgb to hex
+#' @param creator my.col
+#' @author Philipp Schauberger
+#' @importFrom grDevices col2rgb rgb
+#' @keywords internal
+#' @noRd
 col2hex <- function(my.col) {
   rgb(t(col2rgb(my.col)), maxColorValue = 255)
 }

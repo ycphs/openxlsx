@@ -1,4 +1,10 @@
-# openxlsx (development version)
+# openxlsx 4.2.2.1
+ 
+## Fixes
+ 
+* Fix to pass the tests for link-time optimization type mismatches
+
+* Fix to pass the checks of native code (C/C++) based on static code analysis
 
 # openxlsx 4.2.2
 
