@@ -72,13 +72,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -129,7 +135,7 @@
     <p>Convert from excel time number to R POSIXct type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>convertToDateTime</span>(<span class='kw'>x</span>, origin = <span class='st'>"1900-01-01"</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, origin <span class='op'>=</span> <span class='st'>"1900-01-01"</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,11 +160,11 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## 2014-07-01, 2014-06-30, 2014-06-29</span>
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>41821.8127314815</span>, <span class='fl'>41820.8127314815</span>, <span class='fl'>NA</span>, <span class='fl'>41819</span>, <span class='fl'>NaN</span>)
-<span class='fu'>convertToDateTime</span>(<span class='kw'>x</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41821.8127314815</span>, <span class='fl'>41820.8127314815</span>, <span class='cn'>NA</span>, <span class='fl'>41819</span>, <span class='cn'>NaN</span><span class='op'>)</span>
+<span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"
 #&gt; [3] NA                        "2014-06-29 00:00:00 UTC"
-#&gt; [5] NA                       </div><div class='input'><span class='fu'>convertToDateTime</span>(<span class='kw'>x</span>, tx = <span class='st'>"Australia/Perth"</span>)
+#&gt; [5] NA                       </div><div class='input'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, tx <span class='op'>=</span> <span class='st'>"Australia/Perth"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"
 #&gt; [3] NA                        "2014-06-29 00:00:00 UTC"
 #&gt; [5] NA                       </div></pre>
@@ -177,7 +183,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

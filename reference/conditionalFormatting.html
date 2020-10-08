@@ -72,13 +72,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -129,16 +135,16 @@
     <p>Add conditional formatting to cells</p>
     </div>
 
-    <pre class="usage"><span class='fu'>conditionalFormatting</span>(
-  <span class='kw'>wb</span>,
-  <span class='kw'>sheet</span>,
-  <span class='kw'>cols</span>,
-  <span class='kw'>rows</span>,
-  rule = <span class='kw'>NULL</span>,
-  style = <span class='kw'>NULL</span>,
-  type = <span class='st'>"expression"</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>conditionalFormatting</span><span class='op'>(</span>
+  <span class='va'>wb</span>,
+  <span class='va'>sheet</span>,
+  <span class='va'>cols</span>,
+  <span class='va'>rows</span>,
+  rule <span class='op'>=</span> <span class='cn'>NULL</span>,
+  style <span class='op'>=</span> <span class='cn'>NULL</span>,
+  type <span class='op'>=</span> <span class='st'>"expression"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,181 +231,181 @@
     <p>Alexander Walker, Philipp Schauberger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"cellIs"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Row"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Col"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Duplicates"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"containsText"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"notcontainsText"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"beginsWith"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"endsWith"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"colourScale"</span>, zoom = <span class='fl'>30</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"between"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"logical operators"</span>)
+    <pre class="examples"><div class='input'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"cellIs"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Row"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Col"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Duplicates"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"containsText"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"notcontainsText"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"beginsWith"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"endsWith"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"colourScale"</span>, zoom <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"between"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"logical operators"</span><span class='op'>)</span>
 
-<span class='kw'>negStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(fontColour = <span class='st'>"#9C0006"</span>, bgFill = <span class='st'>"#FFC7CE"</span>)
-<span class='kw'>posStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span>(fontColour = <span class='st'>"#006100"</span>, bgFill = <span class='st'>"#C6EFCE"</span>)
+<span class='va'>negStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontColour <span class='op'>=</span> <span class='st'>"#9C0006"</span>, bgFill <span class='op'>=</span> <span class='st'>"#FFC7CE"</span><span class='op'>)</span>
+<span class='va'>posStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontColour <span class='op'>=</span> <span class='st'>"#006100"</span>, bgFill <span class='op'>=</span> <span class='st'>"#C6EFCE"</span><span class='op'>)</span>
 
 <span class='co'>## rule applies to all each cell in range</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"cellIs"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"cellIs"</span>, <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>], startCol = <span class='fl'>2</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"cellIs"</span>,
-  cols = <span class='fl'>1</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"!=0"</span>, style = <span class='kw'>negStyle</span>
-)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"cellIs"</span>,
-  cols = <span class='fl'>1</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"==0"</span>, style = <span class='kw'>posStyle</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"cellIs"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"cellIs"</span>, <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>]</span>, startCol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"cellIs"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"!=0"</span>, style <span class='op'>=</span> <span class='va'>negStyle</span>
+<span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"cellIs"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"==0"</span>, style <span class='op'>=</span> <span class='va'>posStyle</span>
+<span class='op'>)</span>
 
 <span class='co'>## highlight row dependent on first cell in row</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Row"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Row"</span>, <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>], startCol = <span class='fl'>2</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Moving Row"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"$A1&lt;0"</span>, style = <span class='kw'>negStyle</span>
-)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Moving Row"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"$A1&gt;0"</span>, style = <span class='kw'>posStyle</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Row"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Row"</span>, <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>]</span>, startCol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Row"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"$A1&lt;0"</span>, style <span class='op'>=</span> <span class='va'>negStyle</span>
+<span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Row"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"$A1&gt;0"</span>, style <span class='op'>=</span> <span class='va'>posStyle</span>
+<span class='op'>)</span>
 
 <span class='co'>## highlight column dependent on first cell in column</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Col"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Moving Col"</span>, <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>], startCol = <span class='fl'>2</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Moving Col"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"A$1&lt;0"</span>, style = <span class='kw'>negStyle</span>
-)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Moving Col"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"A$1&gt;0"</span>, style = <span class='kw'>posStyle</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Col"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Col"</span>, <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>]</span>, startCol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Col"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"A$1&lt;0"</span>, style <span class='op'>=</span> <span class='va'>negStyle</span>
+<span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Moving Col"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"A$1&gt;0"</span>, style <span class='op'>=</span> <span class='va'>posStyle</span>
+<span class='op'>)</span>
 
 <span class='co'>## highlight entire range cols X rows dependent only on cell A1</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>], startCol = <span class='fl'>2</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"$A$1&lt;0"</span>, style = <span class='kw'>negStyle</span>
-)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
-  rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule = <span class='st'>"$A$1&gt;0"</span>, style = <span class='kw'>posStyle</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span><span class='op'>]</span>, startCol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"$A$1&lt;0"</span>, style <span class='op'>=</span> <span class='va'>negStyle</span>
+<span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, rule <span class='op'>=</span> <span class='st'>"$A$1&gt;0"</span>, style <span class='op'>=</span> <span class='va'>posStyle</span>
+<span class='op'>)</span>
 
 <span class='co'>## highlight cells in column 1 based on value in column 2</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y = <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>10</span>)), startRow = <span class='fl'>15</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>,
-  cols = <span class='fl'>1</span>,
-  rows = <span class='fl'>16</span><span class='op'>:</span><span class='fl'>25</span>, rule = <span class='st'>"B16&lt;0.5"</span>, style = <span class='kw'>negStyle</span>
-)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Dependent on"</span>,
-  cols = <span class='fl'>1</span>,
-  rows = <span class='fl'>16</span><span class='op'>:</span><span class='fl'>25</span>, rule = <span class='st'>"B16&gt;=0.5"</span>, style = <span class='kw'>posStyle</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>, startRow <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span>,
+  rows <span class='op'>=</span> <span class='fl'>16</span><span class='op'>:</span><span class='fl'>25</span>, rule <span class='op'>=</span> <span class='st'>"B16&lt;0.5"</span>, style <span class='op'>=</span> <span class='va'>negStyle</span>
+<span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Dependent on"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span>,
+  rows <span class='op'>=</span> <span class='fl'>16</span><span class='op'>:</span><span class='fl'>25</span>, rule <span class='op'>=</span> <span class='st'>"B16&gt;=0.5"</span>, style <span class='op'>=</span> <span class='va'>posStyle</span>
+<span class='op'>)</span>
 
 
 <span class='co'>## highlight duplicates using default style</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"Duplicates"</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>15</span>], size = <span class='fl'>10</span>, replace = <span class='fl'>TRUE</span>))
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"Duplicates"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type = <span class='st'>"duplicates"</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Duplicates"</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span>, size <span class='op'>=</span> <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Duplicates"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type <span class='op'>=</span> <span class='st'>"duplicates"</span><span class='op'>)</span>
 
 <span class='co'>## cells containing text</span>
-<span class='kw'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>LETTERS</span>, <span class='fl'>10</span>), collapse = <span class='st'>"-"</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"containsText"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='kw'>fn</span>))
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"containsText"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type = <span class='st'>"contains"</span>, rule = <span class='st'>"A"</span>)
+<span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>LETTERS</span>, <span class='fl'>10</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"containsText"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='va'>fn</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"containsText"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type <span class='op'>=</span> <span class='st'>"contains"</span>, rule <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
 
 <span class='co'>## cells not containing text</span>
-<span class='kw'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>LETTERS</span>, <span class='fl'>10</span>), collapse = <span class='st'>"-"</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"containsText"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='kw'>fn</span>))
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"notcontainsText"</span>, cols = <span class='fl'>1</span>, 
-                     rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type = <span class='st'>"notcontains"</span>, rule = <span class='st'>"A"</span>)
+<span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>LETTERS</span>, <span class='fl'>10</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"containsText"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='va'>fn</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"notcontainsText"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, 
+                     rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type <span class='op'>=</span> <span class='st'>"notcontains"</span>, rule <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
 
 
 <span class='co'>## cells begins with text</span>
-<span class='kw'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>LETTERS</span>, <span class='fl'>10</span>), collapse = <span class='st'>"-"</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"beginsWith"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='kw'>fn</span>))
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"beginsWith"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, type = <span class='st'>"beginsWith"</span>, rule = <span class='st'>"A"</span>)
+<span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>LETTERS</span>, <span class='fl'>10</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"beginsWith"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='va'>fn</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"beginsWith"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, type <span class='op'>=</span> <span class='st'>"beginsWith"</span>, rule <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
 
 
 <span class='co'>## cells ends with text</span>
-<span class='kw'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>LETTERS</span>, <span class='fl'>10</span>), collapse = <span class='st'>"-"</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"endsWith"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='kw'>fn</span>))
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"endsWith"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, type = <span class='st'>"endsWith"</span>, rule = <span class='st'>"A"</span>)
+<span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>LETTERS</span>, <span class='fl'>10</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"endsWith"</span>, <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='va'>fn</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"endsWith"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, type <span class='op'>=</span> <span class='st'>"endsWith"</span>, rule <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
 
 <span class='co'>## colourscale colours cells based on cell value</span>
-<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package = <span class='st'>"openxlsx"</span>), sheet = <span class='fl'>4</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"colourScale"</span>, <span class='kw'>df</span>, colNames = <span class='fl'>FALSE</span>) <span class='co'>## write data.frame</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span>, sheet <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"colourScale"</span>, <span class='va'>df</span>, colNames <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='co'>## write data.frame</span>
 
 <span class='co'>## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())</span>
 <span class='co'>## If rule is NULL, min and max of cells is used. Rule must be the same length as style or NULL.</span>
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"colourScale"</span>,
-  cols = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>df</span>), rows = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>df</span>),
-  style = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"white"</span>),
-  rule = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>255</span>),
-  type = <span class='st'>"colourScale"</span>
-)
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"colourScale"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
+  style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"black"</span>, <span class='st'>"white"</span><span class='op'>)</span>,
+  rule <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>255</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='st'>"colourScale"</span>
+<span class='op'>)</span>
 
-<span class='fu'><a href='setColWidths.html'>setColWidths</a></span>(<span class='kw'>wb</span>, <span class='st'>"colourScale"</span>, cols = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>df</span>), widths = <span class='fl'>1.07</span>)
-<span class='fu'><a href='setRowHeights.html'>setRowHeights</a></span>(<span class='kw'>wb</span>, <span class='st'>"colourScale"</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>df</span>), heights = <span class='fl'>7.5</span>)
+<span class='fu'><a href='setColWidths.html'>setColWidths</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"colourScale"</span>, cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>, widths <span class='op'>=</span> <span class='fl'>1.07</span><span class='op'>)</span>
+<span class='fu'><a href='setRowHeights.html'>setRowHeights</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"colourScale"</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>, heights <span class='op'>=</span> <span class='fl'>7.5</span><span class='op'>)</span>
 
 <span class='co'>## Databars</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type = <span class='st'>"databar"</span>) <span class='co'>## Default colours</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type <span class='op'>=</span> <span class='st'>"databar"</span><span class='op'>)</span> <span class='co'>## Default colours</span>
 
 <span class='co'>## Betweem</span>
 <span class='co'># Highlight cells in interval [-2, 2]</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"between"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"between"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type = <span class='st'>"between"</span>, rule = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span>))
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"between"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"between"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type <span class='op'>=</span> <span class='st'>"between"</span>, rule <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## Logical Operators</span>
 <span class='co'># You can use Excels logical Opertors</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"logical operators"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"logical operators"</span>,
-  cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
-  rule = <span class='st'>"OR($A1=1,$A1=3,$A1=5,$A1=7)"</span>
-)
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"conditionalFormattingExample.xlsx"</span>, <span class='fl'>TRUE</span>)
-}
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"logical operators"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"logical operators"</span>,
+  cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
+  rule <span class='op'>=</span> <span class='st'>"OR($A1=1,$A1=3,$A1=5,$A1=7)"</span>
+<span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"conditionalFormattingExample.xlsx"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 
 <span class='co'>#########################################################################</span>
 <span class='co'>## Databar Example</span>
 
-<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>)
+<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span><span class='op'>)</span>
 
 <span class='co'>## Databars</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol = <span class='fl'>1</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, cols = <span class='fl'>1</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type = <span class='st'>"databar"</span>) <span class='co'>## Defaults</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type <span class='op'>=</span> <span class='st'>"databar"</span><span class='op'>)</span> <span class='co'>## Defaults</span>
 
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol = <span class='fl'>3</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, cols = <span class='fl'>3</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type = <span class='st'>"databar"</span>, border = <span class='fl'>FALSE</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, cols <span class='op'>=</span> <span class='fl'>3</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>, type <span class='op'>=</span> <span class='st'>"databar"</span>, border <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol = <span class='fl'>5</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>,
-  cols = <span class='fl'>5</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
-  type = <span class='st'>"databar"</span>, style = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#a6a6a6"</span>), showValue = <span class='fl'>FALSE</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>,
+  cols <span class='op'>=</span> <span class='fl'>5</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
+  type <span class='op'>=</span> <span class='st'>"databar"</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#a6a6a6"</span><span class='op'>)</span>, showValue <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol = <span class='fl'>7</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>,
-  cols = <span class='fl'>7</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
-  type = <span class='st'>"databar"</span>, style = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#a6a6a6"</span>), showValue = <span class='fl'>FALSE</span>, gradient = <span class='fl'>FALSE</span>
-)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>,
+  cols <span class='op'>=</span> <span class='fl'>7</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
+  type <span class='op'>=</span> <span class='st'>"databar"</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#a6a6a6"</span><span class='op'>)</span>, showValue <span class='op'>=</span> <span class='cn'>FALSE</span>, gradient <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol = <span class='fl'>9</span>)
-<span class='fu'>conditionalFormatting</span>(<span class='kw'>wb</span>, <span class='st'>"databar"</span>,
-  cols = <span class='fl'>9</span>, rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
-  type = <span class='st'>"databar"</span>, style = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#a6a6a6"</span>, <span class='st'>"#a6a6a6"</span>), showValue = <span class='fl'>FALSE</span>, gradient = <span class='fl'>FALSE</span>
-)
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, file = <span class='st'>"databarExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
-}
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>:</span><span class='fl'>5</span>, startCol <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>
+<span class='fu'>conditionalFormatting</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"databar"</span>,
+  cols <span class='op'>=</span> <span class='fl'>9</span>, rows <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>11</span>,
+  type <span class='op'>=</span> <span class='st'>"databar"</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#a6a6a6"</span>, <span class='st'>"#a6a6a6"</span><span class='op'>)</span>, showValue <span class='op'>=</span> <span class='cn'>FALSE</span>, gradient <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"databarExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
@@ -417,7 +423,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

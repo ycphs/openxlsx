@@ -72,13 +72,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -129,16 +135,16 @@
     <p>Set document headers and footers</p>
     </div>
 
-    <pre class="usage"><span class='fu'>setHeaderFooter</span>(
-  <span class='kw'>wb</span>,
-  <span class='kw'>sheet</span>,
-  header = <span class='kw'>NULL</span>,
-  footer = <span class='kw'>NULL</span>,
-  evenHeader = <span class='kw'>NULL</span>,
-  evenFooter = <span class='kw'>NULL</span>,
-  firstHeader = <span class='kw'>NULL</span>,
-  firstFooter = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>setHeaderFooter</span><span class='op'>(</span>
+  <span class='va'>wb</span>,
+  <span class='va'>sheet</span>,
+  header <span class='op'>=</span> <span class='cn'>NULL</span>,
+  footer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  evenHeader <span class='op'>=</span> <span class='cn'>NULL</span>,
+  evenFooter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  firstHeader <span class='op'>=</span> <span class='cn'>NULL</span>,
+  firstFooter <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,50 +203,50 @@
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
+    <pre class="examples"><div class='input'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"S1"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"S2"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"S3"</span>)
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"S4"</span>)
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S2"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S3"</span><span class='op'>)</span>
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S4"</span><span class='op'>)</span>
 
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>400</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>400</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>400</span>)
-<span class='fu'><a href='writeData.html'>writeData</a></span>(<span class='kw'>wb</span>, <span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>400</span>)
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>400</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>400</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>400</span><span class='op'>)</span>
+<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>400</span><span class='op'>)</span>
 
-<span class='fu'>setHeaderFooter</span>(<span class='kw'>wb</span>,
-  sheet = <span class='st'>"S1"</span>,
-  header = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD HEAD LEFT"</span>, <span class='st'>"ODD HEAD CENTER"</span>, <span class='st'>"ODD HEAD RIGHT"</span>),
-  footer = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ODD FOOT RIGHT"</span>, <span class='st'>"ODD FOOT CENTER"</span>, <span class='st'>"ODD FOOT RIGHT"</span>),
-  evenHeader = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN HEAD LEFT"</span>, <span class='st'>"EVEN HEAD CENTER"</span>, <span class='st'>"EVEN HEAD RIGHT"</span>),
-  evenFooter = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"EVEN FOOT RIGHT"</span>, <span class='st'>"EVEN FOOT CENTER"</span>, <span class='st'>"EVEN FOOT RIGHT"</span>),
-  firstHeader = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TOP"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>),
-  firstFooter = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BOTTOM"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span>)
-)
+<span class='fu'>setHeaderFooter</span><span class='op'>(</span><span class='va'>wb</span>,
+  sheet <span class='op'>=</span> <span class='st'>"S1"</span>,
+  header <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ODD HEAD LEFT"</span>, <span class='st'>"ODD HEAD CENTER"</span>, <span class='st'>"ODD HEAD RIGHT"</span><span class='op'>)</span>,
+  footer <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ODD FOOT RIGHT"</span>, <span class='st'>"ODD FOOT CENTER"</span>, <span class='st'>"ODD FOOT RIGHT"</span><span class='op'>)</span>,
+  evenHeader <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"EVEN HEAD LEFT"</span>, <span class='st'>"EVEN HEAD CENTER"</span>, <span class='st'>"EVEN HEAD RIGHT"</span><span class='op'>)</span>,
+  evenFooter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"EVEN FOOT RIGHT"</span>, <span class='st'>"EVEN FOOT CENTER"</span>, <span class='st'>"EVEN FOOT RIGHT"</span><span class='op'>)</span>,
+  firstHeader <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"TOP"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span><span class='op'>)</span>,
+  firstFooter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"BOTTOM"</span>, <span class='st'>"OF FIRST"</span>, <span class='st'>"PAGE"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>setHeaderFooter</span>(<span class='kw'>wb</span>,
-  sheet = <span class='fl'>2</span>,
-  header = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Date]"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"&amp;[Page] / &amp;[Pages]"</span>),
-  footer = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&amp;[Path]&amp;[File]"</span>, <span class='fl'>NA</span>, <span class='st'>"&amp;[Tab]"</span>),
-  firstHeader = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Header of First Page"</span>, <span class='fl'>NA</span>),
-  firstFooter = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"Center Footer of First Page"</span>, <span class='fl'>NA</span>)
-)
+<span class='fu'>setHeaderFooter</span><span class='op'>(</span><span class='va'>wb</span>,
+  sheet <span class='op'>=</span> <span class='fl'>2</span>,
+  header <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"&amp;[Date]"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"&amp;[Page] / &amp;[Pages]"</span><span class='op'>)</span>,
+  footer <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"&amp;[Path]&amp;[File]"</span>, <span class='cn'>NA</span>, <span class='st'>"&amp;[Tab]"</span><span class='op'>)</span>,
+  firstHeader <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Center Header of First Page"</span>, <span class='cn'>NA</span><span class='op'>)</span>,
+  firstFooter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"Center Footer of First Page"</span>, <span class='cn'>NA</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>setHeaderFooter</span>(<span class='kw'>wb</span>,
-  sheet = <span class='fl'>3</span>,
-  header = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL HEAD LEFT 2"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"ALL HEAD RIGHT 2"</span>),
-  footer = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ALL FOOT RIGHT 2"</span>, <span class='st'>"ALL FOOT CENTER 2"</span>, <span class='st'>"ALL FOOT RIGHT 2"</span>)
-)
+<span class='fu'>setHeaderFooter</span><span class='op'>(</span><span class='va'>wb</span>,
+  sheet <span class='op'>=</span> <span class='fl'>3</span>,
+  header <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ALL HEAD LEFT 2"</span>, <span class='st'>"ALL HEAD CENTER 2"</span>, <span class='st'>"ALL HEAD RIGHT 2"</span><span class='op'>)</span>,
+  footer <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ALL FOOT RIGHT 2"</span>, <span class='st'>"ALL FOOT CENTER 2"</span>, <span class='st'>"ALL FOOT RIGHT 2"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>setHeaderFooter</span>(<span class='kw'>wb</span>,
-  sheet = <span class='fl'>4</span>,
-  firstHeader = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>),
-  firstFooter = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FIRST ONLY L"</span>, <span class='fl'>NA</span>, <span class='st'>"FIRST ONLY R"</span>)
-)
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"setHeaderFooterExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
-}
+<span class='fu'>setHeaderFooter</span><span class='op'>(</span><span class='va'>wb</span>,
+  sheet <span class='op'>=</span> <span class='fl'>4</span>,
+  firstHeader <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FIRST ONLY L"</span>, <span class='cn'>NA</span>, <span class='st'>"FIRST ONLY R"</span><span class='op'>)</span>,
+  firstFooter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FIRST ONLY L"</span>, <span class='cn'>NA</span>, <span class='st'>"FIRST ONLY R"</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"setHeaderFooterExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -257,7 +263,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

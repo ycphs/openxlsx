@@ -73,13 +73,19 @@ This file is then written to the workbook using insertImage." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -131,18 +137,18 @@ This file is then written to the workbook using insertImage." />
 This file is then written to the workbook using insertImage.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>insertPlot</span>(
-  <span class='kw'>wb</span>,
-  <span class='kw'>sheet</span>,
-  width = <span class='fl'>6</span>,
-  height = <span class='fl'>4</span>,
-  xy = <span class='kw'>NULL</span>,
-  startRow = <span class='fl'>1</span>,
-  startCol = <span class='fl'>1</span>,
-  fileType = <span class='st'>"png"</span>,
-  units = <span class='st'>"in"</span>,
-  dpi = <span class='fl'>300</span>
-)</pre>
+    <pre class="usage"><span class='fu'>insertPlot</span><span class='op'>(</span>
+  <span class='va'>wb</span>,
+  <span class='va'>sheet</span>,
+  width <span class='op'>=</span> <span class='fl'>6</span>,
+  height <span class='op'>=</span> <span class='fl'>4</span>,
+  xy <span class='op'>=</span> <span class='cn'>NULL</span>,
+  startRow <span class='op'>=</span> <span class='fl'>1</span>,
+  startCol <span class='op'>=</span> <span class='fl'>1</span>,
+  fileType <span class='op'>=</span> <span class='st'>"png"</span>,
+  units <span class='op'>=</span> <span class='st'>"in"</span>,
+  dpi <span class='op'>=</span> <span class='fl'>300</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,34 +203,34 @@ This file is then written to the workbook using insertImage.</p>
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Create a new workbook</span>
-<span class='kw'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span>()
+<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'>## Add a worksheet</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span>(<span class='kw'>wb</span>, <span class='st'>"Sheet 1"</span>, gridLines = <span class='fl'>FALSE</span>)
+<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span>, gridLines <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'>## create plot objects</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='kw'>ggplot2</span>)
-<span class='kw'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>qplot</span>(<span class='kw'>mpg</span>,
-  data = <span class='kw'>mtcars</span>, geom = <span class='st'>"density"</span>,
-  fill = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='kw'>gear</span>), alpha = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>.5</span>), main = <span class='st'>"Distribution of Gas Mileage"</span>
-)
-<span class='kw'>p2</span> <span class='op'>&lt;-</span> <span class='fu'>qplot</span>(<span class='kw'>age</span>, <span class='kw'>circumference</span>,
-  data = <span class='kw'>Orange</span>, geom = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"point"</span>, <span class='st'>"line"</span>), colour = <span class='kw'>Tree</span>
-)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>ggplot2</span><span class='op'>)</span>
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>qplot</span><span class='op'>(</span><span class='va'>mpg</span>,
+  data <span class='op'>=</span> <span class='va'>mtcars</span>, geom <span class='op'>=</span> <span class='st'>"density"</span>,
+  fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span><span class='op'>(</span><span class='fl'>.5</span><span class='op'>)</span>, main <span class='op'>=</span> <span class='st'>"Distribution of Gas Mileage"</span>
+<span class='op'>)</span>
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'>qplot</span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>circumference</span>,
+  data <span class='op'>=</span> <span class='va'>Orange</span>, geom <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"point"</span>, <span class='st'>"line"</span><span class='op'>)</span>, colour <span class='op'>=</span> <span class='va'>Tree</span>
+<span class='op'>)</span>
 
 <span class='co'>## Insert currently displayed plot to sheet 1, row 1, column 1</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p1</span>) <span class='co'># plot needs to be showing</span>
-<span class='fu'>insertPlot</span>(<span class='kw'>wb</span>, <span class='fl'>1</span>, width = <span class='fl'>5</span>, height = <span class='fl'>3.5</span>, fileType = <span class='st'>"png"</span>, units = <span class='st'>"in"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span> <span class='co'># plot needs to be showing</span>
+<span class='fu'>insertPlot</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, width <span class='op'>=</span> <span class='fl'>5</span>, height <span class='op'>=</span> <span class='fl'>3.5</span>, fileType <span class='op'>=</span> <span class='st'>"png"</span>, units <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>
 
 <span class='co'>## Insert plot 2</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>p2</span>)
-<span class='fu'>insertPlot</span>(<span class='kw'>wb</span>, <span class='fl'>1</span>, xy = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"J"</span>, <span class='fl'>2</span>), width = <span class='fl'>16</span>, height = <span class='fl'>10</span>, fileType = <span class='st'>"png"</span>, units = <span class='st'>"cm"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p2</span><span class='op'>)</span>
+<span class='fu'>insertPlot</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, xy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"J"</span>, <span class='fl'>2</span><span class='op'>)</span>, width <span class='op'>=</span> <span class='fl'>16</span>, height <span class='op'>=</span> <span class='fl'>10</span>, fileType <span class='op'>=</span> <span class='st'>"png"</span>, units <span class='op'>=</span> <span class='st'>"cm"</span><span class='op'>)</span>
 
 <span class='co'>## Save workbook</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span>(<span class='kw'>wb</span>, <span class='st'>"insertPlotExample.xlsx"</span>, overwrite = <span class='fl'>TRUE</span>)
-}
+<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"insertPlotExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -241,7 +247,7 @@ This file is then written to the workbook using insertImage.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
