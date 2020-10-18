@@ -2143,29 +2143,36 @@ Workbook$methods(
   groupColumns = function(sheet) {
     sheet <- validateSheet(sheet)
 
-    levels <- colOutlineLevels[[sheet]]
     hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
-    cols <- names(levels)
-
-
+    cols <- names(colOutlineLevels[[sheet]])
+    
     if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
       worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
     }
 
     # Check if column is already created (by `setColWidths()` or on import)
+    # Note that columns are initiated by `setColWidths` first (see: order of execution in `preSaveCleanUp()`)
     if (any(cols %in% names(worksheets[[sheet]]$cols))) {
+
       for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
         outline_hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") == i]
-        worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+
+        if (grepl("outlineLevel", worksheets[[sheet]]$cols[[i]], perl = TRUE)) {
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+        } else {
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+        }
       }
 
       cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
-      attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") %in% cols] <<- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") %in% cols]
+      hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") %in% cols]
     }
 
-    colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
-    worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
-    names(worksheets[[sheet]]$cols) <<- cols
+    if (length(cols) > 0) {
+      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+      names(colNodes) <- cols
+      worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+    }
   }
 )
 
