@@ -1,4 +1,14 @@
-# openxlsx (development version)
+# openxlsx 4.2.3
+ 
+## Fixes for Check issues
+ 
+* Fix to pass the tests for link-time optimization type mismatches
+
+* Fix to pass the checks of native code (C/C++) based on static code analysis
+
+## Bug Fixes
+
+* Grouping columns after setting widths no longer throws an error ([#100](https://github.com/ycphs/openxlsx/issues/100))
 
 ## Bug Fixes
 
