@@ -69,3 +69,22 @@ test_that("loading workbook preserves outlines", {
   expect_equal(names(wb$outlineLevels[[1]]), c("3", "4"))
   expect_equal(unique(attr(wb$outlineLevels[[1]], "hidden")[names(wb$outlineLevels[[1]]) %in% c("3", "4")]), "true")
 })
+
+
+test_that("Grouping after setting colwidths has correct length of hidden attributes", {
+  # Issue #100 - https://github.com/ycphs/openxlsx/issues/100
+
+  wb <- createWorkbook(title = "column width and grouping error")
+  addWorksheet(wb, sheetName = 1)
+
+  setColWidths(
+    wb,
+    sheet = 1,
+    cols = 1:100,
+    widths = 8
+  )
+
+  groupColumns(wb, sheet = 1, cols = 20:100, hidden = TRUE)
+
+  expect_equal(length(wb$colOutlineLevels[[1]]), length(attr(wb$colOutlineLevels[[1]], "hidden")))
+})

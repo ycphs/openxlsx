@@ -1227,6 +1227,7 @@ convert2EMU <- function(d, units) {
 #' @param startCol Column coordinate of upper left corner of the image
 #' @param units Units of width and height. Can be "in", "cm" or "px"
 #' @param dpi Image resolution used for conversion between units.
+#' @importFrom grDevices bmp png jpeg
 #' @seealso \code{\link{insertPlot}}
 #' @export
 #' @examples
@@ -1584,6 +1585,7 @@ removeRowHeights <- function(wb, sheet, rows) {
 #' @param dpi Image resolution
 #' @seealso \code{\link{insertImage}}
 #' @export
+#' @importFrom grDevices bmp png jpeg tiff dev.copy dev.list dev.off
 #' @examples
 #' \dontrun{
 #' ## Create a new workbook
@@ -4292,9 +4294,8 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
   }
   
   levels <- rep("1", length(cols))
-  
   hidden <- rep(hidden, length.out = length(cols))
-  
+
   hidden <- hidden[!duplicated(cols)]
   levels <- levels[!duplicated(cols)]
   cols <- cols[!duplicated(cols)]
@@ -4307,8 +4308,8 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     if (any(existing_cols %in% cols)) {
       for (i in intersect(existing_cols, cols)) {
         width_hidden <- attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i]
-        outline_hidden <- as.character(as.integer(hidden[i]))
-        
+        outline_hidden <- as.character(as.integer(hidden))[cols == i]
+
         if (width_hidden != outline_hidden) {
           attr(wb$colWidths[[sheet]], "hidden")[attr(wb$colWidths[[sheet]], "names") == i] <- outline_hidden
         }
