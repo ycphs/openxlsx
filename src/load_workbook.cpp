@@ -103,21 +103,23 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       if(cols.size() > 0){
         
         NumericVector widths;
-        IntegerVector columns;
+        IntegerVector columns_with_widths;
+        IntegerVector columns_with_groups;
         CharacterVector column_hidden;
         CharacterVector col_outline;
-        // CharacterVector col_hidden;
+        CharacterVector col_hidden;
         
-        for(size_t ci = 0; ci < cols.size(); ci++){
+        for (size_t ci = 0; ci < cols.size(); ci++) {
           
           double tmp_width = 0;
           std::string tmp_hidden;
           int min_c = 0;
           int max_c = 0;
           std::string tmp_coloutline;
-          // std::string tmp_col_hidden;
+
           buf = cols[ci];
-          if((buf.find("customWidth", 0) != string::npos) | (buf.find("outlineLevel", 0) != string::npos)){
+          // If either custom widths or groupings, get column index
+          if ((buf.find("customWidth", 0) != string::npos) | (buf.find("outlineLevel", 0) != string::npos)) {
             
             tmp_pos = buf.find("min=\"", 0);
             endPos = buf.find(tagEnd, tmp_pos + 5);
@@ -126,64 +128,78 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             tmp_pos = buf.find("max=\"", 0);
             endPos = buf.find(tagEnd, tmp_pos + 5);
             max_c = atoi(buf.substr(tmp_pos + 5, endPos - tmp_pos - 5).c_str());
-            
-            tmp_pos = buf.find("width=\"", 0);
-            endPos = buf.find(tagEnd, tmp_pos + 7);
-            tmp_width = atof(buf.substr(tmp_pos + 7, endPos - tmp_pos - 7).c_str()) - 0.71;
-            
+
             tmp_pos = buf.find("hidden=\"", 0);
 
-            if(tmp_pos != string::npos){
+            if (tmp_pos != string::npos) {
               endPos = buf.find(tagEnd, tmp_pos + 8);
               tmp_hidden = buf.substr(tmp_pos + 8, endPos - tmp_pos - 8);
-            }else{
+            } else {
               tmp_hidden = "0";
             }
 
-            tmp_pos = buf.find("outlineLevel=\"", 0);
-            endPos = buf.find(tagEnd, tmp_pos + 14);
-            tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);
-            
+            // If column has both a custom width and is part of a group
+            if ((buf.find("customWidth", 0) != string::npos) & (buf.find("outlineLevel", 0) != string::npos)) {
+              tmp_pos = buf.find("width=\"", 0);
+              endPos = buf.find(tagEnd, tmp_pos + 7);
+              tmp_width = atof(buf.substr(tmp_pos + 7, endPos - tmp_pos - 7).c_str()) - 0.71;
+              
+              tmp_pos = buf.find("outlineLevel=\"", 0);
+              endPos = buf.find(tagEnd, tmp_pos + 14);
+              tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);  
 
-            while(min_c <= max_c){
-              widths.push_back(tmp_width);
-              columns.push_back(min_c);
-              column_hidden.push_back(tmp_hidden);
-              col_outline.push_back(tmp_coloutline);
-              // col_hidden.push_back(tmp_hidden);
-              min_c++;
+              while (min_c <= max_c) {
+                widths.push_back(tmp_width);
+                columns_with_widths.push_back(min_c);
+                columns_with_groups.push_back(min_c);
+                column_hidden.push_back(tmp_hidden);
+                col_hidden.push_back(tmp_hidden);
+                col_outline.push_back(tmp_coloutline);
+                min_c++;
+              }
+              
+            } else if (buf.find("customWidth", 0) != string::npos) {      // Column only has a custom width
+
+              tmp_pos = buf.find("width=\"", 0);
+              endPos = buf.find(tagEnd, tmp_pos + 7);
+              tmp_width = atof(buf.substr(tmp_pos + 7, endPos - tmp_pos - 7).c_str()) - 0.71;
+
+              while (min_c <= max_c) {
+                widths.push_back(tmp_width);
+                columns_with_widths.push_back(min_c);
+                column_hidden.push_back(tmp_hidden);
+                min_c++;
+              }
+            } else {      // Column is only part of a group
+
+              tmp_pos = buf.find("outlineLevel=\"", 0);
+              endPos = buf.find(tagEnd, tmp_pos + 14);
+              tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);  
+
+              while (min_c <= max_c) {
+                columns_with_groups.push_back(min_c);
+                col_hidden.push_back(tmp_hidden);
+                col_outline.push_back(tmp_coloutline);
+                min_c++;
+              }
             }
-
           }
-
-          // if (buf.find("outlineLevel", 0) != string::npos) {
-
-          //   tmp_pos = buf.find("outlineLevel=\"", 0);
-          //   endPos = buf.find(tagEnd, tmp_pos + 14);
-          //   tmp_coloutline = buf.substr(tmp_pos + 14, endPos - tmp_pos - 14);
-          //   col_outline.push_back(tmp_coloutline);
-          //   col_hidden.push_back(tmp_hidden);
-          // }
         }
         
-        if(widths.size() > 0){
+        if (widths.size() > 0) {
           CharacterVector tmp_widths(widths);
-          tmp_widths.attr("names") = columns;
+          tmp_widths.attr("names") = columns_with_widths;
           tmp_widths.attr("hidden") = column_hidden;
           colWidths[i] = tmp_widths;
         }
 
-        if(col_outline.size() > 0) {
+        if (col_outline.size() > 0) {
           CharacterVector columns_outline(col_outline);
-          columns_outline.attr("names") = columns;
-          columns_outline.attr("hidden") = column_hidden;
+          columns_outline.attr("names") = columns_with_groups;
+          columns_outline.attr("hidden") = col_hidden;
           colOutlineLevels[i] = columns_outline;
         }
-        
       }
-      
-      
-      
       
       /* --- Everything after sheetData --- */
       size_t pos_post = 0;
