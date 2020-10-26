@@ -1,2 +1,6 @@
 library
 checks
+checks.noindex
+library.noindex
+data.sqlite
+*.html
