@@ -1,3 +1,11 @@
+# openxlsx (development version)
+
+## Bug Fixes
+
+* Fix inability to save workbook more than once ([#106](https://github.com/ycphs/openxlsx/issues/106))
+
+* Fix `loadWorkbook()` sometimes importing incorrect column attributes
+
 # openxlsx 4.2.3
  
 ## Fixes for Check issues
@@ -29,7 +37,6 @@
 ## New Features
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
-
 
 ## Bug Fixes 
 

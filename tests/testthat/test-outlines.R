@@ -24,6 +24,7 @@ test_that("group columns", {
 
 
 test_that("group rows", {
+
   wb <- createWorkbook()
   assign("wb", wb, envir = .GlobalEnv)
   addWorksheet(wb, "Sheet 1")
@@ -68,6 +69,30 @@ test_that("loading workbook preserves outlines", {
   expect_equal(names(wb$colOutlineLevels[[1]]), c("2", "3", "4"))
   expect_equal(names(wb$outlineLevels[[1]]), c("3", "4"))
   expect_equal(unique(attr(wb$outlineLevels[[1]], "hidden")[names(wb$outlineLevels[[1]]) %in% c("3", "4")]), "true")
+
+  wbb <- createWorkbook()
+
+  addWorksheet(wbb, sheetName = "Test", gridLines = FALSE, tabColour = "deepskyblue")
+
+  writeData(wbb, sheet = "Test", x = c(colA = "testcol1", colB = "testcol2"))
+
+  groupColumns(wbb, "Test", cols = 2:3, hidden = FALSE)
+  setColWidths(wbb, sheet = "Test", cols=c(1:5), widths = c(9,9,9,9,9))
+  groupColumns(wbb, "Test", cols = 5:10, hidden = FALSE)
+  setColWidths(wbb, "Test", cols = 15:20, widths = 9)
+
+  tf <- tempfile("test", fileext = ".xlsx")
+  tf2 <- tempfile("test2", fileext = ".xlsx")
+
+  saveWorkbook(wbb, tf, overwrite = T)
+  test <- wbb$worksheets[[1]]$copy()
+
+  wb <- loadWorkbook(tf)
+  saveWorkbook(wb, tf2, overwrite = T)
+
+  testthat::expect_equal(wb$worksheets[[1]], test)
+
+  unlink(c("tf", "tf2"), recursive = TRUE, force = TRUE)
 })
 
 
@@ -87,4 +112,30 @@ test_that("Grouping after setting colwidths has correct length of hidden attribu
   groupColumns(wb, sheet = 1, cols = 20:100, hidden = TRUE)
 
   expect_equal(length(wb$colOutlineLevels[[1]]), length(attr(wb$colOutlineLevels[[1]], "hidden")))
+})
+
+test_that("Consecutive calls to saveWorkbook doesn't corrupt attributes", {
+
+  wbb <- createWorkbook()
+
+  addWorksheet(wbb, sheetName = "Test", gridLines = FALSE, tabColour = "deepskyblue")
+
+  writeData(wbb, sheet = "Test", x = c(colA = "testcol1", colB = "testcol2"))
+
+  groupColumns(wbb, "Test", cols = 2:3, hidden = FALSE)
+  setColWidths(wbb, sheet = "Test", cols=c(1:5), widths = c(9,9,9,9,9))
+  groupColumns(wbb, "Test", cols = 5:10, hidden = FALSE)
+  setColWidths(wbb, "Test", cols = 15:20, widths = 9)
+
+  tf <- tempfile("test", fileext = ".xlsx")
+  tf2 <- tempfile("test2", fileext = ".xlsx")
+
+  saveWorkbook(wbb, tf, overwrite = T)
+  test <- wbb$worksheets[[1]]$copy()
+
+  saveWorkbook(wbb, tf2, overwrite = T)
+
+  testthat::expect_equal(wbb$worksheets[[1]], test)
+
+  unlink(c("tf", "tf2"), recursive = TRUE, force = TRUE)
 })
