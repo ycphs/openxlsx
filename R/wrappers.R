@@ -2030,7 +2030,7 @@ setHeaderFooter <- function(wb, sheet,
 #' @name pageSetup
 #' @title Set page margins, orientation and print scaling
 #' @description Set page margins, orientation and print scaling
-#' @author Alexander Walker
+#' @author Alexander Walker, Joshua Sturm
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param orientation Page orientation. One of "portrait" or "landscape"
@@ -2046,6 +2046,8 @@ setHeaderFooter <- function(wb, sheet,
 #' @param paperSize See details. Default value is 9 (A4 paper).
 #' @param printTitleRows Rows to repeat at top of page when printing. Integer vector.
 #' @param printTitleCols Columns to repeat at left when printing. Integer vector.
+#' @param summaryRow Location of summary rows in groupings
+#' @param summaryCol Location of summary columns in groupings
 #' @export
 #' @details
 #' paperSize is an integer corresponding to:
@@ -2147,7 +2149,8 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
                       left = 0.7, right = 0.7, top = 0.75, bottom = 0.75,
                       header = 0.3, footer = 0.3,
                       fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
-                      printTitleRows = NULL, printTitleCols = NULL) {
+                      printTitleRows = NULL, printTitleCols = NULL,
+                      summaryRow = NULL, summaryCol = NULL) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -2201,7 +2204,42 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
   
   wb$worksheets[[sheet]]$pageMargins <-
     sprintf('<pageMargins left="%s" right="%s" top="%s" bottom="%s" header="%s" footer="%s"/>', left, right, top, bottom, header, footer)
-  
+
+  validRow <- function(summaryRow) {
+    return(tolower(summaryRow) %in% c("above", "below"))
+  }
+  validCol <- function(summaryCol) {
+    return(tolower(summaryCol) %in% c("left", "right"))
+  }
+
+  outlinepr <- ""
+
+  if (!is.null(summaryRow)) {
+
+    if (!validRow(summaryRow)) {
+      stop("Invalid \`summaryRow\` option. Must be one of \"Above\" or \"Below\".")
+    } else if (tolower(summaryRow) == "above") {
+      outlinepr <- ' summaryBelow=\"0\"'
+    } else {
+      outlinepr <- ' summaryBelow=\"1\"'
+    }
+  }
+
+  if (!is.null(summaryCol)) {
+
+    if (!validCol(summaryCol)) {
+      stop("Invalid \`summaryCol\` option. Must be one of \"Left\" or \"Right\".")
+    } else if (tolower(summaryCol) == "Left") {
+      outlinepr <- paste0(outlinepr, ' summaryRight=\"0\"')
+    } else {
+      outlinepr <- paste0(outlinepr, ' summaryRight=\"1\"')
+    }
+  }
+
+  if (!stri_isempty(outlinepr)) {
+    wb$worksheets[[sheet]]$sheetPr <- unique(c(wb$worksheets[[sheet]]$sheetPr, paste0("<outlinePr", outlinepr, "/>")))
+  }
+
   ## print Titles
   if (!is.null(printTitleRows) & is.null(printTitleCols)) {
     if (!is.numeric(printTitleRows)) {
@@ -2236,8 +2274,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
     if (!is.numeric(printTitleCols)) {
       stop("printTitleCols must be numeric.")
     }
-    
-    
+
     cols <- convert_to_excel_ref(cols = range(printTitleCols), LETTERS = LETTERS)
     rows <- range(printTitleRows)
     
