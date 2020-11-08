@@ -10,7 +10,7 @@ context("Read Sources")
 test_that("read.xlsx from different sources", {
 
   ## URL
-  xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"
+  xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
   df_url <- read.xlsx(xlsxFile)
 
   ## File
@@ -21,7 +21,7 @@ test_that("read.xlsx from different sources", {
 
 
   ## Non-existing URL
-  xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest2.xlsx"
+  xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest2.xlsx"
   expect_error(suppressWarnings(read.xlsx(xlsxFile)))
 
 
@@ -36,7 +36,7 @@ test_that("read.xlsx from different sources", {
 test_that("loadWorkbook from different sources", {
 
   ## URL
-  xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"
+  xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
   wb_url <- loadWorkbook(xlsxFile)
 
   ## File
@@ -52,7 +52,7 @@ test_that("loadWorkbook from different sources", {
 test_that("getDateOrigin from different sources", {
 
   ## URL
-  xlsxFile <- "https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"
+  xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
   origin_url <- getDateOrigin(xlsxFile)
 
   ## File

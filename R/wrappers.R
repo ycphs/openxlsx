@@ -2444,7 +2444,7 @@ protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure =
 #' @author Alexander Walker
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param showGridLines A logical. If \code{TRUE}, grid lines are hidden.
+#' @param showGridLines A logical. If \code{FALSE}, grid lines are hidden.
 #' @export
 #' @examples
 #' wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))

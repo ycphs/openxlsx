@@ -1,11 +1,3 @@
-# openxlsx (development version)
-
-## Bug Fixes
-
-* Fix inability to save workbook more than once ([#106](https://github.com/ycphs/openxlsx/issues/106))
-
-* Fix `loadWorkbook()` sometimes importing incorrect column attributes
-
 # openxlsx 4.2.3
  
 ## Fixes for Check issues
@@ -17,6 +9,10 @@
 ## Bug Fixes
 
 * Grouping columns after setting widths no longer throws an error ([#100](https://github.com/ycphs/openxlsx/issues/100))
+
+* Fix inability to save workbook more than once ([#106](https://github.com/ycphs/openxlsx/issues/106))
+
+* Fix `loadWorkbook()` sometimes importing incorrect column attributes
 
 # openxlsx 4.2.2
 
