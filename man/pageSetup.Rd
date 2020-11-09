@@ -19,7 +19,9 @@ pageSetup(
   fitToHeight = FALSE,
   paperSize = NULL,
   printTitleRows = NULL,
-  printTitleCols = NULL
+  printTitleCols = NULL,
+  summaryRow = NULL,
+  summaryCol = NULL
 )
 }
 \arguments{
@@ -52,6 +54,10 @@ pageSetup(
 \item{printTitleRows}{Rows to repeat at top of page when printing. Integer vector.}
 
 \item{printTitleCols}{Columns to repeat at left when printing. Integer vector.}
+
+\item{summaryRow}{Location of summary rows in groupings. One of "Above" or "Below".}
+
+\item{summaryCol}{Location of summary columns in groupings. One of "Right" or "Left".}
 }
 \description{
 Set page margins, orientation and print scaling
@@ -155,5 +161,5 @@ saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
 }
 }
 \author{
-Alexander Walker
+Alexander Walker, Joshua Sturm
 }
