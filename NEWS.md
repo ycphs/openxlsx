@@ -1,3 +1,10 @@
+# openxlsx 4.2.3.9000
+
+## New Features
+
+* Added ability to change positioning of summary columns and rows.
+	* These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
+
 # openxlsx 4.2.3
  
 ## Fixes for Check issues

@@ -2043,8 +2043,8 @@ setHeaderFooter <- function(wb, sheet,
 #' @param paperSize See details. Default value is 9 (A4 paper).
 #' @param printTitleRows Rows to repeat at top of page when printing. Integer vector.
 #' @param printTitleCols Columns to repeat at left when printing. Integer vector.
-#' @param summaryRow Location of summary rows in groupings
-#' @param summaryCol Location of summary columns in groupings
+#' @param summaryRow Location of summary rows in groupings. One of "Above" or "Below".
+#' @param summaryCol Location of summary columns in groupings. One of "Right" or "Left".
 #' @export
 #' @details
 #' paperSize is an integer corresponding to:
