@@ -69,6 +69,7 @@ Collate:
     'openxlsxCoerce.R'
     'readWorkbook.R'
     'sheet_data_class.R'
+    'utils.R'
     'workbook_column_widths.R'
     'workbook_read_workbook.R'
     'workbook_write_data.R'
