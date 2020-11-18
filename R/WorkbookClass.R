@@ -313,7 +313,7 @@ Workbook$methods(
           # The result is saved to a new chart xml file
           newfl <- file.path(dirname(fl), newname)
           charts[newname] <<- newfl
-          chart <- readLines(fl, warn = FALSE, encoding = "UTF-8")
+          chart <- readUTF8(fl)
           chart <-
             gsub(
               stri_join("(?<=')", sheet_names[[clonedSheet]], "(?='!)"),
@@ -17825,8 +17825,7 @@ Workbook$methods(
 Workbook$methods(
   loadStyles = function(stylesXML) {
     ## Build style objects from the styles XML
-    stylesTxt <-
-      readLines(stylesXML, warn = FALSE, encoding = "UTF-8")
+    stylesTxt <- readUTF8(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
 
     ## Indexed colours

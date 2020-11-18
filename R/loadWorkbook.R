@@ -105,7 +105,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## core
   if (length(coreXML) == 1) {
-    coreXML <- paste(readLines(con = coreXML, encoding = "UTF-8", warn = FALSE), collapse = "")
+    coreXML <- paste(readUTF8(coreXML), collapse = "")
     wb$core <- removeHeadTag(x = coreXML)
   }
 
@@ -115,7 +115,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   worksheet_rId_mapping <- NULL
   workbookRelsXML <- xmlFiles[grepl("workbook.xml.rels$", xmlFiles, perl = TRUE)]
   if (length(workbookRelsXML) > 0) {
-    workbookRelsXML <- paste(readLines(con = workbookRelsXML, encoding = "UTF-8", warn = FALSE), collapse = "")
+    workbookRelsXML <- paste(readUTF8(workbookRelsXML), collapse = "")
     workbookRelsXML <- getChildlessNode(xml = workbookRelsXML, tag = "<Relationship ")
     worksheet_rId_mapping <- workbookRelsXML[grepl("worksheets/sheet", workbookRelsXML, fixed = TRUE)]
   }
@@ -142,7 +142,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   ## xl\
   ## xl\workbook
   if (length(workbookXML) > 0) {
-    workbook <- readLines(workbookXML, warn = FALSE, encoding = "UTF-8")
+    workbook <- readUTF8(workbookXML)
     workbook <- removeHeadTag(workbook)
 
     sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
@@ -176,7 +176,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     for (i in 1:length(sheetrId)) {
       if (is_chart_sheet[i]) {
         count <- 0
-        txt <- paste(readLines(chartSheetsXML[j], warn = FALSE, encoding = "UTF-8"), collapse = "")
+        txt <- paste(readUTF8(chartSheetsXML[j]), collapse = "")
 
         zoom <- regmatches(txt, regexpr('(?<=zoomScale=")[0-9]+', txt, perl = TRUE))
         if (length(zoom) == 0) {
@@ -235,7 +235,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## xl\sharedStrings
   if (length(sharedStringsXML) > 0) {
-    sharedStrings <- readLines(sharedStringsXML, warn = FALSE, encoding = "UTF-8")
+    sharedStrings <- readUTF8(sharedStringsXML)
     sharedStrings <- paste(sharedStrings, collapse = "\n")
     sharedStrings <- removeHeadTag(sharedStrings)
 
@@ -419,7 +419,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## xl\theme
   if (length(themeXML) > 0) {
-    wb$theme <- removeHeadTag(paste(unlist(lapply(sort(themeXML)[[1]], function(x) readLines(x, warn = FALSE, encoding = "UTF-8"))), collapse = ""))
+    wb$theme <- removeHeadTag(paste(unlist(lapply(sort(themeXML)[[1]], readUTF8)), collapse = ""))
   }
 
 
@@ -521,7 +521,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     xml <- lapply(1:length(allRels), function(i) {
       if (haveRels[i]) {
-        xml <- readLines(allRels[[i]], warn = FALSE, encoding = "UTF-8")
+        xml <- readUTF8(allRels[[i]])
         xml <- removeHeadTag(xml)
         xml <- gsub("<Relationships .*?>", "", xml)
         xml <- gsub("</Relationships>", "", xml)
@@ -622,7 +622,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
         tablesXML <- tablesXML[sprintf("table%s.xml", unlist(tables))]
 
         ## tables are now in correct order so we can read them in as they are
-        wb$tables <- sapply(tablesXML, function(x) removeHeadTag(paste(readLines(x, warn = FALSE), collapse = "")))
+        wb$tables <- sapply(tablesXML, function(x) removeHeadTag(paste(readUTF8(x), collapse = "")))
 
         ## pull out refs and attach names
         refs <- regmatches(wb$tables, regexpr('(?<=ref=")[0-9A-Z:]+', wb$tables, perl = TRUE))
@@ -690,14 +690,14 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
     if (length(drawingRelsXML) > 0) {
-      dRels <- lapply(drawingRelsXML, readLines, warn = FALSE)
+      dRels <- lapply(drawingRelsXML, readUTF8)
       dRels <- unlist(lapply(dRels, removeHeadTag))
       dRels <- gsub("<Relationships .*?>", "", dRels)
       dRels <- gsub("</Relationships>", "", dRels)
     }
 
     if (length(drawingsXML) > 0) {
-      dXML <- lapply(drawingsXML, readLines, warn = FALSE, encoding = "UTF-8")
+      dXML <- lapply(drawingsXML, readUTF8)
       dXML <- unlist(lapply(dXML, removeHeadTag))
       dXML <- gsub("<xdr:wsDr .*?>", "", dXML)
       dXML <- gsub("</xdr:wsDr>", "", dXML)
@@ -753,7 +753,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
             ind <- grepl(target, vmlDrawingXML)
 
             if (any(ind)) {
-              txt <- paste(readLines(vmlDrawingXML[ind], warn = FALSE), collapse = "\n")
+              txt <- paste(readUTF8(vmlDrawingXML[ind]), collapse = "\n")
               txt <- removeHeadTag(txt)
 
               i1 <- regexpr("<v:shapetype", txt, fixed = TRUE)
@@ -792,7 +792,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
           ind <- grepl(target, vmlDrawingXML)
 
           if (any(ind)) {
-            txt <- paste(readLines(vmlDrawingXML[ind], warn = FALSE), collapse = "\n")
+            txt <- paste(readUTF8(vmlDrawingXML[ind]), collapse = "\n")
             txt <- removeHeadTag(txt)
 
             cd <- unique(getNodes(xml = txt, tagIn = "<x:ClientData"))
@@ -803,7 +803,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
             target <- unlist(lapply(commentXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
             target <- basename(gsub('"$', "", target))
 
-            txt <- paste(readLines(commentsXML[grepl(target, commentsXML)], warn = FALSE, encoding = "UTF-8"), collapse = "\n")
+            txt <- paste(readUTF8(commentsXML[grepl(target, commentsXML)]), collapse = "\n")
             txt <- removeHeadTag(txt)
 
             authors <- getNodes(xml = txt, tagIn = "<author>")

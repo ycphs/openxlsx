@@ -11,7 +11,7 @@ test_that("Writing sheetData rows XML - iris", {
   openxlsx::write.xlsx(iris, temp_file)
 
   unzip(temp_file, exdir = tempdir())
-  x <- readLines(file.path(tempdir(), "xl", "worksheets", "sheet1.xml"), warn = FALSE, encoding = "UTF-8")
+  x <- readUTF8(file.path(tempdir(), "xl", "worksheets", "sheet1.xml"))
   rows <- unlist(regmatches(x = x, gregexpr("<row.*?</row>", x)))
 
   expected_rows <- c(
@@ -187,7 +187,7 @@ test_that("Writing sheetData rows XML - mtcars", {
   openxlsx::write.xlsx(mtcars, temp_file, row.names = TRUE)
 
   unzip(temp_file, exdir = tempdir())
-  x <- readLines(file.path(tempdir(), "xl", "worksheets", "sheet1.xml"), warn = FALSE, encoding = "UTF-8")
+  x <- readUTF8(file.path(tempdir(), "xl", "worksheets", "sheet1.xml"))
   rows <- unlist(regmatches(x = x, gregexpr("<row.*?</row>", x)))
 
   expected_rows <- c(
