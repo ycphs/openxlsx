@@ -312,3 +312,13 @@ std::vector<std::string> get_letters(){
   return(LETTERS);
   
 }
+
+
+// [[Rcpp::export]]
+CharacterVector markUTF8(CharacterVector x) {
+  const size_t n = x.size();
+  for (size_t i = 0; i < n; ++i) {
+    x[i] = Rf_mkCharCE(x[i], CE_UTF8);
+  }
+  return x;
+}

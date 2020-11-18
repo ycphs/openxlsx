@@ -115,6 +115,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// markUTF8
+CharacterVector markUTF8(CharacterVector x);
+RcppExport SEXP _openxlsx_markUTF8(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(markUTF8(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // loadworksheets
 SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xmlFiles, LogicalVector is_chart_sheet);
 RcppExport SEXP _openxlsx_loadworksheets(SEXP wbSEXP, SEXP styleObjectsSEXP, SEXP xmlFilesSEXP, SEXP is_chart_sheetSEXP) {
@@ -456,6 +467,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_cppReadFile", (DL_FUNC) &_openxlsx_cppReadFile, 1},
     {"_openxlsx_read_file_newline", (DL_FUNC) &_openxlsx_read_file_newline, 1},
     {"_openxlsx_get_letters", (DL_FUNC) &_openxlsx_get_letters, 0},
+    {"_openxlsx_markUTF8", (DL_FUNC) &_openxlsx_markUTF8, 1},
     {"_openxlsx_loadworksheets", (DL_FUNC) &_openxlsx_loadworksheets, 4},
     {"_openxlsx_getNodes", (DL_FUNC) &_openxlsx_getNodes, 2},
     {"_openxlsx_getOpenClosedNode", (DL_FUNC) &_openxlsx_getOpenClosedNode, 3},

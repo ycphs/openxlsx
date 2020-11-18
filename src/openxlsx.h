@@ -81,5 +81,4 @@ LogicalVector isInternalHyperlink(CharacterVector x);
 // helper functions
 string itos(int i);
 SEXP write_file(std::string parent, std::string xmlText, std::string parentEnd, std::string R_fileName);
-  
-  
+CharacterVector markUTF8(CharacterVector x);
