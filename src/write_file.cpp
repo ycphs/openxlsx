@@ -216,7 +216,7 @@ SEXP buildMatrixMixed(CharacterVector v,
     
     
     // If column is date class and no strings exist in column
-    if( (std::find(dateCols.begin(), dateCols.end(), i) != dateCols.end()) &
+    if( (std::find(dateCols.begin(), dateCols.end(), i) != dateCols.end()) &&
         (std::find(charCols.begin(), charCols.end(), i) == charCols.end()) ){
       
       // these are all dates and no characters --> safe to convert numerics
