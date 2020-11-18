@@ -315,10 +315,16 @@ std::vector<std::string> get_letters(){
 
 
 // [[Rcpp::export]]
-CharacterVector markUTF8(CharacterVector x) {
+CharacterVector markUTF8(CharacterVector x, bool clone) {
+  CharacterVector out;
+  if (clone) {
+    out = Rcpp::clone(x);
+  } else {
+    out = x;
+  }
   const size_t n = x.size();
   for (size_t i = 0; i < n; ++i) {
-    x[i] = Rf_mkCharCE(x[i], CE_UTF8);
+    out[i] = Rf_mkCharCE(x[i], CE_UTF8);
   }
-  return x;
+  return out;
 }
