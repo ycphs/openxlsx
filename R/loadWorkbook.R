@@ -803,7 +803,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
             target <- unlist(lapply(commentXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
             target <- basename(gsub('"$', "", target))
 
-            txt <- paste(readLines(commentsXML[grepl(target, commentsXML)], warn = FALSE), collapse = "\n")
+            txt <- paste(readLines(commentsXML[grepl(target, commentsXML)], warn = FALSE, encoding = "UTF-8"), collapse = "\n")
             txt <- removeHeadTag(txt)
 
             authors <- getNodes(xml = txt, tagIn = "<author>")
