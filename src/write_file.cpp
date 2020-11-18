@@ -342,7 +342,8 @@ CharacterVector build_table_xml(std::string table, std::string tableStyleXML, st
   table = table + tableCols + tableStyleXML + "</table>";
   
   
-  return wrap(table);
+  CharacterVector out = wrap(table);  
+  return markUTF8(out);
   
 }
 

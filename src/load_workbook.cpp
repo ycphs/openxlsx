@@ -778,8 +778,8 @@ SEXP getNodes(std::string xml, std::string tagIn){
     
   }  
   
-  return wrap(r) ;  
-  
+  CharacterVector out = wrap(r);  
+  return markUTF8(out);
 }
 
 
@@ -814,9 +814,8 @@ SEXP getOpenClosedNode(std::string xml, std::string open_tag, std::string close_
     
   }  
   
-  return wrap(r) ;  
-  
-  
+  CharacterVector out = wrap(r);  
+  return markUTF8(out);
 }
 
 
@@ -852,7 +851,7 @@ SEXP getAttr(CharacterVector x, std::string tag){
     }
   }
   
-  return wrap(r) ;  
+  return markUTF8(r);   // no need to wrap as r is already a CharacterVector
   
 }
 
@@ -912,7 +911,8 @@ CharacterVector getChildlessNode(std::string xml, std::string tag){
     
   }
   
-  return wrap(r) ;  
+  CharacterVector out = wrap(r);  
+  return markUTF8(out);
   
 }
 
@@ -960,7 +960,8 @@ CharacterVector get_extLst_Major(std::string xml){
     
   }
   
-  return wrap(r) ;  
+  CharacterVector out = wrap(r);  
+  return markUTF8(out);
   
 }
 
