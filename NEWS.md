@@ -1,5 +1,9 @@
 # openxlsx 4.2.3
  
+## New Features
+
+* Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for `createNamedRegion()` ([#103](https://github.com/ycphs/openxlsx/issues/103)), `writeComment()`, `writeData()`, `writeDataTable()` and `writeFormula()`. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to @shrektan for the PR [#118](https://github.com/ycphs/openxlsx/pull/118).
+ 
 ## Fixes for Check issues
  
 * Fix to pass the tests for link-time optimization type mismatches
