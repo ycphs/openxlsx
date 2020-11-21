@@ -1150,6 +1150,9 @@ Workbook$methods(
         ref,
         as.integer(totalsRowCount)
       )
+    # because tableName might be native encoded non-ASCII strings, we need to ensure
+    # it's UTF-8 encoded
+    table <- enc2utf8(table) 
 
     nms <- names(tables)
     tSheets <- attr(tables, "sheet")
