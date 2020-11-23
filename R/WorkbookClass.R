@@ -313,7 +313,7 @@ Workbook$methods(
           # The result is saved to a new chart xml file
           newfl <- file.path(dirname(fl), newname)
           charts[newname] <<- newfl
-          chart <- readLines(fl, warn = FALSE, encoding = "UTF-8")
+          chart <- readUTF8(fl)
           chart <-
             gsub(
               stri_join("(?<=')", sheet_names[[clonedSheet]], "(?='!)"),
@@ -1150,6 +1150,9 @@ Workbook$methods(
         ref,
         as.integer(totalsRowCount)
       )
+    # because tableName might be native encoded non-ASCII strings, we need to ensure
+    # it's UTF-8 encoded
+    table <- enc2utf8(table) 
 
     nms <- names(tables)
     tSheets <- attr(tables, "sheet")
@@ -17825,8 +17828,7 @@ Workbook$methods(
 Workbook$methods(
   loadStyles = function(stylesXML) {
     ## Build style objects from the styles XML
-    stylesTxt <-
-      readLines(stylesXML, warn = FALSE, encoding = "UTF-8")
+    stylesTxt <- readUTF8(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
 
     ## Indexed colours

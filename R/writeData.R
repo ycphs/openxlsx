@@ -240,8 +240,6 @@ writeData <- function(wb,
 
     if (name %in% ex_names) {
       stop(sprintf("Named region with name '%s' already exists!", name))
-    } else if (grepl("[^A-Z0-9_\\.]", name[1], ignore.case = TRUE)) {
-      stop("Invalid characters in name")
     } else if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
       stop("name cannot look like a cell reference.")
     }

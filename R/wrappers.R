@@ -2716,8 +2716,6 @@ createNamedRegion <- function(wb, sheet, cols, rows, name) {
   
   if (tolower(name) %in% ex_names) {
     stop(sprintf("Named region with name '%s' already exists!", name))
-  } else if (grepl("[^A-Z0-9_\\.]", name[1], ignore.case = TRUE)) {
-    stop("Invalid characters in name")
   } else if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
     stop("name cannot look like a cell reference.")
   }
@@ -2800,7 +2798,7 @@ getNamedRegions.default <- function(x) {
   xmlFiles <- unzip(x, exdir = xmlDir)
   
   workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
-  workbook <- unlist(readLines(workbook, warn = FALSE, encoding = "UTF-8"))
+  workbook <- unlist(readUTF8(workbook))
   
   dn <- getChildlessNode(xml = removeHeadTag(workbook), tag = "<definedName ")
   if (length(dn) == 0) {
@@ -3269,7 +3267,7 @@ getDateOrigin <- function(xlsxFile) {
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
   
   workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
-  workbook <- paste(unlist(readLines(workbook, warn = FALSE)), collapse = "")
+  workbook <- paste(unlist(readUTF8(workbook)), collapse = "")
   
   if (grepl('date1904="1"|date1904="true"', workbook, ignore.case = TRUE)) {
     origin <- "1904-01-01"
@@ -3312,7 +3310,7 @@ getSheetNames <- function(file) {
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
   
   workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
-  workbook <- readLines(workbook, warn = FALSE, encoding = "UTF-8")
+  workbook <- readUTF8(workbook)
   workbook <- removeHeadTag(workbook)
   sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
   sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl = TRUE)))

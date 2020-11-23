@@ -216,7 +216,7 @@ SEXP buildMatrixMixed(CharacterVector v,
     
     
     // If column is date class and no strings exist in column
-    if( (std::find(dateCols.begin(), dateCols.end(), i) != dateCols.end()) &
+    if( (std::find(dateCols.begin(), dateCols.end(), i) != dateCols.end()) &&
         (std::find(charCols.begin(), charCols.end(), i) == charCols.end()) ){
       
       // these are all dates and no characters --> safe to convert numerics
@@ -342,7 +342,8 @@ CharacterVector build_table_xml(std::string table, std::string tableStyleXML, st
   table = table + tableCols + tableStyleXML + "</table>";
   
   
-  return wrap(table);
+  CharacterVector out = wrap(table);  
+  return markUTF8(out);
   
 }
 

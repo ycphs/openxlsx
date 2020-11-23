@@ -172,14 +172,14 @@ read.xlsx.default <- function(xlsxFile,
 
   ## get workbook names
   workbookRelsXML <-
-    paste(readLines(workbookRelsXML, warn = FALSE, encoding = "UTF-8"),
+    paste(readUTF8(workbookRelsXML),
       collapse = ""
     )
   workbookRelsXML <-
     getChildlessNode(xml = workbookRelsXML, tag = "<Relationship ")
 
   workbook <-
-    unlist(readLines(workbook, warn = FALSE, encoding = "UTF-8"))
+    unlist(readUTF8(workbook))
   workbook <- removeHeadTag(workbook)
 
   sheets <-
@@ -499,7 +499,7 @@ read.xlsx.default <- function(xlsxFile,
     }
 
     stylesXML <- xmlFiles[grepl("styles.xml", xmlFiles)]
-    styles <- readLines(stylesXML, warn = FALSE)
+    styles <- readUTF8(stylesXML)
     styles <- removeHeadTag(styles)
 
     ## Number formats

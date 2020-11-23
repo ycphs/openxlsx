@@ -37,6 +37,10 @@ get_letters <- function() {
     .Call(`_openxlsx_get_letters`)
 }
 
+markUTF8 <- function(x, clone) {
+    .Call(`_openxlsx_markUTF8`, x, clone)
+}
+
 loadworksheets <- function(wb, styleObjects, xmlFiles, is_chart_sheet) {
     .Call(`_openxlsx_loadworksheets`, wb, styleObjects, xmlFiles, is_chart_sheet)
 }

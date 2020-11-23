@@ -917,3 +917,7 @@ hashPassword <- function(password) {
   hash <- bitwXor(bitwXor(hash, length(chars)), 0xCE4B)
   format(as.hexmode(hash), upper.case = TRUE)
 }
+
+readUTF8 <- function(x) {
+  readLines(x, warn = FALSE, encoding = "UTF-8")
+}
