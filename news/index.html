@@ -133,6 +133,13 @@
 <h1 class="page-header" data-toc-text="4.2.3">
 <a href="#openxlsx-423" class="anchor"></a>openxlsx 4.2.3<small> 2020-10-27 </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li>Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for <code><a href="../reference/createNamedRegion.html">createNamedRegion()</a></code> (<a href="https://github.com/ycphs/openxlsx/issues/103"><a href='https://github.com/ycphs/openxlsx/issues/103'>#103</a></a>), <code><a href="../reference/writeComment.html">writeComment()</a></code>, <code><a href="../reference/writeData.html">writeData()</a></code>, <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code> and <code><a href="../reference/writeFormula.html">writeFormula()</a></code>. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the PR <a href="https://github.com/ycphs/openxlsx/pull/118"><a href='https://github.com/ycphs/openxlsx/issues/118'>#118</a></a>.</li>
+</ul>
+</div>
 <div id="fixes-for-check-issues" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fixes-for-check-issues" class="anchor"></a>Fixes for Check issues</h2>
@@ -155,9 +162,9 @@
 <h1 class="page-header" data-toc-text="4.2.2">
 <a href="#openxlsx-422" class="anchor"></a>openxlsx 4.2.2<small> 2020-09-17 </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h2>
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>Added features for <code>conditionalFormatting</code> to support also ‘contains not’, ‘begins with’ and ‘ends with’</p></li>
 <li><p>Added return value for <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code> the default value for <code>returnValue</code> is <code>FALSE</code> (<a href="https://github.com/ycphs/openxlsx/issues/71"><a href='https://github.com/ycphs/openxlsx/issues/71'>#71</a></a>)</p></li>
@@ -177,9 +184,9 @@
 <h1 class="page-header" data-toc-text="4.2.0">
 <a href="#openxlsx-420" class="anchor"></a>openxlsx 4.2.0<small> Unreleased </small>
 </h1>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New Features</h2>
+<a href="#new-features-2" class="anchor"></a>New Features</h2>
 <ul>
 <li>Added <code><a href="../reference/groupColumns.html">groupColumns()</a></code>, <code><a href="../reference/groupRows.html">groupRows()</a></code>, <code><a href="../reference/ungroupColumns.html">ungroupColumns()</a></code>, and <code><a href="../reference/ungroupRows.html">ungroupRows()</a></code> to group/ugroup columns/rows (<a href="https://github.com/ycphs/openxlsx/issues/32"><a href='https://github.com/ycphs/openxlsx/issues/32'>#32</a></a>)</li>
 </ul>
@@ -216,9 +223,9 @@
 <h1 class="page-header" data-toc-text="4.1.5">
 <a href="#openxlsx-415" class="anchor"></a>openxlsx 4.1.5<small> 2020-05-06 </small>
 </h1>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New Features</h2>
+<a href="#new-features-3" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>Add functions to get and set the creator of the xlsx file</p></li>
 <li><p>add function to set the name of the user who last modified the xlsx file</p></li>
@@ -247,9 +254,9 @@
 <h1 class="page-header" data-toc-text="4.1.4">
 <a href="#openxlsx-414" class="anchor"></a>openxlsx 4.1.4<small> 2019-12-06 </small>
 </h1>
-<div id="new-features-3" class="section level2">
+<div id="new-features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New Features</h2>
+<a href="#new-features-4" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>Added <code><a href="../reference/getCellRefs.html">getCellRefs()</a></code> as function. <a href="https://github.com/ycphs/openxlsx/issues/7"><a href='https://github.com/ycphs/openxlsx/issues/7'>#7</a></a></p></li>
 <li><p>Added parameter for customizing na.strings</p></li>
@@ -277,9 +284,9 @@
 <h1 class="page-header" data-toc-text="4.1.3">
 <a href="#openxlsx-413" class="anchor"></a>openxlsx 4.1.3<small> 2019-11-07 </small>
 </h1>
-<div id="new-features-4" class="section level2">
+<div id="new-features-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-4" class="anchor"></a>New Features</h2>
+<a href="#new-features-5" class="anchor"></a>New Features</h2>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 <li>Added <code>pkgdown</code> to create site.</li>
@@ -306,9 +313,9 @@
 <h1 class="page-header" data-toc-text="4.1.1">
 <a href="#openxlsx-411" class="anchor"></a>openxlsx 4.1.1<small> Unreleased </small>
 </h1>
-<div id="new-features-5" class="section level2">
+<div id="new-features-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-5" class="anchor"></a>New Features</h2>
+<a href="#new-features-6" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>sep.names</code> allows choose other separator than ‘.’ for variable names with a blank inside</p></li>
 <li><p>Improve handling of non-region names in <code>getNamedRegions</code> and add related test</p></li>
@@ -319,9 +326,9 @@
 <h1 class="page-header" data-toc-text="4.1.0">
 <a href="#openxlsx-410" class="anchor"></a>openxlsx 4.1.0<small> 2018-05-26 </small>
 </h1>
-<div id="new-features-6" class="section level2">
+<div id="new-features-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-6" class="anchor"></a>New Features</h2>
+<a href="#new-features-7" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>deleteNamedRegions</code> to delete named region and optionally the worksheet data</p></li>
 <li><p>set Workbook properties ‘title’, ‘subject’, ‘category’</p></li>
@@ -346,9 +353,9 @@
 <h1 class="page-header" data-toc-text="4.0.17">
 <a href="#openxlsx-4017" class="anchor"></a>openxlsx 4.0.17<small> 2017-03-23 </small>
 </h1>
-<div id="new-features-7" class="section level2">
+<div id="new-features-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-7" class="anchor"></a>New Features</h2>
+<a href="#new-features-8" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>getNamedRegions</code> returns sheet name and cell references along with the named regions.</p></li>
 <li><p><code>borderStyle</code> and <code>borderColour</code> can be vector to specify different values for each side</p></li>
@@ -381,9 +388,9 @@
 <h1 class="page-header" data-toc-text="4.0.0">
 <a href="#openxlsx-400" class="anchor"></a>openxlsx 4.0.0<small> 2017-01-09 </small>
 </h1>
-<div id="new-features-8" class="section level2">
+<div id="new-features-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-8" class="anchor"></a>New Features</h2>
+<a href="#new-features-9" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>Reduced RAM usage and improved performance</p></li>
 <li><p>maintain vbaProject, slicers, pivotTables on load</p></li>
@@ -405,9 +412,9 @@
 <h1 class="page-header" data-toc-text="3.0.2">
 <a href="#openxlsx-302" class="anchor"></a>openxlsx 3.0.2<small> Unreleased </small>
 </h1>
-<div id="new-features-9" class="section level2">
+<div id="new-features-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-9" class="anchor"></a>New Features</h2>
+<a href="#new-features-10" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>“between” type for conditional formatting values in some interval.</p></li>
 <li><p><code>colWidths</code> parameter added to <code>write.xlsx</code> for auto column widths.</p></li>
@@ -431,9 +438,9 @@
 <h1 class="page-header" data-toc-text="3.0.1">
 <a href="#openxlsx-301" class="anchor"></a>openxlsx 3.0.1<small> Unreleased </small>
 </h1>
-<div id="new-features-10" class="section level2">
+<div id="new-features-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-10" class="anchor"></a>New Features</h2>
+<a href="#new-features-11" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>improved performance of <code>read.xlsx</code> and <code>loadWorkbook</code></p></li>
 <li><p><code>writeFormula</code> funciton added to write cell formulas. Also columns with class “formula” are written as cell formulas similar how column classes determine cell styling</p></li>
@@ -461,9 +468,9 @@
 <h1 class="page-header" data-toc-text="2.4.0">
 <a href="#openxlsx-240" class="anchor"></a>openxlsx 2.4.0<small> 2015-03-07 </small>
 </h1>
-<div id="new-features-11" class="section level2">
+<div id="new-features-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-11" class="anchor"></a>New Features</h2>
+<a href="#new-features-12" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>stackable cell styling</p></li>
 <li><p><code>getDateOrigin</code> function to return the date origin used internally by the xlsx file to pass to <code>convertToDate</code></p></li>
@@ -492,9 +499,9 @@
 <h1 class="page-header" data-toc-text="2.1.3">
 <a href="#openxlsx-213" class="anchor"></a>openxlsx 2.1.3<small> Unreleased </small>
 </h1>
-<div id="new-features-12" class="section level2">
+<div id="new-features-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-12" class="anchor"></a>New Features</h2>
+<a href="#new-features-13" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>conditionalFormatting</code> type “databar”</p></li>
 <li><p><code>asTable</code> parameter to <code>write.xlsx</code> to writing using <code>writeDataTable</code>.</p></li>
@@ -535,9 +542,9 @@
 <h1 class="page-header" data-toc-text="2.0.15">
 <a href="#openxlsx-2015" class="anchor"></a>openxlsx 2.0.15<small> 2014-07-27 </small>
 </h1>
-<div id="new-features-13" class="section level2">
+<div id="new-features-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-13" class="anchor"></a>New Features</h2>
+<a href="#new-features-14" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>writeData</code> now style based on column class the same as <code>writeDataTable</code></p></li>
 <li><p>Vignette “Formatting” for examples focussed on formatting</p></li>
@@ -567,9 +574,9 @@
 <h1 class="page-header" data-toc-text="2.0.1">
 <a href="#openxlsx-201" class="anchor"></a>openxlsx 2.0.1<small> 2014-05-29 </small>
 </h1>
-<div id="new-features-14" class="section level2">
+<div id="new-features-15" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-14" class="anchor"></a>New Features</h2>
+<a href="#new-features-15" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>write.xlsx</code> function to write data directly to file via the <code>writeData</code> function with basic cell styling.</p></li>
 <li><p><code>writeDataTable</code> now styles columns of class ‘Date’, ‘POSIXct’, ‘POSIXt’, ‘currency’, ‘accounting’, ‘percentage’ as Excel formats Date, Date, Date, Currency, Accounting, Percentage respectively.</p></li>

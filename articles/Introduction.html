@@ -89,7 +89,7 @@
       <h1 data-toc-skip>Introduction</h1>
                         <h4 class="author">Alexander Walker, Philipp Schauberger</h4>
             
-            <h4 class="date">2020-10-30</h4>
+            <h4 class="date">2020-11-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
@@ -105,20 +105,20 @@
 <h3 class="hasAnchor">
 <a href="#write-xlsx" class="anchor"></a>write.xlsx</h3>
 <p>The simplest way to write to a workbook is write.xlsx(). By default, write.xlsx calls writeData. If asTable is TRUE write.xlsx will write x as an Excel table.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## write to working directory</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## write to working directory</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX1.xlsx"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable1.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable1.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-list-of-data-frames-to-xlsx-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-list-of-data-frames-to-xlsx-file" class="anchor"></a>write list of data.frames to xlsx-file</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">## write a list of data.frames to individual worksheets using list names as worksheet names</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## write a list of data.frames to individual worksheets using list names as worksheet names</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"MTCARS"</span> <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSX2.xlsx"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable2.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable2.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-xlsx-also-accepts-styling-parameters" class="section level3">
 <h3 class="hasAnchor">
@@ -126,8 +126,8 @@
 <div id="the-simplest-way-is-to-set-default-options-and-set-column-class" class="section level4">
 <h4 class="hasAnchor">
 <a href="#the-simplest-way-is-to-set-default-options-and-set-column-class" class="anchor"></a>The simplest way is to set default options and set column class</h4>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"mm/dd/yyyy"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd hh:mm:ss"</span><span class="op">)</span>
@@ -147,7 +147,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TinyNumbers</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"scientific"</span>
 
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"writeXLSX3.xlsx"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">df</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable3.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">df</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable3.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -157,8 +157,8 @@
 <div id="define-a-style-for-column-headers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#define-a-style-for-column-headers" class="anchor"></a>define a style for column headers</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontColour <span class="op">=</span> <span class="st">"#ffffff"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span>,
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontColour <span class="op">=</span> <span class="st">"#ffffff"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span>,
                   halign <span class="op">=</span> <span class="st">"center"</span>, valign <span class="op">=</span> <span class="st">"center"</span>, textDecoration <span class="op">=</span> <span class="st">"Bold"</span>,
                   border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span>, textRotation <span class="op">=</span> <span class="fl">45</span><span class="op">)</span>
 
@@ -166,26 +166,26 @@
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX5.xlsx"</span>, borders <span class="op">=</span> <span class="st">"columns"</span>, headerStyle <span class="op">=</span> <span class="va">hs</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"writeXLSXTable4.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span>,
-headerStyle <span class="op">=</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>textRotation <span class="op">=</span> <span class="fl">45</span><span class="op">)</span><span class="op">)</span></pre></div>
+headerStyle <span class="op">=</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>textRotation <span class="op">=</span> <span class="fl">45</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="when-writing-a-list-the-stylings-will-apply-to-all-list-elements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#when-writing-a-list-the-stylings-will-apply-to-all-list-elements" class="anchor"></a>When writing a list, the stylings will apply to all list elements</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"colClasses"</span> <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"colClasses"</span> <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSX6.xlsx"</span>, borders <span class="op">=</span> <span class="st">"columns"</span>, headerStyle <span class="op">=</span> <span class="va">hs</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable5.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span>, tableStyle <span class="op">=</span> <span class="st">"TableStyleLight2"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"writeXLSX6.xlsx"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"writeXLSXTable5.xlsx"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"writeXLSXTable5.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-xlsx-returns-the-workbook-object-for-further-editing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-xlsx-returns-the-workbook-object-for-further-editing" class="anchor"></a>write.xlsx returns the workbook object for further editing</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"writeXLSX6.xlsx"</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"writeXLSX6.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, widths <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
-<span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"writeXLSX6.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"writeXLSX6.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="workbook-creation-walk-through" class="section level2">
@@ -194,82 +194,82 @@ headerStyle <span class="op">=</span> <span class="fu"><a href="../reference/cre
 <div id="create-workbook-and-set-default-border-colour-and-style" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-workbook-and-set-default-border-colour-and-style" class="anchor"></a>create workbook and set default border Colour and style</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/modifyBaseFont.html">modifyBaseFont</a></span><span class="op">(</span><span class="va">wb</span>, fontSize <span class="op">=</span> <span class="fl">10</span>, fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/modifyBaseFont.html">modifyBaseFont</a></span><span class="op">(</span><span class="va">wb</span>, fontSize <span class="op">=</span> <span class="fl">10</span>, fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-sheets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-sheets" class="anchor"></a>Add Sheets</h3>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Iris"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Iris"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-data-to-sheet-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-data-to-sheet-1" class="anchor"></a>write data to sheet 1</h3>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/freezePane.html">freezePane</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, firstRow <span class="op">=</span> <span class="cn">TRUE</span>, firstCol <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## freeze first row and column</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/freezePane.html">freezePane</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, firstRow <span class="op">=</span> <span class="cn">TRUE</span>, firstCol <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## freeze first row and column</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>,
 colNames <span class="op">=</span> <span class="cn">TRUE</span>, rowNames <span class="op">=</span> <span class="cn">TRUE</span>,
 tableStyle <span class="op">=</span> <span class="st">"TableStyleLight9"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="st">"A"</span>, widths <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="st">"A"</span>, widths <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-data-to-sheet-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-data-to-sheet-2" class="anchor"></a>write data to sheet 2</h3>
 <p>iris data.frame is added as excel table on sheet 2.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, <span class="va">iris</span>, startCol <span class="op">=</span> <span class="st">"K"</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, <span class="va">iris</span>, startCol <span class="op">=</span> <span class="st">"K"</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="fu">qplot</span><span class="op">(</span>data<span class="op">=</span><span class="va">iris</span>, x <span class="op">=</span> <span class="va">Sepal.Length</span>, y<span class="op">=</span> <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>
 <span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, xy<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span> <span class="co">## insert plot at cell B16</span>
 
 <span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
-<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">var</span><span class="op">)</span></pre></div>
+<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">var</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-write-group-means" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-write-group-means" class="anchor"></a>add write group means</h3>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">headSty</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fgFill<span class="op">=</span><span class="st">"#DCE6F1"</span>, halign<span class="op">=</span><span class="st">"center"</span>, border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span><span class="op">)</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">headSty</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fgFill<span class="op">=</span><span class="st">"#DCE6F1"</span>, halign<span class="op">=</span><span class="st">"center"</span>, border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="st">"Iris dataset group means"</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="va">means</span>, startCol <span class="op">=</span> <span class="st">"B"</span>, startRow<span class="op">=</span><span class="fl">3</span>, borders<span class="op">=</span><span class="st">"rows"</span>, headerStyle <span class="op">=</span> <span class="va">headSty</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="va">means</span>, startCol <span class="op">=</span> <span class="st">"B"</span>, startRow<span class="op">=</span><span class="fl">3</span>, borders<span class="op">=</span><span class="st">"rows"</span>, headerStyle <span class="op">=</span> <span class="va">headSty</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-write-group-variances" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-write-group-variances" class="anchor"></a>add write group variances</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="st">"Iris dataset group variances"</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="st">"Iris dataset group variances"</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x<span class="op">=</span> <span class="va">vars</span>, startCol <span class="op">=</span> <span class="st">"B"</span>, startRow<span class="op">=</span><span class="fl">10</span>, borders<span class="op">=</span><span class="st">"columns"</span>,
 headerStyle <span class="op">=</span> <span class="va">headSty</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, widths <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="co">## width is recycled for each col</span>
-<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols<span class="op">=</span><span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols<span class="op">=</span><span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="add-style-mean-variance-table-headers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-style-mean-variance-table-headers" class="anchor"></a>add style mean &amp; variance table headers</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontSize<span class="op">=</span><span class="fl">14</span>, textDecoration<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, style <span class="op">=</span> <span class="va">s1</span>, rows<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span>, cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontSize<span class="op">=</span><span class="fl">14</span>, textDecoration<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, style <span class="op">=</span> <span class="va">s1</span>, rows<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span>, cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="save-workbook" class="section level3">
 <h3 class="hasAnchor">
 <a href="#save-workbook" class="anchor"></a>save workbook</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"basics.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## save to working directory</span></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"basics.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## save to working directory</span></code></pre></div>
 </div>
 </div>
 <div id="gallery" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gallery" class="anchor"></a>Gallery</h2>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="co">## inspired by xtable gallery</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## inspired by xtable gallery</span>
 <span class="co">#https://CRAN.R-project.org/package=xtable/vignettes/xtableGallery.pdf</span>
 
 <span class="co">## Create a new workbook</span>
@@ -391,7 +391,7 @@ labels <span class="op">=</span> <span class="va">month.abb</span><span class="o
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## view without saving</span>
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="further-examples" class="section level2">
 <h2 class="hasAnchor">
@@ -399,8 +399,8 @@ labels <span class="op">=</span> <span class="va">month.abb</span><span class="o
 <div id="stock-price" class="section level3">
 <h3 class="hasAnchor">
 <a href="#stock-price" class="anchor"></a>Stock Price</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
 
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -449,7 +449,7 @@ cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span cla
 
 <span class="co">## save workbook to working directory</span>
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"stockPrice.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"stockPrice.xlsx"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"stockPrice.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="image-compression-using-pca" class="section level3">
 <h3 class="hasAnchor">

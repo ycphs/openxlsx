@@ -89,7 +89,7 @@
       <h1 data-toc-skip>Formating with xlsx</h1>
                         <h4 class="author">Alexander Walker, Philipp Schauberger</h4>
             
-            <h4 class="date">2020-10-30</h4>
+            <h4 class="date">2020-11-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/master/vignettes/Formatting.Rmd"><code>vignettes/Formatting.Rmd</code></a></small>
       <div class="hidden name"><code>Formatting.Rmd</code></div>
@@ -101,8 +101,8 @@
 <div id="formatting-with-writedata-and-writedatatable" class="section level2">
 <h2 class="hasAnchor">
 <a href="#formatting-with-writedata-and-writedatatable" class="anchor"></a>Formatting with writeData and writeDataTable</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co">## data.frame to write</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## data.frame to write</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">4</span>,
                  <span class="st">"Logical"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
                  <span class="st">"Currency"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"$"</span>,<span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,
@@ -151,7 +151,7 @@
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="va">df</span>, startRow <span class="op">=</span> <span class="fl">16</span>, startCol <span class="op">=</span> <span class="fl">2</span>, tableStyle <span class="op">=</span> <span class="st">"TableStyleLight2"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="va">df</span>, startRow <span class="op">=</span> <span class="fl">23</span>, startCol <span class="op">=</span> <span class="fl">2</span>, tableStyle <span class="op">=</span> <span class="st">"TableStyleMedium21"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co">## opens a temp version</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co">## opens a temp version</span></code></pre></div>
 </div>
 <div id="use-of-pre-defined-table-styles" class="section level2">
 <h2 class="hasAnchor">
@@ -162,8 +162,8 @@
 <div id="date-formatting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#date-formatting" class="anchor"></a>Date Formatting</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># data.frame of dates</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># data.frame of dates</span>
 <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">dates</span>, <span class="va">dates</span><span class="op">)</span>
 <span class="fu"><a href="../reference/names.html">names</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
@@ -214,14 +214,14 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting"</span>, <span class="va">dates</span>, startRow  <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="datetime-formatting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datetime-formatting" class="anchor"></a>DateTime Formatting</h2>
 <p>The conversion from POSIX to Excel datetimes is dependent on the timezone you are in. If POSIX values are being written incorrectly, try setting the timezone with (for example)</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>TZ <span class="op">=</span> <span class="st">"Australia/Sydney"</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>TZ <span class="op">=</span> <span class="st">"Australia/Sydney"</span><span class="op">)</span>
 
 <span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">*</span><span class="fl">10000</span><span class="op">)</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">dateTimes</span>, <span class="va">dateTimes</span><span class="op">)</span>
@@ -264,13 +264,13 @@
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"DateTime Formatting"</span>, <span class="va">dateTimes</span>, startRow  <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"DateTime Formatting.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"DateTime Formatting.xlsx"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"DateTime Formatting.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="conditional-formatting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conditional-formatting" class="anchor"></a>Conditional Formatting</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"cellIs"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Moving Row"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Moving Col"</span><span class="op">)</span>
@@ -336,14 +336,14 @@
 
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"conditionalFormattingExample.xlsx"</span>, <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="numeric-formatting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#numeric-formatting" class="anchor"></a>Numeric Formatting</h2>
 <p>numeric columns styling can be set using the numFmt parameter in createStyle or a default can be set with, for example, options(“openxlsx.numFmt” = “#,#0.00”)</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 1"</span><span class="op">)</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">12.987654321</span>, ncol <span class="op">=</span> <span class="fl">7</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="co">## data.frame to write</span>
@@ -389,7 +389,7 @@
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 3"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
