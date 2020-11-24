@@ -71,7 +71,7 @@ xml_to_hyperlink <- function(xml) {
     x
   })
 
-  hyperlink_objects <- lapply(1:length(xml), function(i) {
+  hyperlink_objects <- lapply(seq_along(xml), function(i) {
     tmp_vals <- vals[[i]]
     tmp_nms <- names[[i]]
     names(tmp_vals) <- tmp_nms
