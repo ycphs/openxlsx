@@ -715,7 +715,7 @@ Workbook$methods(
         file.path(tmpDir, "xl", "pivotCache", "_rels")
       dir.create(path = pivotCacheRelsDir, recursive = TRUE)
 
-      for (i in 1:length(pivotTables)) {
+      for (i in seq_along(pivotTables)) {
         file.copy(
           from = pivotTables[i],
           to = file.path(pivotTablesDir, sprintf("pivotTable%s.xml", i)),
@@ -724,7 +724,7 @@ Workbook$methods(
         )
       }
 
-      for (i in 1:length(pivotDefinitions)) {
+      for (i in seq_along(pivotDefinitions)) {
         file.copy(
           from = pivotDefinitions[i],
           to = file.path(pivotCacheDir, sprintf("pivotCacheDefinition%s.xml", i)),
@@ -733,7 +733,7 @@ Workbook$methods(
         )
       }
 
-      for (i in 1:length(pivotRecords)) {
+      for (i in seq_along(pivotRecords)) {
         file.copy(
           from = pivotRecords[i],
           to = file.path(pivotCacheDir, sprintf("pivotCacheRecords%s.xml", i)),
@@ -742,7 +742,7 @@ Workbook$methods(
         )
       }
 
-      for (i in 1:length(pivotDefinitionsRels)) {
+      for (i in seq_along(pivotDefinitionsRels)) {
         file.copy(
           from = pivotDefinitionsRels[i],
           to = file.path(
@@ -754,7 +754,7 @@ Workbook$methods(
         )
       }
 
-      for (i in 1:length(pivotTables.xml.rels)) {
+      for (i in seq_along(pivotTables.xml.rels)) {
         write_file(
           body = pivotTables.xml.rels[[i]],
           fl = file.path(pivotTablesRelsDir, sprintf("pivotTable%s.xml.rels", i))
@@ -770,7 +770,7 @@ Workbook$methods(
       slicerCachesDir <- file.path(tmpDir, "xl", "slicerCaches")
       dir.create(path = slicerCachesDir, recursive = TRUE)
 
-      for (i in 1:length(slicers)) {
+      for (i in seq_along(slicers)) {
         if (nchar(slicers[i]) > 0) {
           file.copy(from = slicers[i], to = file.path(slicersDir, sprintf("slicer%s.xml", i)))
         }
@@ -778,7 +778,7 @@ Workbook$methods(
 
 
 
-      for (i in 1:length(slicerCaches)) {
+      for (i in seq_along(slicerCaches)) {
         write_file(
           body = slicerCaches[[i]],
           fl = file.path(slicerCachesDir, sprintf("slicerCache%s.xml", i))
@@ -826,7 +826,7 @@ Workbook$methods(
 
     ## write tables
     if (length(unlist(tables, use.names = FALSE)) > 0) {
-      for (i in 1:length(unlist(tables, use.names = FALSE))) {
+      for (i in seq_along(unlist(tables, use.names = FALSE))) {
         if (!grepl("openxlsx_deleted", attr(tables, "tableName")[i], fixed = TRUE)) {
           write_file(
             body = pxml(unlist(tables, use.names = FALSE)[[i]]),
@@ -848,7 +848,7 @@ Workbook$methods(
       xlqueryTablesDir <- file.path(tmpDir, "xl", "queryTables")
       dir.create(path = xlqueryTablesDir, recursive = TRUE)
 
-      for (i in 1:length(queryTables)) {
+      for (i in seq_along(queryTables)) {
         write_file(
           body = queryTables[[i]],
           fl = file.path(xlqueryTablesDir, sprintf("queryTable%s.xml", i))
@@ -866,7 +866,7 @@ Workbook$methods(
       externalLinksDir <- file.path(tmpDir, "xl", "externalLinks")
       dir.create(path = externalLinksDir, recursive = TRUE)
 
-      for (i in 1:length(externalLinks)) {
+      for (i in seq_along(externalLinks)) {
         write_file(
           body = externalLinks[[i]],
           fl = file.path(externalLinksDir, sprintf("externalLink%s.xml", i))
@@ -880,7 +880,7 @@ Workbook$methods(
         file.path(tmpDir, "xl", "externalLinks", "_rels")
       dir.create(path = externalLinksRelsDir, recursive = TRUE)
 
-      for (i in 1:length(externalLinksRels)) {
+      for (i in seq_along(externalLinksRels)) {
         write_file(
           body = externalLinksRels[[i]],
           fl = file.path(
@@ -1231,7 +1231,7 @@ Workbook$methods(
 
 Workbook$methods(
   writeDrawingVML = function(dir) {
-    for (i in 1:length(comments)) {
+    for (i in seq_along(comments)) {
       id <- 1025
 
       cd <- unlist(lapply(comments[[i]], "[[", "clientData"))
@@ -1671,7 +1671,7 @@ Workbook$methods(
         fontNode <- stri_join(fontNode, sprintf(
           "<color %s/>",
           stri_join(
-            sapply(1:length(style$fontColour), function(i) {
+            sapply(seq_along(style$fontColour), function(i) {
               sprintf('%s="%s"', names(style$fontColour)[i], style$fontColour[i])
             }),
             sep = " ",
@@ -2067,10 +2067,10 @@ Workbook$methods(
         if (length(worksheets_rels[[i]]) > 0) {
           ws_rels <- worksheets_rels[[i]]
           if (hasHL) {
-            h_inds <- stri_join(1:length(worksheets[[i]]$hyperlinks), "h")
+            h_inds <- stri_join(seq_along(worksheets[[i]]$hyperlinks), "h")
             ws_rels <-
               c(ws_rels, unlist(
-                lapply(1:length(h_inds), function(j) {
+                lapply(seq_along(h_inds), function(j) {
                   worksheets[[i]]$hyperlinks[[j]]$to_target_xml(h_inds[j])
                 })
               ))
@@ -2495,7 +2495,7 @@ Workbook$methods(
     }
 
     form <-
-      sapply(1:length(value), function(i) {
+      sapply(seq_along(value), function(i) {
         sprintf("<formula%s>%s</formula%s>", i, value[i], i)
       })
     worksheets[[sheet]]$dataValidations <<-
@@ -3073,7 +3073,7 @@ Workbook$methods(
     ## Steps
     # Order workbook.xml.rels:
     #   sheets -> style -> theme -> sharedStrings -> tables -> calcChain
-    # Assign workbook.xml.rels children rIds, 1:length(workbook.xml.rels)
+    # Assign workbook.xml.rels children rIds, seq_along(workbook.xml.rels)
     # Assign workbook$sheets rIds 1:nSheets
     #
     ## drawings will always be r:id1 on worksheet
@@ -3146,7 +3146,7 @@ Workbook$methods(
 
     ## Re assign rIds to children of workbook.xml.rels
     workbook.xml.rels <<-
-      unlist(lapply(1:length(workbook.xml.rels), function(i) {
+      unlist(lapply(seq_along(workbook.xml.rels), function(i) {
         gsub('(?<=Relationship Id="rId)[0-9]+',
           i,
           workbook.xml.rels[[i]],
@@ -3171,7 +3171,7 @@ Workbook$methods(
 
     ## Reassign rId to workbook sheet elements, (order sheets by sheetId first)
     workbook$sheets <<-
-      unlist(lapply(1:length(workbook$sheets), function(i) {
+      unlist(lapply(seq_along(workbook$sheets), function(i) {
         gsub('(?<= r:id="rId)[0-9]+', i, workbook$sheets[[i]], perl = TRUE)
       }))
 
@@ -3234,7 +3234,7 @@ Workbook$methods(
           )
         ))
 
-      for (i in 1:length(workbook$definedNames)) {
+      for (i in seq_along(workbook$definedNames)) {
         if (!is.na(newId[i])) {
           workbook$definedNames[[i]] <<-
             gsub(
@@ -3252,7 +3252,7 @@ Workbook$methods(
 
     ## update workbook r:id to match reordered workbook.xml.rels externalLink element
     if (length(extRefInds) > 0) {
-      newInds <- as.integer(1:length(extRefInds) + length(sheetInds))
+      newInds <- as.integer(seq_along(extRefInds) + length(sheetInds))
       workbook$externalReferences <<-
         stri_join(
           "<externalReferences>",
@@ -3337,7 +3337,7 @@ Workbook$methods(
 
 
     ## Make sure all rowHeights have rows, if not append them!
-    for (i in 1:length(worksheets)) {
+    for (i in seq_along(worksheets)) {
       if (length(rowHeights[[i]]) > 0) {
         rh <- as.integer(names(rowHeights[[i]]))
         missing_rows <- rh[!rh %in% worksheets[[i]]$sheet_data$rows]

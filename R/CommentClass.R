@@ -31,7 +31,7 @@ Comment$methods(show = function() {
   styleShow <- "Style:\n"
 
   if ("list" %in% class(style)) {
-    for (i in 1:length(style)) {
+    for (i in seq_along(style)) {
       styleShow <- append(styleShow, sprintf("Font name: %s\n", style[[i]]$fontName[[1]])) ## Font name
       styleShow <- append(styleShow, sprintf("Font size: %s\n", style[[i]]$fontSize[[1]])) ## Font size
       styleShow <- append(styleShow, sprintf("Font colour: %s\n", gsub("^FF", "#", style[[i]]$fontColour[[1]]))) ## Font colour

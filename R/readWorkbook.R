@@ -535,7 +535,7 @@ read.xlsx.default <- function(xlsxFile,
     isDate <- (s %in% dateStyleIds)
 
     ## set to false if in string_refs
-    isDate[1:length(s) %in% string_refs] <- FALSE
+    isDate[seq_along(s) %in% string_refs] <- FALSE
 
     # check numbers are also integers
     not_an_integer <- numeric(length(v))

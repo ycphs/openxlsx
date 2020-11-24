@@ -257,7 +257,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
 
   if (!is.null(newStylesElements)) {
     if (stack) {
-      for (i in 1:length(newStylesElements)) {
+      for (i in seq_along(newStylesElements)) {
         wb$addStyle(
           sheet = sheet,
           style = newStylesElements[[i]]$style,
@@ -350,11 +350,11 @@ writeCommentXML <- function(comment_list, file_name) {
   xml <- c(xml, paste0("<authors>", paste(sprintf("<author>%s</author>", authors), collapse = ""), "</authors><commentList>"))
 
 
-  for (i in 1:length(comment_list)) {
+  for (i in seq_along(comment_list)) {
     authorInd <- which(authors == comment_list[[i]]$author) - 1L
     xml <- c(xml, sprintf('<comment ref="%s" authorId="%s" shapeId="0"><text>', comment_list[[i]]$ref, authorInd))
 
-    for (j in 1:length(comment_list[[i]]$comment)) {
+    for (j in seq_along(comment_list[[i]]$comment)) {
       xml <- c(xml, sprintf('<r>%s<t xml:space="preserve">%s</t></r>', comment_list[[i]]$style[[j]], comment_list[[i]]$comment[[j]]))
     }
 
@@ -445,7 +445,7 @@ getAttrsFont <- function(xml, tag) {
     Encoding(x) <- "UTF-8"
     x
   })
-  vals <- lapply(1:length(vals), function(i) {
+  vals <- lapply(seq_along(vals), function(i) {
     names(vals[[i]]) <- nms[[i]]
     vals[[i]]
   })
@@ -483,7 +483,7 @@ buildFontList <- function(fonts) {
 
   ## Build font objects
   ft <- replicate(list(), n = length(fonts))
-  for (i in 1:length(fonts)) {
+  for (i in seq_along(fonts)) {
     f <- NULL
     nms <- NULL
     if (length(unlist(sz[i])) > 0) {
@@ -526,7 +526,7 @@ buildFontList <- function(fonts) {
       nms <- c(nms, "underline")
     }
 
-    f <- lapply(1:length(f), function(i) unlist(f[i]))
+    f <- lapply(seq_along(f), function(i) unlist(f[i]))
     names(f) <- nms
 
     ft[[i]] <- f
@@ -581,7 +581,7 @@ nodeAttributes <- function(x) {
   attrs <- lapply(attrs, gsub, pattern = '"', replacement = "")
 
   attrs <- lapply(attrs, strsplit, split = "=")
-  for (i in 1:length(attrs)) {
+  for (i in seq_along(attrs)) {
     nms <- lapply(attrs[[i]], "[[", 1)
     vals <- lapply(attrs[[i]], "[[", 2)
     a <- unlist(vals)
@@ -613,7 +613,7 @@ buildBorder <- function(x) {
 
   sides <- c("TOP", "BOTTOM", "LEFT", "RIGHT", "DIAGONAL")
   sideBorder <- character(length = length(x))
-  for (i in 1:length(x)) {
+  for (i in seq_along(x)) {
     tmp <- sides[sapply(sides, function(s) grepl(s, x[[i]], ignore.case = TRUE))]
     if (length(tmp) > 1) tmp <- tmp[[1]]
     if (length(tmp) == 1) {
@@ -825,7 +825,7 @@ mergeCell2mapping <- function(x) {
   })
 
   ## for each we grid.expand
-  refs <- do.call("rbind", lapply(1:length(rows), function(i) {
+  refs <- do.call("rbind", lapply(seq_along(rows), function(i) {
     tmp <- expand.grid("cols" = cols[[i]], "rows" = rows[[i]])
     tmp$ref <- paste0(convert_to_excel_ref(cols = tmp$cols, LETTERS = LETTERS), tmp$rows)
     tmp$anchor_cell <- tmp$ref[1]
@@ -845,7 +845,7 @@ splitHeaderFooter <- function(x) {
   tmp <- gsub("<(/|)(odd|even|first)(Header|Footer)>(&amp;|)", "", x, perl = TRUE)
   special_tags <- regmatches(tmp, regexpr("&amp;[^LCR]", tmp))
   if (length(special_tags) > 0) {
-    for (i in 1:length(special_tags)) {
+    for (i in seq_along(special_tags)) {
       tmp <- gsub(special_tags[i], sprintf("openxlsx__%s67298679", i), tmp, fixed = TRUE)
     }
   }
@@ -853,7 +853,7 @@ splitHeaderFooter <- function(x) {
   tmp <- strsplit(tmp, split = "&amp;")[[1]]
 
   if (length(special_tags) > 0) {
-    for (i in 1:length(special_tags)) {
+    for (i in seq_along(special_tags)) {
       tmp <- gsub(sprintf("openxlsx__%s67298679", i), special_tags[i], tmp, fixed = TRUE)
     }
   }
