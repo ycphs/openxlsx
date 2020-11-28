@@ -133,6 +133,19 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   v <- as.character(t(as.matrix(
     data.frame(df, stringsAsFactors = FALSE, check.names = FALSE, fix.empty.names = FALSE)
   )))
+  
+  
+  vl <- stri_length(v)
+  
+  for (i in which(vl > 32767)) {
+
+    v[i] <- stri_sub(v[i], 1, 32767)
+  }
+  
+  
+
+ 
+ 
 
 
   if (keepNA) {
