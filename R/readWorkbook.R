@@ -249,7 +249,7 @@ read.xlsx.default <- function(xlsxFile,
     region <-
       gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))
 
-    if (grepl(":", region, fixed = TRUE)) {
+    if (any(grepl(":", region, fixed = TRUE))) {
       cols <-
         unlist(lapply(
           strsplit(region, split = ":", fixed = TRUE),

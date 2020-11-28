@@ -350,3 +350,12 @@ test_that("Matching Substrings breaks reading named regions", {
 
   unlink(temp_file)
 })
+
+
+test_that("Import without warning", {
+  
+  filename <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
+  
+  expect_equal(data.frame(X1 = "A1", X2 = "B1"), read.xlsx(filename, namedRegion = "MyRange", rowNames = FALSE, colNames = FALSE))
+
+})
