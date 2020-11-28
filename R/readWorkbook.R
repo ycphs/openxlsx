@@ -225,6 +225,10 @@ read.xlsx.default <- function(xlsxFile,
       warning("Workbook has no named regions.")
       return(NULL)
     }
+    
+    # search for sheetNames in list of named_region
+    dn_sheetNames <- gsub(".*[>]([^.]+)[!].*", "\\1", dn)
+    found_sheets  <- which(sheetNames %in% dn_sheetNames)
 
     dn_names <-
       replaceXMLEntities(regmatches(dn, regexpr('(?<=name=")[^"]+', dn, perl = TRUE)))
@@ -233,9 +237,21 @@ read.xlsx.default <- function(xlsxFile,
     if (!any(ind)) {
       stop(sprintf("Region '%s' not found!", namedRegion))
     }
-
-    ## pull out first node value
-    dn <- dn[ind]
+    
+    # Todo: Replace with a selection option or bail entirely. This has the possibility to produce unwanted results.
+    # Do not print warning if a specific sheet is requested
+    if (length(ind) > 1 & sheet == 1) {
+      message(sprintf("Region '%s' found on multiple sheets. Using the first appearance.", namedRegion))
+    }
+    
+    # use namedRegion from sheet. if this fails: fallback and pull out first node value
+    if (length(ind) == length(found_sheets)){
+      idx <- which(found_sheets == sheet)
+      dn <- dn[idx]
+    } else {
+      dn <- dn[ind]
+    }
+    
     region <-
       regmatches(dn, regexpr("(?<=>)[^\\<]+", dn, perl = TRUE))
     sheet <-
@@ -249,7 +265,7 @@ read.xlsx.default <- function(xlsxFile,
     region <-
       gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))
 
-    if (any(grepl(":", region, fixed = TRUE))) {
+    if (grepl(":", region, fixed = TRUE)) {
       cols <-
         unlist(lapply(
           strsplit(region, split = ":", fixed = TRUE),
