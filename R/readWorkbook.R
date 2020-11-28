@@ -240,6 +240,8 @@ read.xlsx.default <- function(xlsxFile,
     found_sheets  <- which(sheetNames %in% dn_sheetNames)
 
     ind <- tolower(dn_namedRegion) == tolower(namedRegion)
+    ind <- ind[ind] # length can be > 1 keep only true
+    
     if (!any(ind)) {
       stop(sprintf("Region '%s' not found!", namedRegion))
     }
