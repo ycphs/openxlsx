@@ -242,13 +242,9 @@ read.xlsx.default <- function(xlsxFile,
     ind <- tolower(dn_namedRegion) == tolower(namedRegion)
     ind <- ind[ind] # length can be > 1 keep only true
     
-    if (!any(ind)) {
-      stop(sprintf("Region '%s' not found!", namedRegion))
-    }
-    
     # Todo: Replace with a selection option or bail entirely. This has the possibility to produce unwanted results.
     # Do not print warning if a specific sheet is requested
-    if (length(ind) > 1 & sheet == 1) {
+    if ((length(ind) > 1) & (sheet == 1)) {
       msg <- c(sprintf("Region '%s' found on multiple sheets: \n", namedRegion),
                paste(dn_sheetNames, collapse = "\n"),
                "\nUsing the first appearance.")
