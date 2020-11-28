@@ -218,24 +218,49 @@ read.xlsx.default <- function(xlsxFile,
   reading_named_region <- FALSE
   if (!is.null(namedRegion)) {
     dn <- getNodes(xml = workbook, tagIn = "<definedNames>")
-    dn <-
-      unlist(regmatches(dn, gregexpr("<definedName [^<]*", dn, perl = TRUE)))
-
+    dn <- unlist(regmatches(dn, gregexpr("<definedName [^<]*", dn, perl = TRUE)))
+    
+    # namedRegion in between 'name="' and '"'
+    dn_namedRegion <- gsub(".*name=\"(\\w+)\".*", "\\1", dn)
+    
+    dn <- dn[which(dn_namedRegion == namedRegion)]
+    
     if (length(dn) == 0) {
-      warning("Workbook has no named regions.")
+      if (all(dn_namedRegion == "")) {
+        warning("Workbook has no named region.")
+      } else {
+        warning("Workbook has no such named region.")
+      }
       return(NULL)
     }
+    
+    # search for sheetNames in list of named_region
+    # sheet in between '>' and '!'
+    dn_sheetNames <- gsub(".*[>]([^.]+)[!].*", "\\1", dn)
+    found_sheets  <- which(sheetNames %in% dn_sheetNames)
 
-    dn_names <-
-      replaceXMLEntities(regmatches(dn, regexpr('(?<=name=")[^"]+', dn, perl = TRUE)))
-
-    ind <- tolower(dn_names) == tolower(namedRegion)
-    if (!any(ind)) {
-      stop(sprintf("Region '%s' not found!", namedRegion))
+    ind <- tolower(dn_namedRegion) == tolower(namedRegion)
+    ind <- ind[ind] # length can be > 1 keep only true
+    
+    # Todo: Replace with a selection option or bail entirely. This has the possibility to produce unwanted results.
+    # Do not print warning if a specific sheet is requested
+    if ((length(ind) > 1) & (sheet == 1)) {
+      msg <- c(sprintf("Region '%s' found on multiple sheets: \n", namedRegion),
+               paste(dn_sheetNames, collapse = "\n"),
+               "\nUsing the first appearance.")
+      message(msg)
     }
-
-    ## pull out first node value
-    dn <- dn[ind]
+    
+    # use namedRegion from selected sheet. if this fails: fallback and pull out first node value
+    idx <- which(found_sheets == sheet)
+    
+    if (!identical(idx, integer(0))) {
+      dn <- dn[idx]
+    } else {
+      message(sprintf("Region '%s' not found on selected sheet. Using the first appearance.", namedRegion))
+      dn <- dn[ind]
+    }
+    
     region <-
       regmatches(dn, regexpr("(?<=>)[^\\<]+", dn, perl = TRUE))
     sheet <-
@@ -247,7 +272,7 @@ read.xlsx.default <- function(xlsxFile,
     }
 
     region <-
-      gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))
+      gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))[1]
 
     if (grepl(":", region, fixed = TRUE)) {
       cols <-

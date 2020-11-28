@@ -350,3 +350,23 @@ test_that("Matching Substrings breaks reading named regions", {
 
   unlink(temp_file)
 })
+
+
+test_that("Read namedRegion from specific sheet", {
+  
+  filename <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
+  
+  namedR <- "MyRange"
+  sheets <- openxlsx::getSheetNames(filename)
+  
+  # read the correct sheets
+  expect_equal(data.frame(X1 = "S1A1", X2 = "S1B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet1"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+  expect_equal(data.frame(X1 = "S3A1", X2 = "S3B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet3"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+  
+  # no such namedRegion on sheet(s)
+  expect_warning(read.xlsx(filename, sheet = which(sheets %in% "Sheet2"), namedRegion = "MyRage", rowNames = FALSE, colNames = FALSE))
+  
+  # no such namedRegion on selected sheet, read the first namedRegion anyway (backward compatible)
+  expect_equal(data.frame(X1 = "S1A1", X2 = "S1B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet2"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+               
+})
