@@ -330,7 +330,41 @@ writeData <- function(wb,
     na.string = na.string,
     list_sep = sep
   )
-
+  
+  v <- as.character(t(as.matrix(
+    data.frame(df, stringsAsFactors = FALSE, check.names = FALSE, fix.empty.names = FALSE)
+  )))
+  
+  
+  vl <- stri_length(v)
+  
+  for (i in which(vl > 32767)) {
+    
+    if(vl[i]>32768+30){
+      message(
+        paste0(
+          stri_sub(v[i], 32768, 32768 + 15),
+          " ... " ,
+          stri_sub(v[i], vl[i] - 15, vl[i]),
+          " is truncated. 
+Number of characters exeed the limit of 32767."
+        )
+      )
+    } else {
+      message(
+        paste0(
+          stri_sub(v[i], 32768, -1),
+          " is truncated. 
+Number of characters exeed the limit of 32767."
+        )
+      )
+      
+    }
+    
+    # v[i] <- stri_sub(v[i], 1, 32767)
+  }
+  
+  
   ## header style
   if ("Style" %in% class(headerStyle) & colNames) {
     addStyle(
