@@ -157,8 +157,8 @@ List getCellInfo(std::string xmlFile,
   // file.open(xmlFile.c_str());
   // while (file >> buf)
   // xml += buf + ' ';
-  std::string xml = read_file_newline(xmlFile);
-  
+  std::string xml = read_file_newline(xmlFile);  
+  std::string xml2 = "";
   std::string rtag = "r=";
   std::string ttag = " t=";
   std::string stag = " s=";
@@ -182,6 +182,7 @@ List getCellInfo(std::string xmlFile,
   }
   
   xml = xml.substr(pos + 11);     // get from "sheedData" to the end
+  xml2 = xml;
   
   // startRow cut off
   int row_i = 0;
@@ -275,7 +276,7 @@ List getCellInfo(std::string xmlFile,
   }
   
   // pull out cell merges
-  CharacterVector merge_cell_xml = getChildlessNode(xml, "<mergeCell ");
+  CharacterVector merge_cell_xml = getChildlessNode(xml2, "<mergeCell ");
   
   
   CharacterVector r(ocs);
