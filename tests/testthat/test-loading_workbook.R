@@ -902,3 +902,10 @@ test_that("Loading readTest.xlsx Sheet 1", {
 
   expect_equal(expected_shared_strings, wb$sharedStrings)
 })
+
+test_that("Loading multiple pivot tables: loadPivotTables.xlsx works",{
+  ## loadPivotTables.xlsx is a file with 3 pivot tables and 2 of them have the same reference data.
+  fl <- system.file("extdata", "loadPivotTables.xlsx", package = "openxlsx")
+  wb <- loadWorkbook(fl)
+  
+})
