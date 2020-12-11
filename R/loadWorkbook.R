@@ -535,9 +535,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
 
-    ############################################################################################
-    ############################################################################################
-    ## Slicers
+    
+    ## Slicers -------------------------------------------------------------------------------------
+
+    
 
     if (length(slicerXML) > 0) {
       slicerXML <- slicerXML[order(nchar(slicerXML), slicerXML)]
@@ -592,9 +593,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
     }
 
-    ############################################################################################
-    ############################################################################################
-    ## tables
+
+    ## Tables --------------------------------------------------------------------------------------
+
+    
 
     if (length(tablesXML) > 0) {
       tables <- lapply(xml, function(x) as.integer(regmatches(x, regexpr("(?<=table)[0-9]+(?=\\.xml)", x, perl = TRUE))))
@@ -678,9 +680,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
 
 
-    ############################################################################################
-    ############################################################################################
-    ## drawings
+
+    ## Drawings ------------------------------------------------------------------------------------
+
+    
 
     ## xml is in the order of the sheets, drawIngs is toes to sheet position of hasDrawing
     ## Not every sheet has a drawing.xml
@@ -733,9 +736,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
 
-    ############################################################################################
-    ############################################################################################
-    ## VML drawings
+
+    ## VML Drawings --------------------------------------------------------------------------------
 
 
     if (length(vmlDrawingXML) > 0) {
