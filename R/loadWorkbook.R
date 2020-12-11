@@ -261,7 +261,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     # pivotTable cacheId links to workbook.xml which links to workbook.xml.rels via rId
     # we don't modify the cacheId, only the rId
-    nPivotTables <- length(pivotTableXML)
+    nPivotTables <- length(pivotDefXML)
     rIds <- 20000L + 1:nPivotTables
 
     ## pivot tables
