@@ -904,8 +904,25 @@ test_that("Loading readTest.xlsx Sheet 1", {
 })
 
 test_that("Loading multiple pivot tables: loadPivotTables.xlsx works",{
-  ## loadPivotTables.xlsx is a file with 3 pivot tables and 2 of them have the same reference data.
+  ## loadPivotTables.xlsx is a file with 3 pivot tables and 2 of them have the same reference data (pivotCacheDefinition)
   fl <- system.file("extdata", "loadPivotTables.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
+  
+  # Check that wb is correctly loaded
+  sheet_names <- c("iris",
+                   "iris_pivot",
+                   "penguins",
+                   "penguins_pivot1",
+                   "penguins_pivot2")
+  
+  expect_equal(wb$sheet_names, sheet_names)
+  
+  # Check number of 'pivotTables'
+  expect_equal(length(wb$pivotTables),
+               3)
+  # Check number of 'pivotCacheDefinition'
+  expect_equal(length(wb$pivotDefinitions),
+               2)
+  
   
 })
