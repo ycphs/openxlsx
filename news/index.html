@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -108,7 +108,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ycphs/openxlsx/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -137,7 +137,8 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li>Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for <code><a href="../reference/createNamedRegion.html">createNamedRegion()</a></code> (<a href="https://github.com/ycphs/openxlsx/issues/103"><a href='https://github.com/ycphs/openxlsx/issues/103'>#103</a></a>), <code><a href="../reference/writeComment.html">writeComment()</a></code>, <code><a href="../reference/writeData.html">writeData()</a></code>, <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code> and <code><a href="../reference/writeFormula.html">writeFormula()</a></code>. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the PR <a href="https://github.com/ycphs/openxlsx/pull/118"><a href='https://github.com/ycphs/openxlsx/issues/118'>#118</a></a>.</li>
+<li><p>Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for <code><a href="../reference/createNamedRegion.html">createNamedRegion()</a></code> (<a href="https://github.com/ycphs/openxlsx/issues/103"><a href='https://github.com/ycphs/openxlsx/issues/103'>#103</a></a>), <code><a href="../reference/writeComment.html">writeComment()</a></code>, <code><a href="../reference/writeData.html">writeData()</a></code>, <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code> and <code><a href="../reference/writeFormula.html">writeFormula()</a></code>. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the PR <a href="https://github.com/ycphs/openxlsx/pull/118"><a href='https://github.com/ycphs/openxlsx/issues/118'>#118</a></a>.</p></li>
+<li><p><code><a href="../reference/setColWidths.html">setColWidths()</a></code> now supports zero-length <code>cols</code>, which is convinient when <code>cols</code> is dynamically provided <a href="https://github.com/ycphs/openxlsx/issues/128"><a href='https://github.com/ycphs/openxlsx/issues/128'>#128</a></a>. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the feature request and the PR.</p></li>
 </ul>
 </div>
 <div id="fixes-for-check-issues" class="section level2">
