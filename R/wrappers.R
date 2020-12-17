@@ -1411,6 +1411,9 @@ setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, len
   if (ignoreMergedCells) {
     widths[widths == "auto"] <- "auto2"
   }
+
+  # should do nothing if the cols' length is zero
+  if (length(cols) == 0L) return(invisible(0))
   
   if (length(widths) > length(cols)) {
     stop("More widths than columns supplied.")

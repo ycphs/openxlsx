@@ -3,6 +3,8 @@
 ## New Features
 
 * Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for `createNamedRegion()` ([#103](https://github.com/ycphs/openxlsx/issues/103)), `writeComment()`, `writeData()`, `writeDataTable()` and `writeFormula()`. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to @shrektan for the PR [#118](https://github.com/ycphs/openxlsx/pull/118).
+
+* `setColWidths()` now supports zero-length `cols`, which is convinient when `cols` is dynamically provided [#128](https://github.com/ycphs/openxlsx/issues/128). Thanks to @shrektan for the feature request and the PR.
  
 ## Fixes for Check issues
  
