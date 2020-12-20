@@ -226,45 +226,72 @@ read.xlsx.default <- function(xlsxFile,
     dn <- getNodes(xml = workbook, tagIn = "<definedNames>")
     dn <- unlist(regmatches(dn, gregexpr("<definedName [^<]*", dn, perl = TRUE)))
     
-    # namedRegion in between 'name="' and '"'
-    dn_namedRegion <- gsub(".*name=\"(\\w+)\".*", "\\1", dn)
-    
-    dn <- dn[which(dn_namedRegion == namedRegion)]
-    
-    if (length(dn) == 0) {
-      if (all(dn_namedRegion == "")) {
-        warning("Workbook has no named region.")
-      } else {
-        warning("Workbook has no such named region.")
-      }
-      return(NULL)
-    }
-    
     # search for sheetNames in list of named_region
     # sheet in between '>' and '!'
     dn_sheetNames <- gsub(".*[>]([^.]+)[!].*", "\\1", dn)
-    found_sheets  <- which(sheetNames %in% dn_sheetNames)
-
-    ind <- tolower(dn_namedRegion) == tolower(namedRegion)
-    ind <- ind[ind] # length can be > 1 keep only true
     
-    # Todo: Replace with a selection option or bail entirely. This has the possibility to produce unwanted results.
+    # Check if there are any whitespaces in dn_sheetNames.
+    # Hint: sheet names must not contain: \ / ? * [ ]
+    wsp <- grepl(pattern = "'", dn_sheetNames)
+    if (any(wsp)) {
+      # sheetNames in between ''' and '''. If there is a whitespace in a sheet
+      # name, the name will be "'sheet 1'" instead of "sheet 1.
+      dn_sheetNames[wsp] <- gsub("^'+|'+$", "\\1", dn_sheetNames[wsp])
+    }
+        
+    # namedRegion in between 'name="' and '"'
+    dn_namedRegion <- gsub(".*name=\"(\\w+)\".*", "\\1", dn)
+    
+    if (length(dn) == 0) {
+      warning("Workbook has no named region.")
+      return(invisible(NULL))
+    }
+    
+    if (all(dn_namedRegion != namedRegion)) {
+      warning("Workbook has no such named region.")
+      return(invisible(NULL))
+    }
+    
+    idx <- match(dn_namedRegion, namedRegion)
+    
+    # make sure that the length of both vectors is identical
+    dn <- dn[which(!is.na(idx))]
+    dn_namedRegion <- dn_namedRegion[which(!is.na(idx))]
+    dn_sheetNames  <- dn_sheetNames[which(!is.na(idx))]
+    
+    # a sheet was selected
+    if (sheetselected) {
+      idx <- match(dn_sheetNames, sheetNames)
+      if (is.numeric(sheet)) {
+        idx <- which(idx == sheet)
+        
+      } else {
+        idx <- which(dn_sheetNames == sheet)
+      }
+      dn <- dn[idx]
+      
+      if (length(dn) > 1) {
+        warning("unexpectedly found more than one dn.")
+        print(dn)
+        return(invisible(NULL))
+      }
+      
+      if ( identical(dn, character(0)) ) {
+        warning("Workbook has no such named region on this sheet.")
+        return(invisible(NULL))
+      }
+    }
+    
     # Do not print warning if a specific sheet is requested
-    if ((length(ind) > 1) & (sheet == 1)) {
+    if ((length(dn) > 1) & (!sheetselected)) {
       msg <- c(sprintf("Region '%s' found on multiple sheets: \n", namedRegion),
                paste(dn_sheetNames, collapse = "\n"),
                "\nUsing the first appearance.")
       message(msg)
-    }
-    
-    # use namedRegion from selected sheet. if this fails: fallback and pull out first node value
-    idx <- which(found_sheets == sheet)
-    
-    if (!identical(idx, integer(0))) {
-      dn <- dn[idx]
-    } else {
-      message(sprintf("Region '%s' not found on selected sheet. Using the first appearance.", namedRegion))
-      dn <- dn[ind]
+      
+      dn <- dn[1]
+      dn_namedRegion <- dn_namedRegion[1]
+      dn_sheetNames  <- dn_sheetNames[1]
     }
     
     region <-
@@ -278,7 +305,7 @@ read.xlsx.default <- function(xlsxFile,
     }
 
     region <-
-      gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))[1]
+      gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))
 
     if (grepl(":", region, fixed = TRUE)) {
       cols <-
