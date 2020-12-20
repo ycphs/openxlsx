@@ -488,7 +488,7 @@ read.xlsx.default <- function(xlsxFile,
 
   ## Remove cells where cell is NA (na.strings or empty sharedString '<si><t/></si>')
   if (length(cell_info$v) == 0) {
-    warning("No data found on worksheet.", call. = FALSE)
+    warning("No data found on worksheet.\n", call. = FALSE)
     return(NULL)
   }
 
