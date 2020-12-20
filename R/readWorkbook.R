@@ -70,7 +70,7 @@
 #'
 #' @export
 read.xlsx <- function(xlsxFile,
-                      sheet = 1,
+                      sheet,
                       startRow = 1,
                       colNames = TRUE,
                       rowNames = FALSE,
@@ -89,7 +89,7 @@ read.xlsx <- function(xlsxFile,
 
 #' @export
 read.xlsx.default <- function(xlsxFile,
-                              sheet = 1,
+                              sheet,
                               startRow = 1,
                               colNames = TRUE,
                               rowNames = FALSE,
@@ -108,6 +108,12 @@ read.xlsx.default <- function(xlsxFile,
 
   if (!file.exists(xlsxFile)) {
     stop("File does not exist.")
+  }
+  
+  sheetselected <- TRUE
+  if (missing(sheet)) {
+    sheet <- 1
+    sheetselected <- FALSE
   }
 
   if (grepl("\\.xls$|\\.xlm$", xlsxFile)) {

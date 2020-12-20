@@ -6,7 +6,7 @@
 \usage{
 read.xlsx(
   xlsxFile,
-  sheet = 1,
+  sheet,
   startRow = 1,
   colNames = TRUE,
   rowNames = FALSE,
