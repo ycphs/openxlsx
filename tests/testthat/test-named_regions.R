@@ -360,13 +360,13 @@ test_that("Read namedRegion from specific sheet", {
   sheets <- openxlsx::getSheetNames(filename)
   
   # read the correct sheets
-  expect_equal(data.frame(X1 = "S1A1", X2 = "S1B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet1"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
-  expect_equal(data.frame(X1 = "S3A1", X2 = "S3B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet3"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+  expect_equal(data.frame(X1 = "S1A1", X2 = "S1B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = "Sheet1", namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+  expect_equal(data.frame(X1 = "S2A1", X2 = "S2B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet2"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
+  expect_equal(data.frame(X1 = "S3A1", X2 = "S3B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = "Sheet3", namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
   
-  # no such namedRegion on sheet(s)
-  expect_warning(read.xlsx(filename, sheet = which(sheets %in% "Sheet2"), namedRegion = "MyRage", rowNames = FALSE, colNames = FALSE))
+  # Warning: Workbook has no such named region. (Wrong namedRegion selected.)
+  expect_warning(read.xlsx(filename, sheet = "Sheet2", namedRegion = "MyRage", rowNames = FALSE, colNames = FALSE))
   
-  # no such namedRegion on selected sheet, read the first namedRegion anyway (backward compatible)
-  expect_equal(data.frame(X1 = "S1A1", X2 = "S1B1", stringsAsFactors = FALSE), read.xlsx(filename, sheet = which(sheets %in% "Sheet2"), namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
-               
+  # Warning: Workbook has no such named region on this sheet. (Correct namedRegion, but wrong sheet selected.)
+  expect_warning(read.xlsx(filename, sheet = "Sheet4", namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
 })
