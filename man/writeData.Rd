@@ -36,6 +36,8 @@ writeData(
 
 \item{startRow}{A vector specifying the starting row to write to.}
 
+\item{array}{A bool if the function written is of type array}
+
 \item{xy}{An alternative to specifying \code{startCol} and
 \code{startRow} individually.  A vector of the form
 \code{c(startCol, startRow)}.}

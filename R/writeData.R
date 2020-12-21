@@ -8,6 +8,7 @@
 #' @param x Object to be written. For classes supported look at the examples.
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
+#' @param array A bool if the function written is of type array 
 #' @param xy An alternative to specifying \code{startCol} and
 #' \code{startRow} individually.  A vector of the form
 #' \code{c(startCol, startRow)}.
@@ -438,6 +439,7 @@ if (!array) {
 #' @param x A character vector.
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
+#' @param array A bool if the function written is of type array
 #' @param xy An alternative to specifying \code{startCol} and
 #' \code{startRow} individually.  A vector of the form
 #' \code{c(startCol, startRow)}.
