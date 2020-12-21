@@ -10,7 +10,7 @@ writeData(
   x,
   startCol = 1,
   startRow = 1,
-  array,
+  array = FALSE,
   xy = NULL,
   colNames = TRUE,
   rowNames = FALSE,
