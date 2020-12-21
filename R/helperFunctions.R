@@ -477,9 +477,9 @@ buildFontList <- function(fonts) {
   family <- getAttrs(fonts, "<family ")
   scheme <- getAttrs(fonts, "<scheme ")
 
-  italic <- lapply(fonts, getChildlessNode, tag = "<i")
-  bold <- lapply(fonts, getChildlessNode, tag = "<b")
-  underline <- lapply(fonts, getChildlessNode, tag = "<u")
+  italic <- lapply(fonts, getChildlessNode, tag = "i")
+  bold <- lapply(fonts, getChildlessNode, tag = "b")
+  underline <- lapply(fonts, getChildlessNode, tag = "u")
 
   ## Build font objects
   ft <- replicate(list(), n = length(fonts))
@@ -634,7 +634,7 @@ buildBorder <- function(x) {
 
   ## Colours
   cols <- replicate(n = length(sideBorder), list(rgb = "FF000000"))
-  colNodes <- unlist(sapply(x, getChildlessNode, tag = "<color", USE.NAMES = FALSE))
+  colNodes <- unlist(sapply(x, getChildlessNode, tag = "color", USE.NAMES = FALSE))
 
   if (length(colNodes) > 0) {
     attrs <- regmatches(colNodes, regexpr('(theme|indexed|rgb|auto)=".+"', colNodes))

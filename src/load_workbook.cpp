@@ -80,7 +80,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       }
       
       if(sheetPr.size() == 0)
-        sheetPr = getChildlessNode(xml_pre, "<sheetPr");
+        sheetPr = getChildlessNode(xml_pre, "sheetPr");
       
       if(sheetPr.size() > 0)
         this_worksheet.field("sheetPr") = sheetPr;
@@ -88,7 +88,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       
       
       // Freeze Panes
-      CharacterVector node_xml = getChildlessNode(xml_pre, "<pane ");
+      CharacterVector node_xml = getChildlessNode(xml_pre, "pane");
       if(node_xml.size() > 0)
         this_worksheet.field("freezePane") = node_xml;
       
@@ -211,28 +211,28 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       
       std::string xml_post = xml.substr(pos_post);
       
-      node_xml = getChildlessNode(xml_post, "<sheetProtection ");
+      node_xml = getChildlessNode(xml_post, "sheetProtection");
       if(node_xml.size() > 0) {
         this_worksheet.field("sheetProtection") = node_xml;
       }
       
       
-      node_xml = getChildlessNode(xml_post, "<autoFilter ");
+      node_xml = getChildlessNode(xml_post, "autoFilter");
       if(node_xml.size() > 0)
         this_worksheet.field("autoFilter") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<hyperlink ");
+      node_xml = getChildlessNode(xml_post, "hyperlink");
       if(node_xml.size() > 0)
         this_worksheet.field("hyperlinks") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<pageMargins ");
+      node_xml = getChildlessNode(xml_post, "pageMargins");
       if(node_xml.size() > 0)
         this_worksheet.field("pageMargins") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<pageSetup ");
+      node_xml = getChildlessNode(xml_post, "pageSetup");
       if(node_xml.size() > 0){
         for(int j = 0; j < node_xml.size(); j++){
           
@@ -252,7 +252,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         this_worksheet.field("pageSetup") = node_xml;
       }
       
-      node_xml = getChildlessNode(xml_post, "<mergeCell ");
+      node_xml = getChildlessNode(xml_post, "mergeCell");
       if(node_xml.size() > 0)
         this_worksheet.field("mergeCells") = node_xml;
       
@@ -297,9 +297,9 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       }
       
       
-      node_xml = getChildlessNode(xml_post, "<drawing ");
+      node_xml = getChildlessNode(xml_post, "drawing");
       if(node_xml.size() == 0)
-        node_xml = getChildlessNode(xml_post, "<legacyDrawing ");
+        node_xml = getChildlessNode(xml_post, "legacyDrawing");
       
       if(node_xml.size() > 0){
         for(int j = 0; j < node_xml.size(); j++){

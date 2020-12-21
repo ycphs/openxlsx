@@ -17859,7 +17859,7 @@ Workbook$methods(
 
 
     ## Number formats
-    numFmts <- getChildlessNode(xml = stylesTxt, tag = "<numFmt ")
+    numFmts <- getChildlessNode(xml = stylesTxt, tag = "numFmt")
     numFmtFlag <- FALSE
     if (length(numFmts) > 0) {
       numFmtsIds <-
@@ -17907,7 +17907,7 @@ Workbook$methods(
 
     cellXfs <- getNodes(xml = stylesTxt, tagIn = "<cellXfs")
 
-    xf <- getChildlessNode(xml = cellXfs, tag = "<xf ")
+    xf <- getChildlessNode(xml = cellXfs, tag = "xf")
     xfAttrs <- regmatches(xf, gregexpr('[a-zA-Z]+=".*?"', xf))
     xfNames <-
       lapply(xfAttrs, function(xfAttrs) {

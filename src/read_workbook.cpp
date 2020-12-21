@@ -276,7 +276,7 @@ List getCellInfo(std::string xmlFile,
   }
   
   // pull out cell merges
-  CharacterVector merge_cell_xml = getChildlessNode(xml2, "<mergeCell ");
+  CharacterVector merge_cell_xml = getChildlessNode(xml2, "mergeCell");
   
   
   CharacterVector r(ocs);
