@@ -886,30 +886,54 @@ std::vector<std::string> getChildlessNode_ss(std::string xml, std::string tag){
 
 
 // [[Rcpp::export]]
-CharacterVector getChildlessNode(std::string xml, std::string tag){
+CharacterVector getChildlessNode(std::string xml, std::string tag) {
   
   size_t k = tag.length();
   if(xml.length() == 0)
     return wrap(NA_STRING);
   
-  xml = " " + xml;
+  size_t begPos = 0, endPos = 0;
   
   std::vector<std::string> r;
-  size_t pos = 0;
-  size_t endPos = 0;
-  std::string tagEnd = "/>";
+  std::string res = "";
   
-  while(1){
+  // check "<tag "
+  std::string begTag = "<" + tag + " ";
+  std::string endTag = ">";
+  
+  // initial check, which kind of tags to expect
+  begPos = xml.find(begTag, begPos);
+  
+  // if begTag was found
+  if(begPos != std::string::npos) {
     
-    pos = xml.find(tag, pos+1);    
-    if(pos == std::string::npos)
-      break;
+    endPos = xml.find(endTag, begPos);
+    res = xml.substr(begPos, (endPos - begPos) + endTag.length());
     
-    endPos = xml.find(tagEnd, pos+k);
+    // check if last 2 characters are "/>"
+    // <foo/> or <foo></foo>
+    if (res.substr( res.length() - 2 ).compare("/>") != 0) {
+      // check </tag>
+      endTag = "</" + tag + ">";
+    }
     
-    r.push_back(xml.substr(pos, endPos-pos+2).c_str());
-    
+    // try with <foo ... />
+    while( 1 ) {
+      
+      begPos = xml.find(begTag, begPos);
+      endPos = xml.find(endTag, begPos);
+      
+      if(begPos == std::string::npos) 
+        break;
+      
+      // read from initial "<" to final ">"
+      res = xml.substr(begPos, (endPos - begPos) + endTag.length());
+      
+      begPos = endPos + endTag.length();
+      r.push_back(res);
+    }
   }
+  
   
   CharacterVector out = wrap(r);  
   return markUTF8(out);
