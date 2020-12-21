@@ -4,7 +4,15 @@
 \alias{writeFormula}
 \title{Write a character vector as an Excel Formula}
 \usage{
-writeFormula(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL)
+writeFormula(
+  wb,
+  sheet,
+  x,
+  startCol = 1,
+  startRow = 1,
+  array = FALSE,
+  xy = NULL
+)
 }
 \arguments{
 \item{wb}{A Workbook object containing a worksheet.}

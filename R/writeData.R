@@ -159,6 +159,7 @@ writeData <- function(wb,
                       x,
                       startCol = 1,
                       startRow = 1,
+                      array = FALSE,
                       xy = NULL,
                       colNames = TRUE,
                       rowNames = FALSE,
@@ -226,11 +227,20 @@ writeData <- function(wb,
     colNames <- FALSE
   }
 
+if (!array) {
   ## special case - formula
   if ("formula" %in% class(x)) {
     x <- data.frame("X" = x, stringsAsFactors = FALSE)
     class(x[[1]]) <- "formula"
     colNames <- FALSE
+  }
+} else {
+    ## special case - vector formula
+    if ("formula" %in% class(x)) {
+      x <- data.frame("X" = x, stringsAsFactors = FALSE)
+      class(x[[1]]) <- "vector_formula"
+      colNames <- FALSE
+    }
   }
 
   ## named region
@@ -499,13 +509,19 @@ writeFormula <- function(wb,
                          x,
                          startCol = 1,
                          startRow = 1,
+                         array = FALSE,
                          xy = NULL) {
   if (!"character" %in% class(x)) {
     stop("x must be a character vector.")
   }
 
-  dfx <- data.frame("X" = x, stringsAsFactors = FALSE)
-  class(dfx$X) <- c("character", "formula")
+  if (!array) {
+    dfx <- data.frame("X" = x, stringsAsFactors = FALSE)
+    class(dfx$X) <- c("character", "formula")
+  } else {
+    dfx <- data.frame("X" = x, stringsAsFactors = FALSE)
+    class(dfx$X) <- c("character", "vector_formula")
+  }
 
   if (any(grepl("^(=|)HYPERLINK\\(", x, ignore.case = TRUE))) {
     class(dfx$X) <- c("character", "formula", "hyperlink")
@@ -519,6 +535,7 @@ writeFormula <- function(wb,
     x = dfx,
     startCol = startCol,
     startRow = startRow,
+    array = array,
     xy = xy,
     colNames = FALSE,
     rowNames = FALSE
