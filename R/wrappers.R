@@ -2803,7 +2803,7 @@ getNamedRegions.default <- function(x) {
   workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
   workbook <- unlist(readUTF8(workbook))
   
-  dn <- getChildlessNode(xml = removeHeadTag(workbook), tag = "<definedName ")
+  dn <- getChildlessNode(xml = removeHeadTag(workbook), tag = "definedName")
   if (length(dn) == 0) {
     return(NULL)
   }

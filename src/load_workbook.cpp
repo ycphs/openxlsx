@@ -80,7 +80,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       }
       
       if(sheetPr.size() == 0)
-        sheetPr = getChildlessNode(xml_pre, "<sheetPr");
+        sheetPr = getChildlessNode(xml_pre, "sheetPr");
       
       if(sheetPr.size() > 0)
         this_worksheet.field("sheetPr") = sheetPr;
@@ -88,7 +88,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       
       
       // Freeze Panes
-      CharacterVector node_xml = getChildlessNode(xml_pre, "<pane ");
+      CharacterVector node_xml = getChildlessNode(xml_pre, "pane");
       if(node_xml.size() > 0)
         this_worksheet.field("freezePane") = node_xml;
       
@@ -211,28 +211,28 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       
       std::string xml_post = xml.substr(pos_post);
       
-      node_xml = getChildlessNode(xml_post, "<sheetProtection ");
+      node_xml = getChildlessNode(xml_post, "sheetProtection");
       if(node_xml.size() > 0) {
         this_worksheet.field("sheetProtection") = node_xml;
       }
       
       
-      node_xml = getChildlessNode(xml_post, "<autoFilter ");
+      node_xml = getChildlessNode(xml_post, "autoFilter");
       if(node_xml.size() > 0)
         this_worksheet.field("autoFilter") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<hyperlink ");
+      node_xml = getChildlessNode(xml_post, "hyperlink");
       if(node_xml.size() > 0)
         this_worksheet.field("hyperlinks") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<pageMargins ");
+      node_xml = getChildlessNode(xml_post, "pageMargins");
       if(node_xml.size() > 0)
         this_worksheet.field("pageMargins") = node_xml;
       
       
-      node_xml = getChildlessNode(xml_post, "<pageSetup ");
+      node_xml = getChildlessNode(xml_post, "pageSetup");
       if(node_xml.size() > 0){
         for(int j = 0; j < node_xml.size(); j++){
           
@@ -252,7 +252,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         this_worksheet.field("pageSetup") = node_xml;
       }
       
-      node_xml = getChildlessNode(xml_post, "<mergeCell ");
+      node_xml = getChildlessNode(xml_post, "mergeCell");
       if(node_xml.size() > 0)
         this_worksheet.field("mergeCells") = node_xml;
       
@@ -297,9 +297,9 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
       }
       
       
-      node_xml = getChildlessNode(xml_post, "<drawing ");
+      node_xml = getChildlessNode(xml_post, "drawing");
       if(node_xml.size() == 0)
-        node_xml = getChildlessNode(xml_post, "<legacyDrawing ");
+        node_xml = getChildlessNode(xml_post, "legacyDrawing");
       
       if(node_xml.size() > 0){
         for(int j = 0; j < node_xml.size(); j++){
@@ -886,30 +886,54 @@ std::vector<std::string> getChildlessNode_ss(std::string xml, std::string tag){
 
 
 // [[Rcpp::export]]
-CharacterVector getChildlessNode(std::string xml, std::string tag){
+CharacterVector getChildlessNode(std::string xml, std::string tag) {
   
   size_t k = tag.length();
   if(xml.length() == 0)
     return wrap(NA_STRING);
   
-  xml = " " + xml;
+  size_t begPos = 0, endPos = 0;
   
   std::vector<std::string> r;
-  size_t pos = 0;
-  size_t endPos = 0;
-  std::string tagEnd = "/>";
+  std::string res = "";
   
-  while(1){
+  // check "<tag "
+  std::string begTag = "<" + tag + " ";
+  std::string endTag = ">";
+  
+  // initial check, which kind of tags to expect
+  begPos = xml.find(begTag, begPos);
+  
+  // if begTag was found
+  if(begPos != std::string::npos) {
     
-    pos = xml.find(tag, pos+1);    
-    if(pos == std::string::npos)
-      break;
+    endPos = xml.find(endTag, begPos);
+    res = xml.substr(begPos, (endPos - begPos) + endTag.length());
     
-    endPos = xml.find(tagEnd, pos+k);
+    // check if last 2 characters are "/>"
+    // <foo/> or <foo></foo>
+    if (res.substr( res.length() - 2 ).compare("/>") != 0) {
+      // check </tag>
+      endTag = "</" + tag + ">";
+    }
     
-    r.push_back(xml.substr(pos, endPos-pos+2).c_str());
-    
+    // try with <foo ... />
+    while( 1 ) {
+      
+      begPos = xml.find(begTag, begPos);
+      endPos = xml.find(endTag, begPos);
+      
+      if(begPos == std::string::npos) 
+        break;
+      
+      // read from initial "<" to final ">"
+      res = xml.substr(begPos, (endPos - begPos) + endTag.length());
+      
+      begPos = endPos + endTag.length();
+      r.push_back(res);
+    }
   }
+  
   
   CharacterVector out = wrap(r);  
   return markUTF8(out);

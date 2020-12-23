@@ -176,7 +176,7 @@ read.xlsx.default <- function(xlsxFile,
       collapse = ""
     )
   workbookRelsXML <-
-    getChildlessNode(xml = workbookRelsXML, tag = "<Relationship ")
+    getChildlessNode(xml = workbookRelsXML, tag = "Relationship")
 
   workbook <-
     unlist(readUTF8(workbook))
@@ -528,7 +528,7 @@ read.xlsx.default <- function(xlsxFile,
     styles <- removeHeadTag(styles)
 
     ## Number formats
-    numFmts <- getChildlessNode(xml = styles, tag = "<numFmt ")
+    numFmts <- getChildlessNode(xml = styles, tag = "numFmt")
 
     dateIds <- NULL
     if (length(numFmts) > 0) {
@@ -549,7 +549,7 @@ read.xlsx.default <- function(xlsxFile,
 
     ## which styles are using these dateIds
     cellXfs <- getNodes(xml = styles, tagIn = "<cellXfs")
-    xf <- getChildlessNode(xml = cellXfs, tag = "<xf ")
+    xf <- getChildlessNode(xml = cellXfs, tag = "xf")
     lookingFor <-
       paste(sprintf('numFmtId="%s"', dateIds), collapse = "|")
     dateStyleIds <-

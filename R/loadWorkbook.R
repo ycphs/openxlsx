@@ -116,7 +116,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   workbookRelsXML <- xmlFiles[grepl("workbook.xml.rels$", xmlFiles, perl = TRUE)]
   if (length(workbookRelsXML) > 0) {
     workbookRelsXML <- paste(readUTF8(workbookRelsXML), collapse = "")
-    workbookRelsXML <- getChildlessNode(xml = workbookRelsXML, tag = "<Relationship ")
+    workbookRelsXML <- getChildlessNode(xml = workbookRelsXML, tag = "Relationship")
     worksheet_rId_mapping <- workbookRelsXML[grepl("worksheets/sheet", workbookRelsXML, fixed = TRUE)]
   }
 
@@ -183,7 +183,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
           zoom <- 100
         }
 
-        tabColour <- getChildlessNode(xml = txt, tag = "<tabColor ")
+        tabColour <- getChildlessNode(xml = txt, tag = "tabColor")
         if (length(tabColour) == 0) {
           tabColour <- NULL
         }
@@ -204,18 +204,18 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
     ## additional workbook attributes
-    calcPr <- getChildlessNode(xml = workbook, tag = "<calcPr ")
+    calcPr <- getChildlessNode(xml = workbook, tag = "calcPr")
     if (length(calcPr) > 0) {
       wb$workbook$calcPr <- calcPr
     }
 
 
-    workbookPr <- getChildlessNode(xml = workbook, tag = "<workbookPr ")
+    workbookPr <- getChildlessNode(xml = workbook, tag = "workbookPr")
     if (length(workbookPr) > 0) {
       wb$workbook$workbookPr <- workbookPr
     }
 
-    workbookProtection <- getChildlessNode(xml = workbook, tag = "<workbookProtection ")
+    workbookProtection <- getChildlessNode(xml = workbook, tag = "workbookProtection")
     if (length(workbookProtection) > 0) {
       wb$workbook$workbookProtection <- workbookProtection
     }
@@ -346,7 +346,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
     caches <- getNodes(xml = workbook, tagIn = "<pivotCaches>")
-    caches <- getChildlessNode(xml = caches, tag = "<pivotCache ")
+    caches <- getChildlessNode(xml = caches, tag = "pivotCache")
     for (i in seq_along(caches)) {
       caches[i] <- gsub('"rId[0-9]+"', sprintf('"rId%s"', rIds[i]), caches[i])
     }
@@ -525,7 +525,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
         xml <- removeHeadTag(xml)
         xml <- gsub("<Relationships .*?>", "", xml)
         xml <- gsub("</Relationships>", "", xml)
-        xml <- getChildlessNode(xml = xml, tag = "<Relationship ")
+        xml <- getChildlessNode(xml = xml, tag = "Relationship")
       } else {
         xml <- "<Relationship >"
       }
