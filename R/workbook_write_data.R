@@ -175,7 +175,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   any_functions <- FALSE
   ref_cell <- paste0(int_2_cell_ref(startCol), startRow)
 
-  if (c("openxlsx_formula", "openxlsx_array_formula") %in% colClasses) {
+  if (any(c("openxlsx_formula", "openxlsx_array_formula") %in% colClasses)) {
     
     ## alter the elements of t where we have a formula to be "str"
     if ("openxlsx_formula" %in% colClasses) {
