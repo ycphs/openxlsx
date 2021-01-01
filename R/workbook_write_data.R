@@ -85,18 +85,16 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   }
 
   if ("formula" %in% allColClasses) {
-    print("Formula")
     for (i in which(sapply(colClasses, function(x) "formula" %in% x))) {
       df[[i]] <- replaceIllegalCharacters(as.character(df[[i]]))
       class(df[[i]]) <- "openxlsx_formula"
     }
   }
 
-  if ("vector_formula" %in% allColClasses) {
-    print("Vector Formula")
-    for (i in which(sapply(colClasses, function(x) "vector_formula" %in% x))) {
+  if ("array_formula" %in% allColClasses) {
+    for (i in which(sapply(colClasses, function(x) "array_formula" %in% x))) {
       df[[i]] <- replaceIllegalCharacters(as.character(df[[i]]))
-      class(df[[i]]) <- "openxlsx_vector_formula"
+      class(df[[i]]) <- "openxlsx_array_formula"
     }
   }
 
@@ -182,7 +180,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
 
     ## alter the elements of t where we have a formula to be "str"
     formula_cols <- which(sapply(colClasses, function(x) "openxlsx_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
-    formula_strs <- stri_join("<f aca=\"false\">", unlist(df[formula_cols], use.names = FALSE), "</f>")
+    formula_strs <- stri_join("<f>", unlist(df[formula_cols], use.names = FALSE), "</f>")
     formula_inds <- unlist(lapply(formula_cols, function(i) i + (1:(nRows - colNames) - 1) * nCols + (colNames * nCols)), use.names = FALSE)
     f_in[formula_inds] <- formula_strs
     any_functions <- TRUE
@@ -192,11 +190,11 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     rm(formula_inds)
   }
 
-  if ("openxlsx_vector_formula" %in% colClasses) {
+  if ("openxlsx_array_formula" %in% colClasses) {
 
     ## alter the elements of t where we have a formula to be "str"
-    formula_cols <- which(sapply(colClasses, function(x) "openxlsx_vector_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
-    formula_strs <- stri_join("<f aca=\"false\" t=\"array\" ref=\"", ref_cell, ":", ref_cell, "\">", unlist(df[formula_cols], use.names = FALSE), "</f>")
+    formula_cols <- which(sapply(colClasses, function(x) "openxlsx_array_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
+    formula_strs <- stri_join("<f t=\"array\" ref=\"", ref_cell, ":", ref_cell, "\">", unlist(df[formula_cols], use.names = FALSE), "</f>")
     formula_inds <- unlist(lapply(formula_cols, function(i) i + (1:(nRows - colNames) - 1) * nCols + (colNames * nCols)), use.names = FALSE)
     f_in[formula_inds] <- formula_strs
     any_functions <- TRUE

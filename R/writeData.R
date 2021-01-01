@@ -236,10 +236,10 @@ if (!array) {
     colNames <- FALSE
   }
 } else {
-    ## special case - vector formula
+    ## special case - array formula
     if ("formula" %in% class(x)) {
       x <- data.frame("X" = x, stringsAsFactors = FALSE)
-      class(x[[1]]) <- "vector_formula"
+      class(x[[1]]) <- "array_formula"
       colNames <- FALSE
     }
   }
