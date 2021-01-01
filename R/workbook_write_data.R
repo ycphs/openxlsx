@@ -170,31 +170,21 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   }
 
 
-  ref_cell <- paste0(int_2_cell_ref(startCol), startRow)
-
   ## Formulas
   f_in <- rep.int(as.character(NA), length(t))
   any_functions <- FALSE
+  ref_cell <- paste0(int_2_cell_ref(startCol), startRow)
 
-  if ("openxlsx_formula" %in% colClasses) {
-
+  if (c("openxlsx_formula", "openxlsx_array_formula") %in% colClasses) {
+    
     ## alter the elements of t where we have a formula to be "str"
-    formula_cols <- which(sapply(colClasses, function(x) "openxlsx_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
-    formula_strs <- stri_join("<f>", unlist(df[formula_cols], use.names = FALSE), "</f>")
-    formula_inds <- unlist(lapply(formula_cols, function(i) i + (1:(nRows - colNames) - 1) * nCols + (colNames * nCols)), use.names = FALSE)
-    f_in[formula_inds] <- formula_strs
-    any_functions <- TRUE
-
-    rm(formula_cols)
-    rm(formula_strs)
-    rm(formula_inds)
-  }
-
-  if ("openxlsx_array_formula" %in% colClasses) {
-
-    ## alter the elements of t where we have a formula to be "str"
-    formula_cols <- which(sapply(colClasses, function(x) "openxlsx_array_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
-    formula_strs <- stri_join("<f t=\"array\" ref=\"", ref_cell, ":", ref_cell, "\">", unlist(df[formula_cols], use.names = FALSE), "</f>")
+    if ("openxlsx_formula" %in% colClasses) {
+      formula_cols <- which(sapply(colClasses, function(x) "openxlsx_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
+      formula_strs <- stri_join("<f>", unlist(df[formula_cols], use.names = FALSE), "</f>")
+    } else { # openxlsx_array_formula
+      formula_cols <- which(sapply(colClasses, function(x) "openxlsx_array_formula" %in% x, USE.NAMES = FALSE), useNames = FALSE)
+      formula_strs <- stri_join("<f t=\"array\" ref=\"", ref_cell, ":", ref_cell, "\">", unlist(df[formula_cols], use.names = FALSE), "</f>")
+    }
     formula_inds <- unlist(lapply(formula_cols, function(i) i + (1:(nRows - colNames) - 1) * nCols + (colNames * nCols)), use.names = FALSE)
     f_in[formula_inds] <- formula_strs
     any_functions <- TRUE
