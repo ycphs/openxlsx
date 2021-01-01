@@ -84,17 +84,19 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     }
   }
 
-  if ("formula" %in% allColClasses) {
-    for (i in which(sapply(colClasses, function(x) "formula" %in% x))) {
-      df[[i]] <- replaceIllegalCharacters(as.character(df[[i]]))
-      class(df[[i]]) <- "openxlsx_formula"
+  if (any(c("formula", "array_formula") %in% allColClasses)) {
+    
+    frm <- "formula"
+    cls <- "openxlsx_formula"
+    
+    if ("array_formula" %in% allColClasses) {
+      frm <- "array_formula"
+      cls <- "openxlsx_array_formula"
     }
-  }
-
-  if ("array_formula" %in% allColClasses) {
-    for (i in which(sapply(colClasses, function(x) "array_formula" %in% x))) {
+    
+    for (i in which(sapply(colClasses, function(x) frm %in% x))) {
       df[[i]] <- replaceIllegalCharacters(as.character(df[[i]]))
-      class(df[[i]]) <- "openxlsx_array_formula"
+      class(df[[i]]) <- cls
     }
   }
 
