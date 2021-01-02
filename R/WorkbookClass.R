@@ -17955,7 +17955,7 @@ Workbook$methods(
     ## ------------------------------ build styleObjects ------------------------------ ##
 
     cellXfs <<- getChildlessNode(xml = stylesTxt, tag = "cellXfs")
-    xf <<- getChildlessNode(xml = cellXfs, tag = "xf")
+    xf <<- getNodes(xml = cellXfs, tagIn = "<xf")
     
     xfAttrs <- regmatches(xf, gregexpr('[a-zA-Z]+=".*?"', xf))
     xfNames <-
@@ -17965,7 +17965,7 @@ Workbook$methods(
           regexpr('[a-zA-Z]+(?=\\=".*?")', xfAttrs, perl = TRUE)
         )
       })
-    xfVals <-
+    xfVals <<-
       lapply(xfAttrs, function(xfAttrs) {
         regmatches(xfAttrs, regexpr('(?<=").*?(?=")', xfAttrs, perl = TRUE))
       })
