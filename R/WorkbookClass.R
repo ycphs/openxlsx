@@ -1360,196 +1360,196 @@ Workbook$methods(
 
 Workbook$methods(
   updateStyles = function(style) {
-    # ## Updates styles.xml
-    # xfNode <- list(
-    #   numFmtId = 0,
-    #   fontId = 0,
-    #   fillId = 0,
-    #   borderId = 0,
-    #   xfId = 0
-    # )
+    ## Updates styles.xml
+    xfNode <- list(
+      numFmtId = 0,
+      fontId = 0,
+      fillId = 0,
+      borderId = 0,
+      xfId = 0
+    )
 
 
-    # alignmentFlag <- FALSE
+    alignmentFlag <- FALSE
 
-    # ## Font
-    # if (!is.null(style$fontName) |
-    #   !is.null(style$fontSize) |
-    #   !is.null(style$fontColour) |
-    #   !is.null(style$fontDecoration) |
-    #   !is.null(style$fontFamily) |
-    #   !is.null(style$fontScheme)) {
-    #   fontNode <- .self$createFontNode(style)
-    #   fontId <- style$fontId
+    ## Font
+    if (!is.null(style$fontName) |
+      !is.null(style$fontSize) |
+      !is.null(style$fontColour) |
+      !is.null(style$fontDecoration) |
+      !is.null(style$fontFamily) |
+      !is.null(style$fontScheme)) {
+      fontNode <- .self$createFontNode(style)
+      fontId <- style$fontId
 
-    #   if (length(fontId) == 0) {
-    #     fontId <- style$fontId
-    #     styles$fonts <<- append(styles[["fonts"]], fontNode)
-    #   }
+      if (length(fontId) == 0) {
+        fontId <- style$fontId
+        styles$fonts <<- append(styles[["fonts"]], fontNode)
+      }
 
-    #   xfNode$fontId <- fontId
-    #   xfNode <- append(xfNode, list("applyFont" = "1"))
-    # }
-
-
-    # ## numFmt
-    # if (!is.null(style$numFmt)) {
-    #   if (as.integer(style$numFmt$numFmtId) > 0) {
-    #     numFmtId <- style$numFmt$numFmtId
-    #     if (as.integer(numFmtId) > 163L) {
-    #       tmp <- style$numFmt$formatCode
-
-    #       styles$numFmts <<- unique(c(
-    #         styles$numFmts,
-    #         sprintf(
-    #           '<numFmt numFmtId="%s" formatCode="%s"/>',
-    #           numFmtId,
-    #           tmp
-    #         )
-    #       ))
-    #     }
-
-    #     xfNode$numFmtId <- numFmtId
-    #     xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
-    #   }
-    # }
-
-    # ## Fill
-    # if (!is.null(style$fill)) {
-    #   fillNode <- .self$createFillNode(style)
-    #   if (!is.null(fillNode)) {
-    #     fillId <- which(styles$fills == fillNode) - 1L
-
-    #     if (length(fillId) == 0) {
-    #       fillId <- length(styles$fills)
-    #       styles$fills <<- c(styles$fills, fillNode)
-    #     }
-    #     xfNode$fillId <- fillId
-    #     xfNode <- append(xfNode, list("applyFill" = "1"))
-    #   }
-    # }
-
-    # ## Border
-    # if (any(!is.null(
-    #   c(
-    #     style$borderLeft,
-    #     style$borderRight,
-    #     style$borderTop,
-    #     style$borderBottom,
-    #     style$borderDiagonal
-    #   )
-    # ))) {
-    #   borderNode <- .self$createBorderNode(style)
-    #   borderId <- which(styles$borders == borderNode) - 1L
-
-    #   if (length(borderId) == 0) {
-    #     borderId <- length(styles$borders)
-    #     styles$borders <<- c(styles$borders, borderNode)
-    #   }
-
-    #   xfNode$borderId <- borderId
-    #   xfNode <- append(xfNode, list("applyBorder" = "1"))
-    # }
+      xfNode$fontId <- fontId
+      xfNode <- append(xfNode, list("applyFont" = "1"))
+    }
 
 
-    # # if(!is.null(style$xfId))
-    # # xfNode$xfId <- style$xfId
+    ## numFmt
+    if (!is.null(style$numFmt)) {
+      if (as.integer(style$numFmt$numFmtId) > 0) {
+        numFmtId <- style$numFmt$numFmtId
+        if (as.integer(numFmtId) > 163L) {
+          tmp <- style$numFmt$formatCode
 
-    # childNodes <- ""
+          styles$numFmts <<- unique(c(
+            styles$numFmts,
+            sprintf(
+              '<numFmt numFmtId="%s" formatCode="%s"/>',
+              numFmtId,
+              tmp
+            )
+          ))
+        }
 
-    # ## Alignment
-    # if (!is.null(style$halign) |
-    #   !is.null(style$valign) |
-    #   !is.null(style$wrapText) |
-    #   !is.null(style$textRotation) | !is.null(style$indent)) {
-    #   attrs <- list()
-    #   alignNode <- "<alignment"
+        xfNode$numFmtId <- numFmtId
+        xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
+      }
+    }
 
-    #   if (!is.null(style$textRotation)) {
-    #     alignNode <-
-    #       stri_join(alignNode,
-    #         sprintf('textRotation="%s"', style$textRotation),
-    #         sep = " "
-    #       )
-    #   }
+    ## Fill
+    if (!is.null(style$fill)) {
+      fillNode <- .self$createFillNode(style)
+      if (!is.null(fillNode)) {
+        fillId <- which(styles$fills == fillNode) - 1L
 
-    #   if (!is.null(style$halign)) {
-    #     alignNode <-
-    #       stri_join(alignNode, sprintf('horizontal="%s"', style$halign), sep = " ")
-    #   }
+        if (length(fillId) == 0) {
+          fillId <- length(styles$fills)
+          styles$fills <<- c(styles$fills, fillNode)
+        }
+        xfNode$fillId <- fillId
+        xfNode <- append(xfNode, list("applyFill" = "1"))
+      }
+    }
 
-    #   if (!is.null(style$valign)) {
-    #     alignNode <-
-    #       stri_join(alignNode, sprintf('vertical="%s"', style$valign), sep = " ")
-    #   }
+    ## Border
+    if (any(!is.null(
+      c(
+        style$borderLeft,
+        style$borderRight,
+        style$borderTop,
+        style$borderBottom,
+        style$borderDiagonal
+      )
+    ))) {
+      borderNode <- .self$createBorderNode(style)
+      borderId <- which(styles$borders == borderNode) - 1L
 
-    #   if (!is.null(style$indent)) {
-    #     alignNode <-
-    #       stri_join(alignNode, sprintf('indent="%s"', style$indent), sep = " ")
-    #   }
+      if (length(borderId) == 0) {
+        borderId <- length(styles$borders)
+        styles$borders <<- c(styles$borders, borderNode)
+      }
 
-    #   if (!is.null(style$wrapText)) {
-    #     if (style$wrapText) {
-    #       alignNode <- stri_join(alignNode, 'wrapText="1"', sep = " ")
-    #     }
-    #   }
-
-
-    #   alignNode <- stri_join(alignNode, "/>")
-
-    #   alignmentFlag <- TRUE
-    #   xfNode <- append(xfNode, list("applyAlignment" = "1"))
-
-    #   childNodes <- stri_join(childNodes, alignNode)
-    # }
-
-    # if (!is.null(style$hidden) | !is.null(style$locked)) {
-    #   xfNode <- append(xfNode, list("applyProtection" = "1"))
-    #   protectionNode <- "<protection"
-
-    #   if (!is.null(style$hidden)) {
-    #     protectionNode <-
-    #       stri_join(protectionNode, sprintf('hidden="%s"', as.numeric(style$hidden)), sep = " ")
-    #   }
-    #   if (!is.null(style$locked)) {
-    #     protectionNode <-
-    #       stri_join(protectionNode, sprintf('locked="%s"', as.numeric(style$locked)), sep = " ")
-    #   }
-
-    #   protectionNode <- stri_join(protectionNode, "/>")
-    #   childNodes <- stri_join(childNodes, protectionNode)
-    # }
-
-    # if (length(childNodes) > 0) {
-    #   xfNode <-
-    #     stri_join(
-    #       "<xf ",
-    #       stri_join(
-    #         stri_join(names(xfNode), '="', xfNode, '"'),
-    #         sep = " ",
-    #         collapse = " "
-    #       ),
-    #       ">",
-    #       childNodes,
-    #       "</xf>"
-    #     )
-    # } else {
-    #   xfNode <-
-    #     stri_join("<xf ", stri_join(
-    #       stri_join(names(xfNode), '="', xfNode, '"'),
-    #       sep = " ",
-    #       collapse = " "
-    #     ), "/>")
-    # }
-
-    # styleId <- which(styles$cellXfs == xfNode) - 1L
-    # if (length(styleId) == 0) {
-    #   styleId <- length(styles$cellXfs)
-    #   styles$cellXfs <<- c(styles$cellXfs, xfNode)
-    # }
+      xfNode$borderId <- borderId
+      xfNode <- append(xfNode, list("applyBorder" = "1"))
+    }
 
 
-    # return(as.integer(styleId))
+    # if(!is.null(style$xfId))
+    # xfNode$xfId <- style$xfId
+
+    childNodes <- ""
+
+    ## Alignment
+    if (!is.null(style$halign) |
+      !is.null(style$valign) |
+      !is.null(style$wrapText) |
+      !is.null(style$textRotation) | !is.null(style$indent)) {
+      attrs <- list()
+      alignNode <- "<alignment"
+
+      if (!is.null(style$textRotation)) {
+        alignNode <-
+          stri_join(alignNode,
+            sprintf('textRotation="%s"', style$textRotation),
+            sep = " "
+          )
+      }
+
+      if (!is.null(style$halign)) {
+        alignNode <-
+          stri_join(alignNode, sprintf('horizontal="%s"', style$halign), sep = " ")
+      }
+
+      if (!is.null(style$valign)) {
+        alignNode <-
+          stri_join(alignNode, sprintf('vertical="%s"', style$valign), sep = " ")
+      }
+
+      if (!is.null(style$indent)) {
+        alignNode <-
+          stri_join(alignNode, sprintf('indent="%s"', style$indent), sep = " ")
+      }
+
+      if (!is.null(style$wrapText)) {
+        if (style$wrapText) {
+          alignNode <- stri_join(alignNode, 'wrapText="1"', sep = " ")
+        }
+      }
+
+
+      alignNode <- stri_join(alignNode, "/>")
+
+      alignmentFlag <- TRUE
+      xfNode <- append(xfNode, list("applyAlignment" = "1"))
+
+      childNodes <- stri_join(childNodes, alignNode)
+    }
+
+    if (!is.null(style$hidden) | !is.null(style$locked)) {
+      xfNode <- append(xfNode, list("applyProtection" = "1"))
+      protectionNode <- "<protection"
+
+      if (!is.null(style$hidden)) {
+        protectionNode <-
+          stri_join(protectionNode, sprintf('hidden="%s"', as.numeric(style$hidden)), sep = " ")
+      }
+      if (!is.null(style$locked)) {
+        protectionNode <-
+          stri_join(protectionNode, sprintf('locked="%s"', as.numeric(style$locked)), sep = " ")
+      }
+
+      protectionNode <- stri_join(protectionNode, "/>")
+      childNodes <- stri_join(childNodes, protectionNode)
+    }
+
+    if (length(childNodes) > 0) {
+      xfNode <-
+        stri_join(
+          "<xf ",
+          stri_join(
+            stri_join(names(xfNode), '="', xfNode, '"'),
+            sep = " ",
+            collapse = " "
+          ),
+          ">",
+          childNodes,
+          "</xf>"
+        )
+    } else {
+      xfNode <-
+        stri_join("<xf ", stri_join(
+          stri_join(names(xfNode), '="', xfNode, '"'),
+          sep = " ",
+          collapse = " "
+        ), "/>")
+    }
+
+    styleId <- which(styles$cellXfs == xfNode) - 1L
+    if (length(styleId) == 0) {
+      styleId <- length(styles$cellXfs)
+      styles$cellXfs <<- c(styles$cellXfs, xfNode)
+    }
+
+
+    return(as.integer(styleId))
   }
 )
 
