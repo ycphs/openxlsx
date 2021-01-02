@@ -17954,7 +17954,25 @@ Workbook$methods(
 
     ## ------------------------------ build styleObjects ------------------------------ ##
 
-    xfVals <- getXMLattr(cellXfs, "xf")
+    cellXfs <<- getChildlessNode(xml = stylesTxt, tag = "cellXfs")
+    xf <<- getChildlessNode(xml = cellXfs, tag = "xf")
+    
+    xfAttrs <- regmatches(xf, gregexpr('[a-zA-Z]+=".*?"', xf))
+    xfNames <-
+      lapply(xfAttrs, function(xfAttrs) {
+        regmatches(
+          xfAttrs,
+          regexpr('[a-zA-Z]+(?=\\=".*?")', xfAttrs, perl = TRUE)
+        )
+      })
+    xfVals <-
+      lapply(xfAttrs, function(xfAttrs) {
+        regmatches(xfAttrs, regexpr('(?<=").*?(?=")', xfAttrs, perl = TRUE))
+      })
+
+    for (i in 1:length(xf)) {
+      names(xfVals[[i]]) <- xfNames[[i]]
+    }
 
     styleObjects_tmp <- list()
     flag <- FALSE
@@ -18129,10 +18147,12 @@ Workbook$methods(
       # Cell protection settings can be "0", so we cannot just skip all zeroes
       if ("locked" %in% names(s)) {
         style$locked <- (s[["locked"]] == "1")
+        print(style$locked)
       }
 
       if ("hidden" %in% names(s)) {
         style$hidden <- (s[["hidden"]] == "1")
+        print(style$hidden)
       }
 
       ## we need to skip the first one as this is used as the base style

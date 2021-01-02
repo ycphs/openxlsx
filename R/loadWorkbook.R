@@ -374,7 +374,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   ## xl\styles
   if (length(stylesXML) > 0) {
     styleObjects <- wb$loadStyles(stylesXML)
-    wb$workbook$styles_xml <- readXML(stylesXML)
+    styles <- readUTF8(stylesXML)
+    styles <- removeHeadTag(styles)
+
+    protection <- getChildlessNode(styles, "protection")
+    wb$styles$hidden <- sapply(protection, function(x) ifelse(grepl("hidden=\"1\"", x), 1, 0))
+    wb$styles$locked <- sapply(protection, function(x) ifelse(grepl("locked=\"1\"", x), 1, 0))
+
   } else {
     styleObjects <- list()
   }
