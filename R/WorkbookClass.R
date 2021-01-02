@@ -17938,6 +17938,7 @@ Workbook$methods(
     }
 
     ## fonts will maintain, sz, color, name, family scheme
+    # FIXME: any()
     if (grepl("<font/>", stylesTxt, fixed = TRUE)) {
       ## empty font node
       fonts <- getNodes(xml = stylesTxt, tagIn = "<fonts")
@@ -17947,9 +17948,10 @@ Workbook$methods(
           c(getNodes(xml, tagIn = "<font>"), "")
         }))
     } else {
-      fonts <- getNodes(xml = stylesTxt, tagIn = "<font>")
+      fonts <- getNodes(xml = stylesTxt, tagIn = "<fonts")
+      fonts <- getNodes(paste0(fonts, ">"), "<font>")
     }
-    styles$fonts[[1]] <<- fonts[[1]]
+    styles$fonts <<- fonts
     fonts <- buildFontList(fonts)
 
 
@@ -18158,12 +18160,10 @@ Workbook$methods(
       # Cell protection settings can be "0", so we cannot just skip all zeroes
       if ("locked" %in% names(s)) {
         style$locked <- (s[["locked"]] == "1")
-        print(style$locked)
       }
 
       if ("hidden" %in% names(s)) {
         style$hidden <- (s[["hidden"]] == "1")
-        print(style$hidden)
       }
 
       ## we need to skip the first one as this is used as the base style
