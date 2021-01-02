@@ -60,6 +60,7 @@ Workbook <- setRefClass("Workbook",
 
 Style <- setRefClass("Style",
   fields = c(
+    "fontId",
     "fontName",
     "fontColour",
     "fontSize",

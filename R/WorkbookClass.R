@@ -1359,10 +1359,10 @@ Workbook$methods(
       !is.null(style$fontFamily) |
       !is.null(style$fontScheme)) {
       fontNode <- .self$createFontNode(style)
-      fontId <- which(styles$fonts == fontNode) - 1L
+      fontId <- style$fontId
 
       if (length(fontId) == 0) {
-        fontId <- length(styles$fonts)
+        fontId <- style$fontId
         styles$fonts <<- append(styles[["fonts"]], fontNode)
       }
 
@@ -17997,8 +17997,12 @@ Workbook$methods(
       style <- createStyle()
       if (any(s != "0")) {
         if ("fontId" %in% names(s)) {
+          
+          style$fontId <- as.integer(s[["fontId"]])
+
           if (s[["fontId"]] != "0") {
             thisFont <- fonts[[(as.integer(s[["fontId"]]) + 1)]]
+
 
             if ("sz" %in% names(thisFont)) {
               style$fontSize <- thisFont$sz

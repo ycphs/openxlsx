@@ -5,6 +5,7 @@
 
 
 Style$methods(initialize = function() {
+  fontId <<- NULL
   fontName <<- NULL
   fontColour <<- NULL
   fontSize <<- NULL
@@ -260,6 +261,7 @@ Style$methods(show = function(print = TRUE) {
 
 Style$methods(as.list = function() {
   l <- list(
+    "fontId" = fontId,
     "fontName" = fontName,
     "fontColour" = fontColour,
     "fontSize" = fontSize,
