@@ -8,6 +8,7 @@
 #' @param x Object to be written. For classes supported look at the examples.
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
+#' @param array A bool if the function written is of type array 
 #' @param xy An alternative to specifying \code{startCol} and
 #' \code{startRow} individually.  A vector of the form
 #' \code{c(startCol, startRow)}.
@@ -159,6 +160,7 @@ writeData <- function(wb,
                       x,
                       startCol = 1,
                       startRow = 1,
+                      array = FALSE,
                       xy = NULL,
                       colNames = TRUE,
                       rowNames = FALSE,
@@ -225,11 +227,11 @@ writeData <- function(wb,
     hlinkNames <- names(x)
     colNames <- FALSE
   }
-
+  
   ## special case - formula
   if ("formula" %in% class(x)) {
     x <- data.frame("X" = x, stringsAsFactors = FALSE)
-    class(x[[1]]) <- "formula"
+    class(x[[1]]) <- ifelse(array, "array_formula", "formula")
     colNames <- FALSE
   }
 
@@ -428,6 +430,7 @@ writeData <- function(wb,
 #' @param x A character vector.
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
+#' @param array A bool if the function written is of type array
 #' @param xy An alternative to specifying \code{startCol} and
 #' \code{startRow} individually.  A vector of the form
 #' \code{c(startCol, startRow)}.
@@ -499,13 +502,14 @@ writeFormula <- function(wb,
                          x,
                          startCol = 1,
                          startRow = 1,
+                         array = FALSE,
                          xy = NULL) {
   if (!"character" %in% class(x)) {
     stop("x must be a character vector.")
   }
-
+  
   dfx <- data.frame("X" = x, stringsAsFactors = FALSE)
-  class(dfx$X) <- c("character", "formula")
+  class(dfx$X) <- c("character", ifelse(array, "array_formula", "formula"))
 
   if (any(grepl("^(=|)HYPERLINK\\(", x, ignore.case = TRUE))) {
     class(dfx$X) <- c("character", "formula", "hyperlink")
@@ -519,6 +523,7 @@ writeFormula <- function(wb,
     x = dfx,
     startCol = startCol,
     startRow = startRow,
+    array = array,
     xy = xy,
     colNames = FALSE,
     rowNames = FALSE

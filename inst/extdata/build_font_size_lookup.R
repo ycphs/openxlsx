@@ -1,3 +1,4 @@
+# nolint start
 
 options("scipen" = 10000)
 
@@ -60,3 +61,4 @@ cat(allStrs)
 
 
 
+# nolint end
