@@ -18,7 +18,11 @@ Authors@R:
              role = "ctb"),
       person(given = "Joshua",
              family = "Sturm",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Arseny",
+             family = "Kapoulkine",
+             role = c("ctb", "cph"),
+             comment = "Author of included pugixml code"))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
     worksheets. Through the use of 'Rcpp', read/write times are comparable
