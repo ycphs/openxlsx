@@ -93,66 +93,6 @@ int_2_cell_ref <- function(cols) {
     .Call(`_openxlsx_int_2_cell_ref`, cols)
 }
 
-readXMLPtr <- function(path) {
-    .Call(`_openxlsx_readXMLPtr`, path)
-}
-
-getXMLXPtr1 <- function(doc, child) {
-    .Call(`_openxlsx_getXMLXPtr1`, doc, child)
-}
-
-getXMLXPtr2 <- function(doc, level1, child) {
-    .Call(`_openxlsx_getXMLXPtr2`, doc, level1, child)
-}
-
-getXMLXPtr3 <- function(doc, level1, level2, child) {
-    .Call(`_openxlsx_getXMLXPtr3`, doc, level1, level2, child)
-}
-
-getXMLXPtr4 <- function(doc, level1, level2, level3, child) {
-    .Call(`_openxlsx_getXMLXPtr4`, doc, level1, level2, level3, child)
-}
-
-getXMLXPtr5 <- function(doc, level1, level2, level3, level4, child) {
-    .Call(`_openxlsx_getXMLXPtr5`, doc, level1, level2, level3, level4, child)
-}
-
-getXMLXPtr4val <- function(doc, level1, level2, level3, child) {
-    .Call(`_openxlsx_getXMLXPtr4val`, doc, level1, level2, level3, child)
-}
-
-getXMLXPtr5val <- function(doc, level1, level2, level3, level4, child) {
-    .Call(`_openxlsx_getXMLXPtr5val`, doc, level1, level2, level3, level4, child)
-}
-
-getXMLXPtr2attr <- function(doc, level1, child) {
-    .Call(`_openxlsx_getXMLXPtr2attr`, doc, level1, child)
-}
-
-getXMLXPtr3attr <- function(doc, level1, level2, child) {
-    .Call(`_openxlsx_getXMLXPtr3attr`, doc, level1, level2, child)
-}
-
-getXMLXPtr4attr <- function(doc, level1, level2, level3, child) {
-    .Call(`_openxlsx_getXMLXPtr4attr`, doc, level1, level2, level3, child)
-}
-
-getXMLXPtr5attr <- function(doc, level1, level2, level3, level4, child) {
-    .Call(`_openxlsx_getXMLXPtr5attr`, doc, level1, level2, level3, level4, child)
-}
-
-getXMLXPtr3attr_one <- function(doc, level1, level2, child, attrname) {
-    .Call(`_openxlsx_getXMLXPtr3attr_one`, doc, level1, level2, child, attrname)
-}
-
-getXMLXPtr4attr_one <- function(doc, level1, level2, level3, child, attrname) {
-    .Call(`_openxlsx_getXMLXPtr4attr_one`, doc, level1, level2, level3, child, attrname)
-}
-
-printXPtr <- function(doc, raw) {
-    .Call(`_openxlsx_printXPtr`, doc, raw)
-}
-
 readXML <- function(path) {
     .Call(`_openxlsx_readXML`, path)
 }
