@@ -17894,6 +17894,8 @@ Workbook$methods(
     ## Build style objects from the styles XML
     stylesTxt <- readUTF8(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
+    # use pugi to import xml
+    styles_xml <- readXML(stylesXML)
 
     ## Indexed colours
     vals <- getNodes(xml = stylesTxt, tagIn = "<indexedColors>")
@@ -17971,25 +17973,8 @@ Workbook$methods(
 
     ## ------------------------------ build styleObjects ------------------------------ ##
 
-    cellXfs <<- getChildlessNode(xml = stylesTxt, tag = "cellXfs")
-    xf <<- getNodes(xml = cellXfs, tagIn = "<xf")
-    
-    xfAttrs <- regmatches(xf, gregexpr('[a-zA-Z]+=".*?"', xf))
-    xfNames <-
-      lapply(xfAttrs, function(xfAttrs) {
-        regmatches(
-          xfAttrs,
-          regexpr('[a-zA-Z]+(?=\\=".*?")', xfAttrs, perl = TRUE)
-        )
-      })
-    xfVals <<-
-      lapply(xfAttrs, function(xfAttrs) {
-        regmatches(xfAttrs, regexpr('(?<=").*?(?=")', xfAttrs, perl = TRUE))
-      })
-
-    for (i in 1:length(xf)) {
-      names(xfVals[[i]]) <- xfNames[[i]]
-    }
+    xf <<- getXML3(styles_xml, "styleSheet", "cellXfs", "xf")
+    xfVals <<- getXMLattr(xf, "xf")
 
     styleObjects_tmp <- list()
     flag <- FALSE
