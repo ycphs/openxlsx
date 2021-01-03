@@ -135,7 +135,15 @@
     <p>Write a a character vector containing Excel formula to a worksheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, <span class='va'>sheet</span>, <span class='va'>x</span>, startCol <span class='op'>=</span> <span class='fl'>1</span>, startRow <span class='op'>=</span> <span class='fl'>1</span>, xy <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>writeFormula</span><span class='op'>(</span>
+  <span class='va'>wb</span>,
+  <span class='va'>sheet</span>,
+  <span class='va'>x</span>,
+  startCol <span class='op'>=</span> <span class='fl'>1</span>,
+  startRow <span class='op'>=</span> <span class='fl'>1</span>,
+  array <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  xy <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,6 +167,10 @@
     <tr>
       <th>startRow</th>
       <td><p>A vector specifying the starting row to write to.</p></td>
+    </tr>
+    <tr>
+      <th>array</th>
+      <td><p>A bool if the function written is of type array</p></td>
     </tr>
     <tr>
       <th>xy</th>
