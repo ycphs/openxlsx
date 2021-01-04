@@ -782,6 +782,17 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     ## vmlDrawing and comments
     if (length(commentsXML) > 0) {
+
+      # com_rId <- NULL
+      # for (com_rel in commentsrelXML) {
+      #   rel_xml <<- readXML(com_rel)
+      #   rels <<- getXML2(rel_xml, "Relationships", "Relationship")
+      #   attrs <<- getXMLattr(rels, "Relationship")
+      #   commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
+      #   s <- unlist(attrs[commentID])
+      #   com_rId <- c(com_rId, as.character(s[names(s)=="Id"]))
+      # }
+      # com_rId <<- com_rId
       drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/vmlDrawing[0-9]+\\.vml", x)])
       hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
@@ -830,6 +841,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
             wb$comments[[i]] <- lapply(seq_along(comments), function(j) {
               comment_list <- list(
+                #"refId" = com_rId[j],
                 "ref" = refs[j],
                 "author" = authors[j],
                 "comment" = comments[[j]],

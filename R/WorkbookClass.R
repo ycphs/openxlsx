@@ -679,7 +679,7 @@ Workbook$methods(
           worksheets_rels[[i]] <<- unique(c(
             worksheets_rels[[i]],
             sprintf(
-              '<Relationship Id="rIdcomment" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments" Target="../%s"/>',
+              '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments" Target="../%s"/>',
               fn
             )
           ))
