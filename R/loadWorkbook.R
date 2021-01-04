@@ -71,6 +71,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   commentsXML <- xmlFiles[grepl("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   threadCommentsXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   personXML <- xmlFiles[grepl("xl/persons/person.xml$", xmlFiles, perl = TRUE)]
+  commentsrelXML <<- xmlFiles[grepl("xl/worksheets/_rels/sheet[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   embeddings <- xmlFiles[grepl("xl/embeddings", xmlFiles, perl = TRUE)]
 
   charts <- xmlFiles[grepl("xl/charts/.*xml$", xmlFiles, perl = TRUE)]
@@ -783,16 +784,18 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     ## vmlDrawing and comments
     if (length(commentsXML) > 0) {
 
-      # com_rId <- NULL
-      # for (com_rel in commentsrelXML) {
-      #   rel_xml <<- readXML(com_rel)
-      #   rels <<- getXML2(rel_xml, "Relationships", "Relationship")
-      #   attrs <<- getXMLattr(rels, "Relationship")
-      #   commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
-      #   s <- unlist(attrs[commentID])
-      #   com_rId <- c(com_rId, as.character(s[names(s)=="Id"]))
-      # }
-      # com_rId <<- com_rId
+      com_rId <- vector("list", length(commentsrelXML))
+      names(com_rId) <- commentsrelXML
+      for (com_rel in commentsrelXML) {
+        rel_xml <- readXML(com_rel)
+        rels <- getXML2(rel_xml, "Relationships", "Relationship")
+        attrs <- getXMLattr(rels, "Relationship")
+        # commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
+        # s <- unlist(attrs[commentID])
+        attrs <- as.data.frame(do.call("rbind", attrs))
+        com_rId[[com_rel]] <- attrs
+      }
+      com_rId <<- com_rId
       drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/vmlDrawing[0-9]+\\.vml", x)])
       hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 

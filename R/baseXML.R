@@ -201,8 +201,8 @@ genBaseWorkbook <- function() {
 genBaseSheetRels <- function(sheetInd) {
   c(
     sprintf('<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing" Target="../drawings/drawing%s.xml"/>', sheetInd),
-    sprintf('<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/printerSettings" Target="../printerSettings/printerSettings%s.bin"/>', sheetInd),
-    sprintf('<Relationship Id="rIdvml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing" Target="../drawings/vmlDrawing%s.vml"/>', sheetInd)
+    #sprintf('<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/printerSettings" Target="../printerSettings/printerSettings%s.bin"/>', sheetInd),
+    sprintf('<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing" Target="../drawings/vmlDrawing%s.vml"/>', sheetInd)
   )
 }
 
