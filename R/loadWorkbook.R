@@ -822,8 +822,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
             style <- lapply(comments, getNodes, tagIn = "<rPr>")
 
-            comments <- regmatches(comments, gregexpr("(?<=<t( |>)).*?[^/]+", comments, perl = TRUE))
-            comments <- lapply(comments, function(x) gsub("<", "", x))
+            comments <- regmatches(comments, 
+                                   gregexpr("(?<=<t( |>))[\\s\\S]+?(?=</t>)", comments, perl = TRUE))
             comments <- lapply(comments, function(x) gsub(".*?>", "", x, perl = TRUE))
 
 
