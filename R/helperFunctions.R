@@ -349,15 +349,23 @@ writeCommentXML <- function(comment_list, file_name) {
   xml <- '<comments xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="xr" xmlns:xr="http://schemas.microsoft.com/office/spreadsheetml/2014/revision">'
   xml <- c(xml, paste0("<authors>", paste(sprintf("<author>%s</author>", authors), collapse = ""), "</authors><commentList>"))
 
-
   for (i in seq_along(comment_list)) {
     authorInd <- which(authors == comment_list[[i]]$author) - 1L
     xml <- c(xml, sprintf('<comment ref="%s" authorId="%s" shapeId="0"><text>', comment_list[[i]]$ref, authorInd))
-
-    for (j in seq_along(comment_list[[i]]$comment)) {
-      xml <- c(xml, sprintf('<r>%s<t xml:space="preserve">%s</t></r>', comment_list[[i]]$style[[j]], comment_list[[i]]$comment[[j]]))
+    
+    if(length(comment_list[[i]]$style) != 0){ ## check that style information is present
+      for (j in seq_along(comment_list[[i]]$comment)) {
+        xml <- c(xml, sprintf('<r>%s<t xml:space="preserve">%s</t></r>', 
+                              comment_list[[i]]$style[[j]], 
+                              comment_list[[i]]$comment[[j]]))
+      }
+    }else{ ## Case with no styling information.
+      for (j in seq_along(comment_list[[i]]$comment)) {
+        xml <- c(xml, sprintf('<t>%s</t>', 
+                              comment_list[[i]]$comment[[j]]))
+      }
     }
-
+    
     xml <- c(xml, "</text></comment>")
   }
 
