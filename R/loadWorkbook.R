@@ -69,7 +69,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   vmlDrawingXML <- xmlFiles[grepl("drawings/vmlDrawing[0-9]+\\.vml$", xmlFiles, perl = TRUE)]
   vmlDrawingRelsXML <- xmlFiles[grepl("vmlDrawing[0-9]+.vml.rels$", xmlFiles, perl = TRUE)]
   commentsXML <- xmlFiles[grepl("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE)]
-  threadCommentXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
+  threadCommentsXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   personXML <- xmlFiles[grepl("xl/persons/person.xml$", xmlFiles, perl = TRUE)]
   embeddings <- xmlFiles[grepl("xl/embeddings", xmlFiles, perl = TRUE)]
 
@@ -843,16 +843,16 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
 
     ## Threaded comments
-    if (length(threadCommentXML) > 0) {
-      threadCommentXMLrelationship <- lapply(xml, function(x) x[grepl("threadedComment[0-9]+\\.xml", x)])
-      hasThreadComment<- sapply(threadCommentXMLrelationship, length) > 0
-      if(any(hasThreadComment)) {
+    if (length(threadCommentsXML) > 0) {
+      threadCommentsXMLrelationship <- lapply(xml, function(x) x[grepl("threadedComment[0-9]+\\.xml", x)])
+      hasThreadComments<- sapply(threadCommentsXMLrelationship, length) > 0
+      if(any(hasThreadComments)) {
         for (i in seq_along(xml)) {
-          if (hasThreadComment[i]) {
-            target <- unlist(lapply(threadCommentXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
+          if (hasThreadComments[i]) {
+            target <- unlist(lapply(threadCommentsXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
             target <- basename(gsub('"$', "", target))
 
-            wb$threadComment[[i]] <- threadCommentXML[grepl(target, threadCommentXML)]
+            wb$threadComments[[i]] <- threadCommentsXML[grepl(target, threadCommentsXML)]
             
           }
         }
@@ -860,7 +860,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$Content_Types <- c(
         wb$Content_Types, 
         sprintf('<Override PartName="/xl/threadedComments/%s" ContentType="application/vnd.ms-excel.threadedcomments+xml"/>',
-                sapply(threadCommentXML, basename))
+                sapply(threadCommentsXML, basename))
         )
     }
     

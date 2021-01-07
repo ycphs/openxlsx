@@ -24,7 +24,7 @@ Workbook$methods(
         category = category
       )
     comments <<- list()
-    threadComment <<- list()
+    threadComments <<- list()
 
 
     drawings <<- list()
@@ -210,7 +210,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- FALSE
     comments[[newSheetIndex]] <<- list()
-    threadComment[[newSheetIndex]] <<- list()
+    threadComments[[newSheetIndex]] <<- list()
 
     rowHeights[[newSheetIndex]] <<- list()
     colWidths[[newSheetIndex]] <<- list()
@@ -355,7 +355,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- isChartSheet[[clonedSheet]]
     comments[[newSheetIndex]] <<- comments[[clonedSheet]]
-    threadComment[[newSheetIndex]] <<- threadComment[[clonedSheet]]
+    threadComments[[newSheetIndex]] <<- threadComments[[clonedSheet]]
 
     rowHeights[[newSheetIndex]] <<- rowHeights[[clonedSheet]]
     colWidths[[newSheetIndex]] <<- colWidths[[clonedSheet]]
@@ -590,7 +590,7 @@ Workbook$methods(
     nPivots <- length(pivotDefinitions)
     nSlicers <- length(slicers)
     nComments <- sum(sapply(comments, length) > 0)
-    nThreadComment <- sum(sapply(threadComment, length) > 0)
+    nThreadComments <- sum(sapply(threadComments, length) > 0)
     nPersons <- length(persons)
     nVML <- sum(sapply(vml, length) > 0)
 
@@ -695,16 +695,16 @@ Workbook$methods(
     }
     
     ## Threaded Comments xl/threadedComments/threadedComment.xml
-    if (nThreadComment > 0){
-      xlThreadComment <- file.path(tmpDir, "xl", "threadedComments")
-      dir.create(path = xlThreadComment, recursive = TRUE)
+    if (nThreadComments > 0){
+      xlThreadComments <- file.path(tmpDir, "xl", "threadedComments")
+      dir.create(path = xlThreadComments, recursive = TRUE)
       
-      for (i in 1:nSheets) {
-        if (length(threadComment[[i]]) > 0) {
-          fl <- threadComment[[i]]
+      for (i in seq_len(nSheets)) {
+        if (length(threadComments[[i]]) > 0) {
+          fl <- threadComments[[i]]
           file.copy(
             from = fl,
-            to = file.path(xlThreadComment, basename(fl)),
+            to = file.path(xlThreadComments, basename(fl)),
             overwrite = TRUE,
             copy.date = TRUE
           )
@@ -2308,7 +2308,7 @@ Workbook$methods(
     colOutlineLevels[[sheet]] <<- NULL
     outlineLevels[[sheet]] <<- NULL
     comments[[sheet]] <<- NULL
-    threadComment[[sheet]] <<- NULL
+    threadComments[[sheet]] <<- NULL
     isChartSheet <<- isChartSheet[-sheet]
 
     ## sheetOrder
