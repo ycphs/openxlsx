@@ -44,6 +44,7 @@ Workbook <- setRefClass("Workbook",
     "vml" = "ANY",
     "vml_rels" = "ANY",
     "comments" = "ANY",
+    "threadComment" = "ANY",
 
     "workbook" = "ANY",
     "workbook.xml.rels" = "ANY",

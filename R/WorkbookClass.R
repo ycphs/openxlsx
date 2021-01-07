@@ -24,6 +24,7 @@ Workbook$methods(
         category = category
       )
     comments <<- list()
+    threadComment <<- list()
 
 
     drawings <<- list()
@@ -207,6 +208,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- FALSE
     comments[[newSheetIndex]] <<- list()
+    threadComment[[newSheetIndex]] <<- list()
 
     rowHeights[[newSheetIndex]] <<- list()
     colWidths[[newSheetIndex]] <<- list()
@@ -351,6 +353,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- isChartSheet[[clonedSheet]]
     comments[[newSheetIndex]] <<- comments[[clonedSheet]]
+    threadComment[[newSheetIndex]] <<- threadComment[[clonedSheet]]
 
     rowHeights[[newSheetIndex]] <<- rowHeights[[clonedSheet]]
     colWidths[[newSheetIndex]] <<- colWidths[[clonedSheet]]
@@ -585,6 +588,7 @@ Workbook$methods(
     nPivots <- length(pivotDefinitions)
     nSlicers <- length(slicers)
     nComments <- sum(sapply(comments, length) > 0)
+    nThreadComment <- sum(sapply(threadComment, length) > 0)
     nVML <- sum(sapply(vml, length) > 0)
 
     relsDir <- file.path(tmpDir, "_rels")
@@ -686,6 +690,33 @@ Workbook$methods(
 
       .self$writeDrawingVML(xldrawingsDir)
     }
+    
+    ## Threaded Comments xl/threadedComments/threadedComment.xml
+    if (nThreadComment > 0){
+      xlThreadComment <- file.path(tmpDir, "xl", "threadedComments")
+      dir.create(path = xlThreadComment, recursive = TRUE)
+      
+      for (i in 1:nSheets) {
+        if (length(threadComment[[i]]) > 0) {
+          fl <- threadComment[[i]]
+          file.copy(
+            from = fl,
+            to = file.path(xlThreadComment, basename(fl)),
+            overwrite = TRUE,
+            copy.date = TRUE
+          )
+
+          worksheets_rels[[i]] <<- unique(c(
+            worksheets_rels[[i]],
+            sprintf(
+              '<Relationship Id="rIdcomment" Type="http://schemas.microsoft.com/office/2017/10/relationships/threadedComment" Target="../threadedComments/%s"/>',
+              basename(fl)
+            )
+          ))
+        }
+      }
+    }
+    
 
     if (length(embeddings) > 0) {
       embeddingsDir <- file.path(tmpDir, "xl", "embeddings")
@@ -2261,6 +2292,7 @@ Workbook$methods(
     colOutlineLevels[[sheet]] <<- NULL
     outlineLevels[[sheet]] <<- NULL
     comments[[sheet]] <<- NULL
+    threadComment[[sheet]] <<- NULL
     isChartSheet <<- isChartSheet[-sheet]
 
     ## sheetOrder
