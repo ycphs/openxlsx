@@ -49,7 +49,6 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     ## Unzip files to temp directory
     xmlFiles <- unzip(file, exdir = xmlDir)
   }
-
   wb <- createWorkbook()
 
   ## Not used
@@ -71,6 +70,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   vmlDrawingRelsXML <- xmlFiles[grepl("vmlDrawing[0-9]+.vml.rels$", xmlFiles, perl = TRUE)]
   commentsXML <- xmlFiles[grepl("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   threadCommentXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
+  personXML <- xmlFiles[grepl("xl/persons/person.xml$", xmlFiles, perl = TRUE)]
   embeddings <- xmlFiles[grepl("xl/embeddings", xmlFiles, perl = TRUE)]
 
   charts <- xmlFiles[grepl("xl/charts/.*xml$", xmlFiles, perl = TRUE)]
@@ -101,7 +101,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## remove all EXCEPT media and charts
   if (!isUnzipped) {
-    on.exit(expr = unlink(xmlFiles[!grepl("charts|media|vmlDrawing|comment|embeddings|pivot|slicer|vbaProject", xmlFiles, ignore.case = TRUE)], recursive = TRUE, force = TRUE), add = TRUE)
+    on.exit(expr = unlink(xmlFiles[!grepl("charts|media|vmlDrawing|comment|embeddings|pivot|slicer|vbaProject|person", xmlFiles, ignore.case = TRUE)], recursive = TRUE, force = TRUE), add = TRUE)
   }
 
   ## core
@@ -864,6 +864,17 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
         )
     }
     
+    ## Persons (needed for Threaded Comment)
+    if(length(personXML) > 0){
+      wb$persons <- personXML
+      wb$Content_Types <- c(
+        wb$Content_Types,
+        '<Override PartName="/xl/persons/person.xml" ContentType="application/vnd.ms-excel.person+xml"/>'
+      )
+      wb$workbook.xml.rels <- c(
+        wb$workbook.xml.rels, 
+        '<Relationship Id="rId5" Type="http://schemas.microsoft.com/office/2017/10/relationships/person" Target="persons/person.xml"/>')
+    }
     
 
     ## rels image

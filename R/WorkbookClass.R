@@ -37,6 +37,8 @@ Workbook$methods(
     headFoot <<- NULL
 
     media <<- list()
+    
+    persons <<- NULL
 
     pivotTables <<- NULL
     pivotTables.xml.rels <<- NULL
@@ -589,6 +591,7 @@ Workbook$methods(
     nSlicers <- length(slicers)
     nComments <- sum(sapply(comments, length) > 0)
     nThreadComment <- sum(sapply(threadComment, length) > 0)
+    nPersons <- length(persons)
     nVML <- sum(sapply(vml, length) > 0)
 
     relsDir <- file.path(tmpDir, "_rels")
@@ -709,13 +712,26 @@ Workbook$methods(
           worksheets_rels[[i]] <<- unique(c(
             worksheets_rels[[i]],
             sprintf(
-              '<Relationship Id="rIdcomment" Type="http://schemas.microsoft.com/office/2017/10/relationships/threadedComment" Target="../threadedComments/%s"/>',
+              '<Relationship Id="rIdthread" Type="http://schemas.microsoft.com/office/2017/10/relationships/threadedComment" Target="../threadedComments/%s"/>',
               basename(fl)
             )
           ))
         }
       }
     }
+
+    ## xl/persons/person.xml
+    if (nPersons > 0){
+      personDir <- file.path(tmpDir, "xl", "persons")
+      dir.create(path = personDir, recursive = TRUE)
+      file.copy(
+        from = persons,
+        to = personDir,
+        overwrite = TRUE
+      )
+      
+    }
+    
     
 
     if (length(embeddings) > 0) {
@@ -3102,7 +3118,7 @@ Workbook$methods(
   preSaveCleanUp = function() {
     ## Steps
     # Order workbook.xml.rels:
-    #   sheets -> style -> theme -> sharedStrings -> tables -> calcChain
+    #   sheets -> style -> theme -> sharedStrings -> persons -> tables -> calcChain
     # Assign workbook.xml.rels children rIds, seq_along(workbook.xml.rels)
     # Assign workbook$sheets rIds 1:nSheets
     #
@@ -3150,6 +3166,7 @@ Workbook$methods(
     sharedStringsInd <-
       which(grepl("sharedStrings.xml", workbook.xml.rels))
     tableInds <- which(grepl("table[0-9]+.xml", workbook.xml.rels))
+    personInds <- which(grepl("person.xml", workbook.xml.rels))
 
 
     ## Reordering of workbook.xml.rels
@@ -3171,7 +3188,8 @@ Workbook$methods(
         connectionsInd,
         stylesInd,
         sharedStringsInd,
-        tableInds
+        tableInds,
+        personInds
       )]
 
     ## Re assign rIds to children of workbook.xml.rels
