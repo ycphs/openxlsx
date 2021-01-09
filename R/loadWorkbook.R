@@ -814,10 +814,6 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
               wb$vml[[i]] <- substring(text = txt, first = i1, last = (i2 - 1L))
 
-
-              fls <- c("/tmp/lo/xl/drawings/vmlDrawing1.vml", "/tmp/lo/xl/drawings/vmlDrawing2.vml")
-              fls <- readXML(fls[i])
-
               relsInd <- grepl(target, vmlDrawingRelsXML)
               if (any(relsInd)) {
                 wb$vml_rels[i] <- readXML(fls[i])
