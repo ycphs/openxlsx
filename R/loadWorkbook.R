@@ -760,7 +760,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     if (length(vmlDrawingXML) > 0) {
       wb$Content_Types <- c(wb$Content_Types, '<Default Extension="vml" ContentType="application/vnd.openxmlformats-officedocument.vmlDrawing"/>')
 
-      drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/vmlDrawing", x)])
+      drawXMLrelationship <<- lapply(xml, function(x) x[grepl("drawings/vmlDrawing", x)])
+
+      for (i in seq_along(vmlDrawingXML)) {
+        wb$drawings_vml[[i]] <- readXML(vmlDrawingXML[[i]])
+      }
+
+
       hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
       ## loop over all worksheets and assign drawing to sheet
