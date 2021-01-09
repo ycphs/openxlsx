@@ -101,6 +101,7 @@ Workbook$methods(
                           firstHeader = NULL,
                           firstFooter = NULL,
                           visible = TRUE,
+                          hasDrawing = FALSE,
                           paperSize = 9,
                           orientation = "portrait",
                           hdpi = 300,
@@ -176,6 +177,7 @@ Workbook$methods(
 
     ## update content_tyes
     ## add a drawing.xml for the worksheet
+    if (hasDrawing) {
     Content_Types <<-
       c(
         Content_Types,
@@ -188,6 +190,16 @@ Workbook$methods(
           newSheetIndex
         )
       )
+    } else {
+      Content_Types <<-
+      c(
+        Content_Types,
+        sprintf(
+          '<Override PartName="/xl/worksheets/sheet%s.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>',
+          newSheetIndex
+        )
+      )
+    }
 
     ## Update xl/rels
     workbook.xml.rels <<- c(
@@ -1996,22 +2008,23 @@ Workbook$methods(
     ## write worksheets
     nSheets <- length(worksheets)
 
-    for (i in 1:nSheets) {
+    for (i in seq_len(nSheets)) {
       ## Write drawing i (will always exist) skip those that are empty
-      if (any(drawings[[i]] != "")) {
+      if (!identical(drawings[[i]], list())) {
         write_file(
           head = '<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
           body = pxml(drawings[[i]]),
           tail = "</xdr:wsDr>",
           fl = file.path(xldrawingsDir, stri_join("drawing", i, ".xml"))
         )
-
-        write_file(
-          head = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
-          body = pxml(drawings_rels[[i]]),
-          tail = "</Relationships>",
-          fl = file.path(xldrawingsRelsDir, stri_join("drawing", i, ".xml.rels"))
-        )
+        if (!identical(drawings_rels[[i]], list())) {
+          write_file(
+            head = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
+            body = pxml(drawings_rels[[i]]),
+            tail = "</Relationships>",
+            fl = file.path(xldrawingsRelsDir, stri_join("drawing", i, ".xml.rels"))
+          )
+        }
       } else {
         worksheets[[i]]$drawing <<- character(0)
       }

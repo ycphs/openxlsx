@@ -51,9 +51,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   }
   wb <- createWorkbook()
 
+
   ## Not used
   # .relsXML           <- xmlFiles[grepl("_rels/.rels$", xmlFiles, perl = TRUE)]
   # appXML             <- xmlFiles[grepl("app.xml$", xmlFiles, perl = TRUE)]
+  
+  xmlFiles <<- xmlFiles
+  ContentTypesXML <<- xmlFiles[grepl("\\[Content_Types\\].xml$", xmlFiles, perl = TRUE)]
 
   drawingsXML <- xmlFiles[grepl("drawings/drawing[0-9]+.xml$", xmlFiles, perl = TRUE)]
   worksheetsXML <- xmlFiles[grepl("/worksheets/sheet[0-9]+", xmlFiles, perl = TRUE)]
@@ -194,7 +198,12 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
         wb$addChartSheet(sheetName = sheetNames[i], tabColour = tabColour, zoom = as.numeric(zoom))
       } else {
-        wb$addWorksheet(sheetNames[i], visible = is_visible[i])
+        content_type <- openxlsx:::readXML(ContentTypesXML)
+        override <- openxlsx:::getXML2(content_type, "Types", "Override")
+        overrideAttr <- as.data.frame(do.call("rbind", openxlsx:::getXMLattr(override, "Override")))
+        xmls <- basename(overrideAttr$PartName)
+        drawings <- xmls[grepl("drawing", xmls)]
+        wb$addWorksheet(sheetNames[i], visible = is_visible[i], hasDrawing = !is.na(drawings[i]))
       }
     }
 
