@@ -744,8 +744,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
           drawingInd <- grepl(target, drawingsXML)
           if (any(drawingInd)) {
-            fls <- c("/tmp/lo/xl/drawings/drawing1.xml", "/tmp/lo/xl/drawings/drawing2.xml")
-            wb$drawings[i] <- readXML(fls[i])
+            wb$drawings[i] <- dXML[drawingInd]
           }
         }
       }
