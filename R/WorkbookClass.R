@@ -17893,7 +17893,7 @@ Workbook$methods(
     stylesTxt <- readXML(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
     # use pugi to import xml
-    styles_xml <- readXML(stylesXML)
+    styles_xml <<- readXML(stylesXML)
 
     ## Indexed colours
     vals <- getNodes(xml = stylesTxt, tagIn = "<indexedColors>")
