@@ -949,12 +949,12 @@ Workbook$methods(
       }
     }
 
-    # printerSettings
-    printDir <- file.path(tmpDir, "xl", "printerSettings")
-    dir.create(path = printDir, recursive = TRUE)
-    for (i in 1:nSheets) {
-      writeLines(genPrinterSettings(), file.path(printDir, sprintf("printerSettings%s.bin", i)))
-    }
+    # # printerSettings
+    # printDir <- file.path(tmpDir, "xl", "printerSettings")
+    # dir.create(path = printDir, recursive = TRUE)
+    # for (i in 1:nSheets) {
+    #   writeLines(genPrinterSettings(), file.path(printDir, sprintf("printerSettings%s.bin", i)))
+    # }
 
     ## media (copy file from origin to destination)
     for (x in media) {

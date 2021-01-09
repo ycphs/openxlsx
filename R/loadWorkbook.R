@@ -154,7 +154,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     workbook_xml <- readXML(workbookXML)
 
     # wb$workbook$alternateContent <- getXML2(workbook_xml, "workbook", "mc:AlternateContent")  # breaks file for Excel
-    wb$workbook$extLst <- getXML2(workbook_xml, "workbook", "extLst")
+    # wb$workbook$extLst <- getXML2(workbook_xml, "workbook", "extLst")
 
     sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
     sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl = TRUE)))
