@@ -29,6 +29,7 @@ Workbook$methods(
 
     drawings <<- list()
     drawings_rels <<- list()
+    drawings_vml <<- list()
 
     embeddings <<- NULL
     externalLinks <<- NULL
@@ -1343,7 +1344,15 @@ Workbook$methods(
         worksheets[[i]]$legacyDrawing <<-
           '<legacyDrawing r:id="rId2"/>'
       }
+
     }
+
+      for (i in seq_along(drawings_vml)) {
+        write(
+          x = drawings_vml[[i]],
+          file = file.path(dir, sprintf("vmlDrawing%s.vml", i))
+        )
+      }
   }
 )
 
