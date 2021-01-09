@@ -200,9 +200,9 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
         wb$addChartSheet(sheetName = sheetNames[i], tabColour = tabColour, zoom = as.numeric(zoom))
       } else {
-        content_type <- readXML(ContentTypesXML)
-        override <- getXML2(content_type, "Types", "Override")
-        overrideAttr <- as.data.frame(do.call("rbind", getXMLattr(override, "Override")))
+        content_type <- openxlsx:::readXML(ContentTypesXML)
+        override <- openxlsx:::getXML2(content_type, "Types", "Override")
+        overrideAttr <- as.data.frame(do.call("rbind", openxlsx:::getXMLattr(override, "Override")))
         xmls <- basename(overrideAttr$PartName)
         drawings <- xmls[grepl("drawing", xmls)]
         wb$addWorksheet(sheetNames[i], visible = is_visible[i], hasDrawing = !is.na(drawings[i]))
