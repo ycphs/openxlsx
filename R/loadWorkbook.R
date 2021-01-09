@@ -149,12 +149,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   ## xl\workbook
   if (length(workbookXML) > 0) {
 
-    workbook_xml <- readXMLPtr(workbookXML)
+    workbook_xml <- readXML(workbookXML)
 
     # wb$workbook$alternateContent <- getXML2(workbook_xml, "workbook", "mc:AlternateContent")  # breaks file for Excel
-    # wb$workbook$extLst <- getXML2(workbook_xml, "workbook", "extLst")
+    wb$workbook$extLst <- getXML2(workbook_xml, "workbook", "extLst")
 
-    sheets <- unlist(getXMLXPtr3(workbook_xml, "workbook", "sheets", "sheet"))
+    sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
+    sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl = TRUE)))
 
     ## Some veryHidden sheets do not have a sheet content and their rId is empty.
     ## Such sheets need to be filtered out because otherwise their sheet names
