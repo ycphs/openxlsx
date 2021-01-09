@@ -17902,9 +17902,6 @@ Workbook$methods(
         stri_join("<colors>", vals, "</colors>")
     }
 
-    styles$numFmts <<- numFmts <- getXML3(styles_xml, "styleSheet", "numFmts", "numFmt")
-    # numFmts_attr <- getXMLattr(numFmts, "numFmt")
-
     ## dxf
     styles$dxfs <<- dxf <- getXML3(styles_xml, "styleSheet", "dxfs", "dxf")
 
@@ -17947,8 +17944,10 @@ Workbook$methods(
     fonts <- buildFontList(fonts)
 
 
+    fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
     fills <- buildFillList(fills)
 
+    borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
     borders <- sapply(borders, buildBorder, USE.NAMES = FALSE)
 
 
