@@ -630,24 +630,6 @@ Workbook$methods(
       dir.create(path = xlmediaDir, recursive = TRUE)
     }
 
-    
-    ## will always have a theme
-    xlthemeDir <- file.path(tmpDir, "xl", "theme")
-    dir.create(path = xlthemeDir, recursive = TRUE)
-
-    if (is.null(theme)) {
-      con <- file(file.path(xlthemeDir, "theme1.xml"), open = "wb")
-      writeBin(charToRaw(genBaseTheme()), con)
-      close(con)
-    } else {
-      lapply(1:nThemes, function(i) {
-        con <-
-          file(file.path(xlthemeDir, stri_join("theme", i, ".xml")), open = "wb")
-        writeBin(charToRaw(pxml(theme[[i]])), con)
-        close(con)
-      })
-    }
-
 
 
     ## will always have drawings
@@ -17910,16 +17892,10 @@ Workbook$methods(
       styles$tableStyles <<- tableStyles
     }
 
-    # extLst <- getXML2(styles_xml, "styleSheet", "extLst")
-    # if (length(extLst) > 0) {
+    #extLst <- getNodes(xml = stylesTxt, tagIn = "<extLst>")
+    #if (length(extLst) > 0) {
     #  styles$extLst <<- extLst
-    # }
-
-    styles$borders <<- borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
-
-    styles$fills <<- fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
-
-    styles$cellStyleXfs <<- cellStyleXfs <- getXML3(styles_xml, "styleSheet", "cellStyleXfs", "xf")
+    #}
 
     styles$cellXfs <<- cellXfs <- getXML3(styles_xml, "styleSheet", "cellXfs", "xf")
 
