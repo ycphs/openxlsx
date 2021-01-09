@@ -190,6 +190,7 @@ genBaseWorkbook <- function() {
     externalReferences = NULL,
     definedNames = NULL,
     calcPr = NULL,
+    alternateContent = NULL,
     pivotCaches = NULL,
     extLst = NULL
   )
