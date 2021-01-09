@@ -744,7 +744,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
           drawingInd <- grepl(target, drawingsXML)
           if (any(drawingInd)) {
-            wb$drawings[i] <- dXML[drawingInd]
+            fls <- c("/tmp/lo/xl/drawings/drawing1.xml", "/tmp/lo/xl/drawings/drawing2.xml")
+            wb$drawings[i] <- readXML(fls[i])
           }
         }
       }
@@ -779,9 +780,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
               wb$vml[[i]] <- substring(text = txt, first = i1, last = (i2 - 1L))
 
+
+              fls <- c("/tmp/lo/xl/drawings/vmlDrawing1.vml", "/tmp/lo/xl/drawings/vmlDrawing2.vml")
+              fls <- readXML(fls[i])
+
               relsInd <- grepl(target, vmlDrawingRelsXML)
               if (any(relsInd)) {
-                wb$vml_rels[i] <- vmlDrawingRelsXML[relsInd]
+                wb$vml_rels[i] <- readXML(fls[i])
               }
             }
           }

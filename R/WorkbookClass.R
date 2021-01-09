@@ -1298,17 +1298,7 @@ Workbook$methods(
       if (nComments > 0 | length(vml[[i]]) > 0) {
         write(
           x = stri_join(
-            '<xml xmlns:v="urn:schemas-microsoft-com:vml"
-                    xmlns:o="urn:schemas-microsoft-com:office:office"
-                    xmlns:x="urn:schemas-microsoft-com:office:excel">
-                    <o:shapelayout v:ext="edit">
-                    <o:idmap v:ext="edit" data="1"/>
-                    </o:shapelayout>
-                    <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
-                    path="m,l,21600r21600,l21600,xe">
-                    <v:stroke joinstyle="miter"/>
-                    <v:path gradientshapeok="t" o:connecttype="rect"/>
-                    </v:shapetype>'
+            '<xml xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><o:shapelayout v:ext="edit"><o:idmap v:ext="edit" data="1"/></o:shapelayout><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe"><v:stroke joinstyle="miter"/><v:path gradientshapeok="t" o:connecttype="rect"/></v:shapetype>'
           ),
           file = file.path(dir, sprintf("vmlDrawing%s.vml", i)),
           sep = " "
@@ -1341,7 +1331,7 @@ Workbook$methods(
           append = TRUE
         )
         worksheets[[i]]$legacyDrawing <<-
-          '<legacyDrawing r:id="rIdvml"/>'
+          '<legacyDrawing r:id="rId2"/>'
       }
     }
   }
@@ -2012,9 +2002,9 @@ Workbook$methods(
       ## Write drawing i (will always exist) skip those that are empty
       if (!identical(drawings[[i]], list())) {
         write_file(
-          head = '<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
+          head = '',
           body = pxml(drawings[[i]]),
-          tail = "</xdr:wsDr>",
+          tail = '',
           fl = file.path(xldrawingsDir, stri_join("drawing", i, ".xml"))
         )
         if (!identical(drawings_rels[[i]], list())) {
@@ -2160,7 +2150,7 @@ Workbook$methods(
           }
 
 
-
+        if (i < 3)
           write_file(
             head = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
             body = pxml(ws_rels),
