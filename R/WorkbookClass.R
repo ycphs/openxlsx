@@ -17917,18 +17917,12 @@ Workbook$methods(
         stri_join("<colors>", vals, "</colors>")
     }
 
-    ## dxf (don't need these, I don't think)
-    dxf <- getNodes(xml = stylesTxt, tagIn = "<dxfs")
-    if (length(dxf) > 0) {
-      dxf <- getNodes(xml = dxf[[1]], tagIn = "<dxf>")
-      if (length(dxf) > 0) {
-        styles$dxfs <<- dxf
-      }
-    }
+    ## dxf
+    styles$dxfs <<- dxf <- getXML3(styles_xml, "styleSheet", "dxfs", "dxf")
 
-    tableStyles <- getNodes(xml = stylesTxt, tagIn = "<tableStyles")
+    tableStyles <- getXML2(styles_xml, "styleSheet", "tableStyles")
     if (length(tableStyles) > 0) {
-      styles$tableStyles <<- stri_join(tableStyles, ">")
+      styles$tableStyles <<- tableStyles
     }
 
     extLst <- getNodes(xml = stylesTxt, tagIn = "<extLst>")
@@ -17958,17 +17952,10 @@ Workbook$methods(
     fonts <- buildFontList(fonts)
 
 
-    fills <- getNodes(xml = stylesTxt, tagIn = "<fill>")
+    fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
     fills <- buildFillList(fills)
 
-    borders <- getOpenClosedNode(stylesTxt, "<borders ", "</borders>")
-    borders <-
-      substr(
-        borders,
-        start =  regexpr("<border>", borders)[1],
-        stop = regexpr("</borders>", borders) - 1L
-      )
-    borders <- getNodes(xml = borders, tagIn = "<border")
+    borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
     borders <- sapply(borders, buildBorder, USE.NAMES = FALSE)
 
 
