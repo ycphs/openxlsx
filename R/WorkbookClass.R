@@ -17905,10 +17905,10 @@ Workbook$methods(
 Workbook$methods(
   loadStyles = function(stylesXML) {
     ## Build style objects from the styles XML
-    stylesTxt <- readUTF8(stylesXML)
+    stylesTxt <- readXML(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
     # use pugi to import xml
-    styles_xml <- readXML(stylesXML)
+    styles_xml <<- readXML(stylesXML)
 
     ## Indexed colours
     vals <- getNodes(xml = stylesTxt, tagIn = "<indexedColors>")
@@ -17953,20 +17953,8 @@ Workbook$methods(
     }
 
     ## fonts will maintain, sz, color, name, family scheme
-    # FIXME: any()
-    if (grepl("<font/>", stylesTxt, fixed = TRUE)) {
-      ## empty font node
-      fonts <- getNodes(xml = stylesTxt, tagIn = "<fonts")
-      fonts <- strsplit(fonts, split = "<font/>", fixed = TRUE)[[1]]
-      fonts <-
-        unlist(lapply(fonts, function(xml) {
-          c(getNodes(xml, tagIn = "<font>"), "")
-        }))
-    } else {
-      fonts <- getNodes(xml = stylesTxt, tagIn = "<fonts")
-      fonts <- getNodes(paste0(fonts, ">"), "<font>")
-    }
-    styles$fonts <<- fonts
+    
+    styles$fonts <<- fonts <- getXML3(styles_xml, "styleSheet", "fonts", "font")
     fonts <- buildFontList(fonts)
 
 
