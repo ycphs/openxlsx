@@ -2091,6 +2091,7 @@ Workbook$methods(
             prior = prior,
             post = post,
             sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
             row_heights_ = NULL,
             outline_levels_ = unlist(outlineLevels[[i]]),
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
@@ -2100,6 +2101,7 @@ Workbook$methods(
             prior = prior,
             post = post,
             sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
             row_heights_ = unlist(rowHeights[[i]]),
             outline_levels_ = NULL,
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
@@ -2110,6 +2112,7 @@ Workbook$methods(
             prior = prior,
             post = post,
             sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
             row_heights_ = unlist(rowHeights[[i]]),
             outline_levels_ = unlist(outlineLevels[[i]]),
             R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))

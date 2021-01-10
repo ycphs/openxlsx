@@ -477,6 +477,27 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   worksheetsXML <- file.path(dirname(worksheetsXML), file_names)
   wb <- loadworksheets(wb = wb, styleObjects = styleObjects, xmlFiles = worksheetsXML, is_chart_sheet = is_chart_sheet)
 
+
+  for (i in seq_len(nSheets)) {
+    worksheet_xml <- readXML(worksheetsXML[i])
+
+    wb$worksheets[[i]]$dimension <- getXML2(worksheet_xml, "worksheet", "dimension")
+
+    cols <- getXML3(worksheet_xml, "worksheet", "cols", "col")
+    cols_attr <- getXMLattr(cols, "col")
+
+    names(cols) <- sapply(cols_attr, FUN = function(x) as.integer(x["min"]))
+
+
+    rows <<- getXML3(worksheet_xml, "worksheet", "sheetData", "row")
+    wb$worksheets[[i]]$rows_attr <- getXMLattr(rows, "row")
+    
+    wb$worksheets[[i]]$cols <- cols
+
+    wb$worksheets[[i]]$sheetFormatPr <- getXML2(worksheet_xml, "worksheet", "sheetFormatPr")
+    wb$worksheets[[i]]$sheetViews <- getXML2(worksheet_xml, "worksheet", "sheetViews")
+  }
+
   ## Fix styleobject encoding
   if (length(wb$styleObjects) > 0) {
     style_names <- sapply(wb$styleObjects, "[[", "sheet")

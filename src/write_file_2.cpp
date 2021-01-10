@@ -2,11 +2,11 @@
 
 #include "openxlsx.h"
 
-
 // [[Rcpp::export]]
 SEXP write_worksheet_xml_2( std::string prior
                           , std::string post
                           , Reference sheet_data
+                          , Rcpp::List row_style
                           , Nullable<CharacterVector> row_heights_ = R_NilValue
                           , Nullable<CharacterVector> outline_levels_ = R_NilValue
                           , std::string R_fileName = "output"){
@@ -132,58 +132,10 @@ SEXP write_worksheet_xml_2( std::string prior
       
     }
 
-    if ((h < n_row_heights) && (!Rf_isNull(row_heights_))) { // If there are custom row heights
-
-      if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) { // If there are grouped rows
-
-        if ((unique_rows[i] == row_heights_rows[h]) && (unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-          // Row is grouped and has a custom height
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
-          h++;
-          l++;
-        } else if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
-          l++;
-        } else if ((unique_rows[i] == row_heights_rows[h]) && row_has_data) {
-          // Row has custom height
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\">" + cell_xml + "</row>";
-          h++;
-        } else if (row_has_data) {
-          // Row has data
-          xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
-        } else {
-          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] +"\"/>";
-          h++;
-          l++;
-        }
-      } else {
-
-        if ((unique_rows[i] == row_heights_rows[h]) && row_has_data) {
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\">" + cell_xml + "</row>";
-          h++;
-        } else if (row_has_data) {
-          xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
-        } else {
-          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\"/>";
-          h++;
-        }
-
-      }
-
-    } else if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) {
-
-      if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
-        l++;
-      } else if (row_has_data) {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
-      } else {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\"/>";
-        l++;
-      }
-    } else {
-      xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
-    }
+    Rcpp::StringVector row = row_style[i];
+    // auto res = row.attr("names");
+    
+    xmlFile << setXMLrow(row, cell_xml);
 
   }
     

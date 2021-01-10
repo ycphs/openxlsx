@@ -120,6 +120,7 @@ WorkSheet <- setRefClass("WorkSheet",
     "cols" = "character",
 
     "sheet_data" = "Sheet_Data",
+    "rows_attr" = "ANY",
 
     "autoFilter" = "character",
     "mergeCells" = "ANY",
