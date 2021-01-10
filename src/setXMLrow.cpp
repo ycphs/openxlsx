@@ -33,7 +33,7 @@ std::string setXMLrow(Rcpp::CharacterVector row_attr, std::string cell_xml) {
   }
   
   std::ostringstream oss;
-  doc.print(oss, " ");
+  doc.print(oss, " ", pugi::format_raw);
   
   return oss.str();
 }

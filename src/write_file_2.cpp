@@ -4,64 +4,64 @@
 
 // [[Rcpp::export]]
 SEXP write_worksheet_xml_2( std::string prior
-                          , std::string post
-                          , Reference sheet_data
-                          , Rcpp::List row_style
-                          , Nullable<CharacterVector> row_heights_ = R_NilValue
-                          , Nullable<CharacterVector> outline_levels_ = R_NilValue
-                          , std::string R_fileName = "output"){
+                              , std::string post
+                              , Reference sheet_data
+                              , Rcpp::List row_style
+                              , Nullable<CharacterVector> row_heights_ = R_NilValue
+                              , Nullable<CharacterVector> outline_levels_ = R_NilValue
+                              , std::string R_fileName = "output"){
   
-
+  
   // open file and write header XML
   const char * s = R_fileName.c_str();
   std::ofstream xmlFile;
   xmlFile.open (s);
-  xmlFile << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+  xmlFile << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
   xmlFile << prior;
   
   IntegerVector cell_row = sheet_data.field("rows");
   
   // If no data write childless node and return
   if(cell_row.size() == 0){
-
+    
     xmlFile << "<sheetData/>";
     xmlFile << post;
     xmlFile.close();
     return Rcpp::wrap(0);
   }
   
-
+  
   // sheet_data will be in order, just need to check for row_heights
   CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  CharacterVector cell_types = map_cell_types_to_char(sheet_data.field("t"));
+  CharacterVector cell_types = sheet_data.field("t");
   CharacterVector cell_value = sheet_data.field("v");
   CharacterVector cell_fn = sheet_data.field("f");
   
   CharacterVector style_id = sheet_data.field("style_id");
   CharacterVector unique_rows(sort_unique(cell_row));
-
+  
   CharacterVector row_heights;
   CharacterVector row_heights_rows;
   size_t n_row_heights = 0;
-
+  
   CharacterVector outline_levels;
   CharacterVector outline_levels_rows;
   CharacterVector outline_levels_hidden;
   size_t n_outline_levels = 0;
-
+  
   if (row_heights_.isNotNull()) {
     row_heights = row_heights_;
     row_heights_rows = row_heights.attr("names");
     n_row_heights = row_heights.size();
   }
-
+  
   if (outline_levels_.isNotNull()) {
     outline_levels = outline_levels_;
     outline_levels_rows = outline_levels.attr("names");
     outline_levels_hidden = outline_levels.attr("hidden");
     n_outline_levels = outline_levels.size();
   }
-
+  
   size_t n = cell_row.size();
   size_t k = unique_rows.size();
   std::string xml;
@@ -119,6 +119,8 @@ SEXP write_worksheet_xml_2( std::string prior
         }
         
         
+      }else if(!CharacterVector::is_na(cell_value[j-1])){
+        cell_xml += "\"><v>" + cell_value[j-1] + "</v></c>";
       }else if(!CharacterVector::is_na(cell_fn[j-1])){
         cell_xml += "\">" + cell_fn[j-1] + "</c>";
       }else{
