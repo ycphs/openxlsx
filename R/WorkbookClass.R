@@ -1042,7 +1042,7 @@ Workbook$methods(
     styleXML$cellXfs <-
       stri_join(
         sprintf('<cellXfs count="%s">', length(styles$cellXfs)),
-        pxml(styles$cellXfs),
+        paste0(styles$cellXfs, collapse = ""),
         "</cellXfs>"
       )
     styleXML$cellStyles <-
@@ -1113,13 +1113,14 @@ Workbook$methods(
     )
 
     ## reset styles - maintain any changes to base font
-    baseFont <- styles$fonts[[1]]
-    styles <<-
-      genBaseStyleSheet(styles$dxfs,
-        tableStyles = styles$tableStyles,
-        extLst = styles$extLst
-      )
-    styles$fonts[[1]] <<- baseFont
+    # # TODO: why would I want to do that?
+    # baseFont <- styles$fonts[[1]]
+    # styles <<-
+    #   genBaseStyleSheet(styles$dxfs,
+    #     tableStyles = styles$tableStyles,
+    #     extLst = styles$extLst
+    #   )
+    # styles$fonts[[1]] <<- baseFont
 
 
     return(file.path(tmpDir, tmpFile))
@@ -1349,196 +1350,196 @@ Workbook$methods(
 
 Workbook$methods(
   updateStyles = function(style) {
-    ## Updates styles.xml
-    xfNode <- list(
-      numFmtId = 0,
-      fontId = 0,
-      fillId = 0,
-      borderId = 0,
-      xfId = 0
-    )
+    # ## Updates styles.xml
+    # xfNode <- list(
+    #   numFmtId = 0,
+    #   fontId = 0,
+    #   fillId = 0,
+    #   borderId = 0,
+    #   xfId = 0
+    # )
 
 
-    alignmentFlag <- FALSE
+    # alignmentFlag <- FALSE
 
-    ## Font
-    if (!is.null(style$fontName) |
-      !is.null(style$fontSize) |
-      !is.null(style$fontColour) |
-      !is.null(style$fontDecoration) |
-      !is.null(style$fontFamily) |
-      !is.null(style$fontScheme)) {
-      fontNode <- .self$createFontNode(style)
-      fontId <- style$fontId
+    # ## Font
+    # if (!is.null(style$fontName) |
+    #   !is.null(style$fontSize) |
+    #   !is.null(style$fontColour) |
+    #   !is.null(style$fontDecoration) |
+    #   !is.null(style$fontFamily) |
+    #   !is.null(style$fontScheme)) {
+    #   fontNode <- .self$createFontNode(style)
+    #   fontId <- style$fontId
 
-      if (length(fontId) == 0) {
-        fontId <- style$fontId
-        styles$fonts <<- append(styles[["fonts"]], fontNode)
-      }
+    #   if (length(fontId) == 0) {
+    #     fontId <- style$fontId
+    #     styles$fonts <<- append(styles[["fonts"]], fontNode)
+    #   }
 
-      xfNode$fontId <- fontId
-      xfNode <- append(xfNode, list("applyFont" = "1"))
-    }
-
-
-    ## numFmt
-    if (!is.null(style$numFmt)) {
-      if (as.integer(style$numFmt$numFmtId) > 0) {
-        numFmtId <- style$numFmt$numFmtId
-        if (as.integer(numFmtId) > 163L) {
-          tmp <- style$numFmt$formatCode
-
-          styles$numFmts <<- unique(c(
-            styles$numFmts,
-            sprintf(
-              '<numFmt numFmtId="%s" formatCode="%s"/>',
-              numFmtId,
-              tmp
-            )
-          ))
-        }
-
-        xfNode$numFmtId <- numFmtId
-        xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
-      }
-    }
-
-    ## Fill
-    if (!is.null(style$fill)) {
-      fillNode <- .self$createFillNode(style)
-      if (!is.null(fillNode)) {
-        fillId <- which(styles$fills == fillNode) - 1L
-
-        if (length(fillId) == 0) {
-          fillId <- length(styles$fills)
-          styles$fills <<- c(styles$fills, fillNode)
-        }
-        xfNode$fillId <- fillId
-        xfNode <- append(xfNode, list("applyFill" = "1"))
-      }
-    }
-
-    ## Border
-    if (any(!is.null(
-      c(
-        style$borderLeft,
-        style$borderRight,
-        style$borderTop,
-        style$borderBottom,
-        style$borderDiagonal
-      )
-    ))) {
-      borderNode <- .self$createBorderNode(style)
-      borderId <- which(styles$borders == borderNode) - 1L
-
-      if (length(borderId) == 0) {
-        borderId <- length(styles$borders)
-        styles$borders <<- c(styles$borders, borderNode)
-      }
-
-      xfNode$borderId <- borderId
-      xfNode <- append(xfNode, list("applyBorder" = "1"))
-    }
+    #   xfNode$fontId <- fontId
+    #   xfNode <- append(xfNode, list("applyFont" = "1"))
+    # }
 
 
-    # if(!is.null(style$xfId))
-    # xfNode$xfId <- style$xfId
+    # ## numFmt
+    # if (!is.null(style$numFmt)) {
+    #   if (as.integer(style$numFmt$numFmtId) > 0) {
+    #     numFmtId <- style$numFmt$numFmtId
+    #     if (as.integer(numFmtId) > 163L) {
+    #       tmp <- style$numFmt$formatCode
 
-    childNodes <- ""
+    #       styles$numFmts <<- unique(c(
+    #         styles$numFmts,
+    #         sprintf(
+    #           '<numFmt numFmtId="%s" formatCode="%s"/>',
+    #           numFmtId,
+    #           tmp
+    #         )
+    #       ))
+    #     }
 
-    ## Alignment
-    if (!is.null(style$halign) |
-      !is.null(style$valign) |
-      !is.null(style$wrapText) |
-      !is.null(style$textRotation) | !is.null(style$indent)) {
-      attrs <- list()
-      alignNode <- "<alignment"
+    #     xfNode$numFmtId <- numFmtId
+    #     xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
+    #   }
+    # }
 
-      if (!is.null(style$textRotation)) {
-        alignNode <-
-          stri_join(alignNode,
-            sprintf('textRotation="%s"', style$textRotation),
-            sep = " "
-          )
-      }
+    # ## Fill
+    # if (!is.null(style$fill)) {
+    #   fillNode <- .self$createFillNode(style)
+    #   if (!is.null(fillNode)) {
+    #     fillId <- which(styles$fills == fillNode) - 1L
 
-      if (!is.null(style$halign)) {
-        alignNode <-
-          stri_join(alignNode, sprintf('horizontal="%s"', style$halign), sep = " ")
-      }
+    #     if (length(fillId) == 0) {
+    #       fillId <- length(styles$fills)
+    #       styles$fills <<- c(styles$fills, fillNode)
+    #     }
+    #     xfNode$fillId <- fillId
+    #     xfNode <- append(xfNode, list("applyFill" = "1"))
+    #   }
+    # }
 
-      if (!is.null(style$valign)) {
-        alignNode <-
-          stri_join(alignNode, sprintf('vertical="%s"', style$valign), sep = " ")
-      }
+    # ## Border
+    # if (any(!is.null(
+    #   c(
+    #     style$borderLeft,
+    #     style$borderRight,
+    #     style$borderTop,
+    #     style$borderBottom,
+    #     style$borderDiagonal
+    #   )
+    # ))) {
+    #   borderNode <- .self$createBorderNode(style)
+    #   borderId <- which(styles$borders == borderNode) - 1L
 
-      if (!is.null(style$indent)) {
-        alignNode <-
-          stri_join(alignNode, sprintf('indent="%s"', style$indent), sep = " ")
-      }
+    #   if (length(borderId) == 0) {
+    #     borderId <- length(styles$borders)
+    #     styles$borders <<- c(styles$borders, borderNode)
+    #   }
 
-      if (!is.null(style$wrapText)) {
-        if (style$wrapText) {
-          alignNode <- stri_join(alignNode, 'wrapText="1"', sep = " ")
-        }
-      }
-
-
-      alignNode <- stri_join(alignNode, "/>")
-
-      alignmentFlag <- TRUE
-      xfNode <- append(xfNode, list("applyAlignment" = "1"))
-
-      childNodes <- stri_join(childNodes, alignNode)
-    }
-
-    if (!is.null(style$hidden) | !is.null(style$locked)) {
-      xfNode <- append(xfNode, list("applyProtection" = "1"))
-      protectionNode <- "<protection"
-
-      if (!is.null(style$hidden)) {
-        protectionNode <-
-          stri_join(protectionNode, sprintf('hidden="%s"', as.numeric(style$hidden)), sep = " ")
-      }
-      if (!is.null(style$locked)) {
-        protectionNode <-
-          stri_join(protectionNode, sprintf('locked="%s"', as.numeric(style$locked)), sep = " ")
-      }
-
-      protectionNode <- stri_join(protectionNode, "/>")
-      childNodes <- stri_join(childNodes, protectionNode)
-    }
-
-    if (length(childNodes) > 0) {
-      xfNode <-
-        stri_join(
-          "<xf ",
-          stri_join(
-            stri_join(names(xfNode), '="', xfNode, '"'),
-            sep = " ",
-            collapse = " "
-          ),
-          ">",
-          childNodes,
-          "</xf>"
-        )
-    } else {
-      xfNode <-
-        stri_join("<xf ", stri_join(
-          stri_join(names(xfNode), '="', xfNode, '"'),
-          sep = " ",
-          collapse = " "
-        ), "/>")
-    }
-
-    styleId <- which(styles$cellXfs == xfNode) - 1L
-    if (length(styleId) == 0) {
-      styleId <- length(styles$cellXfs)
-      styles$cellXfs <<- c(styles$cellXfs, xfNode)
-    }
+    #   xfNode$borderId <- borderId
+    #   xfNode <- append(xfNode, list("applyBorder" = "1"))
+    # }
 
 
-    return(as.integer(styleId))
+    # # if(!is.null(style$xfId))
+    # # xfNode$xfId <- style$xfId
+
+    # childNodes <- ""
+
+    # ## Alignment
+    # if (!is.null(style$halign) |
+    #   !is.null(style$valign) |
+    #   !is.null(style$wrapText) |
+    #   !is.null(style$textRotation) | !is.null(style$indent)) {
+    #   attrs <- list()
+    #   alignNode <- "<alignment"
+
+    #   if (!is.null(style$textRotation)) {
+    #     alignNode <-
+    #       stri_join(alignNode,
+    #         sprintf('textRotation="%s"', style$textRotation),
+    #         sep = " "
+    #       )
+    #   }
+
+    #   if (!is.null(style$halign)) {
+    #     alignNode <-
+    #       stri_join(alignNode, sprintf('horizontal="%s"', style$halign), sep = " ")
+    #   }
+
+    #   if (!is.null(style$valign)) {
+    #     alignNode <-
+    #       stri_join(alignNode, sprintf('vertical="%s"', style$valign), sep = " ")
+    #   }
+
+    #   if (!is.null(style$indent)) {
+    #     alignNode <-
+    #       stri_join(alignNode, sprintf('indent="%s"', style$indent), sep = " ")
+    #   }
+
+    #   if (!is.null(style$wrapText)) {
+    #     if (style$wrapText) {
+    #       alignNode <- stri_join(alignNode, 'wrapText="1"', sep = " ")
+    #     }
+    #   }
+
+
+    #   alignNode <- stri_join(alignNode, "/>")
+
+    #   alignmentFlag <- TRUE
+    #   xfNode <- append(xfNode, list("applyAlignment" = "1"))
+
+    #   childNodes <- stri_join(childNodes, alignNode)
+    # }
+
+    # if (!is.null(style$hidden) | !is.null(style$locked)) {
+    #   xfNode <- append(xfNode, list("applyProtection" = "1"))
+    #   protectionNode <- "<protection"
+
+    #   if (!is.null(style$hidden)) {
+    #     protectionNode <-
+    #       stri_join(protectionNode, sprintf('hidden="%s"', as.numeric(style$hidden)), sep = " ")
+    #   }
+    #   if (!is.null(style$locked)) {
+    #     protectionNode <-
+    #       stri_join(protectionNode, sprintf('locked="%s"', as.numeric(style$locked)), sep = " ")
+    #   }
+
+    #   protectionNode <- stri_join(protectionNode, "/>")
+    #   childNodes <- stri_join(childNodes, protectionNode)
+    # }
+
+    # if (length(childNodes) > 0) {
+    #   xfNode <-
+    #     stri_join(
+    #       "<xf ",
+    #       stri_join(
+    #         stri_join(names(xfNode), '="', xfNode, '"'),
+    #         sep = " ",
+    #         collapse = " "
+    #       ),
+    #       ">",
+    #       childNodes,
+    #       "</xf>"
+    #     )
+    # } else {
+    #   xfNode <-
+    #     stri_join("<xf ", stri_join(
+    #       stri_join(names(xfNode), '="', xfNode, '"'),
+    #       sep = " ",
+    #       collapse = " "
+    #     ), "/>")
+    # }
+
+    # styleId <- which(styles$cellXfs == xfNode) - 1L
+    # if (length(styleId) == 0) {
+    #   styleId <- length(styles$cellXfs)
+    #   styles$cellXfs <<- c(styles$cellXfs, xfNode)
+    # }
+
+
+    # return(as.integer(styleId))
   }
 )
 
@@ -1548,112 +1549,112 @@ Workbook$methods(
 
 Workbook$methods(
   updateCellStyles = function() {
-    flag <- TRUE
-    for (style in cellStyleObjects) {
-      ## Updates styles.xml
-      xfNode <- list(
-        numFmtId = 0,
-        fontId = 0,
-        fillId = 0,
-        borderId = 0
-      )
+  #   flag <- TRUE
+  #   for (style in cellStyleObjects) {
+  #     ## Updates styles.xml
+  #     xfNode <- list(
+  #       numFmtId = 0,
+  #       fontId = 0,
+  #       fillId = 0,
+  #       borderId = 0
+  #     )
 
 
-      alignmentFlag <- FALSE
+  #     alignmentFlag <- FALSE
 
-      ## Font
-      if (!is.null(style$fontName) |
-        !is.null(style$fontSize) |
-        !is.null(style$fontColour) |
-        !is.null(style$fontDecoration) |
-        !is.null(style$fontFamily) |
-        !is.null(style$fontScheme)) {
-        fontNode <- .self$createFontNode(style)
-        fontId <- which(styles$font == fontNode) - 1L
+  #     ## Font
+  #     if (!is.null(style$fontName) |
+  #       !is.null(style$fontSize) |
+  #       !is.null(style$fontColour) |
+  #       !is.null(style$fontDecoration) |
+  #       !is.null(style$fontFamily) |
+  #       !is.null(style$fontScheme)) {
+  #       fontNode <- .self$createFontNode(style)
+  #       fontId <- which(styles$font == fontNode) - 1L
 
-        if (length(fontId) == 0) {
-          fontId <- length(styles$fonts)
-          styles$fonts <<- append(styles[["fonts"]], fontNode)
-        }
+  #       if (length(fontId) == 0) {
+  #         fontId <- length(styles$fonts)
+  #         styles$fonts <<- append(styles[["fonts"]], fontNode)
+  #       }
 
-        xfNode$fontId <- fontId
-        xfNode <- append(xfNode, list("applyFont" = "1"))
-      }
+  #       xfNode$fontId <- fontId
+  #       xfNode <- append(xfNode, list("applyFont" = "1"))
+  #     }
 
 
-      ## numFmt
-      if (!is.null(style$numFmt)) {
-        if (as.integer(style$numFmt$numFmtId) > 0) {
-          numFmtId <- style$numFmt$numFmtId
-          if (as.integer(numFmtId) > 163L) {
-            tmp <- style$numFmt$formatCode
+  #     ## numFmt
+  #     if (!is.null(style$numFmt)) {
+  #       if (as.integer(style$numFmt$numFmtId) > 0) {
+  #         numFmtId <- style$numFmt$numFmtId
+  #         if (as.integer(numFmtId) > 163L) {
+  #           tmp <- style$numFmt$formatCode
 
-            styles$numFmts <<- unique(c(
-              styles$numFmts,
-              sprintf(
-                '<numFmt numFmtId="%s" formatCode="%s"/>',
-                numFmtId,
-                tmp
-              )
-            ))
-          }
+  #           styles$numFmts <<- unique(c(
+  #             styles$numFmts,
+  #             sprintf(
+  #               '<numFmt numFmtId="%s" formatCode="%s"/>',
+  #               numFmtId,
+  #               tmp
+  #             )
+  #           ))
+  #         }
 
-          xfNode$numFmtId <- numFmtId
-          xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
-        }
-      }
+  #         xfNode$numFmtId <- numFmtId
+  #         xfNode <- append(xfNode, list("applyNumberFormat" = "1"))
+  #       }
+  #     }
 
-      ## Fill
-      if (!is.null(style$fill)) {
-        fillNode <- .self$createFillNode(style)
-        if (!is.null(fillNode)) {
-          fillId <- which(styles$fills == fillNode) - 1L
+  #     ## Fill
+  #     if (!is.null(style$fill)) {
+  #       fillNode <- .self$createFillNode(style)
+  #       if (!is.null(fillNode)) {
+  #         fillId <- which(styles$fills == fillNode) - 1L
 
-          if (length(fillId) == 0) {
-            fillId <- length(styles$fills)
-            styles$fills <<- c(styles$fills, fillNode)
-          }
-          xfNode$fillId <- fillId
-          xfNode <- append(xfNode, list("applyFill" = "1"))
-        }
-      }
+  #         if (length(fillId) == 0) {
+  #           fillId <- length(styles$fills)
+  #           styles$fills <<- c(styles$fills, fillNode)
+  #         }
+  #         xfNode$fillId <- fillId
+  #         xfNode <- append(xfNode, list("applyFill" = "1"))
+  #       }
+  #     }
 
-      ## Border
-      if (any(!is.null(
-        c(
-          style$borderLeft,
-          style$borderRight,
-          style$borderTop,
-          style$borderBottom,
-          style$borderDiagonal
-        )
-      ))) {
-        borderNode <- .self$createBorderNode(style)
-        borderId <- which(styles$borders == borderNode) - 1L
+  #     ## Border
+  #     if (any(!is.null(
+  #       c(
+  #         style$borderLeft,
+  #         style$borderRight,
+  #         style$borderTop,
+  #         style$borderBottom,
+  #         style$borderDiagonal
+  #       )
+  #     ))) {
+  #       borderNode <- .self$createBorderNode(style)
+  #       borderId <- which(styles$borders == borderNode) - 1L
 
-        if (length(borderId) == 0) {
-          borderId <- length(styles$borders)
-          styles$borders <<- c(styles$borders, borderNode)
-        }
+  #       if (length(borderId) == 0) {
+  #         borderId <- length(styles$borders)
+  #         styles$borders <<- c(styles$borders, borderNode)
+  #       }
 
-        xfNode$borderId <- borderId
-        xfNode <- append(xfNode, list("applyBorder" = "1"))
-      }
+  #       xfNode$borderId <- borderId
+  #       xfNode <- append(xfNode, list("applyBorder" = "1"))
+  #     }
 
-      xfNode <-
-        stri_join("<xf ", stri_join(
-          stri_join(names(xfNode), '="', xfNode, '"'),
-          sep = " ",
-          collapse = " "
-        ), "/>")
+  #     xfNode <-
+  #       stri_join("<xf ", stri_join(
+  #         stri_join(names(xfNode), '="', xfNode, '"'),
+  #         sep = " ",
+  #         collapse = " "
+  #       ), "/>")
 
-      if (flag) {
-        styles$cellStyleXfs <<- xfNode
-        flag <- FALSE
-      } else {
-        styles$cellStyleXfs <<- c(styles$cellStyleXfs, xfNode)
-      }
-    }
+  #     if (flag) {
+  #       styles$cellStyleXfs <<- xfNode
+  #       flag <- FALSE
+  #     } else {
+  #       styles$cellStyleXfs <<- c(styles$cellStyleXfs, xfNode)
+  #     }
+  #   }
   }
 )
 
@@ -2076,8 +2077,8 @@ Workbook$methods(
         prior <- ws$get_prior_sheet_data()
         post <- ws$get_post_sheet_data()
 
-        worksheets[[i]]$sheet_data$style_id <<-
-          as.character(worksheets[[i]]$sheet_data$style_id)
+        # worksheets[[i]]$sheet_data$style_id <<-
+        #   as.character(worksheets[[i]]$sheet_data$style_id)
 
         if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) == 0)) {
           write_worksheet_xml(
@@ -2119,7 +2120,8 @@ Workbook$methods(
           )
         }
 
-        worksheets[[i]]$sheet_data$style_id <<- integer(0)
+        # # why would I want to erase everything in here?
+        # worksheets[[i]]$sheet_data$style_id <<- integer(0)
 
 
         ## write worksheet rels
@@ -3344,10 +3346,10 @@ Workbook$methods(
 
     ## styles
     numFmtIds <- 50000L
-    for (i in which(!isChartSheet)) {
-      worksheets[[i]]$sheet_data$style_id <<-
-        rep.int(x = as.integer(NA), times = worksheets[[i]]$sheet_data$n_elements)
-    }
+    #for (i in which(!isChartSheet)) {
+    #  worksheets[[i]]$sheet_data$style_id <<-
+    #    rep.int(x = as.integer(NA), times = worksheets[[i]]$sheet_data$n_elements)
+    #}
 
 
     for (x in styleObjects) {
@@ -3375,18 +3377,18 @@ Workbook$methods(
           )
 
         ## In here we create any style_ids that don't yet exist in sheet_data
-        worksheets[[sheet]]$sheet_data$style_id[existing_cells %in% cells_to_style] <<-
-          sId
+        #worksheets[[sheet]]$sheet_data$style_id[existing_cells %in% cells_to_style] <<-
+        #  sId
 
 
         new_cells_to_append <-
           which(!cells_to_style %in% existing_cells)
         if (length(new_cells_to_append) > 0) {
-          worksheets[[sheet]]$sheet_data$style_id <<-
-            c(
-              worksheets[[sheet]]$sheet_data$style_id,
-              rep.int(x = sId, times = length(new_cells_to_append))
-            )
+          #worksheets[[sheet]]$sheet_data$style_id <<-
+          #  c(
+          #    worksheets[[sheet]]$sheet_data$style_id,
+          #    rep.int(x = sId, times = length(new_cells_to_append))
+          #  )
 
           worksheets[[sheet]]$sheet_data$rows <<-
             c(worksheets[[sheet]]$sheet_data$rows, x$rows[new_cells_to_append])
@@ -3422,11 +3424,11 @@ Workbook$methods(
         n <- length(missing_rows)
 
         if (n > 0) {
-          worksheets[[i]]$sheet_data$style_id <<-
-            c(
-              worksheets[[i]]$sheet_data$style_id,
-              rep.int(as.integer(NA), times = n)
-            )
+          #worksheets[[i]]$sheet_data$style_id <<-
+          #  c(
+          #    worksheets[[i]]$sheet_data$style_id,
+          #    rep.int(as.integer(NA), times = n)
+          #  )
 
           worksheets[[i]]$sheet_data$rows <<-
             c(worksheets[[i]]$sheet_data$rows, missing_rows)
@@ -17918,6 +17920,9 @@ Workbook$methods(
         stri_join("<colors>", vals, "</colors>")
     }
 
+    styles$numFmts <<- numFmts <- getXML3(styles_xml, "styleSheet", "numFmts", "numFmt")
+    # numFmts_attr <- getXMLattr(numFmts, "numFmt")
+
     ## dxf
     styles$dxfs <<- dxf <- getXML3(styles_xml, "styleSheet", "dxfs", "dxf")
 
@@ -17926,11 +17931,18 @@ Workbook$methods(
       styles$tableStyles <<- tableStyles
     }
 
-    #extLst <- getNodes(xml = stylesTxt, tagIn = "<extLst>")
-    #if (length(extLst) > 0) {
+    # extLst <- getXML2(styles_xml, "styleSheet", "extLst")
+    # if (length(extLst) > 0) {
     #  styles$extLst <<- extLst
-    #}
+    # }
 
+    styles$borders <<- borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
+
+    styles$fills <<- fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
+
+    styles$cellStyleXfs <<- cellStyleXfs <- getXML3(styles_xml, "styleSheet", "cellStyleXfs", "xf")
+
+    styles$cellXfs <<- cellXfs <- getXML3(styles_xml, "styleSheet", "cellXfs", "xf")
 
     ## Number formats
     numFmts <- getChildlessNode(xml = stylesTxt, tag = "numFmt")
@@ -17953,17 +17965,14 @@ Workbook$methods(
     fonts <- buildFontList(fonts)
 
 
-    fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
     fills <- buildFillList(fills)
 
-    borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
     borders <- sapply(borders, buildBorder, USE.NAMES = FALSE)
 
 
     ## ------------------------------ build styleObjects ------------------------------ ##
 
-    xf <- getXML3(styles_xml, "styleSheet", "cellXfs", "xf")
-    xfVals <- getXMLattr(xf, "xf")
+    xfVals <- getXMLattr(cellXfs, "xf")
 
     styleObjects_tmp <- list()
     flag <- FALSE
@@ -18030,55 +18039,55 @@ Workbook$methods(
           }
         }
 
-        ## Border
-        if ("borderId" %in% names(s)) {
-          if (s[["borderId"]] != "0") {
-            # & "applyBorder" %in% names(s)){
+        # ## Border
+        # if ("borderId" %in% names(s)) {
+        #   if (s[["borderId"]] != "0") {
+        #     # & "applyBorder" %in% names(s)){
 
-            border_ind <- as.integer(s[["borderId"]]) + 1L
-            if (border_ind <= length(borders)) {
-              thisBorder <- borders[[border_ind]]
+        #     border_ind <- as.integer(s[["borderId"]]) + 1L
+        #     if (border_ind <= length(borders)) {
+        #       thisBorder <- borders[[border_ind]]
 
-              if ("borderLeft" %in% names(thisBorder)) {
-                style$borderLeft <- thisBorder$borderLeft
-                style$borderLeftColour <- thisBorder$borderLeftColour
-              }
+        #       if ("borderLeft" %in% names(thisBorder)) {
+        #         style$borderLeft <- thisBorder$borderLeft
+        #         style$borderLeftColour <- thisBorder$borderLeftColour
+        #       }
 
-              if ("borderRight" %in% names(thisBorder)) {
-                style$borderRight <- thisBorder$borderRight
-                style$borderRightColour <-
-                  thisBorder$borderRightColour
-              }
+        #       if ("borderRight" %in% names(thisBorder)) {
+        #         style$borderRight <- thisBorder$borderRight
+        #         style$borderRightColour <-
+        #           thisBorder$borderRightColour
+        #       }
 
-              if ("borderTop" %in% names(thisBorder)) {
-                style$borderTop <- thisBorder$borderTop
-                style$borderTopColour <- thisBorder$borderTopColour
-              }
+        #       if ("borderTop" %in% names(thisBorder)) {
+        #         style$borderTop <- thisBorder$borderTop
+        #         style$borderTopColour <- thisBorder$borderTopColour
+        #       }
 
-              if ("borderBottom" %in% names(thisBorder)) {
-                style$borderBottom <- thisBorder$borderBottom
-                style$borderBottomColour <-
-                  thisBorder$borderBottomColour
-              }
+        #       if ("borderBottom" %in% names(thisBorder)) {
+        #         style$borderBottom <- thisBorder$borderBottom
+        #         style$borderBottomColour <-
+        #           thisBorder$borderBottomColour
+        #       }
 
-              if ("borderDiagonal" %in% names(thisBorder)) {
-                style$borderDiagonal <- thisBorder$borderDiagonal
-                style$borderDiagonalColour <-
-                  thisBorder$borderDiagonalColour
-              }
+        #       if ("borderDiagonal" %in% names(thisBorder)) {
+        #         style$borderDiagonal <- thisBorder$borderDiagonal
+        #         style$borderDiagonalColour <-
+        #           thisBorder$borderDiagonalColour
+        #       }
 
-              if ("borderDiagonalUp" %in% names(thisBorder)) {
-                style$borderDiagonalUp <-
-                  thisBorder$borderDiagonalUp
-              }
+        #       if ("borderDiagonalUp" %in% names(thisBorder)) {
+        #         style$borderDiagonalUp <-
+        #           thisBorder$borderDiagonalUp
+        #       }
 
-              if ("borderDiagonalDown" %in% names(thisBorder)) {
-                style$borderDiagonalDown <-
-                  thisBorder$borderDiagonalDown
-              }
-            }
-          }
-        }
+        #       if ("borderDiagonalDown" %in% names(thisBorder)) {
+        #         style$borderDiagonalDown <-
+        #           thisBorder$borderDiagonalDown
+        #       }
+        #     }
+        #   }
+        # }
 
         ## alignment
         # applyAlignment <- "applyAlignment" %in% names(s)

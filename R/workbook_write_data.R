@@ -150,14 +150,14 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
 
   if (keepNA) {
     if (is.null(na.string)) {
-      t[is.na(v)] <- 4L
+      # t[is.na(v)] <- 4L
       v[is.na(v)] <- "#N/A"
     } else {
-      t[is.na(v)] <- 1L
+      # t[is.na(v)] <- 1L
       v[is.na(v)] <- as.character(na.string)
     }
   } else {
-    t[is.na(v)] <- as.integer(NA)
+    t[is.na(v)] <- as.character(NA)
     v[is.na(v)] <- as.character(NA)
   }
 

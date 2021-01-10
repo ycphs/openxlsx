@@ -38,19 +38,19 @@ SEXP write_worksheet_xml(std::string prior
   }
   
   CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  CharacterVector cell_types = map_cell_types_to_char(sheet_data.field("t"));
+  CharacterVector cell_types = sheet_data.field("t");
   CharacterVector cell_value = sheet_data.field("v");
   CharacterVector cell_fn = sheet_data.field("f");
-
+  
   CharacterVector style_id = sheet_data.field("style_id");
   CharacterVector unique_rows(sort_unique(cell_row));
-
-    
+  
+  
   size_t n = cell_row.size();
   size_t k = unique_rows.size();
   std::string xml;
   std::string cell_xml;
-
+  
   // write sheet_data
   
   // write xml prior to sheetData and opening tag
@@ -86,9 +86,10 @@ SEXP write_worksheet_xml(std::string prior
           }
         }
         
-      }else{
-        cell_xml += "\"/>";
-        
+      } else if(!CharacterVector::is_na(cell_value[j-1])){
+        cell_xml += "\"><v>" + cell_value[j-1] + "</v></c>";
+      } else {
+        cell_xml += "\"/>";        
       }
       
       j += 1;

@@ -496,6 +496,16 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     wb$worksheets[[i]]$sheetFormatPr <- getXML2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXML2(worksheet_xml, "worksheet", "sheetViews")
+
+
+    row <- getXML3(worksheet_xml, "worksheet", "sheetData", "row")
+    row_c <- lapply(row, function(x) getXML2(x, "row", "c"))
+    row_c_attr <- lapply(row_c, function(x) getXMLattr(x, "c"))
+
+    # ts <- sapply(row_c_attr, function(x) {sapply(x, function(y) y["t"])}) %>% unlist() %>% as.character()
+    wb$worksheets[[i]]$sheet_data$style_id <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["s"])})))
+    wb$worksheets[[i]]$sheet_data$t <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["t"])})))
+
   }
 
   ## Fix styleobject encoding

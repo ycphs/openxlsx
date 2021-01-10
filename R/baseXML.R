@@ -222,7 +222,7 @@ genBaseStyleSheet <- function(dxfs = NULL, tableStyles = NULL, extLst = NULL) {
 
     cellStyleXfs = c('<xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>'),
 
-    cellXfs = c('<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'),
+    cellXfs = NULL, # c('<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'),
 
     cellStyles = c('<cellStyle name="Normal" xfId="0" builtinId="0"/>'),
 

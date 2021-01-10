@@ -98,7 +98,7 @@ Sheet_Data <- setRefClass("Sheet_Data",
   fields = c(
     "rows" = "integer",
     "cols" = "integer",
-    "t" = "integer",
+    "t" = "ANY",
     "v" = "character",
     "f" = "character",
     "style_id" = "ANY",
