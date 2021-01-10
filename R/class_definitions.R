@@ -131,8 +131,6 @@ WorkSheet <- setRefClass("WorkSheet",
 
     "sheet_data" = "Sheet_Data",
     "rows_attr" = "ANY",
-    "cols_attr" = "ANY",
-    "cols" = "ANY",
 
     "autoFilter" = "character",
     "mergeCells" = "ANY",

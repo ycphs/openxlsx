@@ -519,6 +519,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// write_worksheet_xml_2
+SEXP write_worksheet_xml_2(std::string prior, std::string post, Reference sheet_data, Rcpp::List row_style, Nullable<CharacterVector> row_heights_, Nullable<CharacterVector> outline_levels_, std::string R_fileName);
+RcppExport SEXP _openxlsx_write_worksheet_xml_2(SEXP priorSEXP, SEXP postSEXP, SEXP sheet_dataSEXP, SEXP row_styleSEXP, SEXP row_heights_SEXP, SEXP outline_levels_SEXP, SEXP R_fileNameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type prior(priorSEXP);
+    Rcpp::traits::input_parameter< std::string >::type post(postSEXP);
+    Rcpp::traits::input_parameter< Reference >::type sheet_data(sheet_dataSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type row_style(row_styleSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type row_heights_(row_heights_SEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type outline_levels_(outline_levels_SEXP);
+    Rcpp::traits::input_parameter< std::string >::type R_fileName(R_fileNameSEXP);
+    rcpp_result_gen = Rcpp::wrap(write_worksheet_xml_2(prior, post, sheet_data, row_style, row_heights_, outline_levels_, R_fileName));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getXML1", (DL_FUNC) &_openxlsx_getXML1, 2},
@@ -561,6 +578,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_buildMatrixMixed", (DL_FUNC) &_openxlsx_buildMatrixMixed, 8},
     {"_openxlsx_matrixRowInds", (DL_FUNC) &_openxlsx_matrixRowInds, 1},
     {"_openxlsx_build_table_xml", (DL_FUNC) &_openxlsx_build_table_xml, 6},
+    {"_openxlsx_write_worksheet_xml_2", (DL_FUNC) &_openxlsx_write_worksheet_xml_2, 7},
     {NULL, NULL, 0}
 };
 

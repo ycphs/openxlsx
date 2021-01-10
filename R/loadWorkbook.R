@@ -472,33 +472,24 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   wb <- loadworksheets(wb = wb, styleObjects = styleObjects, xmlFiles = worksheetsXML, is_chart_sheet = is_chart_sheet)
 
 
-  # TODO this loop should live in loadworksheets
   for (i in seq_len(nSheets)) {
-    worksheet_xml <- readXMLPtr(worksheetsXML[i])
+    worksheet_xml <- readXML(worksheetsXML[i])
 
-    wb$worksheets[[i]]$dimension <- getXMLXPtr2(worksheet_xml, "worksheet", "dimension")
+    wb$worksheets[[i]]$dimension <- getXML2(worksheet_xml, "worksheet", "dimension")
 
-    # get attributes for cols and rows
-    wb$worksheets[[i]]$rows_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "sheetData", "row")
-    wb$worksheets[[i]]$cols_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "cols", "col")
+    cols <- getXML3(worksheet_xml, "worksheet", "cols", "col")
+    cols_attr <- getXMLattr(cols, "col")
 
-    wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
-    wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
+    names(cols) <- sapply(cols_attr, FUN = function(x) as.integer(x["min"]))
+
+
+    rows <<- getXML3(worksheet_xml, "worksheet", "sheetData", "row")
+    wb$worksheets[[i]]$rows_attr <- getXMLattr(rows, "row")
     
-    wb$worksheets[[i]]$sheet_data$fval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$vval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
-    wb$worksheets[[i]]$sheet_data$isval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "is")
+    wb$worksheets[[i]]$cols <- cols
 
-    # character vectors attributes to f(?) and v
-    wb$worksheets[[i]]$sheet_data$ftyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$vtyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
-    wb$worksheets[[i]]$sheet_data$istyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "is")
-
-    # row, style and type
-    wb$worksheets[[i]]$sheet_data$rtyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
-    wb$worksheets[[i]]$sheet_data$styp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
-    wb$worksheets[[i]]$sheet_data$ttyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
-
+    wb$worksheets[[i]]$sheetFormatPr <- getXML2(worksheet_xml, "worksheet", "sheetFormatPr")
+    wb$worksheets[[i]]$sheetViews <- getXML2(worksheet_xml, "worksheet", "sheetViews")
   }
 
   ## Fix styleobject encoding

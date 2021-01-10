@@ -81,11 +81,4 @@ LogicalVector isInternalHyperlink(CharacterVector x);
 string itos(int i);
 SEXP write_file(std::string parent, std::string xmlText, std::string parentEnd, std::string R_fileName);
 CharacterVector markUTF8(CharacterVector x, bool clone = false);
-std::string setXMLrow(Rcpp::CharacterVector row_style, 
-                      Rcpp::List cell_frm,
-                      Rcpp::List cell_typ,
-                      Rcpp::List cell_val,
-                      Rcpp::List cell_row,
-                      Rcpp::List cell_str,
-                      Rcpp::List cell_f,
-                      Rcpp::List cell_v);
+std::string setXMLrow(Rcpp::CharacterVector row_attr, std::string cell_xml);

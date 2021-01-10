@@ -2086,20 +2086,48 @@ Workbook$methods(
         prior <- ws$get_prior_sheet_data()
         post <- ws$get_post_sheet_data()
 
-        # worksheets[[i]]$sheet_data$style_id <<-
-        #   as.character(worksheets[[i]]$sheet_data$style_id)
+        worksheets[[i]]$sheet_data$style_id <<-
+          as.character(worksheets[[i]]$sheet_data$style_id)
 
-        # message(i, " \n")
-        write_worksheet_xml_2(
-          prior = prior,
-          post = post,
-          sheet_data = ws$sheet_data,
-          cols_attr = ws$cols_attr,
-          rows_attr = ws$rows_attr,
-          row_heights_ = NULL,
-          outline_levels_ = unlist(outlineLevels[[i]]),
-          R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
-        )
+        if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) == 0)) {
+          write_worksheet_xml(
+            prior = prior,
+            post = post,
+            sheet_data = ws$sheet_data,
+            R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
+          )
+        } else if ((length(rowHeights[[i]]) == 0) & (length(outlineLevels[[i]]) > 0)) {
+          write_worksheet_xml_2(
+            prior = prior,
+            post = post,
+            sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
+            row_heights_ = NULL,
+            outline_levels_ = unlist(outlineLevels[[i]]),
+            R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
+          )
+        } else if ((length(rowHeights[[i]]) > 0) & (length(outlineLevels[[i]]) == 0)) {
+          write_worksheet_xml_2(
+            prior = prior,
+            post = post,
+            sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
+            row_heights_ = unlist(rowHeights[[i]]),
+            outline_levels_ = NULL,
+            R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
+          )
+        } else {
+          ## row heights will always be in order and all row heights are given rows in preSaveCleanup
+          write_worksheet_xml_2(
+            prior = prior,
+            post = post,
+            sheet_data = ws$sheet_data,
+            row_style = worksheets[[i]]$rows_attr,
+            row_heights_ = unlist(rowHeights[[i]]),
+            outline_levels_ = unlist(outlineLevels[[i]]),
+            R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
+          )
+        }
 
         # # why would I want to erase everything in here?
         # worksheets[[i]]$sheet_data$style_id <<- integer(0)
