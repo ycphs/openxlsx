@@ -93,6 +93,34 @@ int_2_cell_ref <- function(cols) {
     .Call(`_openxlsx_int_2_cell_ref`, cols)
 }
 
+readXMLPtr <- function(path) {
+    .Call(`_openxlsx_readXMLPtr`, path)
+}
+
+getXMLXPtr1 <- function(doc, child) {
+    .Call(`_openxlsx_getXMLXPtr1`, doc, child)
+}
+
+getXMLXPtr2 <- function(doc, level1, child) {
+    .Call(`_openxlsx_getXMLXPtr2`, doc, level1, child)
+}
+
+getXMLXPtr3 <- function(doc, level1, level2, child) {
+    .Call(`_openxlsx_getXMLXPtr3`, doc, level1, level2, child)
+}
+
+getXMLXPtr4 <- function(doc, level1, level2, level3, child) {
+    .Call(`_openxlsx_getXMLXPtr4`, doc, level1, level2, level3, child)
+}
+
+getXMLXPtr4attr <- function(doc, level1, level2, level3, child) {
+    .Call(`_openxlsx_getXMLXPtr4attr`, doc, level1, level2, level3, child)
+}
+
+printXPtr <- function(doc) {
+    .Call(`_openxlsx_printXPtr`, doc)
+}
+
 readXML <- function(path) {
     .Call(`_openxlsx_readXML`, path)
 }
