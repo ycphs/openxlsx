@@ -923,6 +923,13 @@ test_that("Loading multiple pivot tables: loadPivotTables.xlsx works",{
   # Check number of 'pivotCacheDefinition'
   expect_equal(length(wb$pivotDefinitions),
                2)
-  
+})
+
+test_that("Load and saving a file with Threaded Comments works", {
+  ## loadThreadComment.xlsx is a simple xlsx file that uses Threaded Comment.
+  fl <- system.file("extdata", "loadThreadComment.xlsx", package = "openxlsx")
+  wb <- loadWorkbook(fl)
+  # Check that wb can be saved without error
+  expect_silent(saveWorkbook(wb, file = tempfile()))
   
 })

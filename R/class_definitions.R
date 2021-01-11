@@ -19,6 +19,8 @@ Workbook <- setRefClass("Workbook",
     "headFoot" = "ANY",
     "media" = "ANY",
     "outlineLevels" = "ANY",
+    
+    "persons" = "ANY",
 
     "pivotTables" = "ANY",
     "pivotTables.xml.rels" = "ANY",
@@ -44,6 +46,7 @@ Workbook <- setRefClass("Workbook",
     "vml" = "ANY",
     "vml_rels" = "ANY",
     "comments" = "ANY",
+    "threadComments" = "ANY",
 
     "workbook" = "ANY",
     "workbook.xml.rels" = "ANY",

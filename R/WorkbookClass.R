@@ -24,6 +24,7 @@ Workbook$methods(
         category = category
       )
     comments <<- list()
+    threadComments <<- list()
 
 
     drawings <<- list()
@@ -36,6 +37,8 @@ Workbook$methods(
     headFoot <<- NULL
 
     media <<- list()
+    
+    persons <<- NULL
 
     pivotTables <<- NULL
     pivotTables.xml.rels <<- NULL
@@ -207,6 +210,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- FALSE
     comments[[newSheetIndex]] <<- list()
+    threadComments[[newSheetIndex]] <<- list()
 
     rowHeights[[newSheetIndex]] <<- list()
     colWidths[[newSheetIndex]] <<- list()
@@ -351,6 +355,7 @@ Workbook$methods(
 
     isChartSheet[[newSheetIndex]] <<- isChartSheet[[clonedSheet]]
     comments[[newSheetIndex]] <<- comments[[clonedSheet]]
+    threadComments[[newSheetIndex]] <<- threadComments[[clonedSheet]]
 
     rowHeights[[newSheetIndex]] <<- rowHeights[[clonedSheet]]
     colWidths[[newSheetIndex]] <<- colWidths[[clonedSheet]]
@@ -585,6 +590,8 @@ Workbook$methods(
     nPivots <- length(pivotDefinitions)
     nSlicers <- length(slicers)
     nComments <- sum(sapply(comments, length) > 0)
+    nThreadComments <- sum(sapply(threadComments, length) > 0)
+    nPersons <- length(persons)
     nVML <- sum(sapply(vml, length) > 0)
 
     relsDir <- file.path(tmpDir, "_rels")
@@ -686,6 +693,46 @@ Workbook$methods(
 
       .self$writeDrawingVML(xldrawingsDir)
     }
+    
+    ## Threaded Comments xl/threadedComments/threadedComment.xml
+    if (nThreadComments > 0){
+      xlThreadComments <- file.path(tmpDir, "xl", "threadedComments")
+      dir.create(path = xlThreadComments, recursive = TRUE)
+      
+      for (i in seq_len(nSheets)) {
+        if (length(threadComments[[i]]) > 0) {
+          fl <- threadComments[[i]]
+          file.copy(
+            from = fl,
+            to = file.path(xlThreadComments, basename(fl)),
+            overwrite = TRUE,
+            copy.date = TRUE
+          )
+
+          worksheets_rels[[i]] <<- unique(c(
+            worksheets_rels[[i]],
+            sprintf(
+              '<Relationship Id="rIdthread" Type="http://schemas.microsoft.com/office/2017/10/relationships/threadedComment" Target="../threadedComments/%s"/>',
+              basename(fl)
+            )
+          ))
+        }
+      }
+    }
+
+    ## xl/persons/person.xml
+    if (nPersons > 0){
+      personDir <- file.path(tmpDir, "xl", "persons")
+      dir.create(path = personDir, recursive = TRUE)
+      file.copy(
+        from = persons,
+        to = personDir,
+        overwrite = TRUE
+      )
+      
+    }
+    
+    
 
     if (length(embeddings) > 0) {
       embeddingsDir <- file.path(tmpDir, "xl", "embeddings")
@@ -2261,6 +2308,7 @@ Workbook$methods(
     colOutlineLevels[[sheet]] <<- NULL
     outlineLevels[[sheet]] <<- NULL
     comments[[sheet]] <<- NULL
+    threadComments[[sheet]] <<- NULL
     isChartSheet <<- isChartSheet[-sheet]
 
     ## sheetOrder
@@ -3070,7 +3118,7 @@ Workbook$methods(
   preSaveCleanUp = function() {
     ## Steps
     # Order workbook.xml.rels:
-    #   sheets -> style -> theme -> sharedStrings -> tables -> calcChain
+    #   sheets -> style -> theme -> sharedStrings -> persons -> tables -> calcChain
     # Assign workbook.xml.rels children rIds, seq_along(workbook.xml.rels)
     # Assign workbook$sheets rIds 1:nSheets
     #
@@ -3118,6 +3166,7 @@ Workbook$methods(
     sharedStringsInd <-
       which(grepl("sharedStrings.xml", workbook.xml.rels))
     tableInds <- which(grepl("table[0-9]+.xml", workbook.xml.rels))
+    personInds <- which(grepl("person.xml", workbook.xml.rels))
 
 
     ## Reordering of workbook.xml.rels
@@ -3139,7 +3188,8 @@ Workbook$methods(
         connectionsInd,
         stylesInd,
         sharedStringsInd,
-        tableInds
+        tableInds,
+        personInds
       )]
 
     ## Re assign rIds to children of workbook.xml.rels
