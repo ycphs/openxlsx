@@ -17,6 +17,7 @@ addWorksheet(
   firstHeader = NULL,
   firstFooter = NULL,
   visible = TRUE,
+  hasDrawing = FALSE,
   paperSize = getOption("openxlsx.paperSize", default = 9),
   orientation = getOption("openxlsx.orientation", default = "portrait"),
   vdpi = getOption("openxlsx.vdpi", default = getOption("openxlsx.dpi", default = 300)),

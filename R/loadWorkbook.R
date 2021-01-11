@@ -148,16 +148,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   ## xl\
   ## xl\workbook
   if (length(workbookXML) > 0) {
-    workbook <- readUTF8(workbookXML)
-    workbook <- removeHeadTag(workbook)
 
-    workbook_xml <- readXML(workbookXML)
+    workbook_xml <- readXMLPtr(workbookXML)
 
     # wb$workbook$alternateContent <- getXML2(workbook_xml, "workbook", "mc:AlternateContent")  # breaks file for Excel
     # wb$workbook$extLst <- getXML2(workbook_xml, "workbook", "extLst")
 
-    sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
-    sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl = TRUE)))
+    sheets <- unlist(getXMLXPtr3(workbook_xml, "workbook", "sheets", "sheet"))
 
     ## Some veryHidden sheets do not have a sheet content and their rId is empty.
     ## Such sheets need to be filtered out because otherwise their sheet names
@@ -220,29 +217,25 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
     ## additional workbook attributes
-    calcPr <- getChildlessNode(xml = workbook, tag = "calcPr")
+    calcPr <- getXMLXPtr2(workbook_xml, "workbook", "calcPr")
     if (length(calcPr) > 0) {
       wb$workbook$calcPr <- calcPr
     }
 
-
-    workbookPr <- getChildlessNode(xml = workbook, tag = "workbookPr")
+    workbookPr <- getXMLXPtr2(workbook_xml, "workbook", "workbookPr")
     if (length(workbookPr) > 0) {
       wb$workbook$workbookPr <- workbookPr
     }
 
-    workbookProtection <- getChildlessNode(xml = workbook, tag = "workbookProtection")
+    workbookProtection <- getXMLXPtr2(workbook_xml, "workbook", "workbookProtection")
     if (length(workbookProtection) > 0) {
       wb$workbook$workbookProtection <- workbookProtection
     }
 
 
     ## defined Names
-    dNames <- getNodes(xml = workbook, tagIn = "<definedNames>")
-    if (length(dNames) > 0) {
-      dNames <- gsub("^<definedNames>|</definedNames>$", "", dNames)
-      wb$workbook$definedNames <- paste0(getNodes(xml = dNames, tagIn = "<definedName"), ">")
-    }
+    wb$workbook$definedNames <-  getXMLXPtr3(workbook_xml, "workbook", "definedNames", "definedName")
+    
   }
 
 
@@ -478,31 +471,32 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   wb <- loadworksheets(wb = wb, styleObjects = styleObjects, xmlFiles = worksheetsXML, is_chart_sheet = is_chart_sheet)
 
 
+  # TODO this loop should live in loadworksheets
   for (i in seq_len(nSheets)) {
-    worksheet_xml <- readXML(worksheetsXML[i])
+    worksheet_xml <- readXMLPtr(worksheetsXML[i])
 
-    wb$worksheets[[i]]$dimension <- getXML2(worksheet_xml, "worksheet", "dimension")
+    wb$worksheets[[i]]$dimension <- getXMLXPtr2(worksheet_xml, "worksheet", "dimension")
 
-    cols <- getXML3(worksheet_xml, "worksheet", "cols", "col")
+    cols <- getXMLXPtr3(worksheet_xml, "worksheet", "cols", "col")
     cols_attr <- getXMLattr(cols, "col")
 
     names(cols) <- sapply(cols_attr, FUN = function(x) as.integer(x["min"]))
 
 
-    rows <<- getXML3(worksheet_xml, "worksheet", "sheetData", "row")
+    rows <<- getXMLXPtr3(worksheet_xml, "worksheet", "sheetData", "row")
     wb$worksheets[[i]]$rows_attr <- getXMLattr(rows, "row")
     
     wb$worksheets[[i]]$cols <- cols
 
-    wb$worksheets[[i]]$sheetFormatPr <- getXML2(worksheet_xml, "worksheet", "sheetFormatPr")
-    wb$worksheets[[i]]$sheetViews <- getXML2(worksheet_xml, "worksheet", "sheetViews")
+    wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
+    wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
 
 
-    row <- getXML3(worksheet_xml, "worksheet", "sheetData", "row")
-    row_c <- lapply(row, function(x) getXML2(x, "row", "c"))
-    row_c_attr <- lapply(row_c, function(x) getXMLattr(x, "c"))
+    row_c_attr <- getXMLXPtr4attr(worksheet_xml, "worksheet", "sheetData", "row", "c")
+    # return xptr if row_c_attr is required? Or in a single function?
+    # row_c_attr <- lapply(row_c, function(x) getXMLattr(x, "c"))
 
-    # ts <- sapply(row_c_attr, function(x) {sapply(x, function(y) y["t"])}) %>% unlist() %>% as.character()
+    # TODO cpp function loop over row_c_attr and return only "s" or "t". Do we need it as nested list? do we need it as character vector?
     wb$worksheets[[i]]$sheet_data$style_id <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["s"])})))
     wb$worksheets[[i]]$sheet_data$t <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["t"])})))
 
@@ -568,11 +562,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     xml <- lapply(seq_along(allRels), function(i) {
       if (haveRels[i]) {
-        xml <- readUTF8(allRels[[i]])
-        xml <- removeHeadTag(xml)
-        xml <- gsub("<Relationships .*?>", "", xml)
-        xml <- gsub("</Relationships>", "", xml)
-        xml <- getChildlessNode(xml = xml, tag = "Relationship")
+        xml <- readXMLPtr(allRels[[i]])
+        xml <- getXMLXPtr2(xml, "Relationships", "Relationship")
       } else {
         xml <- "<Relationship >"
       }
@@ -838,8 +829,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       com_rId <- vector("list", length(commentsrelXML))
       names(com_rId) <- commentsrelXML
       for (com_rel in commentsrelXML) {
-        rel_xml <- readXML(com_rel)
-        rels <- getXML2(rel_xml, "Relationships", "Relationship")
+        rel_xml <- readXMLPtr(com_rel)
+        rels <- getXMLXPtr2(rel_xml, "Relationships", "Relationship")
         attrs <- getXMLattr(rels, "Relationship")
         # commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
         # s <- unlist(attrs[commentID])

@@ -1,12 +1,14 @@
 
-
 #include <Rcpp.h>
+#include "pugixml.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
 using namespace Rcpp;
 using namespace std;
+
 
 
 

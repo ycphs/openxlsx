@@ -71,6 +71,7 @@ Collate:
     'openxlsx-package.R'
     'openxlsx.R'
     'openxlsxCoerce.R'
+    'pugixml.R'
     'readWorkbook.R'
     'sheet_data_class.R'
     'workbook_column_widths.R'
