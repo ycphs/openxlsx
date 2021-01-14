@@ -99,8 +99,8 @@ Sheet_Data <- setRefClass("Sheet_Data",
     "rows" = "integer",
     "cols" = "integer",
     "t" = "ANY",
-    "v" = "character",
-    "f" = "character",
+    "v" = "ANY",
+    "f" = "ANY",
     "style_id" = "ANY",
     "data_count" = "integer",
     "n_elements" = "integer"
@@ -120,6 +120,7 @@ WorkSheet <- setRefClass("WorkSheet",
 
     "sheet_data" = "Sheet_Data",
     "rows_attr" = "ANY",
+    "cols_attr" = "ANY",
 
     "autoFilter" = "character",
     "mergeCells" = "ANY",

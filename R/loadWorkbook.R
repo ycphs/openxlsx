@@ -477,28 +477,19 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     wb$worksheets[[i]]$dimension <- getXMLXPtr2(worksheet_xml, "worksheet", "dimension")
 
-    cols <- getXMLXPtr3(worksheet_xml, "worksheet", "cols", "col")
-    cols_attr <- getXMLattr(cols, "col")
-
-    names(cols) <- sapply(cols_attr, FUN = function(x) as.integer(x["min"]))
-
-
-    rows <<- getXMLXPtr3(worksheet_xml, "worksheet", "sheetData", "row")
-    wb$worksheets[[i]]$rows_attr <- getXMLattr(rows, "row")
-    
-    wb$worksheets[[i]]$cols <- cols
+    # get attributes for cols and rows
+    wb$worksheets[[i]]$rows_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "sheetData", "row")
+    wb$worksheets[[i]]$cols_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "cols", "col")
 
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
-
-
-    row_c_attr <- getXMLXPtr4attr(worksheet_xml, "worksheet", "sheetData", "row", "c")
-    # return xptr if row_c_attr is required? Or in a single function?
-    # row_c_attr <- lapply(row_c, function(x) getXMLattr(x, "c"))
-
-    # TODO cpp function loop over row_c_attr and return only "s" or "t". Do we need it as nested list? do we need it as character vector?
-    wb$worksheets[[i]]$sheet_data$style_id <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["s"])})))
-    wb$worksheets[[i]]$sheet_data$t <- as.character(unlist(sapply(row_c_attr, function(x) {sapply(x, function(y) y["t"])})))
+    
+    wb$worksheets[[i]]$sheet_data$v <- openxlsx:::getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+    wb$worksheets[[i]]$sheet_data$f <- openxlsx:::getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
+    wb$worksheets[[i]]$sheet_data$t <- openxlsx:::getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
+    # character vectors
+    wb$worksheets[[i]]$sheet_data$style_id <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
+    wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
 
   }
 

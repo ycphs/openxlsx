@@ -22,91 +22,41 @@ SEXP write_worksheet_xml_2( std::string prior,
   xmlFile << prior;
   
   
-  CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  CharacterVector cell_types = sheet_data.field("t");
-  CharacterVector cell_value = sheet_data.field("v");
-  CharacterVector cell_fn = sheet_data.field("f");
+  // sheet_data will be in order, just need to check for row_heights
+  // CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
+  List cell_typ = sheet_data.field("t");
+  List cell_val = sheet_data.field("v");
+  List cell_frm = sheet_data.field("f");
   
-  CharacterVector style_id = sheet_data.field("style_id");
-  CharacterVector unique_rows(sort_unique(cell_row));
-  
-  
-  size_t n = cell_row.size();
-  size_t k = unique_rows.size();
-  std::string xml;
-  std::string cell_xml;
-  
-  // write sheet_data
+  List style_id = sheet_data.field("style_id");
   
   xmlFile << "<sheetData>";
   
-  for (size_t i = 0; i < rows_attr.length(); ++i) {
+  for (auto i = 0; i < rows_attr.length(); ++i) {
     
     // CharacterVector col_style = cols_attr[i];
     // CharacterVector col_style_id = style_id[i];
     // CharacterVector cell_type = as<CharacterVector>(cell_typ[i]);
     // Rcout << cell_type << std::endl;
     
-    while(currentRow == unique_rows[i]){
-      
-      //cell XML strings
-      cell_xml += "<c r=\"" + cell_col[j] + itos(cell_row[j]);
-      
-      if(!CharacterVector::is_na(style_id[j]))
-        cell_xml += "\" s=\""+ style_id[j];
-      
-      //If we have a t value we must have a v value
-      if(!CharacterVector::is_na(cell_types[j])){
-        
-        //If we have a c value we might have an f value (cval[3] is f)
-        if(CharacterVector::is_na(cell_fn[j])){ // no function
-          
-          cell_xml += "\" t=\"" + cell_types[j] + "\"><v>" + cell_value[j] + "</v></c>";
-          
-        }else{
-          if(CharacterVector::is_na(cell_value[j])){ // If v is NA
-            cell_xml += "\" t=\"" + cell_types[j] + "\">" + cell_fn[j] + "</c>";
-          }else{
-            cell_xml += "\" t=\"" + cell_types[j] + "\">" + cell_fn[j] + "<v>" + cell_value[j] + "</v></c>";
-          }
-        }
-        
-      } else if(!CharacterVector::is_na(cell_value[j-1])){
-        cell_xml += "\"><v>" + cell_value[j-1] + "</v></c>";
-      } else {
-        cell_xml += "\"/>";        
-      }
-      
-      j += 1;
-      
-      if(j == n)
-        break;
-      
-      currentRow = cell_row[j];
-    }
+    // Rcout << col_style << std::endl;
+    // Rcout << col_style_id << std::endl;
+    
+    // SEXP tmp = rows_attr[i];
+    // Rcout << tmp << std::endl;
     
     CharacterVector row_style = rows_attr[i];
-    // Rcout << "i: " << i << row_style << std::endl;
+    Rcout << "i: " << i << row_style << std::endl;
+    // Rcout << "i: " << i << std::endl;
     
-    // CharacterVector ctyp = cell_typ[i];
-    
-    Rcpp::List f_typ = cell_frm[i];
-    Rcpp::List r_typ = cell_row[i];
-    Rcpp::List s_typ = cell_str[i];
-    Rcpp::List c_typ = cell_typ[i];
-    Rcpp::List v_typ = cell_val[i];
-    Rcpp::List f_val = cell_f[i];
-    Rcpp::List v_val = cell_v[i];
+    List c_frm = cell_frm[i];
+    List c_val = cell_val[i];
     
     
-    // Rf_PrintValue(f_typ);
-    // Rf_PrintValue(c_typ);
-    // Rf_PrintValue(v_typ);
-    // Rf_PrintValue(r_typ);
-    // Rf_PrintValue(s_typ);
+    // Rcout << "j: " << j << std::endl;
+    // CharacterVector cval = c_val[j];
     
-    xmlFile << setXMLrow(row_style, f_typ, c_typ, v_typ, r_typ, s_typ, f_val, v_val);
-    // Rcpp::stop("debug");
+    // xmlFile << setXMLrow(row_style, cell_typ, cell_val);
     
   }
   
