@@ -118,9 +118,9 @@ WorkSheet$methods(get_prior_sheet_data = function() {
   }
 
   # TODO write function for new cols_attr
-  #if (length(cols) > 0) {
-  #  xml <- paste(xml, pxml(c("<cols>", cols, "</cols>")), collapse = "")
-  #}
+  if (length(cols_attr) > 0) {
+    xml <- paste0(xml, paste(c("<cols>", setXMLcols(cols_attr), "</cols>"), collapse = ""))
+  }
 
 
   return(xml)

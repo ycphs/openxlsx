@@ -231,8 +231,12 @@ SEXP getXMLXPtr4attr(XPtrXML doc, std::string level1, std::string level2, std::s
            attr;
            attr = attr.next_attribute())
       {
-        nam.push_back(attr.name());
-        res.push_back(attr.value());
+        if (attr.value() != NULL) {
+          nam.push_back(attr.name());
+          res.push_back(attr.value());
+        } else {
+          res.push_back("");
+        }
       }
       
       // assign names
@@ -293,8 +297,12 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
              attr;
              attr = attr.next_attribute())
         {
-          nam.push_back(attr.name());
-          res.push_back(attr.value());
+          if (attr.value() != NULL) {
+            nam.push_back(attr.name());
+            res.push_back(attr.value());
+          } else {
+            res.push_back("");
+          }
         }
         
         // assign names
@@ -323,26 +331,32 @@ Rcpp::CharacterVector getXMLXPtr3attr_one(XPtrXML doc, std::string level1, std::
        worksheet = worksheet.next_sibling(child.c_str()))
   { 
     pugi::xml_attribute attr = worksheet.attribute(attrname.c_str());
-    z.push_back(attr.value());
+    
+    if (attr.value() != NULL) {
+      z.push_back(attr.value());
+    } else {
+      z.push_back("");
+    }
   }
   
   return  Rcpp::wrap(z);
 }
 
+
+// nested list below level 3. eg:
+// <level1>
+//  <level2>
+//    <level3>
+//      <child attrname=""/>
+//      <child />
+//    </level3>
+//    <level3>
+//      <child />
+//    </level3>
+//  </level2>
+//</level1
 // [[Rcpp::export]]
 SEXP getXMLXPtr4attr_one(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string child, std::string attrname) {
-  // nested list below level 3. eg:
-  // <level1>
-  //  <level2>
-  //    <level3>
-  //      <child attrname=""/>
-  //      <child />
-  //    </level3>
-  //    <level3>
-  //      <child />
-  //    </level3>
-  //  </level2>
-  //</level1
   
   std::vector<std::vector<std::string>> z;
   
@@ -357,7 +371,12 @@ SEXP getXMLXPtr4attr_one(XPtrXML doc, std::string level1, std::string level2, st
          row = row.next_sibling(child.c_str()))
     {
       pugi::xml_attribute attr = row.attribute(attrname.c_str());
-      y.push_back(attr.value());
+      
+      if (attr.value() != NULL) {
+        y.push_back(attr.value());
+      } else {
+        y.push_back("");
+      }
     }
     
     z.push_back(y);

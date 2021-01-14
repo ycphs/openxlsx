@@ -98,6 +98,8 @@ Sheet_Data <- setRefClass("Sheet_Data",
   fields = c(
     "rows" = "integer",
     "cols" = "integer",
+    "s" = "ANY",
+    "r" = "ANY",
     "t" = "ANY",
     "v" = "ANY",
     "f" = "ANY",

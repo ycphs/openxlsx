@@ -161,6 +161,10 @@ calc_number_rows <- function(x, skipEmptyRows) {
     .Call(`_openxlsx_calc_number_rows`, x, skipEmptyRows)
 }
 
+setXMLcols <- function(cols_attr) {
+    .Call(`_openxlsx_setXMLcols`, cols_attr)
+}
+
 map_cell_types_to_integer <- function(t) {
     .Call(`_openxlsx_map_cell_types_to_integer`, t)
 }

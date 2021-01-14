@@ -786,14 +786,14 @@ buildFillList <- function(fills) {
 
 
 getDefinedNamesSheet <- function(x) {
-  belongTo <- unlist(lapply(strsplit(x, split = ">|<"), "[[", 3))
-  quoted <- grepl("^'", belongTo)
+  # belongTo <- unlist(lapply(strsplit(x, split = ">|<"), "[[", 3))
+  # quoted <- grepl("^'", belongTo)
 
-  belongTo[quoted] <- regmatches(belongTo[quoted], regexpr("(?<=').*(?='!)", belongTo[quoted], perl = TRUE))
-  belongTo[!quoted] <- gsub("!\\$[A-Z0-9].*", "", belongTo[!quoted])
-  belongTo[!quoted] <- gsub("!#REF!.*", "", belongTo[!quoted])
+  # belongTo[quoted] <- regmatches(belongTo[quoted], regexpr("(?<=').*(?='!)", belongTo[quoted], perl = TRUE))
+  # belongTo[!quoted] <- gsub("!\\$[A-Z0-9].*", "", belongTo[!quoted])
+  # belongTo[!quoted] <- gsub("!#REF!.*", "", belongTo[!quoted])
 
-  return(belongTo)
+  # return(belongTo)
 }
 
 

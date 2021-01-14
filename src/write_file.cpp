@@ -24,15 +24,17 @@ SEXP write_worksheet_xml_2( std::string prior,
   
   // sheet_data will be in order, just need to check for row_heights
   // CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
+  List cell_frm = sheet_data.field("f");
+  List cell_row = sheet_data.field("r");
+  List cell_str = sheet_data.field("s");
   List cell_typ = sheet_data.field("t");
   List cell_val = sheet_data.field("v");
-  List cell_frm = sheet_data.field("f");
   
   List style_id = sheet_data.field("style_id");
   
   xmlFile << "<sheetData>";
   
-  for (auto i = 0; i < rows_attr.length(); ++i) {
+  for (size_t i = 0; i < rows_attr.length(); ++i) {
     
     // CharacterVector col_style = cols_attr[i];
     // CharacterVector col_style_id = style_id[i];
@@ -45,18 +47,20 @@ SEXP write_worksheet_xml_2( std::string prior,
     // SEXP tmp = rows_attr[i];
     // Rcout << tmp << std::endl;
     
-    CharacterVector row_style = rows_attr[i];
-    Rcout << "i: " << i << row_style << std::endl;
     // Rcout << "i: " << i << std::endl;
     
-    List c_frm = cell_frm[i];
-    List c_val = cell_val[i];
+    CharacterVector row_style = rows_attr[i];
+    // Rcout << "i: " << i << row_style << std::endl;
     
+    // CharacterVector ctyp = cell_typ[i];
     
-    // Rcout << "j: " << j << std::endl;
-    // CharacterVector cval = c_val[j];
+    Rcpp::List r_typ = cell_row[i];
+    Rcpp::List s_typ = cell_str[i];
+    Rcpp::List c_typ = cell_typ[i];
+    Rcpp::List v_typ = cell_val[i];
     
-    // xmlFile << setXMLrow(row_style, cell_typ, cell_val);
+    xmlFile << setXMLrow(row_style, c_typ, v_typ, r_typ, s_typ);
+    // Rcpp::stop("debug");
     
   }
   
