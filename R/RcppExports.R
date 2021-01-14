@@ -113,8 +113,28 @@ getXMLXPtr4 <- function(doc, level1, level2, level3, child) {
     .Call(`_openxlsx_getXMLXPtr4`, doc, level1, level2, level3, child)
 }
 
+getXMLXPtr5 <- function(doc, level1, level2, level3, level4, child) {
+    .Call(`_openxlsx_getXMLXPtr5`, doc, level1, level2, level3, level4, child)
+}
+
+getXMLXPtr3attr <- function(doc, level1, level2, child) {
+    .Call(`_openxlsx_getXMLXPtr3attr`, doc, level1, level2, child)
+}
+
 getXMLXPtr4attr <- function(doc, level1, level2, level3, child) {
     .Call(`_openxlsx_getXMLXPtr4attr`, doc, level1, level2, level3, child)
+}
+
+getXMLXPtr5attr <- function(doc, level1, level2, level3, level4, child) {
+    .Call(`_openxlsx_getXMLXPtr5attr`, doc, level1, level2, level3, level4, child)
+}
+
+getXMLXPtr3attr_one <- function(doc, level1, level2, child, attrname) {
+    .Call(`_openxlsx_getXMLXPtr3attr_one`, doc, level1, level2, child, attrname)
+}
+
+getXMLXPtr4attr_one <- function(doc, level1, level2, level3, child, attrname) {
+    .Call(`_openxlsx_getXMLXPtr4attr_one`, doc, level1, level2, level3, child, attrname)
 }
 
 printXPtr <- function(doc) {
@@ -165,8 +185,9 @@ buildCellList <- function(r, t, v) {
     .Call(`_openxlsx_buildCellList`, r, t, v)
 }
 
-write_worksheet_xml <- function(prior, post, sheet_data, R_fileName) {
-    .Call(`_openxlsx_write_worksheet_xml`, prior, post, sheet_data, R_fileName)
+#' @import Rcpp
+write_worksheet_xml_2 <- function(prior, post, sheet_data, cols_attr, rows_attr, row_heights_ = NULL, outline_levels_ = NULL, R_fileName = "output") {
+    .Call(`_openxlsx_write_worksheet_xml_2`, prior, post, sheet_data, cols_attr, rows_attr, row_heights_, outline_levels_, R_fileName)
 }
 
 buildMatrixNumeric <- function(v, rowInd, colInd, colNames, nRows, nCols) {
@@ -183,9 +204,5 @@ matrixRowInds <- function(indices) {
 
 build_table_xml <- function(table, tableStyleXML, ref, colNames, showColNames, withFilter) {
     .Call(`_openxlsx_build_table_xml`, table, tableStyleXML, ref, colNames, showColNames, withFilter)
-}
-
-write_worksheet_xml_2 <- function(prior, post, sheet_data, row_style, row_heights_ = NULL, outline_levels_ = NULL, R_fileName = "output") {
-    .Call(`_openxlsx_write_worksheet_xml_2`, prior, post, sheet_data, row_style, row_heights_, outline_levels_, R_fileName)
 }
 

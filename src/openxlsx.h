@@ -16,9 +16,6 @@ using namespace std;
 int cell_ref_to_col(string );
 CharacterVector int_2_cell_ref(IntegerVector);
 
-// write file
-SEXP write_worksheet_xml(string, string, List, Reference, IntegerVector, CharacterVector, string );
-
 
 // write_data.cpp
 CharacterVector map_cell_types_to_char(IntegerVector);
@@ -84,4 +81,4 @@ LogicalVector isInternalHyperlink(CharacterVector x);
 string itos(int i);
 SEXP write_file(std::string parent, std::string xmlText, std::string parentEnd, std::string R_fileName);
 CharacterVector markUTF8(CharacterVector x, bool clone = false);
-std::string setXMLrow(Rcpp::CharacterVector row_attr, std::string cell_xml);
+std::string setXMLrow(Rcpp::CharacterVector row_style, Rcpp::List cell_typ, Rcpp::List cell_val);

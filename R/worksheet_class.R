@@ -57,7 +57,7 @@ WorkSheet$methods(initialize = function(showGridLines = TRUE,
   dimension <<- '<dimension ref="A1"/>'
   sheetViews <<- sprintf('<sheetViews><sheetView workbookViewId="0" zoomScale="%s" showGridLines="%s" tabSelected="%s"/></sheetViews>', as.integer(zoom), as.integer(showGridLines), as.integer(tabSelected))
   sheetFormatPr <<- '<sheetFormatPr defaultRowHeight="15.0" baseColWidth="10"/>'
-  cols <<- character(0)
+  cols_attr <<- character(0)
 
   autoFilter <<- character(0)
   mergeCells <<- character(0)
@@ -117,9 +117,10 @@ WorkSheet$methods(get_prior_sheet_data = function() {
     xml <- paste(xml, sheetFormatPr, collapse = "")
   }
 
-  if (length(cols) > 0) {
-    xml <- paste(xml, pxml(c("<cols>", cols, "</cols>")), collapse = "")
-  }
+  # TODO write function for new cols_attr
+  #if (length(cols) > 0) {
+  #  xml <- paste(xml, pxml(c("<cols>", cols, "</cols>")), collapse = "")
+  #}
 
 
   return(xml)

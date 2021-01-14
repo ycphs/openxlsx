@@ -2,114 +2,74 @@
 #include "openxlsx.h"
 
 
-
-
-
-
-
+//' @import Rcpp
 // [[Rcpp::export]]
-SEXP write_worksheet_xml(std::string prior
-                           , std::string post
-                           , Reference sheet_data
-                           , std::string R_fileName){
+SEXP write_worksheet_xml_2( std::string prior,
+                            std::string post, 
+                            Reference sheet_data,
+                            Rcpp::List cols_attr,
+                            Rcpp::List rows_attr,
+                            Nullable<CharacterVector> row_heights_ = R_NilValue,
+                            Nullable<CharacterVector> outline_levels_ = R_NilValue,
+                            std::string R_fileName = "output"){
+  
   
   // open file and write header XML
   const char * s = R_fileName.c_str();
   std::ofstream xmlFile;
   xmlFile.open (s);
-  xmlFile << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+  xmlFile << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
   xmlFile << prior;
-
-  //NOTES ON WHY THIS WORKS
-  // - If no row heights every row has children
-  // - If data only added once, sheet_data will be in order
-  // - Thus all rows have children (all starting row tags are open) and no need to sort/find
-  
-
-  // DEV START
-  IntegerVector cell_row = sheet_data.field("rows");
-  
-  // If no data write childless node and return
-  if(cell_row.size() == 0){
-    xmlFile << "<sheetData/>";
-    xmlFile << post;
-    xmlFile.close();
-    return Rcpp::wrap(0);
-  }
-  
-  CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  CharacterVector cell_types = sheet_data.field("t");
-  CharacterVector cell_value = sheet_data.field("v");
-  CharacterVector cell_fn = sheet_data.field("f");
-  
-  CharacterVector style_id = sheet_data.field("style_id");
-  CharacterVector unique_rows(sort_unique(cell_row));
   
   
-  size_t n = cell_row.size();
-  size_t k = unique_rows.size();
-  std::string xml;
-  std::string cell_xml;
+  // sheet_data will be in order, just need to check for row_heights
+  // CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
+  List cell_typ = sheet_data.field("t");
+  List cell_val = sheet_data.field("v");
+  List cell_frm = sheet_data.field("f");
   
-  // write sheet_data
+  List style_id = sheet_data.field("style_id");
   
-  // write xml prior to sheetData and opening tag
   xmlFile << "<sheetData>";
-  size_t j = 0;
-  String currentRow = unique_rows[0];
   
-  for(size_t i = 0; i < k; i++){
+  for (auto i = 0; i < rows_attr.length(); ++i) {
     
-    cell_xml = "";
+    // CharacterVector col_style = cols_attr[i];
+    // CharacterVector col_style_id = style_id[i];
+    // CharacterVector cell_type = as<CharacterVector>(cell_typ[i]);
+    // Rcout << cell_type << std::endl;
     
-    while(currentRow == unique_rows[i]){
-      
-      //cell XML strings
-      cell_xml += "<c r=\"" + cell_col[j] + itos(cell_row[j]);
-      
-      if(!CharacterVector::is_na(style_id[j]))
-        cell_xml += "\" s=\""+ style_id[j];
-      
-      //If we have a t value we must have a v value
-      if(!CharacterVector::is_na(cell_types[j])){
-        
-        //If we have a c value we might have an f value (cval[3] is f)
-        if(CharacterVector::is_na(cell_fn[j])){ // no function
-          
-          cell_xml += "\" t=\"" + cell_types[j] + "\"><v>" + cell_value[j] + "</v></c>";
-          
-        }else{
-          if(CharacterVector::is_na(cell_value[j])){ // If v is NA
-            cell_xml += "\" t=\"" + cell_types[j] + "\">" + cell_fn[j] + "</c>";
-          }else{
-            cell_xml += "\" t=\"" + cell_types[j] + "\">" + cell_fn[j] + "<v>" + cell_value[j] + "</v></c>";
-          }
-        }
-        
-      } else if(!CharacterVector::is_na(cell_value[j-1])){
-        cell_xml += "\"><v>" + cell_value[j-1] + "</v></c>";
-      } else {
-        cell_xml += "\"/>";        
-      }
-      
-      j += 1;
-      
-      if(j == n)
-        break;
-      
-      currentRow = cell_row[j];
-    }
+    // Rcout << col_style << std::endl;
+    // Rcout << col_style_id << std::endl;
     
-    xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
+    // SEXP tmp = rows_attr[i];
+    // Rcout << tmp << std::endl;
+    
+    CharacterVector row_style = rows_attr[i];
+    Rcout << "i: " << i << row_style << std::endl;
+    // Rcout << "i: " << i << std::endl;
+    
+    List c_frm = cell_frm[i];
+    List c_val = cell_val[i];
+    
+    
+    // Rcout << "j: " << j << std::endl;
+    // CharacterVector cval = c_val[j];
+    
+    // xmlFile << setXMLrow(row_style, cell_typ, cell_val);
     
   }
   
-  // write closing tag, post <sheetData> xml and close
+  
+  
+  // write closing tag and XML post data
   xmlFile << "</sheetData>";
   xmlFile << post;
+  
+  //close file
   xmlFile.close();
   
-  return Rcpp::wrap(0);
+  return wrap(0);
   
 }
 
@@ -347,6 +307,3 @@ CharacterVector build_table_xml(std::string table, std::string tableStyleXML, st
   return markUTF8(out);
   
 }
-
-
-
