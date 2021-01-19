@@ -2229,7 +2229,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
 
     if (!validCol(summaryCol)) {
       stop("Invalid \`summaryCol\` option. Must be one of \"Left\" or \"Right\".")
-    } else if (tolower(summaryCol) == "Left") {
+    } else if (tolower(summaryCol) == "left") {
       outlinepr <- paste0(outlinepr, ' summaryRight=\"0\"')
     } else {
       outlinepr <- paste0(outlinepr, ' summaryRight=\"1\"')
