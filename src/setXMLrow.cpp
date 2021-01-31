@@ -33,6 +33,10 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
   // Rcpp::Rprintf(cell_typ);
   // Rf_PrintValue(cell_frm);
   
+  // Rf_PrintValue(cell_row);
+  // Rf_PrintValue(cell_str);
+  // Rf_PrintValue(cell_typ);
+
   // not if only row attribs are present
   // Rcpp::Rcout << "c_beg" << std::endl;
   if (cell_row.length() > 0)
@@ -45,26 +49,22 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
       
       std::string r_typ = Rcpp::as<std::string>(cell_row[i]);
       std::string s_typ = Rcpp::as<std::string>(cell_str[i]);
+      std::string t_typ = Rcpp::as<std::string>(cell_typ[i]);
       
       // Rcpp::Rcout << "b_read" << std::endl;
       Rcpp::List f_typ = cell_frm[i];
-      Rcpp::List c_typ = cell_typ[i];
       Rcpp::List v_typ = cell_val[i];
       // Rcpp::Rcout << "e_read" << std::endl;
       
       // Rf_PrintValue(f_typ);
-      // Rf_PrintValue(c_typ);
+      // Rf_PrintValue(c_typ); // is a string already
       // Rf_PrintValue(v_typ);
       
       // each <c> needs "r" and "s"
       pugi::xml_node col = row.append_child("c");
       col.append_attribute("r") = r_typ.c_str();
       col.append_attribute("s") = s_typ.c_str();
-      
-      for (auto tj = 0; tj < c_typ.length(); ++tj) {
-        Rcpp::CharacterVector celltyp = c_typ[tj];
-        col.append_attribute("t") = celltyp;
-      }
+      col.append_attribute("t") = t_typ.c_str();
       
       
       /*
