@@ -2135,7 +2135,7 @@ Workbook$methods(
           }
 
 
-        if (i < 3)
+        # if (i < 3)
           write_file(
             head = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
             body = pxml(ws_rels),

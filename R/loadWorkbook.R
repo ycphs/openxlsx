@@ -732,8 +732,15 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     if (length(drawingsXML) > 0) {
       dXML <- lapply(drawingsXML, readUTF8)
       dXML <- unlist(lapply(dXML, removeHeadTag))
+      # this creates crippled drawings files
       dXML <- gsub("<xdr:wsDr .*?>", "", dXML)
       dXML <- gsub("</xdr:wsDr>", "", dXML)
+
+      
+      for (drawing in seq_along(drawingsXML)) {
+       drwng_xml <- readXMLPtr(drawingsXML[drawing])
+       wb$drawings[[drawing]] <- getXMLXPtr1(drwng_xml, "xdr:wsDr")
+      }
 
       #       ptn1 <- "<(mc:AlternateContent|xdr:oneCellAnchor|xdr:twoCellAnchor|xdr:absoluteAnchor)"
       #       ptn2 <- "</(mc:AlternateContent|xdr:oneCellAnchor|xdr:twoCellAnchor|xdr:absoluteAnchor)>"
@@ -744,25 +751,25 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
     ## loop over all worksheets and assign drawing to sheet
-    if (any(hasDrawing)) {
-      for (i in seq_along(xml)) {
-        if (hasDrawing[i]) {
-          target <- unlist(lapply(drawXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
-          target <- basename(gsub('"$', "", target))
+    # if (any(hasDrawing)) {
+    #   for (i in seq_along(xml)) {
+    #     if (hasDrawing[i]) {
+    #       target <- unlist(lapply(drawXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
+    #       target <- basename(gsub('"$', "", target))
 
-          ## sheet_i has which(hasDrawing)[[i]]
-          relsInd <- grepl(target, drawingRelsXML)
-          if (any(relsInd)) {
-            wb$drawings_rels[i] <- dRels[relsInd]
-          }
+    #       ## sheet_i has which(hasDrawing)[[i]]
+    #       relsInd <- grepl(target, drawingRelsXML)
+    #       if (any(relsInd)) {
+    #         wb$drawings_rels[i] <- dRels[relsInd]
+    #       }
 
-          drawingInd <- grepl(target, drawingsXML)
-          if (any(drawingInd)) {
-            wb$drawings[i] <- dXML[drawingInd]
-          }
-        }
-      }
-    }
+    #       drawingInd <- grepl(target, drawingsXML)
+    #       if (any(drawingInd)) {
+    #         wb$drawings[i] <- dXML[drawingInd]
+    #       }
+    #     }
+    #   }
+    # }
 
 
 
