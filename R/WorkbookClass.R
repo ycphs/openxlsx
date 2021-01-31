@@ -2088,9 +2088,8 @@ Workbook$methods(
 
         # worksheets[[i]]$sheet_data$style_id <<-
         #   as.character(worksheets[[i]]$sheet_data$style_id)
-        print(prior)
 
-        message(i, " \n")
+        # message(i, " \n")
         write_worksheet_xml_2(
           prior = prior,
           post = post,

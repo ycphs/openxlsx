@@ -485,14 +485,14 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
     
     wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
+    #wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
     wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
 
     # character vectors
     wb$worksheets[[i]]$sheet_data$style_id <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
     wb$worksheets[[i]]$sheet_data$r <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
     wb$worksheets[[i]]$sheet_data$s <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
-    #wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
+    wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
 
   }
 
@@ -831,12 +831,16 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       names(com_rId) <- commentsrelXML
       for (com_rel in commentsrelXML) {
         rel_xml <- readXMLPtr(com_rel)
+        #attrs <- getXMLXPtr2attr(rel_xml, "Relationships", "Relationship")
+        #print(attrs)
         rels <- getXMLXPtr2(rel_xml, "Relationships", "Relationship")
         print(rels)
         attrs <- getXMLattr(rels, "Relationship")
+        #print(attrs)
         # commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
         # s <- unlist(attrs[commentID])
         attrs <- as.data.frame(do.call("rbind", attrs))
+        # print(attrs)
         com_rId[[com_rel]] <- attrs
       }
       com_rId <<- com_rId
