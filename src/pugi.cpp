@@ -165,6 +165,37 @@ SEXP getXMLXPtr5(XPtrXML doc, std::string level1, std::string level2, std::strin
 
 
 // [[Rcpp::export]]
+SEXP getXMLXPtr2attr(XPtrXML doc, std::string level1, std::string child) {
+  
+  
+  Rcpp::List z;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(child.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(child.c_str()))
+  {
+    
+    Rcpp::CharacterVector res;
+    std::vector<std::string> nam;
+    
+    for (pugi::xml_attribute attr = worksheet.first_attribute();
+         attr;
+         attr = attr.next_attribute())
+    {
+      nam.push_back(attr.name());
+      res.push_back(attr.value());
+    }
+    
+    // assign names
+    res.attr("names") = nam;
+    
+    z.push_back(res);
+  }
+  
+  return  Rcpp::wrap(z);
+}
+
+// [[Rcpp::export]]
 SEXP getXMLXPtr3attr(XPtrXML doc, std::string level1, std::string level2, std::string child) {
   
   

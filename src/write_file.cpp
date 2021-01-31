@@ -54,12 +54,20 @@ SEXP write_worksheet_xml_2( std::string prior,
     
     // CharacterVector ctyp = cell_typ[i];
     
+    Rcpp::List f_typ = cell_frm[i];
     Rcpp::List r_typ = cell_row[i];
     Rcpp::List s_typ = cell_str[i];
     Rcpp::List c_typ = cell_typ[i];
     Rcpp::List v_typ = cell_val[i];
     
-    xmlFile << setXMLrow(row_style, c_typ, v_typ, r_typ, s_typ);
+    
+    // Rf_PrintValue(f_typ);
+    // Rf_PrintValue(c_typ);
+    // Rf_PrintValue(v_typ);
+    // Rf_PrintValue(r_typ);
+    // Rf_PrintValue(s_typ);
+    
+    xmlFile << setXMLrow(row_style, f_typ, c_typ, v_typ, r_typ, s_typ);
     // Rcpp::stop("debug");
     
   }

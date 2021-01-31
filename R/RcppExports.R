@@ -117,6 +117,10 @@ getXMLXPtr5 <- function(doc, level1, level2, level3, level4, child) {
     .Call(`_openxlsx_getXMLXPtr5`, doc, level1, level2, level3, level4, child)
 }
 
+getXMLXPtr2attr <- function(doc, level1, child) {
+    .Call(`_openxlsx_getXMLXPtr2attr`, doc, level1, child)
+}
+
 getXMLXPtr3attr <- function(doc, level1, level2, child) {
     .Call(`_openxlsx_getXMLXPtr3attr`, doc, level1, level2, child)
 }
