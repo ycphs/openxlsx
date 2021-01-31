@@ -763,13 +763,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     #         wb$drawings_rels[i] <- dRels[relsInd]
     #       }
 
-          drawingInd <- grepl(target, drawingsXML)
-          if (any(drawingInd)) {
-            wb$drawings[i] <- dXML[drawingInd]
-          }
-        }
-      }
-    }
+    #       drawingInd <- grepl(target, drawingsXML)
+    #       if (any(drawingInd)) {
+    #         wb$drawings[i] <- dXML[drawingInd]
+    #       }
+    #     }
+    #   }
+    # }
 
 
 
