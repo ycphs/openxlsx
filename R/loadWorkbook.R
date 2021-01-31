@@ -829,13 +829,12 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       names(com_rId) <- commentsrelXML
       for (com_rel in commentsrelXML) {
         # TODO: I do not get this, why does this work with the print and not without it?
-        # Why does the
         rel_xml <- readXMLPtr(com_rel)
-        #attrs <- getXMLXPtr2attr(rel_xml, "Relationships", "Relationship")
+        attrs <- getXMLXPtr2attr(rel_xml, "Relationships", "Relationship")
         #print(attrs)
-        rels <- getXMLXPtr2(rel_xml, "Relationships", "Relationship")
-        print(rels)
-        attrs <- getXMLattr(rels, "Relationship")
+        #rels <- getXMLXPtr2(rel_xml, "Relationships", "Relationship")
+        #print(rels)
+        #attrs <- getXMLattr(rels, "Relationship")
         #print(attrs)
         # commentID <- sapply(attrs, FUN= function(x)any(grepl(x, pattern = "comments")))
         # s <- unlist(attrs[commentID])
