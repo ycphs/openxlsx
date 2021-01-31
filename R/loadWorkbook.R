@@ -484,15 +484,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
     
-    wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    #wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
-    wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+    wb$worksheets[[i]]$sheet_data$ftyp <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
+    wb$worksheets[[i]]$sheet_data$vtyp <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
 
     # character vectors
-    wb$worksheets[[i]]$sheet_data$style_id <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
-    wb$worksheets[[i]]$sheet_data$r <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
-    wb$worksheets[[i]]$sheet_data$s <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
-    wb$worksheets[[i]]$sheet_data$t <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
+    wb$worksheets[[i]]$sheet_data$rtyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
+    wb$worksheets[[i]]$sheet_data$styp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
+    wb$worksheets[[i]]$sheet_data$ttyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
 
   }
 
@@ -823,6 +821,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       com_rId <- vector("list", length(commentsrelXML))
       names(com_rId) <- commentsrelXML
       for (com_rel in commentsrelXML) {
+        # TODO: I do not get this, why does this work with the print and not without it?
+        # Why does the
         rel_xml <- readXMLPtr(com_rel)
         #attrs <- getXMLXPtr2attr(rel_xml, "Relationships", "Relationship")
         #print(attrs)
