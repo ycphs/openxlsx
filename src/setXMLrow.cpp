@@ -62,9 +62,10 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
       
       // each <c> needs "r" and "s"
       pugi::xml_node col = row.append_child("c");
-      col.append_attribute("r") = r_typ.c_str();
-      col.append_attribute("s") = s_typ.c_str();
-      col.append_attribute("t") = t_typ.c_str();
+      // save attributes only if != "" (is r is always != ""?)
+      if (r_typ.compare("") != 0) col.append_attribute("r") = r_typ.c_str();
+      if (s_typ.compare("") != 0) col.append_attribute("s") = s_typ.c_str();
+      if (t_typ.compare("") != 0) col.append_attribute("t") = t_typ.c_str();
       
       
       /*
