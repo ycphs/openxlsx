@@ -1,4 +1,4 @@
-
+# nolint start
 
 
 require('openxlsx')
@@ -123,19 +123,4 @@ addStyle(wb, 3, createStyle(textDecoration = "bold", fgFill = "salmon"), 2:4, 2:
 
 openXL(wb)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# nolint end
