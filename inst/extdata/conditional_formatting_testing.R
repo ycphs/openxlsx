@@ -1,4 +1,4 @@
-
+# nolint start
 
 
 wb <- createWorkbook()
@@ -76,3 +76,5 @@ wb <- loadWorkbook(fl)
 conditionalFormatting(wb, "Duplicates", cols = 1, rows = 1:10, type = "duplicates", style = createStyle(textDecoration = 'BOLD'))
 openXL(wb)
 
+
+# nolint end
