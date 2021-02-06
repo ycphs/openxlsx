@@ -484,8 +484,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
     
-    wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+    wb$worksheets[[i]]$sheet_data$fval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
+    wb$worksheets[[i]]$sheet_data$vval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
 
     # character vectors attributes to f(?) and v
     wb$worksheets[[i]]$sheet_data$ftyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
