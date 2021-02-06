@@ -30,6 +30,9 @@ SEXP write_worksheet_xml_2( std::string prior,
   List cell_typ = sheet_data.field("ttyp");
   List cell_val = sheet_data.field("vtyp");
   
+  List cell_f = sheet_data.field("fval");
+  List cell_v = sheet_data.field("vval");
+  
   // List style_id = sheet_data.field("style_id");
   
   xmlFile << "<sheetData>";
@@ -59,6 +62,8 @@ SEXP write_worksheet_xml_2( std::string prior,
     Rcpp::List s_typ = cell_str[i];
     Rcpp::List c_typ = cell_typ[i];
     Rcpp::List v_typ = cell_val[i];
+    Rcpp::List f_val = cell_f[i];
+    Rcpp::List v_val = cell_v[i];
     
     
     // Rf_PrintValue(f_typ);
@@ -67,7 +72,7 @@ SEXP write_worksheet_xml_2( std::string prior,
     // Rf_PrintValue(r_typ);
     // Rf_PrintValue(s_typ);
     
-    xmlFile << setXMLrow(row_style, f_typ, c_typ, v_typ, r_typ, s_typ);
+    xmlFile << setXMLrow(row_style, f_typ, c_typ, v_typ, r_typ, s_typ, f_val, v_val);
     // Rcpp::stop("debug");
     
   }
