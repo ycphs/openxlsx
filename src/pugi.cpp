@@ -420,7 +420,6 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
         x.push_back(res);
       }
       
-      y.push_back(x);
       y[itr_rows] = x;
       ++itr_rows;
     }
