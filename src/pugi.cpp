@@ -498,10 +498,14 @@ SEXP getXMLXPtr4attr_one(XPtrXML doc, std::string level1, std::string level2, st
 }
 
 // [[Rcpp::export]]
-std::string printXPtr(XPtrXML doc) {
+std::string printXPtr(XPtrXML doc, bool raw) {
   
   std::ostringstream oss;
-  doc->print(oss, " ", pugi::format_raw);
+  if (raw) {
+    doc->print(oss, " ", pugi::format_raw);
+  } else {
+    doc->print(oss);
+  }
   
   return  oss.str();
 }

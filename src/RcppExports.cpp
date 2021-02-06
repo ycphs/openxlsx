@@ -489,13 +489,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // printXPtr
-std::string printXPtr(XPtrXML doc);
-RcppExport SEXP _openxlsx_printXPtr(SEXP docSEXP) {
+std::string printXPtr(XPtrXML doc, bool raw);
+RcppExport SEXP _openxlsx_printXPtr(SEXP docSEXP, SEXP rawSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrXML >::type doc(docSEXP);
-    rcpp_result_gen = Rcpp::wrap(printXPtr(doc));
+    Rcpp::traits::input_parameter< bool >::type raw(rawSEXP);
+    rcpp_result_gen = Rcpp::wrap(printXPtr(doc, raw));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -770,7 +771,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getXMLXPtr5attr", (DL_FUNC) &_openxlsx_getXMLXPtr5attr, 6},
     {"_openxlsx_getXMLXPtr3attr_one", (DL_FUNC) &_openxlsx_getXMLXPtr3attr_one, 5},
     {"_openxlsx_getXMLXPtr4attr_one", (DL_FUNC) &_openxlsx_getXMLXPtr4attr_one, 6},
-    {"_openxlsx_printXPtr", (DL_FUNC) &_openxlsx_printXPtr, 1},
+    {"_openxlsx_printXPtr", (DL_FUNC) &_openxlsx_printXPtr, 2},
     {"_openxlsx_readXML", (DL_FUNC) &_openxlsx_readXML, 1},
     {"_openxlsx_get_shared_strings", (DL_FUNC) &_openxlsx_get_shared_strings, 2},
     {"_openxlsx_getCellInfo", (DL_FUNC) &_openxlsx_getCellInfo, 6},
