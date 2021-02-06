@@ -149,8 +149,8 @@ getXMLXPtr4attr_one <- function(doc, level1, level2, level3, child, attrname) {
     .Call(`_openxlsx_getXMLXPtr4attr_one`, doc, level1, level2, level3, child, attrname)
 }
 
-printXPtr <- function(doc) {
-    .Call(`_openxlsx_printXPtr`, doc)
+printXPtr <- function(doc, raw) {
+    .Call(`_openxlsx_printXPtr`, doc, raw)
 }
 
 readXML <- function(path) {
