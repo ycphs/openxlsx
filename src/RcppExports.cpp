@@ -368,6 +368,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getXMLXPtr4val
+SEXP getXMLXPtr4val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string child);
+RcppExport SEXP _openxlsx_getXMLXPtr4val(SEXP docSEXP, SEXP level1SEXP, SEXP level2SEXP, SEXP level3SEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrXML >::type doc(docSEXP);
+    Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level2(level2SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level3(level3SEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXMLXPtr4val(doc, level1, level2, level3, child));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getXMLXPtr5val
+SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string level4, std::string child);
+RcppExport SEXP _openxlsx_getXMLXPtr5val(SEXP docSEXP, SEXP level1SEXP, SEXP level2SEXP, SEXP level3SEXP, SEXP level4SEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrXML >::type doc(docSEXP);
+    Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level2(level2SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level3(level3SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level4(level4SEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXMLXPtr5val(doc, level1, level2, level3, level4, child));
+    return rcpp_result_gen;
+END_RCPP
+}
 // getXMLXPtr2attr
 SEXP getXMLXPtr2attr(XPtrXML doc, std::string level1, std::string child);
 RcppExport SEXP _openxlsx_getXMLXPtr2attr(SEXP docSEXP, SEXP level1SEXP, SEXP childSEXP) {
@@ -731,6 +762,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getXMLXPtr3", (DL_FUNC) &_openxlsx_getXMLXPtr3, 4},
     {"_openxlsx_getXMLXPtr4", (DL_FUNC) &_openxlsx_getXMLXPtr4, 5},
     {"_openxlsx_getXMLXPtr5", (DL_FUNC) &_openxlsx_getXMLXPtr5, 6},
+    {"_openxlsx_getXMLXPtr4val", (DL_FUNC) &_openxlsx_getXMLXPtr4val, 5},
+    {"_openxlsx_getXMLXPtr5val", (DL_FUNC) &_openxlsx_getXMLXPtr5val, 6},
     {"_openxlsx_getXMLXPtr2attr", (DL_FUNC) &_openxlsx_getXMLXPtr2attr, 3},
     {"_openxlsx_getXMLXPtr3attr", (DL_FUNC) &_openxlsx_getXMLXPtr3attr, 4},
     {"_openxlsx_getXMLXPtr4attr", (DL_FUNC) &_openxlsx_getXMLXPtr4attr, 5},

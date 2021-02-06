@@ -163,14 +163,78 @@ SEXP getXMLXPtr5(XPtrXML doc, std::string level1, std::string level2, std::strin
   return  Rcpp::wrap(x);
 }
 
+// [[Rcpp::export]]
+SEXP getXMLXPtr4val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string child) {
+  
+  std::vector<std::vector<std::string>> x;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(level3.c_str()))
+  {
+    std::vector<std::string> y;
+    
+    for (pugi::xml_node col = worksheet.child(child.c_str());
+         col;
+         col = col.next_sibling(child.c_str()))
+    {
+      y.push_back(col.child_value() );
+    }
+    
+    x.push_back(y);
+  }
+  
+  return  Rcpp::wrap(x);
+}
+
+// [[Rcpp::export]]
+SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string level4, std::string child) {
+  
+  // TODO: create vector of correct size instead of push back. 
+  std::vector<std::vector<std::vector<std::string>>> x;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(level3.c_str()))
+  {
+    std::vector<std::vector<std::string>> y;
+    
+    for (pugi::xml_node col = worksheet.child(level4.c_str());
+         col;
+         col = col.next_sibling(level4.c_str()))
+    {
+      std::vector<std::string> z;
+      
+      for (pugi::xml_node val = col.child(child.c_str());
+           val;
+           val = val.next_sibling(child.c_str()))
+      {
+        // Rcpp::Rcout << val.name() << " = " << val.child_value() << std::endl;
+        z.push_back(val.child_value() );
+      }
+      
+      y.push_back(z);
+    }
+    
+    x.push_back(y);
+  }
+  
+  return  Rcpp::wrap(x);
+}
+
+
 
 // [[Rcpp::export]]
 SEXP getXMLXPtr2attr(XPtrXML doc, std::string level1, std::string child) {
   
   
-  Rcpp::List z;
+  pugi::xml_node worksheet = doc->child(level1.c_str()).child(child.c_str());
+  size_t n = std::distance(worksheet.begin(), worksheet.end());
   
-  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(child.c_str());
+  Rcpp::List z(n);
+  
+  auto itr = 0;
+  for (worksheet = doc->child(level1.c_str()).child(child.c_str());
        worksheet;
        worksheet = worksheet.next_sibling(child.c_str()))
   {
@@ -242,13 +306,18 @@ SEXP getXMLXPtr3attr(XPtrXML doc, std::string level1, std::string level2, std::s
 // [[Rcpp::export]]
 SEXP getXMLXPtr4attr(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string child) {
   
-  Rcpp::List z;
+  auto rows = doc->child(level1.c_str()).child(level2.c_str());
+  size_t n = std::distance(rows.begin(), rows.end());
+  auto itr_rows = 0;
+  Rcpp::List z(n);
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
        worksheet;
        worksheet = worksheet.next_sibling(level3.c_str()))
   {
-    Rcpp::List y;
+    size_t k = std::distance(worksheet.begin(), worksheet.end());
+    auto itr_cols = 0;
+    Rcpp::List y(k);
     
     for (pugi::xml_node row = worksheet.child(child.c_str());
          row;
@@ -273,9 +342,12 @@ SEXP getXMLXPtr4attr(XPtrXML doc, std::string level1, std::string level2, std::s
       // assign names
       res.attr("names") = nam;
       
-      y.push_back(res);
+      y[itr_cols] = res;
+      ++itr_cols;
     }
-    z.push_back(y);
+    
+    z[itr_rows] = y;
+    ++itr_rows;
   }
   
   return  Rcpp::wrap(z);
@@ -302,13 +374,19 @@ SEXP getXMLXPtr4attr(XPtrXML doc, std::string level1, std::string level2, std::s
 // [[Rcpp::export]]
 SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string level4, std::string child) {
   
-  Rcpp::List z;
+  auto worksheet = doc->child(level1.c_str()).child(level2.c_str());
+  size_t n = std::distance(worksheet.begin(), worksheet.end());
+  auto itr_cols = 0;
+  Rcpp::List z(n);
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
        worksheet;
        worksheet = worksheet.next_sibling(level3.c_str()))
   {
-    Rcpp::List y;
+    
+    size_t k = std::distance(worksheet.begin(), worksheet.end());
+    auto itr_rows = 0;
+    Rcpp::List y(k);
     
     for (pugi::xml_node row = worksheet.child(level4.c_str());
          row;
@@ -324,7 +402,7 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
         Rcpp::CharacterVector res;
         std::vector<std::string> nam;
         
-        for (pugi::xml_attribute attr = row.first_attribute();
+        for (pugi::xml_attribute attr = col.first_attribute();
              attr;
              attr = attr.next_attribute())
         {
@@ -343,9 +421,12 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
       }
       
       y.push_back(x);
+      y[itr_rows] = x;
+      ++itr_rows;
     }
     
-    z.push_back(y);
+    z[itr_cols] = y;
+    ++itr_cols;
   }
   
   return  Rcpp::wrap(z);

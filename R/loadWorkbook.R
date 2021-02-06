@@ -484,10 +484,11 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
     
-    wb$worksheets[[i]]$sheet_data$ftyp <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$vtyp <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+    wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
+    wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
 
     # character vectors
+    wb$worksheets[[i]]$sheet_data$vtyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
     wb$worksheets[[i]]$sheet_data$rtyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
     wb$worksheets[[i]]$sheet_data$styp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
     wb$worksheets[[i]]$sheet_data$ttyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
