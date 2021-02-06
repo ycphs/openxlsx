@@ -13,7 +13,9 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
                       Rcpp::List cell_typ,
                       Rcpp::List cell_val,
                       Rcpp::List cell_row,
-                      Rcpp::List cell_str) {
+                      Rcpp::List cell_str,
+                      Rcpp::List cell_f,
+                      Rcpp::List cell_v) {
   
   Rcpp::CharacterVector nams = row_style.names();
   pugi::xml_document typ;
@@ -36,7 +38,7 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
   // Rf_PrintValue(cell_row);
   // Rf_PrintValue(cell_str);
   // Rf_PrintValue(cell_typ);
-
+  
   // not if only row attribs are present
   // Rcpp::Rcout << "c_beg" << std::endl;
   if (cell_row.length() > 0)
@@ -54,11 +56,16 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
       // Rcpp::Rcout << "b_read" << std::endl;
       Rcpp::List f_typ = cell_frm[i];
       Rcpp::List v_typ = cell_val[i];
+      Rcpp::List f_val = cell_f[i];
+      Rcpp::List v_val = cell_v[i];
+      
       // Rcpp::Rcout << "e_read" << std::endl;
       
       // Rf_PrintValue(f_typ);
       // Rf_PrintValue(c_typ); // is a string already
       // Rf_PrintValue(v_typ);
+      
+      
       
       // each <c> needs "r" and "s"
       pugi::xml_node col = row.append_child("c");
@@ -79,32 +86,45 @@ std::string setXMLrow(Rcpp::CharacterVector row_style,
       // Rf_PrintValue(f_typ);
       // check if any <f> is available
       for (auto fj = 0; fj < f_typ.length(); ++fj) {
+        // Rcpp::Rcout << "fml" << std::endl;
         
-        // Rcpp::Rcout << r_typ << " " << s_typ << std::endl;
-        // Rcpp::Rcout << "ftyp: " << (fj +1) << "/" << f_typ.length() << std::endl;
-
-        // Rf_PrintValue(f_typ[fj]);
-        std::string ft = Rcpp::as<std::string>(f_typ[fj]);
-        // Rcpp::Rcout << ft << std::endl;
-
-        pugi::xml_document fml;
-        pugi::xml_parse_result result_f = fml.load_string(ft.c_str(), pugi::parse_default | pugi::parse_fragment);
-        // Rcpp::Rcout << result_f.description() << std::endl;
-
-        pugi::xml_node fv = col.append_copy(fml.document_element());
+        pugi::xml_node fml = col.append_child("f");
+        
+        if(!Rf_isNull(f_typ[fj])) {
+          
+          Rcpp::List ft = f_typ[fj];
+          Rcpp::List ft_nams = ft.names();
+          
+          for (auto i = 0; i < ft_nams.length(); ++i) {
+            fml.append_attribute(ft_nams[i]) = Rcpp::as<std::string>(ft[i]).c_str();
+          }
+          
+          std::string fv_str = Rcpp::as<std::string>(f_val[fj]);
+          fml.append_child(pugi::node_pcdata).set_value(fv_str.c_str());
+        }
       }
-      // Rcpp::Rcout << "fin" << std::endl;
       
       // check if any <v> is available
       for (auto vj = 0; vj < v_typ.length(); ++vj) {
-
-        std::string vt = Rcpp::as<std::string>(v_typ[vj]);
-
-        pugi::xml_document val;
-        pugi::xml_parse_result result_v = val.load_string(vt.c_str(), pugi::parse_default | pugi::parse_fragment);
-        // Rcpp::Rcout << result_v.description() << std::endl;
-
-        pugi::xml_node vv = col.append_copy(val.document_element());
+        
+        // Rcpp::Rcout << "val" << std::endl;
+        pugi::xml_node val = col.append_child("v");
+        
+        // Rf_PrintValue(v_typ);
+        // Rf_PrintValue(v_val[vj]);
+        
+        // it is possible to have empty v
+        if(!Rf_isNull(v_val[vj])) {
+          
+          Rcpp::CharacterVector vt = v_typ[vj];
+          Rcpp::CharacterVector vt_nams = vt.names();
+          
+          for (auto i = 0; i < vt_nams.length(); ++i) {
+            val.append_attribute(vt_nams[i]) = Rcpp::as<std::string>(vt[i]).c_str();
+          }
+          std::string vv_str = Rcpp::as<std::string>(v_val[vj]);
+          val.append_child(pugi::node_pcdata).set_value(vv_str.c_str());
+        }
       }
       
     }
