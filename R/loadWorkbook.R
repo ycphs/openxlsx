@@ -354,8 +354,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     )
 
 
-    caches <- getNodes(xml = workbook, tagIn = "<pivotCaches>")
-    caches <- getChildlessNode(xml = caches, tag = "pivotCache")
+    caches <- getXMLXPtr3(workbook_xml, "workbook", "pivotCaches", "pivotCache")
+
     for (i in seq_along(caches)) {
       caches[i] <- gsub('"rId[0-9]+"', sprintf('"rId%s"', rIds[i]), caches[i])
     }
@@ -484,11 +484,14 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
     
-    wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+    wb$worksheets[[i]]$sheet_data$f <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
+    wb$worksheets[[i]]$sheet_data$v <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
 
-    # character vectors
+    # character vectors attributes to f(?) and v
+    wb$worksheets[[i]]$sheet_data$ftyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
     wb$worksheets[[i]]$sheet_data$vtyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
+
+    # row, style and type
     wb$worksheets[[i]]$sheet_data$rtyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
     wb$worksheets[[i]]$sheet_data$styp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
     wb$worksheets[[i]]$sheet_data$ttyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
