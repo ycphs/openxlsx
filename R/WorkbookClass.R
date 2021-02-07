@@ -1061,13 +1061,23 @@ Workbook$methods(
           "</dxfs>"
         )
       )
-    ## write styles.xml
-    write_file(
-      head = '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac x16r2 xr" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" xmlns:x16r2="http://schemas.microsoft.com/office/spreadsheetml/2015/02/main" xmlns:xr="http://schemas.microsoft.com/office/spreadsheetml/2014/revision">',
-      body = pxml(styleXML),
-      tail = "</styleSheet>",
-      fl = file.path(xlDir, "styles.xml")
-    )
+
+     ## write styles.xml
+    if(is.null(workbook$styles_xml)) {
+      write_file(
+        head = '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac x16r2 xr" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" xmlns:x16r2="http://schemas.microsoft.com/office/spreadsheetml/2015/02/main" xmlns:xr="http://schemas.microsoft.com/office/spreadsheetml/2014/revision">',
+        body = pxml(styleXML),
+        tail = "</styleSheet>",
+        fl = file.path(xlDir, "styles.xml")
+      ) 
+    } else {
+      write_file(
+        head = '',
+        body = workbook$styles_xml,
+        tail = '',
+        fl = file.path(xlDir, "styles.xml")
+      )
+    }
 
     ## write workbook.xml
     workbookXML <- workbook

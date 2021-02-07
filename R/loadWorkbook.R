@@ -374,6 +374,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   ## xl\styles
   if (length(stylesXML) > 0) {
     styleObjects <- wb$loadStyles(stylesXML)
+    wb$workbook$styles_xml <- readXML(stylesXML)
   } else {
     styleObjects <- list()
   }
