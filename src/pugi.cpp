@@ -190,33 +190,54 @@ SEXP getXMLXPtr4val(XPtrXML doc, std::string level1, std::string level2, std::st
 // [[Rcpp::export]]
 SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string level4, std::string child) {
   
-  // TODO: create vector of correct size instead of push back. 
-  std::vector<std::vector<std::vector<std::string>>> x;
+  auto worksheet = doc->child(level1.c_str()).child(level2.c_str());
+  size_t n = std::distance(worksheet.begin(), worksheet.end());
+  auto itr_rows = 0;
+  Rcpp::List x(n);
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
        worksheet;
        worksheet = worksheet.next_sibling(level3.c_str()))
   {
-    std::vector<std::vector<std::string>> y;
+    size_t k = std::distance(worksheet.begin(), worksheet.end());
+    auto itr_cols = 0;
+    Rcpp::List y(k);
+    
+    std::vector<std::string> nam;
     
     for (pugi::xml_node col = worksheet.child(level4.c_str());
          col;
          col = col.next_sibling(level4.c_str()))
     {
-      std::vector<std::string> z;
+      Rcpp::CharacterVector z;
+      
+      // get r attr e.g. "A1"
+      std::string colrow = col.attribute("r").value();
+      // remove numeric from string
+      colrow.erase(std::remove_if(colrow.begin(),
+                                  colrow.end(),
+                                  &isdigit),
+                                  colrow.end());
+      nam.push_back(colrow);
       
       for (pugi::xml_node val = col.child(child.c_str());
            val;
            val = val.next_sibling(child.c_str()))
       {
-        // Rcpp::Rcout << val.name() << " = " << val.child_value() << std::endl;
-        z.push_back(val.child_value() );
+        
+        std::string val_s = val.child_value();
+        
+        z.push_back( val_s );
       }
       
-      y.push_back(z);
+      y[itr_cols]= z;
+      ++itr_cols;
     }
     
-    x.push_back(y);
+    y.attr("names") = nam;
+    
+    x[itr_rows] = y;
+    ++itr_rows;
   }
   
   return  Rcpp::wrap(x);
