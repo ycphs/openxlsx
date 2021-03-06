@@ -319,83 +319,86 @@ writeData <- function(wb,
     }
   }
 
-  ## write data.frame
-  wb$writeData(
-    df = x,
-    colNames = colNames,
-    sheet = sheet,
-    startCol = startCol,
-    startRow = startRow,
-    colClasses = colClasss2,
-    hlinkNames = hlinkNames,
-    keepNA = keepNA,
-    na.string = na.string,
-    list_sep = sep
-  )
+  # ## write data.frame
+  # wb$writeData(
+  #   df = x,
+  #   colNames = colNames,
+  #   sheet = sheet,
+  #   startCol = startCol,
+  #   startRow = startRow,
+  #   colClasses = colClasss2,
+  #   hlinkNames = hlinkNames,
+  #   keepNA = keepNA,
+  #   na.string = na.string,
+  #   list_sep = sep
+  # )
 
-  ## header style
-  if ("Style" %in% class(headerStyle) & colNames) {
-    addStyle(
-      wb = wb, sheet = sheet, style = headerStyle,
-      rows = startRow,
-      cols = 0:(nCol - 1) + startCol,
-      gridExpand = TRUE, stack = TRUE
-    )
-  }
+  # actual driver, the rest should not create data used for writing
+  wb <- writeData2(wb = wb, sheet = sheet, data = x, colNames = colNames, rowNames = FALSE, startRow = startRow, startCol = startCol)
 
-  ## If we don't have any rows to write return
-  if (nRow == 0) {
-    return(invisible(0))
-  }
+  # ## header style
+  # if ("Style" %in% class(headerStyle) & colNames) {
+  #   addStyle(
+  #     wb = wb, sheet = sheet, style = headerStyle,
+  #     rows = startRow,
+  #     cols = 0:(nCol - 1) + startCol,
+  #     gridExpand = TRUE, stack = TRUE
+  #   )
+  # }
 
-  ## named region
-  if (!is.null(name)) {
-    ref1 <- stri_join("$", convert_to_excel_ref(cols = startCol, LETTERS = LETTERS), "$", startRow)
-    ref2 <- stri_join("$", convert_to_excel_ref(cols = startCol + nCol - 1L, LETTERS = LETTERS), "$", startRow + nRow - 1L + colNames)
-    wb$createNamedRegion(ref1 = ref1, ref2 = ref2, name = name, sheet = wb$sheet_names[wb$validateSheet(sheet)])
-  }
+  # ## If we don't have any rows to write return
+  # if (nRow == 0) {
+  #   return(invisible(0))
+  # }
+
+  # ## named region
+  # if (!is.null(name)) {
+  #   ref1 <- stri_join("$", convert_to_excel_ref(cols = startCol, LETTERS = LETTERS), "$", startRow)
+  #   ref2 <- stri_join("$", convert_to_excel_ref(cols = startCol + nCol - 1L, LETTERS = LETTERS), "$", startRow + nRow - 1L + colNames)
+  #   wb$createNamedRegion(ref1 = ref1, ref2 = ref2, name = name, sheet = wb$sheet_names[wb$validateSheet(sheet)])
+  # }
 
 
-  ## hyperlink style, if no borders
-  if (borders == "none") {
-    invisible(classStyles(wb, sheet = sheet, startRow = startRow, startCol = startCol, colNames = colNames, nRow = nrow(x), colClasses = colClasses, stack = TRUE))
-  } else if (borders == "surrounding") {
-    wb$surroundingBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
-      borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
-    )
-  } else if (borders == "rows") {
-    wb$rowBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
-      borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
-    )
-  } else if (borders == "columns") {
-    wb$columnBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
-      borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
-    )
-  } else if (borders == "all") {
-    wb$allBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
-      borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
-    )
-  }
+  # ## hyperlink style, if no borders
+  # if (borders == "none") {
+  #   invisible(classStyles(wb, sheet = sheet, startRow = startRow, startCol = startCol, colNames = colNames, nRow = nrow(x), colClasses = colClasses, stack = TRUE))
+  # } else if (borders == "surrounding") {
+  #   wb$surroundingBorders(colClasses,
+  #     sheet = sheet,
+  #     startRow = startRow + colNames,
+  #     startCol = startCol,
+  #     nRow = nRow, nCol = nCol,
+  #     borderColour = list("rgb" = borderColour),
+  #     borderStyle = borderStyle
+  #   )
+  # } else if (borders == "rows") {
+  #   wb$rowBorders(colClasses,
+  #     sheet = sheet,
+  #     startRow = startRow + colNames,
+  #     startCol = startCol,
+  #     nRow = nRow, nCol = nCol,
+  #     borderColour = list("rgb" = borderColour),
+  #     borderStyle = borderStyle
+  #   )
+  # } else if (borders == "columns") {
+  #   wb$columnBorders(colClasses,
+  #     sheet = sheet,
+  #     startRow = startRow + colNames,
+  #     startCol = startCol,
+  #     nRow = nRow, nCol = nCol,
+  #     borderColour = list("rgb" = borderColour),
+  #     borderStyle = borderStyle
+  #   )
+  # } else if (borders == "all") {
+  #   wb$allBorders(colClasses,
+  #     sheet = sheet,
+  #     startRow = startRow + colNames,
+  #     startCol = startCol,
+  #     nRow = nRow, nCol = nCol,
+  #     borderColour = list("rgb" = borderColour),
+  #     borderStyle = borderStyle
+  #   )
+  # }
 
   invisible(0)
 }
