@@ -30,7 +30,7 @@ conditionalFormatting(
 \item{style}{A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")}
 
 \item{type}{Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
-'endsWith', 'contains' or 'notContains' (case insensitive).}
+'endsWith', 'topN', 'bottomN', 'contains' or 'notContains' (case insensitive).}
 
 \item{...}{See below}
 }
@@ -82,6 +82,30 @@ If type == "between"
   \item{style is a Style object. See \code{\link{createStyle}}}
   \item{rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)}
 }
+
+If type == "topN"
+\itemize{
+  \item{style is a Style object. See \code{\link{createStyle}}}
+  \item{rule is ignored}
+  \item{...
+  \itemize{
+    \item{\bold{rank} numeric vector of length 1 indicating number of highest values.}
+    \item{\bold{percent} TRUE if you want top N percentage.}
+     }
+   }
+}
+
+If type == "bottomN"
+\itemize{
+  \item{style is a Style object. See \code{\link{createStyle}}}
+  \item{rule is ignored}
+  \item{...
+  \itemize{
+    \item{\bold{rank} numeric vector of length 1 indicating number of lowest values.}
+    \item{\bold{percent} TRUE if you want bottom N percentage.}
+     }
+   }
+}
 }
 \examples{
 wb <- createWorkbook()
@@ -97,6 +121,8 @@ addWorksheet(wb, "endsWith")
 addWorksheet(wb, "colourScale", zoom = 30)
 addWorksheet(wb, "databar")
 addWorksheet(wb, "between")
+addWorksheet(wb, "topN")
+addWorksheet(wb, "bottomN")
 addWorksheet(wb, "logical operators")
 
 negStyle <- createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
@@ -213,6 +239,24 @@ conditionalFormatting(wb, "databar", cols = 1, rows = 1:11, type = "databar") ##
 # Highlight cells in interval [-2, 2]
 writeData(wb, "between", -5:5)
 conditionalFormatting(wb, "between", cols = 1, rows = 1:11, type = "between", rule = c(-2, 2))
+
+## Top N 
+writeData(wb, "topN", data.frame(x = 1:10, y = rnorm(10)))
+# Highlight top 5 values in column x
+conditionalFormatting(wb, "topN", cols = 1, rows = 2:11, 
+ style = posStyle, type = "topN", rank = 5)#'
+# Highlight top 20 percentage in column y
+conditionalFormatting(wb, "topN", cols = 2, rows = 2:11, 
+ style = posStyle, type = "topN", rank = 20, percent = TRUE)
+
+## Bottom N 
+writeData(wb, "bottomN", data.frame(x = 1:10, y = rnorm(10)))
+# Highlight bottom 5 values in column x
+conditionalFormatting(wb, "bottomN", cols = 1, rows = 2:11, 
+ style = negStyle, type = "topN", rank = 5)
+# Highlight bottom 20 percentage in column y
+conditionalFormatting(wb, "bottomN", cols = 2, rows = 2:11, 
+ style = negStyle, type = "topN", rank = 20, percent = TRUE)
 
 ## Logical Operators
 # You can use Excels logical Opertors
