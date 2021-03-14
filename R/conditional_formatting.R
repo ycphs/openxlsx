@@ -216,7 +216,7 @@
 #' writeData(wb, "databar", -5:5)
 #' conditionalFormatting(wb, "databar", cols = 1, rows = 1:11, type = "databar") ## Default colours
 #'
-#' ## Betweem
+#' ## Between
 #' # Highlight cells in interval [-2, 2]
 #' writeData(wb, "between", -5:5)
 #' conditionalFormatting(wb, "between", cols = 1, rows = 1:11, type = "between", rule = c(-2, 2))
@@ -240,7 +240,7 @@
 #'  style = negStyle, type = "topN", rank = 20, percent = TRUE)
 #'
 #' ## Logical Operators
-#' # You can use Excels logical Opertors
+#' # You can use Excels logical Operators
 #' writeData(wb, "logical operators", 1:10)
 #' conditionalFormatting(wb, "logical operators",
 #'   cols = 1, rows = 1:10,
