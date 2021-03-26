@@ -10,6 +10,11 @@ test_that("convert to date", {
   n <- as.integer(dates) + origin
 
   expect_equal(convertToDate(n), dates)
+
+  earlyDate <- as.Date("1900-01-03")
+  serialDate <- 3
+  expect_equal(convertToDate(serialDate), earlyDate)
+
 })
 
 
