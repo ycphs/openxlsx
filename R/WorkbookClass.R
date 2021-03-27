@@ -2851,6 +2851,22 @@ Workbook$methods(
           formula[1],
           formula[2]
         )
+    } else if (type == "topN") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="top10" dxfId="%s" priority="1" rank="%s" percent="%s"></cfRule>',
+          dxfId,
+          values[1],
+          values[2]
+        )
+    } else if (type == "bottomN") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="top10" dxfId="%s" priority="1" rank="%s" percent="%s" bottom="1"></cfRule>',
+          dxfId,
+          values[1],
+          values[2]
+        )
     }
 
     worksheets[[sheet]]$conditionalFormatting <<-
