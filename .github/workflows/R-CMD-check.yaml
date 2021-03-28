@@ -73,7 +73,7 @@ jobs:
         run: |
           sudo -s apt-get install libicu-dev
   
-      - name: Install system dependencies
+      - name: Install stringi packages
         if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
