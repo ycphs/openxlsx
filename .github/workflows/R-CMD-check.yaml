@@ -23,14 +23,19 @@ jobs:
         config:
           - {os: windows-latest, r: '3.6'}
           - {os: windows-latest, r: '4.0'}
+          - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: 'devel'}
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: '4.0'}
+          - {os: macOS-latest, r: 'release'}
           - {os: macOS-latest, r: 'devel'}
-          - {os: ubuntu-latest, r: '3.6'}
-          - {os: ubuntu-latest, r: '4.0'}
-          - {os: ubuntu-latest, r: 'devel'}
-          - {os: ubuntu-16.04, r: '3.6'} 
+          - {os: ubuntu-16.04, r: '3.6'}
+          - {os: ubuntu-18.04, r: '3.6'}
+          - {os: ubuntu-18.04, r: '4.0'}
+          - {os: ubuntu-20.04, r: '4.0'} 
+          - {os: ubuntu-20.04, r: 'release'}
+          - {os: ubuntu-20.04, r: 'devel'}
+
 
             
     env:
@@ -65,6 +70,18 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-1-
 
+      - name: install libicu-dev for Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo -s apt-get install libicu-dev
+  
+      - name: Install stringi packages
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "install.packages('stringi')"
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
@@ -75,10 +92,8 @@ jobs:
           sudo -s eval "$sysreqs"
           
           
-      - name: install libicu-dev for Linux
-        if: runner.os == 'Linux'
-        run: |
-          sudo -s apt-get install libicu-dev
+
+          
       
       - name: Install dependencies
         run: |
