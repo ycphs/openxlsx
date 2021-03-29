@@ -602,6 +602,10 @@ read.xlsx.default <- function(xlsxFile,
     not_an_integer <-
       (not_an_integer %% 1L != 0) & !is.na(not_an_integer)
     isDate[not_an_integer] <- FALSE
+    if(origin == 25569L){
+      earlyDates <- as.integer(v) < 60
+      v[earlyDates & isDate] <- as.integer(v[earlyDates & isDate]) + 1
+    }
 
 
     ## perform int to date to character convertsion (way too slow)
