@@ -36,9 +36,13 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     if (grepl('date1904="1"|date1904="true"', stri_join(unlist(workbook), collapse = ""), ignore.case = TRUE)) {
       origin <- 24107L
     }
-
+    
     for (i in dInds) {
       df[[i]] <- as.integer(df[[i]]) + origin
+      if (origin == 25569L){
+        earlyDate <- df[[i]] < 60
+        df[[i]][earlyDate] <- df[[i]][earlyDate] - 1
+      }
     }
 
     pInds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
