@@ -462,7 +462,7 @@ getAttrsFont <- function(xml, tag) {
 }
 
 getAttrs <- function(xml, tag) {
-  x <- lapply(xml, getChildlessNode, tag = tag)
+  x <- lapply(xml, getChildlessNode_ss, tag = tag)
   x[sapply(x, length) == 0] <- ""
   a <- lapply(x, function(x) regmatches(x, regexpr('[a-zA-Z]+=".*?"', x)))
 
