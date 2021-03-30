@@ -49,6 +49,7 @@ test_that("Writing then reading returns identical data.frame 2", {
 
   ## data.frame of dates
   dates <- data.frame("d1" = Sys.Date() - 0:500)
+  dates[nrow(dates)+1,] = as.Date("1900-01-02")
   for (i in 1:3) dates <- cbind(dates, dates)
   names(dates) <- paste0("d", 1:8)
 
