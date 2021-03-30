@@ -224,8 +224,15 @@ SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::st
            val;
            val = val.next_sibling(child.c_str()))
       {
-        
-        std::string val_s = val.child_value();
+        std::string val_s = "";
+        // is node contains additional t node.
+        // TODO: check if multiple t nodes are possible, for now return only one.
+        if (val.child("t")) {
+          pugi::xml_node tval = val.child("t");
+          val_s = tval.child_value();
+        } else {
+          val_s = val.child_value();
+        }
         
         z.push_back( val_s );
       }
