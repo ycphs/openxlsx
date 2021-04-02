@@ -61,7 +61,7 @@
 #'
 #' \bold{colWidths Parameters}
 #' \itemize{
-#'   \item{\bold{colWidths}} {Must be value "auto". Sets all columns containing data to auto width.}
+#'   \item{\bold{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
 #' }
 #'
 #'
@@ -110,6 +110,13 @@
 #'   startCol = c(1, 2, 3), startRow = 2,
 #'   asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE)
 #' )
+#' }
+#' 
+#' # specify column widths for multiple sheets
+#' \dontrun{
+#' write.xlsx(l, "writeList2.xlsx", colWidths = 20)
+#' write.xlsx(l, "writeList2.xlsx", colWidths = list(100, 200, 300))
+#' write.xlsx(l, "writeList2.xlsx", colWidths = list(rep(10, 5), rep(8, 11), rep(5, 5)))
 #' }
 #'
 #' @export
@@ -360,6 +367,9 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
   ## auto column widths
   colWidths <- ""
   if ("colWidths" %in% names(params)) {
+    if (length(params$colWidths) != 1L && !is.list(params$colWidths)) {
+      warning("colWidths must be passed as a list", call. = FALSE)
+    }
     colWidths <- params$colWidths
   }
 
@@ -499,8 +509,10 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
         )
       }
 
-      if (colWidths[i] %in% "auto") {
-        setColWidths(wb, sheet = i, cols = 1:ncol(x[[i]]) + startCol[[i]] - 1L, widths = "auto")
+      if (identical(colWidths[[i]], "auto")) {
+        setColWidths(wb, sheet = i, cols = seq_along(x[[i]]) + startCol[[i]] - 1L, widths = "auto")
+      } else if (!identical(colWidths[[i]], "")) {
+        setColWidths(wb, sheet = i, cols = seq_along(x[[i]]) + startCol[[i]] - 1L, widths = colWidths[[i]])
       }
     }
   } else {
@@ -523,6 +535,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
         tableStyle = tableStyle,
         tableName = NULL,
         headerStyle = headerStyle,
+        withFilter = withFilter,
         keepNA = keepNA,
         na.string = na.string
       )
@@ -540,13 +553,16 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
         borders = borders,
         borderColour = borderColour,
         borderStyle = borderStyle,
+        withFilter = withFilter,
         keepNA = keepNA,
         na.string = na.string
       )
     }
 
-    if (colWidths[1] %in% "auto") {
-      setColWidths(wb, sheet = 1, cols = 1:ncol(x) + startCol - 1L, widths = "auto")
+    if (identical(colWidths, "auto")) {
+      setColWidths(wb, sheet = 1, cols = seq_along(x) + startCol - 1L, widths = "auto")
+    } else if (!identical(colWidths, "")) {
+      setColWidths(wb, sheet = 1, cols = seq_along(x) + startCol - 1L, widths = colWidths)
     }
   }
 

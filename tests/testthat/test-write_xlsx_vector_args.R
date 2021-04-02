@@ -37,3 +37,77 @@ test_that("Writing then reading returns identical data.frame 1", {
 
   unlink(tmp_file, recursive = TRUE, force = TRUE)
 })
+
+test_that("write.xlsx() passes withFilter and colWidths [151]", {
+  df <- data.frame(x = 1, b = 2)
+  tf1 <- tempfile(fileext = ".xlsx")
+  tf2 <- tempfile(fileext = ".xlsx")
+  on.exit(file.remove(tf1, tf2), add = TRUE)
+  
+  write.xlsx(df, tf1)
+  write.xlsx(df, tf2, withFilter = FALSE, colWidths = 15)
+  
+  x <- loadWorkbook(tf1)
+  y <- loadWorkbook(tf2)
+  
+  expect_equal(
+    x$worksheets[[1]]$autoFilter,
+    "<autoFilter ref=\"A1:B2\"/>"
+  )
+  
+  expect_equal(
+    y$worksheets[[1]]$autoFilter,
+    character()
+  )
+  
+  expect_equal(x$colWidths, list(list()))
+  
+  expect_equal(
+    y$colWidths[[1]],
+    structure(c(`1` = "15", `2` = "15"), hidden = c("0", "0"))
+  )
+}) 
+
+test_that("write.xlsx() correctly handles colWidths", {
+  x <- data.frame(a = 1, b = 2, c = 3)
+  file <- tempfile(".xlsx")
+  on.exit(file.remove(file), add = TRUE)
+  zero3 <- rep("0", 3)
+  
+  # No warning when passing "auto"
+  expect_warning(write.xlsx(rep_len(list(x), 3), file, colWidths = "auto"), NA)
+  
+  # single value is repeated for all columns
+  write.xlsx(rep_len(list(x), 3), file, colWidths = 13)
+  
+  expect_equal(
+    loadWorkbook(file)$colWidths,
+    rep_len(list(structure(c(`1` = "13", `2` = "13", `3` = "13"), hidden = zero3)), 3)
+  )
+  
+  # sets are repated
+  write.xlsx(rep_len(list(x), 3), file, colWidths = list(c(10, 20, 30)))
+  
+  expect_equal(
+    loadWorkbook(file)$colWidths,
+    rep_len(list(structure(c(`1` = "10", `2` = "20", `3` = "30"), hidden = zero3)), 3)
+  )
+  
+  
+  # 3 distinct sets
+  write.xlsx(rep_len(list(x), 3), file, 
+    colWidths = list(
+      c(10, 20, 30),
+      c(100, 200, 300),
+      c(1, 2, 3)
+    ))
+  
+  expect_equal(
+    loadWorkbook(file)$colWidths,
+    list(
+      structure(c(`1` = "10", `2` = "20", `3` = "30"), hidden = zero3),
+      structure(c(`1` = "100", `2` = "200", `3` = "300"), hidden = zero3),
+      structure(c(`1` = "1", `2` = "2", `3` = "3"), hidden = zero3)
+    )
+  )
+})

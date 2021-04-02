@@ -75,7 +75,7 @@ between each column.  If "\code{all}" all cell borders are drawn.}
 
 \bold{colWidths Parameters}
 \itemize{
-  \item{\bold{colWidths}} {Must be value "auto". Sets all columns containing data to auto width.}
+  \item{\bold{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
 }
 
 
@@ -121,6 +121,13 @@ write.xlsx(l, "writeList2.xlsx",
   startCol = c(1, 2, 3), startRow = 2,
   asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE)
 )
+}
+
+# specify column widths for multiple sheets
+\dontrun{
+write.xlsx(l, "writeList2.xlsx", colWidths = 20)
+write.xlsx(l, "writeList2.xlsx", colWidths = list(100, 200, 300))
+write.xlsx(l, "writeList2.xlsx", colWidths = list(rep(10, 5), rep(8, 11), rep(5, 5)))
 }
 
 }

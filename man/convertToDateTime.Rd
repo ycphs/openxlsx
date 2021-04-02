@@ -23,5 +23,6 @@ Excel stores dates as number of days from some origin date
 ## 2014-07-01, 2014-06-30, 2014-06-29
 x <- c(41821.8127314815, 41820.8127314815, NA, 41819, NaN)
 convertToDateTime(x)
-convertToDateTime(x, tx = "Australia/Perth")
+convertToDateTime(x, tz = "Australia/Perth")
+convertToDateTime(x, tz = "UTC")
 }
