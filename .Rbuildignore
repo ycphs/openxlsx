@@ -5,6 +5,7 @@ cran-comments.md
 ^.*\.github\*
 .travis.yml
 .appveyor.yml
+.lintr
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^_pkgdown\.yml$
