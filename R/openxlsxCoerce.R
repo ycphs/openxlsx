@@ -203,7 +203,7 @@ openxlsxCoerce.coxph <- function(x, rowNames) {
 openxlsxCoerce.summary.coxph <- function(x, rowNames) {
   coef <- x$coefficients
   ci <- x$conf.int
-  nvars <- nrow(coef)
+  # nvars <- nrow(coef)  variable not used
 
   tmp <- cbind(
     coef[, -ncol(coef), drop = FALSE], # p later

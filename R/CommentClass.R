@@ -121,7 +121,7 @@ createComment <- function(comment,
   width <- round(width)
   height <- round(height)
 
-  n <- length(comment)
+  # n <- length(comment) variable not used
   author <- author[1]
   visible <- visible[1]
 
