@@ -594,7 +594,7 @@ convertFromExcelRef <- function(col) {
   if (any(charFlag)) {
     col[charFlag] <- gsub("[0-9]", "", col[charFlag])
     d <- lapply(strsplit(col[charFlag], split = ""), function(x) match(rev(x), LETTERS))
-    col[charFlag] <- unlist(lapply(1:length(d), function(i) sum(d[[i]] * (26^(
+    col[charFlag] <- unlist(lapply(seq_along(d), function(i) sum(d[[i]] * (26^(
       seq_along(d[[i]]) - 1)))))
   }
   
