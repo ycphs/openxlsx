@@ -594,7 +594,8 @@ convertFromExcelRef <- function(col) {
   if (any(charFlag)) {
     col[charFlag] <- gsub("[0-9]", "", col[charFlag])
     d <- lapply(strsplit(col[charFlag], split = ""), function(x) match(rev(x), LETTERS))
-    col[charFlag] <- unlist(lapply(1:length(d), function(i) sum(d[[i]] * (26^(0:(length(d[[i]]) - 1L))))))
+    col[charFlag] <- unlist(lapply(1:length(d), function(i) sum(d[[i]] * (26^(
+      seq_along(d[[i]]) - 1)))))
   }
   
   col[!charFlag] <- as.integer(col[!charFlag])
@@ -863,7 +864,7 @@ createStyle <- function(fontName = NULL,
   
   ## background fill
   if (is.null(bgFill)) {
-    bgFillList <- NULL
+    # bgFillList <- NULL variable not used
   } else {
     bgFill <- validateColour(bgFill, "Invalid bgFill colour")
     style$fill <- append(style$fill, list(fillBg = list("rgb" = bgFill)))
@@ -871,7 +872,7 @@ createStyle <- function(fontName = NULL,
   
   ## foreground fill
   if (is.null(fgFill)) {
-    fgFillList <- NULL
+    # fgFillList <- NULL variable not used
   } else {
     fgFill <- validateColour(fgFill, "Invalid fgFill colour")
     style$fill <- append(style$fill, list(fillFg = list(rgb = fgFill)))
@@ -2343,7 +2344,7 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
   }
   
   sheet <- wb$validateSheet(sheet)
-  xml <- wb$worksheets[[sheet]]$sheetProtection
+  # xml <- wb$worksheets[[sheet]]$sheetProtection variable not used
   
   props <- c()
   
@@ -3020,8 +3021,9 @@ setHeader <- function(wb, text, position = "center") {
     stop("Text argument must be a character vector of length 1")
   }
   
-  sheet <- wb$validateSheet(1)
-  wb$headFoot$text[wb$headFoot$pos == position & wb$headFoot$head == "head"] <- as.character(text)
+  # sheet <- wb$validateSheet(1) variable not used
+  wb$headFoot$text[wb$headFoot$pos == position & wb$headFoot$head == "head"] <- 
+    as.character(text)
 }
 
 
@@ -3067,7 +3069,7 @@ setFooter <- function(wb, text, position = "center") {
     stop("Text argument must be a character vector of length 1")
   }
   
-  sheet <- wb$validateSheet(1)
+  # sheet <- wb$validateSheet(1) variable not used
   wb$headFoot$text[wb$headFoot$pos == position & wb$headFoot$head == "foot"] <- as.character(text)
 }
 
@@ -3439,7 +3441,7 @@ sheetVisibility <- function(wb) {
     return(invisible(wb))
   }
   
-  for (i in 1:length(wb$worksheets)) {
+  for (i in seq_along(wb$worksheets)) {
     wb$workbook$sheets[i] <- gsub(exState0[i], value[i], wb$workbook$sheets[i], fixed = TRUE)
   }
   

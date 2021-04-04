@@ -102,7 +102,7 @@ test_that("Writing then reading returns identical data.frame 2", {
 
   expect_equal(object = dateOrigin, expected = "1900-01-01", check.attributes = FALSE)
 
-  for (i in 1:ncol(x)) {
+  for (i in seq_len(ncol(x))) {
     xNoDateDetection[[i]] <- convertToDate(xNoDateDetection[[i]], origin = dateOrigin)
   }
 

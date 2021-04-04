@@ -58,7 +58,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
       offSet <- lapply(t, parseOffset)
       offSet <- lapply(offSet, function(x) ifelse(is.na(x), 0, x))
 
-      for (i in 1:length(pInds)) {
+      for (i in seq_along(pInds)) {
         df[[pInds[i]]] <- as.numeric(as.POSIXct(df[[pInds[i]]])) / 86400 + origin + offSet[[i]]
       }
     }
@@ -227,7 +227,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
       } ## this is text to display instead of hyperlink
 
       ## create hyperlink objects
-      newhl <- lapply(1:length(hyperlink_inds), function(i) {
+      newhl <- lapply(seq_along(hyperlink_inds), function(i) {
         Hyperlink$new(ref = hyperlink_refs[i], target = targets[i], location = NULL, display = NULL, is_external = TRUE)
       })
 

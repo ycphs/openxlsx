@@ -2622,7 +2622,8 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length(worksheets[[sheet]]$conditionalFormatting) > 0) {
-      for (i in length(worksheets[[sheet]]$conditionalFormatting):1) {
+      for (i in order(seq_along(worksheets[[sheet]]$conditionalFormatting),
+                      decreasing = T)) {
         priority <-
           regmatches(
             worksheets[[sheet]]$conditionalFormatting[[i]],
@@ -2633,17 +2634,16 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
-
+        
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
-
+        
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
-            priority_new,
-            worksheets[[sheet]]$conditionalFormatting[[i]],
-            fixed = TRUE
-          )
+               priority_new,
+               worksheets[[sheet]]$conditionalFormatting[[i]],
+               fixed = TRUE)
       }
     }
 
@@ -3472,7 +3472,7 @@ Workbook$methods(
 
       ## ********** Assume all styleObjects cells have one a single worksheet **********
       ## Loop through existing styleObjects
-      newInds <- 1:length(rows)
+      newInds <- seq_along(rows)
       keepStyle <- rep(TRUE, nStyles)
       for (i in 1:nStyles) {
         if (sheet == styleObjects[[i]]$sheet) {
@@ -3676,7 +3676,7 @@ Workbook$methods(
 
 
         ## loop through existing tables checking if any over lap with new table
-        for (i in 1:length(exTable)) {
+        for (i in seq_along(exTable)) {
           existing_cols <- cols[[i]]
           existing_rows <- rows[[i]]
 
@@ -17819,7 +17819,8 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length((worksheets[[sheet]]$conditionalFormatting)) > 0) {
-      for (i in length(worksheets[[sheet]]$conditionalFormatting):1) {
+      for (i in order(seq_along(worksheets[[sheet]]$conditionalFormatting),
+                      decreasing = T)) {
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub('(?<=priority=")[0-9]+',
             i + 1L,
@@ -17931,7 +17932,7 @@ Workbook$methods(
       formatCodes <-
         sapply(numFmts, getAttr, tag = 'formatCode="', USE.NAMES = FALSE)
       numFmts <-
-        lapply(1:length(numFmts), function(i) {
+        lapply(seq_along(numFmts), function(i) {
           list("numFmtId" = numFmtsIds[[i]], "formatCode" = formatCodes[[i]])
         })
       numFmtFlag <- TRUE
@@ -17985,7 +17986,7 @@ Workbook$methods(
         regmatches(xfAttrs, regexpr('(?<=").*?(?=")', xfAttrs, perl = TRUE))
       })
 
-    for (i in 1:length(xf)) {
+    for (i in seq_along(xf)) {
       names(xfVals[[i]]) <- xfNames[[i]]
     }
 
