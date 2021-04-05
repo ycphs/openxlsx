@@ -18274,17 +18274,17 @@ Workbook$methods(
 
 
 
-WorkSheet$methods(
+Workbook$methods(
   setActiveSheet = function(activeSheet = NULL) {
     if (is.character(activeSheet)) {
       if (activeSheet %in% sheet_names) {
-        ActiveSheet <<- which(activeSheet %in% sheet_names)
+        wb$ActiveSheet <<- which(activeSheet %in% sheet_names)
       }
     }
     
     if (is.numeric(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
-        ActiveSheet <<- activeSheet
+        wb$ActiveSheet <<- activeSheet
       }
     }
     
@@ -18292,7 +18292,7 @@ WorkSheet$methods(
     stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
                            "tabSelected=\"[0-9]\"",
                            paste0("tabSelected=\"",
-                                  as.integer(ActiveSheet==i)
+                                  as.integer(wb$ActiveSheet==i)
                                   ,"\""))
     }
     
