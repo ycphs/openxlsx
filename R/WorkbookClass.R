@@ -121,7 +121,7 @@ Workbook$methods(
         ))) + 1L
     } else {
       sheetId <- 1
-      wb$ActiveSheet <- 1
+      wb$ActiveSheet <- 1L
     }
 
 
@@ -18284,9 +18284,9 @@ Workbook$methods(
       }
     }
 
-    if (is.numeric(activeSheet)) {
+    if (is.integer(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
-        wb$ActiveSheet <- activeSheet
+        wb$ActiveSheet <- as.integer(activeSheet)
       }
     }
 
