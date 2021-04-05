@@ -4601,3 +4601,30 @@ getCreators <- function(wb) {
   
   return(wb$getCreators())
 }
+
+
+#' @name setActiveSheet
+#' @title Set the active worksheet of the workbook.
+#' @author Philipp Schauberger
+#' @description Just a wrapper of wb$setActiveSheet()
+#' @param wb A workbook object
+#' @param ActiveSheet A string object with the name of the sheet or an integer 
+#' with the ID of the sheet
+#' @examples
+#'
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "Sheet 1")
+#' addWorksheet(wb, "Sheet 2")
+#' addWorksheet(wb, "Sheet 3")
+#' addWorksheet(wb, "Sheet 4")
+#' setActiveSheet(wb, 2)
+#' 
+#' setActiveSheet(wb, "Sheet 3")
+#' @export
+setActiveSheet <- function(wb, ActiveSheet) {
+  if (!inherits(wb, "Workbook")) {
+    stop("argument must be a Workbook.")
+  }
+  
+  invisible(wb$setActiveSheet(ActiveSheet))
+}
