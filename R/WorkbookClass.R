@@ -1994,9 +1994,9 @@ Workbook$methods(
                                xlworksheetsDir,
                                xlworksheetsRelsDir) {
     ## write worksheets
-    nSheets <- length(worksheets)
-
-    for (i in 1:nSheets) {
+    # nSheets <- length(worksheets)
+    
+    for (i in seq_along(worksheets)) {
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
         write_file(
