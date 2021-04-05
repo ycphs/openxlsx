@@ -121,7 +121,7 @@ Workbook$methods(
         ))) + 1L
     } else {
       sheetId <- 1
-      wb$ActiveSheet <- 1L
+      ActiveSheet <<- 1L
     }
 
 
