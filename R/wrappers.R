@@ -4602,29 +4602,63 @@ getCreators <- function(wb) {
   return(wb$getCreators())
 }
 
-
-#' @name setActiveSheet
-#' @title Set the active worksheet of the workbook.
+#' @name activeSheet
+#' @title Get/set active sheet of the workbook
 #' @author Philipp Schauberger
-#' @description Just a wrapper of wb$setActiveSheet()
+#' @description Get and set active sheet of the workbook
 #' @param wb A workbook object
-#' @param ActiveSheet A string object with the name of the sheet or an integer 
-#' with the ID of the sheet
+#' @return return the active sheet of the workbook
 #' @examples
 #'
 #' wb <- createWorkbook()
-#' addWorksheet(wb, "Sheet 1")
-#' addWorksheet(wb, "Sheet 2")
-#' addWorksheet(wb, "Sheet 3")
-#' addWorksheet(wb, "Sheet 4")
-#' setActiveSheet(wb, 2)
-#' 
-#' setActiveSheet(wb, "Sheet 3")
+#' addWorksheet(wb, sheetName = "S1")
+#' addWorksheet(wb, sheetName = "S2")
+#' addWorksheet(wb, sheetName = "S3")
+#'
+#' activeSheet(wb) # default value is the first sheet active
+#' activeSheet(wb) <- 1 ## active sheet S1
+#' activeSheet(wb)
+#' activeSheet(wb) <- "S2" ## active sheet S2
+#' activeSheet(wb)
 #' @export
-setActiveSheet <- function(wb, ActiveSheet) {
-  if (!inherits(wb, "Workbook")) {
-    stop("argument must be a Workbook.")
+activeSheet <- function(wb) {
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
   }
   
-  invisible(wb$setActiveSheet(ActiveSheet))
+  
+  return(wb$ActiveSheet)
+}
+
+#' @rdname activeSheet
+#' @param value index of the active sheet or name of the active sheet
+#' @export
+`activeSheet<-` <- function(wb, value) {
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+  
+  if (is.character(activeSheet)) {
+    if (activeSheet %in% sheet_names) {
+      wb$ActiveSheet <- which(activeSheet %in% sheet_names)
+    }
+  }
+  
+  if (is.numeric(activeSheet)) {
+    if (activeSheet %in% seq_along(sheet_names)) {
+      wb$ActiveSheet <- activeSheet
+    }
+  }
+  
+  for (i in seq_along(sheet_names)) {
+    stri_replace_all_regex(
+      wb$worksheets[[i]]$sheetViews,
+      "tabSelected=\"[0-9]\"",
+      paste0("tabSelected=\"",
+             as.integer(wb$ActiveSheet == i)
+             , "\"")
+    )
+  }
+  
+  invisible(wb)
 }

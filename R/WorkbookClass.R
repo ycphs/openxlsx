@@ -18273,28 +18273,28 @@ Workbook$methods(
 )
 
 
-
-Workbook$methods(
-  setActiveSheet = function(activeSheet = NULL) {
-    if (is.character(activeSheet)) {
-      if (activeSheet %in% sheet_names) {
-        wb$ActiveSheet <<- which(activeSheet %in% sheet_names)
-      }
-    }
-    
-    if (is.numeric(activeSheet)) {
-      if (activeSheet %in% seq_along(sheet_names)) {
-        wb$ActiveSheet <<- activeSheet
-      }
-    }
-    
-    for(i in seq_along(sheet_names)){
-    stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
-                           "tabSelected=\"[0-9]\"",
-                           paste0("tabSelected=\"",
-                                  as.integer(wb$ActiveSheet==i)
-                                  ,"\""))
-    }
-    
-  }
-)
+# 
+# Workbook$methods(
+#   activeSheet = function(activeSheet = NULL) {
+#     if (is.character(activeSheet)) {
+#       if (activeSheet %in% sheet_names) {
+#         wb$ActiveSheet <<- which(activeSheet %in% sheet_names)
+#       }
+#     }
+#     
+#     if (is.numeric(activeSheet)) {
+#       if (activeSheet %in% seq_along(sheet_names)) {
+#         wb$ActiveSheet <<- activeSheet
+#       }
+#     }
+#     
+#     for(i in seq_along(sheet_names)){
+#     stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
+#                            "tabSelected=\"[0-9]\"",
+#                            paste0("tabSelected=\"",
+#                                   as.integer(wb$ActiveSheet==i)
+#                                   ,"\""))
+#     }
+#     
+#   }
+# )
