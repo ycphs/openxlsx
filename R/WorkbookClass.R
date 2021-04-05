@@ -18280,23 +18280,23 @@ Workbook$methods(
   setactiveSheet = function(activeSheet = NULL) {
     if (is.character(activeSheet)) {
       if (activeSheet %in% sheet_names) {
-        wb$ActiveSheet <- which(activeSheet %in% sheet_names)
+        ActiveSheet <<- which(sheet_names == activeSheet)
       }
     }
 
     if (is.integer(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
-        wb$ActiveSheet <- as.integer(activeSheet)
+        ActiveSheet <<- as.integer(activeSheet)
       }
     }
 
     for(i in seq_along(sheet_names)){
-    stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
+      worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
                            "tabSelected=\"[0-9]\"",
                            paste0("tabSelected=\"",
-                                  as.integer(wb$ActiveSheet==i)
+                                  as.integer(ActiveSheet == i)
                                   ,"\""))
     }
-
+  
   }
 )

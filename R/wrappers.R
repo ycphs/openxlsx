@@ -4645,4 +4645,6 @@ activeSheet <- function(wb) {
   
   
   invisible(wb$setactiveSheet(value))
+  
+  invisible(wb)
 }
