@@ -52,7 +52,8 @@ Workbook <- setRefClass("Workbook",
     "workbook.xml.rels" = "ANY",
     "worksheets" = "ANY",
     "worksheets_rels" = "ANY",
-    "sheetOrder" = "integer"
+    "sheetOrder" = "integer",
+    "ActiveSheet" = "integer"
   )
 )
 

@@ -56,7 +56,7 @@ Workbook$methods(
 
     sheet_names <<- character(0)
     sheetOrder <<- integer(0)
-    ActiveSheet <<- integer(0)
+   
     sharedStrings <<- list()
     attr(sharedStrings, "uniqueCount") <<- 0
 
@@ -80,6 +80,7 @@ Workbook$methods(
 
     worksheets <<- list()
     worksheets_rels <<- list()
+    ActiveSheet <<- integer(0)
   }
 )
 
@@ -120,6 +121,7 @@ Workbook$methods(
         ))) + 1L
     } else {
       sheetId <- 1
+      wb$ActiveSheet <- 1
     }
 
 
@@ -18273,28 +18275,28 @@ Workbook$methods(
 )
 
 
-# 
-# Workbook$methods(
-#   activeSheet = function(activeSheet = NULL) {
-#     if (is.character(activeSheet)) {
-#       if (activeSheet %in% sheet_names) {
-#         wb$ActiveSheet <<- which(activeSheet %in% sheet_names)
-#       }
-#     }
-#     
-#     if (is.numeric(activeSheet)) {
-#       if (activeSheet %in% seq_along(sheet_names)) {
-#         wb$ActiveSheet <<- activeSheet
-#       }
-#     }
-#     
-#     for(i in seq_along(sheet_names)){
-#     stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
-#                            "tabSelected=\"[0-9]\"",
-#                            paste0("tabSelected=\"",
-#                                   as.integer(wb$ActiveSheet==i)
-#                                   ,"\""))
-#     }
-#     
-#   }
-# )
+
+Workbook$methods(
+  setactiveSheet = function(activeSheet = NULL) {
+    if (is.character(activeSheet)) {
+      if (activeSheet %in% sheet_names) {
+        wb$ActiveSheet <- which(activeSheet %in% sheet_names)
+      }
+    }
+
+    if (is.numeric(activeSheet)) {
+      if (activeSheet %in% seq_along(sheet_names)) {
+        wb$ActiveSheet <- activeSheet
+      }
+    }
+
+    for(i in seq_along(sheet_names)){
+    stri_replace_all_regex(wb$worksheets[[i]]$sheetViews,
+                           "tabSelected=\"[0-9]\"",
+                           paste0("tabSelected=\"",
+                                  as.integer(wb$ActiveSheet==i)
+                                  ,"\""))
+    }
+
+  }
+)
