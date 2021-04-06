@@ -2633,14 +2633,17 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
+        
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
+        
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
-             priority_new,
-             worksheets[[sheet]]$conditionalFormatting[[i]],
-             fixed = TRUE)
+               priority_new,
+               worksheets[[sheet]]$conditionalFormatting[[i]],
+               fixed = TRUE
+          )
       }
     }
 
