@@ -59,7 +59,7 @@ test_that("Support non-ASCII strings not in UTF-8 encodings", {
   writeDataTable(wb, ws, non_ascii_df, tableName = non_ascii[3])
   writeData(wb, ws, non_ascii_df, xy = list("D", 1), name = non_ascii[4])
   writeComment(wb, ws, 1, 1, comment = createComment(non_ascii[5], non_ascii[6]))
-  writeFormula(wb, ws, x = sprintf('"%s"&"%s"', non_ascii[1], non_ascii[2]), xy = list("G" 1))
+  writeFormula(wb, ws, x = sprintf('"%s"&"%s"', non_ascii[1], non_ascii[2]), xy = list("G", 1))
   createNamedRegion(wb, ws, 7, 1, name = non_ascii[7])
   saveWorkbook(wb, file)
   
