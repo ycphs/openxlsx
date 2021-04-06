@@ -18305,12 +18305,16 @@ Workbook$methods(
     if (is.character(activeSheet)) {
       if (activeSheet %in% sheet_names) {
         ActiveSheet <<- which(sheet_names == activeSheet)
+      } else {
+        stop(paste(activeSheet, "doesn't exist as sheet name."))
       }
     }
 
-    if (is.integer(activeSheet)) {
+    if (is.integer(activeSheet)|is.numeric(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
         ActiveSheet <<- as.integer(activeSheet)
+      }else {
+        stop(paste(activeSheet, "doesn't exist as sheet index."))
       }
     }
 
