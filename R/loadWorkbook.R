@@ -1024,7 +1024,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   activesheet <- unlist(regmatches(activesheet, gregexpr("<workbookView[^>]*>", activesheet, perl = TRUE)))
   
   wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
-
+  
+  if(length(wb$ActiveSheet) == 0){
+    wb$ActiveSheet <- 1L
+  }
 
   return(wb)
 }

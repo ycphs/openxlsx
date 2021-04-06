@@ -3453,6 +3453,7 @@ Workbook$methods(
         invisible(.self$groupColumns(i))
       }
       
+      
       if(ActiveSheet==i) {
         worksheets[[i]]$sheetViews <<-
           stri_replace_all_regex(
@@ -3725,6 +3726,10 @@ Workbook$methods(
     aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
+    
+    if (length(aSheet) == 0) {
+      aSheet <- 1
+    }
 
     ## worksheets
     if (nSheets > 0) {
