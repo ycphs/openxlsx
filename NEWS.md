@@ -3,10 +3,14 @@
 ## Fixes
 
 * `write.xlsx()` now successfully passes `withFilter` ([#151](https://github.com/ycphs/openxlsx/issues/151))
+* code clean up
+* removal of unused variables
 
 ## New features
 
 * `write.xlsx()` can now handle `colWidths` passed as either a single element or a `list()`
+
+
 
 # openxlsx 4.2.3.9000
 
