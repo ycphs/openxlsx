@@ -18298,11 +18298,11 @@ Workbook$methods(
       }
     }
 
-    for(i in seq_along(wbook$sheet_names)){
-      wbook$worksheets[[i]]$sheetViews <- stri_replace_all_regex(wbook$worksheets[[i]]$sheetViews,
+    for(i in seq_along(sheet_names)){
+      worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
                            "tabSelected=\"[0-9]\"",
                            paste0("tabSelected=\"",
-                                  as.integer(wbook$ActiveSheet == i)
+                                  as.integer(ActiveSheet == i)
                                   ,"\""))
       
       

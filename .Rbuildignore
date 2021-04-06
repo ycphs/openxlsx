@@ -16,3 +16,6 @@ cran-comments.md
 ^azure-pipelines\.yml$
 ^\.pre-commit-config\.yaml$
 ^img$
+^openxlsx\.Rcheck$
+^openxlsx.*\.tar\.gz$
+^openxlsx.*\.tgz$
