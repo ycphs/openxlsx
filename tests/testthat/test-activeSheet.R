@@ -3,17 +3,31 @@ context("active Sheet ")
 
 
 test_that("get and set active sheet of a workbook", {
+  
+  tempFile1 <- file.path(tempdir(), "temp1.xlsx")
+  tempFile2 <- file.path(tempdir(), "temp2.xlsx")
+  tempFile3 <- file.path(tempdir(), "temp3.xlsx")
   wbook <- createWorkbook()
   addWorksheet(wbook, sheetName = "S1")
   addWorksheet(wbook, sheetName = "S2")
   addWorksheet(wbook, sheetName = "S3")
   
-   # default value is the first sheet active
-  expect_equal(activeSheet(wbook),1)
-  activeSheet(wbook) <- 1 ## active sheet S1
-  expect_equal(activeSheet(wbook),1)
-  activeSheet(wbook) <- "S2" ## active sheet S2
-  expect(activeSheet(wbook),2)
   
-
+  saveWorkbook(wbook,tempFile1)
+  # default value is the first sheet active
+  expect_equal(activeSheet(wbook),1)
+  expect_equal(activeSheet(wbook),loadWorkbook(tempFile1)$ActiveSheet)
+  
+  activeSheet(wbook) <- 1 ## active sheet S1
+  saveWorkbook(wbook,tempFile2)
+  expect_equal(activeSheet(wbook),1)
+  expect_equal(activeSheet(wbook),loadWorkbook(tempFile2)$ActiveSheet)
+  activeSheet(wbook) <- "S2" ## active sheet S2
+  saveWorkbook(wbook,tempFile3)
+  expect(activeSheet(wbook),2)
+  expect_equal(activeSheet(wbook),loadWorkbook(tempFile3)$ActiveSheet)
+  
+  unlink(tempFile1, recursive = TRUE, force = TRUE)
+  unlink(tempFile2, recursive = TRUE, force = TRUE)
+  unlink(tempFile3, recursive = TRUE, force = TRUE)
 })
