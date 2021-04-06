@@ -232,7 +232,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     for (i in which(vl > 32767)) {
       
       if(vl[i]>32768+30){
-        message(
+        warning(
           paste0(
             stri_sub(newStrs[i], 32768, 32768 + 15),
             " ... " ,
@@ -242,7 +242,7 @@ Number of characters exeed the limit of 32767."
           )
         )
       } else {
-        message(
+        warning(
           paste0(
             stri_sub(newStrs[i], 32768, -1),
             " is truncated. 
