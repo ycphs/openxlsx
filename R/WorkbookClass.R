@@ -2622,8 +2622,7 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length(worksheets[[sheet]]$conditionalFormatting) > 0) {
-      for (i in order(seq_along(worksheets[[sheet]]$conditionalFormatting),
-                      decreasing = T)) {
+      for (i in rev(seq_along(worksheets[[sheet]]$conditionalFormatting))) {
         priority <-
           regmatches(
             worksheets[[sheet]]$conditionalFormatting[[i]],
@@ -2634,16 +2633,14 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
-        
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
-        
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
-               priority_new,
-               worksheets[[sheet]]$conditionalFormatting[[i]],
-               fixed = TRUE)
+             priority_new,
+             worksheets[[sheet]]$conditionalFormatting[[i]],
+             fixed = TRUE)
       }
     }
 
@@ -17819,8 +17816,7 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length((worksheets[[sheet]]$conditionalFormatting)) > 0) {
-      for (i in order(seq_along(worksheets[[sheet]]$conditionalFormatting),
-                      decreasing = T)) {
+      for (i in rev(seq_along(worksheets[[sheet]]$conditionalFormatting))) {
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub('(?<=priority=")[0-9]+',
             i + 1L,
