@@ -3257,7 +3257,7 @@ Workbook$methods(
       sprintf(
         '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
         visible_sheet_index - 1L,
-        visible_sheet_index - 1L
+        ActiveSheet - 1L
       )
 
     worksheets[[visible_sheet_index]]$sheetViews <<-
@@ -3706,7 +3706,7 @@ Workbook$methods(
     nImages <- length(media)
     nCharts <- length(charts)
     nStyles <- length(styleObjects)
-
+    aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
 
@@ -3815,8 +3815,16 @@ Workbook$methods(
     if (nSheets > 0) {
       showText <-
         c(showText, sprintf(
-          "Worksheet write order: %s",
+          "Worksheet write order: %s\n",
           stri_join(sheetOrder, sep = " ", collapse = ", ")
+        ))
+    }
+    
+    if(aSheet >= 1){
+      showText <-
+        c(showText, sprintf(
+          "Active Worksheet: %s",
+          aSheet
         ))
     }
 
@@ -18290,13 +18298,17 @@ Workbook$methods(
       }
     }
 
-    for(i in seq_along(sheet_names)){
-      worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
+    for(i in seq_along(wbook$sheet_names)){
+      wbook$worksheets[[i]]$sheetViews <- stri_replace_all_regex(wbook$worksheets[[i]]$sheetViews,
                            "tabSelected=\"[0-9]\"",
                            paste0("tabSelected=\"",
-                                  as.integer(ActiveSheet == i)
+                                  as.integer(wbook$ActiveSheet == i)
                                   ,"\""))
+      
+      
     }
+    
+    
   
   }
 )
