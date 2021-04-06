@@ -3452,6 +3452,22 @@ Workbook$methods(
       if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
       }
+      
+      if(ActiveSheet==i) {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"1\"")
+          )
+      } else {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"0\"")
+          )
+      }
     }
   }
 )
