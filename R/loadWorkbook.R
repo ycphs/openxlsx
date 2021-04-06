@@ -176,9 +176,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 # #active sheet -----------------------------------------------------------
 
       
-    activesheet <- unlist(regmatches(workbook, gregexpr("(?<=<bookViews>).*(?=</bookViews>)", workbook, perl = TRUE)))
-    activesheet <- unlist(regmatches(activesheet, gregexpr("<workbookView[^>]*>", activesheet, perl = TRUE)))
-    wb$ActiveSheet<-as.integer(getAttrs(activesheet,"activeTab")$activeTab)
+   
     
     ## add worksheets to wb
     j <- 1
@@ -1022,7 +1020,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   }
 
 
-
+  activesheet <- unlist(regmatches(workbook, gregexpr("(?<=<bookViews>).*(?=</bookViews>)", workbook, perl = TRUE)))
+  activesheet <- unlist(regmatches(activesheet, gregexpr("<workbookView[^>]*>", activesheet, perl = TRUE)))
+  
+  wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
 
 
   return(wb)
