@@ -40,7 +40,7 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
     for (i in dInds) {
       df[[i]] <- as.integer(df[[i]]) + origin
       if (origin == 25569L){
-        earlyDate <- df[[i]] < 60
+        earlyDate <- which(df[[i]] < 60)
         df[[i]][earlyDate] <- df[[i]][earlyDate] - 1
       }
     }
