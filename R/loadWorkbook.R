@@ -3,7 +3,7 @@
 
 #' @name loadWorkbook
 #' @title Load an existing .xlsx file
-#' @author Alexander Walker
+#' @author Alexander Walker, Philipp Schauberger
 #' @param file A path to an existing .xlsx or .xlsm file
 #' @param xlsxFile alias for file
 #' @param isUnzipped Set to TRUE if the xlsx file is already unzipped
@@ -148,7 +148,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))
     sheets <- unlist(regmatches(sheets, gregexpr("<sheet[^>]*>", sheets, perl = TRUE)))
-
+    
     ## Some veryHidden sheets do not have a sheet content and their rId is empty.
     ## Such sheets need to be filtered out because otherwise their sheet names
     ## occur in the list of all sheet names, leading to a wrong association
@@ -171,7 +171,13 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     if (length(is_visible) != length(sheetrId)) {
       is_visible <- rep(TRUE, length(sheetrId))
     }
+    
 
+# #active sheet -----------------------------------------------------------
+
+      
+   
+    
     ## add worksheets to wb
     j <- 1
     for (i in seq_along(sheetrId)) {
@@ -1014,8 +1020,14 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   }
 
 
-
-
+  activesheet <- unlist(regmatches(workbook, gregexpr("(?<=<bookViews>).*(?=</bookViews>)", workbook, perl = TRUE)))
+  activesheet <- unlist(regmatches(activesheet, gregexpr("<workbookView[^>]*>", activesheet, perl = TRUE)))
+  
+  wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
+  
+  if(length(wb$ActiveSheet) == 0){
+    wb$ActiveSheet <- 1L
+  }
 
   return(wb)
 }

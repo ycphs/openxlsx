@@ -4603,3 +4603,50 @@ getCreators <- function(wb) {
   
   return(wb$getCreators())
 }
+
+#' @name activeSheet
+#' @title Get/set active sheet of the workbook
+#' @author Philipp Schauberger
+#' @description Get and set active sheet of the workbook
+#' @param wb A workbook object
+#' @return return the active sheet of the workbook
+#' @examples
+#'
+#' wb <- createWorkbook()
+#' addWorksheet(wb, sheetName = "S1")
+#' addWorksheet(wb, sheetName = "S2")
+#' addWorksheet(wb, sheetName = "S3")
+#'
+#' activeSheet(wb) # default value is the first sheet active
+#' activeSheet(wb) <- 1 ## active sheet S1
+#' activeSheet(wb)
+#' activeSheet(wb) <- "S2" ## active sheet S2
+#' activeSheet(wb)
+#' @export
+activeSheet <- function(wb) {
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  
+  
+  return(wb$ActiveSheet)
+}
+
+#' @rdname activeSheet
+#' @param value index of the active sheet or name of the active sheet
+#' @export
+`activeSheet<-` <- function(wb, value) {
+  od <- getOption("OutDec")
+  options("OutDec" = ".")
+  on.exit(expr = options("OutDec" = od), add = TRUE)
+  
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  
+  
+  
+  invisible(wb$setactiveSheet(value))
+  
+  invisible(wb)
+}

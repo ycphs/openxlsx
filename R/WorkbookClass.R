@@ -56,7 +56,7 @@ Workbook$methods(
 
     sheet_names <<- character(0)
     sheetOrder <<- integer(0)
-
+   
     sharedStrings <<- list()
     attr(sharedStrings, "uniqueCount") <<- 0
 
@@ -80,6 +80,7 @@ Workbook$methods(
 
     worksheets <<- list()
     worksheets_rels <<- list()
+    ActiveSheet <<- integer(0)
   }
 )
 
@@ -120,6 +121,7 @@ Workbook$methods(
         ))) + 1L
     } else {
       sheetId <- 1
+      ActiveSheet <<- 1L
     }
 
 
@@ -3255,7 +3257,7 @@ Workbook$methods(
       sprintf(
         '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
         visible_sheet_index - 1L,
-        visible_sheet_index - 1L
+        ActiveSheet - 1L
       )
 
     worksheets[[visible_sheet_index]]$sheetViews <<-
@@ -3449,6 +3451,23 @@ Workbook$methods(
 
       if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
+      }
+      
+      
+      if(ActiveSheet==i) {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"1\"")
+          )
+      } else {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"0\"")
+          )
       }
     }
   }
@@ -3704,9 +3723,13 @@ Workbook$methods(
     nImages <- length(media)
     nCharts <- length(charts)
     nStyles <- length(styleObjects)
-
+    aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
+    
+    if (length(aSheet) == 0) {
+      aSheet <- 1
+    }
 
     ## worksheets
     if (nSheets > 0) {
@@ -3813,8 +3836,16 @@ Workbook$methods(
     if (nSheets > 0) {
       showText <-
         c(showText, sprintf(
-          "Worksheet write order: %s",
+          "Worksheet write order: %s\n",
           stri_join(sheetOrder, sep = " ", collapse = ", ")
+        ))
+    }
+    
+    if(aSheet >= 1){
+      showText <-
+        c(showText, sprintf(
+          "Active Worksheet: %s",
+          aSheet
         ))
     }
 
@@ -18269,5 +18300,40 @@ Workbook$methods(
           replacement = LastModifiedBy
         )
     }
+  }
+)
+
+
+
+Workbook$methods(
+  setactiveSheet = function(activeSheet = NULL) {
+    if (is.character(activeSheet)) {
+      if (activeSheet %in% sheet_names) {
+        ActiveSheet <<- which(sheet_names == activeSheet)
+      } else {
+        stop(paste(activeSheet, "doesn't exist as sheet name."))
+      }
+    }
+
+    if (is.integer(activeSheet)|is.numeric(activeSheet)) {
+      if (activeSheet %in% seq_along(sheet_names)) {
+        ActiveSheet <<- as.integer(activeSheet)
+      }else {
+        stop(paste(activeSheet, "doesn't exist as sheet index."))
+      }
+    }
+
+    for(i in seq_along(sheet_names)){
+      worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
+                           "tabSelected=\"[0-9]\"",
+                           paste0("tabSelected=\"",
+                                  as.integer(ActiveSheet == i)
+                                  ,"\""))
+      
+      
+    }
+    
+    
+  
   }
 )
