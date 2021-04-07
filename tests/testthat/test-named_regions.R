@@ -19,8 +19,8 @@ test_that("Maintaining Named Regions on Load", {
     wb = wb,
     sheet = 1,
     name = "iris",
-    rows = 1:(nrow(iris) + 1),
-    cols = 1:ncol(iris)
+    rows = seq_len(nrow(iris) + 1),
+    cols = seq_len(ncol(iris))
   )
 
 

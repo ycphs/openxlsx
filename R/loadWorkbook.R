@@ -182,7 +182,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     j <- 1
     for (i in seq_along(sheetrId)) {
       if (is_chart_sheet[i]) {
-        count <- 0
+        # count <- 0  variable not used
         txt <- paste(readUTF8(chartSheetsXML[j]), collapse = "")
 
         zoom <- regmatches(txt, regexpr('(?<=zoomScale=")[0-9]+', txt, perl = TRUE))
@@ -930,8 +930,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     ## pivot tables
     if (length(pivotTableXML) > 0) {
-      pivotTableJ <- lapply(xml, function(x) as.integer(regmatches(x, regexpr("(?<=pivotTable)[0-9]+(?=\\.xml)", x, perl = TRUE))))
-      sheetWithPivot <- which(sapply(pivotTableJ, length) > 0)
+      # pivotTableJ <- lapply(xml, function(x) as.integer(regmatches(x, regexpr("(?<=pivotTable)[0-9]+(?=\\.xml)", x, perl = TRUE)))) variable not used
+      # sheetWithPivot <- which(sapply(pivotTableJ, length) > 0)  variable not used
 
       pivotRels <- lapply(xml, function(x) {
         y <- x[grepl("pivotTable", x)]

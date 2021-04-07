@@ -322,7 +322,7 @@ test_that("Reading from new workbook cols/rows", {
   y <- read.xlsx(tempFile, 1, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
 
   df <- mtcars[sort((rows - 1)[(rows - 1) <= nrow(mtcars)]), sort(cols[cols <= ncol(mtcars)])]
-  rownames(df) <- 1:nrow(df)
+  rownames(df) <- seq_len(nrow(df))
 
   expect_equal(object = x, expected = y)
   expect_equal(object = x, expected = df)
@@ -366,7 +366,7 @@ test_that("Reading from new workbook cols/rows", {
   y <- read.xlsx(tempFile, sheet = 3, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
 
   df <- mtcars[sort((rows - 1)[(rows - 1) <= nrow(mtcars)]), sort(cols[cols <= ncol(mtcars)])]
-  rownames(df) <- 1:nrow(df)
+  rownames(df) <- seq_len(nrow(df))
 
   expect_equal(object = x, expected = y, check.attributes = FALSE)
   expect_equal(object = df, expected = x, check.attributes = FALSE)
