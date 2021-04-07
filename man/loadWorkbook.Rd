@@ -38,5 +38,5 @@ saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
 \code{\link{removeWorksheet}}
 }
 \author{
-Alexander Walker
+Alexander Walker, Philipp Schauberger
 }
