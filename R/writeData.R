@@ -332,7 +332,8 @@ writeData <- function(wb,
     na.string = na.string,
     list_sep = sep
   )
-
+  
+  
   ## header style
   if ("Style" %in% class(headerStyle) & colNames) {
     addStyle(
