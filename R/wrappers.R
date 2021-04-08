@@ -2551,7 +2551,7 @@ worksheetOrder <- function(wb) {
   }
   
   old_ActiveSheet <- wb$ActiveSheet
-  new_ActiveSheet <- which(old_ActiveSheet == value)
+  new_ActiveSheet <- which(value == old_ActiveSheet)
   
   
   wb$sheetOrder <- value

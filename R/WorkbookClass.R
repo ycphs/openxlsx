@@ -3841,12 +3841,19 @@ Workbook$methods(
         ))
     }
     
-    if(aSheet >= 1){
+    
+    
+    if (aSheet >= 1) {
       showText <-
-        c(showText, sprintf(
-          "Active Worksheet: %s",
-          aSheet
-        ))
+        c(
+          showText,
+          sprintf(
+            'Active Sheet %s: "%s" \n\tPosition: %s\n',
+            sheetOrder[aSheet],
+            exSheets[[sheetOrder[aSheet]]],
+            aSheet
+          )
+        )
     }
 
     cat(unlist(showText))
