@@ -1,50 +1,59 @@
 
-
-
 genBaseColStyle <- function(cc) {
   colStyle <- createStyle()
   specialFormat <- TRUE
 
   if ("date" %in% cc) {
-    colStyle <- createStyle("numFmt" = "date")
+    colStyle <- createStyle(numFmt = "date")
   } else if (any(c("posixlt", "posixct", "posixt") %in% cc)) {
-    colStyle <- createStyle("numFmt" = "longdate")
+    colStyle <- createStyle(numFmt = "longdate")
   } else if ("currency" %in% cc) {
-    colStyle$numFmt <- list("numFmtId" = "164", "formatCode" = "&quot;$&quot;#,##0.00")
+    colStyle$numFmt <- list(numFmtId = "164", "formatCode" = "&quot;$&quot;#,##0.00")
   } else if ("accounting" %in% cc) {
-    colStyle$numFmt <- list("numFmtId" = "44")
+    colStyle$numFmt <- list(numFmtIs = "44")
   } else if ("hyperlink" %in% cc) {
-    colStyle$fontColour <- list("theme" = "10")
+    colStyle$fontColour <- list(theme = "10")
   } else if ("percentage" %in% cc) {
-    colStyle$numFmt <- list("numFmtId" = "10")
+    colStyle$numFmt <- list(numFmtIs = "10")
   } else if ("scientific" %in% cc) {
-    colStyle$numFmt <- list("numFmtId" = "11")
-  } else if ("3" %in% cc | "comma" %in% cc) {
-    colStyle$numFmt <- list("numFmtId" = "3")
-  } else if ("numeric" %in% cc & !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
-    colStyle$numFmt <- list("numFmtId" = 9999, "formatCode" = getOption("openxlsx.numFmt"))
+    colStyle$numFmt <- list(numFmtId = "11")
+  } else if (any(c("3", "comma") %in% cc)) {
+    colStyle$numFmt <- list(numFmtId = "3")
+    # TODO jmb is this a safe change?
+  } else if ("numeric" %in% cc & !grepl("[^0\\.,#\\$\\* %]", openxlsx_getOp("numFmt"))) {
+    colStyle$numFmt <- list(numFmtId = 9999, formatCode = openxlsx_getOp("numFmt"))
   } else {
     colStyle$numFmt <- list(numFmtId = "0")
     specialFormat <- FALSE
   }
 
   list(
-    "style" = colStyle,
-    "specialFormat" = specialFormat
+    style = colStyle,
+    specialFormat = specialFormat
   )
 }
 
 
 
-Workbook$methods(surroundingBorders = function(colClasses, sheet, startRow, startCol, nRow, nCol, borderColour, borderStyle, borderType) {
+Workbook$methods(surroundingBorders = function(
+  colClasses, 
+  sheet, 
+  startRow, 
+  startCol,
+  nRow, 
+  nCol, 
+  borderColour, 
+  borderStyle, 
+  borderType
+) {
   sheet <- sheet_names[[validateSheet(sheet)]]
   ## steps
   # get column class
   # get corresponding base style
-
+  
   for (i in 1:nCol) {
     tmp <- genBaseColStyle(colClasses[[i]])
-
+    
     colStyle <- tmp$style
     specialFormat <- tmp$specialFormat
 
@@ -340,15 +349,17 @@ Workbook$methods(surroundingBorders = function(colClasses, sheet, startRow, star
   invisible(0)
 })
 
-
-
-
-
-
-
-
-
-Workbook$methods(rowBorders = function(colClasses, sheet, startRow, startCol, nRow, nCol, borderColour, borderStyle, borderType) {
+Workbook$methods(rowBorders = function(
+  colClasses,
+  sheet,
+  startRow,
+  startCol, 
+  nRow,
+  nCol,
+  borderColour,
+  borderStyle, 
+  borderType
+) {
   sheet <- sheet_names[[validateSheet(sheet)]]
   ## steps
   # get column class
@@ -422,9 +433,17 @@ Workbook$methods(rowBorders = function(colClasses, sheet, startRow, startCol, nR
 })
 
 
-
-
-Workbook$methods(columnBorders = function(colClasses, sheet, startRow, startCol, nRow, nCol, borderColour, borderStyle, borderType) {
+Workbook$methods(columnBorders = function(
+  colClasses,
+  sheet, 
+  startRow, 
+  startCol, 
+  nRow, 
+  nCol, 
+  borderColour, 
+  borderStyle, 
+  borderType
+) {
   sheet <- sheet_names[[validateSheet(sheet)]]
   ## steps
   # get column class
@@ -514,7 +533,6 @@ Workbook$methods(columnBorders = function(colClasses, sheet, startRow, startCol,
         ))
       }
 
-
       styleObjects <<- append(styleObjects, list(
         list(
           "style" = sBot,
@@ -531,10 +549,17 @@ Workbook$methods(columnBorders = function(colClasses, sheet, startRow, startCol,
 })
 
 
-
-
-
-Workbook$methods(allBorders = function(colClasses, sheet, startRow, startCol, nRow, nCol, borderColour, borderStyle, borderType) {
+Workbook$methods(allBorders = function(
+  colClasses,
+  sheet,
+  startRow,
+  startCol,
+  nRow,
+  nCol,
+  borderColour,
+  borderStyle,
+  borderType
+) {
   sheet <- sheet_names[[validateSheet(sheet)]]
   ## steps
   # get column class

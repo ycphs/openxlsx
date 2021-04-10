@@ -39,7 +39,7 @@
 #'    \item{\bold{mediumDashDotDot}}{ medium weight dash-dot-dot border}
 #'    \item{\bold{slantDashDot}}{ slanted dash-dot border}
 #'   }
-#' @param withFilter If \code{TRUE}, add filters to the column name row. NOTE can only have one filter per worksheet.
+#' @param withFilter If \code{TRUE} or \code{NA}, add filters to the column name row. NOTE can only have one filter per worksheet.
 #' @param keepNA If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.
 #' @param na.string If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
@@ -155,44 +155,51 @@
 #' \dontrun{
 #' saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)
 #' }
-writeData <- function(wb,
-                      sheet,
-                      x,
-                      startCol = 1,
-                      startRow = 1,
-                      array = FALSE,
-                      xy = NULL,
-                      colNames = TRUE,
-                      rowNames = FALSE,
-                      headerStyle = NULL,
-                      borders = c("none", "surrounding", "rows", "columns", "all"),
-                      borderColour = getOption("openxlsx.borderColour", "black"),
-                      borderStyle = getOption("openxlsx.borderStyle", "thin"),
-                      withFilter = FALSE,
-                      keepNA = FALSE,
-                      na.string = NULL,
-                      name = NULL,
-                      sep = ", ") {
-
+writeData <- function(
+  wb,
+  sheet,
+  x,
+  startCol     = 1,
+  startRow     = 1,
+  array        = FALSE,
+  xy           = NULL,
+  colNames     = TRUE,
+  rowNames     = FALSE,
+  headerStyle  = openxlsx_getOp("headerStyle"),
+  borders      = openxlsx_getOp("borders", "none"),
+  borderColour = openxlsx_getOp("borderColour", "black"),
+  borderStyle  = openxlsx_getOp("borderStyle", "thin"),
+  withFilter   = openxlsx_getOp("withFilter", FALSE),
+  keepNA       = openxlsx_getOp("keepNA", FALSE),
+  na.string    = openxlsx_getOp("na.string"),
+  name         = NULL,
+  sep          = ", "
+) {
+  
   ## increase scipen to avoid writing in scientific
   exSciPen <- getOption("scipen")
   od <- getOption("OutDec")
   exDigits <- getOption("digits")
-
+  
   options("scipen" = 200)
   options("OutDec" = ".")
   options("digits" = 22)
-
+  
   on.exit(options("scipen" = exSciPen), add = TRUE)
   on.exit(expr = options("OutDec" = od), add = TRUE)
   on.exit(options("digits" = exDigits), add = TRUE)
-
-
-
+  
+  # Set NULLs
+  borders      <- borders      %||% "none"
+  borderColour <- borderColour %||% "black"
+  borderStyle  <- borderStyle  %||% "thin"
+  withFilter   <- withFilter   %||% FALSE
+  keepNA       <- keepNA       %||% FALSE
+  
   if (is.null(x)) {
     return(invisible(0))
   }
-
+  
   ## All input conversions/validations
   if (!is.null(xy)) {
     if (length(xy) != 2) {
@@ -201,26 +208,30 @@ writeData <- function(wb,
     startCol <- xy[[1]]
     startRow <- xy[[2]]
   }
-
+  
   ## convert startRow and startCol
   if (!is.numeric(startCol)) {
     startCol <- convertFromExcelRef(startCol)
   }
+  
   startRow <- as.integer(startRow)
-
+  
+  # TODO jmb add inherits
   if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
+  
+  # TODO jmb add checks
   if (!is.logical(colNames)) stop("colNames must be a logical.")
   if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-  if (!is.null(headerStyle) & !"Style" %in% class(headerStyle)) stop("headerStyle must be a style object or NULL.")
-  if ((!is.character(sep)) | (length(sep) != 1)) stop("sep must be a character vector of length 1")
-
-  borders <- match.arg(borders)
-  if (length(borders) != 1) stop("borders argument must be length 1.")
-
+  
+  if (is_not_class(headerStyle, "Style")) {
+    stop("headerStyle must be a style object or NULL.")
+  }
+  if (!is.character(sep) || length(sep) != 1) stop("sep must be a character vector of length 1")
+  
   ## borderColours validation
   borderColour <- validateColour(borderColour, "Invalid border colour")
   borderStyle <- validateBorderStyle(borderStyle)[[1]]
-
+  
   ## special case - vector of hyperlinks
   hlinkNames <- NULL
   if ("hyperlink" %in% class(x)) {
@@ -234,57 +245,55 @@ writeData <- function(wb,
     class(x[[1]]) <- ifelse(array, "array_formula", "formula")
     colNames <- FALSE
   }
-
+  
   ## named region
   if (!is.null(name)) { ## validate name
     ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
     ex_names <- replaceXMLEntities(ex_names)
-
+    
     if (name %in% ex_names) {
       stop(sprintf("Named region with name '%s' already exists!", name))
     } else if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
       stop("name cannot look like a cell reference.")
     }
   }
-
+  
   if (is.vector(x) | is.factor(x) | inherits(x, "Date")) {
     colNames <- FALSE
   } ## this will go to coerce.default and rowNames will be ignored
-
+  
   ## Coerce to data.frame
   x <- openxlsxCoerce(x = x, rowNames = rowNames)
-
+  
   nCol <- ncol(x)
   nRow <- nrow(x)
-
+  
   ## If no rows and not writing column names return as nothing to write
   if (nRow == 0 & !colNames) {
     return(invisible(0))
   }
-
+  
   ## If no columns and not writing row names return as nothing to write
   if (nCol == 0 & !rowNames) {
     return(invisible(0))
   }
-
+  
   colClasses <- lapply(x, function(x) tolower(class(x)))
   colClasss2 <- colClasses
   colClasss2[sapply(colClasses, function(x) "formula" %in% x) & sapply(colClasses, function(x) "hyperlink" %in% x)] <- "formula"
-
+  
   if (is.numeric(sheet)) {
     sheetX <- wb$validateSheet(sheet)
   } else {
     sheetX <- wb$validateSheet(replaceXMLEntities(sheet))
     sheet <- replaceXMLEntities(sheet)
   }
-
+  
   if (wb$isChartSheet[[sheetX]]) {
     stop("Cannot write to chart sheet.")
     return(NULL)
   }
-
-
-
+  
   ## Check not overwriting existing table headers
   wb$check_overwrite_tables(
     sheet = sheet,
@@ -294,21 +303,19 @@ writeData <- function(wb,
     error_msg =
       "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
   )
-
-
-
+  
   ## write autoFilter, can only have a single filter per worksheet
   if (withFilter) {
     coords <- data.frame("x" = c(startRow, startRow + nRow + colNames - 1L), "y" = c(startCol, startCol + nCol - 1L))
     ref <- stri_join(getCellRefs(coords), collapse = ":")
-
+    
     wb$worksheets[[sheetX]]$autoFilter <- sprintf('<autoFilter ref="%s"/>', ref)
-
+    
     l <- convert_to_excel_ref(cols = unlist(coords[, 2]), LETTERS = LETTERS)
     dfn <- sprintf("'%s'!%s", names(wb)[sheetX], stri_join("$", l, "$", coords[, 1], collapse = ":"))
-
+    
     dn <- sprintf('<definedName name="_xlnm._FilterDatabase" localSheetId="%s" hidden="1">%s</definedName>', sheetX - 1L, dfn)
-
+    
     if (length(wb$workbook$definedNames) > 0) {
       ind <- grepl('name="_xlnm._FilterDatabase"', wb$workbook$definedNames)
       if (length(ind) > 0) {
@@ -318,21 +325,21 @@ writeData <- function(wb,
       wb$workbook$definedNames <- dn
     }
   }
-
+  
   ## write data.frame
   wb$writeData(
-    df = x,
-    colNames = colNames,
-    sheet = sheet,
-    startCol = startCol,
-    startRow = startRow,
+    df         = x,
+    colNames   = colNames,
+    sheet      = sheet,
+    startCol   = startCol,
+    startRow   = startRow,
     colClasses = colClasss2,
     hlinkNames = hlinkNames,
-    keepNA = keepNA,
-    na.string = na.string,
-    list_sep = sep
+    keepNA     = keepNA,
+    na.string  = na.string,
+    list_sep   = sep
   )
-
+  
   ## header style
   if ("Style" %in% class(headerStyle) & colNames) {
     addStyle(
@@ -342,73 +349,80 @@ writeData <- function(wb,
       gridExpand = TRUE, stack = TRUE
     )
   }
-
+  
   ## If we don't have any rows to write return
   if (nRow == 0) {
     return(invisible(0))
   }
-
+  
   ## named region
   if (!is.null(name)) {
     ref1 <- stri_join("$", convert_to_excel_ref(cols = startCol, LETTERS = LETTERS), "$", startRow)
     ref2 <- stri_join("$", convert_to_excel_ref(cols = startCol + nCol - 1L, LETTERS = LETTERS), "$", startRow + nRow - 1L + colNames)
     wb$createNamedRegion(ref1 = ref1, ref2 = ref2, name = name, sheet = wb$sheet_names[wb$validateSheet(sheet)])
   }
-
-
+  
   ## hyperlink style, if no borders
+  borders <- match.arg(borders, c("none", "surrounding", "rows", "columns", "all"))
+  
+  # TODO jmb switch to switch()?
   if (borders == "none") {
-    invisible(classStyles(wb, sheet = sheet, startRow = startRow, startCol = startCol, colNames = colNames, nRow = nrow(x), colClasses = colClasses, stack = TRUE))
+    invisible(
+      classStyles(
+        wb, 
+        sheet      = sheet,
+        startRow   = startRow, 
+        startCol   = startCol, 
+        colNames   = colNames, 
+        nRow       = nrow(x),
+        colClasses = colClasses, 
+        stack      = TRUE
+      )
+    )
   } else if (borders == "surrounding") {
-    wb$surroundingBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
+    wb$surroundingBorders(
+      colClasses,
+      sheet        = sheet,
+      startRow     = startRow + colNames,
+      startCol     = startCol,
+      nRow         = nRow, nCol = nCol,
       borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
+      borderStyle  = borderStyle
     )
   } else if (borders == "rows") {
-    wb$rowBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
+    wb$rowBorders(
+      colClasses,
+      sheet        = sheet,
+      startRow     = startRow + colNames,
+      startCol     = startCol,
+      nRow         = nRow, nCol = nCol,
       borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
+      borderStyle  = borderStyle
     )
   } else if (borders == "columns") {
-    wb$columnBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
+    wb$columnBorders(
+      colClasses,
+      sheet        = sheet,
+      startRow     = startRow + colNames,
+      startCol     = startCol,
+      nRow         = nRow, nCol = nCol,
       borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
+      borderStyle  = borderStyle
     )
   } else if (borders == "all") {
-    wb$allBorders(colClasses,
-      sheet = sheet,
-      startRow = startRow + colNames,
-      startCol = startCol,
-      nRow = nRow, nCol = nCol,
+    wb$allBorders(
+      colClasses,
+      sheet        = sheet,
+      startRow     = startRow + colNames,
+      startCol     = startCol,
+      nRow         = nRow, nCol = nCol,
       borderColour = list("rgb" = borderColour),
-      borderStyle = borderStyle
+      borderStyle  = borderStyle
     )
   }
-
+  
   invisible(0)
 }
-
-
-
-
-
-
-
-
-
-
 
 
 #' @name writeFormula
@@ -497,38 +511,37 @@ writeData <- function(wb,
 #' saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
 #' }
 #'
-writeFormula <- function(wb,
-                         sheet,
-                         x,
-                         startCol = 1,
-                         startRow = 1,
-                         array = FALSE,
-                         xy = NULL) {
+writeFormula <- function(
+  wb,
+  sheet,
+  x,
+  startCol = 1,
+  startRow = 1,
+  array = FALSE,
+  xy = NULL
+) {
   if (!"character" %in% class(x)) {
     stop("x must be a character vector.")
   }
   
   dfx <- data.frame("X" = x, stringsAsFactors = FALSE)
   class(dfx$X) <- c("character", ifelse(array, "array_formula", "formula"))
-
+  
   if (any(grepl("^(=|)HYPERLINK\\(", x, ignore.case = TRUE))) {
     class(dfx$X) <- c("character", "formula", "hyperlink")
   }
-
-
-
+  
   writeData(
-    wb = wb,
-    sheet = sheet,
-    x = dfx,
+    wb       = wb,
+    sheet    = sheet,
+    x        = dfx,
     startCol = startCol,
     startRow = startRow,
-    array = array,
-    xy = xy,
+    array    = array,
+    xy       = xy,
     colNames = FALSE,
     rowNames = FALSE
   )
-
-
+  
   invisible(0)
 }

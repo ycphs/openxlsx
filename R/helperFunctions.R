@@ -82,21 +82,21 @@ makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NUL
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
-
-
+  
+  
   cell <- paste0(int2col(col), row)
   if (!is.null(file)) {
     dest <- sprintf("[%s]'%s'!%s", file, sheet, cell)
   } else {
     dest <- sprintf("#'%s'!%s", sheet, cell)
   }
-
+  
   if (is.null(text)) {
     str <- sprintf("=HYPERLINK(\"%s\")", dest)
   } else {
     str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", dest, text)
   }
-
+  
   return(str)
 }
 
@@ -118,15 +118,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   allColClasses <- unlist(colClasses, use.names = FALSE)
   rowInds <- (1 + startRow + colNames - 1L):(nRow + startRow + colNames - 1L)
   startCol <- startCol - 1L
-
+  
   newStylesElements <- NULL
   names(colClasses) <- NULL
-
+  
   if ("hyperlink" %in% allColClasses) {
-
+    
     ## style hyperlinks
     inds <- which(sapply(colClasses, function(x) "hyperlink" %in% x))
-
+    
     hyperlinkstyle <- createStyle(textDecoration = "underline")
     hyperlinkstyle$fontColour <- list("theme" = "10")
     styleElements <- list(
@@ -135,126 +135,126 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   if ("date" %in% allColClasses) {
-
+    
     ## style dates
     inds <- which(sapply(colClasses, function(x) "date" %in% x))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "date"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   if (any(c("posixlt", "posixct", "posixt") %in% allColClasses)) {
-
+    
     ## style POSIX
     inds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "LONGDATE"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
-
+  
+  
   ## style currency as CURRENCY
   if ("currency" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "currency" %in% x))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "CURRENCY"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   ## style accounting as ACCOUNTING
   if ("accounting" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "accounting" %in% x))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "ACCOUNTING"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   ## style percentages
   if ("percentage" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "percentage" %in% x))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "percentage"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   ## style big mark
   if ("scientific" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "scientific" %in% x))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "scientific"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   ## style big mark
   if ("3" %in% allColClasses | "comma" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "3" %in% tolower(x) | "comma" %in% tolower(x)))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = "3"),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
+  
   ## numeric sigfigs (Col must be numeric and numFmt options must only have 0s and \\.)
   if ("numeric" %in% allColClasses & !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
     inds <- which(sapply(colClasses, function(x) "numeric" %in% tolower(x)))
-
+    
     styleElements <- list(
       "style" = createStyle(numFmt = getOption("openxlsx.numFmt", "0")),
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
     )
-
+    
     newStylesElements <- append(newStylesElements, list(styleElements))
   }
-
-
+  
+  
   if (!is.null(newStylesElements)) {
     if (stack) {
       for (i in seq_along(newStylesElements)) {
@@ -269,20 +269,11 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
       wb$styleObjects <- append(wb$styleObjects, newStylesElements)
     }
   }
-
-
-
+  
+  
+  
   invisible(1)
 }
-
-
-
-
-
-
-
-
-
 
 
 #' @name validateColour
@@ -294,24 +285,24 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
 #' @keywords internal
 #' @noRd
 validateColour <- function(colour, errorMsg = "Invalid colour!") {
-
+  
   ## check if
   if (is.null(colour)) {
     colour <- "black"
   }
-
+  
   validColours <- colours()
-
+  
   if (any(colour %in% validColours)) {
     colour[colour %in% validColours] <- col2hex(colour[colour %in% validColours])
   }
-
+  
   if (any(!grepl("^#[A-Fa-f0-9]{6}$", colour))) {
     stop(errorMsg, call. = FALSE)
   }
-
+  
   colour <- gsub("^#", "FF", toupper(colour))
-
+  
   return(colour)
 }
 
@@ -339,7 +330,7 @@ headerFooterSub <- function(x) {
     x <- gsub("\\[File\\]", "F", x)
     x <- gsub("\\[Tab\\]", "A", x)
   }
-
+  
   return(x)
 }
 
@@ -348,29 +339,31 @@ writeCommentXML <- function(comment_list, file_name) {
   authors <- unique(sapply(comment_list, "[[", "author"))
   xml <- '<comments xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="xr" xmlns:xr="http://schemas.microsoft.com/office/spreadsheetml/2014/revision">'
   xml <- c(xml, paste0("<authors>", paste(sprintf("<author>%s</author>", authors), collapse = ""), "</authors><commentList>"))
-
+  
   for (i in seq_along(comment_list)) {
     authorInd <- which(authors == comment_list[[i]]$author) - 1L
     xml <- c(xml, sprintf('<comment ref="%s" authorId="%s" shapeId="0"><text>', comment_list[[i]]$ref, authorInd))
     
-    if(length(comment_list[[i]]$style) != 0){ ## check that style information is present
+    if (length(comment_list[[i]]$style) != 0) {
+      ## check that style information is present
       for (j in seq_along(comment_list[[i]]$comment)) {
         xml <- c(xml, sprintf('<r>%s<t xml:space="preserve">%s</t></r>', 
-                              comment_list[[i]]$style[[j]], 
-                              comment_list[[i]]$comment[[j]]))
+          comment_list[[i]]$style[[j]], 
+          comment_list[[i]]$comment[[j]]))
       }
-    }else{ ## Case with no styling information.
+    } else {
+      ## Case with no styling information.
       for (j in seq_along(comment_list[[i]]$comment)) {
         xml <- c(xml, sprintf('<t>%s</t>', 
-                              comment_list[[i]]$comment[[j]]))
+          comment_list[[i]]$comment[[j]]))
       }
     }
     
     xml <- c(xml, "</text></comment>")
   }
-
+  
   write_file(body = paste(xml, collapse = ""), tail = "</commentList></comments>", fl = file_name)
-
+  
   NULL
 }
 
@@ -378,18 +371,17 @@ writeCommentXML <- function(comment_list, file_name) {
 illegalchars <- c("&", '"', "'", "<", ">", "\a", "\b", "\v", "\f")
 illegalcharsreplace <- c("&amp;", "&quot;", "&apos;", "&lt;", "&gt;", "", "", "", "")
 
-
 replaceIllegalCharacters <- function(v) {
   vEnc <- Encoding(v)
   v <- as.character(v)
-
+  
   flg <- vEnc != "UTF-8"
   if (any(flg)) {
     v[flg] <- stri_conv(v[flg], from = "", to = "UTF-8")
   }
-
+  
   v <- stri_replace_all_fixed(v, illegalchars, illegalcharsreplace, vectorize_all = FALSE)
-
+  
   return(v)
 }
 
@@ -400,7 +392,7 @@ replaceXMLEntities <- function(v) {
   v <- gsub("&apos;", "'", v, fixed = TRUE)
   v <- gsub("&lt;", "<", v, fixed = TRUE)
   v <- gsub("&gt;", ">", v, fixed = TRUE)
-
+  
   return(v)
 }
 
@@ -412,41 +404,35 @@ pxml <- function(x) {
 
 removeHeadTag <- function(x) {
   x <- paste(x, collapse = "")
-
+  
   if (any(grepl("<\\?", x))) {
     x <- gsub("<\\?xml [^>]+", "", x)
   }
-
+  
   x <- gsub("^>", "", x)
   x
 }
-
-
 
 validateBorderStyle <- function(borderStyle) {
   valid <- c(
     "none", "thin", "medium", "dashed", "dotted", "thick", "double", "hair", "mediumDashed",
     "dashDot", "mediumDashDot", "dashDotDot", "mediumDashDotDot", "slantDashDot"
   )
-
+  
   ind <- match(tolower(borderStyle), tolower(valid))
   if (any(is.na(ind))) {
     stop("Invalid borderStyle", call. = FALSE)
   }
-
+  
   return(valid[ind])
 }
-
-
-
-
 
 getAttrsFont <- function(xml, tag) {
   x <- lapply(xml, getChildlessNode, tag = tag)
   x[sapply(x, length) == 0] <- ""
   x <- unlist(x)
   a <- lapply(x, function(x) unlist(regmatches(x, gregexpr('[a-zA-Z]+=".*?"', x))))
-
+  
   nms <- lapply(a, function(xml) regmatches(xml, regexpr('[a-zA-Z]+(?=\\=".*?")', xml, perl = TRUE)))
   vals <- lapply(a, function(xml) regmatches(xml, regexpr('(?<=").*?(?=")', xml, perl = TRUE)))
   vals <- lapply(vals, function(x) {
@@ -457,7 +443,7 @@ getAttrsFont <- function(xml, tag) {
     names(vals[[i]]) <- nms[[i]]
     vals[[i]]
   })
-
+  
   return(vals)
 }
 
@@ -465,14 +451,14 @@ getAttrs <- function(xml, tag) {
   x <- lapply(xml, getChildlessNode, tag = tag)
   x[sapply(x, length) == 0] <- ""
   a <- lapply(x, function(x) regmatches(x, regexpr('[a-zA-Z]+=".*?"', x)))
-
+  
   names <- lapply(a, function(xml) regmatches(xml, regexpr('[a-zA-Z]+(?=\\=".*?")', xml, perl = TRUE)))
   vals <- lapply(a, function(xml) regmatches(xml, regexpr('(?<=").*?(?=")', xml, perl = TRUE)))
   vals <- lapply(vals, function(x) {
     Encoding(x) <- "UTF-8"
     x
   })
-
+  
   names(vals) <- names
   return(vals)
 }
@@ -484,11 +470,11 @@ buildFontList <- function(fonts) {
   name <- getAttrs(fonts, tag = "<name ")
   family <- getAttrs(fonts, "<family ")
   scheme <- getAttrs(fonts, "<scheme ")
-
+  
   italic <- lapply(fonts, getChildlessNode, tag = "i")
   bold <- lapply(fonts, getChildlessNode, tag = "b")
   underline <- lapply(fonts, getChildlessNode, tag = "u")
-
+  
   ## Build font objects
   ft <- replicate(list(), n = length(fonts))
   for (i in seq_along(fonts)) {
@@ -498,48 +484,48 @@ buildFontList <- function(fonts) {
       f <- c(f, sz[i])
       nms <- c(nms, "sz")
     }
-
+    
     if (length(unlist(colour[i])) > 0) {
       f <- c(f, colour[i])
       nms <- c(nms, "color")
     }
-
+    
     if (length(unlist(name[i])) > 0) {
       f <- c(f, name[i])
       nms <- c(nms, "name")
     }
-
+    
     if (length(unlist(family[i])) > 0) {
       f <- c(f, family[i])
       nms <- c(nms, "family")
     }
-
+    
     if (length(unlist(scheme[i])) > 0) {
       f <- c(f, scheme[i])
       nms <- c(nms, "scheme")
     }
-
+    
     if (length(italic[[i]]) > 0) {
       f <- c(f, "italic")
       nms <- c(nms, "italic")
     }
-
+    
     if (length(bold[[i]]) > 0) {
       f <- c(f, "bold")
       nms <- c(nms, "bold")
     }
-
+    
     if (length(underline[[i]]) > 0) {
       f <- c(f, "underline")
       nms <- c(nms, "underline")
     }
-
+    
     f <- lapply(seq_along(f), function(i) unlist(f[i]))
     names(f) <- nms
-
+    
     ft[[i]] <- f
   }
-
+  
   ft
 }
 
@@ -548,15 +534,15 @@ buildFontList <- function(fonts) {
 get_named_regions_from_string <- function(dn) {
   dn <- gsub("</definedNames>", "", dn, fixed = TRUE)
   dn <- gsub("</workbook>", "", dn, fixed = TRUE)
-
+  
   dn <- unique(unlist(strsplit(dn, split = "</definedName>", fixed = TRUE)))
   dn <- dn[grepl("<definedName", dn, fixed = TRUE)]
-
+  
   dn_names <- regmatches(dn, regexpr('(?<=name=")[^"]+', dn, perl = TRUE))
-
+  
   dn_pos <- regmatches(dn, regexpr("(?<=>).*", dn, perl = TRUE))
   dn_pos <- gsub("[$']", "", dn_pos)
-
+  
   has_bang <- grepl("!", dn_pos, fixed = TRUE)
   dn_sheets <- ifelse(has_bang,
     gsub("^(.*)!.*$", "\\1", dn_pos),
@@ -566,10 +552,10 @@ get_named_regions_from_string <- function(dn) {
     gsub("^.*!(.*)$", "\\1", dn_pos),
     ""
   )
-
+  
   attr(dn_names, "sheet") <- dn_sheets
   attr(dn_names, "position") <- dn_coords
-
+  
   return(dn_names)
 }
 
@@ -578,16 +564,16 @@ get_named_regions_from_string <- function(dn) {
 nodeAttributes <- function(x) {
   x <- paste0("<", unlist(strsplit(x, split = "<")))
   x <- x[grepl("<bgColor|<fgColor", x)]
-
+  
   if (length(x) == 0) {
     return("")
   }
-
+  
   attrs <- regmatches(x, gregexpr(' [a-zA-Z]+="[^"]*', x, perl = TRUE))
   tags <- regmatches(x, gregexpr("<[a-zA-Z]+ ", x, perl = TRUE))
   tags <- lapply(tags, gsub, pattern = "<| ", replacement = "")
   attrs <- lapply(attrs, gsub, pattern = '"', replacement = "")
-
+  
   attrs <- lapply(attrs, strsplit, split = "=")
   for (i in seq_along(attrs)) {
     nms <- lapply(attrs[[i]], "[[", 1)
@@ -596,9 +582,9 @@ nodeAttributes <- function(x) {
     names(a) <- unlist(nms)
     attrs[[i]] <- a
   }
-
+  
   names(attrs) <- unlist(tags)
-
+  
   attrs
 }
 
@@ -608,17 +594,17 @@ buildBorder <- function(x) {
   if (grepl('diagonalup="1"', tolower(x), fixed = TRUE)) {
     style$borderDiagonalUp <- TRUE
   }
-
+  
   if (grepl('diagonaldown="1"', tolower(x), fixed = TRUE)) {
     style$borderDiagonalDown <- TRUE
   }
-
+  
   ## gets all borders that have children
   x <- unlist(lapply(c("<left", "<right", "<top", "<bottom", "<diagonal"), function(tag) getNodes(xml = x, tagIn = tag)))
   if (length(x) == 0) {
     return(NULL)
   }
-
+  
   sides <- c("TOP", "BOTTOM", "LEFT", "RIGHT", "DIAGONAL")
   sideBorder <- character(length = length(x))
   for (i in seq_along(x)) {
@@ -628,28 +614,28 @@ buildBorder <- function(x) {
       sideBorder[[i]] <- tmp
     }
   }
-
+  
   sideBorder <- sideBorder[sideBorder != ""]
   x <- x[sideBorder != ""]
   if (length(sideBorder) == 0) {
     return(NULL)
   }
-
-
+  
+  
   ## style
   weight <- gsub('style=|"', "", regmatches(x, regexpr('style="[a-z]+"', x, perl = TRUE, ignore.case = TRUE)))
-
-
+  
+  
   ## Colours
   cols <- replicate(n = length(sideBorder), list(rgb = "FF000000"))
   colNodes <- unlist(sapply(x, getChildlessNode, tag = "color", USE.NAMES = FALSE))
-
+  
   if (length(colNodes) > 0) {
     attrs <- regmatches(colNodes, regexpr('(theme|indexed|rgb|auto)=".+"', colNodes))
   } else {
     attrs <- NULL
   }
-
+  
   if (length(attrs) != length(x)) {
     return(
       list(
@@ -658,7 +644,7 @@ buildBorder <- function(x) {
       )
     )
   }
-
+  
   attrs <- strsplit(attrs, split = "=")
   cols <- sapply(attrs, function(attr) {
     if (length(attr) == 2) {
@@ -671,41 +657,39 @@ buildBorder <- function(x) {
     }
     return(y)
   })
-
+  
   ## sideBorder & cols
   if ("LEFT" %in% sideBorder) {
     style$borderLeft <- weight[which(sideBorder == "LEFT")]
     style$borderLeftColour <- cols[which(sideBorder == "LEFT")]
   }
-
+  
   if ("RIGHT" %in% sideBorder) {
     style$borderRight <- weight[which(sideBorder == "RIGHT")]
     style$borderRightColour <- cols[which(sideBorder == "RIGHT")]
   }
-
+  
   if ("TOP" %in% sideBorder) {
     style$borderTop <- weight[which(sideBorder == "TOP")]
     style$borderTopColour <- cols[which(sideBorder == "TOP")]
   }
-
+  
   if ("BOTTOM" %in% sideBorder) {
     style$borderBottom <- weight[which(sideBorder == "BOTTOM")]
     style$borderBottomColour <- cols[which(sideBorder == "BOTTOM")]
   }
-
+  
   if ("DIAGONAL" %in% sideBorder) {
     style$borderDiagonal <- weight[which(sideBorder == "DIAGONAL")]
     style$borderDiagonalColour <- cols[which(sideBorder == "DIAGONAL")]
   }
-
+  
   return(style)
 }
 
 
-
-
 genHeaderFooterNode <- function(x) {
-
+  
   # <headerFooter differentOddEven="1" differentFirst="1" scaleWithDoc="0" alignWithMargins="0">
   #   <oddHeader>&amp;Lfirst L&amp;CfC&amp;RfR</oddHeader>
   #   <oddFooter>&amp;LfFootL&amp;CfFootC&amp;RfFootR</oddFooter>
@@ -714,68 +698,118 @@ genHeaderFooterNode <- function(x) {
   #   <firstHeader>&amp;L&amp;P&amp;Cfirst C&amp;Rfirst R</firstHeader>
   #   <firstFooter>&amp;Lfirst L Foot&amp;Cfirst C Foot&amp;Rfirst R Foot</firstFooter>
   #   </headerFooter>
-
+  
   ## ODD
   if (length(x$oddHeader) > 0) {
-    oddHeader <- paste0("<oddHeader>", sprintf("&amp;L%s", x$oddHeader[[1]]), sprintf("&amp;C%s", x$oddHeader[[2]]), sprintf("&amp;R%s", x$oddHeader[[3]]), "</oddHeader>", collapse = "")
+    oddHeader <- paste0(
+      "<oddHeader>", 
+      sprintf("&amp;L%s", x$oddHeader[[1]]), 
+      sprintf("&amp;C%s", x$oddHeader[[2]]), 
+      sprintf("&amp;R%s", x$oddHeader[[3]]),
+      "</oddHeader>", 
+      collapse = ""
+    )
   } else {
     oddHeader <- NULL
   }
-
+  
   if (length(x$oddFooter) > 0) {
-    oddFooter <- paste0("<oddFooter>", sprintf("&amp;L%s", x$oddFooter[[1]]), sprintf("&amp;C%s", x$oddFooter[[2]]), sprintf("&amp;R%s", x$oddFooter[[3]]), "</oddFooter>", collapse = "")
+    oddFooter <- paste0(
+      "<oddFooter>", 
+      sprintf("&amp;L%s", x$oddFooter[[1]]),
+      sprintf("&amp;C%s", x$oddFooter[[2]]), 
+      sprintf("&amp;R%s", x$oddFooter[[3]]),
+      "</oddFooter>", 
+      collapse = ""
+    )
   } else {
     oddFooter <- NULL
   }
-
+  
   ## EVEN
   if (length(x$evenHeader) > 0) {
-    evenHeader <- paste0("<evenHeader>", sprintf("&amp;L%s", x$evenHeader[[1]]), sprintf("&amp;C%s", x$evenHeader[[2]]), sprintf("&amp;R%s", x$evenHeader[[3]]), "</evenHeader>", collapse = "")
+    evenHeader <- paste0(
+      "<evenHeader>", 
+      sprintf("&amp;L%s", x$evenHeader[[1]]),
+      sprintf("&amp;C%s", x$evenHeader[[2]]),
+      sprintf("&amp;R%s", x$evenHeader[[3]]),
+      "</evenHeader>",
+      collapse = ""
+    )
   } else {
     evenHeader <- NULL
   }
-
+  
   if (length(x$evenFooter) > 0) {
-    evenFooter <- paste0("<evenFooter>", sprintf("&amp;L%s", x$evenFooter[[1]]), sprintf("&amp;C%s", x$evenFooter[[2]]), sprintf("&amp;R%s", x$evenFooter[[3]]), "</evenFooter>", collapse = "")
+    evenFooter <- paste0(
+      "<evenFooter>", 
+      sprintf("&amp;L%s", x$evenFooter[[1]]),
+      sprintf("&amp;C%s", x$evenFooter[[2]]), 
+      sprintf("&amp;R%s", x$evenFooter[[3]]),
+      "</evenFooter>", 
+      collapse = ""
+    )
   } else {
     evenFooter <- NULL
   }
-
+  
   ## FIRST
   if (length(x$firstHeader) > 0) {
-    firstHeader <- paste0("<firstHeader>", sprintf("&amp;L%s", x$firstHeader[[1]]), sprintf("&amp;C%s", x$firstHeader[[2]]), sprintf("&amp;R%s", x$firstHeader[[3]]), "</firstHeader>", collapse = "")
+    firstHeader <- paste0(
+      "<firstHeader>", 
+      sprintf("&amp;L%s", x$firstHeader[[1]]), 
+      sprintf("&amp;C%s", x$firstHeader[[2]]),
+      sprintf("&amp;R%s", x$firstHeader[[3]]),
+      "</firstHeader>", 
+      collapse = ""
+    )
   } else {
     firstHeader <- NULL
   }
-
+  
   if (length(x$firstFooter) > 0) {
-    firstFooter <- paste0("<firstFooter>", sprintf("&amp;L%s", x$firstFooter[[1]]), sprintf("&amp;C%s", x$firstFooter[[2]]), sprintf("&amp;R%s", x$firstFooter[[3]]), "</firstFooter>", collapse = "")
+    firstFooter <- paste0(
+      "<firstFooter>",
+      sprintf("&amp;L%s", x$firstFooter[[1]]), 
+      sprintf("&amp;C%s", x$firstFooter[[2]]), 
+      sprintf("&amp;R%s", x$firstFooter[[3]]), 
+      "</firstFooter>",
+      collapse = ""
+      )
   } else {
     firstFooter <- NULL
   }
-
-
+  
   headTag <- sprintf(
     '<headerFooter differentOddEven="%s" differentFirst="%s" scaleWithDoc="0" alignWithMargins="0">',
     as.integer(!(is.null(evenHeader) & is.null(evenFooter))),
     as.integer(!(is.null(firstHeader) & is.null(firstFooter)))
   )
-
-  paste0(headTag, oddHeader, oddFooter, evenHeader, evenFooter, firstHeader, firstFooter, "</headerFooter>")
+  
+  paste0(
+    headTag, 
+    oddHeader, 
+    oddFooter, 
+    evenHeader, 
+    evenFooter, 
+    firstHeader, 
+    firstFooter,
+    "</headerFooter>"
+  )
 }
 
 
 buildFillList <- function(fills) {
   fillAttrs <- rep(list(list()), length(fills))
-
+  
   ## patternFill
   inds <- grepl("patternFill", fills)
   fillAttrs[inds] <- lapply(fills[inds], nodeAttributes)
-
+  
   ## gradientFill
   inds <- grepl("gradientFill", fills)
   fillAttrs[inds] <- fills[inds]
-
+  
   return(fillAttrs)
 }
 
@@ -783,30 +817,30 @@ buildFillList <- function(fills) {
 getDefinedNamesSheet <- function(x) {
   belongTo <- unlist(lapply(strsplit(x, split = ">|<"), "[[", 3))
   quoted <- grepl("^'", belongTo)
-
+  
   belongTo[quoted] <- regmatches(belongTo[quoted], regexpr("(?<=').*(?='!)", belongTo[quoted], perl = TRUE))
   belongTo[!quoted] <- gsub("!\\$[A-Z0-9].*", "", belongTo[!quoted])
   belongTo[!quoted] <- gsub("!#REF!.*", "", belongTo[!quoted])
-
+  
   return(belongTo)
 }
 
 
 getSharedStringsFromFile <- function(sharedStringsFile, isFile) {
-
+  
   ## read in, get si tags, get t tag value and  pull out all string nodes
   sharedStrings <- get_shared_strings(xmlFile = sharedStringsFile, isFile = isFile) ## read from file
-
-
+  
+  
   Encoding(sharedStrings) <- "UTF-8"
   z <- tolower(sharedStrings)
   sharedStrings[z == "true"] <- "TRUE"
   sharedStrings[z == "false"] <- "FALSE"
   z <- NULL ## effectivel remove z
-
+  
   ## XML replacements
   sharedStrings <- replaceXMLEntities(sharedStrings)
-
+  
   return(sharedStrings)
 }
 
@@ -826,12 +860,12 @@ mergeCell2mapping <- function(x) {
     r <- as.integer(gsub(pattern = "[A-Z]", replacement = "", r, perl = TRUE))
     seq(from = r[1], to = r[2], by = 1)
   })
-
+  
   cols <- lapply(refs, function(r) {
     r <- convertFromExcelRef(r)
     seq(from = r[1], to = r[2], by = 1)
   })
-
+  
   ## for each we grid.expand
   refs <- do.call("rbind", lapply(seq_along(rows), function(i) {
     tmp <- expand.grid("cols" = cols[[i]], "rows" = rows[[i]])
@@ -839,10 +873,10 @@ mergeCell2mapping <- function(x) {
     tmp$anchor_cell <- tmp$ref[1]
     return(tmp[, c("anchor_cell", "ref", "rows")])
   }))
-
-
+  
+  
   refs <- refs[refs$anchor_cell != refs$ref, ]
-
+  
   return(refs)
 }
 
@@ -857,32 +891,32 @@ splitHeaderFooter <- function(x) {
       tmp <- gsub(special_tags[i], sprintf("openxlsx__%s67298679", i), tmp, fixed = TRUE)
     }
   }
-
+  
   tmp <- strsplit(tmp, split = "&amp;")[[1]]
-
+  
   if (length(special_tags) > 0) {
     for (i in seq_along(special_tags)) {
       tmp <- gsub(sprintf("openxlsx__%s67298679", i), special_tags[i], tmp, fixed = TRUE)
     }
   }
-
-
+  
+  
   res <- rep(list(NULL), 3)
   ind <- substr(tmp, 1, 1) == "L"
   if (any(ind)) {
     res[[1]] <- substring(tmp, 2)[ind]
   }
-
+  
   ind <- substr(tmp, 1, 1) == "C"
   if (any(ind)) {
     res[[2]] <- substring(tmp, 2)[ind]
   }
-
+  
   ind <- substr(tmp, 1, 1) == "R"
   if (any(ind)) {
     res[[3]] <- substring(tmp, 2)[ind]
   }
-
+  
   res
 }
 
@@ -890,18 +924,18 @@ splitHeaderFooter <- function(x) {
 
 
 getFile <- function(xlsxFile) {
-
+  
   ## Is this a file or URL (code taken from read.table())
   on.exit(try(close(fl), silent = TRUE), add = TRUE)
   fl <- file(description = xlsxFile)
-
+  
   ## If URL download
   if ("url" %in% class(fl)) {
     tmpFile <- tempfile(fileext = ".xlsx")
     download.file(url = xlsxFile, destfile = tmpFile, cacheOK = FALSE, mode = "wb", quiet = TRUE)
     xlsxFile <- tmpFile
   }
-
+  
   return(xlsxFile)
 }
 

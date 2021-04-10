@@ -1,5 +1,4 @@
 
-
 context("write.xlsx vector arguments")
 
 test_that("Writing then reading returns identical data.frame 1", {

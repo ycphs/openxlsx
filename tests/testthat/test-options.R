@@ -25,7 +25,6 @@ test_that("changing options", {
     "not a standard openxlsx option"
   )
   
-  # Must be single value
-  expect_error(openxlsx_getOp(NULL), "length")
-  expect_error(openxlsx_getOp(c("border", "withFilter")), "length")
+  # Multiple Ops returns error
+  expect_error(openxlsx_getOp(c("withFilter", "borders")), "length 1")
 })

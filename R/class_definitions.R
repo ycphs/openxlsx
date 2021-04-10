@@ -1,3 +1,6 @@
+
+# Workbook ----------------------------------------------------------------
+
 Workbook <- setRefClass("Workbook",
   fields = c(
     "sheet_names" = "character",
@@ -56,7 +59,7 @@ Workbook <- setRefClass("Workbook",
   )
 )
 
-
+# Style -------------------------------------------------------------------
 
 Style <- setRefClass("Style",
   fields = c(
@@ -92,6 +95,8 @@ Style <- setRefClass("Style",
   methods = list()
 )
 
+# Sheet_Data --------------------------------------------------------------
+
 Sheet_Data <- setRefClass("Sheet_Data",
   fields = c(
     "rows" = "integer",
@@ -106,8 +111,7 @@ Sheet_Data <- setRefClass("Sheet_Data",
 )
 
 
-
-
+# Worksheet ---------------------------------------------------------------
 
 WorkSheet <- setRefClass("WorkSheet",
   fields = c(
@@ -143,8 +147,7 @@ WorkSheet <- setRefClass("WorkSheet",
   )
 )
 
-
-
+# ChartSheet --------------------------------------------------------------
 
 ChartSheet <- setRefClass("ChartSheet",
   fields = c(

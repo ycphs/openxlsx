@@ -19,16 +19,18 @@ The openxlsx package uses global options, most to simplify formatting.  These
  \item{openxlsx.borders}{"none"}
  \item{openxlsx.borderStyle}{"thin"}
  \item{openxlsx.compressionLevel}{"9"}
+ \item{openxlsx.creator}{""}
  \item{openxlsx.dateFormat}{"mm/dd/yyyy"}
  \item{openxlsx.datetimeFormat}{"yyyy-mm-dd hh:mm:ss"}
  \item{openxlsx.headerStyle}{NULL}
+ \item{openxlsx.keepNA}{FALSE}
  \item{openxlsx.na.string}{NULL}
  \item{openxlsx.numFmt}{NULL}
  \item{openxlsx.orientation}{"portrait"}
  \item{openxlsx.paperSize}{9}
  \item{openxlsx.tabColour}{"TableStyleLight9"}
  \item{openxlsx.tableStyle}{"TableStyleLight9"}
- \item{openxlsx.withFilter}{FALSE}
+ \item{openxlsx.withFilter}{NA Whether to write data with or without a filter.  If NA will make filters with \code{writeDataTable} and will not for \code{writeData}}
 }
 
 See the Formatting vignette for examples.
@@ -46,7 +48,7 @@ Additional options
    \item{\code{\link{writeDataTable}}}
    \item{\code{\link{write.xlsx}}}
    \item{\code{\link{read.xlsx}}}
-   \item{\code{\link{op.openxlx}}}
+   \item{\code{\link{op.openxlsx}}}
   }
 for examples
 }

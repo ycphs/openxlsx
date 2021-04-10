@@ -2,8 +2,6 @@
 
 context("Reading from workbook is identical to reading from file")
 
-
-
 test_that("Reading from loaded workbook", {
   wb <- createWorkbook()
   for (i in 1:4) {
