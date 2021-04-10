@@ -888,7 +888,7 @@ std::vector<std::string> getChildlessNode_ss(std::string xml, std::string tag){
 // [[Rcpp::export]]
 CharacterVector getChildlessNode(std::string xml, std::string tag) {
   
-  size_t k = tag.length();
+  // size_t k = tag.length(); variable not used
   if(xml.length() == 0)
     return wrap(NA_STRING);
   

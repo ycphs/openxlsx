@@ -309,7 +309,7 @@ read.xlsx.Workbook <- function(xlsxFile,
     }))
 
 
-    dateIds <- NULL
+    # dateIds <- NULL variable not used
     if (length(format_codes) > 0) {
 
       ## this regex defines what "looks" like a date

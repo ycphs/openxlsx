@@ -1,9 +1,17 @@
-# openxlsx 4.2.3.9000
+# development
 
-## New Features
+## Fixes
 
+* `write.xlsx()` now successfully passes `withFilter` ([#151](https://github.com/ycphs/openxlsx/issues/151))
+* code clean up PR [#168](https://github.com/ycphs/openxlsx/pull/168)
+* removal of unused variables PR [#168](https://github.com/ycphs/openxlsx/pull/168)
+
+## New features
+
+* `write.xlsx()` can now handle `colWidths` passed as either a single element or a `list()`
 * Added ability to change positioning of summary columns and rows.
-	* These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
+  * These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
+* activeSheet allows to set and get the active (displayed) sheet of a worbook.
 
 # openxlsx 4.2.3
  

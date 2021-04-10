@@ -169,8 +169,8 @@ WorkSheet$methods(get_post_sheet_data = function() {
   }
 
   if (length(hyperlinks) > 0) {
-    h_inds <- paste0(1:length(hyperlinks), "h")
-    xml <- paste(xml, paste("<hyperlinks>", paste(sapply(1:length(h_inds), function(i) hyperlinks[[i]]$to_xml(h_inds[i])), collapse = ""), "</hyperlinks>"), collapse = "")
+    h_inds <- paste0(seq_along(hyperlinks), "h")
+    xml <- paste(xml, paste("<hyperlinks>", paste(sapply(seq_along(h_inds), function(i) hyperlinks[[i]]$to_xml(h_inds[i])), collapse = ""), "</hyperlinks>"), collapse = "")
   }
 
   if (length(pageMargins) > 0) {

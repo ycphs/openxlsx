@@ -5,6 +5,7 @@ cran-comments.md
 ^.*\.github\*
 .travis.yml
 .appveyor.yml
+.lintr
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^_pkgdown\.yml$
@@ -14,3 +15,7 @@ cran-comments.md
 ^\.github$
 ^azure-pipelines\.yml$
 ^\.pre-commit-config\.yaml$
+^img$
+^openxlsx\.Rcheck$
+^openxlsx.*\.tar\.gz$
+^openxlsx.*\.tgz$

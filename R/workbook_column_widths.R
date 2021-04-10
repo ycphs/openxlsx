@@ -91,7 +91,7 @@ Workbook$methods(setColWidths = function(sheet) {
         sd <- worksheets[[sheet]]$sheet_data
 
         if (length(merge_cols) > 0) {
-          all_merged_cells <- lapply(1:length(merge_cols), function(i) {
+          all_merged_cells <- lapply(seq_along(merge_cols), function(i) {
             expand.grid(
               "rows" = min(merge_rows[[i]]):max(merge_rows[[i]]),
               "cols" = min(merge_cols[[i]]):max(merge_cols[[i]])

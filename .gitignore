@@ -16,3 +16,6 @@ Rprof.out
 docs/*.*
 docs/reference/*.html
 docs/
+openxlsx.Rcheck/
+openxlsx*.tar.gz
+openxlsx*.tgz

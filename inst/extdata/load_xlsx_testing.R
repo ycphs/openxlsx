@@ -1,4 +1,4 @@
-
+# nolint start
 require('openxlsx')
 
 unzip_xlsx <- function(fl){
@@ -172,4 +172,4 @@ openXL(file.path(test_file_dir, "pivotTest.xlsx"))
 
 
 
-
+# nolint end

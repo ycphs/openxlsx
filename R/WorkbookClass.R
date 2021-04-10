@@ -56,7 +56,7 @@ Workbook$methods(
 
     sheet_names <<- character(0)
     sheetOrder <<- integer(0)
-
+   
     sharedStrings <<- list()
     attr(sharedStrings, "uniqueCount") <<- 0
 
@@ -78,6 +78,7 @@ Workbook$methods(
 
     worksheets <<- list()
     worksheets_rels <<- list()
+    ActiveSheet <<- integer(0)
   }
 )
 
@@ -114,6 +115,7 @@ Workbook$methods(
         ))) + 1L
     } else {
       sheetId <- 1
+      ActiveSheet <<- 1L
     }
 
 
@@ -1976,9 +1978,9 @@ Workbook$methods(
                                xlworksheetsDir,
                                xlworksheetsRelsDir) {
     ## write worksheets
-    nSheets <- length(worksheets)
-
-    for (i in 1:nSheets) {
+    # nSheets <- length(worksheets)
+    
+    for (i in seq_along(worksheets)) {
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
         write_file(
@@ -2604,7 +2606,7 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length(worksheets[[sheet]]$conditionalFormatting) > 0) {
-      for (i in length(worksheets[[sheet]]$conditionalFormatting):1) {
+      for (i in rev(seq_along(worksheets[[sheet]]$conditionalFormatting))) {
         priority <-
           regmatches(
             worksheets[[sheet]]$conditionalFormatting[[i]],
@@ -2615,16 +2617,16 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
-
+        
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
-
+        
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
-            priority_new,
-            worksheets[[sheet]]$conditionalFormatting[[i]],
-            fixed = TRUE
+               priority_new,
+               worksheets[[sheet]]$conditionalFormatting[[i]],
+               fixed = TRUE
           )
       }
     }
@@ -3237,7 +3239,7 @@ Workbook$methods(
       sprintf(
         '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
         visible_sheet_index - 1L,
-        visible_sheet_index - 1L
+        ActiveSheet - 1L
       )
 
     worksheets[[visible_sheet_index]]$sheetViews <<-
@@ -3432,6 +3434,23 @@ Workbook$methods(
       if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
       }
+      
+      
+      if(ActiveSheet==i) {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"1\"")
+          )
+      } else {
+        worksheets[[i]]$sheetViews <<-
+          stri_replace_all_regex(
+            worksheets[[i]]$sheetViews,
+            "tabSelected=\"[0-9]\"",
+            paste0("tabSelected=\"0\"")
+          )
+      }
     }
   }
 )
@@ -3454,7 +3473,7 @@ Workbook$methods(
 
       ## ********** Assume all styleObjects cells have one a single worksheet **********
       ## Loop through existing styleObjects
-      newInds <- 1:length(rows)
+      newInds <- seq_along(rows)
       keepStyle <- rep(TRUE, nStyles)
       for (i in 1:nStyles) {
         if (sheet == styleObjects[[i]]$sheet) {
@@ -3658,7 +3677,7 @@ Workbook$methods(
 
 
         ## loop through existing tables checking if any over lap with new table
-        for (i in 1:length(exTable)) {
+        for (i in seq_along(exTable)) {
           existing_cols <- cols[[i]]
           existing_rows <- rows[[i]]
 
@@ -3686,9 +3705,13 @@ Workbook$methods(
     nImages <- length(media)
     nCharts <- length(charts)
     nStyles <- length(styleObjects)
-
+    aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
+    
+    if (length(aSheet) == 0) {
+      aSheet <- 1
+    }
 
     ## worksheets
     if (nSheets > 0) {
@@ -3795,8 +3818,16 @@ Workbook$methods(
     if (nSheets > 0) {
       showText <-
         c(showText, sprintf(
-          "Worksheet write order: %s",
+          "Worksheet write order: %s\n",
           stri_join(sheetOrder, sep = " ", collapse = ", ")
+        ))
+    }
+    
+    if(aSheet >= 1){
+      showText <-
+        c(showText, sprintf(
+          "Active Worksheet: %s",
+          aSheet
         ))
     }
 
@@ -17804,7 +17835,7 @@ Workbook$methods(
 
     ## Increment priority of conditional formatting rule
     if (length((worksheets[[sheet]]$conditionalFormatting)) > 0) {
-      for (i in length(worksheets[[sheet]]$conditionalFormatting):1) {
+      for (i in rev(seq_along(worksheets[[sheet]]$conditionalFormatting))) {
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub('(?<=priority=")[0-9]+',
             i + 1L,
@@ -17916,7 +17947,7 @@ Workbook$methods(
       formatCodes <-
         sapply(numFmts, getAttr, tag = 'formatCode="', USE.NAMES = FALSE)
       numFmts <-
-        lapply(1:length(numFmts), function(i) {
+        lapply(seq_along(numFmts), function(i) {
           list("numFmtId" = numFmtsIds[[i]], "formatCode" = formatCodes[[i]])
         })
       numFmtFlag <- TRUE
@@ -17970,7 +18001,7 @@ Workbook$methods(
         regmatches(xfAttrs, regexpr('(?<=").*?(?=")', xfAttrs, perl = TRUE))
       })
 
-    for (i in 1:length(xf)) {
+    for (i in seq_along(xf)) {
       names(xfVals[[i]]) <- xfNames[[i]]
     }
 
@@ -18254,5 +18285,40 @@ Workbook$methods(
           replacement = LastModifiedBy
         )
     }
+  }
+)
+
+
+
+Workbook$methods(
+  setactiveSheet = function(activeSheet = NULL) {
+    if (is.character(activeSheet)) {
+      if (activeSheet %in% sheet_names) {
+        ActiveSheet <<- which(sheet_names == activeSheet)
+      } else {
+        stop(paste(activeSheet, "doesn't exist as sheet name."))
+      }
+    }
+
+    if (is.integer(activeSheet)|is.numeric(activeSheet)) {
+      if (activeSheet %in% seq_along(sheet_names)) {
+        ActiveSheet <<- as.integer(activeSheet)
+      }else {
+        stop(paste(activeSheet, "doesn't exist as sheet index."))
+      }
+    }
+
+    for(i in seq_along(sheet_names)){
+      worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
+                           "tabSelected=\"[0-9]\"",
+                           paste0("tabSelected=\"",
+                                  as.integer(ActiveSheet == i)
+                                  ,"\""))
+      
+      
+    }
+    
+    
+  
   }
 )

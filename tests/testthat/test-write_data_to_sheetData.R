@@ -223,3 +223,28 @@ test_that("Write zero rows & columns", {
   saveWorkbook(wb, tempFile, overwrite = TRUE)
   unlink(tempFile)
 })
+
+
+
+
+test_that("too much data",
+          
+          {
+            wb <- createWorkbook()
+            addWorksheet(wb, "test1")
+            addWorksheet(wb, "test2")
+            df1 <-
+              data.frame(Col1 = paste(rep(1, 32768 + 100), collapse = ""))
+            df2 <-
+              data.frame(Col1 = paste(rep(1, 32768), collapse = ""))
+            expect_warning(
+              writeData(wb, 1, df1),
+              "1 is truncated. 
+Number of characters exeed the limit of 32767."
+            )
+            expect_warning(
+              writeData(wb, 2, df2),
+              "1 is truncated. 
+Number of characters exeed the limit of 32767."
+            )
+          })
