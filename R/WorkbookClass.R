@@ -3242,7 +3242,7 @@ Workbook$methods(
       }))
 
     ## re-order worksheets if need to
-    if (any(sheetOrder != 1:nSheets)) {
+    if (any(sheetOrder != seq_len(nSheets))) {
       workbook$sheets <<- workbook$sheets[sheetOrder]
     }
 
@@ -3252,31 +3252,46 @@ Workbook$methods(
     state <- rep.int("visible", nSheets)
     state[grepl("hidden", workbook$sheets)] <- "hidden"
     visible_sheet_index <- which(state %in% "visible")[[1]]
-
+    visible_sheets <- which(state %in% "visible")
     workbook$bookViews <<-
       sprintf(
         '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
         visible_sheet_index - 1L,
         ActiveSheet - 1L
       )
-
-    worksheets[[visible_sheet_index]]$sheetViews <<-
-      sub(
-        '( tabSelected="0")|( tabSelected="false")',
-        ' tabSelected="1"',
-        worksheets[[visible_sheet_index]]$sheetViews,
-        ignore.case = TRUE
-      )
-    if (nSheets > 1) {
-      for (i in (1:nSheets)[!(1:nSheets) %in% visible_sheet_index]) {
-        worksheets[[i]]$sheetViews <<-
-          sub(
-            ' tabSelected="(1|true|false|0)"',
-            ' tabSelected="0"',
-            worksheets[[i]]$sheetViews,
-            ignore.case = TRUE
-          )
-      }
+    
+    for(i in seq_len(nSheets)) {
+      worksheets[[i]]$sheetViews <<-
+        sub(
+          ' tabSelected="(1|true|false|0)"',
+          ifelse(
+            ActiveSheet == i,
+            ' tabSelected="true"',
+            ' tabSelected="false"'
+          ),
+          worksheets[[i]]$sheetViews,
+          ignore.case = TRUE
+        )
+    }
+    # worksheets[[visible_sheet_index]]$sheetViews
+    
+    # worksheets[[visible_sheet_index]]$sheetViews <<-
+    #   sub(
+    #     '( tabSelected="0")|( tabSelected="false")',
+    #     ' tabSelected="1"',
+    #     worksheets[[visible_sheet_index]]$sheetViews,
+    #     ignore.case = TRUE
+    #   )
+    # if (nSheets > 1) {
+    #   for (i in (1:nSheets)[!(1:nSheets) %in% visible_sheet_index]) {
+    #     worksheets[[i]]$sheetViews <<-
+    #       sub(
+    #         ' tabSelected="(1|true|false|0)"',
+    #         ' tabSelected="false"',
+    #         worksheets[[i]]$sheetViews,
+    #         ignore.case = TRUE
+    #       )
+    #   }
     }
 
 
