@@ -125,7 +125,6 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
 
   ## set scientific notation penalty
 
-  # TODO separate params, remove NULLs, use mapply()
   params <- list(...)
 
   ## Possible parameters
@@ -182,9 +181,6 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
   if (!is.logical(asTable)) {
     stop("asTable must be a logical.")
   }
-
-  # TODO jmb Can this be done in a simpler way?  mapply?  do.call?
-  # TODO yes, leave all validation to the other functions
 
   creator <- params$creator %||% openxlsx_getOp("creator", "")
   title <- params$title ### will return NULL of not exist

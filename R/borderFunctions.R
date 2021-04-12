@@ -19,7 +19,6 @@ genBaseColStyle <- function(cc) {
     colStyle$numFmt <- list(numFmtId = "11")
   } else if (any(c("3", "comma") %in% cc)) {
     colStyle$numFmt <- list(numFmtId = "3")
-    # TODO jmb is this a safe change?
   } else if ("numeric" %in% cc & !grepl("[^0\\.,#\\$\\* %]", openxlsx_getOp("numFmt"))) {
     colStyle$numFmt <- list(numFmtId = 9999, formatCode = openxlsx_getOp("numFmt"))
   } else {

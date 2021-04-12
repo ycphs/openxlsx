@@ -368,7 +368,6 @@ addWorksheet <- function(
   gridLines = openxlsx_getOp("gridLines", TRUE),
   tabColour = NULL,
   zoom = 100,
-  # TODO jmb check that "none" is fine for header and footer
   header = openxlsx_getOp("header"), 
   footer = openxlsx_getOp("footer"), 
   evenHeader = openxlsx_getOp("evenHeader"), 
@@ -783,7 +782,6 @@ createStyle <- function(
     numFmt <- replaceIllegalCharacters(numFmt_original)
   }
   
-  # TODO jmb save vector separately
   numFmtMapping <- list(
     list(numFmtId = 0), # GENERAL
     list(numFmtId = 2), # NUMBER

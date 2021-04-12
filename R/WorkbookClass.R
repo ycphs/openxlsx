@@ -3846,8 +3846,6 @@ Workbook$methods(
 
 # openxlsxFontSizeLookupTable ---------------------------------------------
 
-# TODO jmb openxlsxFontSizeLookupTable in data-raw?
-
 ## Character width lookup table
 openxlsxFontSizeLookupTable <-
   data.frame(

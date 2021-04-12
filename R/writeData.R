@@ -216,10 +216,8 @@ writeData <- function(
 
   startRow <- as.integer(startRow)
 
-  # TODO jmb add inherits
   if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
 
-  # TODO jmb add checks
   if (!is.logical(colNames)) stop("colNames must be a logical.")
   if (!is.logical(rowNames)) stop("rowNames must be a logical.")
 
@@ -365,7 +363,6 @@ writeData <- function(
   ## hyperlink style, if no borders
   borders <- match.arg(borders, c("none", "surrounding", "rows", "columns", "all"))
 
-  # TODO jmb switch to switch()?
   if (borders == "none") {
     invisible(
       classStyles(
