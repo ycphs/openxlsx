@@ -231,7 +231,7 @@ SEXP buildMatrixMixed(CharacterVector v,
           try{
             datetmp[ri] = Rcpp::Date(atoi(dt_str.substr(5,2).c_str()), atoi(dt_str.substr(8,2).c_str()), atoi(dt_str.substr(0,4).c_str()) );
           }catch(...) {
-            std::cerr << "Error reading date:\n" << dt_str << "\nrow: " << ri+1 << "\ncol: " << i+1 << "\n";
+            Rcpp::Rcerr << "Error reading date:\n" << dt_str << "\nrow: " << ri+1 << "\ncol: " << i+1 << "\n";
             throw;
           }
           //datetmp[ri] = Date(atoi(m(ri,i)) - originAdj);
