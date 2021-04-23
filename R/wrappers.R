@@ -362,24 +362,34 @@ sheets <- function(wb) {
 #' \dontrun{
 #' saveWorkbook(wb, "addWorksheetExample.xlsx", overwrite = TRUE)
 #' }
-addWorksheet <- function(wb, sheetName,
-                         gridLines = TRUE,
-                         tabColour = NULL,
-                         zoom = 100,
-                         header = NULL,
-                         footer = NULL,
-                         evenHeader = NULL,
-                         evenFooter = NULL,
-                         firstHeader = NULL,
-                         firstFooter = NULL,
-                         visible = TRUE,
-                         paperSize = getOption("openxlsx.paperSize", default = 9),
-                         orientation = getOption("openxlsx.orientation", default = "portrait"),
-                         vdpi = getOption("openxlsx.vdpi", default = getOption("openxlsx.dpi", default = 300)),
-                         hdpi = getOption("openxlsx.hdpi", default = getOption("openxlsx.dpi", default = 300))) {
+addWorksheet <- function(
+  wb,
+  sheetName,
+  gridLines = openxlsx_getOp("gridLines", TRUE),
+  tabColour = NULL,
+  zoom = 100,
+  header = openxlsx_getOp("header"), 
+  footer = openxlsx_getOp("footer"), 
+  evenHeader = openxlsx_getOp("evenHeader"), 
+  evenFooter = openxlsx_getOp("evenFooter"), 
+  firstHeader = openxlsx_getOp("firstHeader"), 
+  firstFooter = openxlsx_getOp("firstFooter"), 
+  visible = TRUE,
+  paperSize = openxlsx_getOp("paperSize", 9),
+  orientation = openxlsx_getOp("orientation", "portrait"),
+  vdpi = openxlsx_getOp("vdpi", 300),
+  hdpi = openxlsx_getOp("hdpi", 300)
+) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
+  
+  # Set NULL defaults
+  gridLines   <- gridLines   %||% TRUE
+  paperSize   <- paperSize   %||% 9
+  orientation <- orientation %||% "portrait"
+  vdpi        <- vdpi        %||% 300
+  hdpi        <- hdpi        %||% 300
   
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -734,19 +744,25 @@ convertFromExcelRef <- function(col) {
 #'
 #' # supply all colours
 #' createStyle(border = "TopBottomLeft", borderColour = c("red", "yellow", "green"))
-createStyle <- function(fontName = NULL,
-                        fontSize = NULL,
-                        fontColour = NULL,
-                        numFmt = "GENERAL",
-                        border = NULL,
-                        borderColour = getOption("openxlsx.borderColour", "black"),
-                        borderStyle = getOption("openxlsx.borderStyle", "thin"),
-                        bgFill = NULL, fgFill = NULL,
-                        halign = NULL, valign = NULL,
-                        textDecoration = NULL, wrapText = FALSE,
-                        textRotation = NULL,
-                        indent = NULL,
-                        locked = NULL, hidden = NULL) {
+createStyle <- function(
+  fontName       = NULL,
+  fontSize       = NULL,
+  fontColour     = NULL,
+  numFmt         = openxlsx_getOp("numFmt", "GENERAL"),
+  border         = NULL,
+  borderColour   = openxlsx_getOp("borderColour", "black"),
+  borderStyle    = openxlsx_getOp("borderStyle", "thin"),
+  bgFill         = NULL, 
+  fgFill         = NULL,
+  halign         = NULL,
+  valign         = NULL,
+  textDecoration = NULL,
+  wrapText       = FALSE,
+  textRotation   = NULL,
+  indent         = NULL,
+  locked         = NULL, 
+  hidden         = NULL
+  ) {
   
   ### Error checking
   od <- getOption("OutDec")
@@ -759,31 +775,27 @@ createStyle <- function(fontName = NULL,
   validNumFmt <- c("general", "number", "currency", "accounting", "date", "longdate", "time", "percentage", "scientific", "text", "3", "4", "comma")
   
   if (numFmt == "date") {
-    numFmt <- getOption("openxlsx.dateFormat", getOption("openxlsx.dateformat", "date"))
+    numFmt <- openxlsx_getOp("dateFormat", "date")
   } else if (numFmt == "longdate") {
-    numFmt <- getOption("openxlsx.datetimeFormat", getOption("openxlsx.datetimeformat", getOption("openxlsx.dateTimeFormat", "longdate")))
+    numFmt <- openxlsx_getOp("datetimeFormat", "longdate")
   } else if (!numFmt %in% validNumFmt) {
     numFmt <- replaceIllegalCharacters(numFmt_original)
   }
   
-  
-  
-  
   numFmtMapping <- list(
-    list("numFmtId" = 0), # GENERAL
-    list("numFmtId" = 2), # NUMBER
-    list("numFmtId" = 164, formatCode = "&quot;$&quot;#,##0.00"), ## CURRENCY
-    list("numFmtId" = 44), # ACCOUNTING
-    list("numFmtId" = 14), # DATE
-    list("numFmtId" = 166, formatCode = "yyyy/mm/dd hh:mm:ss"), # LONGDATE
-    list("numFmtId" = 167), # TIME
-    list("numFmtId" = 10), # PERCENTAGE
-    list("numFmtId" = 11), # SCIENTIFIC
-    list("numFmtId" = 49), # TEXT
-    
-    list("numFmtId" = 3),
-    list("numFmtId" = 4),
-    list("numFmtId" = 3)
+    list(numFmtId = 0), # GENERAL
+    list(numFmtId = 2), # NUMBER
+    list(numFmtId = 164, formatCode = "&quot;$&quot;#,##0.00"), ## CURRENCY
+    list(numFmtId = 44), # ACCOUNTING
+    list(numFmtId = 14), # DATE
+    list(numFmtId = 166, formatCode = "yyyy/mm/dd hh:mm:ss"), # LONGDATE
+    list(numFmtId = 167), # TIME
+    list(numFmtId = 10), # PERCENTAGE
+    list(numFmtId = 11), # SCIENTIFIC
+    list(numFmtId = 49), # TEXT
+    list(numFmtId = 3),
+    list(numFmtId = 4),
+    list(numFmtId = 3)
   )
   
   names(numFmtMapping) <- validNumFmt
@@ -1007,8 +1019,6 @@ createStyle <- function(fontName = NULL,
 #'   fgFill = "#4F81BD", border = "TopBottom", borderColour = "#4F81BD"
 #' )
 #'
-#' addStyle(wb, sheet = 1, headerStyle, rows = 1, cols = 1:6, gridExpand = TRUE)
-#'
 #' ## style for body
 #' bodyStyle <- createStyle(border = "TopBottom", borderColour = "#4F81BD")
 #' addStyle(wb, sheet = 1, bodyStyle, rows = 2:6, cols = 1:6, gridExpand = TRUE)
@@ -1016,12 +1026,18 @@ createStyle <- function(fontName = NULL,
 #' \dontrun{
 #' saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
 #' }
-addStyle <- function(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = FALSE) {
+addStyle <- function(
+  wb, 
+  sheet, 
+  style, 
+  rows, 
+  cols, 
+  gridExpand = FALSE,
+  stack = FALSE
+) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
-  
-  
   
   
   if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {

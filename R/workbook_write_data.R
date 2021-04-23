@@ -1,9 +1,17 @@
 
 #' @include class_definitions.R
-
-
-
-Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, colClasses, hlinkNames, keepNA, na.string, list_sep) {
+Workbook$methods(writeData = function(
+  df,
+  sheet,
+  startRow,
+  startCol,
+  colNames,
+  colClasses,
+  hlinkNames,
+  keepNA, 
+  na.string,
+  list_sep
+) {
   sheet <- validateSheet(sheet)
   nCols <- ncol(df)
   nRows <- nrow(df)
@@ -14,7 +22,6 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
 
   ######################################################################
   ## standardise all column types
-
 
   ## pull out NaN values
   nans <- unlist(lapply(1:nCols, function(i) {
@@ -63,7 +70,6 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
       }
     }
   }
-
 
   ## convert any Dates to integers and create date style object
   if (any(c("currency", "accounting", "percentage", "3", "comma") %in% allColClasses)) {
@@ -126,10 +132,6 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
       class(df[[i]]) <- "character"
     }
   }
-
-
-
-
 
   ## End standardise all column types
   ######################################################################
@@ -236,11 +238,6 @@ Workbook$methods(writeData = function(df, sheet, startRow, startCol, colNames, c
   }
 
 
-
-
-
-
-
   ## convert all strings to references in sharedStrings and update values (v)
   strFlag <- which(t == 1L)
   newStrs <- v[strFlag]
@@ -290,8 +287,6 @@ Number of characters exeed the limit of 32767."
     f_in = f_in,
     any_functions = any_functions
   )
-
-
 
   invisible(0)
 })

@@ -2,22 +2,24 @@
 #' @include class_definitions.R
 
 
-WorkSheet$methods(initialize = function(showGridLines = TRUE,
-                                        tabSelected = FALSE,
-                                        tabColour = NULL,
-                                        zoom = 100,
-
-                                        oddHeader = NULL,
-                                        oddFooter = NULL,
-                                        evenHeader = NULL,
-                                        evenFooter = NULL,
-                                        firstHeader = NULL,
-                                        firstFooter = NULL,
-
-                                        paperSize = 9,
-                                        orientation = "portrait",
-                                        hdpi = 300,
-                                        vdpi = 300) {
+WorkSheet$methods(initialize = function(
+  showGridLines = TRUE,
+  tabSelected = FALSE,
+  tabColour = NULL,
+  zoom = 100,
+  
+  oddHeader = NULL,
+  oddFooter = NULL,
+  evenHeader = NULL,
+  evenFooter = NULL,
+  firstHeader = NULL,
+  firstFooter = NULL,
+  
+  paperSize = 9,
+  orientation = "portrait",
+  hdpi = 300,
+  vdpi = 300
+  ) {
   if (!is.null(tabColour)) {
     tabColour <- sprintf('<sheetPr><tabColor rgb="%s"/></sheetPr>', tabColour)
   } else {
@@ -39,16 +41,25 @@ WorkSheet$methods(initialize = function(showGridLines = TRUE,
     })
   }
 
+  # hf <- list(
+  #   oddHeader = naToNULLList(oddHeader),
+  #   oddFooter = naToNULLList(oddFooter),
+  #   evenHeader = naToNULLList(evenHeader),
+  #   evenFooter = naToNULLList(evenFooter),
+  #   firstHeader = naToNULLList(firstHeader),
+  #   firstFooter = naToNULLList(firstFooter)
+  # )
+  
   hf <- list(
-    oddHeader = naToNULLList(oddHeader),
-    oddFooter = naToNULLList(oddFooter),
-    evenHeader = naToNULLList(evenHeader),
-    evenFooter = naToNULLList(evenFooter),
-    firstHeader = naToNULLList(firstHeader),
-    firstFooter = naToNULLList(firstFooter)
+    oddHeader   = oddHeader,
+    oddFooter   = oddFooter,
+    evenHeader  = evenHeader,
+    evenFooter  = evenFooter,
+    firstHeader = firstHeader,
+    firstFooter = firstFooter
   )
-
-  if (all(sapply(hf, length) == 0)) {
+  
+  if (all(vapply(hf, is.null, NA))) {
     hf <- list()
   }
 
@@ -81,12 +92,6 @@ WorkSheet$methods(initialize = function(showGridLines = TRUE,
 
   sheet_data <<- Sheet_Data$new()
 })
-
-
-
-
-
-
 
 
 
@@ -126,8 +131,6 @@ WorkSheet$methods(get_prior_sheet_data = function() {
 })
 
 
-
-
 WorkSheet$methods(get_post_sheet_data = function() {
   xml <- ""
 
@@ -142,8 +145,6 @@ WorkSheet$methods(get_post_sheet_data = function() {
   if (length(mergeCells) > 0) {
     xml <- paste0(xml, paste0(sprintf('<mergeCells count="%s">', length(mergeCells)), pxml(mergeCells), "</mergeCells>"), collapse = "")
   }
-
-
 
   if (length(conditionalFormatting) > 0) {
     nms <- names(conditionalFormatting)
@@ -167,13 +168,10 @@ WorkSheet$methods(get_post_sheet_data = function() {
     xml <- paste0(xml, paste0(sprintf('<dataValidations count="%s">', length(dataValidations)), pxml(dataValidations), "</dataValidations>"))
   }
 
-
-
   if (length(hyperlinks) > 0) {
     h_inds <- paste0(seq_along(hyperlinks), "h")
     xml <- paste(xml, paste("<hyperlinks>", paste(sapply(seq_along(h_inds), function(i) hyperlinks[[i]]$to_xml(h_inds[i])), collapse = ""), "</hyperlinks>"), collapse = "")
   }
-
 
   if (length(pageMargins) > 0) {
     xml <- paste0(xml, pageMargins, collapse = "")
@@ -183,10 +181,9 @@ WorkSheet$methods(get_post_sheet_data = function() {
     xml <- paste0(xml, pageSetup, collapse = "")
   }
 
-  if (length(headerFooter) > 0) {
+  if (!identical(headerFooter, list()) && length(headerFooter) > 0) {
     xml <- paste0(xml, genHeaderFooterNode(headerFooter), collapse = "")
   }
-
 
   ## rowBreaks and colBreaks
   if (length(rowBreaks) > 0) {
@@ -195,7 +192,6 @@ WorkSheet$methods(get_post_sheet_data = function() {
       collapse = ""
     )
   }
-
 
   if (length(colBreaks) > 0) {
     xml <- paste0(xml,
