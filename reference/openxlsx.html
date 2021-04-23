@@ -141,23 +141,35 @@ and removes the dependency on Java.</p>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The openxlsx package uses global options to simplify formatting:</p>
-<ul>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.borderColour" = "black")</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.borderStyle" = "thin")</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.dateFormat" = "mm/dd/yyyy")</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.numFmt" = NULL)</a></code></p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.paperSize" = 9)</a></code> ## A4</p></li>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.orientation" = "portrait")</a></code> ## page orientation</p></li>
-</ul><p>See the Formatting vignette for examples.</p>
+    <p>The openxlsx package uses global options, most to simplify formatting.  These
+  are stored in the <code>op.openxlsx</code> object.</p>
+<dl>
+ <dt>openxlsx.bandedCols</dt><dd><p>FALSE</p></dd>
+ <dt>openxlsx.bandedRows</dt><dd><p>TRUE</p></dd>
+ <dt>openxlsx.borderColour</dt><dd><p>"black"</p></dd>
+ <dt>openxlsx.borders</dt><dd><p>"none"</p></dd>
+ <dt>openxlsx.borderStyle</dt><dd><p>"thin"</p></dd>
+ <dt>openxlsx.compressionLevel</dt><dd><p>"9"</p></dd>
+ <dt>openxlsx.creator</dt><dd><p>""</p></dd>
+ <dt>openxlsx.dateFormat</dt><dd><p>"mm/dd/yyyy"</p></dd>
+ <dt>openxlsx.datetimeFormat</dt><dd><p>"yyyy-mm-dd hh:mm:ss"</p></dd>
+ <dt>openxlsx.headerStyle</dt><dd><p>NULL</p></dd>
+ <dt>openxlsx.keepNA</dt><dd><p>FALSE</p></dd>
+ <dt>openxlsx.na.string</dt><dd><p>NULL</p></dd>
+ <dt>openxlsx.numFmt</dt><dd><p>NULL</p></dd>
+ <dt>openxlsx.orientation</dt><dd><p>"portrait"</p></dd>
+ <dt>openxlsx.paperSize</dt><dd><p>9</p></dd>
+ <dt>openxlsx.tabColour</dt><dd><p>"TableStyleLight9"</p></dd>
+ <dt>openxlsx.tableStyle</dt><dd><p>"TableStyleLight9"</p></dd>
+ <dt>openxlsx.withFilter</dt><dd><p>NA Whether to write data with or without a filter.  If NA will make filters with <code>writeDataTable</code> and will not for <code>writeData</code></p></dd>
 
+</dl>
 
-
+<p>See the Formatting vignette for examples.</p>
 <p>Additional options</p>
-<ul>
-<li><p><code><a href='https://rdrr.io/r/base/options.html'>options("openxlsx.compressionLevel" = "9")</a></code> ## set zip compression level, default is "1".</p></li>
-</ul>
+<dl>
+
+</dl>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -169,6 +181,7 @@ and removes the dependency on Java.</p>
 <li><p><code><a href='writeDataTable.html'>writeDataTable</a></code></p></li>
 <li><p><code><a href='write.xlsx.html'>write.xlsx</a></code></p></li>
 <li><p><code><a href='read.xlsx.html'>read.xlsx</a></code></p></li>
+<li><p><code><a href='openxlsx_options.html'>op.openxlsx</a></code></p></li>
 </ul><p>for examples</p></div>
 
   </div>

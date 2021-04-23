@@ -144,18 +144,18 @@
   xy <span class='op'>=</span> <span class='cn'>NULL</span>,
   colNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
   rowNames <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  tableStyle <span class='op'>=</span> <span class='st'>"TableStyleLight9"</span>,
+  tableStyle <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"tableStyle"</span>, <span class='st'>"TableStyleLight9"</span><span class='op'>)</span>,
   tableName <span class='op'>=</span> <span class='cn'>NULL</span>,
-  headerStyle <span class='op'>=</span> <span class='cn'>NULL</span>,
-  withFilter <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  keepNA <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  na.string <span class='op'>=</span> <span class='cn'>NULL</span>,
+  headerStyle <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"headerStyle"</span><span class='op'>)</span>,
+  withFilter <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"withFilter"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  keepNA <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"keepNA"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  na.string <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"na.string"</span><span class='op'>)</span>,
   sep <span class='op'>=</span> <span class='st'>", "</span>,
   stack <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  firstColumn <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  lastColumn <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  bandedRows <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  bandedCols <span class='op'>=</span> <span class='cn'>FALSE</span>
+  firstColumn <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"firstColumn"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  lastColumn <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"lastColumn"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  bandedRows <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"bandedRows"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  bandedCols <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"bandedCols"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -209,7 +209,7 @@ A vector of the form c(startCol, startRow)</p></td>
     </tr>
     <tr>
       <th>withFilter</th>
-      <td><p>If <code>TRUE</code>, columns with have filters in the first row.</p></td>
+      <td><p>If <code>TRUE</code> or <code>NA</code>, columns with have filters in the first row.</p></td>
     </tr>
     <tr>
       <th>keepNA</th>

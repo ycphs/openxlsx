@@ -138,20 +138,20 @@
     <pre class="usage"><span class='fu'>addWorksheet</span><span class='op'>(</span>
   <span class='va'>wb</span>,
   <span class='va'>sheetName</span>,
-  gridLines <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  gridLines <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"gridLines"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
   tabColour <span class='op'>=</span> <span class='cn'>NULL</span>,
   zoom <span class='op'>=</span> <span class='fl'>100</span>,
-  header <span class='op'>=</span> <span class='cn'>NULL</span>,
-  footer <span class='op'>=</span> <span class='cn'>NULL</span>,
-  evenHeader <span class='op'>=</span> <span class='cn'>NULL</span>,
-  evenFooter <span class='op'>=</span> <span class='cn'>NULL</span>,
-  firstHeader <span class='op'>=</span> <span class='cn'>NULL</span>,
-  firstFooter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  header <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"header"</span><span class='op'>)</span>,
+  footer <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"footer"</span><span class='op'>)</span>,
+  evenHeader <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"evenHeader"</span><span class='op'>)</span>,
+  evenFooter <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"evenFooter"</span><span class='op'>)</span>,
+  firstHeader <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"firstHeader"</span><span class='op'>)</span>,
+  firstFooter <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"firstFooter"</span><span class='op'>)</span>,
   visible <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  paperSize <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.paperSize"</span>, default <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>,
-  orientation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.orientation"</span>, default <span class='op'>=</span> <span class='st'>"portrait"</span><span class='op'>)</span>,
-  vdpi <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.vdpi"</span>, default <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.dpi"</span>, default <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span><span class='op'>)</span>,
-  hdpi <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.hdpi"</span>, default <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"openxlsx.dpi"</span>, default <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span><span class='op'>)</span>
+  paperSize <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"paperSize"</span>, <span class='fl'>9</span><span class='op'>)</span>,
+  orientation <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"orientation"</span>, <span class='st'>"portrait"</span><span class='op'>)</span>,
+  vdpi <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"vdpi"</span>, <span class='fl'>300</span><span class='op'>)</span>,
+  hdpi <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"hdpi"</span>, <span class='fl'>300</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
