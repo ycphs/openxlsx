@@ -3832,6 +3832,7 @@ Workbook$methods(
     }
 
     cat(unlist(showText))
+    cat("\n")
   }
 )
 
