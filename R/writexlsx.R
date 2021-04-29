@@ -3,11 +3,11 @@
 #' @name write.xlsx
 #' @title write data to an xlsx file
 #' @description write a data.frame or list of data.frames to an xlsx file
-#' @author Alexander Walker
-#' @param x object or a list of objects that can be handled by \code{\link{writeData}} to write to file
-#' @param file xlsx file name
-#' @param asTable write using writeDataTable as opposed to writeData
-#' @param ... optional parameters to pass to functions:
+#' @author Alexander Walker, Jordan Mark Barbone
+#' @inheritParams buildWorkbook
+#' @param file A file path to save the xlsx file
+#' @param overwrite If `TRUE` will save over `file` if present (default: `FALSE`)
+#' 
 #' \itemize{
 #'   \item{createWorkbook}
 #'   \item{addWorksheet}
@@ -76,6 +76,7 @@
 #' @seealso \code{\link{addWorksheet}}
 #' @seealso \code{\link{writeData}}
 #' @seealso \code{\link{createStyle}} for style parameters
+#' @seealso \code{\link{buildWorkbook}}
 #' @return A workbook object
 #' @examples
 #'
@@ -120,70 +121,8 @@
 #' }
 #'
 #' @export
-write.xlsx <- function(x, file, asTable = FALSE, ...) {
-  if (!is.logical(asTable)) {
-    stop("asTable must be a logical.")
-  }
-  
-  params <- list(...)
-  # x <- list(
-  #   iris = head(iris),
-  #   lets = data.frame(abc = head(letters)),
-  #   dfmatrix = as.data.frame(matrix(runif(25), ncol = 5))
-  # )
-  # params <- list(colNames = TRUE, borders = "rows", headerStyle = hs)
-  
-  isList <- inherits(x, "list")
-  
-  if (isList) {
-    params$sheetName <- params$sheetName %||% names(x) %||% paste0("Sheet ", seq_along(x))
-  }
-  
-  ## create new Workbook object
-  wb <- do_call_params(createWorkbook, params)
-  
-  ## If a list is supplied write to individual worksheets using names if available
-  if (isList) {
-    do_call_params(addWorksheet, params, wb = list(wb), .map = TRUE)
-  } else {
-    params$sheetName <- params$sheetName %||% "Sheet 1"
-    do_call_params(addWorksheet, params, wb = wb)
-  }
-  
-  params$sheet <- params$sheet %||% params$sheetName
-  
-  # write Data
-  if (asTable) {
-    do_call_params(writeDataTable, params, x = x, wb = list(wb), .map = TRUE)
-  } else {
-    do_call_params(writeData, params, x = x, wb = wb, .map = TRUE)
-  }
-  
-  params$startCol <- params$startCol %||% 1
-  # TODO colWidths as globalOption
-  params$colWidths <- params$colWidths %||% ""
-    params$colWidths <- rep_len(params$colWidths, length.out = length(x))
-  
-  for (i in seq_along(x)) {
-    if (identical(params$colWidths[[i]], "auto")) {
-      setColWidths(
-        wb,
-        sheet = i,
-        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L, 
-        widths = "auto"
-      )
-    } else if (!identical(params$colWidths[[i]], "")) {
-      setColWidths(
-        wb,
-        sheet = i,
-        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L, 
-        widths = params$colWidths[[i]]
-      )
-    }
-  }
-  
-  do_call_params(freezePane, params, wb = list(wb), .map = TRUE)
-  
-  saveWorkbook(wb, file = file, overwrite = params$overwrite %||% FALSE)
+write.xlsx <- function(x, file, asTable = FALSE, overwrite = FALSE, ...) {
+  wb <- buildWorkbook(x, asTable = asTable, ...)
+  saveWorkbook(wb, file = file, overwrite = overwrite)
   invisible(wb)
 }
