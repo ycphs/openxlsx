@@ -18349,7 +18349,7 @@ Workbook$methods(
       worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
                            "tabSelected=\"[0-9]\"",
                            paste0("tabSelected=\"",
-                                  as.integer(ActiveSheet == i)
+                                  ifelse(ActiveSheet == i,"true","false")
                                   ,"\""))
       
       
