@@ -15,7 +15,7 @@
 #' @param tableStyle Any excel table style name or "none" (see "formatting" vignette).
 #' @param tableName name of table in workbook. The table name must be unique.
 #' @param headerStyle Custom style to apply to column names.
-#' @param withFilter If \code{TRUE}, columns with have filters in the first row.
+#' @param withFilter If \code{TRUE} or \code{NA}, columns with have filters in the first row.
 #' @param keepNA If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.
 #' @param na.string If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
@@ -135,24 +135,37 @@
 #' saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)
 #' }
 #'
-writeDataTable <- function(wb, sheet, x,
-                           startCol = 1,
-                           startRow = 1,
-                           xy = NULL,
-                           colNames = TRUE,
-                           rowNames = FALSE,
-                           tableStyle = "TableStyleLight9",
-                           tableName = NULL,
-                           headerStyle = NULL,
-                           withFilter = TRUE,
-                           keepNA = FALSE,
-                           na.string = NULL,
-                           sep = ", ",
-                           stack = FALSE,
-                           firstColumn = FALSE,
-                           lastColumn = FALSE,
-                           bandedRows = TRUE,
-                           bandedCols = FALSE) {
+writeDataTable <- function(
+  wb,
+  sheet,
+  x,
+  startCol    = 1,
+  startRow    = 1,
+  xy          = NULL,
+  colNames    = TRUE,
+  rowNames    = FALSE,
+  tableStyle  = openxlsx_getOp("tableStyle", "TableStyleLight9"),
+  tableName   = NULL,
+  headerStyle = openxlsx_getOp("headerStyle"),
+  withFilter  = openxlsx_getOp("withFilter", TRUE),
+  keepNA      = openxlsx_getOp("keepNA", FALSE),
+  na.string   = openxlsx_getOp("na.string"),
+  sep         = ", ",
+  stack       = FALSE,
+  firstColumn = openxlsx_getOp("firstColumn", FALSE),
+  lastColumn  = openxlsx_getOp("lastColumn", FALSE),
+  bandedRows  = openxlsx_getOp("bandedRows", TRUE),
+  bandedCols  = openxlsx_getOp("bandedCols", FALSE)
+  ) {
+  
+  # Set NULLs
+  withFilter  <- withFilter  %||% TRUE
+  keepNA      <- keepNA      %||% FALSE
+  firstColumn <- firstColumn %||% FALSE
+  lastColumn  <- lastColumn  %||% FALSE
+  bandedRows  <- bandedRows  %||% TRUE
+  bandedCols  <- bandedCols  %||% FALSE
+  
   if (!is.null(xy)) {
     if (length(xy) != 2) {
       stop("xy parameter must have length 2")
@@ -161,12 +174,19 @@ writeDataTable <- function(wb, sheet, x,
     startRow <- xy[[2]]
   }
 
+
+  # recode NULLs to match default
+  # If not set, change to default
+  withFilter <- withFilter %||% TRUE
+  
   ## Input validating
   if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
   if (!"data.frame" %in% class(x)) stop("x must be a data.frame.")
   if (!is.logical(colNames)) stop("colNames must be a logical.")
   if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-  if (!is.null(headerStyle) & !"Style" %in% class(headerStyle)) stop("headerStyle must be a style object or NULL.")
+  if (is_not_class(headerStyle, "Style")) {
+    stop("headerStyle must be a style object or NULL.")
+  } 
   if (!is.logical(withFilter)) stop("withFilter must be a logical.")
   if ((!is.character(sep)) | (length(sep) != 1)) stop("sep must be a character vector of length 1")
 
@@ -271,16 +291,16 @@ writeDataTable <- function(wb, sheet, x,
 
   ## write data to worksheet
   wb$writeData(
-    df = x,
-    colNames = TRUE,
-    sheet = sheet,
-    startRow = startRow,
-    startCol = startCol,
+    df         = x,
+    colNames   = TRUE,
+    sheet      = sheet,
+    startRow   = startRow,
+    startCol   = startCol,
     colClasses = colClasses,
     hlinkNames = NULL,
-    keepNA = keepNA,
-    na.string = na.string,
-    list_sep = sep
+    keepNA     = keepNA,
+    na.string  = na.string,
+    list_sep   = sep
   )
 
   ## replace invalid XML characters
@@ -288,17 +308,17 @@ writeDataTable <- function(wb, sheet, x,
 
   ## create table.xml and assign an id to worksheet tables
   wb$buildTable(
-    sheet = sheet,
-    colNames = colNames,
-    ref = ref,
-    showColNames = showColNames,
-    tableStyle = tableStyle,
-    tableName = tableName,
-    withFilter = withFilter[1],
-    totalsRowCount = 0L,
-    showFirstColumn = firstColumn[1],
-    showLastColumn = lastColumn[1],
-    showRowStripes = bandedRows[1],
+    sheet             = sheet,
+    colNames          = colNames,
+    ref               = ref,
+    showColNames      = showColNames,
+    tableStyle        = tableStyle,
+    tableName         = tableName,
+    withFilter        = withFilter[1],
+    totalsRowCount    = 0L,
+    showFirstColumn   = firstColumn[1],
+    showLastColumn    = lastColumn[1],
+    showRowStripes    = bandedRows[1],
     showColumnStripes = bandedCols[1]
   )
 }

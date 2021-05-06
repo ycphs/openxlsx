@@ -4,7 +4,7 @@
 #' @import stringi
 
 Workbook$methods(
-  initialize = function(creator = "",
+  initialize = function(creator = openxlsx_getOp("creator"),
                         title = NULL,
                         subject = NULL,
                         category = NULL) {
@@ -73,8 +73,6 @@ Workbook$methods(
     vml <<- list()
     vml_rels <<- list()
 
-
-
     workbook <<- genBaseWorkbook()
     workbook.xml.rels <<- genBaseWorkbook.xml.rels()
 
@@ -84,35 +82,31 @@ Workbook$methods(
   }
 )
 
-
-
-
-
-
-
 Workbook$methods(
-  addWorksheet = function(sheetName,
-                          showGridLines = TRUE,
-                          tabColour = NULL,
-                          zoom = 100,
-                          oddHeader = NULL,
-                          oddFooter = NULL,
-                          evenHeader = NULL,
-                          evenFooter = NULL,
-                          firstHeader = NULL,
-                          firstFooter = NULL,
-                          visible = TRUE,
-                          paperSize = 9,
-                          orientation = "portrait",
-                          hdpi = 300,
-                          vdpi = 300) {
+  addWorksheet = function(
+    sheetName,
+    showGridLines = openxlsx_getOp("showGridLines"),
+    tabColour = openxlsx_getOp("tabColour"),
+    zoom = 100,
+    oddHeader = openxlsx_getOp("oddHeader"),
+    oddFooter = openxlsx_getOp("oddFooter"),
+    evenHeader = openxlsx_getOp("evenHeader"),
+    evenFooter = openxlsx_getOp("evenFooter"),
+    firstHeader = openxlsx_getOp("firstHeader"),
+    firstFooter = openxlsx_getOp("firstFooter"),
+    visible = TRUE,
+    paperSize = openxlsx_getOp("paperSize", 9),
+    orientation = openxlsx_getOp("orientation", "portrait"),
+    hdpi = openxlsx_getOp("hdpi", 300),
+    vdpi = openxlsx_getOp("vdpi", 300)
+  ) {
     if (!missing(sheetName)) {
       if (grepl(pattern = ":", x = sheetName)) {
         stop("colon not allowed in sheet names in Excel")
       }
     }
     newSheetIndex <- length(worksheets) + 1L
-
+    
     if (newSheetIndex > 1) {
       sheetId <-
         max(as.integer(regmatches(
@@ -127,19 +121,15 @@ Workbook$methods(
 
     ## fix visible value
     visible <- tolower(visible)
+    
     if (visible == "true") {
       visible <- "visible"
-    }
-
-    if (visible == "false") {
+    } else if (visible == "false") {
       visible <- "hidden"
-    }
-
-    if (visible == "veryhidden") {
+    } else if (visible == "veryhidden") {
       visible <- "veryHidden"
     }
-
-
+    
     ##  Add sheet to workbook.xml
     workbook$sheets <<-
       c(
@@ -225,7 +215,6 @@ Workbook$methods(
     invisible(newSheetIndex)
   }
 )
-
 
 Workbook$methods(
   cloneWorksheet = function(sheetName, clonedSheet) {
@@ -474,7 +463,6 @@ Workbook$methods(
   }
 )
 
-
 Workbook$methods(
   addChartSheet = function(sheetName,
                            tabColour = NULL,
@@ -533,8 +521,6 @@ Workbook$methods(
         newSheetIndex
       )
     )
-
-
 
     ## add a drawing.xml for the worksheet
     Content_Types <<-
@@ -637,9 +623,6 @@ Workbook$methods(
       })
     }
 
-
-
-
     ## will always have drawings
     xlworksheetsDir <- file.path(tmpDir, "xl", "worksheets")
     dir.create(path = xlworksheetsDir, recursive = TRUE)
@@ -735,7 +718,6 @@ Workbook$methods(
     }
     
     
-
     if (length(embeddings) > 0) {
       embeddingsDir <- file.path(tmpDir, "xl", "embeddings")
       dir.create(path = embeddingsDir, recursive = TRUE)
@@ -3850,16 +3832,9 @@ Workbook$methods(
     }
 
     cat(unlist(showText))
+    cat("\n")
   }
 )
-
-
-# ## function to create the below
-# strs <- "data.frame("
-# for(i in 1:nrow(tab))
-#   strs <- append(strs, stri_join('"', gsub(" ", ".", tolower(tab$Font[[i]])), '" = ',  stri_join(capture.output(dput(unname(unlist(tab[1,2:ncol(tab)])))), collapse = ""), ", \n"))
-# strs[length(strs)] <- gsub(", \\\n$", ")", strs[length(strs)])
-# cat(strs)
 
 ## TO BE DEPRECATED
 Workbook$methods(

@@ -111,7 +111,7 @@
 #'   asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE)
 #' )
 #' }
-#' 
+#'
 #' # specify column widths for multiple sheets
 #' \dontrun{
 #' write.xlsx(l, "writeList2.xlsx", colWidths = 20)
@@ -182,7 +182,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     stop("asTable must be a logical.")
   }
 
-  creator <- ifelse("creator" %in% names(params), params$creator, "")
+  creator <- params$creator %||% openxlsx_getOp("creator", "")
   title <- params$title ### will return NULL of not exist
   subject <- params$subject ### will return NULL of not exist
   category <- params$category ### will return NULL of not exist
@@ -201,7 +201,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-  tabColour <- NULL
+  tabColour <- openxlsx_getOp("tabColour")
   if ("tabColour" %in% names(params)) {
     tabColour <- validateColour(params$tabColour, "Invalid tabColour!")
   }
@@ -216,7 +216,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
   }
 
   ## AddWorksheet
-  gridLines <- TRUE
+  gridLines <- openxlsx_getOp("gridLines")
   if ("gridLines" %in% names(params)) {
     if (all(is.logical(params$gridLines))) {
       gridLines <- params$gridLines
@@ -235,7 +235,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
   }
 
 
-  withFilter <- TRUE
+  withFilter <- openxlsx_getOp("withFilter")
   if ("withFilter" %in% names(params)) {
     if (is.logical(params$withFilter)) {
       withFilter <- params$withFilter
@@ -280,7 +280,6 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-
   rowNames <- FALSE
   if ("rowNames" %in% names(params)) {
     if (is.logical(params$rowNames)) {
@@ -307,8 +306,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     xy <- params$xy
   }
 
-
-  headerStyle <- NULL
+  headerStyle <- openxlsx_getOp("headerStyle")
   if ("headerStyle" %in% names(params)) {
     if (length(params$headerStyle) == 1) {
       if ("Style" %in% class(params$headerStyle)) {
@@ -325,7 +323,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-  borders <- NULL
+  borders <- openxlsx_getOp("borders")
   if ("borders" %in% names(params)) {
     borders <- tolower(params$borders)
     if (!all(borders %in% c("surrounding", "rows", "columns", "all"))) {
@@ -333,17 +331,17 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-  borderColour <- getOption("openxlsx.borderColour", "black")
+  borderColour <- openxlsx_getOp("borderColour")
   if ("borderColour" %in% names(params)) {
     borderColour <- params$borderColour
   }
 
-  borderStyle <- getOption("openxlsx.borderStyle", "thin")
+  borderStyle <- openxlsx_getOp("borderStyle")
   if ("borderStyle" %in% names(params)) {
     borderStyle <- validateBorderStyle(params$borderStyle)
   }
 
-  keepNA <- FALSE
+  keepNA <- openxlsx_getOp("keepNA")
   if ("keepNA" %in% names(params)) {
     if (!"logical" %in% class(keepNA)) {
       stop("keepNA must be a logical.")
@@ -352,13 +350,13 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-  na.string <- NULL
+  na.string <- openxlsx_getOp("na.string")
   if ("na.string" %in% names(params)) {
     na.string <- as.character(params$na.string)
   }
 
 
-  tableStyle <- "TableStyleLight9"
+  tableStyle <- openxlsx_getOp("tableStyle")
   if ("tableStyle" %in% names(params)) {
     tableStyle <- params$tableStyle
   }
@@ -375,7 +373,12 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
 
 
   ## create new Workbook object
-  wb <- createWorkbook(creator = creator, title = title, subject = subject, category = category)
+  wb <- createWorkbook(
+    creator = creator,
+    title = title,
+    subject = subject,
+    category = category
+  )
 
 
   ## If a list is supplied write to individual worksheets using names if available
@@ -413,6 +416,7 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
 
     if (length(withFilter) != nSheets) {
+      withFilter <- withFilter %||% asTable
       withFilter <- rep_len(withFilter, length.out = nSheets)
     }
 
@@ -475,37 +479,37 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
 
       if (asTable[i]) {
         writeDataTable(
-          wb = wb,
-          sheet = i,
-          x = x[[i]],
-          startCol = startCol[[i]],
-          startRow = startRow[[i]],
-          xy = xy,
-          colNames = colNames[[i]],
-          rowNames = rowNames[[i]],
-          tableStyle = tableStyle[[i]],
-          tableName = NULL,
+          wb          = wb,
+          sheet       = i,
+          x           = x[[i]],
+          startCol    = startCol[[i]],
+          startRow    = startRow[[i]],
+          xy          = xy,
+          colNames    = colNames[[i]],
+          rowNames    = rowNames[[i]],
+          tableStyle  = tableStyle[[i]],
+          tableName   = NULL,
           headerStyle = headerStyle[[i]],
-          withFilter = withFilter[[i]],
-          keepNA = keepNA[[i]],
-          na.string = na.string[[i]]
+          withFilter  = withFilter[[i]],
+          keepNA      = keepNA[[i]],
+          na.string   = na.string[[i]]
         )
       } else {
         writeData(
-          wb = wb,
-          sheet = i,
-          x = x[[i]],
-          startCol = startCol[[i]],
-          startRow = startRow[[i]],
-          xy = xy,
-          colNames = colNames[[i]],
-          rowNames = rowNames[[i]],
-          headerStyle = headerStyle[[i]],
-          borders = borders[[i]],
+          wb           = wb,
+          sheet        = i,
+          x            = x[[i]],
+          startCol     = startCol[[i]],
+          startRow     = startRow[[i]],
+          xy           = xy,
+          colNames     = colNames[[i]],
+          rowNames     = rowNames[[i]],
+          headerStyle  = headerStyle[[i]],
+          borders      = borders[[i]],
           borderColour = borderColour[[i]],
-          borderStyle = borderStyle[[i]],
-          keepNA = keepNA[[i]],
-          na.string = na.string[[i]]
+          borderStyle  = borderStyle[[i]],
+          keepNA       = keepNA[[i]],
+          na.string    = na.string[[i]]
         )
       }
 
@@ -524,16 +528,16 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
       }
 
       writeDataTable(
-        wb = wb,
-        sheet = 1,
-        x = x,
-        startCol = startCol,
-        startRow = startRow,
-        xy = xy,
-        colNames = colNames,
-        rowNames = rowNames,
-        tableStyle = tableStyle,
-        tableName = NULL,
+        wb          = wb,
+        sheet       = 1,
+        x           = x,
+        startCol    = startCol,
+        startRow    = startRow,
+        xy          = xy,
+        colNames    = colNames,
+        rowNames    = rowNames,
+        tableStyle  = tableStyle,
+        tableName   = NULL,
         headerStyle = headerStyle,
         withFilter = withFilter,
         keepNA = keepNA,
@@ -541,16 +545,16 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
       )
     } else {
       writeData(
-        wb = wb,
-        sheet = 1,
-        x = x,
-        startCol = startCol,
-        startRow = startRow,
-        xy = xy,
-        colNames = colNames,
-        rowNames = rowNames,
-        headerStyle = headerStyle,
-        borders = borders,
+        wb           = wb,
+        sheet        = 1,
+        x            = x,
+        startCol     = startCol,
+        startRow     = startRow,
+        xy           = xy,
+        colNames     = colNames,
+        rowNames     = rowNames,
+        headerStyle  = headerStyle,
+        borders      = borders,
         borderColour = borderColour,
         borderStyle = borderStyle,
         withFilter = withFilter,
@@ -622,10 +626,6 @@ write.xlsx <- function(x, file, asTable = FALSE, ...) {
     }
   }
 
-
-
-
   saveWorkbook(wb = wb, file = file, overwrite = overwrite)
-
   invisible(wb)
 }
