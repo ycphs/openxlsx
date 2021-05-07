@@ -9,7 +9,7 @@
 * `write.xlsx()` can now handle `colWidths` passed as either a single element or a `list()`
 * Added ability to change positioning of summary columns and rows.
   * These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
-* activeSheet allows to set and get the active (displayed) sheet of a worbook.
+* `activeSheet` allows to set and get the active (displayed) sheet of a worbook.
 
 ## New Features
 
