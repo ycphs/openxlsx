@@ -2,11 +2,7 @@
 #include "openxlsx.h"
 
 
-
-
-
-
-
+//' @import Rcpp
 // [[Rcpp::export]]
 SEXP write_worksheet_xml(std::string prior
                            , std::string post
