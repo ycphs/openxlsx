@@ -60,6 +60,7 @@ Collate:
     'borderFunctions.R'
     'chartsheet_class.R'
     'conditional_formatting.R'
+    'data-fontSizeLookupTables.R'
     'helperFunctions.R'
     'loadWorkbook.R'
     'onUnload.R'

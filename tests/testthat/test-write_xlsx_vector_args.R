@@ -39,8 +39,8 @@ test_that("Writing then reading returns identical data.frame 1", {
 
 test_that("write.xlsx() passes withFilter and colWidths [151]", {
   df <- data.frame(x = 1, b = 2)
-  tf1 <- tempfile(fileext = ".xlsx")
-  tf2 <- tempfile(fileext = ".xlsx")
+  tf1 <- tempfile("file_1_", fileext = ".xlsx")
+  tf2 <- tempfile("file_2_", fileext = ".xlsx")
   on.exit(file.remove(tf1, tf2), add = TRUE)
   
   # undebug(write.xlsx)
@@ -96,8 +96,8 @@ test_that("write.xlsx() correctly passes default asTable and withFilters", {
 
 test_that("write.xlsx() correctly handles colWidths", {
   x <- data.frame(a = 1, b = 2, c = 3)
-  file <- tempfile(".xlsx")
-  on.exit(file.remove(file), add = TRUE)
+  file <- tempfile("write_xlsx_", fileext = ".xlsx")
+  on.exit(if (file.exists(file)) file.remove(file), add = TRUE)
   zero3 <- rep("0", 3)
   
   # No warning when passing "auto"
@@ -118,7 +118,6 @@ test_that("write.xlsx() correctly handles colWidths", {
     loadWorkbook(file)$colWidths,
     rep_len(list(structure(c(`1` = "10", `2` = "20", `3` = "30"), hidden = zero3)), 3)
   )
-  
   
   # 3 distinct sets
   write.xlsx(rep_len(list(x), 3), file, 
