@@ -18,6 +18,11 @@ Workbook$methods(writeData = function(
   df_nms <- names(df)
 
   allColClasses <- unlist(colClasses)
+  
+  isPOSIXlt <- function(data) sapply(lapply(data, class), FUN = function(x) any(x == "POSIXlt"))
+  
+  df[isPOSIXlt(df)] <- lapply(df[isPOSIXlt(df)], as.POSIXct)
+  
   df <- as.list(df)
 
   ######################################################################
