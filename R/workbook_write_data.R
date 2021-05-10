@@ -20,8 +20,13 @@ Workbook$methods(writeData = function(
   allColClasses <- unlist(colClasses)
   
   isPOSIXlt <- function(data) sapply(lapply(data, class), FUN = function(x) any(x == "POSIXlt"))
+  to_convert <- isPOSIXlt(df)
   
-  df[isPOSIXlt(df)] <- lapply(df[isPOSIXlt(df)], as.POSIXct)
+  if (any(to_convert)) {
+    message("Found POSIXlt. Converting to POSIXct")
+    df[to_convert] <- lapply(df[to_convert], as.POSIXct)  
+  }
+  
   
   df <- as.list(df)
 
