@@ -1,11 +1,9 @@
 
-
 context("Worksheet naming")
 
 test_that("Worksheet names", {
   
   ### test for names without special character
-  
   wb <- createWorkbook()
   sheetname <- "test"
   addWorksheet(wb, sheetname)
@@ -45,7 +43,4 @@ test_that("Worksheet names", {
   
   expect_equal(sheetname,names(wb))
   expect_equal("test &quot;A&quot;",wb$sheet_names)
-  
-
-  
 })

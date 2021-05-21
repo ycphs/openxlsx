@@ -7,7 +7,7 @@
 #' @inheritParams buildWorkbook
 #' @param file A file path to save the xlsx file
 #' @param overwrite If `TRUE` will save over `file` if present (default: `FALSE`)
-#' 
+#'
 #' \itemize{
 #'   \item{createWorkbook}
 #'   \item{addWorksheet}
@@ -112,7 +112,7 @@
 #'   asTable = c(TRUE, TRUE, FALSE), withFilter = c(TRUE, FALSE, FALSE)
 #' )
 #' }
-#' 
+#'
 #' # specify column widths for multiple sheets
 #' \dontrun{
 #' write.xlsx(l, "writeList2.xlsx", colWidths = 20)
