@@ -173,7 +173,8 @@ writeData <- function(
   keepNA       = openxlsx_getOp("keepNA", FALSE),
   na.string    = openxlsx_getOp("na.string"),
   name         = NULL,
-  sep          = ", "
+  sep          = ", ",
+  row.names
 ) {
 
   op <- get_set_options()

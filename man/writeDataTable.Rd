@@ -24,7 +24,8 @@ writeDataTable(
   firstColumn = openxlsx_getOp("firstColumn", FALSE),
   lastColumn = openxlsx_getOp("lastColumn", FALSE),
   bandedRows = openxlsx_getOp("bandedRows", TRUE),
-  bandedCols = openxlsx_getOp("bandedCols", FALSE)
+  bandedCols = openxlsx_getOp("bandedCols", FALSE),
+  row.names
 )
 }
 \arguments{

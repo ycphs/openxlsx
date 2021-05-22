@@ -155,7 +155,8 @@ writeDataTable <- function(
   firstColumn = openxlsx_getOp("firstColumn", FALSE),
   lastColumn  = openxlsx_getOp("lastColumn", FALSE),
   bandedRows  = openxlsx_getOp("bandedRows", TRUE),
-  bandedCols  = openxlsx_getOp("bandedCols", FALSE)
+  bandedCols  = openxlsx_getOp("bandedCols", FALSE),
+  row.names
   ) {
   
   op <- get_set_options()
@@ -183,7 +184,6 @@ writeDataTable <- function(
     startCol <- xy[[1]]
     startRow <- xy[[2]]
   }
-
 
   # recode NULLs to match default
   # If not set, change to default
