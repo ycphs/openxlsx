@@ -70,42 +70,42 @@
 #'
 #' @export
 read.xlsx <- function(xlsxFile,
-                      sheet,
-                      startRow = 1,
-                      colNames = TRUE,
-                      rowNames = FALSE,
-                      detectDates = FALSE,
-                      skipEmptyRows = TRUE,
-                      skipEmptyCols = TRUE,
-                      rows = NULL,
-                      cols = NULL,
-                      check.names = FALSE,
-                      sep.names = ".",
-                      namedRegion = NULL,
-                      na.strings = "NA",
-                      fillMergedCells = FALSE) {
+  sheet,
+  startRow = 1,
+  colNames = TRUE,
+  rowNames = FALSE,
+  detectDates = FALSE,
+  skipEmptyRows = TRUE,
+  skipEmptyCols = TRUE,
+  rows = NULL,
+  cols = NULL,
+  check.names = FALSE,
+  sep.names = ".",
+  namedRegion = NULL,
+  na.strings = "NA",
+  fillMergedCells = FALSE) {
   UseMethod("read.xlsx", xlsxFile)
 }
 
 #' @export
 read.xlsx.default <- function(xlsxFile,
-                              sheet,
-                              startRow = 1,
-                              colNames = TRUE,
-                              rowNames = FALSE,
-                              detectDates = FALSE,
-                              skipEmptyRows = TRUE,
-                              skipEmptyCols = TRUE,
-                              rows = NULL,
-                              cols = NULL,
-                              check.names = FALSE,
-                              sep.names = ".",
-                              namedRegion = NULL,
-                              na.strings = "NA",
-                              fillMergedCells = FALSE) {
+  sheet,
+  startRow = 1,
+  colNames = TRUE,
+  rowNames = FALSE,
+  detectDates = FALSE,
+  skipEmptyRows = TRUE,
+  skipEmptyCols = TRUE,
+  rows = NULL,
+  cols = NULL,
+  check.names = FALSE,
+  sep.names = ".",
+  namedRegion = NULL,
+  na.strings = "NA",
+  fillMergedCells = FALSE) {
   ## Validate inputs and get files
   xlsxFile <- getFile(xlsxFile)
-
+  
   if (!file.exists(xlsxFile)) {
     stop("File does not exist.")
   }
@@ -115,67 +115,67 @@ read.xlsx.default <- function(xlsxFile,
     sheet <- 1
     sheetselected <- FALSE
   }
-
+  
   if (grepl("\\.xls$|\\.xlm$", xlsxFile)) {
     stop("openxlsx can not read .xls or .xlm files!")
   }
-
+  
   if (!is.logical(colNames)) {
     stop("colNames must be TRUE/FALSE.")
   }
-
+  
   if (!is.logical(rowNames)) {
     stop("rowNames must be TRUE/FALSE.")
   }
-
+  
   if (!is.logical(detectDates)) {
     stop("detectDates must be TRUE/FALSE.")
   }
-
+  
   if (!is.logical(skipEmptyRows)) {
     stop("skipEmptyRows must be TRUE/FALSE.")
   }
-
+  
   if (!is.logical(check.names)) {
     stop("check.names must be TRUE/FALSE.")
   }
-
+  
   if (!is.character(sep.names) | nchar(sep.names) != 1) {
     stop("sep.names must be a character and only one.")
   }
-
+  
   if (length(sheet) > 1) {
     stop("sheet must be of length 1.")
   }
-
+  
   if (is.null(rows)) {
     rows <- NA
   } else if (length(rows) > 1) {
     rows <- as.integer(sort(rows))
   }
-
-
+  
+  
   ## check startRow
   if (!is.null(startRow)) {
     if (length(startRow) > 1) {
       stop("startRow must have length 1.")
     }
   }
-
+  
   ## create temp dir and unzip
   xmlDir <-
     file.path(tempdir(), paste0(sample(LETTERS, 10), collapse = ""), "_excelXMLRead")
   xmlFiles <- unzip(xlsxFile, exdir = xmlDir)
-
+  
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
-
+  
   sharedStringsFile <-
     xmlFiles[grepl("sharedStrings.xml$", xmlFiles, perl = TRUE)]
   workbook <-
     xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
   workbookRelsXML <-
     xmlFiles[grepl("workbook.xml.rels$", xmlFiles, perl = TRUE)]
-
+  
   ## get workbook names
   workbookRelsXML <-
     paste(readUTF8(workbookRelsXML),
@@ -183,11 +183,11 @@ read.xlsx.default <- function(xlsxFile,
     )
   workbookRelsXML <-
     getChildlessNode(xml = workbookRelsXML, tag = "Relationship")
-
+  
   workbook <-
     unlist(readUTF8(workbook))
   workbook <- removeHeadTag(workbook)
-
+  
   sheets <-
     unlist(regmatches(
       workbook,
@@ -205,21 +205,21 @@ read.xlsx.default <- function(xlsxFile,
       invert = TRUE,
       value = TRUE
     )
-
-
+  
+  
   ## make sure sheetId is 1 based
   sheetrId <- unlist(getRId(sheets))
   sheetNames <-
     unlist(regmatches(sheets, gregexpr('(?<=name=")[^"]+', sheets, perl = TRUE)))
   sheetNames <- replaceXMLEntities(sheetNames)
-
-
+  
+  
   nSheets <- length(sheetrId)
   if (nSheets == 0) {
     stop("Workbook has no worksheets")
   }
-
-
+  
+  
   ## Named region logic
   reading_named_region <- FALSE
   if (!is.null(namedRegion)) {
@@ -238,7 +238,7 @@ read.xlsx.default <- function(xlsxFile,
       # name, the name will be "'sheet 1'" instead of "sheet 1.
       dn_sheetNames[wsp] <- gsub("^'+|'+$", "\\1", dn_sheetNames[wsp])
     }
-        
+    
     # namedRegion in between 'name="' and '"'
     dn_namedRegion <- gsub(".*name=\"(\\w+)\".*", "\\1", dn)
     
@@ -285,8 +285,8 @@ read.xlsx.default <- function(xlsxFile,
     # Do not print warning if a specific sheet is requested
     if ((length(dn) > 1) & (!sheetselected)) {
       msg <- c(sprintf("Region '%s' found on multiple sheets: \n", namedRegion),
-               paste(dn_sheetNames, collapse = "\n"),
-               "\nUsing the first appearance.")
+        paste(dn_sheetNames, collapse = "\n"),
+        "\nUsing the first appearance.")
       message(msg)
       
       dn <- dn[1]
@@ -303,10 +303,10 @@ read.xlsx.default <- function(xlsxFile,
     if (length(sheet) > 1) {
       sheet <- sheet[which.max(nchar(sheet))]
     }
-
+    
     region <-
       gsub("[^A-Z0-9:]", "", gsub(sheet, "", region, fixed = TRUE))
-
+    
     if (grepl(":", region, fixed = TRUE)) {
       cols <-
         unlist(lapply(
@@ -317,7 +317,7 @@ read.xlsx.default <- function(xlsxFile,
         unlist(lapply(strsplit(region, split = ":", fixed = TRUE), function(x) {
           as.integer(gsub("[A-Z]", "", x, perl = TRUE))
         }))
-
+      
       cols <- seq(
         from = cols[1],
         to = cols[2],
@@ -332,23 +332,23 @@ read.xlsx.default <- function(xlsxFile,
       cols <- convertFromExcelRef(region)
       rows <- as.integer(gsub("[A-Z]", "", region, perl = TRUE))
     }
-
+    
     startRow <- 1
     reading_named_region <- TRUE
   }
-
-
-
-
-
+  
+  
+  
+  
+  
   ## get the file_name for each sheetrId
   file_name <- sapply(sheetrId, function(rId) {
     txt <-
       workbookRelsXML[grepl(sprintf('Id="%s"', rId), workbookRelsXML, fixed = TRUE)]
     regmatches(txt, regexpr('(?<=Target=").+xml(?=")', txt, perl = TRUE))
   })
-
-
+  
+  
   ## get the correct sheets
   if ("character" %in% class(sheet)) {
     sheetNames <- replaceXMLEntities(sheetNames)
@@ -363,13 +363,13 @@ read.xlsx.default <- function(xlsxFile,
     }
     sheet <- file_name[sheet]
   }
-
+  
   if (length(sheet) == 0) {
     stop(
       "Length of sheet is 0 - something has gone terribly wrong! Please report this bug on github (https://github.com/awalker89/openxlsx/issues) with an example xlsx file."
     )
   }
-
+  
   ## get file
   worksheet <-
     xmlFiles[grepl(
@@ -382,28 +382,28 @@ read.xlsx.default <- function(xlsxFile,
       "Length of worksheet is 0 - something has gone terribly wrong! Please report this bug on github (https://github.com/awalker89/openxlsx/issues) with an example xlsx file."
     )
   }
-
-
+  
+  
   ## read in sharedStrings
   if (length(sharedStringsFile) > 0) {
     sharedStrings <-
       getSharedStringsFromFile(sharedStringsFile = sharedStringsFile, isFile = TRUE)
     if (!is.null(na.strings)) {
       sharedStrings[is.na(sharedStrings) |
-        sharedStrings %in% na.strings] <- "openxlsx_na_vlu"
+          sharedStrings %in% na.strings] <- "openxlsx_na_vlu"
     }
   } else {
     sharedStrings <- ""
   }
-
-
+  
+  
   if ("character" %in% class(startRow)) {
     startRowStr <- startRow
     startRow <- 1
   } else {
     startRowStr <- NULL
   }
-
+  
   ## single function get all r, s (if detect dates is TRUE), t, v
   cell_info <- getCellInfo(
     xmlFile = worksheet,
@@ -413,18 +413,18 @@ read.xlsx.default <- function(xlsxFile,
     rows = rows,
     getDates = detectDates
   )
-
+  
   if (fillMergedCells & length(cell_info$cellMerge) > 0) {
     # stop("Not implemented")
-
+    
     merge_mapping <- mergeCell2mapping(cell_info$cellMerge)
-
+    
     ## remove any elements from  r, string_refs, b, s that existing in merge_mapping
     ## insert all missing refs into r
-
+    
     to_remove_inds <- cell_info$r %in% merge_mapping$ref
     to_remove_elems <- cell_info$r[to_remove_inds]
-
+    
     if (any(to_remove_inds)) {
       cell_info$r <- cell_info$r[!to_remove_inds]
       cell_info$s <- cell_info$s[!to_remove_inds]
@@ -432,10 +432,10 @@ read.xlsx.default <- function(xlsxFile,
       cell_info$string_refs <-
         cell_info$string_refs[!cell_info$string_refs %in% to_remove_elems]
     }
-
+    
     ## Now insert
     inds <- match(merge_mapping$anchor_cell, cell_info$r)
-
+    
     ## String refs (must sort)
     new_string_refs <-
       merge_mapping$ref[merge_mapping$anchor_cell %in% cell_info$string_refs]
@@ -450,11 +450,11 @@ read.xlsx.default <- function(xlsxFile,
         nchar(cell_info$string_refs),
         cell_info$string_refs
       )]
-
+    
     ## r
     cell_info$r <- c(cell_info$r, merge_mapping$ref)
     cell_info$v <- c(cell_info$v, cell_info$v[inds])
-
+    
     ord <-
       order(as.integer(
         gsub(
@@ -464,53 +464,50 @@ read.xlsx.default <- function(xlsxFile,
           perl = TRUE
         )
       ), nchar(cell_info$r), cell_info$r)
-
+    
     cell_info$r <- cell_info$r[ord]
     cell_info$v <- cell_info$v[ord]
     if (length(cell_info$s) > 0) {
       cell_info$s <- c(cell_info$s, cell_info$s[inds])[ord]
     }
-
-
+    
+    
     cell_info$nRows <-
       calc_number_rows(x = cell_info$r, skipEmptyRows = skipEmptyRows)
   }
-
-
-
+  
+  
+  
   cell_rows <-
     as.integer(gsub("[A-Z]", "", cell_info$r, perl = TRUE))
   cell_cols <- convert_from_excel_ref(x = cell_info$r)
-
-
-  ######################################################################
-  ## subsetting
-
+  
+  
+  ## subsetting ----
   ## Remove cells where cell is NA (na.strings or empty sharedString '<si><t/></si>')
+  
   if (length(cell_info$v) == 0) {
     warning("No data found on worksheet.\n", call. = FALSE)
     return(NULL)
   }
-
+  
   keep <- !is.na(cell_info$v)
   if (!is.null(cols)) {
     keep <- keep & (cell_cols %in% cols)
   }
-
-
+  
   ## End of subsetting
-  ######################################################################
-
+  
   ## Subset
   cell_rows <- cell_rows[keep]
   cell_cols <- cell_cols[keep]
-
+  
   v <- cell_info$v[keep]
   s <- cell_info$s[keep]
-
+  
   string_refs <- match(cell_info$string_refs, cell_info$r[keep])
   string_refs <- string_refs[!is.na(string_refs)]
-
+  
   if (skipEmptyRows) {
     nRows <- length(unique(cell_rows))
   } else if (reading_named_region) {
@@ -519,17 +516,14 @@ read.xlsx.default <- function(xlsxFile,
   } else {
     nRows <- max(cell_rows) - min(cell_rows) + 1
   }
-
+  
   if (nRows == 0 | length(cell_rows) == 0) {
     warning("No data found on worksheet.", call. = FALSE)
     return(NULL)
   }
-
+  
   Encoding(v) <- "UTF-8" ## only works if length(v) > 0
-
-
-
-
+  
   if (!is.null(startRowStr)) {
     stop("startRowStr not implemented")
     ind <- which(grepl(startRowStr, v, ignore.case = TRUE))
@@ -546,8 +540,8 @@ read.xlsx.default <- function(xlsxFile,
       }
     }
   }
-
-
+  
+  
   ## Determine date cells (if required)
   origin <- 25569L
   if (detectDates) {
@@ -555,60 +549,49 @@ read.xlsx.default <- function(xlsxFile,
     if (grepl('date1904="1"|date1904="true"', workbook, ignore.case = TRUE)) {
       origin <- 24107L
     }
-
+    
     stylesXML <- xmlFiles[grepl("styles.xml", xmlFiles)]
     styles <- readUTF8(stylesXML)
     styles <- removeHeadTag(styles)
-
+    
     ## Number formats
     numFmts <- getChildlessNode(xml = styles, tag = "numFmt")
-
+    
     dateIds <- NULL
     if (length(numFmts) > 0) {
-      numFmtsIds <-
-        sapply(numFmts, getAttr, tag = 'numFmtId="', USE.NAMES = FALSE)
-      formatCodes <-
-        sapply(numFmts, getAttr, tag = 'formatCode="', USE.NAMES = FALSE)
-      formatCodes <-
-        gsub(".*(?<=\\])|@", "", formatCodes, perl = TRUE)
-
+      numFmtsIds <- sapply(numFmts, getAttr, tag = 'numFmtId="', USE.NAMES = FALSE)
+      formatCodes <- sapply(numFmts, getAttr, tag = 'formatCode="', USE.NAMES = FALSE)
+      formatCodes <- gsub(".*(?<=\\])|@", "", formatCodes, perl = TRUE)
+      
       ## this regex defines what "looks" like a date
-      dateIds <-
-        numFmtsIds[!grepl("[^mdyhsapAMP[:punct:] ]", formatCodes) &
+      dateIds <- numFmtsIds[!grepl("[^mdyhsapAMP[:punct:] ]", formatCodes) &
           nchar(formatCodes > 3)]
     }
-
+    
     dateIds <- c(dateIds, 14)
-
+    
     ## which styles are using these dateIds
     cellXfs <- getNodes(xml = styles, tagIn = "<cellXfs")
     xf <- getChildlessNode(xml = cellXfs, tag = "xf")
-    lookingFor <-
-      paste(sprintf('numFmtId="%s"', dateIds), collapse = "|")
-    dateStyleIds <-
-      which(sapply(xf, function(x) {
-        grepl(lookingFor, x)
-      }, USE.NAMES = FALSE)) - 1L
-
-    isDate <- (s %in% dateStyleIds)
-
+    lookingFor <- paste(sprintf('numFmtId="%s"', dateIds), collapse = "|")
+    dateStyleIds <- which(sapply(xf, function(x) grepl(lookingFor, x), USE.NAMES = FALSE)) - 1L
+    
+    isDate <- s %in% dateStyleIds
+    
     ## set to false if in string_refs
     isDate[seq_along(s) %in% string_refs] <- FALSE
-
+    
     # check numbers are also integers
     not_an_integer <- numeric(length(v))
-    not_an_integer[isDate] <-
-      suppressWarnings(as.numeric(v[isDate]))
-    not_an_integer <-
-      (not_an_integer %% 1L != 0) & !is.na(not_an_integer)
+    not_an_integer[isDate] <- suppressWarnings(as.numeric(v[isDate]))
+    not_an_integer <- (not_an_integer %% 1L != 0) & !is.na(not_an_integer)
     isDate[not_an_integer] <- FALSE
-    if(origin == 25569L){
+    if (origin == 25569L) {
       earlyDates <- suppressWarnings(as.integer(v) < 60)
-      v[earlyDates & isDate] <- as.integer(v[earlyDates & isDate]) + 1
+      v[earlyDates & isDate] <- as.integer(v[earlyDates & isDate]) + 1L
     }
-
-
-    ## perform int to date to character convertsion (way too slow)
+    
+    ## perform int to date to character conversion (way too slow)
     v[isDate] <-
       format(
         as.Date(as.integer(v[isDate]) - origin, origin = "1970-01-01"),
@@ -617,20 +600,20 @@ read.xlsx.default <- function(xlsxFile,
   } else {
     isDate <- as.logical(NA)
   }
-
+  
   ## Build data.frame
   m <- read_workbook(
-    cols_in = cell_cols,
-    rows_in = cell_rows,
-    v = v,
-    string_inds = string_refs,
-    is_date = isDate,
-    hasColNames = colNames,
-    hasSepNames = sep.names,
+    cols_in       = cell_cols,
+    rows_in       = cell_rows,
+    v             = v,
+    string_inds   = string_refs,
+    is_date       = isDate,
+    hasColNames   = colNames,
+    hasSepNames   = sep.names,
     skipEmptyRows = skipEmptyRows,
     skipEmptyCols = skipEmptyCols,
-    nRows = nRows,
-    clean_names = clean_names
+    nRows         = nRows,
+    clean_names   = clean_names
   )
   
   if (rowNames) {
@@ -653,14 +636,6 @@ read.xlsx.default <- function(xlsxFile,
   m
 }
 
-
-
-
-
-
-
-
-
 #' @name readWorkbook
 #' @title  Read from an Excel file or Workbook object
 #' @description Read data from an Excel file or Workbook object into a data.frame
@@ -678,20 +653,20 @@ read.xlsx.default <- function(xlsxFile,
 #' xlsxFile <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
 #' df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1, rows = c(1, 3, 5), cols = 1:3)
 readWorkbook <- function(xlsxFile,
-                         sheet = 1,
-                         startRow = 1,
-                         colNames = TRUE,
-                         rowNames = FALSE,
-                         detectDates = FALSE,
-                         skipEmptyRows = TRUE,
-                         skipEmptyCols = TRUE,
-                         rows = NULL,
-                         cols = NULL,
-                         check.names = FALSE,
-                         sep.names = ".",
-                         namedRegion = NULL,
-                         na.strings = "NA",
-                         fillMergedCells = FALSE) {
+  sheet = 1,
+  startRow = 1,
+  colNames = TRUE,
+  rowNames = FALSE,
+  detectDates = FALSE,
+  skipEmptyRows = TRUE,
+  skipEmptyCols = TRUE,
+  rows = NULL,
+  cols = NULL,
+  check.names = FALSE,
+  sep.names = ".",
+  namedRegion = NULL,
+  na.strings = "NA",
+  fillMergedCells = FALSE) {
   read.xlsx(
     xlsxFile = xlsxFile,
     sheet = sheet,
