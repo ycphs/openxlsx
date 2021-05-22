@@ -632,19 +632,25 @@ read.xlsx.default <- function(xlsxFile,
     nRows = nRows,
     clean_names = clean_names
   )
-
-
-  if (colNames && check.names) {
-    colnames(m) <- make.names(colnames(m), unique = TRUE)
-  }
-
-
+  
   if (rowNames) {
+    # set the first column as the rownames
     rownames(m) <- m[[1]]
     m[[1]] <- NULL
   }
-
-  return(m)
+  
+  if (colNames) {
+    if (check.names) {
+      colnames(m) <- make.names(colnames(m), unique = TRUE)
+    }
+  } else {
+    # Need to reset column names
+    if (rowNames) {
+      colnames(m) <- make.names(seq_along(m))
+    }
+  }
+  
+  m
 }
 
 
