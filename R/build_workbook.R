@@ -56,12 +56,23 @@ buildWorkbook <- function(x, asTable = FALSE, ...) {
     do_call_params(writeData, params, x = x, wb = wb, .map = TRUE)
   }
   
-  params$startCol <- params$startCol %||% 1
-  # TODO colWidths as globalOption
-  params$colWidths <- params$colWidths %||% ""
-  params$colWidths <- rep_len(params$colWidths, length.out = length(x))
+  do_setColWidths(wb, x, params, isList)
+  do_call_params(freezePane, params, wb = list(wb), .map = TRUE)
+  invisible(wb)
+}
+
+
+do_setColWidths <- function(wb, x, params, isList) {
+  if (!isList) {
+    x <- list(x)
+  }
   
-  for (i in seq_along(x)) {
+  params$startCol <- params$startCol %||% 1
+  params$startCol <- rep_len(list(params$startCol), length.out = length(x))
+  params$colWidths <- params$colWidths %||% ""
+  params$colWidths <- rep_len(as.list(params$colWidths), length.out = length(x))
+  
+  for (i in seq_along(wb$worksheets)) {
     if (identical(params$colWidths[[i]], "auto")) {
       setColWidths(
         wb,
@@ -73,12 +84,10 @@ buildWorkbook <- function(x, asTable = FALSE, ...) {
       setColWidths(
         wb,
         sheet = i,
-        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L, 
+        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L,
         widths = params$colWidths[[i]]
       )
     }
   }
-  
-  do_call_params(freezePane, params, wb = list(wb), .map = TRUE)
-  invisible(wb)
+  wb
 }
