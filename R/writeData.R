@@ -176,19 +176,14 @@ writeData <- function(
   sep          = ", "
 ) {
 
-  ## increase scipen to avoid writing in scientific
-  exSciPen <- getOption("scipen")
-  od <- getOption("OutDec")
-  exDigits <- getOption("digits")
-
-  options("scipen" = 200)
-  options("OutDec" = ".")
-  options("digits" = 22)
-
-  on.exit(options("scipen" = exSciPen), add = TRUE)
-  on.exit(expr = options("OutDec" = od), add = TRUE)
-  on.exit(options("digits" = exDigits), add = TRUE)
-
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
+  
+  if (!missing(row.names)) {
+    warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
+    rowNames <- row.names
+  }
+  
   # Set NULLs
   borders      <- borders      %||% "none"
   borderColour <- borderColour %||% "black"

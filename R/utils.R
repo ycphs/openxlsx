@@ -39,3 +39,16 @@ do_call_params <- function(fun, params, ..., .map = FALSE) {
 
   do.call(call_fun, call_params)
 }
+
+# sets temporary options
+# returns the current options to decrease line use
+get_set_options <- function() {
+  op <- options()
+  options(
+    # increase scipen to avoid writing in scientific
+    scipen = 200,
+    OutDec = ".",
+    digits = 22
+  )
+  op
+}
