@@ -100,6 +100,8 @@ op.openxlsx <- list(
   openxlsx.keepNA           = FALSE,
   openxlsx.lastColumn       = NULL,
   openxlsx.na.string        = NULL,
+  openxlsx.maxWidth         = 250,
+  openxlsx.minWidth         = 3,
   openxlsx.numFmt           = "GENERAL",
   openxlsx.oddFooter        = NULL,
   openxlsx.oddHeader        = NULL,
