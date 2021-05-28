@@ -211,16 +211,12 @@ writeData <- function(
   }
 
   startRow <- as.integer(startRow)
-
-  if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
-
-  if (!is.logical(colNames)) stop("colNames must be a logical.")
-  if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-
-  if (is_not_class(headerStyle, "Style")) {
-    stop("headerStyle must be a style object or NULL.")
-  }
-  if (!is.character(sep) || length(sep) != 1) stop("sep must be a character vector of length 1")
+  
+  assert_class(wb, "Workbook")
+  assert_true_false(colNames)
+  assert_true_false(rowNames)
+  assert_character1(sep)
+  assert_class(headerStyle, "Style", or_null = TRUE)
 
   ## borderColours validation
   borderColour <- validateColour(borderColour, "Invalid border colour")
@@ -228,13 +224,13 @@ writeData <- function(
 
   ## special case - vector of hyperlinks
   hlinkNames <- NULL
-  if ("hyperlink" %in% class(x)) {
+  if (inherits(x, "hyperlink")) {
     hlinkNames <- names(x)
     colNames <- FALSE
   }
 
   ## special case - formula
-  if ("formula" %in% class(x)) {
+  if (inherits(x, "formula")) {
     x <- data.frame("X" = x, stringsAsFactors = FALSE)
     class(x[[1]]) <- ifelse(array, "array_formula", "formula")
     colNames <- FALSE
@@ -335,7 +331,7 @@ writeData <- function(
   )
 
   ## header style
-  if ("Style" %in% class(headerStyle) & colNames) {
+  if (inherits(headerStyle, "Style") & colNames) {
     addStyle(
       wb = wb, sheet = sheet, style = headerStyle,
       rows = startRow,

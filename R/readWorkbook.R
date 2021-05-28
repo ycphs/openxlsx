@@ -116,37 +116,18 @@ read.xlsx.default <- function(xlsxFile,
     sheetselected <- FALSE
   }
   
-  if (grepl("\\.xls$|\\.xlm$", xlsxFile)) {
-    stop("openxlsx can not read .xls or .xlm files!")
+  if (!grepl("\\.xlsx$", xlsxFile)) {
+    stop("openxlsx can only read .xlsx files", call. = FALSE)
   }
   
-  if (!is.logical(colNames)) {
-    stop("colNames must be TRUE/FALSE.")
-  }
-  
-  if (!is.logical(rowNames)) {
-    stop("rowNames must be TRUE/FALSE.")
-  }
-  
-  if (!is.logical(detectDates)) {
-    stop("detectDates must be TRUE/FALSE.")
-  }
-  
-  if (!is.logical(skipEmptyRows)) {
-    stop("skipEmptyRows must be TRUE/FALSE.")
-  }
-  
-  if (!is.logical(check.names)) {
-    stop("check.names must be TRUE/FALSE.")
-  }
-  
-  if (!is.character(sep.names) | nchar(sep.names) != 1) {
-    stop("sep.names must be a character and only one.")
-  }
-  
-  if (length(sheet) > 1) {
-    stop("sheet must be of length 1.")
-  }
+  assert_true_false1(colNames)
+  assert_true_false1(rowNames)
+  assert_true_false1(detectDates)
+  assert_true_false1(skipEmptyRows)
+  assert_true_false1(check.names)
+  assert_character1(sep.names, scalar = TRUE)
+  assert_length(sheet, 1L)
+  assert_length(startRow, 1L)
   
   if (is.null(rows)) {
     rows <- NA

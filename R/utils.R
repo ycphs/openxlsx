@@ -15,15 +15,11 @@
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
 is_not_class <- function(x, class) {
-  if (is.null(x)) {
-    FALSE
-  } else {
-    !inherits(x, class)
-  }
+  !(inherits(x, class) | is.null(x))
 }
 
 is_true_false <- function(x) {
-  is.logical(x) && length(x) == 1L && is.na(x)
+  is.logical(x) && length(x) == 1L && !is.na(x)
 }
 
 do_call_params <- function(fun, params, ..., .map = FALSE) {
