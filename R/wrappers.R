@@ -2861,7 +2861,7 @@ getNamedRegions.default <- function(x) {
   xmlDir <- file.path(tempdir(), "named_regions_tmp")
   xmlFiles <- unzip(x, exdir = xmlDir)
 
-  workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
+  workbook <- grep("workbook.xml$", xmlFiles, perl = TRUE, value = TRUE)
   workbook <- unlist(readUTF8(workbook))
 
   dn <- getChildlessNode(xml = removeHeadTag(workbook), tag = "definedName")
@@ -3331,7 +3331,7 @@ getDateOrigin <- function(xlsxFile) {
 
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
 
-  workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
+  workbook <- grep("workbook.xml$", xmlFiles, perl = TRUE, value = TRUE)
   workbook <- paste(unlist(readUTF8(workbook)), collapse = "")
 
   if (grepl('date1904="1"|date1904="true"', workbook, ignore.case = TRUE)) {
@@ -3374,7 +3374,7 @@ getSheetNames <- function(file) {
 
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
 
-  workbook <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
+  workbook <- grep("workbook.xml$", xmlFiles, perl = TRUE, value = TRUE)
   workbook <- readUTF8(workbook)
   workbook <- removeHeadTag(workbook)
   sheets <- unlist(regmatches(workbook, gregexpr("(?<=<sheets>).*(?=</sheets>)", workbook, perl = TRUE)))

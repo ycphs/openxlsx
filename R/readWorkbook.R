@@ -220,9 +220,9 @@ read.xlsx.default <- function(
     idx <- match(dn_namedRegion, namedRegion)
     
     # make sure that the length of both vectors is identical
-    dn <- dn[which(!is.na(idx))]
-    dn_namedRegion <- dn_namedRegion[which(!is.na(idx))]
-    dn_sheetNames  <- dn_sheetNames[which(!is.na(idx))]
+    dn <- dn[!is.na(idx)]
+    dn_namedRegion <- dn_namedRegion[!is.na(idx)]
+    dn_sheetNames  <- dn_sheetNames[!is.na(idx)]
     
     # a sheet was selected
     if (sheetselected) {

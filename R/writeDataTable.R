@@ -12,6 +12,7 @@
 #' A vector of the form c(startCol, startRow)
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, row names of x are written.
+#' @param row.names Deprecated, please use \code{rowNames} instead
 #' @param tableStyle Any excel table style name or "none" (see "formatting" vignette).
 #' @param tableName name of table in workbook. The table name must be unique.
 #' @param headerStyle Custom style to apply to column names.

@@ -55,54 +55,63 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   # .relsXML           <- xmlFiles[grepl("_rels/.rels$", xmlFiles, perl = TRUE)]
   # appXML             <- xmlFiles[grepl("app.xml$", xmlFiles, perl = TRUE)]
 
-  drawingsXML <- xmlFiles[grepl("drawings/drawing[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  worksheetsXML <- xmlFiles[grepl("/worksheets/sheet[0-9]+", xmlFiles, perl = TRUE)]
+  drawingsXML   <- grep("drawings/drawing[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  worksheetsXML <- grep("/worksheets/sheet[0-9]+", xmlFiles, perl = TRUE, value = TRUE)
 
-  coreXML <- xmlFiles[grepl("core.xml$", xmlFiles, perl = TRUE)]
-  workbookXML <- xmlFiles[grepl("workbook.xml$", xmlFiles, perl = TRUE)]
-  stylesXML <- xmlFiles[grepl("styles.xml$", xmlFiles, perl = TRUE)]
-  sharedStringsXML <- xmlFiles[grepl("sharedStrings.xml$", xmlFiles, perl = TRUE)]
-  themeXML <- xmlFiles[grepl("theme[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  drawingRelsXML <- xmlFiles[grepl("drawing[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
-  sheetRelsXML <- xmlFiles[grepl("sheet[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
-  media <- xmlFiles[grepl("image[0-9]+.[a-z]+$", xmlFiles, perl = TRUE)]
-  vmlDrawingXML <- xmlFiles[grepl("drawings/vmlDrawing[0-9]+\\.vml$", xmlFiles, perl = TRUE)]
-  vmlDrawingRelsXML <- xmlFiles[grepl("vmlDrawing[0-9]+.vml.rels$", xmlFiles, perl = TRUE)]
-  commentsXML <- xmlFiles[grepl("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE)]
-  threadCommentsXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
-  personXML <- xmlFiles[grepl("xl/persons/person.xml$", xmlFiles, perl = TRUE)]
-  embeddings <- xmlFiles[grepl("xl/embeddings", xmlFiles, perl = TRUE)]
-
-  charts <- xmlFiles[grepl("xl/charts/.*xml$", xmlFiles, perl = TRUE)]
-  chartsRels <- xmlFiles[grepl("xl/charts/_rels", xmlFiles, perl = TRUE)]
-  chartSheetsXML <- xmlFiles[grepl("xl/chartsheets/sheet[0-9]+\\.xml", xmlFiles, perl = TRUE)]
-
-  tablesXML <- xmlFiles[grepl("tables/table[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  tableRelsXML <- xmlFiles[grepl("table[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
-  queryTablesXML <- xmlFiles[grepl("queryTable[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  connectionsXML <- xmlFiles[grepl("connections.xml$", xmlFiles, perl = TRUE)]
-  extLinksXML <- xmlFiles[grepl("externalLink[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  extLinksRelsXML <- xmlFiles[grepl("externalLink[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
+  coreXML           <- grep("core.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  workbookXML       <- grep("workbook.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  stylesXML         <- grep("styles.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  sharedStringsXML  <- grep("sharedStrings.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  themeXML          <- grep("theme[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  drawingRelsXML    <- grep("drawing[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  sheetRelsXML      <- grep("sheet[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  media             <- grep("image[0-9]+.[a-z]+$", xmlFiles, perl = TRUE, value = TRUE)
+  vmlDrawingXML     <- grep("drawings/vmlDrawing[0-9]+\\.vml$", xmlFiles, perl = TRUE, value = TRUE)
+  vmlDrawingRelsXML <- grep("vmlDrawing[0-9]+.vml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  commentsXML       <- grep("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE, value = TRUE)
+  threadCommentsXML <- grep("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE, value = TRUE)
+  personXML         <- grep("xl/persons/person.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  embeddings        <- grep("xl/embeddings", xmlFiles, perl = TRUE, value = TRUE)
+  charts            <- grep("xl/charts/.*xml$", xmlFiles, perl = TRUE, value = TRUE)
+  chartsRels        <- grep("xl/charts/_rels", xmlFiles, perl = TRUE, value = TRUE)
+  chartSheetsXML    <- grep("xl/chartsheets/sheet[0-9]+\\.xml", xmlFiles, perl = TRUE, value = TRUE)
+  tablesXML         <- grep("tables/table[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  tableRelsXML      <- grep("table[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  queryTablesXML    <- grep("queryTable[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  connectionsXML    <- grep("connections.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  extLinksXML       <- grep("externalLink[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  extLinksRelsXML   <- grep("externalLink[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
 
 
   # pivot tables
-  pivotTableXML <- xmlFiles[grepl("pivotTable[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  pivotTableRelsXML <- xmlFiles[grepl("pivotTable[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
-  pivotDefXML <- xmlFiles[grepl("pivotCacheDefinition[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  pivotDefRelsXML <- xmlFiles[grepl("pivotCacheDefinition[0-9]+.xml.rels$", xmlFiles, perl = TRUE)]
-  pivotCacheRecords <- xmlFiles[grepl("pivotCacheRecords[0-9]+.xml$", xmlFiles, perl = TRUE)]
+  pivotTableXML     <- grep("pivotTable[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  pivotTableRelsXML <- grep("pivotTable[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  pivotDefXML       <- grep("pivotCacheDefinition[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  pivotDefRelsXML   <- grep("pivotCacheDefinition[0-9]+.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
+  pivotCacheRecords <- grep("pivotCacheRecords[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
 
   ## slicers
-  slicerXML <- xmlFiles[grepl("slicer[0-9]+.xml$", xmlFiles, perl = TRUE)]
-  slicerCachesXML <- xmlFiles[grepl("slicerCache[0-9]+.xml$", xmlFiles, perl = TRUE)]
+  slicerXML       <- grep("slicer[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
+  slicerCachesXML <- grep("slicerCache[0-9]+.xml$", xmlFiles, perl = TRUE, value = TRUE)
 
   ## VBA Macro
-  vbaProject <- xmlFiles[grepl("vbaProject\\.bin$", xmlFiles, perl = TRUE)]
+  vbaProject <- grep("vbaProject\\.bin$", xmlFiles, perl = TRUE, value = TRUE)
 
   ## remove all EXCEPT media and charts
   if (!isUnzipped) {
-    on.exit(expr = unlink(xmlFiles[!grepl("charts|media|vmlDrawing|comment|embeddings|pivot|slicer|vbaProject|person", xmlFiles, ignore.case = TRUE)], recursive = TRUE, force = TRUE), add = TRUE)
-  }
+    on.exit({
+      paths <- grep(
+        "charts|media|vmlDrawing|comment|embeddings|pivot|slicer|vbaProject|person", 
+        xmlFiles, 
+        ignore.case = TRUE,
+        value = TRUE,
+        invert = TRUE
+      )
+      unlink(paths, recursive = TRUE, force = TRUE)
+    },
+      add = TRUE
+    )
+}
 
   ## core
   if (length(coreXML) == 1) {
@@ -114,17 +123,17 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## get Rid of chartsheets, these do not have a worksheet/sheeti.xml
   worksheet_rId_mapping <- NULL
-  workbookRelsXML <- xmlFiles[grepl("workbook.xml.rels$", xmlFiles, perl = TRUE)]
+  workbookRelsXML <- grep("workbook.xml.rels$", xmlFiles, perl = TRUE, value = TRUE)
   if (length(workbookRelsXML) > 0) {
     workbookRelsXML <- paste(readUTF8(workbookRelsXML), collapse = "")
     workbookRelsXML <- getChildlessNode(xml = workbookRelsXML, tag = "Relationship")
-    worksheet_rId_mapping <- workbookRelsXML[grepl("worksheets/sheet", workbookRelsXML, fixed = TRUE)]
+    worksheet_rId_mapping <- grep("worksheets/sheet", workbookRelsXML, fixed = TRUE, value = TRUE)
   }
 
   ##
   chartSheetRIds <- NULL
   if (length(chartSheetsXML) > 0) {
-    workbookRelsXML <- workbookRelsXML[grepl("chartsheets/sheet", workbookRelsXML, fixed = TRUE)]
+    workbookRelsXML <- grep("chartsheets/sheet", workbookRelsXML, fixed = TRUE, value = TRUE)
 
     chartSheetRIds <- unlist(getId(workbookRelsXML))
     chartsheet_rId_mapping <- unlist(regmatches(workbookRelsXML, gregexpr("sheet[0-9]+\\.xml", workbookRelsXML, perl = TRUE, ignore.case = TRUE)))
@@ -132,7 +141,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     sheetNo <- as.integer(regmatches(chartSheetsXML, regexpr("(?<=sheet)[0-9]+(?=\\.xml)", chartSheetsXML, perl = TRUE)))
     chartSheetsXML <- chartSheetsXML[order(sheetNo)]
 
-    chartSheetsRelsXML <- xmlFiles[grepl("xl/chartsheets/_rels", xmlFiles, perl = TRUE)]
+    chartSheetsRelsXML <- grep("xl/chartsheets/_rels", xmlFiles, perl = TRUE, value = TRUE)
     sheetNo2 <- as.integer(regmatches(chartSheetsRelsXML, regexpr("(?<=sheet)[0-9]+(?=\\.xml\\.rels)", chartSheetsRelsXML, perl = TRUE)))
     chartSheetsRelsXML <- chartSheetsRelsXML[order(sheetNo2)]
 
@@ -696,7 +705,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     ## Not every sheet has a drawing.xml
 
 
-    drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/drawing", x)])
+    drawXMLrelationship <- lapply(xml, function(x) grep("drawings/drawing", x, value = TRUE))
     hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
     if (length(drawingRelsXML) > 0) {
@@ -750,7 +759,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     if (length(vmlDrawingXML) > 0) {
       wb$Content_Types <- c(wb$Content_Types, '<Default Extension="vml" ContentType="application/vnd.openxmlformats-officedocument.vmlDrawing"/>')
 
-      drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/vmlDrawing", x)])
+      drawXMLrelationship <- lapply(xml, function(x) grep("drawings/vmlDrawing", x, value = TRUE))
       hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
       ## loop over all worksheets and assign drawing to sheet
@@ -788,10 +797,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     ## vmlDrawing and comments
     if (length(commentsXML) > 0) {
-      drawXMLrelationship <- lapply(xml, function(x) x[grepl("drawings/vmlDrawing[0-9]+\\.vml", x)])
+      drawXMLrelationship <- lapply(xml, function(x) grep("drawings/vmlDrawing[0-9]+\\.vml", x, value = TRUE))
       hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
 
-      commentXMLrelationship <- lapply(xml, function(x) x[grepl("comments[0-9]+\\.xml", x)])
+      commentXMLrelationship <- lapply(xml, function(x) grep("comments[0-9]+\\.xml", x, value = TRUE))
       hasComment <- sapply(commentXMLrelationship, length) > 0 ## which sheets have a comment
 
       for (i in seq_along(xml)) {
@@ -805,14 +814,14 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
             txt <- removeHeadTag(txt)
 
             cd <- unique(getNodes(xml = txt, tagIn = "<x:ClientData"))
-            cd <- cd[grepl('ObjectType="Note"', cd)]
+            cd <- grep('ObjectType="Note"', cd, value = TRUE)
             cd <- paste0(cd, ">")
 
             ## now loada comment
             target <- unlist(lapply(commentXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
             target <- basename(gsub('"$', "", target))
 
-            txt <- paste(readUTF8(commentsXML[grepl(target, commentsXML)]), collapse = "\n")
+            txt <- paste(readUTF8(grep(target, commentsXML, value = TRUE)), collapse = "\n")
             txt <- removeHeadTag(txt)
 
             authors <- getNodes(xml = txt, tagIn = "<author>")
@@ -850,7 +859,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     ## Threaded comments
     if (length(threadCommentsXML) > 0) {
-      threadCommentsXMLrelationship <- lapply(xml, function(x) x[grepl("threadedComment[0-9]+\\.xml", x)])
+      threadCommentsXMLrelationship <- lapply(xml, function(x) grep("threadedComment[0-9]+\\.xml", x, value = TRUE))
       hasThreadComments<- sapply(threadCommentsXMLrelationship, length) > 0
       if(any(hasThreadComments)) {
         for (i in seq_along(xml)) {
@@ -858,7 +867,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
             target <- unlist(lapply(threadCommentsXMLrelationship[[i]], function(x) regmatches(x, gregexpr('(?<=Target=").*?"', x, perl = TRUE))[[1]]))
             target <- basename(gsub('"$', "", target))
 
-            wb$threadComments[[i]] <- threadCommentsXML[grepl(target, threadCommentsXML)]
+            wb$threadComments[[i]] <- grep(target, threadCommentsXML, value = TRUE)
             
           }
         }
@@ -884,7 +893,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     
 
     ## rels image
-    drawXMLrelationship <- lapply(xml, function(x) x[grepl("relationships/image", x)])
+    drawXMLrelationship <- lapply(xml, function(x) grep("relationships/image", x, value = TRUE))
     hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
     if (any(hasDrawing)) {
       for (i in seq_along(xml)) {
@@ -900,7 +909,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
 
     ## rels image
-    drawXMLrelationship <- lapply(xml, function(x) x[grepl("relationships/package", x)])
+    drawXMLrelationship <- lapply(xml, function(x) grep("relationships/package", x, value = TRUE))
     hasDrawing <- sapply(drawXMLrelationship, length) > 0 ## which sheets have a drawing
     if (any(hasDrawing)) {
       for (i in seq_along(xml)) {
@@ -934,7 +943,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       # sheetWithPivot <- which(sapply(pivotTableJ, length) > 0)  variable not used
 
       pivotRels <- lapply(xml, function(x) {
-        y <- x[grepl("pivotTable", x)]
+        y <- grep("pivotTable", x, value = TRUE)
         y[order(nchar(y), y)]
       })
       hasPivot <- sapply(pivotRels, length) > 0
@@ -958,7 +967,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
       if (length(inds) > 0) {
         toRemove <- paste(sprintf("(pivotCacheDefinition%s\\.xml)", inds), collapse = "|")
-        fileNo <- which(grepl(toRemove, wb$pivotTables.xml.rels))
+        fileNo <- grep(toRemove, wb$pivotTables.xml.rels)
         toRemove <- paste(sprintf("(pivotCacheDefinition%s\\.xml)", fileNo), collapse = "|")
 
         ## remove reference to file from workbook.xml.res

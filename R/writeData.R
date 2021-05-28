@@ -14,6 +14,7 @@
 #' \code{c(startCol, startRow)}.
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, data.frame row names of x are written.
+#' @param row.names Deprecated, please use \code{rowNames} instead
 #' @param headerStyle Custom style to apply to column names.
 #' @param borders Either "\code{none}" (default), "\code{surrounding}",
 #' "\code{columns}", "\code{rows}" or \emph{respective abbreviations}.  If

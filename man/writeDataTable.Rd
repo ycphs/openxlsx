@@ -76,6 +76,8 @@ existing style is replaced by the new style.
 \item{bandedRows}{logical. If TRUE, rows are colour banded}
 
 \item{bandedCols}{logical. If TRUE, the columns are colour banded}
+
+\item{row.names}{Deprecated, please use \code{rowNames} instead}
 }
 \description{
 Write to a worksheet and format as an Excel table
