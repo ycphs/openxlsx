@@ -660,9 +660,9 @@ readWorkbook <- function(xlsxFile,
     rows = rows,
     cols = cols,
     check.names = check.names,
-    sep.names = ".",
     namedRegion = namedRegion,
     na.strings = na.strings,
+    sep.names       = sep.names,
     fillMergedCells = fillMergedCells
   )
 }
