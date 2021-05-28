@@ -198,21 +198,6 @@ writeDataTable <- function(
   assert_true_false(bandedRows)
   assert_true_false(bandedCols)
   
-  if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
-  if (!"data.frame" %in% class(x)) stop("x must be a data.frame.")
-  if (!is.logical(colNames)) stop("colNames must be a logical.")
-  if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-  if (is_not_class(headerStyle, "Style")) {
-    stop("headerStyle must be a style object or NULL.")
-  } 
-  if (!is.logical(withFilter)) stop("withFilter must be a logical.")
-  if ((!is.character(sep)) | (length(sep) != 1)) stop("sep must be a character vector of length 1")
-
-  if (!is.logical(firstColumn)) stop("firstColumn must be a logical.")
-  if (!is.logical(lastColumn)) stop("lastColumn must be a logical.")
-  if (!is.logical(bandedRows)) stop("bandedRows must be a logical.")
-  if (!is.logical(bandedCols)) stop("bandedCols must be a logical.")
-
   if (is.null(tableName)) {
     tableName <- paste0("Table", as.character(length(wb$tables) + 3L))
   } else {
@@ -237,9 +222,11 @@ writeDataTable <- function(
   ## header style
   if (inherits(headerStyle, "Style")) {
     addStyle(
-      wb = wb, sheet = sheet, style = headerStyle,
-      rows = startRow,
-      cols = 0:(ncol(x) - 1L) + startCol,
+      wb         = wb, 
+      sheet      = sheet,
+      style      = headerStyle,
+      rows       = startRow,
+      cols       = 0:(ncol(x) - 1L) + startCol,
       gridExpand = TRUE
     )
   }
@@ -256,12 +243,16 @@ writeDataTable <- function(
       colNames[char0] <- colnames(x)[char0] <- paste0("Column", which(char0))
     }
   } else {
-    colNames <- paste0("Column", seq_len(ncol(x)))
+    colNames <- paste0("Column", seq_along(x))
     names(x) <- colNames
   }
+  
   ## If zero rows, append an empty row (prevent XML from corrupting)
   if (nrow(x) == 0) {
-    x <- rbind(as.data.frame(x), matrix("", nrow = 1, ncol = ncol(x), dimnames = list(character(), colnames(x))))
+    x <- rbind(
+      as.data.frame(x),
+      matrix("", nrow = 1, ncol = ncol(x), dimnames = list(character(), colnames(x)))
+    )
     names(x) <- colNames
   }
 
@@ -272,14 +263,24 @@ writeDataTable <- function(
   ## check not overwriting another table
   wb$check_overwrite_tables(
     sheet = sheet,
-    new_rows = c(startRow, startRow + nrow(x) - 1L + 1L) ## + header
-    , new_cols = c(startCol, startCol + ncol(x) - 1L)
+    new_rows = c(startRow, startRow + nrow(x) - 1L + 1L), ## + header
+    new_cols = c(startCol, startCol + ncol(x) - 1L)
   )
 
 
   ## column class styling
+  # consider not using lowercase and instead use inherits(x, class)
   colClasses <- lapply(x, function(x) tolower(class(x)))
-  classStyles(wb, sheet = sheet, startRow = startRow, startCol = startCol, colNames = TRUE, nRow = nrow(x), colClasses = colClasses, stack = stack)
+  classStyles(
+    wb,
+    sheet      = sheet,
+    startRow   = startRow, 
+    startCol   = startCol, 
+    colNames   = TRUE,
+    nRow       = nrow(x),
+    colClasses = colClasses, 
+    stack      = stack
+  )
 
   ## write data to worksheet
   wb$writeData(

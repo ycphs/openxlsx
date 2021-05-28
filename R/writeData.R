@@ -270,7 +270,11 @@ writeData <- function(
 
   colClasses <- lapply(x, function(x) tolower(class(x)))
   colClasss2 <- colClasses
-  colClasss2[sapply(colClasses, function(x) "formula" %in% x) & sapply(colClasses, function(x) "hyperlink" %in% x)] <- "formula"
+  colClasss2[vapply(
+    colClasses,
+    function(i) inherits(i, "formula") & inherits(i, "hyperlink"),
+    NA
+  )] <- "formula"
 
   if (is.numeric(sheet)) {
     sheetX <- wb$validateSheet(sheet)
@@ -281,26 +285,26 @@ writeData <- function(
 
   if (wb$isChartSheet[[sheetX]]) {
     stop("Cannot write to chart sheet.")
-    return(NULL)
   }
 
   ## Check not overwriting existing table headers
   wb$check_overwrite_tables(
-    sheet = sheet,
-    new_rows = c(startRow, startRow + nRow - 1L + colNames),
-    new_cols = c(startCol, startCol + nCol - 1L),
+    sheet                   = sheet,
+    new_rows                = c(startRow, startRow + nRow - 1L + colNames),
+    new_cols                = c(startCol, startCol + nCol - 1L),
     check_table_header_only = TRUE,
-    error_msg =
-      "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
+    error_msg               = "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
   )
 
   ## write autoFilter, can only have a single filter per worksheet
   if (withFilter) {
-    coords <- data.frame("x" = c(startRow, startRow + nRow + colNames - 1L), "y" = c(startCol, startCol + nCol - 1L))
+    coords <- data.frame(
+      x = c(startRow, startRow + nRow + colNames - 1L),
+      y = c(startCol, startCol + nCol - 1L)
+    )
+    
     ref <- stri_join(getCellRefs(coords), collapse = ":")
-
     wb$worksheets[[sheetX]]$autoFilter <- sprintf('<autoFilter ref="%s"/>', ref)
-
     l <- convert_to_excel_ref(cols = unlist(coords[, 2]), LETTERS = LETTERS)
     dfn <- sprintf("'%s'!%s", names(wb)[sheetX], stri_join("$", l, "$", coords[, 1], collapse = ":"))
 
@@ -333,10 +337,13 @@ writeData <- function(
   ## header style
   if (inherits(headerStyle, "Style") & colNames) {
     addStyle(
-      wb = wb, sheet = sheet, style = headerStyle,
-      rows = startRow,
-      cols = 0:(nCol - 1) + startCol,
-      gridExpand = TRUE, stack = TRUE
+      wb         = wb,
+      sheet      = sheet, 
+      style      = headerStyle,
+      rows       = startRow,
+      cols       = 0:(nCol - 1) + startCol,
+      gridExpand = TRUE,
+      stack      = TRUE
     )
   }
 
@@ -509,7 +516,8 @@ writeFormula <- function(
   array = FALSE,
   xy = NULL
 ) {
-  if (!"character" %in% class(x)) {
+  
+  if (!is.character(x)) {
     stop("x must be a character vector.")
   }
 

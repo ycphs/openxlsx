@@ -1111,8 +1111,6 @@ Workbook$methods(
   }
 )
 
-
-
 Workbook$methods(
   validateSheet = function(sheetName) {
     if (!is.numeric(sheetName)) {
@@ -1123,21 +1121,20 @@ Workbook$methods(
 
     if (is.numeric(sheetName)) {
       if (sheetName > length(sheet_names)) {
-        stop(sprintf("This Workbook only has %s sheets.", length(sheet_names)),
-          call. =
-            FALSE
+        stop("This Workbook only has ", length(sheet_names),
+          " sheets, ", sheetName, " is not valid",
+          call. = FALSE
         )
       }
-
       return(sheetName)
     } else if (!sheetName %in% replaceXMLEntities(sheet_names)) {
-      stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)), call. = FALSE)
+      stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)),
+        call. = FALSE)
     }
 
-    return(which(replaceXMLEntities(sheet_names) == sheetName))
+    which(replaceXMLEntities(sheet_names) == sheetName)
   }
 )
-
 
 
 Workbook$methods(
@@ -1149,8 +1146,6 @@ Workbook$methods(
     sheet_names[sheetIndex]
   }
 )
-
-
 
 Workbook$methods(
   buildTable = function(sheet,
