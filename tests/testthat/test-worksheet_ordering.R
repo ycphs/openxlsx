@@ -21,7 +21,7 @@ test_that("Worksheet ordering from new Workbook", {
   genWS(wb, "Sheet 3")
 
 
-  tempFile <- file.path(tempdir(), "orderingTest.xlsx")
+  tempFile <- temp_xlsx("orderingTest")
 
   ## no ordering
   saveWorkbook(wb, file = tempFile, overwrite = TRUE)
@@ -244,7 +244,7 @@ test_that("Worksheet ordering from new Workbook", {
 
 
 test_that("Worksheet ordering from new Workbook", {
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
 
   wb <- createWorkbook()
   addWorksheet(wb = wb, sheetName = "Sheet 1", gridLines = FALSE)

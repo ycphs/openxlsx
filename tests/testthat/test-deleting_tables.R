@@ -9,9 +9,7 @@ test_that("Deleting a Table Object", {
   writeDataTable(wb, sheet = "Sheet 1", x = iris, tableName = "iris")
   writeDataTable(wb, sheet = 1, x = mtcars, tableName = "mtcars", startCol = 10)
 
-
-  ###################################################################################
-  ## Get table
+  # Get table ----
 
   expect_equal(length(getTables(wb, sheet = 1)), 2L)
   expect_equal(length(getTables(wb, sheet = "Sheet 1")), 2L)
@@ -30,12 +28,7 @@ test_that("Deleting a Table Object", {
 
   expect_equal(length(wb$tables), 2L)
 
-
-
-
-
-  ###################################################################################
-  ## Deleting a worksheet
+  ## Deleting a worksheet ----
 
   removeWorksheet(wb, 1)
   expect_equal(length(wb$tables), 2L)
@@ -88,9 +81,6 @@ test_that("Deleting a Table Object", {
     "mtcars"
   ))
 
-
-
-
   ## removeTable clears table object and all data
   writeDataTable(wb, sheet = 1, x = iris, tableName = "iris", startCol = 1)
   expect_equal(wb$worksheets[[1]]$tableParts, c("<tablePart r:id=\"rId6\"/>", "<tablePart r:id=\"rId7\"/>"), check.attributes = FALSE)
@@ -115,11 +105,8 @@ test_that("Deleting a Table Object", {
   expect_equal(getTables(wb, sheet = 1), "mtcars", check.attributes = FALSE)
 })
 
-
-
-
 test_that("Save and load Table Deletion", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
 
   wb <- createWorkbook()
   addWorksheet(wb, sheetName = "Sheet 1")
@@ -161,7 +148,7 @@ test_that("Save and load Table Deletion", {
   removeTable(wb = wb, sheet = 1, table = "iris")
   expect_equal(attr(wb$tables, "tableName"), c("iris_openxlsx_deleted", "mtcars"))
 
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
   saveWorkbook(wb = wb, file = temp_file, overwrite = TRUE)
   wb <- loadWorkbook(file = temp_file)
 
@@ -186,7 +173,7 @@ test_that("Save and load Table Deletion", {
   removeTable(wb = wb, sheet = 1, table = "mtcars")
   expect_equal(attr(wb$tables, "tableName"), c("iris_openxlsx_deleted", "mtcars_openxlsx_deleted", "mtcars2"))
 
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
   saveWorkbook(wb = wb, file = temp_file, overwrite = TRUE)
   wb <- loadWorkbook(file = temp_file)
 

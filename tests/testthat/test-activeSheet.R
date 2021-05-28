@@ -4,9 +4,9 @@ context("active Sheet ")
 
 test_that("get and set active sheet of a workbook", {
   
-  tempFile1 <- file.path(tempdir(), "temp1.xlsx")
-  tempFile2 <- file.path(tempdir(), "temp2.xlsx")
-  tempFile3 <- file.path(tempdir(), "temp3.xlsx")
+  tempFile1 <- temp_xlsx("temp1")
+  tempFile2 <- temp_xlsx("temp2")
+  tempFile3 <- temp_xlsx("temp3")
   wbook <- createWorkbook()
   addWorksheet(wbook, sheetName = "S1")
   addWorksheet(wbook, sheetName = "S2")

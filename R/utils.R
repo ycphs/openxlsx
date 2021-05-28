@@ -48,3 +48,7 @@ get_set_options <- function() {
   )
   op
 }
+
+temp_xlsx <- function(name = "temp_xlsx") {
+  tempfile(pattern = paste0(name, "_"), fileext = ".xlsx")
+}

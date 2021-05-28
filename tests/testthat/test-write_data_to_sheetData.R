@@ -187,7 +187,7 @@ test_that("Converting R types to Excel types", {
 
 
 test_that("Write zero rows & columns", {
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
   wb <- createWorkbook()
   addWorksheet(wb, "s1")
   addWorksheet(wb, "s2")

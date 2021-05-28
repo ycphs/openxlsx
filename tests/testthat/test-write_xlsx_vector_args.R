@@ -61,7 +61,7 @@ test_that("write.xlsx() correctly passes default asTable and withFilters", {
   y <- buildWorkbook(df, asTable = TRUE)
   
   # Save the workbook 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   saveWorkbook(y, tf)
   y2 <- loadWorkbook(tf)
   

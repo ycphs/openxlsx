@@ -930,6 +930,6 @@ test_that("Load and saving a file with Threaded Comments works", {
   fl <- system.file("extdata", "loadThreadComment.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
   # Check that wb can be saved without error
-  expect_silent(saveWorkbook(wb, file = tempfile()))
+  expect_silent(saveWorkbook(wb, file = temp_xlsx()))
   
 })

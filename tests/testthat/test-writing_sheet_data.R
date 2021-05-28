@@ -7,7 +7,7 @@ context("Writing Sheet Data XML")
 
 
 test_that("Writing sheetData rows XML - iris", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
   openxlsx::write.xlsx(iris, temp_file)
 
   unzip(temp_file, exdir = tempdir())
@@ -183,7 +183,7 @@ test_that("Writing sheetData rows XML - iris", {
 
 
 test_that("Writing sheetData rows XML - mtcars", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
   openxlsx::write.xlsx(mtcars, temp_file, row.names = TRUE)
 
   unzip(temp_file, exdir = tempdir())

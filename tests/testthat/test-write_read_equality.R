@@ -110,12 +110,12 @@ test_that("Writing then reading returns identical data.frame 2", {
 })
 
 test_that("Writing then reading rowNames, colNames combinations", {
-  fileName <- tempfile(fileext = ".xlsx")
+  fileName <- temp_xlsx()
   curr_wd <- getwd()
   mt <- utils::head(mtcars) # don't need the whole thing
 
   expect_warning(
-    write.xlsx(mt, file = tempfile(), row.names = TRUE, overwrite = TRUE),
+    write.xlsx(mt, file = temp_xlsx(), row.names = TRUE, overwrite = TRUE),
     "Please use 'rowNames' instead of 'row.names'"
   )
   
@@ -230,7 +230,7 @@ test_that("Writing then reading returns identical data.frame 4", {
   df[6, 4] <- NA
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = TRUE)
   x <- read.xlsx(tf)
 
@@ -238,7 +238,7 @@ test_that("Writing then reading returns identical data.frame 4", {
   unlink(tf, recursive = TRUE, force = TRUE)
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = FALSE)
   x <- read.xlsx(tf)
 
@@ -261,7 +261,7 @@ test_that("Writing then reading returns identical data.frame 5", {
   df_expected[6, 4] <- na.string
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = TRUE, na.string = na.string)
   x <- read.xlsx(tf)
 
@@ -272,7 +272,7 @@ test_that("Writing then reading returns identical data.frame 5", {
 
 
 test_that("Special characters in sheet names", {
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
 
   ## data
   sheet_name <- "A & B < D > D"

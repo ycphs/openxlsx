@@ -1,13 +1,8 @@
 
-
-
-
 context("Skip Empty Rows")
 
-
-
 test_that("skip empty rows", {
-  xlsxfile <- tempfile()
+  xlsxfile <- temp_xlsx()
   df <- data.frame("x" = c(1, NA, NA, 2), "y" = c(1, NA, NA, 3))
 
   write.xlsx(df, xlsxfile)
@@ -25,10 +20,7 @@ test_that("skip empty rows", {
   expect_equal(calc_number_rows(x = v, skipEmptyRows = TRUE), 3)
   expect_equal(calc_number_rows(x = v, skipEmptyRows = FALSE), 5)
 
-
-
   ## DONT SKIP
-
   df1 <- readWorkbook(xlsxfile, skipEmptyRows = TRUE)
   df2 <- readWorkbook(wb, skipEmptyRows = TRUE)
 
@@ -39,13 +31,8 @@ test_that("skip empty rows", {
   expect_equivalent(df[c(1, 4), ], df2)
 })
 
-
-
-
-
-
 test_that("skip empty cols", {
-  xlsxfile <- tempfile()
+  xlsxfile <- temp_xlsx()
   x <- data.frame("a" = c(1, NA, NA, 2), "b" = c(1, NA, NA, 3))
   y <- data.frame("x" = c(1, NA, NA, 2), "y" = c(1, NA, NA, 3))
 
