@@ -200,7 +200,7 @@ writeDataTable <- function(
   assert_true_false(bandedCols)
   
   if (is.null(tableName)) {
-    tableName <- paste0("Table", as.character(length(wb$tables) + 3L))
+    tableName <- sprintf("Table%i", length(wb$tables) + 3L)
   } else {
     tableName <- wb$validate_table_name(tableName)
   }
