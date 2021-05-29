@@ -110,6 +110,11 @@ test_that("Writing then reading returns identical data.frame 2", {
 })
 
 test_that("Writing then reading rowNames, colNames combinations", {
+  op <- options()
+  options(stringsAsFactors = FALSE)
+  on.exit(options(op), add = TRUE)
+  
+  
   fileName <- temp_xlsx()
   curr_wd <- getwd()
   mt <- utils::head(mtcars) # don't need the whole thing
