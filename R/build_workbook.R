@@ -18,7 +18,15 @@
 #' @param ... Additional arguments passed to \code{\link{writeData}}, 
 #'   \code{\link{writeDataTable}}, \code{\link{setColWidths}}
 #' @author Jordan Mark Barbone
-#' @returns A Workbook object, invisibly
+#' @returns A Workbook object
+#' 
+#' @examples
+#' x <- data.frame(a = 1, b = 2)
+#' wb <- buildWorkbook(x)
+#' 
+#' y <- list(a = x, b = x, c = x)
+#' buildWorkbook(y, asTable = TRUE)
+#' buildWorkbook(y, asTable = TRUE, tableStyle = "TableStyleLight8")
 #' 
 #' @seealso \code{\link{write.xlsx}}
 #' 
@@ -58,7 +66,7 @@ buildWorkbook <- function(x, asTable = FALSE, ...) {
   
   do_setColWidths(wb, x, params, isList)
   do_call_params(freezePane, params, wb = list(wb), .map = TRUE)
-  invisible(wb)
+  wb
 }
 
 

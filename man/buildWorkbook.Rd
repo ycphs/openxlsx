@@ -18,7 +18,7 @@ than \code{\link{writeData}} to write \code{x} to the file (default:
 \code{\link{writeDataTable}}, \code{\link{setColWidths}}}
 }
 \value{
-A Workbook object, invisibly
+A Workbook object
 }
 \description{
 Build a workbook from a data.frame or named list
@@ -30,6 +30,15 @@ This function can be used as shortcut to create a workbook object from a
   and passed to \code{\link{writeData}} or \code{\link{writeDataTable}} to
   initially create the Workbook objects then appropriate parameters are 
   passed to \code{\link{setColWidths}}.
+}
+\examples{
+x <- data.frame(a = 1, b = 2)
+wb <- buildWorkbook(x)
+
+y <- list(a = x, b = x, c = x)
+buildWorkbook(y, asTable = TRUE)
+buildWorkbook(y, asTable = TRUE, tableStyle = "TableStyleLight8")
+
 }
 \seealso{
 \code{\link{write.xlsx}}
