@@ -14,7 +14,7 @@
 #' \code{c(startCol, startRow)}.
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, data.frame row names of x are written.
-#' @param row.names Deprecated, please use \code{rowNames} instead
+#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
 #' @param headerStyle Custom style to apply to column names.
 #' @param borders Either "\code{none}" (default), "\code{surrounding}",
 #' "\code{columns}", "\code{rows}" or \emph{respective abbreviations}.  If
@@ -175,6 +175,7 @@ writeData <- function(
   na.string    = openxlsx_getOp("na.string"),
   name         = NULL,
   sep          = ", ",
+  col.names,
   row.names
 ) {
 
@@ -184,6 +185,11 @@ writeData <- function(
   if (!missing(row.names)) {
     warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
     rowNames <- row.names
+  }
+  
+  if (!missing(col.names)) {
+    warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
+    colNames <- col.names
   }
   
   # Set NULLs

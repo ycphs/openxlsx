@@ -23,6 +23,7 @@ writeData(
   na.string = openxlsx_getOp("na.string"),
   name = NULL,
   sep = ", ",
+  col.names,
   row.names
 )
 }
@@ -86,7 +87,7 @@ each column. If "\code{all}" all cell borders are drawn.}
 
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
 
-\item{row.names}{Deprecated, please use \code{rowNames} instead}
+\item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
 \value{
 invisible(0)

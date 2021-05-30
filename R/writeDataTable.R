@@ -12,7 +12,7 @@
 #' A vector of the form c(startCol, startRow)
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, row names of x are written.
-#' @param row.names Deprecated, please use \code{rowNames} instead
+#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
 #' @param tableStyle Any excel table style name or "none" (see "formatting" vignette).
 #' @param tableName name of table in workbook. The table name must be unique.
 #' @param headerStyle Custom style to apply to column names.
@@ -157,6 +157,7 @@ writeDataTable <- function(
   lastColumn  = openxlsx_getOp("lastColumn", FALSE),
   bandedRows  = openxlsx_getOp("bandedRows", TRUE),
   bandedCols  = openxlsx_getOp("bandedCols", FALSE),
+  col.names,
   row.names
   ) {
   op <- get_set_options()
@@ -167,6 +168,11 @@ writeDataTable <- function(
   if (!missing(row.names)) {
     warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
     row.names <- rowNames
+  }
+  
+  if (!missing(col.names)) {
+    warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
+    colNames <- col.names
   }
   
   # Set NULLs

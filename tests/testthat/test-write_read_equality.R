@@ -119,11 +119,6 @@ test_that("Writing then reading rowNames, colNames combinations", {
   curr_wd <- getwd()
   mt <- utils::head(mtcars) # don't need the whole thing
 
-  expect_warning(
-    write.xlsx(mt, file = temp_xlsx(), row.names = TRUE, overwrite = TRUE),
-    "Please use 'rowNames' instead of 'row.names'"
-  )
-  
   # write the row and column names for testing
   write.xlsx(mt, file = fileName, overwrite = TRUE, rowNames = TRUE, colNames = TRUE)
   
