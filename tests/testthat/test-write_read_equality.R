@@ -41,9 +41,6 @@ test_that("Writing then reading returns identical data.frame 1", {
   expect_equal(object = getwd(), curr_wd)
 })
 
-
-
-
 test_that("Writing then reading returns identical data.frame 2", {
   curr_wd <- getwd()
 
@@ -112,65 +109,79 @@ test_that("Writing then reading returns identical data.frame 2", {
   unlink(fileName, recursive = TRUE, force = TRUE)
 })
 
-
-
-
-
-
-
 test_that("Writing then reading rowNames, colNames combinations", {
-  fileName <- file.path(tempdir(), "tmp.xlsx")
+  op <- options()
+  options(stringsAsFactors = FALSE)
+  on.exit(options(op), add = TRUE)
+  
+  
+  fileName <- temp_xlsx()
   curr_wd <- getwd()
+  mt <- utils::head(mtcars) # don't need the whole thing
 
-  ## rowNames = colNames = TRUE
-  write.xlsx(mtcars, file = fileName, overwrite = TRUE, row.names = TRUE)
+  # write the row and column names for testing
+  write.xlsx(mt, file = fileName, overwrite = TRUE, rowNames = TRUE, colNames = TRUE)
+  
+  # rowNames = colNames = TRUE
+  # Row names = first column
+  # Col names = first row
   x <- read.xlsx(fileName, sheet = 1, rowNames = TRUE)
-  expect_equal(object = x, expected = mtcars, check.attributes = TRUE)
+  expect_equal(x, mt)
 
 
-  ## rowNames = TRUE, colNames = FALSE
-  write.xlsx(mtcars, file = fileName, overwrite = TRUE, rowNames = TRUE, colNames = FALSE)
+  # rowNames = TRUE, colNames = FALSE
+  # Row names = first column
+  # Col names = X1, X2, etc
+  
+  # need to create an expected output
+  y <- as.data.frame(rbind(colnames(mt), as.matrix(mt)))
+  colnames(y) <- c(make.names(seq_along(mt)))
   x <- read.xlsx(fileName, sheet = 1, rowNames = TRUE, colNames = FALSE)
-  expect_equal(object = x, expected = mtcars, check.attributes = FALSE)
-  expect_equal(object = rownames(x), expected = rownames(mtcars))
+  expect_equal(x, y)
 
 
-  ## rowNames = FALSE, colNames = TRUE
-  write.xlsx(mtcars, file = fileName, overwrite = TRUE, rowNames = FALSE, colNames = TRUE)
+  # rowNames = FALSE, colNames = TRUE
+  # Row names = ""
+  # Cl names = first row
+  y2 <- cbind(row.names(mt), mt)
+  colnames(y2)[1] <- ""
+  row.names(y2) <- NULL
   x <- read.xlsx(fileName, sheet = 1, rowNames = FALSE, colNames = TRUE)
-  expect_equal(object = x, expected = mtcars, check.attributes = FALSE)
-
-  ## rowNames = FALSE, colNames = FALSE
-  write.xlsx(mtcars, file = fileName, overwrite = TRUE, rowNames = FALSE, colNames = FALSE)
+  expect_equal(x, y2)
+  
+  # rowNames = FALSE, colNames = FALSE
+  # Row names = ""
+  # Col names = X1, X2, etc
+  y3 <- cbind(row.names(y), y)
+  colnames(y3) <- make.names(seq_along(y3))
+  row.names(y3) <- NULL
   x <- read.xlsx(fileName, sheet = 1, rowNames = FALSE, colNames = FALSE)
-  expect_equal(object = x, expected = mtcars, check.attributes = FALSE)
+  expect_equal(x, y3)
 
-  expect_equal(object = getwd(), curr_wd)
+  
+  # Check wd
+  expect_equal(getwd(), curr_wd)
+  
   unlink(fileName, recursive = TRUE, force = TRUE)
 })
 
 
-
-
-
-
-
 test_that("Writing then reading returns identical data.frame 3", {
+  op <- options()
+  options(openxlsx.dateFormat = "yyyy-mm-dd")
+  on.exit(options(op), add = TRUE)
 
   ## data
-  genDf <- function() {
-    data.frame(
-      "Date" = Sys.Date() - 0:4,
-      "Logical" = c(TRUE, FALSE, TRUE, TRUE, FALSE),
-      "Currency" = -2:2,
-      "Accounting" = -2:2,
-      "hLink" = "https://CRAN.R-project.org/",
-      "Percentage" = seq(-1, 1, length.out = 5),
-      "TinyNumber" = runif(5) / 1E9, stringsAsFactors = FALSE
-    )
-  }
-
-  df <- genDf()
+  df <- data.frame(
+    Date       = as.Date("2021-05-21") - 0:4,
+    Logical    = c(TRUE, FALSE, TRUE, TRUE, FALSE),
+    Currency   = -2:2,
+    Accounting = -2:2,
+    hLink      = "https://CRAN.R-project.org/",
+    Percentage = seq.int(-1, 1, length.out = 5),
+    TinyNumber = runif(5) / 1E9,
+    stringsAsFactors = FALSE
+  )
 
   class(df$Currency) <- "currency"
   class(df$Accounting) <- "accounting"
@@ -178,42 +189,36 @@ test_that("Writing then reading returns identical data.frame 3", {
   class(df$Percentage) <- "percentage"
   class(df$TinyNumber) <- "scientific"
 
-  options("openxlsx.dateFormat" = "yyyy-mm-dd")
-
-  fileName <- file.path(tempdir(), "allClasses.xlsx")
+  fileName <- tempfile("allClasses", fileext = ".xlsx")
   write.xlsx(df, file = fileName, overwrite = TRUE)
-
 
   ## rows, cols combinations
   rows <- 1:4
   cols <- c(1, 3, 5)
-  x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols)
-  expect_equal(object = x, expected = genDf()[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])], check.attributes = FALSE)
-
+  x <- read.xlsx(fileName, detectDates = TRUE, rows = rows, cols = cols)
+  exp <- df[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])]
+  expect_equal(x, exp)
 
   rows <- 1:4
   cols <- 1:9
   x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols)
-  expect_equal(object = x, expected = genDf()[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])], check.attributes = FALSE)
-
+  exp <- df[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])]
+  expect_equal(x, exp)
 
   rows <- 1:200
   cols <- c(5, 99, 2)
   x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols)
-  expect_equal(object = x, expected = genDf()[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])], check.attributes = FALSE)
+  exp <- df[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])]
+  expect_equal(x, exp)
 
 
   rows <- 1000:900
   cols <- c(5, 99, 2)
   suppressWarnings(x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols))
-  expect_equal(object = x, expected = NULL, check.attributes = FALSE)
+  expect_identical(x, NULL)
 
   unlink(fileName, recursive = TRUE, force = TRUE)
 })
-
-
-
-
 
 
 test_that("Writing then reading returns identical data.frame 4", {
@@ -225,7 +230,7 @@ test_that("Writing then reading returns identical data.frame 4", {
   df[6, 4] <- NA
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = TRUE)
   x <- read.xlsx(tf)
 
@@ -233,7 +238,7 @@ test_that("Writing then reading returns identical data.frame 4", {
   unlink(tf, recursive = TRUE, force = TRUE)
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = FALSE)
   x <- read.xlsx(tf)
 
@@ -256,7 +261,7 @@ test_that("Writing then reading returns identical data.frame 5", {
   df_expected[6, 4] <- na.string
 
 
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
   write.xlsx(x = df, file = tf, keepNA = TRUE, na.string = na.string)
   x <- read.xlsx(tf)
 
@@ -266,9 +271,8 @@ test_that("Writing then reading returns identical data.frame 5", {
 
 
 
-
 test_that("Special characters in sheet names", {
-  tf <- tempfile(fileext = ".xlsx")
+  tf <- temp_xlsx()
 
   ## data
   sheet_name <- "A & B < D > D"

@@ -81,8 +81,8 @@ test_that("loading workbook preserves outlines", {
   groupColumns(wbb, "Test", cols = 5:10, hidden = FALSE)
   setColWidths(wbb, "Test", cols = 15:20, widths = 9)
 
-  tf <- tempfile("test", fileext = ".xlsx")
-  tf2 <- tempfile("test2", fileext = ".xlsx")
+  tf <- temp_xlsx("test")
+  tf2 <- temp_xlsx("test2")
 
   saveWorkbook(wbb, tf, overwrite = T)
   test <- wbb$worksheets[[1]]$copy()
@@ -127,8 +127,8 @@ test_that("Consecutive calls to saveWorkbook doesn't corrupt attributes", {
   groupColumns(wbb, "Test", cols = 5:10, hidden = FALSE)
   setColWidths(wbb, "Test", cols = 15:20, widths = 9)
 
-  tf <- tempfile("test", fileext = ".xlsx")
-  tf2 <- tempfile("test2", fileext = ".xlsx")
+  tf <- temp_xlsx("test")
+  tf2 <- temp_xlsx("test2")
 
   saveWorkbook(wbb, tf, overwrite = T)
   test <- wbb$worksheets[[1]]$copy()

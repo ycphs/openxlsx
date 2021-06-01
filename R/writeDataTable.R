@@ -12,6 +12,7 @@
 #' A vector of the form c(startCol, startRow)
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, row names of x are written.
+#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
 #' @param tableStyle Any excel table style name or "none" (see "formatting" vignette).
 #' @param tableName name of table in workbook. The table name must be unique.
 #' @param headerStyle Custom style to apply to column names.
@@ -155,8 +156,24 @@ writeDataTable <- function(
   firstColumn = openxlsx_getOp("firstColumn", FALSE),
   lastColumn  = openxlsx_getOp("lastColumn", FALSE),
   bandedRows  = openxlsx_getOp("bandedRows", TRUE),
-  bandedCols  = openxlsx_getOp("bandedCols", FALSE)
+  bandedCols  = openxlsx_getOp("bandedCols", FALSE),
+  col.names,
+  row.names
   ) {
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
+  
+  ## increase scipen to avoid writing in scientific
+  
+  if (!missing(row.names)) {
+    warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
+    row.names <- rowNames
+  }
+  
+  if (!missing(col.names)) {
+    warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
+    colNames <- col.names
+  }
   
   # Set NULLs
   withFilter  <- withFilter  %||% TRUE
@@ -165,6 +182,7 @@ writeDataTable <- function(
   lastColumn  <- lastColumn  %||% FALSE
   bandedRows  <- bandedRows  %||% TRUE
   bandedCols  <- bandedCols  %||% FALSE
+  withFilter  <- withFilter  %||% TRUE
   
   if (!is.null(xy)) {
     if (length(xy) != 2) {
@@ -174,46 +192,24 @@ writeDataTable <- function(
     startRow <- xy[[2]]
   }
 
-
-  # recode NULLs to match default
-  # If not set, change to default
-  withFilter <- withFilter %||% TRUE
+  # Assert parameters
+  assert_class(wb, "Workbook")
+  assert_class(x, "data.frame")
+  assert_true_false(colNames)
+  assert_true_false(rowNames)
+  assert_class(headerStyle, "Style", or_null = TRUE)
+  assert_true_false(withFilter)
+  assert_character1(sep)
+  assert_true_false(firstColumn)
+  assert_true_false(lastColumn)
+  assert_true_false(bandedRows)
+  assert_true_false(bandedCols)
   
-  ## Input validating
-  if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
-  if (!"data.frame" %in% class(x)) stop("x must be a data.frame.")
-  if (!is.logical(colNames)) stop("colNames must be a logical.")
-  if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-  if (is_not_class(headerStyle, "Style")) {
-    stop("headerStyle must be a style object or NULL.")
-  } 
-  if (!is.logical(withFilter)) stop("withFilter must be a logical.")
-  if ((!is.character(sep)) | (length(sep) != 1)) stop("sep must be a character vector of length 1")
-
-  if (!is.logical(firstColumn)) stop("firstColumn must be a logical.")
-  if (!is.logical(lastColumn)) stop("lastColumn must be a logical.")
-  if (!is.logical(bandedRows)) stop("bandedRows must be a logical.")
-  if (!is.logical(bandedCols)) stop("bandedCols must be a logical.")
-
   if (is.null(tableName)) {
-    tableName <- paste0("Table", as.character(length(wb$tables) + 3L))
+    tableName <- sprintf("Table%i", length(wb$tables) + 3L)
   } else {
     tableName <- wb$validate_table_name(tableName)
   }
-
-
-  ## increase scipen to avoid writing in scientific
-  exSciPen <- getOption("scipen")
-  od <- getOption("OutDec")
-  exDigits <- getOption("digits")
-
-  options("scipen" = 200)
-  options("OutDec" = ".")
-  options("digits" = 22)
-
-  on.exit(options("scipen" = exSciPen), add = TRUE)
-  on.exit(expr = options("OutDec" = od), add = TRUE)
-  on.exit(options("digits" = exDigits), add = TRUE)
 
   ## convert startRow and startCol
   if (!is.numeric(startCol)) {
@@ -227,25 +223,17 @@ writeDataTable <- function(
   }
 
   ## If 0 rows append a blank row
-
-  validNames <- c("none", paste0("TableStyleLight", 1:21), paste0("TableStyleMedium", 1:28), paste0("TableStyleDark", 1:11))
-  if (!tolower(tableStyle) %in% tolower(validNames)) {
-    stop("Invalid table style.")
-  } else {
-    tableStyle <- validNames[grepl(paste0("^", tableStyle, "$"), validNames, ignore.case = TRUE)]
-  }
-
-  tableStyle <- na.omit(tableStyle)
-  if (length(tableStyle) == 0) {
-    stop("Unknown table style.")
-  }
+  
+  tableStyle <- validate_StyleName(tableStyle)
 
   ## header style
-  if ("Style" %in% class(headerStyle)) {
+  if (inherits(headerStyle, "Style")) {
     addStyle(
-      wb = wb, sheet = sheet, style = headerStyle,
-      rows = startRow,
-      cols = 0:(ncol(x) - 1L) + startCol,
+      wb         = wb, 
+      sheet      = sheet,
+      style      = headerStyle,
+      rows       = startRow,
+      cols       = 0:(ncol(x) - 1L) + startCol,
       gridExpand = TRUE
     )
   }
@@ -254,9 +242,7 @@ writeDataTable <- function(
 
   if (colNames) {
     colNames <- colnames(x)
-    if (any(duplicated(tolower(colNames)))) {
-      stop("Column names of x must be case-insensitive unique.")
-    }
+    assert_unique(colNames, case_sensitive = FALSE)
 
     ## zero char names are invalid
     char0 <- nchar(colNames) == 0
@@ -264,12 +250,16 @@ writeDataTable <- function(
       colNames[char0] <- colnames(x)[char0] <- paste0("Column", which(char0))
     }
   } else {
-    colNames <- paste0("Column", seq_len(ncol(x)))
+    colNames <- paste0("Column", seq_along(x))
     names(x) <- colNames
   }
+  
   ## If zero rows, append an empty row (prevent XML from corrupting)
   if (nrow(x) == 0) {
-    x <- rbind(as.data.frame(x), matrix("", nrow = 1, ncol = ncol(x), dimnames = list(character(), colnames(x))))
+    x <- rbind(
+      as.data.frame(x),
+      matrix("", nrow = 1, ncol = ncol(x), dimnames = list(character(), colnames(x)))
+    )
     names(x) <- colNames
   }
 
@@ -280,14 +270,24 @@ writeDataTable <- function(
   ## check not overwriting another table
   wb$check_overwrite_tables(
     sheet = sheet,
-    new_rows = c(startRow, startRow + nrow(x) - 1L + 1L) ## + header
-    , new_cols = c(startCol, startCol + ncol(x) - 1L)
+    new_rows = c(startRow, startRow + nrow(x) - 1L + 1L), ## + header
+    new_cols = c(startCol, startCol + ncol(x) - 1L)
   )
 
 
   ## column class styling
+  # consider not using lowercase and instead use inherits(x, class)
   colClasses <- lapply(x, function(x) tolower(class(x)))
-  classStyles(wb, sheet = sheet, startRow = startRow, startCol = startCol, colNames = TRUE, nRow = nrow(x), colClasses = colClasses, stack = stack)
+  classStyles(
+    wb,
+    sheet      = sheet,
+    startRow   = startRow, 
+    startCol   = startCol, 
+    colNames   = TRUE,
+    nRow       = nrow(x),
+    colClasses = colClasses, 
+    stack      = stack
+  )
 
   ## write data to worksheet
   wb$writeData(

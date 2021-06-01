@@ -24,7 +24,9 @@ writeDataTable(
   firstColumn = openxlsx_getOp("firstColumn", FALSE),
   lastColumn = openxlsx_getOp("lastColumn", FALSE),
   bandedRows = openxlsx_getOp("bandedRows", TRUE),
-  bandedCols = openxlsx_getOp("bandedCols", FALSE)
+  bandedCols = openxlsx_getOp("bandedCols", FALSE),
+  col.names,
+  row.names
 )
 }
 \arguments{
@@ -75,6 +77,8 @@ existing style is replaced by the new style.
 \item{bandedRows}{logical. If TRUE, rows are colour banded}
 
 \item{bandedCols}{logical. If TRUE, the columns are colour banded}
+
+\item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
 \description{
 Write to a worksheet and format as an Excel table

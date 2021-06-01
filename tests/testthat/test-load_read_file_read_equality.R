@@ -13,7 +13,7 @@ test_that("Reading from loaded workbook", {
   writeData(wb, sheet = 3, x = mtcars, colNames = FALSE, rowNames = TRUE, startRow = 2, startCol = 2, borders = "columns")
   writeData(wb, sheet = 4, x = mtcars, colNames = FALSE, rowNames = FALSE, startRow = 12, startCol = 1, borders = "surrounding")
 
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
   saveWorkbook(wb, tempFile, overwrite = TRUE)
 
   wb <- loadWorkbook(tempFile)

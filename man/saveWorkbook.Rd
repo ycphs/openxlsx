@@ -13,7 +13,7 @@ saveWorkbook(wb, file, overwrite = FALSE, returnValue = FALSE)
 
 \item{overwrite}{If \code{TRUE}, overwrite any existing file.}
 
-\item{returnValue}{If \code{TRUE}, returns  \code{TRUE} in case of a success, else \code{FALSE}. 
+\item{returnValue}{If \code{TRUE}, returns  \code{TRUE} in case of a success, else \code{FALSE}.
 If flag is \code{FALSE}, then no return value is returned.}
 }
 \description{

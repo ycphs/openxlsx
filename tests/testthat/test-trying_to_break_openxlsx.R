@@ -7,7 +7,7 @@ context("Images and Tables.")
 test_that("Images and Tables - reordering and removing", {
   if (FALSE) {
     options("stringsAsFactors" = FALSE)
-    tempFile <- file.path(tempdir(), "break.xlsx")
+    tempFile <- temp_xlsx("break")
 
     getPlot <- function(i) {
       n <- 5000
@@ -199,7 +199,7 @@ test_that("Images and Tables - reordering and removing", {
 })
 
 test_that("setColWidths() should support zero-length cols", {
-  file <- tempfile(fileext = ".xlsx")
+  file <- temp_xlsx()
   on.exit(unlink(file), add = TRUE)
   wb <- createWorkbook()
   ws <- addWorksheet(wb, "empty")

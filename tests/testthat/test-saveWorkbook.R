@@ -4,7 +4,7 @@ context("save workbook")
 
 test_that("test return values for saveWorkbook", {
   
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
   wb<-createWorkbook()
   addWorksheet(wb,"name")
   expect_true( saveWorkbook(wb,tempFile,returnValue = TRUE))

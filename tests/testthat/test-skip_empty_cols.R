@@ -1,13 +1,8 @@
 
-
-
-
 context("Skip Empty Cols")
 
-
-
 test_that("skip empty rows", {
-  xlsxfile <- tempfile()
+  xlsxfile <- temp_xlsx()
   df <- data.frame("x" = c(1, NA, NA, 2), "y" = c(1, NA, NA, 3))
 
   write.xlsx(df, xlsxfile)
@@ -20,15 +15,11 @@ test_that("skip empty rows", {
   expect_equal(df, df1)
   expect_equal(df, df2)
 
-
   v <- c("A1", "B1", "A2", "B2", "A5", "B5")
   expect_equal(calc_number_rows(x = v, skipEmptyRows = TRUE), 3)
   expect_equal(calc_number_rows(x = v, skipEmptyRows = FALSE), 5)
 
-
-
   ## DONT SKIP
-
   df1 <- readWorkbook(xlsxfile, skipEmptyRows = TRUE)
   df2 <- readWorkbook(wb, skipEmptyRows = TRUE)
 
@@ -39,15 +30,8 @@ test_that("skip empty rows", {
   expect_equivalent(df[c(1, 4), ], df2)
 })
 
-
-
-
-
-
-
 test_that("Version 4 fixes from File", {
   fl <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
-
 
   x <- read.xlsx(xlsxFile = fl, sheet = 4, skipEmptyCols = TRUE, skipEmptyRows = TRUE, colNames = FALSE)
   expect_equal(nrow(x), 5L)

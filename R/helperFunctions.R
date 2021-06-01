@@ -536,7 +536,7 @@ get_named_regions_from_string <- function(dn) {
   dn <- gsub("</workbook>", "", dn, fixed = TRUE)
   
   dn <- unique(unlist(strsplit(dn, split = "</definedName>", fixed = TRUE)))
-  dn <- dn[grepl("<definedName", dn, fixed = TRUE)]
+  dn <- grep("<definedName", dn, fixed = TRUE, value = TRUE)
   
   dn_names <- regmatches(dn, regexpr('(?<=name=")[^"]+', dn, perl = TRUE))
   
@@ -563,7 +563,7 @@ get_named_regions_from_string <- function(dn) {
 
 nodeAttributes <- function(x) {
   x <- paste0("<", unlist(strsplit(x, split = "<")))
-  x <- x[grepl("<bgColor|<fgColor", x)]
+  x <- grep("<bgColor|<fgColor", x, value = TRUE)
   
   if (length(x) == 0) {
     return("")

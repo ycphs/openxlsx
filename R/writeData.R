@@ -14,6 +14,7 @@
 #' \code{c(startCol, startRow)}.
 #' @param colNames If \code{TRUE}, column names of x are written.
 #' @param rowNames If \code{TRUE}, data.frame row names of x are written.
+#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
 #' @param headerStyle Custom style to apply to column names.
 #' @param borders Either "\code{none}" (default), "\code{surrounding}",
 #' "\code{columns}", "\code{rows}" or \emph{respective abbreviations}.  If
@@ -173,22 +174,24 @@ writeData <- function(
   keepNA       = openxlsx_getOp("keepNA", FALSE),
   na.string    = openxlsx_getOp("na.string"),
   name         = NULL,
-  sep          = ", "
+  sep          = ", ",
+  col.names,
+  row.names
 ) {
 
-  ## increase scipen to avoid writing in scientific
-  exSciPen <- getOption("scipen")
-  od <- getOption("OutDec")
-  exDigits <- getOption("digits")
-
-  options("scipen" = 200)
-  options("OutDec" = ".")
-  options("digits" = 22)
-
-  on.exit(options("scipen" = exSciPen), add = TRUE)
-  on.exit(expr = options("OutDec" = od), add = TRUE)
-  on.exit(options("digits" = exDigits), add = TRUE)
-
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
+  
+  if (!missing(row.names)) {
+    warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
+    rowNames <- row.names
+  }
+  
+  if (!missing(col.names)) {
+    warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
+    colNames <- col.names
+  }
+  
   # Set NULLs
   borders      <- borders      %||% "none"
   borderColour <- borderColour %||% "black"
@@ -215,16 +218,12 @@ writeData <- function(
   }
 
   startRow <- as.integer(startRow)
-
-  if (!"Workbook" %in% class(wb)) stop("First argument must be a Workbook.")
-
-  if (!is.logical(colNames)) stop("colNames must be a logical.")
-  if (!is.logical(rowNames)) stop("rowNames must be a logical.")
-
-  if (is_not_class(headerStyle, "Style")) {
-    stop("headerStyle must be a style object or NULL.")
-  }
-  if (!is.character(sep) || length(sep) != 1) stop("sep must be a character vector of length 1")
+  
+  assert_class(wb, "Workbook")
+  assert_true_false(colNames)
+  assert_true_false(rowNames)
+  assert_character1(sep)
+  assert_class(headerStyle, "Style", or_null = TRUE)
 
   ## borderColours validation
   borderColour <- validateColour(borderColour, "Invalid border colour")
@@ -232,13 +231,13 @@ writeData <- function(
 
   ## special case - vector of hyperlinks
   hlinkNames <- NULL
-  if ("hyperlink" %in% class(x)) {
+  if (inherits(x, "hyperlink")) {
     hlinkNames <- names(x)
     colNames <- FALSE
   }
 
   ## special case - formula
-  if ("formula" %in% class(x)) {
+  if (inherits(x, "formula")) {
     x <- data.frame("X" = x, stringsAsFactors = FALSE)
     class(x[[1]]) <- ifelse(array, "array_formula", "formula")
     colNames <- FALSE
@@ -278,7 +277,11 @@ writeData <- function(
 
   colClasses <- lapply(x, function(x) tolower(class(x)))
   colClasss2 <- colClasses
-  colClasss2[sapply(colClasses, function(x) "formula" %in% x) & sapply(colClasses, function(x) "hyperlink" %in% x)] <- "formula"
+  colClasss2[vapply(
+    colClasses,
+    function(i) inherits(i, "formula") & inherits(i, "hyperlink"),
+    NA
+  )] <- "formula"
 
   if (is.numeric(sheet)) {
     sheetX <- wb$validateSheet(sheet)
@@ -289,26 +292,26 @@ writeData <- function(
 
   if (wb$isChartSheet[[sheetX]]) {
     stop("Cannot write to chart sheet.")
-    return(NULL)
   }
 
   ## Check not overwriting existing table headers
   wb$check_overwrite_tables(
-    sheet = sheet,
-    new_rows = c(startRow, startRow + nRow - 1L + colNames),
-    new_cols = c(startCol, startCol + nCol - 1L),
+    sheet                   = sheet,
+    new_rows                = c(startRow, startRow + nRow - 1L + colNames),
+    new_cols                = c(startCol, startCol + nCol - 1L),
     check_table_header_only = TRUE,
-    error_msg =
-      "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
+    error_msg               = "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
   )
 
   ## write autoFilter, can only have a single filter per worksheet
   if (withFilter) {
-    coords <- data.frame("x" = c(startRow, startRow + nRow + colNames - 1L), "y" = c(startCol, startCol + nCol - 1L))
+    coords <- data.frame(
+      x = c(startRow, startRow + nRow + colNames - 1L),
+      y = c(startCol, startCol + nCol - 1L)
+    )
+    
     ref <- stri_join(getCellRefs(coords), collapse = ":")
-
     wb$worksheets[[sheetX]]$autoFilter <- sprintf('<autoFilter ref="%s"/>', ref)
-
     l <- convert_to_excel_ref(cols = unlist(coords[, 2]), LETTERS = LETTERS)
     dfn <- sprintf("'%s'!%s", names(wb)[sheetX], stri_join("$", l, "$", coords[, 1], collapse = ":"))
 
@@ -339,12 +342,15 @@ writeData <- function(
   )
 
   ## header style
-  if ("Style" %in% class(headerStyle) & colNames) {
+  if (inherits(headerStyle, "Style") & colNames) {
     addStyle(
-      wb = wb, sheet = sheet, style = headerStyle,
-      rows = startRow,
-      cols = 0:(nCol - 1) + startCol,
-      gridExpand = TRUE, stack = TRUE
+      wb         = wb,
+      sheet      = sheet, 
+      style      = headerStyle,
+      rows       = startRow,
+      cols       = 0:(nCol - 1) + startCol,
+      gridExpand = TRUE,
+      stack      = TRUE
     )
   }
 
@@ -517,7 +523,8 @@ writeFormula <- function(
   array = FALSE,
   xy = NULL
 ) {
-  if (!"character" %in% class(x)) {
+  
+  if (!is.character(x)) {
     stop("x must be a character vector.")
   }
 

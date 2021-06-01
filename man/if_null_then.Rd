@@ -20,6 +20,6 @@ Replace NULL
 x <- NULL
 x <- x \%||\% "none"
 x <- x \%||\% NA
-} 
+}
 
 }

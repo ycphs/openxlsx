@@ -125,8 +125,8 @@ Workbook$methods(setColWidths = function(sheet) {
         autoColumns = as.integer(autoCols),
         widths = allCharWidths,
         baseFontCharWidth = baseFontCharWidth,
-        minW = getOption("openxlsx.minWidth", 3),
-        maxW = getOption("openxlsx.maxWidth", 250)
+        minW = openxlsx_getOp("minWidth", 3),
+        maxW = openxlsx_getOp("maxWidth", 250)
       )
 
       missingAuto <- autoCols[!autoCols %in% names(calculatedWidths)]

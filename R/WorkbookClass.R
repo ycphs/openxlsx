@@ -1111,8 +1111,6 @@ Workbook$methods(
   }
 )
 
-
-
 Workbook$methods(
   validateSheet = function(sheetName) {
     if (!is.numeric(sheetName)) {
@@ -1123,21 +1121,20 @@ Workbook$methods(
 
     if (is.numeric(sheetName)) {
       if (sheetName > length(sheet_names)) {
-        stop(sprintf("This Workbook only has %s sheets.", length(sheet_names)),
-          call. =
-            FALSE
+        stop("This Workbook only has ", length(sheet_names),
+          " sheets, ", sheetName, " is not valid",
+          call. = FALSE
         )
       }
-
       return(sheetName)
     } else if (!sheetName %in% replaceXMLEntities(sheet_names)) {
-      stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)), call. = FALSE)
+      stop(sprintf("Sheet '%s' does not exist.", replaceXMLEntities(sheetName)),
+        call. = FALSE)
     }
 
-    return(which(replaceXMLEntities(sheet_names) == sheetName))
+    which(replaceXMLEntities(sheet_names) == sheetName)
   }
 )
-
 
 
 Workbook$methods(
@@ -1149,8 +1146,6 @@ Workbook$methods(
     sheet_names[sheetIndex]
   }
 )
-
-
 
 Workbook$methods(
   buildTable = function(sheet,
@@ -2107,7 +2102,7 @@ Workbook$methods(
 
           ## Check if any tables were deleted - remove these from rels
           if (length(tables) > 0) {
-            table_inds <- which(grepl("tables/table[0-9].xml", ws_rels))
+            table_inds <- grep("tables/table[0-9].xml", ws_rels)
 
             if (length(table_inds) > 0) {
               ids <-
@@ -2309,8 +2304,7 @@ Workbook$methods(
     }
 
     ## Need to remove reference from workbook.xml.rels to pivotCache
-    removeRels <-
-      worksheets_rels[[sheet]][grepl("pivotTables", worksheets_rels[[sheet]])]
+    removeRels <- grep("pivotTables", worksheets_rels[[sheet]], value = TRUE)
     if (length(removeRels) > 0) {
       ## sheet rels links to a pivotTable file, the corresponding pivotTable_rels file links to the cacheDefn which is listing in workbook.xml.rels
       ## remove reference to this file from the workbook.xml.rels
@@ -2326,7 +2320,7 @@ Workbook$methods(
           collapse = "|"
         )
 
-      fileNo <- which(grepl(toRemove, pivotTables.xml.rels))
+      fileNo <- grep(toRemove, pivotTables.xml.rels)
       toRemove <-
         stri_join(
           sprintf("(pivotCacheDefinition%s\\.xml)", fileNo),
@@ -3151,33 +3145,20 @@ Workbook$methods(
     }
 
     ## get index of each child element for ordering
-    sheetInds <-
-      which(grepl(
-        "(worksheets|chartsheets)/sheet[0-9]+\\.xml",
-        workbook.xml.rels
-      ))
-    stylesInd <- which(grepl("styles\\.xml", workbook.xml.rels))
-    themeInd <-
-      which(grepl("theme/theme[0-9]+.xml", workbook.xml.rels))
-    connectionsInd <-
-      which(grepl("connections.xml", workbook.xml.rels))
-    extRefInds <-
-      which(grepl("externalLinks/externalLink[0-9]+.xml", workbook.xml.rels))
-    sharedStringsInd <-
-      which(grepl("sharedStrings.xml", workbook.xml.rels))
-    tableInds <- which(grepl("table[0-9]+.xml", workbook.xml.rels))
-    personInds <- which(grepl("person.xml", workbook.xml.rels))
+    sheetInds <- grep("(worksheets|chartsheets)/sheet[0-9]+\\.xml", workbook.xml.rels)
+    stylesInd <- grep("styles\\.xml", workbook.xml.rels)
+    themeInd <- grep("theme/theme[0-9]+.xml", workbook.xml.rels)
+    connectionsInd <- grep("connections.xml", workbook.xml.rels)
+    extRefInds <- grep("externalLinks/externalLink[0-9]+.xml", workbook.xml.rels)
+    sharedStringsInd <- grep("sharedStrings.xml", workbook.xml.rels)
+    tableInds <- grep("table[0-9]+.xml", workbook.xml.rels)
+    personInds <- grep("person.xml", workbook.xml.rels)
 
 
     ## Reordering of workbook.xml.rels
     ## don't want to re-assign rIds for pivot tables or slicer caches
-    pivotNode <-
-      workbook.xml.rels[grepl(
-        "pivotCache/pivotCacheDefinition[0-9].xml",
-        workbook.xml.rels
-      )]
-    slicerNode <-
-      workbook.xml.rels[which(grepl("slicerCache[0-9]+.xml", workbook.xml.rels))]
+    pivotNode <- grep("pivotCache/pivotCacheDefinition[0-9].xml", workbook.xml.rels, value = TRUE)
+    slicerNode <- grep("slicerCache[0-9]+.xml", workbook.xml.rels, value = TRUE)
 
     ## Reorder children of workbook.xml.rels
     workbook.xml.rels <<-
