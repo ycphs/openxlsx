@@ -135,26 +135,30 @@
     <p>write a data.frame or list of data.frames to an xlsx file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write.xlsx</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>file</span>, asTable <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>write.xlsx</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>file</span>, asTable <span class='op'>=</span> <span class='cn'>FALSE</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>object or a list of objects that can be handled by <code><a href='writeData.html'>writeData</a></code> to write to file</p></td>
+      <td><p>A data.frame or a (named) list of objects that can be handled by
+<code><a href='writeData.html'>writeData</a></code> or <code><a href='writeDataTable.html'>writeDataTable</a></code> to write to file</p></td>
     </tr>
     <tr>
       <th>file</th>
-      <td><p>xlsx file name</p></td>
+      <td><p>A file path to save the xlsx file</p></td>
     </tr>
     <tr>
       <th>asTable</th>
-      <td><p>write using writeDataTable as opposed to writeData</p></td>
+      <td><p>If <code>TRUE</code> will use <code><a href='writeDataTable.html'>writeDataTable</a></code> rather
+than <code><a href='writeData.html'>writeData</a></code> to write <code>x</code> to the file (default: 
+<code>FALSE</code>)</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>optional parameters to pass to functions:</p><ul>
+      <th>overwrite</th>
+      <td><p>If `TRUE` will save over `file` if present (default: `FALSE`)</p>
+<ul>
 <li><p>createWorkbook</p></li>
 <li><p>addWorksheet</p></li>
 <li><p>writeData</p></li>
@@ -163,6 +167,11 @@
 </ul>
 
 <p>see details.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='writeData.html'>writeData</a></code>, 
+<code><a href='writeDataTable.html'>writeDataTable</a></code>, <code><a href='setColWidths.html'>setColWidths</a></code></p></td>
     </tr>
     </table>
 
@@ -224,10 +233,11 @@ styled as dates and datetimes respectively.</p>
 
     <div class='dont-index'><p><code><a href='addWorksheet.html'>addWorksheet</a></code></p>
 <p><code><a href='writeData.html'>writeData</a></code></p>
-<p><code><a href='createStyle.html'>createStyle</a></code> for style parameters</p></div>
+<p><code><a href='createStyle.html'>createStyle</a></code> for style parameters</p>
+<p><code><a href='buildWorkbook.html'>buildWorkbook</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Alexander Walker</p>
+    <p>Alexander Walker, Jordan Mark Barbone</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

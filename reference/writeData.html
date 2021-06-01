@@ -153,7 +153,9 @@
   keepNA <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"keepNA"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
   na.string <span class='op'>=</span> <span class='fu'><a href='openxlsx_options.html'>openxlsx_getOp</a></span><span class='op'>(</span><span class='st'>"na.string"</span><span class='op'>)</span>,
   name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  sep <span class='op'>=</span> <span class='st'>", "</span>
+  sep <span class='op'>=</span> <span class='st'>", "</span>,
+  <span class='va'>col.names</span>,
+  <span class='va'>row.names</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -252,6 +254,10 @@ each column. If "<code>all</code>" all cell borders are drawn.</p></td>
     <tr>
       <th>sep</th>
       <td><p>Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).</p></td>
+    </tr>
+    <tr>
+      <th>row.names, col.names</th>
+      <td><p>Deprecated, please use <code>rowNames</code>, <code>colNames</code> instead</p></td>
     </tr>
     </table>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>save Workbook to file — saveWorkbook • openxlsx</title>
+<title>Build Workbook — buildWorkbook • openxlsx</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="save Workbook to file — saveWorkbook" />
-<meta property="og:description" content="save a Workbook object to file" />
+<meta property="og:title" content="Build Workbook — buildWorkbook" />
+<meta property="og:description" content="Build a workbook from a data.frame or named list" />
 
 
 
@@ -126,59 +126,92 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>save Workbook to file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ycphs/openxlsx/blob/master/R/wrappers.R'><code>R/wrappers.R</code></a></small>
-    <div class="hidden name"><code>saveWorkbook.Rd</code></div>
+    <h1>Build Workbook</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ycphs/openxlsx/blob/master/R/build_workbook.R'><code>R/build_workbook.R</code></a></small>
+    <div class="hidden name"><code>buildWorkbook.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>save a Workbook object to file</p>
+    <p>Build a workbook from a data.frame or named list</p>
     </div>
 
-    <pre class="usage"><span class='fu'>saveWorkbook</span><span class='op'>(</span><span class='va'>wb</span>, <span class='va'>file</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>, returnValue <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>x</span>, asTable <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>wb</th>
-      <td><p>A Workbook object to write to file</p></td>
+      <th>x</th>
+      <td><p>A data.frame or a (named) list of objects that can be handled by
+<code><a href='writeData.html'>writeData</a></code> or <code><a href='writeDataTable.html'>writeDataTable</a></code> to write to file</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>A character string naming an xlsx file</p></td>
+      <th>asTable</th>
+      <td><p>If <code>TRUE</code> will use <code><a href='writeDataTable.html'>writeDataTable</a></code> rather
+than <code><a href='writeData.html'>writeData</a></code> to write <code>x</code> to the file (default: 
+<code>FALSE</code>)</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>If <code>TRUE</code>, overwrite any existing file.</p></td>
-    </tr>
-    <tr>
-      <th>returnValue</th>
-      <td><p>If <code>TRUE</code>, returns  <code>TRUE</code> in case of a success, else <code>FALSE</code>.
-If flag is <code>FALSE</code>, then no return value is returned.</p></td>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='writeData.html'>writeData</a></code>, 
+<code><a href='writeDataTable.html'>writeDataTable</a></code>, <code><a href='setColWidths.html'>setColWidths</a></code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A Workbook object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function can be used as shortcut to create a workbook object from a 
+  data.frame or named list.  If names are available in the list they will be
+  used as the worksheet names.  The parameters in <code>...</code> are collected
+  and passed to <code><a href='writeData.html'>writeData</a></code> or <code><a href='writeDataTable.html'>writeDataTable</a></code> to
+  initially create the Workbook objects then appropriate parameters are 
+  passed to <code><a href='setColWidths.html'>setColWidths</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='createWorkbook.html'>createWorkbook</a></code></p>
-<p><code><a href='addWorksheet.html'>addWorksheet</a></code></p>
-<p><code><a href='loadWorkbook.html'>loadWorkbook</a></code></p>
-<p><code><a href='writeData.html'>writeData</a></code></p>
-<p><code><a href='writeDataTable.html'>writeDataTable</a></code></p></div>
+    <div class='dont-index'><p><code><a href='write.xlsx.html'>write.xlsx</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Alexander Walker, Philipp Schauberger</p>
+    <p>Jordan Mark Barbone</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Create a new workbook and add a worksheet</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='st'>"Creator of workbook"</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, sheetName <span class='op'>=</span> <span class='st'>"My first worksheet"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'>## Save workbook to working directory</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>saveWorkbook</span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"saveWorkbookExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='va'>x</span>, b <span class='op'>=</span> <span class='va'>x</span>, c <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
+<span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; A Workbook object.
+#&gt;  
+#&gt; Worksheets:
+#&gt;  Sheet 1: "a"
+#&gt;  
+#&gt; 
+#&gt;  Sheet 2: "b"
+#&gt;  
+#&gt; 
+#&gt;  Sheet 3: "c"
+#&gt;  
+#&gt; 
+#&gt;  
+#&gt;  Worksheet write order: 1, 2, 3
+#&gt;  Active Worksheet: 1</div><div class='input'><span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span>, tableStyle <span class='op'>=</span> <span class='st'>"TableStyleLight8"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; A Workbook object.
+#&gt;  
+#&gt; Worksheets:
+#&gt;  Sheet 1: "a"
+#&gt;  
+#&gt; 
+#&gt;  Sheet 2: "b"
+#&gt;  
+#&gt; 
+#&gt;  Sheet 3: "c"
+#&gt;  
+#&gt; 
+#&gt;  
+#&gt;  Worksheet write order: 1, 2, 3
+#&gt;  Active Worksheet: 1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
