@@ -3865,7 +3865,7 @@ Workbook$methods(
           sprintf(
             'Active Sheet %s: "%s" \n\tPosition: %s\n',
             sheetOrder[aSheet],
-            exSheets[[sheetOrder[aSheet]]],
+            exSheets[[aSheet]],
             aSheet
           )
         )
@@ -18331,7 +18331,7 @@ Workbook$methods(
   setactiveSheet = function(activeSheet = NULL) {
     if (is.character(activeSheet)) {
       if (activeSheet %in% sheet_names) {
-        ActiveSheet <<- which(sheet_names == activeSheet)
+        ActiveSheet <<- which(sheet_names[sheetOrder] == activeSheet)
       } else {
         stop(paste(activeSheet, "doesn't exist as sheet name."))
       }
@@ -18339,7 +18339,7 @@ Workbook$methods(
 
     if (is.integer(activeSheet)|is.numeric(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
-        ActiveSheet <<- as.integer(activeSheet)
+        ActiveSheet <<- which(sheetOrder==activeSheet)
       }else {
         stop(paste(activeSheet, "doesn't exist as sheet index."))
       }
