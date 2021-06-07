@@ -19,8 +19,9 @@
 * `write.xlsx()` >> `buildWorkbook()` can now handle `colWidths` passed as either a single element or a `list()`
 * Added ability to change positioning of summary columns and rows.
   * These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
-* activeSheet allows to set and get the active (displayed) sheet of a workbook.
+* `activeSheet` allows to set and get the active (displayed) sheet of a worbook.
 * Adds new global options for workbook formatting ([#165](https://github.com/ycphs/openxlsx/issues/165); see `?op.openxlsx`)
+
 
 
 

@@ -3205,7 +3205,7 @@ Workbook$methods(
       }))
 
     ## re-order worksheets if need to
-    if (any(sheetOrder != 1:nSheets)) {
+    if (any(sheetOrder != seq_len(nSheets))) {
       workbook$sheets <<- workbook$sheets[sheetOrder]
     }
 
@@ -3215,32 +3215,47 @@ Workbook$methods(
     state <- rep.int("visible", nSheets)
     state[grepl("hidden", workbook$sheets)] <- "hidden"
     visible_sheet_index <- which(state %in% "visible")[[1]]
-
+    visible_sheets <- which(state %in% "visible")
     workbook$bookViews <<-
       sprintf(
         '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
         visible_sheet_index - 1L,
         ActiveSheet - 1L
       )
-
-    worksheets[[visible_sheet_index]]$sheetViews <<-
-      sub(
-        '( tabSelected="0")|( tabSelected="false")',
-        ' tabSelected="1"',
-        worksheets[[visible_sheet_index]]$sheetViews,
-        ignore.case = TRUE
-      )
-    if (nSheets > 1) {
-      for (i in (1:nSheets)[!(1:nSheets) %in% visible_sheet_index]) {
-        worksheets[[i]]$sheetViews <<-
-          sub(
-            ' tabSelected="(1|true|false|0)"',
-            ' tabSelected="0"',
-            worksheets[[i]]$sheetViews,
-            ignore.case = TRUE
-          )
-      }
+    
+    for(i in seq_len(nSheets)) {
+      worksheets[[i]]$sheetViews <<-
+        sub(
+          ' tabSelected="(1|true|false|0)"',
+          ifelse(
+            sheetOrder[ActiveSheet] == i,
+            ' tabSelected="true"',
+            ' tabSelected="false"'
+          ),
+          worksheets[[i]]$sheetViews,
+          ignore.case = TRUE
+        )
     }
+    # worksheets[[visible_sheet_index]]$sheetViews
+    
+    # worksheets[[visible_sheet_index]]$sheetViews <<-
+    #   sub(
+    #     '( tabSelected="0")|( tabSelected="false")',
+    #     ' tabSelected="1"',
+    #     worksheets[[visible_sheet_index]]$sheetViews,
+    #     ignore.case = TRUE
+    #   )
+    # if (nSheets > 1) {
+    #   for (i in (1:nSheets)[!(1:nSheets) %in% visible_sheet_index]) {
+    #     worksheets[[i]]$sheetViews <<-
+    #       sub(
+    #         ' tabSelected="(1|true|false|0)"',
+    #         ' tabSelected="false"',
+    #         worksheets[[i]]$sheetViews,
+    #         ignore.case = TRUE
+    #       )
+    #   }
+    # }
 
 
 
@@ -3418,18 +3433,18 @@ Workbook$methods(
       
       
       if(ActiveSheet==i) {
-        worksheets[[i]]$sheetViews <<-
+        worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
-            worksheets[[i]]$sheetViews,
-            "tabSelected=\"[0-9]\"",
-            paste0("tabSelected=\"1\"")
+            worksheets[[sheetOrder[i]]]$sheetViews,
+            "tabSelected=\"(1|true|false|0)\"",
+            paste0("tabSelected=\"true\"")
           )
       } else {
-        worksheets[[i]]$sheetViews <<-
+        worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
-            worksheets[[i]]$sheetViews,
-            "tabSelected=\"[0-9]\"",
-            paste0("tabSelected=\"0\"")
+            worksheets[[sheetOrder[i]]]$sheetViews,
+            "tabSelected=\"(1|true|false|0)\"",
+            paste0("tabSelected=\"false\"")
           )
       }
     }
@@ -3804,12 +3819,19 @@ Workbook$methods(
         ))
     }
     
-    if(aSheet >= 1){
+    
+    
+    if (aSheet >= 1) {
       showText <-
-        c(showText, sprintf(
-          "Active Worksheet: %s",
-          aSheet
-        ))
+        c(
+          showText,
+          sprintf(
+            'Active Sheet %s: "%s" \n\tPosition: %s\n',
+            sheetOrder[aSheet],
+            exSheets[[sheetOrder[aSheet]]],
+            aSheet
+          )
+        )
     }
 
     cat(unlist(showText))
@@ -4295,7 +4317,7 @@ Workbook$methods(
   setactiveSheet = function(activeSheet = NULL) {
     if (is.character(activeSheet)) {
       if (activeSheet %in% sheet_names) {
-        ActiveSheet <<- which(sheet_names == activeSheet)
+        ActiveSheet <<- which(sheet_names[sheetOrder] == activeSheet)
       } else {
         stop(paste(activeSheet, "doesn't exist as sheet name."))
       }
@@ -4303,7 +4325,7 @@ Workbook$methods(
 
     if (is.integer(activeSheet)|is.numeric(activeSheet)) {
       if (activeSheet %in% seq_along(sheet_names)) {
-        ActiveSheet <<- as.integer(activeSheet)
+        ActiveSheet <<- which(sheetOrder==activeSheet)
       }else {
         stop(paste(activeSheet, "doesn't exist as sheet index."))
       }
@@ -4311,9 +4333,9 @@ Workbook$methods(
 
     for(i in seq_along(sheet_names)){
       worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
-                           "tabSelected=\"[0-9]\"",
+                           "tabSelected=\"(1|true|false|0)\"",
                            paste0("tabSelected=\"",
-                                  as.integer(ActiveSheet == i)
+                                  ifelse(sheetOrder[ActiveSheet]  == i,"true","false")
                                   ,"\""))
       
       

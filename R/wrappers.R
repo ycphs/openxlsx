@@ -2571,7 +2571,13 @@ worksheetOrder <- function(wb) {
     stop("Elements of order are greater than the number of worksheets")
   }
 
+  
+  old_ActiveSheet <- wb$ActiveSheet
+  new_ActiveSheet <- which(value == old_ActiveSheet)
+  
   wb$sheetOrder <- value
+  wb$setactiveSheet(old_ActiveSheet)
+  
 
   invisible(wb)
 }
