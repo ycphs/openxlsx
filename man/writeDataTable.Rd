@@ -13,18 +13,20 @@ writeDataTable(
   xy = NULL,
   colNames = TRUE,
   rowNames = FALSE,
-  tableStyle = "TableStyleLight9",
+  tableStyle = openxlsx_getOp("tableStyle", "TableStyleLight9"),
   tableName = NULL,
-  headerStyle = NULL,
-  withFilter = TRUE,
-  keepNA = FALSE,
-  na.string = NULL,
+  headerStyle = openxlsx_getOp("headerStyle"),
+  withFilter = openxlsx_getOp("withFilter", TRUE),
+  keepNA = openxlsx_getOp("keepNA", FALSE),
+  na.string = openxlsx_getOp("na.string"),
   sep = ", ",
   stack = FALSE,
-  firstColumn = FALSE,
-  lastColumn = FALSE,
-  bandedRows = TRUE,
-  bandedCols = FALSE
+  firstColumn = openxlsx_getOp("firstColumn", FALSE),
+  lastColumn = openxlsx_getOp("lastColumn", FALSE),
+  bandedRows = openxlsx_getOp("bandedRows", TRUE),
+  bandedCols = openxlsx_getOp("bandedCols", FALSE),
+  col.names,
+  row.names
 )
 }
 \arguments{
@@ -52,7 +54,7 @@ A vector of the form c(startCol, startRow)}
 
 \item{headerStyle}{Custom style to apply to column names.}
 
-\item{withFilter}{If \code{TRUE}, columns with have filters in the first row.}
+\item{withFilter}{If \code{TRUE} or \code{NA}, columns with have filters in the first row.}
 
 \item{keepNA}{If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.}
 
@@ -75,6 +77,8 @@ existing style is replaced by the new style.
 \item{bandedRows}{logical. If TRUE, rows are colour banded}
 
 \item{bandedCols}{logical. If TRUE, the columns are colour banded}
+
+\item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
 \description{
 Write to a worksheet and format as an Excel table

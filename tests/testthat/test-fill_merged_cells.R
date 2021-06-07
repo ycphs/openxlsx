@@ -21,7 +21,7 @@ test_that("fill merged cells", {
   mergeCells(wb = wb, sheet = 1, cols = 2:4, rows = 4)
   mergeCells(wb = wb, sheet = 1, cols = 2:4, rows = 5)
 
-  tmp_file <- tempfile(fileext = ".xlsx")
+  tmp_file <- temp_xlsx()
   saveWorkbook(wb = wb, file = tmp_file, overwrite = TRUE)
 
   expect_equal(names(read.xlsx(tmp_file, fillMergedCells = FALSE)), c("A", "B", "X3", "X4"))

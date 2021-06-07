@@ -19,3 +19,4 @@ cran-comments.md
 ^openxlsx\.Rcheck$
 ^openxlsx.*\.tar\.gz$
 ^openxlsx.*\.tgz$
+^data-raw$

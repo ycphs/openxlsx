@@ -1,13 +1,7 @@
 
-
-
 context("Named Regions")
 
-
-
 test_that("Maintaining Named Regions on Load", {
-
-
   ## create named regions
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
@@ -19,43 +13,40 @@ test_that("Maintaining Named Regions on Load", {
     wb = wb,
     sheet = 1,
     name = "iris",
-    rows = 1:(nrow(iris) + 1),
-    cols = 1:ncol(iris)
+    rows = seq_len(nrow(iris) + 1),
+    cols = seq_len(ncol(iris))
   )
-
 
   ## using writeData 'name' argument
   writeData(wb, sheet = 1, x = iris, name = "iris2", startCol = 10)
-
 
   ## Named region size 1
   writeData(wb, sheet = 2, x = 99, name = "region1", startCol = 3, startRow = 3)
 
   ## save file for testing
-  out_file <- tempfile(fileext = ".xlsx")
+  out_file <- temp_xlsx()
   saveWorkbook(wb, out_file, overwrite = TRUE)
-
 
   expect_equal(object = getNamedRegions(wb), expected = getNamedRegions(out_file))
 
   df1 <- read.xlsx(wb, namedRegion = "iris")
   df2 <- read.xlsx(out_file, namedRegion = "iris")
-  expect_equal(object = df1, expected = df2)
+  expect_equal(df1, df2)
 
   df1 <- read.xlsx(wb, namedRegion = "region1")
-  expect_equal(object = class(df1), expected = "data.frame")
-  expect_equal(object = nrow(df1), expected = 0)
-  expect_equal(object = ncol(df1), expected = 1)
+  expect_s3_class(df1, "data.frame")
+  expect_equal(nrow(df1), 0)
+  expect_equal(ncol(df1), 1)
 
   df1 <- read.xlsx(wb, namedRegion = "region1", colNames = FALSE)
-  expect_equal(object = class(df1), expected = "data.frame")
-  expect_equal(object = nrow(df1), expected = 1)
-  expect_equal(object = ncol(df1), expected = 1)
+  expect_s3_class(df1, "data.frame")
+  expect_equal(nrow(df1), 1)
+  expect_equal(ncol(df1), 1)
 
   df1 <- read.xlsx(wb, namedRegion = "region1", rowNames = TRUE)
-  expect_equal(object = class(df1), expected = "data.frame")
-  expect_equal(object = nrow(df1), expected = 0)
-  expect_equal(object = ncol(df1), expected = 0)
+  expect_s3_class(df1, "data.frame")
+  expect_equal(nrow(df1), 0)
+  expect_equal(ncol(df1), 0)
 })
 
 test_that("Correctly Loading Named Regions Created in Excel", {
@@ -150,7 +141,7 @@ test_that("Load names from an Excel file with funky non-region names", {
 
 
 test_that("Missing rows in named regions", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
 
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
@@ -227,7 +218,7 @@ test_that("Missing rows in named regions", {
 
 
 test_that("Missing columns in named regions", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
 
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
@@ -305,7 +296,7 @@ test_that("Missing columns in named regions", {
 
 
 test_that("Matching Substrings breaks reading named regions", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
 
   wb <- createWorkbook()
   addWorksheet(wb, "table")

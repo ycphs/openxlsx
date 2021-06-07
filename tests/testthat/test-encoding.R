@@ -6,7 +6,7 @@ context("Encoding Tests")
 
 
 test_that("Write read encoding equality", {
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
 
   wb <- createWorkbook()
   for (i in 1:4) {
@@ -53,7 +53,7 @@ test_that("Support non-ASCII strings not in UTF-8 encodings", {
     X = non_ascii, Y = seq_along(non_ascii), stringsAsFactors = FALSE
   )
   colnames(non_ascii_df) <- non_ascii[3:4]
-  file <- tempfile(fileext = ".xlsx")
+  file <- temp_xlsx()
   wb <- createWorkbook(creator = non_ascii[1])
   ws <- addWorksheet(wb, non_ascii[2])
   writeDataTable(wb, ws, non_ascii_df, tableName = non_ascii[3])

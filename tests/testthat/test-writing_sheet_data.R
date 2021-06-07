@@ -1,13 +1,9 @@
 
-
-
-
-
 context("Writing Sheet Data XML")
 
 
 test_that("Writing sheetData rows XML - iris", {
-  temp_file <- tempfile(fileext = ".xlsx")
+  temp_file <- temp_xlsx()
   openxlsx::write.xlsx(iris, temp_file)
 
   unzip(temp_file, exdir = tempdir())
@@ -168,7 +164,7 @@ test_that("Writing sheetData rows XML - iris", {
     "<row r=\"151\"><c r=\"A151\" t=\"n\"><v>5.9</v></c><c r=\"B151\" t=\"n\"><v>3</v></c><c r=\"C151\" t=\"n\"><v>5.1</v></c><c r=\"D151\" t=\"n\"><v>1.8</v></c><c r=\"E151\" t=\"s\"><v>7</v></c></row>"
   )
 
-  for (i in 1:length(expected_rows)) {
+  for (i in seq_along(expected_rows)) {
     expect_equal(rows[i], expected = expected_rows[i])
   }
 
@@ -177,14 +173,9 @@ test_that("Writing sheetData rows XML - iris", {
 })
 
 
-
-
-
-
-
 test_that("Writing sheetData rows XML - mtcars", {
-  temp_file <- tempfile(fileext = ".xlsx")
-  openxlsx::write.xlsx(mtcars, temp_file, row.names = TRUE)
+  temp_file <- temp_xlsx()
+  openxlsx::write.xlsx(mtcars, temp_file, rowNames = TRUE)
 
   unzip(temp_file, exdir = tempdir())
   x <- readUTF8(file.path(tempdir(), "xl", "worksheets", "sheet1.xml"))
@@ -226,7 +217,7 @@ test_that("Writing sheetData rows XML - mtcars", {
     "<row r=\"33\"><c r=\"A33\" t=\"s\"><v>43</v></c><c r=\"B33\" t=\"n\"><v>21.4</v></c><c r=\"C33\" t=\"n\"><v>4</v></c><c r=\"D33\" t=\"n\"><v>121</v></c><c r=\"E33\" t=\"n\"><v>109</v></c><c r=\"F33\" t=\"n\"><v>4.11</v></c><c r=\"G33\" t=\"n\"><v>2.78</v></c><c r=\"H33\" t=\"n\"><v>18.6</v></c><c r=\"I33\" t=\"n\"><v>1</v></c><c r=\"J33\" t=\"n\"><v>1</v></c><c r=\"K33\" t=\"n\"><v>4</v></c><c r=\"L33\" t=\"n\"><v>2</v></c></row>"
   )
 
-  for (i in 1:length(expected_rows)) {
+  for (i in seq_along(expected_rows)) {
     expect_equal(rows[i], expected = expected_rows[i])
   }
 })

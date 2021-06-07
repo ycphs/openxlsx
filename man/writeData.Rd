@@ -14,15 +14,17 @@ writeData(
   xy = NULL,
   colNames = TRUE,
   rowNames = FALSE,
-  headerStyle = NULL,
-  borders = c("none", "surrounding", "rows", "columns", "all"),
-  borderColour = getOption("openxlsx.borderColour", "black"),
-  borderStyle = getOption("openxlsx.borderStyle", "thin"),
-  withFilter = FALSE,
-  keepNA = FALSE,
-  na.string = NULL,
+  headerStyle = openxlsx_getOp("headerStyle"),
+  borders = openxlsx_getOp("borders", "none"),
+  borderColour = openxlsx_getOp("borderColour", "black"),
+  borderStyle = openxlsx_getOp("borderStyle", "thin"),
+  withFilter = openxlsx_getOp("withFilter", FALSE),
+  keepNA = openxlsx_getOp("keepNA", FALSE),
+  na.string = openxlsx_getOp("na.string"),
   name = NULL,
-  sep = ", "
+  sep = ", ",
+  col.names,
+  row.names
 )
 }
 \arguments{
@@ -75,7 +77,7 @@ each column. If "\code{all}" all cell borders are drawn.}
    \item{\bold{slantDashDot}}{ slanted dash-dot border}
   }}
 
-\item{withFilter}{If \code{TRUE}, add filters to the column name row. NOTE can only have one filter per worksheet.}
+\item{withFilter}{If \code{TRUE} or \code{NA}, add filters to the column name row. NOTE can only have one filter per worksheet.}
 
 \item{keepNA}{If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.}
 
@@ -84,6 +86,8 @@ each column. If "\code{all}" all cell borders are drawn.}
 \item{name}{If not NULL, a named region is defined.}
 
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
+
+\item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
 \value{
 invisible(0)

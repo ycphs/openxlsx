@@ -9,26 +9,35 @@ openxlsx simplifies the the process of writing and styling Excel xlsx files from
 and removes the dependency on Java.
 }
 \details{
-The openxlsx package uses global options to simplify formatting:
+The openxlsx package uses global options, most to simplify formatting.  These
+  are stored in the \code{op.openxlsx} object.
 
-\itemize{
-   \item{\code{options("openxlsx.borderColour" = "black")}}
-   \item{\code{options("openxlsx.borderStyle" = "thin")}}
-   \item{\code{options("openxlsx.dateFormat" = "mm/dd/yyyy")}}
-   \item{\code{options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")}}
-   \item{\code{options("openxlsx.numFmt" = NULL)}}
-   \item{\code{options("openxlsx.paperSize" = 9)}} ## A4
-   \item{\code{options("openxlsx.orientation" = "portrait")}} ## page orientation
+\describe{
+ \item{openxlsx.bandedCols}{FALSE}
+ \item{openxlsx.bandedRows}{TRUE}
+ \item{openxlsx.borderColour}{"black"}
+ \item{openxlsx.borders}{"none"}
+ \item{openxlsx.borderStyle}{"thin"}
+ \item{openxlsx.compressionLevel}{"9"}
+ \item{openxlsx.creator}{""}
+ \item{openxlsx.dateFormat}{"mm/dd/yyyy"}
+ \item{openxlsx.datetimeFormat}{"yyyy-mm-dd hh:mm:ss"}
+ \item{openxlsx.headerStyle}{NULL}
+ \item{openxlsx.keepNA}{FALSE}
+ \item{openxlsx.na.string}{NULL}
+ \item{openxlsx.numFmt}{NULL}
+ \item{openxlsx.orientation}{"portrait"}
+ \item{openxlsx.paperSize}{9}
+ \item{openxlsx.tabColour}{"TableStyleLight9"}
+ \item{openxlsx.tableStyle}{"TableStyleLight9"}
+ \item{openxlsx.withFilter}{NA Whether to write data with or without a filter.  If NA will make filters with \code{writeDataTable} and will not for \code{writeData}}
 }
- See the Formatting vignette for examples.
 
-
-
+See the Formatting vignette for examples.
 
 Additional options
 
-\itemize{
-\item{\code{options("openxlsx.compressionLevel" = "9")}} ## set zip compression level, default is "1".
+\describe{
 }
 }
 \seealso{
@@ -39,6 +48,7 @@ Additional options
    \item{\code{\link{writeDataTable}}}
    \item{\code{\link{write.xlsx}}}
    \item{\code{\link{read.xlsx}}}
+   \item{\code{\link{op.openxlsx}}}
   }
 for examples
 }

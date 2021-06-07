@@ -1,10 +1,5 @@
 
-
-
-
 context("Reading from wb object is identical to reading from file")
-
-
 
 test_that("Reading from new workbook", {
   curr_wd <- getwd()
@@ -43,21 +38,10 @@ test_that("Reading from new workbook", {
   rm(wb)
 })
 
-
-
-
-
-
-
-
-
-
-
 test_that("Empty workbook", {
   curr_wd <- getwd()
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
-
 
   expect_equal(NULL, suppressWarnings(read.xlsx(wb)))
 
@@ -73,9 +57,6 @@ test_that("Empty workbook", {
   expect_equal(NULL, suppressWarnings(read.xlsx(wb, sheet = 1, colNames = FALSE, skipEmptyRows = TRUE, detectDates = TRUE, rows = 4:10)))
   expect_equal(NULL, suppressWarnings(read.xlsx(wb, sheet = 1, colNames = TRUE, skipEmptyRows = TRUE, detectDates = FALSE, cols = 4:10)))
 
-
-
-
   expect_warning(read.xlsx(wb))
 
   expect_warning(read.xlsx(wb, sheet = 1, colNames = FALSE))
@@ -89,10 +70,6 @@ test_that("Empty workbook", {
 
   expect_warning(read.xlsx(wb, sheet = 1, colNames = FALSE, skipEmptyRows = TRUE, detectDates = TRUE, rows = 4:10))
   expect_warning(read.xlsx(wb, sheet = 1, colNames = TRUE, skipEmptyRows = TRUE, detectDates = FALSE, cols = 4:10))
-
-
-
-
 
 
   ## 1 element
@@ -171,18 +148,16 @@ test_that("Empty workbook", {
 })
 
 
-
-
 test_that("Reading NAs and NaN values", {
   fileName <- file.path(tempdir(), "NaN.xlsx")
   na.string <- "*"
 
   ## data
   a <- data.frame(
-    "X" = c(-pi / 0, NA, NaN),
-    "Y" = letters[1:3],
-    "Z" = c(pi / 0, 99, NaN),
-    "Z2" = c(1, NaN, NaN),
+    X  = c(-pi / 0, NA, NaN),
+    Y  = letters[1:3],
+    Z  = c(pi / 0, 99, NaN),
+    Z2 = c(1, NaN, NaN),
     stringsAsFactors = FALSE
   )
 
@@ -235,8 +210,6 @@ test_that("Reading NAs and NaN values", {
 
   expect_equal(read.xlsx(wb), expected_df)
 
-
-
   ## keepNA = FALSE
   expect_equal(read.xlsx(wb), read.xlsx(fileName))
   expect_equal(b, read.xlsx(wb))
@@ -256,9 +229,6 @@ test_that("Reading NAs and NaN values", {
 
   unlink(fileName, recursive = TRUE, force = TRUE)
 })
-
-
-
 
 
 test_that("Reading from new workbook 2 ", {
@@ -310,7 +280,7 @@ test_that("Reading from new workbook cols/rows", {
     addWorksheet(wb, sprintf("Sheet %s", i))
   }
 
-  tempFile <- file.path(tempdir(), "temp.xlsx")
+  tempFile <- temp_xlsx()
 
   ## 1
   writeData(wb, sheet = 1, x = mtcars, colNames = TRUE, rowNames = FALSE)
@@ -322,7 +292,7 @@ test_that("Reading from new workbook cols/rows", {
   y <- read.xlsx(tempFile, 1, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
 
   df <- mtcars[sort((rows - 1)[(rows - 1) <= nrow(mtcars)]), sort(cols[cols <= ncol(mtcars)])]
-  rownames(df) <- 1:nrow(df)
+  rownames(df) <- seq_len(nrow(df))
 
   expect_equal(object = x, expected = y)
   expect_equal(object = x, expected = df)
@@ -366,7 +336,7 @@ test_that("Reading from new workbook cols/rows", {
   y <- read.xlsx(tempFile, sheet = 3, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
 
   df <- mtcars[sort((rows - 1)[(rows - 1) <= nrow(mtcars)]), sort(cols[cols <= ncol(mtcars)])]
-  rownames(df) <- 1:nrow(df)
+  rownames(df) <- seq_len(nrow(df))
 
   expect_equal(object = x, expected = y, check.attributes = FALSE)
   expect_equal(object = df, expected = x, check.attributes = FALSE)
