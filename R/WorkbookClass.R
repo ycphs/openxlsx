@@ -3865,7 +3865,7 @@ Workbook$methods(
           sprintf(
             'Active Sheet %s: "%s" \n\tPosition: %s\n',
             sheetOrder[aSheet],
-            exSheets[[aSheet]],
+            exSheets[[sheetOrder[aSheet]]],
             aSheet
           )
         )
