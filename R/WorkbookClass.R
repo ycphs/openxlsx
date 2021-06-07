@@ -3265,7 +3265,7 @@ Workbook$methods(
         sub(
           ' tabSelected="(1|true|false|0)"',
           ifelse(
-            ActiveSheet == i,
+            sheetOrder[ActiveSheet] == i,
             ' tabSelected="true"',
             ' tabSelected="false"'
           ),
@@ -3470,18 +3470,18 @@ Workbook$methods(
       
       
       if(ActiveSheet==i) {
-        worksheets[[i]]$sheetViews <<-
+        worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
-            worksheets[[i]]$sheetViews,
-            "tabSelected=\"[0-9]\"",
-            paste0("tabSelected=\"1\"")
+            worksheets[[sheetOrder[i]]]$sheetViews,
+            "tabSelected=\"(1|true|false|0)\"",
+            paste0("tabSelected=\"true\"")
           )
       } else {
-        worksheets[[i]]$sheetViews <<-
+        worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
-            worksheets[[i]]$sheetViews,
-            "tabSelected=\"[0-9]\"",
-            paste0("tabSelected=\"0\"")
+            worksheets[[sheetOrder[i]]]$sheetViews,
+            "tabSelected=\"(1|true|false|0)\"",
+            paste0("tabSelected=\"false\"")
           )
       }
     }
@@ -18347,9 +18347,9 @@ Workbook$methods(
 
     for(i in seq_along(sheet_names)){
       worksheets[[i]]$sheetViews <<- stri_replace_all_regex(worksheets[[i]]$sheetViews,
-                           "tabSelected=\"[0-9]\"",
+                           "tabSelected=\"(1|true|false|0)\"",
                            paste0("tabSelected=\"",
-                                  ifelse(ActiveSheet == i,"true","false")
+                                  ifelse(sheetOrder[ActiveSheet]  == i,"true","false")
                                   ,"\""))
       
       
