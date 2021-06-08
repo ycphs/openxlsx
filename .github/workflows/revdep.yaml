@@ -11,11 +11,11 @@ jobs:
       matrix:
         config:
         - {os: ubuntu-18.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
-  
-        env:
-          R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-          RSPM: ${{ matrix.config.rspm }}
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
