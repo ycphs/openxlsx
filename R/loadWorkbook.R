@@ -37,8 +37,6 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
 
     file <- getFile(file)
-
-    file <- getFile(file)
     if (!file.exists(file)) {
       stop("File does not exist.")
     }
