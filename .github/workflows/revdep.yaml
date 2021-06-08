@@ -32,7 +32,7 @@ jobs:
   
       - name: Install dependencies
         run: |
-          install.packages("remotes")
+          install.packages("remotes", repos = "https://cran.rstudio.com")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/revdepcheck")
         shell: Rscript {0}
