@@ -1,0 +1,45 @@
+
+on: push
+
+name: revdep
+
+jobs:
+  revdep:
+  runs-on: ${{ matrix.config.os }}
+if: startsWith(github.event.head_commit.message, 'REVDEPCHECK')
+name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+strategy:
+  fail-fast: false
+matrix:
+  config:
+  - { os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+
+env:
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+CRAN: ${{ matrix.config.r }}
+
+steps:
+  - uses: actions/checkout@v2
+- uses: r-lib/actions/setup-r@v1
+with:
+  r-version: ${{ matrix.config.r }}
+
+- uses: r-lib/actions/setup-pandoc@v1
+
+- name: Cache R packages
+uses: actions/cache@v2
+with:
+  path: ${{ env.R_LIBS_USER }}
+key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
+
+- name: Install dependencies
+run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_github('r-lib/revdepcheck')"
+
+- name: Revdepcheck
+run: Rscript -e "revdepcheck::revdep_reset()" -e "revdepcheck::revdep_check(num_workers=4)"
+
+- name: Upload check results
+uses: actions/upload-artifact@v2
+with:
+  name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+path: revdep/
