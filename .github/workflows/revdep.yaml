@@ -32,9 +32,9 @@ jobs:
   
       - name: Install revdepcheck and run checks
         run: |
-          install.packages("remotes", repos = "https://cran.rstudio.com")
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("r-lib/revdepcheck")
+          # install.packages("remotes", repos = "https://cran.rstudio.com")
+          # remotes::install_deps(dependencies = TRUE)
+          install.packages("revdepcheck", repos = "https://cran.rstudio.com")
           library(revdepcheck)
           revdep_reset()
           revdep_check(num_workers=4)
