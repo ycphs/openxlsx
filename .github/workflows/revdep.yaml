@@ -30,15 +30,16 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
   
-      - name: Install dependencies
+      - name: Install revdepcheck and run checks
         run: |
           install.packages("remotes", repos = "https://cran.rstudio.com")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/revdepcheck")
+          library(revdepcheck)
+          revdep_reset()
+          revdep_check(num_workers=4)
         shell: Rscript {0}
           
-      - name: Revdepcheck
-        run: Rscript -e "revdepcheck::revdep_reset()" -e "revdepcheck::revdep_check(num_workers=4)"
       
       - name: Upload check results
         uses: actions/upload-artifact@v2
