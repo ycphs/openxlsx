@@ -18,6 +18,10 @@ Authors@R:
              role = "ctb"),
       person(given = "Joshua",
              family = "Sturm",
+             role = "ctb"),
+      person(given = "Jan Marvin",
+             family = "Garbuszus",
+             email = "jan.garbuszus@ruhr-uni-bochum.de",
              role = "ctb"))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
