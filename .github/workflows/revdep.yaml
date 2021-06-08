@@ -35,6 +35,7 @@ jobs:
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/revdepcheck")
+        shell: Rscript {0}
           
       - name: Revdepcheck
         run: Rscript -e "revdepcheck::revdep_reset()" -e "revdepcheck::revdep_check(num_workers=4)"
