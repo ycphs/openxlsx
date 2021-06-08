@@ -30,15 +30,14 @@ The openxlsx package uses global options, most to simplify formatting.  These
  \item{openxlsx.paperSize}{9}
  \item{openxlsx.tabColour}{"TableStyleLight9"}
  \item{openxlsx.tableStyle}{"TableStyleLight9"}
- \item{openxlsx.withFilter}{NA Whether to write data with or without a filter.  If NA will make filters with \code{writeDataTable} and will not for \code{writeData}}
+ \item{openxlsx.withFilter}{NA Whether to write data with or without a 
+ filter. If NA will make filters with \code{writeDataTable} and will not for
+ \code{writeData}}
 }
 
 See the Formatting vignette for examples.
 
 Additional options
-
-\describe{
-}
 }
 \seealso{
 \itemize{
