@@ -227,9 +227,7 @@ test_that("Write zero rows & columns", {
 
 
 
-test_that("too much data",
-          
-          {
+test_that("too much data", {
             wb <- createWorkbook()
             addWorksheet(wb, "test1")
             addWorksheet(wb, "test2")
