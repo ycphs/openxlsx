@@ -58,7 +58,7 @@ openXL <- function(file = NULL) {
     myCommand <- paste(app, file, "&", sep = " ")
     system(command = myCommand)
   } else if ("Windows" == userSystem) {
-    shell(shQuote(string = file), wait = FALSE)
+    shell(shQuote(string = file), wait = FALSE) #nolint
   } else if ("Darwin" == userSystem) {
     myCommand <- paste0("open ", file)
     system(command = myCommand)
