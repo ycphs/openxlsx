@@ -30,7 +30,7 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
           
-     - name: install libcurl4-openssl-dev for Linux
+      - name: install libcurl4-openssl-dev for Linux
         run: |
           sudo apt install libcurl4-openssl-dev
   
