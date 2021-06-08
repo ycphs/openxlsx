@@ -29,10 +29,14 @@ jobs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
+          
+     - name: install libcurl4-openssl-dev for Linux
+        run: |
+          sudo apt install libcurl4-openssl-dev
   
       - name: Install revdepcheck and run checks
         run: |
-          install.packages("devtools", repos = "https://cran.rstudio.com")
+          install.packages(c("curl","devtools"),dependencies=TRUE)
           devtools::install_github("r-lib/revdepcheck")
           library(revdepcheck)
           revdep_reset()
