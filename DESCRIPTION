@@ -22,7 +22,12 @@ Authors@R:
       person(given = "Jan Marvin",
              family = "Garbuszus",
              email = "jan.garbuszus@ruhr-uni-bochum.de",
-             role = "ctb"))
+             role = "ctb")
+      person(given = "Jordan Mark",
+             family = "Barbone",
+             role = "ctb",
+             email = "jmbarbone@gmail.com",
+             comment = c(ORCID = "0000-0001-9788-3628")))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
     worksheets. Through the use of 'Rcpp', read/write times are comparable
