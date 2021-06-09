@@ -2573,7 +2573,6 @@ worksheetOrder <- function(wb) {
 
   
   old_ActiveSheet <- wb$ActiveSheet
-  new_ActiveSheet <- which(value == old_ActiveSheet)
   
   wb$sheetOrder <- value
   wb$setactiveSheet(old_ActiveSheet)
