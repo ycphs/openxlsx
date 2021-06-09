@@ -22,7 +22,7 @@ Authors@R:
       person(given = "Jan Marvin",
              family = "Garbuszus",
              email = "jan.garbuszus@ruhr-uni-bochum.de",
-             role = "ctb")
+             role = "ctb"),
       person(given = "Jordan Mark",
              family = "Barbone",
              role = "ctb",
