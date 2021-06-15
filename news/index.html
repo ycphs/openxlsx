@@ -129,6 +129,56 @@
       <small>Source: <a href='https://github.com/ycphs/openxlsx/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="openxlsx-424" class="section level1">
+<h1 class="page-header" data-toc-text="4.2.4">
+<a href="#openxlsx-424" class="anchor"></a>openxlsx 4.2.4<small> Unreleased </small>
+</h1>
+<div id="fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fixes" class="anchor"></a>Fixes</h2>
+<ul>
+<li>
+<code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> now successfully passes <code>withFilter</code> (<a href="https://github.com/ycphs/openxlsx/issues/151"><a href='https://github.com/ycphs/openxlsx/issues/151'>#151</a></a>)</li>
+<li>code clean up PR <a href="https://github.com/ycphs/openxlsx/pull/168"><a href='https://github.com/ycphs/openxlsx/issues/168'>#168</a></a>
+</li>
+<li>removal of unused variables PR <a href="https://github.com/ycphs/openxlsx/pull/168"><a href='https://github.com/ycphs/openxlsx/issues/168'>#168</a></a>
+</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>adds <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> to generate a <code>Workbook</code> object from a (named) list or a data.frame (<a href="https://github.com/ycphs/openxlsx/issues/192"><a href='https://github.com/ycphs/openxlsx/issues/192'>#192</a></a>, <a href="https://github.com/ycphs/openxlsx/issues/187"><a href='https://github.com/ycphs/openxlsx/issues/187'>#187</a></a>)
+<ul>
+<li>this is now recommended rather than the <code><a href="../reference/write.xlsx.html">write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</a></code> functionality before</li>
+<li>
+<code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> is now a wrapper for <code>wb &lt;- buildWorkbook(x); saveWorkbook(x, file)</code>
+</li>
+<li>parameter checking from <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> &gt;&gt; <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> are now held off until passed to <code><a href="../reference/writeData.html">writeData()</a></code>, <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code>, etc</li>
+<li>
+<code>row.names</code> is now deprecated for <code><a href="../reference/writeData.html">writeData()</a></code> and <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code>; please use <code>rowNames</code> instead</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> now checks for the file extension <code>.xlsx</code>; previously it would throw an error when the file was <code>.xls</code> or <code>.xlm</code> files</li>
+<li>memory allocation improvements</li>
+<li>global options added for <code>minWidth</code> and <code>maxWidth</code>
+</li>
+<li>
+<code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> &gt;&gt; <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> can now handle <code>colWidths</code> passed as either a single element or a <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>
+</li>
+<li>Added ability to change positioning of summary columns and rows.
+<ul>
+<li>These can be set with the <code>summaryCol</code> and <code>summaryRow</code> arguments in <code><a href="../reference/pageSetup.html">pageSetup()</a></code>.</li>
+</ul>
+</li>
+<li>
+<code>activeSheet</code> allows to set and get the active (displayed) sheet of a worbook.</li>
+<li>Adds new global options for workbook formatting (<a href="https://github.com/ycphs/openxlsx/issues/165"><a href='https://github.com/ycphs/openxlsx/issues/165'>#165</a></a>; see <code><a href="../reference/openxlsx_options.html">?op.openxlsx</a></code>)</li>
+</ul>
+</div>
+</div>
     <div id="openxlsx-423" class="section level1">
 <h1 class="page-header" data-toc-text="4.2.3">
 <a href="#openxlsx-423" class="anchor"></a>openxlsx 4.2.3<small> 2020-10-27 </small>
