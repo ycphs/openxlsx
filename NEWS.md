@@ -1,4 +1,4 @@
-# development
+# openxlsx 4.2.4
 
 ## Fixes
 

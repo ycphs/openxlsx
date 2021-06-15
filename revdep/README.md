@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                                        |
 |ctype    |en_US.UTF-8                                        |
 |tz       |Europe/Vienna                                      |
-|date     |2021-06-15                                         |
+|date     |2021-06-16                                         |
 
 # Dependencies
 
@@ -22,58 +22,4 @@
 |zip      |2.2.0 |2.2.0 |   |
 
 # Revdeps
-
-## Failed to check (49)
-
-|package        |version |error |warning |note |
-|:--------------|:-------|:-----|:-------|:----|
-|appreci8R      |?       |      |        |     |
-|artMS          |?       |      |        |     |
-|BayesianFROC   |?       |      |        |     |
-|behaviorchange |?       |      |        |     |
-|bibliometrix   |?       |      |        |     |
-|cbaf           |?       |      |        |     |
-|CHRONOS        |?       |      |        |     |
-|CLME           |?       |      |        |     |
-|CNVPanelizer   |?       |      |        |     |
-|CohortPlat     |?       |      |        |     |
-|CoTiMA         |?       |      |        |     |
-|crosstable     |?       |      |        |     |
-|cSEM           |?       |      |        |     |
-|DAPAR          |?       |      |        |     |
-|ddPCRclust     |?       |      |        |     |
-|Dominance      |?       |      |        |     |
-|dragon         |?       |      |        |     |
-|Ecfun          |?       |      |        |     |
-|ecotox         |?       |      |        |     |
-|emdi           |?       |      |        |     |
-|EventStudy     |?       |      |        |     |
-|expss          |?       |      |        |     |
-|fasstr         |?       |      |        |     |
-|fedup          |?       |      |        |     |
-|GA4GHshiny     |?       |      |        |     |
-|huxtable       |?       |      |        |     |
-|hypeR          |?       |      |        |     |
-|isoreader      |?       |      |        |     |
-|lares          |?       |      |        |     |
-|maEndToEnd     |?       |      |        |     |
-|MatrixQCvis    |?       |      |        |     |
-|MicroSEC       |?       |      |        |     |
-|nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
-|PloGO2         |?       |      |        |     |
-|qdap           |?       |      |        |     |
-|rADA           |?       |      |        |     |
-|rbiom          |?       |      |        |     |
-|rio            |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
-|SEERaBomb      |?       |      |        |     |
-|SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
-|stplanr        |?       |      |        |     |
-|structToolbox  |?       |      |        |     |
-|TarSeqQC       |?       |      |        |     |
-|TPP            |3.21.0  |      |        |     |
-|uncoverappLib  |?       |      |        |     |
 
