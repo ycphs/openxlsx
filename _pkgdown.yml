@@ -2,3 +2,7 @@ destination: docs
 
 development:
   mode: auto
+  
+development:
+  destination: dev
+
