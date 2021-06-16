@@ -1,1 +1,4 @@
 destination: docs
+
+development:
+  mode: auto
