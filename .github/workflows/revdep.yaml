@@ -71,8 +71,9 @@ jobs:
           revdep_check::revdep_report()
           revdep_check::revdep_report_summary()
         shell: Rscript {0}
-          
-    - name: Commit results
+
+
+      - name: Commit results
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
@@ -80,11 +81,9 @@ jobs:
           git add revdep/problems.md
           git add revdep/failures.md
           git add revdep/cran.md
-          git commit -m 'revdepcheck run - No changes to commit' || 
-          echo "No changes to commit"
+          git commit -m "revdepcheck run - No changes to commit" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
-         
-         
+    
       - name: Upload check results
         uses: actions/upload-artifact@v2
         with:
