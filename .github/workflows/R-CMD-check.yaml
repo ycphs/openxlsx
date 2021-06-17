@@ -43,6 +43,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
+    if: "!contains(github.event.head_commit.message, 'revdepcheck run - No changes to commit')"
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
