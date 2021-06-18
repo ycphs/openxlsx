@@ -68,8 +68,8 @@ jobs:
         run: |
           revdepcheck::revdep_reset()
           revdepcheck::revdep_check(num_workers=4)
-          revdep_check::revdep_report()
-          revdep_check::revdep_report_summary()
+          revdepcheck::revdep_report()
+          revdepcheck::revdep_report_summary()
         shell: Rscript {0}
 
 
