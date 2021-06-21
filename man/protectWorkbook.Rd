@@ -9,7 +9,8 @@ protectWorkbook(
   protect = TRUE,
   password = NULL,
   lockStructure = FALSE,
-  lockWindows = FALSE
+  lockWindows = FALSE,
+  type = 1L
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ protectWorkbook(
 \item{lockStructure}{Whether the workbook structure should be locked}
 
 \item{lockWindows}{Whether the window position of the spreadsheet should be locked}
+
+\item{type}{Lock type, default 1. From the xml documentation: 1 - Document is password protected. 2 - Document is recommended to be opened as read-only. 4 - Document is enforced to be opened as read-only. 8 - Document is locked for annotation.}
 }
 \description{
 Protect or unprotect a workbook from modifications by the user in the graphical user interface. Replaces an existing protection.

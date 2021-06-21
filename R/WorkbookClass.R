@@ -828,11 +828,14 @@ Workbook$methods(
       fl = file.path(relsDir, ".rels")
     )
 
+    app <- "<Application>Microsoft Excel</Application>"
+    # further protect argument (might be extended with: <ScaleCrop>, <HeadingPairs>, <TitlesOfParts>, <LinksUpToDate>, <SharedDoc>, <HyperlinksChanged>, <AppVersion>)
+    if (!is.null(workbook$apps)) app <- paste0(app, workbook$apps)
 
     ## write app.xml
     write_file(
       head = '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">',
-      body = "<Application>Microsoft Excel</Application>",
+      body = app,
       tail = "</Properties>",
       fl = file.path(docPropsDir, "app.xml")
     )
@@ -4223,7 +4226,8 @@ Workbook$methods(
   protectWorkbook = function(protect = TRUE,
                              lockStructure = FALSE,
                              lockWindows = FALSE,
-                             password = NULL) {
+                             password = NULL,
+                             type = NULL) {
     attr <- c()
     if (!is.null(password)) {
       attr["workbookPassword"] <- hashPassword(password)
@@ -4248,6 +4252,8 @@ Workbook$methods(
             sep = ""
           )
         )
+      if (!is.null(type) | !is.null(password))
+        workbook$apps <<- sprintf("<DocSecurity>%i</DocSecurity>", type)
     } else {
       workbook$workbookProtection <<- ""
     }
