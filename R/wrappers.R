@@ -2437,6 +2437,7 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
 #' @param password (optional) password required to unprotect the workbook
 #' @param lockStructure Whether the workbook structure should be locked
 #' @param lockWindows Whether the window position of the spreadsheet should be locked
+#' @param type Lock type, default 1. From the xml documentation: 1 - Document is password protected. 2 - Document is recommended to be opened as read-only. 4 - Document is enforced to be opened as read-only. 8 - Document is locked for annotation.
 #' @export
 #' @examples
 #' wb <- createWorkbook()
@@ -2450,12 +2451,12 @@ protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
 #' \dontrun{
 #' saveWorkbook(wb, "WorkBook_Protection_unprotected.xlsx", overwrite = TRUE)
 #' }
-protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure = FALSE, lockWindows = FALSE) {
+protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure = FALSE, lockWindows = FALSE, type = 1L) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
 
-  invisible(wb$protectWorkbook(protect = protect, password = password, lockStructure = lockStructure, lockWindows = lockWindows))
+  invisible(wb$protectWorkbook(protect = protect, password = password, lockStructure = lockStructure, lockWindows = lockWindows, type = type))
 }
 
 
