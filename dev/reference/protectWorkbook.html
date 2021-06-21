@@ -140,7 +140,8 @@
   protect <span class='op'>=</span> <span class='cn'>TRUE</span>,
   password <span class='op'>=</span> <span class='cn'>NULL</span>,
   lockStructure <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  lockWindows <span class='op'>=</span> <span class='cn'>FALSE</span>
+  lockWindows <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  type <span class='op'>=</span> <span class='fl'>1L</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,6 +166,10 @@
     <tr>
       <th>lockWindows</th>
       <td><p>Whether the window position of the spreadsheet should be locked</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Lock type, default 1. From the xml documentation: 1 - Document is password protected. 2 - Document is recommended to be opened as read-only. 4 - Document is enforced to be opened as read-only. 8 - Document is locked for annotation.</p></td>
     </tr>
     </table>
 
