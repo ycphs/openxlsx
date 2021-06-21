@@ -24,8 +24,10 @@ test_that("Reading protected Workbook", {
   saveWorkbook(wb, tmp_file, overwrite = TRUE)
 
   wb2 <- loadWorkbook(file = tmp_file)
-  # Check that the order of teh sub-elements is preserved
-  expect_equal(names(wb2$workbook), names(wb$workbook))
+  # Check that the order of the sub-elements is preserved
+  n1 <- names(wb2$workbook)
+  n2 <- names(wb$workbook)[names(wb$workbook) != "apps"]
+  expect_equal(n1, n2)
 
   unlink(tmp_file, recursive = TRUE, force = TRUE)
 })
