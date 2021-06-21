@@ -246,3 +246,45 @@ Number of characters exeed the limit of 32767."
 Number of characters exeed the limit of 32767."
             )
           })
+
+# example from gh issue #200
+test_that("write hyperlinks", {
+  
+  tmp <- openxlsx:::temp_xlsx()
+  tmp_dir <- tempdir()
+  
+  
+  # create data
+  channels <- data.frame(
+    channel = c("ABC", "BBC", "CBC"),
+    homepage = c("https://www.abc.net.au/",
+                 "https://www.bbc.com/",
+                 "https://www.cbc.ca/"),
+    stringsAsFactors = FALSE
+  )
+  
+  channels$formula <- paste0('=HYPERLINK("',
+                             channels$homepage,
+                             '","',
+                             channels$channel,
+                             '")')
+  
+  
+  # create xlsx
+  wb <- createWorkbook()
+  addWorksheet(wb, "channels")
+  writeDataTable(wb, "channels", channels, tableName = "channels")
+  writeFormula(wb, "channels", channels$formula, startRow = 2, startCol = 1)
+  freezePane(wb, "channels", firstRow = TRUE)
+  setColWidths(wb, "channels", cols = 1:ncol(channels), widths = "auto")
+  saveWorkbook(wb, file = tmp, overwrite = TRUE)
+  
+  # check the xls file for the correct string
+  unzip(tmp, exdir = tmp_dir)
+  sheet1 <- readLines(paste0(tmp_dir, "/xl/worksheets/sheet1.xml"), warn = FALSE)
+  res <- sapply(replaceIllegalCharacters(channels$formula),
+                FUN = function(str)grepl(str, x = sheet1, fixed = TRUE))
+  
+  
+  expect_true(all(res))
+})

@@ -104,6 +104,12 @@ Workbook$methods(writeData = function(
     }
   }
 
+  if ("hyperlink" %in% allColClasses) {
+    for (i in which(sapply(colClasses, function(x) "hyperlink" %in% x))) {
+      class(df[[i]]) <- "hyperlink"
+    }
+  }
+
   if (any(c("formula", "array_formula") %in% allColClasses)) {
     
     frm <- "formula"
@@ -117,12 +123,6 @@ Workbook$methods(writeData = function(
     for (i in which(sapply(colClasses, function(x) frm %in% x))) {
       df[[i]] <- replaceIllegalCharacters(as.character(df[[i]]))
       class(df[[i]]) <- cls
-    }
-  }
-
-  if ("hyperlink" %in% allColClasses) {
-    for (i in which(sapply(colClasses, function(x) "hyperlink" %in% x))) {
-      class(df[[i]]) <- "hyperlink"
     }
   }
 
