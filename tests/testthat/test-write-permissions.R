@@ -8,7 +8,7 @@ test_that("test failed write errors for saveWorkbook", {
   wb <- createWorkbook()
   addWorksheet(wb, "name")
 
-  expect_error(write.xlsx(x = cars, file = tempFile, overwrite = TRUE))
+  expect_warning(write.xlsx(x = cars, file = tempFile, overwrite = TRUE))
 
   unlink(tempFile, recursive = TRUE, force = TRUE)
 })
