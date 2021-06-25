@@ -67,3 +67,27 @@ SEXP getXMLattr(std::vector<std::string> strs, std::string child) {
   
   return  Rcpp::wrap(z);
 }
+
+
+// [[Rcpp::export]]
+SEXP getXML1attr_one(std::string str, std::string child, std::string attr) {
+  
+  pugi::xml_document doc;
+  pugi::xml_parse_result result = doc.load_string(str.c_str());
+  if (!result) {
+    Rcpp::stop("xml import unsuccessfull");
+  }
+  
+  
+  std::vector<std::string> res;
+  
+  for (pugi::xml_node worksheet = doc.child(child.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(child.c_str()))
+  {
+    res.push_back(worksheet.attribute(attr.c_str()).value());
+  }
+  
+  return  Rcpp::wrap(res);
+}
+

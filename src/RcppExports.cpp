@@ -18,6 +18,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getXML1val
+SEXP getXML1val(std::string str, std::string child);
+RcppExport SEXP _openxlsx_getXML1val(SEXP strSEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type str(strSEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXML1val(str, child));
+    return rcpp_result_gen;
+END_RCPP
+}
 // getXML2
 SEXP getXML2(std::string str, std::string level1, std::string child);
 RcppExport SEXP _openxlsx_getXML2(SEXP strSEXP, SEXP level1SEXP, SEXP childSEXP) {
@@ -28,6 +40,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
     Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
     rcpp_result_gen = Rcpp::wrap(getXML2(str, level1, child));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getXML2val
+SEXP getXML2val(std::string str, std::string level1, std::string child);
+RcppExport SEXP _openxlsx_getXML2val(SEXP strSEXP, SEXP level1SEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type str(strSEXP);
+    Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXML2val(str, level1, child));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -45,6 +70,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getXML3value
+SEXP getXML3value(std::string str, std::string level1, std::string level2, std::string child);
+RcppExport SEXP _openxlsx_getXML3value(SEXP strSEXP, SEXP level1SEXP, SEXP level2SEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type str(strSEXP);
+    Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
+    Rcpp::traits::input_parameter< std::string >::type level2(level2SEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXML3value(str, level1, level2, child));
+    return rcpp_result_gen;
+END_RCPP
+}
 // getXMLattr
 SEXP getXMLattr(std::vector<std::string> strs, std::string child);
 RcppExport SEXP _openxlsx_getXMLattr(SEXP strsSEXP, SEXP childSEXP) {
@@ -54,6 +93,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<std::string> >::type strs(strsSEXP);
     Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
     rcpp_result_gen = Rcpp::wrap(getXMLattr(strs, child));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getXML1attr_one
+SEXP getXML1attr_one(std::string str, std::string child, std::string attr);
+RcppExport SEXP _openxlsx_getXML1attr_one(SEXP strSEXP, SEXP childSEXP, SEXP attrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type str(strSEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    Rcpp::traits::input_parameter< std::string >::type attr(attrSEXP);
+    rcpp_result_gen = Rcpp::wrap(getXML1attr_one(str, child, attr));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -735,9 +787,13 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getXML1", (DL_FUNC) &_openxlsx_getXML1, 2},
+    {"_openxlsx_getXML1val", (DL_FUNC) &_openxlsx_getXML1val, 2},
     {"_openxlsx_getXML2", (DL_FUNC) &_openxlsx_getXML2, 3},
+    {"_openxlsx_getXML2val", (DL_FUNC) &_openxlsx_getXML2val, 3},
     {"_openxlsx_getXML3", (DL_FUNC) &_openxlsx_getXML3, 4},
+    {"_openxlsx_getXML3value", (DL_FUNC) &_openxlsx_getXML3value, 4},
     {"_openxlsx_getXMLattr", (DL_FUNC) &_openxlsx_getXMLattr, 2},
+    {"_openxlsx_getXML1attr_one", (DL_FUNC) &_openxlsx_getXML1attr_one, 3},
     {"_openxlsx_calc_column_widths", (DL_FUNC) &_openxlsx_calc_column_widths, 7},
     {"_openxlsx_convert_to_excel_ref", (DL_FUNC) &_openxlsx_convert_to_excel_ref, 2},
     {"_openxlsx_convert_from_excel_ref", (DL_FUNC) &_openxlsx_convert_from_excel_ref, 1},
