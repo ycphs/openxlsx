@@ -196,21 +196,21 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
             
             # check if val is some kind of string expression
             if ( !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
-            if (suppressWarnings(is.na(as.character(as.numeric(val)))))
-              tt[[nam]][rownames(tt) == row]  <- "s"
-              
+              if (suppressWarnings(is.na(as.character(as.numeric(val)))))
+                tt[[nam]][rownames(tt) == row]  <- "s"
+            
             z[[nam]][rownames(z) == row] <- val
           }
-
+          
         }
       }
     }
   }
   
   # overwrite for 
-  for (row in seq_along(isval)) {
+  for (row in as.integer(keep_row)) {
     
-    if (row %in% keep_row) {
+    if ((row %in% keep_row)  & (row <= length(isval))) {
       rowvals   <- isval[[row]]
       
       for (col in seq_along(rowvals)) {
