@@ -3,7 +3,6 @@ Package: openxlsx
 Title: Read, Write and Edit xlsx Files
 Version: 4.2.4.9000
 Date: 2021-06-08
-Language: en-US
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -21,18 +20,18 @@ Authors@R:
              role = "ctb"),
       person(given = "Jan Marvin",
              family = "Garbuszus",
-             email = "jan.garbuszus@ruhr-uni-bochum.de",
-             role = "ctb"),
+             role = "ctb",
+             email = "jan.garbuszus@ruhr-uni-bochum.de"),
       person(given = "Jordan Mark",
              family = "Barbone",
              role = "ctb",
              email = "jmbarbone@gmail.com",
              comment = c(ORCID = "0000-0001-9788-3628")))
-Description: Simplifies the creation of Excel .xlsx files by
-    providing a high level interface to writing, styling and editing
-    worksheets. Through the use of 'Rcpp', read/write times are comparable
-    to the 'xlsx' and 'XLConnect' packages with the added benefit of
-    removing the dependency on Java.
+Description: Simplifies the creation of Excel .xlsx files by providing a
+    high level interface to writing, styling and editing worksheets.
+    Through the use of 'Rcpp', read/write times are comparable to the
+    'xlsx' and 'XLConnect' packages with the added benefit of removing the
+    dependency on Java.
 License: MIT + file LICENSE
 URL: https://ycphs.github.io/openxlsx/index.html,
     https://github.com/ycphs/openxlsx
@@ -44,19 +43,23 @@ Imports:
     methods,
     Rcpp,
     stats,
+    stringi,
     utils,
-    zip,
-    stringi
+    zip
 Suggests:
+    fs (>= 1.5.0),
     knitr,
-    testthat,
+    rmarkdown,
     roxygen2,
-    rmarkdown 
+    testthat
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
     knitr
+Remotes: 
+    r-lib/fs
 Encoding: UTF-8
+Language: en-US
 RoxygenNote: 7.1.1
 Collate: 
     'CommentClass.R'
