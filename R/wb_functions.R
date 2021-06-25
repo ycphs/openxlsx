@@ -130,25 +130,26 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   
   # internet says: numFmtId > 0 and applyNumberFormat == 1
   sd <- as.data.frame(
-    do.call("rbind",
-            lapply(
-              wb$styles$cellXfs, 
-              FUN= function(x) 
-                c(
-                  as.numeric(getXML1attr_one(x, "xf", "numFmtId")),
-                  as.numeric(getXML1attr_one(x, "xf", "applyNumberFormat"))
-                )
-            ) 
+    do.call(
+      "rbind",
+      lapply(
+        wb$styles$cellXfs, 
+        FUN= function(x) 
+          c(
+            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "numFmtId")),
+            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "applyNumberFormat"))
+          )
+      ) 
     )
   )
-  sd <- unique(sd)
   names(sd) <- c("numFmtId", "applyNumberFormat")
   
+  sd$id <- seq_len(nrow(sd))-1
   sd$isdate <- 0
   sd$isdate[sd$numFmtId > 0 &
               sd$applyNumberFormat == 1] <- 1
   
-  xlsx_date_style <- sd$numFmtId[sd$isdate == 1]
+  xlsx_date_style <- sd$id[sd$isdate == 1]
   
   # create temporary data frame
   z <- tt <- dims_to_dataframe(dims)
