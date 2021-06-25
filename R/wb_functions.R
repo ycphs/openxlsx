@@ -62,6 +62,7 @@ guess_col_type <- function(tt) {
 #' written down and not optimized etc. The goal was to have something working.
 #' 
 #' @param wb openxlsx workbook
+#' @param sheet Either sheet name or index. When missing the first sheet in the workbook is selected.
 #' @param colnames If TRUE, the first row of data will be used as column names.
 #' @param dims Character string of type "A1:B2" as optional dimentions to be imported.
 #' @param detectDates If TRUE, attempt to recognise dates and perform conversion.
@@ -90,22 +91,27 @@ guess_col_type <- function(tt) {
 #'   read.xlsx(wb2)
 #' 
 #' @export
-wb_to_df <- function(wb, colNames = TRUE, dims, detectDates = TRUE,
+wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
                      showFormula = FALSE, convert = TRUE,
                      skipEmptyCols = FALSE) {
   
+  if (missing(sheet)) sheet <- 1
+  
+  if (is.character(sheet))
+    sheet <- which(wb1$sheet_names %in% sheet)
+  
   # must be available
   if (missing(dims))
-    dims <- getXML1attr_one(wb$worksheets[[1]]$dimension,
+    dims <- getXML1attr_one(wb$worksheets[[sheet]]$dimension,
                             "dimension",
                             "ref")
   
-  vval  <- wb$worksheets[[1]]$sheet_data$vval
-  fval  <- wb$worksheets[[1]]$sheet_data$fval
-  ttyp  <- wb$worksheets[[1]]$sheet_data$ttyp  # to identify strings and numbers
-  styp  <- wb$worksheets[[1]]$sheet_data$styp  # to identify dates?
-  rtyp  <- wb$worksheets[[1]]$sheet_data$rtyp  # to identify dates?
-  isval <- wb$worksheets[[1]]$sheet_data$isval # inlinestr
+  vval  <- wb$worksheets[[sheet]]$sheet_data$vval
+  fval  <- wb$worksheets[[sheet]]$sheet_data$fval
+  ttyp  <- wb$worksheets[[sheet]]$sheet_data$ttyp  # to identify strings and numbers
+  styp  <- wb$worksheets[[sheet]]$sheet_data$styp  # to identify dates?
+  rtyp  <- wb$worksheets[[sheet]]$sheet_data$rtyp  # to identify dates?
+  isval <- wb$worksheets[[sheet]]$sheet_data$isval # inlinestr
   
   
   # internet says: numFmtId > 0 and applyNumberFormat == 1
@@ -138,7 +144,7 @@ wb_to_df <- function(wb, colNames = TRUE, dims, detectDates = TRUE,
   
   for (row in as.integer(keep_row)) {
     
-    if (row %in% keep_row) {
+    if ((row %in% keep_row)  & (row <= length(vval))) {
       
       rowvals   <- vval[[row]]
       rowvals_f <- fval[[row]]

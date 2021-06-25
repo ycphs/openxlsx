@@ -6,6 +6,7 @@
 \usage{
 wb_to_df(
   wb,
+  sheet,
   colNames = TRUE,
   dims,
   detectDates = TRUE,
@@ -16,6 +17,8 @@ wb_to_df(
 }
 \arguments{
 \item{wb}{openxlsx workbook}
+
+\item{sheet}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
 
 \item{dims}{Character string of type "A1:B2" as optional dimentions to be imported.}
 
