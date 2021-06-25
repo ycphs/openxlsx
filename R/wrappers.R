@@ -29,9 +29,9 @@
 #'   category = "something"
 #' )
 createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.getenv("USERNAME"), Sys.getenv("USER")),
-  title = NULL,
-  subject = NULL,
-  category = NULL) {
+                           title = NULL,
+                           subject = NULL,
+                           category = NULL) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -119,20 +119,20 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 
   xlsx_file <- wb$saveWorkbook()
 
-  result<-tryCatch(file.copy(from = xlsx_file, to = file, overwrite = overwrite),
-    error = function(e) e, warning = function(w) w)
+  result <- tryCatch(file.copy(from = xlsx_file, to = file, overwrite = overwrite),
+    error = function(e) e, warning = function(w) w
+  )
 
 
 
 
   ## delete temporary dir
   unlink(dirname(xlsx_file), force = TRUE, recursive = TRUE)
-  if(returnValue == FALSE){
+  if (returnValue == FALSE) {
     invisible(1)
-  }else{
+  } else {
     return(result)
   }
-
 }
 
 
@@ -362,24 +362,22 @@ sheets <- function(wb) {
 #' \dontrun{
 #' saveWorkbook(wb, "addWorksheetExample.xlsx", overwrite = TRUE)
 #' }
-addWorksheet <- function(
-  wb,
-  sheetName,
-  gridLines = openxlsx_getOp("gridLines", TRUE),
-  tabColour = NULL,
-  zoom = 100,
-  header = openxlsx_getOp("header"),
-  footer = openxlsx_getOp("footer"),
-  evenHeader = openxlsx_getOp("evenHeader"),
-  evenFooter = openxlsx_getOp("evenFooter"),
-  firstHeader = openxlsx_getOp("firstHeader"),
-  firstFooter = openxlsx_getOp("firstFooter"),
-  visible = TRUE,
-  paperSize = openxlsx_getOp("paperSize", 9),
-  orientation = openxlsx_getOp("orientation", "portrait"),
-  vdpi = openxlsx_getOp("vdpi", 300),
-  hdpi = openxlsx_getOp("hdpi", 300)
-) {
+addWorksheet <- function(wb,
+                         sheetName,
+                         gridLines = openxlsx_getOp("gridLines", TRUE),
+                         tabColour = NULL,
+                         zoom = 100,
+                         header = openxlsx_getOp("header"),
+                         footer = openxlsx_getOp("footer"),
+                         evenHeader = openxlsx_getOp("evenHeader"),
+                         evenFooter = openxlsx_getOp("evenFooter"),
+                         firstHeader = openxlsx_getOp("firstHeader"),
+                         firstFooter = openxlsx_getOp("firstFooter"),
+                         visible = TRUE,
+                         paperSize = openxlsx_getOp("paperSize", 9),
+                         orientation = openxlsx_getOp("orientation", "portrait"),
+                         vdpi = openxlsx_getOp("vdpi", 300),
+                         hdpi = openxlsx_getOp("hdpi", 300)) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -393,11 +391,11 @@ addWorksheet <- function(
   }
 
   # Set NULL defaults
-  gridLines   <- gridLines   %||% TRUE
-  paperSize   <- paperSize   %||% 9
+  gridLines <- gridLines %||% TRUE
+  paperSize <- paperSize %||% 9
   orientation <- orientation %||% "portrait"
-  vdpi        <- vdpi        %||% 300
-  hdpi        <- hdpi        %||% 300
+  vdpi <- vdpi %||% 300
+  hdpi <- hdpi %||% 300
 
   if (tolower(sheetName) %in% tolower(wb$sheet_names)) {
     stop(paste0("A worksheet by the name '", sheetName, "' already exists! Sheet names must be unique case-insensitive."))
@@ -608,8 +606,10 @@ convertFromExcelRef <- function(col) {
   if (any(charFlag)) {
     col[charFlag] <- gsub("[0-9]", "", col[charFlag])
     d <- lapply(strsplit(col[charFlag], split = ""), function(x) match(rev(x), LETTERS))
-    col[charFlag] <- unlist(lapply(seq_along(d), function(i) sum(d[[i]] * (26^(
-      seq_along(d[[i]]) - 1)))))
+    col[charFlag] <- unlist(lapply(seq_along(d), function(i) {
+      sum(d[[i]] * (26^(
+        seq_along(d[[i]]) - 1)))
+    }))
   }
 
   col[!charFlag] <- as.integer(col[!charFlag])
@@ -748,25 +748,23 @@ convertFromExcelRef <- function(col) {
 #'
 #' # supply all colours
 #' createStyle(border = "TopBottomLeft", borderColour = c("red", "yellow", "green"))
-createStyle <- function(
-  fontName       = NULL,
-  fontSize       = NULL,
-  fontColour     = NULL,
-  numFmt         = openxlsx_getOp("numFmt", "GENERAL"),
-  border         = NULL,
-  borderColour   = openxlsx_getOp("borderColour", "black"),
-  borderStyle    = openxlsx_getOp("borderStyle", "thin"),
-  bgFill         = NULL,
-  fgFill         = NULL,
-  halign         = NULL,
-  valign         = NULL,
-  textDecoration = NULL,
-  wrapText       = FALSE,
-  textRotation   = NULL,
-  indent         = NULL,
-  locked         = NULL,
-  hidden         = NULL
-  ) {
+createStyle <- function(fontName = NULL,
+                        fontSize = NULL,
+                        fontColour = NULL,
+                        numFmt = openxlsx_getOp("numFmt", "GENERAL"),
+                        border = NULL,
+                        borderColour = openxlsx_getOp("borderColour", "black"),
+                        borderStyle = openxlsx_getOp("borderStyle", "thin"),
+                        bgFill = NULL,
+                        fgFill = NULL,
+                        halign = NULL,
+                        valign = NULL,
+                        textDecoration = NULL,
+                        wrapText = FALSE,
+                        textRotation = NULL,
+                        indent = NULL,
+                        locked = NULL,
+                        hidden = NULL) {
 
   ### Error checking
   od <- getOption("OutDec")
@@ -1030,15 +1028,13 @@ createStyle <- function(
 #' \dontrun{
 #' saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
 #' }
-addStyle <- function(
-  wb,
-  sheet,
-  style,
-  rows,
-  cols,
-  gridExpand = FALSE,
-  stack = FALSE
-) {
+addStyle <- function(wb,
+                     sheet,
+                     style,
+                     rows,
+                     cols,
+                     gridExpand = FALSE,
+                     stack = FALSE) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -1113,9 +1109,9 @@ getCellRefs <- function(cellCoords) {
 
 
   if (!("numeric" %in% sapply(cellCoords[, 1], class) |
-      "integer" %in% sapply(cellCoords[, 1], class))
-    & ("numeric" %in% sapply(cellCoords[, 2], class) |
-        "integer" %in% sapply(cellCoords[, 2], class))
+    "integer" %in% sapply(cellCoords[, 1], class)) &
+    ("numeric" %in% sapply(cellCoords[, 2], class) |
+      "integer" %in% sapply(cellCoords[, 2], class))
 
   ) {
     stop("Provide a data.frame containing integers!")
@@ -1434,7 +1430,9 @@ setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, len
   }
 
   # should do nothing if the cols' length is zero
-  if (length(cols) == 0L) return(invisible(0))
+  if (length(cols) == 0L) {
+    return(invisible(0))
+  }
 
   if (length(widths) > length(cols)) {
     stop("More widths than columns supplied.")
@@ -1640,7 +1638,7 @@ removeRowHeights <- function(wb, sheet, rows) {
 #' saveWorkbook(wb, "insertPlotExample.xlsx", overwrite = TRUE)
 #' }
 insertPlot <- function(wb, sheet, width = 6, height = 4, xy = NULL,
-  startRow = 1, startCol = 1, fileType = "png", units = "in", dpi = 300) {
+                       startRow = 1, startCol = 1, fileType = "png", units = "in", dpi = 300) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -1972,12 +1970,12 @@ getBaseFont <- function(wb) {
 #' saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)
 #' }
 setHeaderFooter <- function(wb, sheet,
-  header = NULL,
-  footer = NULL,
-  evenHeader = NULL,
-  evenFooter = NULL,
-  firstHeader = NULL,
-  firstFooter = NULL) {
+                            header = NULL,
+                            footer = NULL,
+                            evenHeader = NULL,
+                            evenFooter = NULL,
+                            firstHeader = NULL,
+                            firstFooter = NULL) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
@@ -2167,11 +2165,11 @@ setHeaderFooter <- function(wb, sheet,
 #' saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
 #' }
 pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
-  left = 0.7, right = 0.7, top = 0.75, bottom = 0.75,
-  header = 0.3, footer = 0.3,
-  fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
-  printTitleRows = NULL, printTitleCols = NULL,
-  summaryRow = NULL, summaryCol = NULL) {
+                      left = 0.7, right = 0.7, top = 0.75, bottom = 0.75,
+                      header = 0.3, footer = 0.3,
+                      fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
+                      printTitleRows = NULL, printTitleCols = NULL,
+                      summaryRow = NULL, summaryCol = NULL) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -2236,7 +2234,6 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
   outlinepr <- ""
 
   if (!is.null(summaryRow)) {
-
     if (!validRow(summaryRow)) {
       stop("Invalid \`summaryRow\` option. Must be one of \"Above\" or \"Below\".")
     } else if (tolower(summaryRow) == "above") {
@@ -2247,7 +2244,6 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
   }
 
   if (!is.null(summaryCol)) {
-
     if (!validCol(summaryCol)) {
       stop("Invalid \`summaryCol\` option. Must be one of \"Left\" or \"Right\".")
     } else if (tolower(summaryCol) == "left") {
@@ -2353,12 +2349,12 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
 #' saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
 #' }
 protectWorksheet <- function(wb, sheet, protect = TRUE, password = NULL,
-  lockSelectingLockedCells = NULL, lockSelectingUnlockedCells = NULL,
-  lockFormattingCells = NULL, lockFormattingColumns = NULL, lockFormattingRows = NULL,
-  lockInsertingColumns = NULL, lockInsertingRows = NULL, lockInsertingHyperlinks = NULL,
-  lockDeletingColumns = NULL, lockDeletingRows = NULL,
-  lockSorting = NULL, lockAutoFilter = NULL, lockPivotTables = NULL,
-  lockObjects = NULL, lockScenarios = NULL) {
+                             lockSelectingLockedCells = NULL, lockSelectingUnlockedCells = NULL,
+                             lockFormattingCells = NULL, lockFormattingColumns = NULL, lockFormattingRows = NULL,
+                             lockInsertingColumns = NULL, lockInsertingRows = NULL, lockInsertingHyperlinks = NULL,
+                             lockDeletingColumns = NULL, lockDeletingRows = NULL,
+                             lockSorting = NULL, lockAutoFilter = NULL, lockPivotTables = NULL,
+                             lockObjects = NULL, lockScenarios = NULL) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
@@ -2572,12 +2568,12 @@ worksheetOrder <- function(wb) {
     stop("Elements of order are greater than the number of worksheets")
   }
 
-  
+
   old_ActiveSheet <- wb$ActiveSheet
-  
+
   wb$sheetOrder <- value
   wb$setactiveSheet(old_ActiveSheet)
-  
+
 
   invisible(wb)
 }
