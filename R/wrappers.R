@@ -119,9 +119,7 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 
   xlsx_file <- wb$saveWorkbook()
 
-  result <- tryCatch(file.copy(from = xlsx_file, to = file, overwrite = overwrite),
-    error = function(e) e, warning = function(w) w
-  )
+  result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite)
 
 
 
