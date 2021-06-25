@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-06-22                   |
+|date     |2021-06-25                   |
 
 # Dependencies
 
@@ -23,12 +23,14 @@
 
 # Revdeps
 
-## Failed to check (26)
+## Failed to check (31)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
+|bibliometrix   |?       |      |        |     |
+|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -46,10 +48,13 @@
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |1       |2    |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
+|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
+|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.0  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
