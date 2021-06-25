@@ -34,6 +34,12 @@ dims_to_dataframe <- function(dims) {
   z
 }
 
+#' @param rtyp rtyp object
+#' @export 
+get_row_names <- function(rtyp) {
+  sapply(rtyp, function(x) gsub("[[:upper:]]","", x[[1]]))
+}
+
 #' function to estimate the column type.
 #' 0 = character, 1 = numeric, 2 = date.
 #' @param tt dataframe produced by wb_to_df()
@@ -113,6 +119,14 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   rtyp  <- wb$worksheets[[sheet]]$sheet_data$rtyp  # to identify dates?
   isval <- wb$worksheets[[sheet]]$sheet_data$isval # inlinestr
   
+  rnams <- get_row_names(rtyp)
+  names(vval)  <- rnams
+  names(fval)  <- rnams
+  names(ttyp)  <- rnams
+  names(styp)  <- rnams
+  names(rtyp)  <- rnams
+  names(isval) <- rnams
+  
   
   # internet says: numFmtId > 0 and applyNumberFormat == 1
   sd <- as.data.frame(
@@ -142,9 +156,9 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   keep_col <- colnames(z)
   keep_row <- rownames(z)
   
-  for (row in as.integer(keep_row)) {
+  for (row in keep_row) {
     
-    if ((row %in% keep_row)  & (row <= length(vval))) {
+    if ((row %in% keep_row)  & (row %in% rnams)) {
       
       rowvals   <- vval[[row]]
       rowvals_f <- fval[[row]]
@@ -208,9 +222,9 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   }
   
   # overwrite for 
-  for (row in as.integer(keep_row)) {
+  for (row in keep_row) {
     
-    if ((row %in% keep_row)  & (row <= length(isval))) {
+    if ((row %in% keep_row) & (row %in% rnams)) {
       rowvals   <- isval[[row]]
       
       for (col in seq_along(rowvals)) {
