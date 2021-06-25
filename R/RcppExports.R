@@ -5,16 +5,32 @@ getXML1 <- function(str, child) {
     .Call(`_openxlsx_getXML1`, str, child)
 }
 
+getXML1val <- function(str, child) {
+    .Call(`_openxlsx_getXML1val`, str, child)
+}
+
 getXML2 <- function(str, level1, child) {
     .Call(`_openxlsx_getXML2`, str, level1, child)
+}
+
+getXML2val <- function(str, level1, child) {
+    .Call(`_openxlsx_getXML2val`, str, level1, child)
 }
 
 getXML3 <- function(str, level1, level2, child) {
     .Call(`_openxlsx_getXML3`, str, level1, level2, child)
 }
 
+getXML3value <- function(str, level1, level2, child) {
+    .Call(`_openxlsx_getXML3value`, str, level1, level2, child)
+}
+
 getXMLattr <- function(strs, child) {
     .Call(`_openxlsx_getXMLattr`, strs, child)
+}
+
+getXML1attr_one <- function(str, child, attr) {
+    .Call(`_openxlsx_getXML1attr_one`, str, child, attr)
 }
 
 calc_column_widths <- function(sheet_data, sharedStrings, autoColumns, widths, baseFontCharWidth, minW, maxW) {
