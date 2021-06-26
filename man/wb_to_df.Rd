@@ -7,6 +7,7 @@
 wb_to_df(
   xlsxFile,
   sheet,
+  startRow = 1,
   colNames = TRUE,
   rowNames = FALSE,
   detectDates = TRUE,
@@ -25,6 +26,8 @@ wb_to_df(
 \item{xlsxFile}{An xlsx file, Workbook object or URL to xlsx file.}
 
 \item{sheet}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
+
+\item{startRow}{first row to begin looking for data.}
 
 \item{detectDates}{If TRUE, attempt to recognise dates and perform conversion.}
 
@@ -93,6 +96,9 @@ written down and not optimized etc. The goal was to have something working.
   # define type of the data.frame
   wb_to_df(wb1, cols = c(1, 4), types = c("Var1" = 0, "Var3" = 1))
   
+  # start in row 5
+  wb_to_df(wb1, startRow = 5, colNames = FALSE)
+  
   # read.xlsx(wb1)
 
   ###########################################################################
@@ -105,7 +111,7 @@ written down and not optimized etc. The goal was to have something working.
   # read.xlsx(wb2)
   
   ###########################################################################
-  # definedName
+  # definedName // namedRegion
   xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
   wb3 <- loadWorkbook(xlsxFile)
  

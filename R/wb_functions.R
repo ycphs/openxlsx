@@ -75,6 +75,7 @@ guess_col_type <- function(tt) {
 #' @param showFormula If TRUE, the underlying Excel formulas are shown.
 #' @param convert If TRUE, a conversion to dates and numerics is attempted.
 #' @param skipEmptyCols If TRUE, empty columns are skipped.
+#' @param startRow first row to begin looking for data.
 #' @param rows A numeric vector specifying which rows in the Excel file to read. If NULL, all rows are read.
 #' @param cols A numeric vector specifying which columns in the Excel file to read. If NULL, all columns are read.
 #' @param definedName Character string with a definedName. If no sheet is selected, the first appearance will be selected.
@@ -122,6 +123,9 @@ guess_col_type <- function(tt) {
 #'   # define type of the data.frame
 #'   wb_to_df(wb1, cols = c(1, 4), types = c("Var1" = 0, "Var3" = 1))
 #'   
+#'   # start in row 5
+#'   wb_to_df(wb1, startRow = 5, colNames = FALSE)
+#'   
 #'   # read.xlsx(wb1)
 #' 
 #'   ###########################################################################
@@ -134,7 +138,7 @@ guess_col_type <- function(tt) {
 #'   # read.xlsx(wb2)
 #'   
 #'   ###########################################################################
-#'   # definedName
+#'   # definedName // namedRegion
 #'   xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
 #'   wb3 <- loadWorkbook(xlsxFile)
 #'  
@@ -147,6 +151,7 @@ guess_col_type <- function(tt) {
 #' @export
 wb_to_df <- function(xlsxFile,
                      sheet, 
+                     startRow = 1,
                      colNames = TRUE, 
                      rowNames = FALSE,
                      detectDates = TRUE,
@@ -260,6 +265,13 @@ wb_to_df <- function(xlsxFile,
   
   keep_col <- colnames(z)
   keep_row <- rownames(z)
+  
+  if (startRow > 1) {
+    keep_row <- as.character(seq(startRow, max(as.numeric(keep_row))))
+    
+    z  <- z[rownames(z) %in% keep_row,]
+    tt <- tt[rownames(tt) %in% keep_row,]
+  }
   
   if (!is.null(rows)) {
     keep_row <- as.character(rows)
