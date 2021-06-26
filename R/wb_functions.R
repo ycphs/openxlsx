@@ -75,6 +75,7 @@ guess_col_type <- function(tt) {
 #' @param showFormula If TRUE, the underlying Excel formulas are shown.
 #' @param convert If TRUE, a conversion to dates and numerics is attempted.
 #' @param skipEmptyCols If TRUE, empty columns are skipped.
+#' @param definedName Character string with a definedName. If no sheet is selected, the first appearance will be selected.
 #' @examples
 #'   # numerics, dates, missings, bool and string
 #'   xlsxFile <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
@@ -83,6 +84,10 @@ guess_col_type <- function(tt) {
 #'   # inlinestr
 #'   xlsxFile <- system.file("extdata", "inlinestr.xlsx", package = "openxlsx")
 #'   wb2 <- loadWorkbook(xlsxFile)
+#'   
+#'   # definedName
+#'   xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
+#'   wb3 <- loadWorkbook(xlsxFile)
 #' 
 #'   wb_to_df(wb1)
 #'   wb_to_df(wb1, colNames = FALSE)
@@ -95,16 +100,57 @@ guess_col_type <- function(tt) {
 #' 
 #'   wb_to_df(wb2)
 #'   read.xlsx(wb2)
+#'  
+#'   wb_to_df(wb3, definedName = "MyRange", colNames = F)
+#'   wb_to_df(wb3, definedName = "MyRange", sheet = 4, colNames = F)
 #' 
 #' @export
 wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
                      showFormula = FALSE, convert = TRUE,
-                     skipEmptyCols = FALSE) {
+                     skipEmptyCols = FALSE, definedName) {
+  
+  if (!missing(definedName)) {
+    
+    dn <- wb$workbook$definedNames
+    wo <- unlist(lapply(dn, function(x) getXML1val(x, "definedName")))
+    wo <- gsub("\\$", "", wo)
+    wo <- unlist(sapply(wo, strsplit, "!"))
+    
+    nr <- as.data.frame(
+      matrix(wo, 
+             ncol = 2, 
+             byrow = TRUE, 
+             dimnames = list(seq_len(length(dn)),
+                             c("sheet", "dims") ))
+    )
+    nr$name <- sapply(dn, function(x) getXML1attr_one(x, "definedName", "name"))
+    nr$local <- sapply(dn, function(x) ifelse(
+      openxlsx:::getXML1attr_one(x,"definedName", "localSheetId") == "", 0, 1)
+    )
+    nr$sheet <- which(wb$sheet_names %in% nr$sheet)
+    
+    nr <- nr[order(nr$local, nr$name, nr$sheet),]
+    
+    if (definedName %in% nr$name & missing(sheet)) {
+      sel   <- nr[nr$name == definedName, ][1,]
+      sheet <- sel$sheet
+      dims  <- sel$dims
+    } else if (definedName %in% nr$name) {
+        sel <- nr[nr$name == definedName & nr$sheet == sheet, ]
+      if (NROW(sel) == 0) {
+        stop("no such definedName on selected sheet")
+      } else {
+        dims <- sel$dims
+      }
+    } else {
+      stop("no such definedName")
+    }
+  }
   
   if (missing(sheet)) sheet <- 1
   
   if (is.character(sheet))
-    sheet <- which(wb1$sheet_names %in% sheet)
+    sheet <- which(wb$sheet_names %in% sheet)
   
   # must be available
   if (missing(dims))
@@ -281,5 +327,6 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   
   attr(z, "tt") <- tt
   attr(z, "types") <- types
+  attr(z, "dn") <- nr
   z
 }

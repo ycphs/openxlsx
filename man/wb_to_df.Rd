@@ -12,7 +12,8 @@ wb_to_df(
   detectDates = TRUE,
   showFormula = FALSE,
   convert = TRUE,
-  skipEmptyCols = FALSE
+  skipEmptyCols = FALSE,
+  definedName
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ wb_to_df(
 
 \item{skipEmptyCols}{If TRUE, empty columns are skipped.}
 
+\item{definedName}{Character string with a definedName. If no sheet is selected, the first appearance will be selected.}
+
 \item{colnames}{If TRUE, the first row of data will be used as column names.}
 }
 \description{
@@ -44,6 +47,10 @@ written down and not optimized etc. The goal was to have something working.
   # inlinestr
   xlsxFile <- system.file("extdata", "inlinestr.xlsx", package = "openxlsx")
   wb2 <- loadWorkbook(xlsxFile)
+  
+  # definedName
+  xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
+  wb3 <- loadWorkbook(xlsxFile)
 
   wb_to_df(wb1)
   wb_to_df(wb1, colNames = FALSE)
@@ -56,5 +63,8 @@ written down and not optimized etc. The goal was to have something working.
 
   wb_to_df(wb2)
   read.xlsx(wb2)
+ 
+  wb_to_df(wb3, definedName = "MyRange", colNames = F)
+  wb_to_df(wb3, definedName = "MyRange", sheet = 4, colNames = F)
 
 }
