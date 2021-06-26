@@ -292,6 +292,243 @@ SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::st
 }
 
 // [[Rcpp::export]]
+void loadvals(Rcpp::Reference wb, XPtrXML doc, 
+              std::string level1, std::string level2, std::string level3, std::string level4,
+              std::string child1, std::string child2, std::string child3) {
+  
+  auto worksheet = doc->child(level1.c_str()).child(level2.c_str());
+  
+  size_t n = std::distance(worksheet.begin(), worksheet.end());
+  auto itr_rows = 0;
+  
+  std::string r_str = "r", s_str = "s", t_str = "t";
+  
+  Rcpp::List x1(n),  x2(n),  x3(n);
+  Rcpp::List xt1(n), xt2(n), xt3(n);
+  
+  std::vector<std::vector<std::string>> rtyp, styp, ttyp;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(level3.c_str()))
+  {
+    size_t k = std::distance(worksheet.begin(), worksheet.end());
+    auto itr_cols = 0;
+    
+    Rcpp::List y1(k),  y2(k),  y3(k);
+    Rcpp::List yt1(k), yt2(k), yt3(k);
+    
+    std::vector<std::string> nam;
+    std::vector<std::string> rtyp_col, styp_col, ttyp_col;
+    
+    
+    /* ---------------------------------------------------------------------- */
+    /* read fval, vval, isval and ftyp, vtyp, istyp ------------------------- */
+    /* ---------------------------------------------------------------------- */
+    
+    for (pugi::xml_node col = worksheet.child(level4.c_str());
+         col;
+         col = col.next_sibling(level4.c_str()))
+    {
+      Rcpp::CharacterVector z1, z2, z3;
+      Rcpp::List zt1, zt2, zt3;
+      
+      // get r attr e.g. "A1"
+      std::string colrow = col.attribute("r").value();
+      // remove numeric from string
+      colrow.erase(std::remove_if(colrow.begin(),
+                                  colrow.end(),
+                                  &isdigit),
+                                  colrow.end());
+      nam.push_back(colrow);
+      
+      // 1. should make this loop a function
+      for (pugi::xml_node val = col.child(child1.c_str());
+           val;
+           val = val.next_sibling(child1.c_str()))
+      {
+        // 1.1 val -------------------------------------------------------------
+        std::string val_s = "";
+        // is node contains additional t node.
+        // TODO: check if multiple t nodes are possible, for now return only one.
+        if (val.child("t")) {
+          pugi::xml_node tval = val.child("t");
+          val_s = tval.child_value();
+        } else {
+          val_s = val.child_value();
+        }
+        z1.push_back( val_s );
+        
+        // 1.2 typ -------------------------------------------------------------
+        Rcpp::CharacterVector rest;
+        std::vector<std::string> namt;
+
+        for (pugi::xml_attribute attr = col.first_attribute();
+             attr;
+             attr = attr.next_attribute())
+        {
+          if (attr.value() != NULL) {
+            namt.push_back(attr.name());
+            rest.push_back(attr.value());
+          } else {
+            rest.push_back("");
+          }
+        }
+        // assign names
+        rest.attr("names") = namt;
+        zt1.push_back(rest);
+        
+      }
+      y1[itr_cols]= z1;
+      yt1[itr_cols] = zt1;
+      
+      // 2. should make this loop a function
+      for (pugi::xml_node val = col.child(child2.c_str());
+           val;
+           val = val.next_sibling(child2.c_str()))
+      {
+        // 2.1 val -------------------------------------------------------------
+        std::string val_s = "";
+        // is node contains additional t node.
+        // TODO: check if multiple t nodes are possible, for now return only one.
+        if (val.child("t")) {
+          pugi::xml_node tval = val.child("t");
+          val_s = tval.child_value();
+        } else {
+          val_s = val.child_value();
+        }
+        z2.push_back( val_s );
+        
+        // 2.2 typ -------------------------------------------------------------
+        Rcpp::CharacterVector rest;
+        std::vector<std::string> namt;
+
+        for (pugi::xml_attribute attr = col.first_attribute();
+             attr;
+             attr = attr.next_attribute())
+        {
+          if (attr.value() != NULL) {
+            namt.push_back(attr.name());
+            rest.push_back(attr.value());
+          } else {
+            rest.push_back("");
+          }
+        }
+        // assign names
+        rest.attr("names") = namt;
+        zt2.push_back(rest);
+        
+      }
+      y2[itr_cols]= z2;
+      yt2[itr_cols] = zt2;
+      
+      // 3. should make this loop a function
+      for (pugi::xml_node val = col.child(child3.c_str());
+           val;
+           val = val.next_sibling(child3.c_str()))
+      {
+        // 3.1 val -------------------------------------------------------------
+        std::string val_s = "";
+        // is node contains additional t node.
+        // TODO: check if multiple t nodes are possible, for now return only one.
+        if (val.child("t")) {
+          pugi::xml_node tval = val.child("t");
+          val_s = tval.child_value();
+        } else {
+          val_s = val.child_value();
+        }
+        z3.push_back( val_s );
+        
+        // 3.2 typ -------------------------------------------------------------
+        Rcpp::CharacterVector rest;
+        std::vector<std::string> namt;
+
+        for (pugi::xml_attribute attr = col.first_attribute();
+             attr;
+             attr = attr.next_attribute())
+        {
+          if (attr.value() != NULL) {
+            namt.push_back(attr.name());
+            rest.push_back(attr.value());
+          } else {
+            rest.push_back("");
+          }
+        }
+        // assign names
+        rest.attr("names") = namt;
+        zt3.push_back(rest);
+        
+      }
+      y3[itr_cols] = z3;
+      yt3[itr_cols] = zt3;
+      
+      
+      /* -------------------------------------------------------------------- */
+      /* rtyp, styp, ttyp --------------------------------------------------- */
+      /* -------------------------------------------------------------------- */
+      pugi::xml_attribute attr1 = col.attribute(r_str.c_str());
+      
+      if (attr1.value() != NULL) {
+        rtyp_col.push_back(attr1.value());
+      } else {
+        rtyp_col.push_back("");
+      }
+      
+      pugi::xml_attribute attr2 = col.attribute(s_str.c_str());
+      
+      if (attr2.value() != NULL) {
+        styp_col.push_back(attr2.value());
+      } else {
+        styp_col.push_back("");
+      }
+      
+      pugi::xml_attribute attr3 = col.attribute(t_str.c_str());
+      
+      if (attr3.value() != NULL) {
+        ttyp_col.push_back(attr3.value());
+      } else {
+        ttyp_col.push_back("");
+      }
+      /* -------------------------------------------------------------------- */
+      
+      /* row is done */
+      ++itr_cols;
+    }
+    
+    y1.attr("names") = nam;
+    y2.attr("names") = nam;
+    y3.attr("names") = nam;
+    
+    x1[itr_rows] = y1;
+    x2[itr_rows] = y2;
+    x3[itr_rows] = y3;
+    
+    xt1[itr_rows] = yt1;
+    xt2[itr_rows] = yt2;
+    xt3[itr_rows] = yt3;
+    
+    rtyp.push_back(rtyp_col);
+    styp.push_back(styp_col);
+    ttyp.push_back(ttyp_col);
+    
+    ++itr_rows;
+  }
+  
+  wb.field("fval")  = x1;
+  wb.field("vval")  = x2;
+  wb.field("isval") = x3;
+  
+  wb.field("ftyp")  = xt1;
+  wb.field("vtyp")  = xt2;
+  wb.field("istyp") = xt3;
+  
+  wb.field("rtyp")  = Rcpp::wrap(rtyp);
+  wb.field("styp")  = Rcpp::wrap(styp);
+  wb.field("ttyp")  = Rcpp::wrap(ttyp);
+  
+}
+
+// [[Rcpp::export]]
 SEXP getXMLXPtr1attr(XPtrXML doc, std::string child) {
   
   
@@ -478,7 +715,7 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
   
   auto worksheet = doc->child(level1.c_str()).child(level2.c_str());
   size_t n = std::distance(worksheet.begin(), worksheet.end());
-  auto itr_cols = 0;
+  auto itr_cols = 0; // rows
   Rcpp::List z(n);
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
@@ -487,7 +724,7 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
   {
     
     size_t k = std::distance(worksheet.begin(), worksheet.end());
-    auto itr_rows = 0;
+    auto itr_rows = 0; // cols
     Rcpp::List y(k);
     
     for (pugi::xml_node row = worksheet.child(level4.c_str());
