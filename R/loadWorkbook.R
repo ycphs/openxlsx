@@ -244,24 +244,12 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
   ## xl\sharedStrings
   if (length(sharedStringsXML) > 0) {
-    sharedStrings <- readUTF8(sharedStringsXML)
-    sharedStrings <- paste(sharedStrings, collapse = "\n")
-    sharedStrings <- removeHeadTag(sharedStrings)
-
-    uniqueCount <- as.integer(regmatches(sharedStrings, regexpr('(?<=uniqueCount=")[0-9]+', sharedStrings, perl = TRUE)))
-
-    ## read in and get <si> nodes
-    vals <- getNodes(xml = sharedStrings, tagIn = "<si>")
-
-    if ("<si><t/></si>" %in% vals) {
-      vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
-      Encoding(vals) <- "UTF-8"
-      attr(vals, "uniqueCount") <- uniqueCount - 1L
-    } else {
-      Encoding(vals) <- "UTF-8"
-      attr(vals, "uniqueCount") <- uniqueCount
-    }
-
+    
+    sst <- readXMLPtr(sharedStringsXML)
+    uniqueCount <- getXMLXPtr1attr_one(sst, "sst", "uniqueCount")
+    vals <- getXMLXPtr3val(sst, "sst", "si", "t")
+    
+    attr(vals, "uniqueCount") <- uniqueCount
     wb$sharedStrings <- vals
   }
 
