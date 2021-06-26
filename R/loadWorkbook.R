@@ -469,7 +469,6 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   file_names <- file_names[match(sheetrId, file_rIds)]
 
   worksheetsXML <- file.path(dirname(worksheetsXML), file_names)
-  wb <- loadworksheets(wb = wb, styleObjects = styleObjects, xmlFiles = worksheetsXML, is_chart_sheet = is_chart_sheet)
 
 
   # TODO this loop should live in loadworksheets

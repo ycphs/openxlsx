@@ -231,20 +231,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// loadworksheets
-SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xmlFiles, LogicalVector is_chart_sheet);
-RcppExport SEXP _openxlsx_loadworksheets(SEXP wbSEXP, SEXP styleObjectsSEXP, SEXP xmlFilesSEXP, SEXP is_chart_sheetSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Reference >::type wb(wbSEXP);
-    Rcpp::traits::input_parameter< List >::type styleObjects(styleObjectsSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type xmlFiles(xmlFilesSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type is_chart_sheet(is_chart_sheetSEXP);
-    rcpp_result_gen = Rcpp::wrap(loadworksheets(wb, styleObjects, xmlFiles, is_chart_sheet));
-    return rcpp_result_gen;
-END_RCPP
-}
 // getNodes
 SEXP getNodes(std::string xml, std::string tagIn);
 RcppExport SEXP _openxlsx_getNodes(SEXP xmlSEXP, SEXP tagInSEXP) {
@@ -804,7 +790,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_read_file_newline", (DL_FUNC) &_openxlsx_read_file_newline, 1},
     {"_openxlsx_get_letters", (DL_FUNC) &_openxlsx_get_letters, 0},
     {"_openxlsx_markUTF8", (DL_FUNC) &_openxlsx_markUTF8, 2},
-    {"_openxlsx_loadworksheets", (DL_FUNC) &_openxlsx_loadworksheets, 4},
     {"_openxlsx_getNodes", (DL_FUNC) &_openxlsx_getNodes, 2},
     {"_openxlsx_getOpenClosedNode", (DL_FUNC) &_openxlsx_getOpenClosedNode, 3},
     {"_openxlsx_getAttr", (DL_FUNC) &_openxlsx_getAttr, 2},

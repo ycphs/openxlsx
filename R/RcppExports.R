@@ -73,10 +73,6 @@ markUTF8 <- function(x, clone) {
     .Call(`_openxlsx_markUTF8`, x, clone)
 }
 
-loadworksheets <- function(wb, styleObjects, xmlFiles, is_chart_sheet) {
-    .Call(`_openxlsx_loadworksheets`, wb, styleObjects, xmlFiles, is_chart_sheet)
-}
-
 getNodes <- function(xml, tagIn) {
     .Call(`_openxlsx_getNodes`, xml, tagIn)
 }
