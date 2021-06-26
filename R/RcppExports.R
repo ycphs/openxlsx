@@ -129,12 +129,24 @@ getXMLXPtr5 <- function(doc, level1, level2, level3, level4, child) {
     .Call(`_openxlsx_getXMLXPtr5`, doc, level1, level2, level3, level4, child)
 }
 
+getXMLXPtr2val <- function(doc, level1, child) {
+    .Call(`_openxlsx_getXMLXPtr2val`, doc, level1, child)
+}
+
+getXMLXPtr3val <- function(doc, level1, level2, child) {
+    .Call(`_openxlsx_getXMLXPtr3val`, doc, level1, level2, child)
+}
+
 getXMLXPtr4val <- function(doc, level1, level2, level3, child) {
     .Call(`_openxlsx_getXMLXPtr4val`, doc, level1, level2, level3, child)
 }
 
 getXMLXPtr5val <- function(doc, level1, level2, level3, level4, child) {
     .Call(`_openxlsx_getXMLXPtr5val`, doc, level1, level2, level3, level4, child)
+}
+
+getXMLXPtr1attr <- function(doc, child) {
+    .Call(`_openxlsx_getXMLXPtr1attr`, doc, child)
 }
 
 getXMLXPtr2attr <- function(doc, level1, child) {
@@ -151,6 +163,14 @@ getXMLXPtr4attr <- function(doc, level1, level2, level3, child) {
 
 getXMLXPtr5attr <- function(doc, level1, level2, level3, level4, child) {
     .Call(`_openxlsx_getXMLXPtr5attr`, doc, level1, level2, level3, level4, child)
+}
+
+getXMLXPtr1attr_one <- function(doc, child, attrname) {
+    .Call(`_openxlsx_getXMLXPtr1attr_one`, doc, child, attrname)
+}
+
+getXMLXPtr2attr_one <- function(doc, level1, child, attrname) {
+    .Call(`_openxlsx_getXMLXPtr2attr_one`, doc, level1, child, attrname)
 }
 
 getXMLXPtr3attr_one <- function(doc, level1, level2, child, attrname) {

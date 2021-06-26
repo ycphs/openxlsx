@@ -164,8 +164,49 @@ SEXP getXMLXPtr5(XPtrXML doc, std::string level1, std::string level2, std::strin
 }
 
 // [[Rcpp::export]]
+SEXP getXMLXPtr2val(XPtrXML doc, std::string level1, std::string child) {
+  
+  // returns a single vector, not a list of vectors!
+  std::vector<std::string> x;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(level1.c_str()))
+  {
+    std::vector<std::string> y;
+    
+    pugi::xml_node col = worksheet.child(child.c_str());
+    x.push_back(col.child_value() );
+    
+  }
+  
+  return  Rcpp::wrap(x);
+}
+
+// [[Rcpp::export]]
+SEXP getXMLXPtr3val(XPtrXML doc, std::string level1, std::string level2, std::string child) {
+  
+  // returns a single vector, not a list of vectors!
+  std::vector<std::string> x;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(level2.c_str()))
+  {
+    std::vector<std::string> y;
+    
+    pugi::xml_node col = worksheet.child(child.c_str());
+    
+    x.push_back(col.child_value() );
+  }
+  
+  return  Rcpp::wrap(x);
+}
+
+// [[Rcpp::export]]
 SEXP getXMLXPtr4val(XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string child) {
   
+  // returns a list of vectors!
   std::vector<std::vector<std::string>> x;
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
@@ -250,7 +291,40 @@ SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::st
   return  Rcpp::wrap(x);
 }
 
-
+// [[Rcpp::export]]
+SEXP getXMLXPtr1attr(XPtrXML doc, std::string child) {
+  
+  
+  pugi::xml_node worksheet = doc->child(child.c_str());
+  size_t n = std::distance(worksheet.begin(), worksheet.end());
+  
+  Rcpp::List z(n);
+  
+  auto itr = 0;
+  for (worksheet = doc->child(child.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(child.c_str()))
+  {
+    
+    Rcpp::CharacterVector res;
+    std::vector<std::string> nam;
+    
+    for (pugi::xml_attribute attr = worksheet.first_attribute();
+         attr;
+         attr = attr.next_attribute())
+    {
+      nam.push_back(attr.name());
+      res.push_back(attr.value());
+    }
+    
+    // assign names
+    res.attr("names") = nam;
+    
+    z.push_back(res);
+  }
+  
+  return  Rcpp::wrap(z);
+}
 
 // [[Rcpp::export]]
 SEXP getXMLXPtr2attr(XPtrXML doc, std::string level1, std::string child) {
@@ -454,6 +528,50 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
     
     z[itr_cols] = y;
     ++itr_cols;
+  }
+  
+  return  Rcpp::wrap(z);
+}
+
+// [[Rcpp::export]]
+Rcpp::CharacterVector getXMLXPtr1attr_one(XPtrXML doc, std::string child, std::string attrname) {
+  
+  
+  std::vector<std::string> z;
+  
+  for (pugi::xml_node worksheet = doc->child(child.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(child.c_str()))
+  { 
+    pugi::xml_attribute attr = worksheet.attribute(attrname.c_str());
+    
+    if (attr.value() != NULL) {
+      z.push_back(attr.value());
+    } else {
+      z.push_back("");
+    }
+  }
+  
+  return  Rcpp::wrap(z);
+}
+
+// [[Rcpp::export]]
+Rcpp::CharacterVector getXMLXPtr2attr_one(XPtrXML doc, std::string level1, std::string child, std::string attrname) {
+  
+  
+  std::vector<std::string> z;
+  
+  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(child.c_str());
+       worksheet;
+       worksheet = worksheet.next_sibling(child.c_str()))
+  { 
+    pugi::xml_attribute attr = worksheet.attribute(attrname.c_str());
+    
+    if (attr.value() != NULL) {
+      z.push_back(attr.value());
+    } else {
+      z.push_back("");
+    }
   }
   
   return  Rcpp::wrap(z);
