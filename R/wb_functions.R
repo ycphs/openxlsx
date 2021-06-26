@@ -166,6 +166,9 @@ wb_to_df <- function(xlsxFile,
                      definedName) {
   
   if (is.character(xlsxFile)){
+    # if using it this way, it might be benefitial to only load the sheet we
+    # want to read instead of every sheet of the entire xlsx file WHEN we do
+    # not even see it
     wb <- loadWorkbook(xlsxFile)
   } else {
     wb <- xlsxFile
