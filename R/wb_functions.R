@@ -199,7 +199,7 @@ wb_to_df <- function(xlsxFile,
       sheet <- sel$sheet
       dims  <- sel$dims
     } else if (definedName %in% nr$name) {
-        sel <- nr[nr$name == definedName & nr$sheet == sheet, ]
+      sel <- nr[nr$name == definedName & nr$sheet == sheet, ]
       if (NROW(sel) == 0) {
         stop("no such definedName on selected sheet")
       } else {
@@ -279,7 +279,7 @@ wb_to_df <- function(xlsxFile,
     z  <- z[rownames(z) %in% keep_row,]
     tt <- tt[rownames(tt) %in% keep_row,]
   }
-    
+  
   
   if (!is.null(cols)) {
     keep_col <- int2col(cols)
@@ -287,92 +287,83 @@ wb_to_df <- function(xlsxFile,
     z  <- z[keep_col]
     tt <- tt[keep_col]
   }
-    
+  
   
   for (row in keep_row) {
     
     if ((row %in% keep_row)  & (row %in% rnams)) {
       
-      rowvals   <- vval[[row]]
-      rowvals_f <- fval[[row]]
+      rowvals    <-  vval[[row]]
+      rowvals_is <- isval[[row]]
+      rowvals_f  <-  fval[[row]]
       
       for (col in seq_along(rowvals)) {
         nam <- names(rowvals[col])
         
         if (nam %in% keep_col) {
           
-          val <- unlist(rowvals[col])
+          val       <- unlist(rowvals[col])
+          val_is    <- unlist(rowvals_is[col])
           
-          if (ttyp[[row]][col] == "s") {
-            val <- wb$sharedStrings[as.numeric(val)+1]
-            val <- getXML2val(val, level1 = "si", child = "t")
+          if (!identical(val, character(0)) | !identical(isval, character(0))) {
             
-            tt[[nam]][rownames(tt) == row]  <- "s"
-          }
-          
-          if (ttyp[[row]][col] == "str") {
-            tt[[nam]][rownames(tt) == row]  <- "s"
-          }
-          
-          if (ttyp[[row]][col] == "b") {
-            val <- as.logical(as.numeric(val))
+            # sharedString: string
+            if (ttyp[[row]][col] == "s") {
+              val <- wb$sharedStrings[as.numeric(val)+1]
+              
+              tt[[nam]][rownames(tt) == row]  <- "s"
+            }
             
-            tt[[nam]][rownames(tt) == row]  <- "b"
-          }
-          
-          if (ttyp[[row]][col] == "e") {
+            # inlinestr: string
+            if (!identical(val_is, character(0))) {
+              z[[nam]][rownames(z) == row] <- val_is
+              
+              tt[[nam]][rownames(tt) == row]  <- "s"
+            }
+            
+            # str: should be from function evaluation?
+            if (ttyp[[row]][col] == "str") {
+              tt[[nam]][rownames(tt) == row]  <- "s"
+            }
+            
+            # bool: logical value
+            if (ttyp[[row]][col] == "b") {
+              val <- as.logical(as.numeric(val))
+              
+              tt[[nam]][rownames(tt) == row]  <- "b"
+            }
+            
+            # evaluation: takes the formula value?
             if (showFormula) {
-              tmp <- unlist(rowvals_f[col])
-              if (!identical(tmp, character(0))) {
-                val <- tmp
-                
-                tt[[nam]][rownames(tt) == row]  <- "s"
+              if (ttyp[[row]][col] == "e") {
+                tmp <- unlist(rowvals_f[col])
+                if (!identical(tmp, character(0))) {
+                  val <- tmp
+                  
+                  tt[[nam]][rownames(tt) == row]  <- "s"
+                }
               }
             }
-          }
-          
-          if (detectDates) {
-            if (styp[[row]][col] %in% xlsx_date_style ) {
-              val <- as.character(convertToDate(as.numeric(val)))
-              
-              tt[[nam]][rownames(tt) == row]  <- "d"
+            
+            # dates
+            if (detectDates) {
+              if (styp[[row]][col] %in% xlsx_date_style ) {
+                val <- as.character(convertToDate(as.numeric(val)))
+                
+                tt[[nam]][rownames(tt) == row]  <- "d"
+              }
             }
-          }
-          
-          if (!identical(val, character(0))) {
             
-            # check if val is some kind of string expression
-            if ( !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
-              if (suppressWarnings(is.na(as.character(as.numeric(val)))))
-                tt[[nam]][rownames(tt) == row]  <- "s"
+            # write vval here, final check if its a string
+            if (!identical(val, character(0))) {
+              # check if val is some kind of string expression
+              if ( !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
+                if (suppressWarnings(is.na(as.character(as.numeric(val)))))
+                  tt[[nam]][rownames(tt) == row]  <- "s"
+              
+              z[[nam]][rownames(z) == row] <- val
+            }
             
-            z[[nam]][rownames(z) == row] <- val
-          }
-          
-        }
-      }
-    }
-  }
-  
-  # overwrite for 
-  for (row in keep_row) {
-    
-    if ((row %in% keep_row) & (row %in% rnams)) {
-      rowvals   <- isval[[row]]
-      
-      for (col in seq_along(rowvals)) {
-        nam <- names(rowvals[col])
-        
-        if (nam %in% keep_col) {
-          
-          val <- unlist(rowvals[col])
-          
-          
-          # keep only non character(0)
-          if (!identical(val, character(0))) {
-            z[[nam]][rownames(z) == row] <- val
-            
-            tt[[nam]][rownames(tt) == row]  <- "s"
           }
         }
       }
