@@ -327,6 +327,6 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   
   attr(z, "tt") <- tt
   attr(z, "types") <- types
-  attr(z, "dn") <- nr
+  if (!missing(definedName)) attr(z, "dn") <- nr
   z
 }
