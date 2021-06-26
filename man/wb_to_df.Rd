@@ -5,31 +5,42 @@
 \title{Create Dataframe from Workbook}
 \usage{
 wb_to_df(
-  wb,
+  xlsxFile,
   sheet,
   colNames = TRUE,
-  dims,
+  rowNames = FALSE,
   detectDates = TRUE,
+  skipEmptyCols = FALSE,
+  skipEmptyRows = FALSE,
+  rows = NULL,
+  cols = NULL,
+  dims,
   showFormula = FALSE,
   convert = TRUE,
-  skipEmptyCols = FALSE,
+  types,
   definedName
 )
 }
 \arguments{
-\item{wb}{openxlsx workbook}
+\item{xlsxFile}{An xlsx file, Workbook object or URL to xlsx file.}
 
 \item{sheet}{Either sheet name or index. When missing the first sheet in the workbook is selected.}
 
-\item{dims}{Character string of type "A1:B2" as optional dimentions to be imported.}
-
 \item{detectDates}{If TRUE, attempt to recognise dates and perform conversion.}
+
+\item{skipEmptyCols}{If TRUE, empty columns are skipped.}
+
+\item{rows}{A numeric vector specifying which rows in the Excel file to read. If NULL, all rows are read.}
+
+\item{cols}{A numeric vector specifying which columns in the Excel file to read. If NULL, all columns are read.}
+
+\item{dims}{Character string of type "A1:B2" as optional dimentions to be imported.}
 
 \item{showFormula}{If TRUE, the underlying Excel formulas are shown.}
 
 \item{convert}{If TRUE, a conversion to dates and numerics is attempted.}
 
-\item{skipEmptyCols}{If TRUE, empty columns are skipped.}
+\item{types}{A named numeric indicating, the type of the data. 0: character, 1: numeric, 2: date. Names must match the created}
 
 \item{definedName}{Character string with a definedName. If no sheet is selected, the first appearance will be selected.}
 
@@ -40,31 +51,68 @@ Simple function to create a dataframe from a workbook. Simple as in simply
 written down and not optimized etc. The goal was to have something working.
 }
 \examples{
+
+  ###########################################################################
   # numerics, dates, missings, bool and string
   xlsxFile <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
   wb1 <- loadWorkbook(xlsxFile)
+
+  # import workbook
+  wb_to_df(wb1)
   
+  # do not convert first row to colNames 
+  wb_to_df(wb1, colNames = FALSE)
+  
+  # do not try to identify dates in the data
+  wb_to_df(wb1, detectDates = FALSE)
+  
+  # return the underlying Excel formula instead of their values
+  wb_to_df(wb1, showFormula = TRUE)
+  
+  # read dimension withot colNames
+  wb_to_df(wb1, dims = "A2:C5", colNames = FALSE)
+  
+  # read selected cols
+  wb_to_df(wb1, cols = c(1:2, 7))
+  
+  # read selected rows
+  wb_to_df(wb1, rows = c(1, 4, 6))
+  
+  # convert characters to numerics and date (logical too?)
+  wb_to_df(wb1, convert = FALSE)
+  
+  # erase empty Rows from dataset
+  wb_to_df(wb1, sheet = 3, skipEmptyRows = TRUE)
+  
+  # erase rmpty Cols from dataset
+  wb_to_df(wb1, skipEmptyCols = TRUE)
+  
+  # convert first row to rownames
+  wb_to_df(wb1, sheet = 3, dims = "C6:G9", rowNames = TRUE)
+  
+  # define type of the data.frame
+  wb_to_df(wb1, cols = c(1, 4), types = c("Var1" = 0, "Var3" = 1))
+  
+  # read.xlsx(wb1)
+
+  ###########################################################################
   # inlinestr
   xlsxFile <- system.file("extdata", "inlinestr.xlsx", package = "openxlsx")
   wb2 <- loadWorkbook(xlsxFile)
   
+  # read dataset with inlinestr
+  wb_to_df(wb2)
+  # read.xlsx(wb2)
+  
+  ###########################################################################
   # definedName
   xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
   wb3 <- loadWorkbook(xlsxFile)
-
-  wb_to_df(wb1)
-  wb_to_df(wb1, colNames = FALSE)
-  wb_to_df(wb1, detectDates = FALSE)
-  wb_to_df(wb1, showFormula = TRUE)
-  wb_to_df(wb1, dims = "A2:C5", colNames = FALSE)
-  wb_to_df(wb1, convert = FALSE)
-  wb_to_df(wb1, skipEmptyCols = TRUE)
-  read.xlsx(wb1)
-
-  wb_to_df(wb2)
-  read.xlsx(wb2)
  
+  # read dataset with definedName (returns global first)
   wb_to_df(wb3, definedName = "MyRange", colNames = F)
+  
+  # read definedName from sheet
   wb_to_df(wb3, definedName = "MyRange", sheet = 4, colNames = F)
 
 }

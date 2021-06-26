@@ -67,7 +67,7 @@ guess_col_type <- function(tt) {
 #' Simple function to create a dataframe from a workbook. Simple as in simply
 #' written down and not optimized etc. The goal was to have something working.
 #' 
-#' @param wb openxlsx workbook
+#' @param xlsxFile An xlsx file, Workbook object or URL to xlsx file.
 #' @param sheet Either sheet name or index. When missing the first sheet in the workbook is selected.
 #' @param colnames If TRUE, the first row of data will be used as column names.
 #' @param dims Character string of type "A1:B2" as optional dimentions to be imported.
@@ -75,39 +75,97 @@ guess_col_type <- function(tt) {
 #' @param showFormula If TRUE, the underlying Excel formulas are shown.
 #' @param convert If TRUE, a conversion to dates and numerics is attempted.
 #' @param skipEmptyCols If TRUE, empty columns are skipped.
+#' @param rows A numeric vector specifying which rows in the Excel file to read. If NULL, all rows are read.
+#' @param cols A numeric vector specifying which columns in the Excel file to read. If NULL, all columns are read.
 #' @param definedName Character string with a definedName. If no sheet is selected, the first appearance will be selected.
+#' @param types A named numeric indicating, the type of the data. 0: character, 1: numeric, 2: date. Names must match the created
 #' @examples
+#' 
+#'   ###########################################################################
 #'   # numerics, dates, missings, bool and string
 #'   xlsxFile <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
 #'   wb1 <- loadWorkbook(xlsxFile)
+#' 
+#'   # import workbook
+#'   wb_to_df(wb1)
 #'   
+#'   # do not convert first row to colNames 
+#'   wb_to_df(wb1, colNames = FALSE)
+#'   
+#'   # do not try to identify dates in the data
+#'   wb_to_df(wb1, detectDates = FALSE)
+#'   
+#'   # return the underlying Excel formula instead of their values
+#'   wb_to_df(wb1, showFormula = TRUE)
+#'   
+#'   # read dimension withot colNames
+#'   wb_to_df(wb1, dims = "A2:C5", colNames = FALSE)
+#'   
+#'   # read selected cols
+#'   wb_to_df(wb1, cols = c(1:2, 7))
+#'   
+#'   # read selected rows
+#'   wb_to_df(wb1, rows = c(1, 4, 6))
+#'   
+#'   # convert characters to numerics and date (logical too?)
+#'   wb_to_df(wb1, convert = FALSE)
+#'   
+#'   # erase empty Rows from dataset
+#'   wb_to_df(wb1, sheet = 3, skipEmptyRows = TRUE)
+#'   
+#'   # erase rmpty Cols from dataset
+#'   wb_to_df(wb1, skipEmptyCols = TRUE)
+#'   
+#'   # convert first row to rownames
+#'   wb_to_df(wb1, sheet = 3, dims = "C6:G9", rowNames = TRUE)
+#'   
+#'   # define type of the data.frame
+#'   wb_to_df(wb1, cols = c(1, 4), types = c("Var1" = 0, "Var3" = 1))
+#'   
+#'   # read.xlsx(wb1)
+#' 
+#'   ###########################################################################
 #'   # inlinestr
 #'   xlsxFile <- system.file("extdata", "inlinestr.xlsx", package = "openxlsx")
 #'   wb2 <- loadWorkbook(xlsxFile)
 #'   
+#'   # read dataset with inlinestr
+#'   wb_to_df(wb2)
+#'   # read.xlsx(wb2)
+#'   
+#'   ###########################################################################
 #'   # definedName
 #'   xlsxFile <- system.file("extdata", "namedRegions3.xlsx", package = "openxlsx")
 #'   wb3 <- loadWorkbook(xlsxFile)
-#' 
-#'   wb_to_df(wb1)
-#'   wb_to_df(wb1, colNames = FALSE)
-#'   wb_to_df(wb1, detectDates = FALSE)
-#'   wb_to_df(wb1, showFormula = TRUE)
-#'   wb_to_df(wb1, dims = "A2:C5", colNames = FALSE)
-#'   wb_to_df(wb1, convert = FALSE)
-#'   wb_to_df(wb1, skipEmptyCols = TRUE)
-#'   read.xlsx(wb1)
-#' 
-#'   wb_to_df(wb2)
-#'   read.xlsx(wb2)
 #'  
+#'   # read dataset with definedName (returns global first)
 #'   wb_to_df(wb3, definedName = "MyRange", colNames = F)
+#'   
+#'   # read definedName from sheet
 #'   wb_to_df(wb3, definedName = "MyRange", sheet = 4, colNames = F)
 #' 
 #' @export
-wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
-                     showFormula = FALSE, convert = TRUE,
-                     skipEmptyCols = FALSE, definedName) {
+wb_to_df <- function(xlsxFile,
+                     sheet, 
+                     colNames = TRUE, 
+                     rowNames = FALSE,
+                     detectDates = TRUE,
+                     skipEmptyCols = FALSE,
+                     skipEmptyRows = FALSE,
+                     rows = NULL,
+                     cols = NULL,
+                     dims, 
+                     showFormula = FALSE,
+                     convert = TRUE,
+                     types,
+                     definedName) {
+  
+  if (is.character(xlsxFile)){
+    wb <- loadWorkbook(xlsxFile)
+  } else {
+    wb <- xlsxFile
+  }
+  
   
   if (!missing(definedName)) {
     
@@ -182,8 +240,8 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
         wb$styles$cellXfs, 
         FUN= function(x) 
           c(
-            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "numFmtId")),
-            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "applyNumberFormat"))
+            as.numeric(getXML1attr_one(x, "xf", "numFmtId")),
+            as.numeric(getXML1attr_one(x, "xf", "applyNumberFormat"))
           )
       ) 
     )
@@ -202,6 +260,22 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
   
   keep_col <- colnames(z)
   keep_row <- rownames(z)
+  
+  if (!is.null(rows)) {
+    keep_row <- as.character(rows)
+    
+    z  <- z[rownames(z) %in% keep_row,]
+    tt <- tt[rownames(tt) %in% keep_row,]
+  }
+    
+  
+  if (!is.null(cols)) {
+    keep_col <- int2col(cols)
+    
+    z  <- z[keep_col]
+    tt <- tt[keep_col]
+  }
+    
   
   for (row in keep_row) {
     
@@ -302,15 +376,19 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
     tt <- tt[-1, ]
   }
   
-  types <- guess_col_type(tt)
-  
-  # could make it optional or explicit
-  if (convert) {
-    nums <- names(types[types == 1])
-    dtes <- names(types[types == 2])
+  if (rowNames) {
+    rownames(z)  <- z[,1]
+    rownames(tt) <- z[,1]
     
-    z[nums] <- lapply(z[nums], as.numeric)
-    z[dtes] <- lapply(z[dtes], as.Date)
+    z  <- z[ ,-1]
+    tt <- tt[ , -1]
+  }
+  
+  if (skipEmptyRows) {
+    empty <- apply(z, 1, function(x) all(is.na(x)), simplify = TRUE)
+    
+    z  <- z[!empty, ]
+    tt <- tt[!empty,]
   }
   
   if (skipEmptyCols) {
@@ -323,6 +401,18 @@ wb_to_df <- function(wb, sheet, colNames = TRUE, dims, detectDates = TRUE,
       tt[sel] <- NULL
     }
     
+  }
+  
+  if (missing(types))
+    types <- guess_col_type(tt)
+  
+  # could make it optional or explicit
+  if (convert) {
+    nums <- names(types[types == 1])
+    dtes <- names(types[types == 2])
+    
+    z[nums] <- lapply(z[nums], as.numeric)
+    z[dtes] <- lapply(z[dtes], as.Date)
   }
   
   attr(z, "tt") <- tt
