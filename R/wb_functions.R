@@ -1,11 +1,12 @@
 
 #' create dataframe from dimensions
 #' @param dims Character vector of expected dimension.
+#' @param fill If TRUE, fills the dataframe with variables
 #' @examples {
 #'   dims_to_dataframe("A1:B2")
 #' }
 #' @export
-dims_to_dataframe <- function(dims) {
+dims_to_dataframe <- function(dims, fill = FALSE) {
   
   dimensions <- strsplit(dims, ":")
   rows <- as.numeric(gsub("[[:upper:]]","", dimensions[[1]]))
@@ -24,8 +25,14 @@ dims_to_dataframe <- function(dims) {
   
   rows <- seq(rows_min, rows_max)
   
+  data <- NA
+  if (fill) {
+    data <- expand.grid(cols, rows, stringsAsFactors = FALSE)
+    data <- paste0(data$Var1, data$Var2)
+  }
+  
   # matrix as.data.frame
-  mm <- matrix(data = NA,
+  mm <- matrix(data = data,
                nrow = length(rows),
                ncol = length(cols),
                dimnames = list(rows, cols))

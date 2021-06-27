@@ -4,10 +4,12 @@
 \alias{dims_to_dataframe}
 \title{create dataframe from dimensions}
 \usage{
-dims_to_dataframe(dims)
+dims_to_dataframe(dims, fill = FALSE)
 }
 \arguments{
 \item{dims}{Character vector of expected dimension.}
+
+\item{fill}{If TRUE, fills the dataframe with variables}
 }
 \description{
 create dataframe from dimensions
