@@ -291,6 +291,7 @@ SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::st
   return  Rcpp::wrap(x);
 }
 
+// loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml, "worksheet", "sheetData", "row", "c", "f", "v", "is")
 // [[Rcpp::export]]
 void loadvals(Rcpp::Reference wb, XPtrXML doc, 
               std::string level1, std::string level2, std::string level3, std::string level4,
@@ -305,8 +306,11 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
   
   Rcpp::List x1(n),  x2(n),  x3(n);
   Rcpp::List xt1(n), xt2(n), xt3(n);
+  Rcpp::List row_attributes(n);
   
   std::vector<std::vector<std::string>> rtyp, styp, ttyp;
+  
+  std::vector<std::string> rownames;
   
   for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
        worksheet;
@@ -490,10 +494,34 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
         ttyp_col.push_back("");
       }
       /* -------------------------------------------------------------------- */
-      
+
       /* row is done */
       ++itr_cols;
     }
+    
+    
+    /* row attributes ------------------------------------------------------- */
+    
+    Rcpp::CharacterVector row_attr;
+    std::vector<std::string> row_attr_nam;
+    
+    for (pugi::xml_attribute attr = worksheet.first_attribute();
+         attr;
+         attr = attr.next_attribute())
+    {
+      row_attr_nam.push_back(attr.name());
+      row_attr.push_back(attr.value());
+      
+      // push row name back (will assign it to list)
+      if (attr.name() == r_str)
+        rownames.push_back(attr.value());
+        
+    }
+    row_attr.attr("names") = row_attr_nam;
+    
+    row_attributes[itr_rows] = row_attr;
+    
+    /* ---------------------------------------------------------------------- */
     
     y1.attr("names") = nam;
     y2.attr("names") = nam;
@@ -514,6 +542,27 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
     ++itr_rows;
   }
   
+  row_attributes.attr("names") = rownames;
+  
+  x1.attr("names") = rownames;
+  x2.attr("names") = rownames;
+  x3.attr("names") = rownames;
+  
+  xt1.attr("names") = rownames;
+  xt2.attr("names") = rownames;
+  xt3.attr("names") = rownames;
+  
+  // create Rcpp list first
+  Rcpp::List rtyp_l = Rcpp::wrap(rtyp);
+  Rcpp::List styp_l = Rcpp::wrap(styp);
+  Rcpp::List ttyp_l = Rcpp::wrap(ttyp);
+  rtyp_l.attr("names") = rownames;
+  styp_l.attr("names") = rownames;
+  ttyp_l.attr("names") = rownames;
+  
+  
+  wb.field("row_attr") = row_attributes;
+  
   wb.field("fval")  = x1;
   wb.field("vval")  = x2;
   wb.field("isval") = x3;
@@ -522,9 +571,9 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
   wb.field("vtyp")  = xt2;
   wb.field("istyp") = xt3;
   
-  wb.field("rtyp")  = Rcpp::wrap(rtyp);
-  wb.field("styp")  = Rcpp::wrap(styp);
-  wb.field("ttyp")  = Rcpp::wrap(ttyp);
+  wb.field("rtyp")  = rtyp_l;
+  wb.field("styp")  = styp_l;
+  wb.field("ttyp")  = ttyp_l;
   
 }
 

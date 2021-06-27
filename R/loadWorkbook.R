@@ -466,8 +466,8 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$worksheets[[i]]$dimension <- getXMLXPtr2(worksheet_xml, "worksheet", "dimension")
 
     # get attributes for cols and rows
-    wb$worksheets[[i]]$rows_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "sheetData", "row")
-    wb$worksheets[[i]]$cols_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "cols", "col")
+    # wb$worksheets[[i]]$rows_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "sheetData", "row")
+    # wb$worksheets[[i]]$cols_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "cols", "col") # there is no col?
 
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews    <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
