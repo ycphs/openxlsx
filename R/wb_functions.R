@@ -233,13 +233,7 @@ wb_to_df <- function(xlsxFile,
   rtyp  <- wb$worksheets[[sheet]]$sheet_data$rtyp  # to identify dates?
   isval <- wb$worksheets[[sheet]]$sheet_data$isval # inlinestr
   
-  rnams <- get_row_names(rtyp)
-  names(vval)  <- rnams
-  names(fval)  <- rnams
-  names(ttyp)  <- rnams
-  names(styp)  <- rnams
-  names(rtyp)  <- rnams
-  names(isval) <- rnams
+  rnams <- names(vval)
   
   
   # internet says: numFmtId > 0 and applyNumberFormat == 1
@@ -285,7 +279,6 @@ wb_to_df <- function(xlsxFile,
     tt <- tt[rownames(tt) %in% keep_row,]
   }
   
-  
   if (!is.null(cols)) {
     keep_col <- int2col(cols)
     
@@ -293,10 +286,10 @@ wb_to_df <- function(xlsxFile,
     tt <- tt[keep_col]
   }
   
+  keep_row <- keep_row[keep_row %in% rnams]
+  
   
   for (row in keep_row) {
-    
-    if ((row %in% keep_row)  & (row %in% rnams)) {
       
       rowvals    <-  vval[[row]]
       rowvals_is <- isval[[row]]
@@ -381,8 +374,8 @@ wb_to_df <- function(xlsxFile,
           }
         }
       }
-    }
-  }
+    
+  } # end row loop
   
   # if colNames, then change tt too
   if (colNames) {
