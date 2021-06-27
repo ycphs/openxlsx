@@ -80,6 +80,7 @@ guess_col_type <- function(tt) {
 #' @param cols A numeric vector specifying which columns in the Excel file to read. If NULL, all columns are read.
 #' @param definedName Character string with a definedName. If no sheet is selected, the first appearance will be selected.
 #' @param types A named numeric indicating, the type of the data. 0: character, 1: numeric, 2: date. Names must match the created
+#' @param na.strings A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.
 #' @examples
 #' 
 #'   ###########################################################################
@@ -159,6 +160,7 @@ wb_to_df <- function(xlsxFile,
                      skipEmptyRows = FALSE,
                      rows = NULL,
                      cols = NULL,
+                     na.strings = "#N/A",
                      dims, 
                      showFormula = FALSE,
                      convert = TRUE,
@@ -359,8 +361,17 @@ wb_to_df <- function(xlsxFile,
             
             # write vval here, final check if its a string
             if (!identical(val, character(0))) {
+              
+              # convert na.string to NA
+              if (!is.na(na.strings) | !missing(na.strings)) {
+                if(val %in% na.strings) {
+                  val <- NA
+                  tt[[nam]][rownames(tt) == row]  <- NA
+                }
+              }
+              
               # check if val is some kind of string expression
-              if ( !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
+              if ( !is.na(val) &  !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
                 if (suppressWarnings(is.na(as.character(as.numeric(val)))))
                   tt[[nam]][rownames(tt) == row]  <- "s"
               

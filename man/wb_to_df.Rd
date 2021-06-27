@@ -15,6 +15,7 @@ wb_to_df(
   skipEmptyRows = FALSE,
   rows = NULL,
   cols = NULL,
+  na.strings = "#N/A",
   dims,
   showFormula = FALSE,
   convert = TRUE,
@@ -36,6 +37,8 @@ wb_to_df(
 \item{rows}{A numeric vector specifying which rows in the Excel file to read. If NULL, all rows are read.}
 
 \item{cols}{A numeric vector specifying which columns in the Excel file to read. If NULL, all columns are read.}
+
+\item{na.strings}{A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.}
 
 \item{dims}{Character string of type "A1:B2" as optional dimentions to be imported.}
 
