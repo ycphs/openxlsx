@@ -332,7 +332,7 @@ wb_to_df <- function(xlsxFile,
           }
           
           # bool: logical value
-          if (this_vtyp == "b") {
+          if (this_ttyp == "b") {
             val$v <- as.logical(as.numeric(val$v))
             
             tt[[col]][rownames(tt) == row]  <- "b"
@@ -340,11 +340,9 @@ wb_to_df <- function(xlsxFile,
           
           # evaluation: takes the formula value?
           if (showFormula) {
-            if (this_vtyp == "e") {
-              val$v <- val$f
-              
-              tt[[col]][rownames(tt) == row]  <- "s"
-            }
+            if(!is.null(val$f)) val$v <- val$f
+            
+            tt[[col]][rownames(tt) == row]  <- "s"
           }
           
           # convert na.string to NA
