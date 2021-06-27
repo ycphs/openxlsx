@@ -13,7 +13,7 @@ using namespace std;
 
 
 // load workbook
-int cell_ref_to_col(string );
+Rcpp::IntegerVector cell_ref_to_col(Rcpp::CharacterVector x );
 CharacterVector int_2_cell_ref(IntegerVector);
 
 

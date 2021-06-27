@@ -12,11 +12,11 @@ dims_to_dataframe <- function(dims) {
   cols <- gsub("[[:digit:]]","", dimensions[[1]])
   
   # cols
-  col_min <- openxlsx:::cell_ref_to_col(cols[1])
-  col_max <- openxlsx:::cell_ref_to_col(cols[2])
+  col_min <- col2int(cols[1])
+  col_max <- col2int(cols[2])
   
   cols <- seq(col_min, col_max)
-  cols <- openxlsx::int2col(cols)
+  cols <- int2col(cols)
   
   # rows
   rows_min <- rows[1]
