@@ -465,29 +465,11 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     wb$worksheets[[i]]$dimension <- getXMLXPtr2(worksheet_xml, "worksheet", "dimension")
 
-    # get attributes for cols and rows
-    # wb$worksheets[[i]]$rows_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "sheetData", "row")
-    # wb$worksheets[[i]]$cols_attr <- getXMLXPtr3attr(worksheet_xml, "worksheet", "cols", "col") # there is no col?
-
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews    <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
 
     # load the data
-    openxlsx:::loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml, "worksheet", "sheetData", "row", "c", "f", "v", "is")
-    
-    # wb$worksheets[[i]]$sheet_data$fval  <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    # wb$worksheets[[i]]$sheet_data$vval  <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
-    # wb$worksheets[[i]]$sheet_data$isval <- getXMLXPtr5val(worksheet_xml, "worksheet", "sheetData", "row", "c", "is")
-
-    # # character vectors attributes to f(?) and v
-    # wb$worksheets[[i]]$sheet_data$ftyp  <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "f")
-    # wb$worksheets[[i]]$sheet_data$vtyp  <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "v")
-    # wb$worksheets[[i]]$sheet_data$istyp <- getXMLXPtr5attr(worksheet_xml, "worksheet", "sheetData", "row", "c", "is")
-
-    # # row, style and type
-    # wb$worksheets[[i]]$sheet_data$rtyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "r")
-    # wb$worksheets[[i]]$sheet_data$styp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "s")
-    # wb$worksheets[[i]]$sheet_data$ttyp <- getXMLXPtr4attr_one(worksheet_xml, "worksheet", "sheetData", "row", "c", "t")
+    openxlsx:::loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml)
 
   }
 

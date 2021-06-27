@@ -465,20 +465,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // loadvals
-void loadvals(Rcpp::Reference wb, XPtrXML doc, std::string level1, std::string level2, std::string level3, std::string level4, std::string child1, std::string child2, std::string child3);
-RcppExport SEXP _openxlsx_loadvals(SEXP wbSEXP, SEXP docSEXP, SEXP level1SEXP, SEXP level2SEXP, SEXP level3SEXP, SEXP level4SEXP, SEXP child1SEXP, SEXP child2SEXP, SEXP child3SEXP) {
+void loadvals(Rcpp::Reference wb, XPtrXML doc);
+RcppExport SEXP _openxlsx_loadvals(SEXP wbSEXP, SEXP docSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Reference >::type wb(wbSEXP);
     Rcpp::traits::input_parameter< XPtrXML >::type doc(docSEXP);
-    Rcpp::traits::input_parameter< std::string >::type level1(level1SEXP);
-    Rcpp::traits::input_parameter< std::string >::type level2(level2SEXP);
-    Rcpp::traits::input_parameter< std::string >::type level3(level3SEXP);
-    Rcpp::traits::input_parameter< std::string >::type level4(level4SEXP);
-    Rcpp::traits::input_parameter< std::string >::type child1(child1SEXP);
-    Rcpp::traits::input_parameter< std::string >::type child2(child2SEXP);
-    Rcpp::traits::input_parameter< std::string >::type child3(child3SEXP);
-    loadvals(wb, doc, level1, level2, level3, level4, child1, child2, child3);
+    loadvals(wb, doc);
     return R_NilValue;
 END_RCPP
 }
@@ -892,7 +885,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getXMLXPtr3val", (DL_FUNC) &_openxlsx_getXMLXPtr3val, 4},
     {"_openxlsx_getXMLXPtr4val", (DL_FUNC) &_openxlsx_getXMLXPtr4val, 5},
     {"_openxlsx_getXMLXPtr5val", (DL_FUNC) &_openxlsx_getXMLXPtr5val, 6},
-    {"_openxlsx_loadvals", (DL_FUNC) &_openxlsx_loadvals, 9},
+    {"_openxlsx_loadvals", (DL_FUNC) &_openxlsx_loadvals, 2},
     {"_openxlsx_getXMLXPtr1attr", (DL_FUNC) &_openxlsx_getXMLXPtr1attr, 2},
     {"_openxlsx_getXMLXPtr2attr", (DL_FUNC) &_openxlsx_getXMLXPtr2attr, 3},
     {"_openxlsx_getXMLXPtr3attr", (DL_FUNC) &_openxlsx_getXMLXPtr3attr, 4},

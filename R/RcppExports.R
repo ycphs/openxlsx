@@ -145,8 +145,8 @@ getXMLXPtr5val <- function(doc, level1, level2, level3, level4, child) {
     .Call(`_openxlsx_getXMLXPtr5val`, doc, level1, level2, level3, level4, child)
 }
 
-loadvals <- function(wb, doc, level1, level2, level3, level4, child1, child2, child3) {
-    invisible(.Call(`_openxlsx_loadvals`, wb, doc, level1, level2, level3, level4, child1, child2, child3))
+loadvals <- function(wb, doc) {
+    invisible(.Call(`_openxlsx_loadvals`, wb, doc))
 }
 
 getXMLXPtr1attr <- function(doc, child) {

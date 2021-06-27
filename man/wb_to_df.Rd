@@ -102,6 +102,9 @@ written down and not optimized etc. The goal was to have something working.
   # start in row 5
   wb_to_df(wb1, startRow = 5, colNames = FALSE)
   
+  # na string
+  wb_to_df(wb1, na.strings = "")
+  
   # read.xlsx(wb1)
 
   ###########################################################################

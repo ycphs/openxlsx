@@ -291,195 +291,109 @@ SEXP getXMLXPtr5val(XPtrXML doc, std::string level1, std::string level2, std::st
   return  Rcpp::wrap(x);
 }
 
-// loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml, "worksheet", "sheetData", "row", "c", "f", "v", "is")
+// loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml, "worksheet", "sheetData", "row", "c")
 // [[Rcpp::export]]
-void loadvals(Rcpp::Reference wb, XPtrXML doc, 
-              std::string level1, std::string level2, std::string level3, std::string level4,
-              std::string child1, std::string child2, std::string child3) {
+void loadvals(Rcpp::Reference wb, XPtrXML doc) {
   
-  auto worksheet = doc->child(level1.c_str()).child(level2.c_str());
+  auto ws = doc->child("worksheet").child("sheetData");
   
-  size_t n = std::distance(worksheet.begin(), worksheet.end());
+  size_t n = std::distance(ws.begin(), ws.end());
   auto itr_rows = 0;
   
-  std::string r_str = "r", s_str = "s", t_str = "t";
+  std::string r_str = "r";
   
-  Rcpp::List x1(n),  x2(n),  x3(n);
-  Rcpp::List xt1(n), xt2(n), xt3(n);
+  Rcpp::List v(n), t(n);
   Rcpp::List row_attributes(n);
-  
-  std::vector<std::vector<std::string>> rtyp, styp, ttyp;
-  
   std::vector<std::string> rownames;
   
-  for (pugi::xml_node worksheet = doc->child(level1.c_str()).child(level2.c_str()).child(level3.c_str());
+  
+  for (pugi::xml_node worksheet = ws.child("row");
        worksheet;
-       worksheet = worksheet.next_sibling(level3.c_str()))
+       worksheet = worksheet.next_sibling())
   {
     size_t k = std::distance(worksheet.begin(), worksheet.end());
     auto itr_cols = 0;
     
-    Rcpp::List y1(k),  y2(k),  y3(k);
-    Rcpp::List yt1(k), yt2(k), yt3(k);
-    
-    std::vector<std::string> nam;
-    std::vector<std::string> rtyp_col, styp_col, ttyp_col;
+    Rcpp::List v_r(k), t_r(k);
+    std::vector<std::string> colnames;
     
     
     /* ---------------------------------------------------------------------- */
-    /* read fval, vval, isval and ftyp, vtyp, istyp ------------------------- */
+    /* read cval, and ctyp -------------------------------------------------- */
     /* ---------------------------------------------------------------------- */
     
-    for (pugi::xml_node col = worksheet.child(level4.c_str());
+    for (pugi::xml_node col = worksheet.child("c");
          col;
-         col = col.next_sibling(level4.c_str()))
+         col = col.next_sibling())
     {
-      Rcpp::CharacterVector z1, z2, z3;
-      Rcpp::List zt1, zt2, zt3;
       
-      std::vector<std::string> type_name1, type_name2, type_name3;
+      auto nn = std::distance(col.children().begin(), col.children().end());
+      auto tt = nn; if (tt == 0) ++tt;
       
-      // get r attr e.g. "A1"
+      Rcpp::List v_c(tt), t_c;
+      std::vector<std::string> val_name, typ_name;
+      
+      
+      // get r attr e.g. "A1" and return colnames "A"
       std::string colrow = col.attribute("r").value();
       // remove numeric from string
       colrow.erase(std::remove_if(colrow.begin(),
                                   colrow.end(),
                                   &isdigit),
                                   colrow.end());
-      nam.push_back(colrow);
+      colnames.push_back(colrow);
       
-      // 1. should make this loop a function
-      for (pugi::xml_node val = col.child(child1.c_str());
-           val;
-           val = val.next_sibling(child1.c_str()))
+      
+      // typ: attribute ------------------------------------------------------
+      for (pugi::xml_attribute attr = col.first_attribute();
+           attr;
+           attr = attr.next_attribute())
       {
-        // 1.1 val -------------------------------------------------------------
-        std::string val_s = "";
-        // is node contains additional t node.
-        // TODO: check if multiple t nodes are possible, for now return only one.
-        if (val.child("t")) {
-          pugi::xml_node tval = val.child("t");
-          val_s = tval.child_value();
-        } else {
-          val_s = val.child_value();
-        }
-        z1.push_back( val_s );
-        
-        // 1.2 typ -------------------------------------------------------------
-        for (pugi::xml_attribute attr = col.first_attribute();
-             attr;
-             attr = attr.next_attribute())
+        typ_name.push_back(attr.name());
+        t_c.push_back(attr.value());
+      }
+      
+      // val -------------------------------------------------------------------
+      
+      if (nn > 0) {
+        auto val_itr = 0;
+        for (pugi::xml_node val = col.first_child();
+             val;
+             val = val.next_sibling())
         {
-          if (attr.value() != NULL) {
-            type_name1.push_back(attr.name());
-            zt1.push_back(attr.value());
+          
+          std::string val_s = "";
+          std::string val_n = "";
+          
+          val_n = val.name();
+          
+          // is nodes contain additional t node.
+          // TODO: check if multiple t nodes are possible, for now return one.
+          if (val.child("t")) {
+            pugi::xml_node tval = val.child("t");
+            val_s = tval.child_value();
+          } else {
+            val_s = val.child_value();
           }
+          
+          val_name.push_back(val_n);
+          v_c[val_itr] = val_s;
+          ++val_itr;
         }
-        
-      }
-      zt1.attr("names") = type_name1;
-      
-      y1[itr_cols]= z1;
-      yt1[itr_cols] = zt1;
-      
-      // 2. should make this loop a function
-      for (pugi::xml_node val = col.child(child2.c_str());
-           val;
-           val = val.next_sibling(child2.c_str()))
-      {
-        // 2.1 val -------------------------------------------------------------
-        std::string val_s = "";
-        // is node contains additional t node.
-        // TODO: check if multiple t nodes are possible, for now return only one.
-        if (val.child("t")) {
-          pugi::xml_node tval = val.child("t");
-          val_s = tval.child_value();
-        } else {
-          val_s = val.child_value();
-        }
-        z2.push_back( val_s );
-        
-        // 2.2 typ -------------------------------------------------------------
-        for (pugi::xml_attribute attr = col.first_attribute();
-             attr;
-             attr = attr.next_attribute())
-        {
-          if (attr.value() != NULL) {
-            type_name2.push_back(attr.name());
-            zt2.push_back(attr.value());
-          }
-        }
-        
-      }
-      zt2.attr("names") = type_name2;
-      
-      y2[itr_cols]= z2;
-      yt2[itr_cols] = zt2;
-      
-      // 3. should make this loop a function
-      for (pugi::xml_node val = col.child(child3.c_str());
-           val;
-           val = val.next_sibling(child3.c_str()))
-      {
-        // 3.1 val -------------------------------------------------------------
-        std::string val_s = "";
-        // is node contains additional t node.
-        // TODO: check if multiple t nodes are possible, for now return only one.
-        if (val.child("t")) {
-          pugi::xml_node tval = val.child("t");
-          val_s = tval.child_value();
-        } else {
-          val_s = val.child_value();
-        }
-        z3.push_back( val_s );
-        
-        // 3.2 typ -------------------------------------------------------------
-        for (pugi::xml_attribute attr = col.first_attribute();
-             attr;
-             attr = attr.next_attribute())
-        {
-          if (attr.value() != NULL) {
-            type_name3.push_back(attr.name());
-            zt3.push_back(attr.value());
-          }
-        }
-        
-      }
-      zt3.attr("names") = type_name3;
-      
-      y3[itr_cols] = z3;
-      yt3[itr_cols] = zt3;
-      
-      
-      /* -------------------------------------------------------------------- */
-      /* rtyp, styp, ttyp --------------------------------------------------- */
-      /* might be removed in future updates, all of this is in vtyp --------- */
-      /* -------------------------------------------------------------------- */
-      pugi::xml_attribute attr1 = col.attribute(r_str.c_str());
-      
-      if (attr1.value() != NULL) {
-        rtyp_col.push_back(attr1.value());
       } else {
-        rtyp_col.push_back("");
+        std::string val_s = "empty";
+        std::string val_n = "empty";
+        val_name.push_back(val_n);
+        v_c.push_back( val_s );
       }
       
-      pugi::xml_attribute attr2 = col.attribute(s_str.c_str());
+      v_c.attr("names") = val_name;
+      t_c.attr("names") = typ_name;
       
-      if (attr2.value() != NULL) {
-        styp_col.push_back(attr2.value());
-      } else {
-        styp_col.push_back("");
-      }
+      v_r[itr_cols] = v_c;
+      t_r[itr_cols] = t_c;
       
-      pugi::xml_attribute attr3 = col.attribute(t_str.c_str());
       
-      if (attr3.value() != NULL) {
-        ttyp_col.push_back(attr3.value());
-      } else {
-        ttyp_col.push_back("");
-      }
-      /* -------------------------------------------------------------------- */
-
       /* row is done */
       ++itr_cols;
     }
@@ -487,7 +401,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
     
     /* row attributes ------------------------------------------------------- */
     
-    Rcpp::CharacterVector row_attr;
+    Rcpp::List row_attr;
     std::vector<std::string> row_attr_nam;
     
     for (pugi::xml_attribute attr = worksheet.first_attribute();
@@ -500,7 +414,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
       // push row name back (will assign it to list)
       if (attr.name() == r_str)
         rownames.push_back(attr.value());
-        
+      
     }
     row_attr.attr("names") = row_attr_nam;
     
@@ -508,62 +422,23 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
     
     /* ---------------------------------------------------------------------- */
     
-    y1.attr("names") = nam;
-    y2.attr("names") = nam;
-    y3.attr("names") = nam;
+    v_r.attr("names") = colnames;
+    v[itr_rows]  = v_r;
     
-    x1[itr_rows] = y1;
-    x2[itr_rows] = y2;
-    x3[itr_rows] = y3;
-    
-    
-    yt1.attr("names") = nam;
-    yt2.attr("names") = nam;
-    yt3.attr("names") = nam;
-    
-    xt1[itr_rows] = yt1;
-    xt2[itr_rows] = yt2;
-    xt3[itr_rows] = yt3;
-    
-    rtyp.push_back(rtyp_col);
-    styp.push_back(styp_col);
-    ttyp.push_back(ttyp_col);
+    t_r.attr("names") = colnames;
+    t[itr_rows] = t_r;
     
     ++itr_rows;
   }
   
   row_attributes.attr("names") = rownames;
   
-  x1.attr("names") = rownames;
-  x2.attr("names") = rownames;
-  x3.attr("names") = rownames;
-  
-  xt1.attr("names") = rownames;
-  xt2.attr("names") = rownames;
-  xt3.attr("names") = rownames;
-  
-  // create Rcpp list first
-  Rcpp::List rtyp_l = Rcpp::wrap(rtyp);
-  Rcpp::List styp_l = Rcpp::wrap(styp);
-  Rcpp::List ttyp_l = Rcpp::wrap(ttyp);
-  rtyp_l.attr("names") = rownames;
-  styp_l.attr("names") = rownames;
-  ttyp_l.attr("names") = rownames;
-  
+  v.attr("names") = rownames;
+  t.attr("names") = rownames;
   
   wb.field("row_attr") = row_attributes;
-  
-  wb.field("fval")  = x1;
-  wb.field("vval")  = x2;
-  wb.field("isval") = x3;
-  
-  wb.field("ftyp")  = xt1;
-  wb.field("vtyp")  = xt2;
-  wb.field("istyp") = xt3;
-  
-  wb.field("rtyp")  = rtyp_l;
-  wb.field("styp")  = styp_l;
-  wb.field("ttyp")  = ttyp_l;
+  wb.field("cval")  = v;
+  wb.field("ctyp")  = t;
   
 }
 
