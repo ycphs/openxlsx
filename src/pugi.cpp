@@ -531,6 +531,11 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
     x2[itr_rows] = y2;
     x3[itr_rows] = y3;
     
+    
+    yt1.attr("names") = nam;
+    yt2.attr("names") = nam;
+    yt3.attr("names") = nam;
+    
     xt1[itr_rows] = yt1;
     xt2[itr_rows] = yt2;
     xt3[itr_rows] = yt3;
