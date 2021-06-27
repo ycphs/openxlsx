@@ -223,11 +223,12 @@ col2int <- function(x) {
   
   if (!is.character(x)) {
     stop("x must be character")
+    
+    if (any(is.na(x)))
+      stop("x must be a valid character")
   }
-  if (is.na(x) | is.complex(x)) 
-    stop("x must be a valid character")
   
-  cell_ref_to_col(x)
+  as.integer(sapply(x, cell_ref_to_col))
 }
 
 
