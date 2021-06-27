@@ -234,11 +234,16 @@ wb_to_df <- function(xlsxFile,
                             "ref")
   
   vval  <- wb$worksheets[[sheet]]$sheet_data$vval
+  vtyp  <- wb$worksheets[[sheet]]$sheet_data$vtyp
   fval  <- wb$worksheets[[sheet]]$sheet_data$fval
-  ttyp  <- wb$worksheets[[sheet]]$sheet_data$ttyp  # to identify strings and numbers
-  styp  <- wb$worksheets[[sheet]]$sheet_data$styp  # to identify dates?
-  rtyp  <- wb$worksheets[[sheet]]$sheet_data$rtyp  # to identify dates?
-  isval <- wb$worksheets[[sheet]]$sheet_data$isval # inlinestr
+  ftyp  <- wb$worksheets[[sheet]]$sheet_data$ftyp
+  isval <- wb$worksheets[[sheet]]$sheet_data$isval
+  istyp <- wb$worksheets[[sheet]]$sheet_data$istyp
+  
+  # # all in vtyp, but extraced
+  # ttyp  <- wb$worksheets[[sheet]]$sheet_data$ttyp
+  # styp  <- wb$worksheets[[sheet]]$sheet_data$styp
+  # rtyp  <- wb$worksheets[[sheet]]$sheet_data$rtyp
   
   rnams <- names(vval)
   
@@ -251,8 +256,8 @@ wb_to_df <- function(xlsxFile,
         wb$styles$cellXfs, 
         FUN= function(x) 
           c(
-            as.numeric(getXML1attr_one(x, "xf", "numFmtId")),
-            as.numeric(getXML1attr_one(x, "xf", "applyNumberFormat"))
+            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "numFmtId")),
+            as.numeric(openxlsx:::getXML1attr_one(x, "xf", "applyNumberFormat"))
           )
       ) 
     )
@@ -269,118 +274,133 @@ wb_to_df <- function(xlsxFile,
   # create temporary data frame
   z <- tt <- dims_to_dataframe(dims)
   
-  keep_col <- colnames(z)
-  keep_row <- rownames(z)
+  keep_cols <- colnames(z)
+  keep_rows <- rownames(z)
   
   if (startRow > 1) {
-    keep_row <- as.character(seq(startRow, max(as.numeric(keep_row))))
+    keep_rows <- as.character(seq(startRow, max(as.numeric(keep_rows))))
     
-    z  <- z[rownames(z) %in% keep_row,]
-    tt <- tt[rownames(tt) %in% keep_row,]
+    z  <- z[rownames(z) %in% keep_rows,]
+    tt <- tt[rownames(tt) %in% keep_rows,]
   }
   
   if (!is.null(rows)) {
-    keep_row <- as.character(rows)
+    keep_rows <- as.character(rows)
     
-    z  <- z[rownames(z) %in% keep_row,]
-    tt <- tt[rownames(tt) %in% keep_row,]
+    z  <- z[rownames(z) %in% keep_rows,]
+    tt <- tt[rownames(tt) %in% keep_rows,]
   }
   
   if (!is.null(cols)) {
-    keep_col <- int2col(cols)
+    keep_cols <- int2col(cols)
     
-    z  <- z[keep_col]
-    tt <- tt[keep_col]
+    z  <- z[keep_cols]
+    tt <- tt[keep_cols]
   }
   
-  keep_row <- keep_row[keep_row %in% rnams]
+  keep_row <- keep_rows[keep_rows %in% rnams]
   
   
   for (row in keep_row) {
+    
+    rowvals    <-  vval[[row]]
+    rowvals_is <- isval[[row]]
+    rowvals_f  <-  fval[[row]]
+    
+    keep_col <- keep_cols[keep_cols %in% names(rowvals)]
+    
+    for (col in keep_col) {
       
-      rowvals    <-  vval[[row]]
-      rowvals_is <- isval[[row]]
-      rowvals_f  <-  fval[[row]]
+      val       <- rowvals[[col]]
+      val_is    <- rowvals_is[[col]]
       
-      for (col in seq_along(rowvals)) {
-        nam <- names(rowvals[col])
+      if (!identical(val, character(0)) | !identical(isval, character(0))) {
         
-        if (nam %in% keep_col) {
+        this_vtyp <- vtyp[[row]][[col]][["t"]]
+        this_styp <- vtyp[[row]][[col]][["s"]]
+        this_istyp <- istyp[[row]][[col]][["t"]]
+        
+        if (!is.null(this_vtyp)) {
           
-          val       <- unlist(rowvals[col])
-          val_is    <- unlist(rowvals_is[col])
+          # sharedString: string
+          if (this_vtyp == "s") {
+            val <- wb$sharedStrings[as.numeric(val)+1]
+            
+            tt[[col]][rownames(tt) == row]  <- "s"
+          }
           
-          if (!identical(val, character(0)) | !identical(isval, character(0))) {
+          # str: should be from function evaluation?
+          if (this_vtyp == "str") {
+            tt[[col]][rownames(tt) == row]  <- "s"
+          }
+          
+          # bool: logical value
+          if (this_vtyp == "b") {
+            val <- as.logical(as.numeric(val))
             
-            # sharedString: string
-            if (ttyp[[row]][col] == "s") {
-              val <- wb$sharedStrings[as.numeric(val)+1]
-              
-              tt[[nam]][rownames(tt) == row]  <- "s"
-            }
-            
-            # inlinestr: string
-            if (!identical(val_is, character(0))) {
-              z[[nam]][rownames(z) == row] <- val_is
-              
-              tt[[nam]][rownames(tt) == row]  <- "s"
-            }
-            
-            # str: should be from function evaluation?
-            if (ttyp[[row]][col] == "str") {
-              tt[[nam]][rownames(tt) == row]  <- "s"
-            }
-            
-            # bool: logical value
-            if (ttyp[[row]][col] == "b") {
-              val <- as.logical(as.numeric(val))
-              
-              tt[[nam]][rownames(tt) == row]  <- "b"
-            }
-            
-            # evaluation: takes the formula value?
-            if (showFormula) {
-              if (ttyp[[row]][col] == "e") {
-                tmp <- unlist(rowvals_f[col])
-                if (!identical(tmp, character(0))) {
-                  val <- tmp
-                  
-                  tt[[nam]][rownames(tt) == row]  <- "s"
-                }
-              }
-            }
-            
-            # dates
-            if (detectDates) {
-              if (styp[[row]][col] %in% xlsx_date_style ) {
-                val <- as.character(convertToDate(as.numeric(val)))
+            tt[[col]][rownames(tt) == row]  <- "b"
+          }
+          
+          # evaluation: takes the formula value?
+          if (showFormula) {
+            if (this_vtyp == "e") {
+              tmp <- unlist(rowvals_f[col])
+              if (!identical(tmp, character(0))) {
+                val <- tmp
                 
-                tt[[nam]][rownames(tt) == row]  <- "d"
+                tt[[col]][rownames(tt) == row]  <- "s"
               }
             }
-            
-            # write vval here, final check if its a string
-            if (!identical(val, character(0))) {
-              
-              # convert na.string to NA
-              if (!is.na(na.strings) | !missing(na.strings)) {
-                if(val %in% na.strings) {
-                  val <- NA
-                  tt[[nam]][rownames(tt) == row]  <- NA
-                }
-              }
-              
-              # check if val is some kind of string expression
-              if ( !is.na(val) &  !(tt[[nam]][rownames(tt) == row] %in% c("b", "d")) )
-                if (suppressWarnings(is.na(as.character(as.numeric(val)))))
-                  tt[[nam]][rownames(tt) == row]  <- "s"
-              
-              z[[nam]][rownames(z) == row] <- val
-            }
-            
           }
         }
+        
+        if (!is.null(this_istyp)) {
+          
+          # inlinestr: string
+          if (!identical(val_is, character(0))) {
+            z[[col]][rownames(z) == row] <- val_is
+            
+            tt[[col]][rownames(tt) == row]  <- "s"
+          }
+          
+        }
+        
+        # dates
+        if (!is.null(this_styp)) {
+          
+          if (detectDates) {
+            if ( (this_styp %in% xlsx_date_style) ) {
+              val <- as.character(convertToDate(as.numeric(val)))
+              
+              tt[[col]][rownames(tt) == row]  <- "d"
+            }
+          }
+          
+        }
+        
+        # write vval here, final check if its a string
+        if (!identical(val, character(0))) {
+          
+          # convert na.string to NA
+          if (!is.na(na.strings) | !missing(na.strings)) {
+            if(val %in% na.strings) {
+              val <- NA
+              tt[[col]][rownames(tt) == row]  <- NA
+            }
+          }
+          
+          # check if val is some kind of string expression
+          if ( !is.na(val) &  !(tt[[col]][rownames(tt) == row] %in% c("b", "d", "s", "str")) )
+            
+            # check if it becomes NA when changing from character, to numeric and back
+            if (suppressWarnings(is.na(as.character(as.numeric(val)))))
+              tt[[col]][rownames(tt) == row]  <- "s"
+          
+          z[[col]][rownames(z) == row] <- val
+          
+        }
       }
+    }
     
   } # end row loop
   

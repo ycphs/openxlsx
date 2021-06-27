@@ -19,8 +19,8 @@ update_cell(x, wb, sheet, cell)
 Minimal invasive update of a single cell for imported workbooks.
 }
 \examples{
-\dontrun{
-   wb <- update_cell(x = "Updated 2021-04-02", wb = wb, sheet = "Lookups", cell = "G1")
-   wb <- update_cell(x = 7, wb = wb, sheet = "Lookups", cell = "H1")
-}
+   xlsxFile <- system.file("extdata", "update_test.xlsx", package = "openxlsx")
+   wb <- loadWorkbook(xlsxFile)
+   wb <- update_cell(x = c(1:3), wb = wb, sheet = "Sheet1", cell = "D4:D6")
+   wb <- update_cell(x = 7, wb = wb, sheet = "Sheet1", cell = "H1")
 }

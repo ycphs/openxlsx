@@ -337,6 +337,8 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
       Rcpp::CharacterVector z1, z2, z3;
       Rcpp::List zt1, zt2, zt3;
       
+      std::vector<std::string> type_name1, type_name2, type_name3;
+      
       // get r attr e.g. "A1"
       std::string colrow = col.attribute("r").value();
       // remove numeric from string
@@ -364,25 +366,19 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
         z1.push_back( val_s );
         
         // 1.2 typ -------------------------------------------------------------
-        Rcpp::CharacterVector rest;
-        std::vector<std::string> namt;
-
         for (pugi::xml_attribute attr = col.first_attribute();
              attr;
              attr = attr.next_attribute())
         {
           if (attr.value() != NULL) {
-            namt.push_back(attr.name());
-            rest.push_back(attr.value());
-          } else {
-            rest.push_back("");
+            type_name1.push_back(attr.name());
+            zt1.push_back(attr.value());
           }
         }
-        // assign names
-        rest.attr("names") = namt;
-        zt1.push_back(rest);
         
       }
+      zt1.attr("names") = type_name1;
+      
       y1[itr_cols]= z1;
       yt1[itr_cols] = zt1;
       
@@ -404,25 +400,19 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
         z2.push_back( val_s );
         
         // 2.2 typ -------------------------------------------------------------
-        Rcpp::CharacterVector rest;
-        std::vector<std::string> namt;
-
         for (pugi::xml_attribute attr = col.first_attribute();
              attr;
              attr = attr.next_attribute())
         {
           if (attr.value() != NULL) {
-            namt.push_back(attr.name());
-            rest.push_back(attr.value());
-          } else {
-            rest.push_back("");
+            type_name2.push_back(attr.name());
+            zt2.push_back(attr.value());
           }
         }
-        // assign names
-        rest.attr("names") = namt;
-        zt2.push_back(rest);
         
       }
+      zt2.attr("names") = type_name2;
+      
       y2[itr_cols]= z2;
       yt2[itr_cols] = zt2;
       
@@ -444,31 +434,26 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc,
         z3.push_back( val_s );
         
         // 3.2 typ -------------------------------------------------------------
-        Rcpp::CharacterVector rest;
-        std::vector<std::string> namt;
-
         for (pugi::xml_attribute attr = col.first_attribute();
              attr;
              attr = attr.next_attribute())
         {
           if (attr.value() != NULL) {
-            namt.push_back(attr.name());
-            rest.push_back(attr.value());
-          } else {
-            rest.push_back("");
+            type_name3.push_back(attr.name());
+            zt3.push_back(attr.value());
           }
         }
-        // assign names
-        rest.attr("names") = namt;
-        zt3.push_back(rest);
         
       }
+      zt3.attr("names") = type_name3;
+      
       y3[itr_cols] = z3;
       yt3[itr_cols] = zt3;
       
       
       /* -------------------------------------------------------------------- */
       /* rtyp, styp, ttyp --------------------------------------------------- */
+      /* might be removed in future updates, all of this is in vtyp --------- */
       /* -------------------------------------------------------------------- */
       pugi::xml_attribute attr1 = col.attribute(r_str.c_str());
       
