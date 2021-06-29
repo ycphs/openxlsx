@@ -381,10 +381,12 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
           ++val_itr;
         }
       } else {
+        // write something so that we know its missing, NULL is nasty to handle
         std::string val_s = "empty";
         std::string val_n = "empty";
         val_name.push_back(val_n);
-        v_c.push_back( val_s );
+        v_c[0] = val_s;
+        
       }
       
       v_c.attr("names") = val_name;
