@@ -66,13 +66,19 @@ update_cell <- function(x, wb, sheet, cell) {
     for (row in rows) {
       for (col in cols) {
         i <- i+1
-        cval[[row]][[col]]$v <- as.character(x[i])
+        
+        ctyp[[row]][[col]]$f <- NULL
+        ctyp[[row]][[col]]$s <- NULL
+        ctyp[[row]][[col]]$t <- NULL
+        cval[[row]][[col]]$v <- NULL
+        cval[[row]][[col]]$is <- NULL
         
         # for now create a str
         if (is.character(x)) {
-          ctyp[[row]][[col]]$t <- "str"
+          ctyp[[row]][[col]]$t <- "inlineStr"
+          cval[[row]][[col]]$is <- as.character(x[i])
         } else {
-          ctyp[[row]][[col]]$t <- ""
+          cval[[row]][[col]]$v <- as.character(x[i])
         }
         
       }
