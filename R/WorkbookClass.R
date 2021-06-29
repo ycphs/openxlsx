@@ -981,7 +981,7 @@ Workbook$methods(
           length(sharedStrings),
           attr(sharedStrings, "uniqueCount")
         ),
-        body = stri_join(sharedStrings, collapse = "", sep = " "),
+        body = stri_join(set_sst(sharedStrings), collapse = "", sep = " "),
         tail = "</sst>",
         fl = file.path(xlDir, "sharedStrings.xml")
       )
@@ -2088,14 +2088,14 @@ Workbook$methods(
 
         # worksheets[[i]]$sheet_data$style_id <<-
         #   as.character(worksheets[[i]]$sheet_data$style_id)
-
+        
         # message(i, " \n")
         write_worksheet_xml_2(
           prior = prior,
           post = post,
           sheet_data = ws$sheet_data,
           cols_attr = ws$cols_attr,
-          rows_attr = ws$rows_attr,
+          rows_attr = ws$sheet_data$row_attr,
           row_heights_ = NULL,
           outline_levels_ = unlist(outlineLevels[[i]]),
           R_fileName = file.path(xlworksheetsDir, sprintf("sheet%s.xml", i))
