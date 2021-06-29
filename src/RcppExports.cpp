@@ -687,14 +687,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// setXMLcols
-SEXP setXMLcols(Rcpp::List cols_attr);
-RcppExport SEXP _openxlsx_setXMLcols(SEXP cols_attrSEXP) {
+// set_row
+std::string set_row(Rcpp::List row_attr, Rcpp::List col_vals, Rcpp::List col_attr);
+RcppExport SEXP _openxlsx_set_row(SEXP row_attrSEXP, SEXP col_valsSEXP, SEXP col_attrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::List >::type cols_attr(cols_attrSEXP);
-    rcpp_result_gen = Rcpp::wrap(setXMLcols(cols_attr));
+    Rcpp::traits::input_parameter< Rcpp::List >::type row_attr(row_attrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type col_vals(col_valsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type col_attr(col_attrSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_row(row_attr, col_vals, col_attr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// set_sst
+Rcpp::CharacterVector set_sst(Rcpp::CharacterVector sharedStrings);
+RcppExport SEXP _openxlsx_set_sst(SEXP sharedStringsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type sharedStrings(sharedStringsSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_sst(sharedStrings));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -769,7 +782,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // write_worksheet_xml_2
-SEXP write_worksheet_xml_2(std::string prior, std::string post, Reference sheet_data, Rcpp::List cols_attr, Rcpp::List rows_attr, Nullable<CharacterVector> row_heights_, Nullable<CharacterVector> outline_levels_, std::string R_fileName);
+SEXP write_worksheet_xml_2(std::string prior, std::string post, Reference sheet_data, Rcpp::CharacterVector cols_attr, Rcpp::List rows_attr, Nullable<CharacterVector> row_heights_, Nullable<CharacterVector> outline_levels_, std::string R_fileName);
 RcppExport SEXP _openxlsx_write_worksheet_xml_2(SEXP priorSEXP, SEXP postSEXP, SEXP sheet_dataSEXP, SEXP cols_attrSEXP, SEXP rows_attrSEXP, SEXP row_heights_SEXP, SEXP outline_levels_SEXP, SEXP R_fileNameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -777,7 +790,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type prior(priorSEXP);
     Rcpp::traits::input_parameter< std::string >::type post(postSEXP);
     Rcpp::traits::input_parameter< Reference >::type sheet_data(sheet_dataSEXP);
-    Rcpp::traits::input_parameter< Rcpp::List >::type cols_attr(cols_attrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type cols_attr(cols_attrSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type rows_attr(rows_attrSEXP);
     Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type row_heights_(row_heights_SEXP);
     Rcpp::traits::input_parameter< Nullable<CharacterVector> >::type outline_levels_(outline_levels_SEXP);
@@ -901,7 +914,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_getCellInfo", (DL_FUNC) &_openxlsx_getCellInfo, 6},
     {"_openxlsx_read_workbook", (DL_FUNC) &_openxlsx_read_workbook, 11},
     {"_openxlsx_calc_number_rows", (DL_FUNC) &_openxlsx_calc_number_rows, 2},
-    {"_openxlsx_setXMLcols", (DL_FUNC) &_openxlsx_setXMLcols, 1},
+    {"_openxlsx_set_row", (DL_FUNC) &_openxlsx_set_row, 3},
+    {"_openxlsx_set_sst", (DL_FUNC) &_openxlsx_set_sst, 1},
     {"_openxlsx_map_cell_types_to_integer", (DL_FUNC) &_openxlsx_map_cell_types_to_integer, 1},
     {"_openxlsx_map_cell_types_to_char", (DL_FUNC) &_openxlsx_map_cell_types_to_char, 1},
     {"_openxlsx_build_cell_types_integer", (DL_FUNC) &_openxlsx_build_cell_types_integer, 2},

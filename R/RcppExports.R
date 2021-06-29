@@ -209,8 +209,12 @@ calc_number_rows <- function(x, skipEmptyRows) {
     .Call(`_openxlsx_calc_number_rows`, x, skipEmptyRows)
 }
 
-setXMLcols <- function(cols_attr) {
-    .Call(`_openxlsx_setXMLcols`, cols_attr)
+set_row <- function(row_attr, col_vals, col_attr) {
+    .Call(`_openxlsx_set_row`, row_attr, col_vals, col_attr)
+}
+
+set_sst <- function(sharedStrings) {
+    .Call(`_openxlsx_set_sst`, sharedStrings)
 }
 
 map_cell_types_to_integer <- function(t) {

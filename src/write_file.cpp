@@ -7,7 +7,7 @@
 SEXP write_worksheet_xml_2( std::string prior,
                             std::string post, 
                             Reference sheet_data,
-                            Rcpp::List cols_attr,
+                            Rcpp::CharacterVector cols_attr,
                             Rcpp::List rows_attr,
                             Nullable<CharacterVector> row_heights_ = R_NilValue,
                             Nullable<CharacterVector> outline_levels_ = R_NilValue,
@@ -24,60 +24,23 @@ SEXP write_worksheet_xml_2( std::string prior,
   
   // sheet_data will be in order, just need to check for row_heights
   // CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  List cell_frm = sheet_data.field("ftyp");
-  List cell_row = sheet_data.field("rtyp");
-  List cell_str = sheet_data.field("styp");
-  List cell_typ = sheet_data.field("ttyp");
-  List cell_val = sheet_data.field("vtyp");
-  
-  List cell_f = sheet_data.field("fval");
-  List cell_v = sheet_data.field("vval");
-  
-  // List style_id = sheet_data.field("style_id");
+  List cell_typ = sheet_data.field("ctyp");
+  List cell_val = sheet_data.field("cval");
   
   xmlFile << "<sheetData>";
   
   for (size_t i = 0; i < rows_attr.length(); ++i) {
     
-    // CharacterVector col_style = cols_attr[i];
-    // CharacterVector col_style_id = style_id[i];
-    // CharacterVector cell_type = as<CharacterVector>(cell_typ[i]);
-    // Rcout << cell_type << std::endl;
+    Rcpp::List row  = rows_attr[i];
+    Rcpp::List typ  = cell_typ[i];
+    Rcpp::List val  = cell_val[i];
     
-    // Rcout << col_style << std::endl;
-    // Rcout << col_style_id << std::endl;
-    
-    // SEXP tmp = rows_attr[i];
-    // Rcout << tmp << std::endl;
-    
-    // Rcout << "i: " << i << std::endl;
-    
-    CharacterVector row_style = rows_attr[i];
-    // Rcout << "i: " << i << row_style << std::endl;
-    
-    // CharacterVector ctyp = cell_typ[i];
-    
-    Rcpp::List f_typ = cell_frm[i];
-    Rcpp::List r_typ = cell_row[i];
-    Rcpp::List s_typ = cell_str[i];
-    Rcpp::List c_typ = cell_typ[i];
-    Rcpp::List v_typ = cell_val[i];
-    Rcpp::List f_val = cell_f[i];
-    Rcpp::List v_val = cell_v[i];
-    
-    
-    // Rf_PrintValue(f_typ);
-    // Rf_PrintValue(c_typ);
-    // Rf_PrintValue(v_typ);
-    // Rf_PrintValue(r_typ);
-    // Rf_PrintValue(s_typ);
-    
-    xmlFile << setXMLrow(row_style, f_typ, c_typ, v_typ, r_typ, s_typ, f_val, v_val);
-    // Rcpp::stop("debug");
+    // Rf_PrintValue(row);
+    // Rf_PrintValue(val);
+    // Rf_PrintValue(typ);
+    xmlFile << set_row(row, val, typ);
     
   }
-  
-  
   
   // write closing tag and XML post data
   xmlFile << "</sheetData>";
