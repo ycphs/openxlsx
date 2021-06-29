@@ -467,6 +467,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
     wb$worksheets[[i]]$sheetFormatPr <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetFormatPr")
     wb$worksheets[[i]]$sheetViews    <- getXMLXPtr2(worksheet_xml, "worksheet", "sheetViews")
+    wb$worksheets[[i]]$cols_attr     <- getXMLXPtr3(worksheet_xml, "worksheet", "cols", "col")
 
     # load the data
     openxlsx:::loadvals(wb$worksheets[[i]]$sheet_data, worksheet_xml)
