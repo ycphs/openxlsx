@@ -390,11 +390,11 @@ replaceIllegalCharacters <- function(v) {
 add_escape_unicode <- function(v) {
  
   strings_unicode <-
-    c(stri_extract_all_regex(v, "_x+[:xdigit:]{4}+_", simplify = T))
+    c(stri_extract_all_regex(v, "_x+[:xdigit:]{4}+_",simplify = T))
   
-  strings_unicode_clean <- paste0("_x005F", strings_unicode)
+  strings_unicode_clean <- stri_join("_x005F", strings_unicode)
   
-  v <- stri_replace_all_fixed(v, strings_unicode, strings_unicode_clean)
+  v<-stri_replace_all_fixed(v, strings_unicode, strings_unicode_clean,vectorize_all = F)
   
   
   
@@ -406,7 +406,7 @@ add_escape_unicode <- function(v) {
 
 remove_escape_unicode <- function(v) {
   strings_unicode <-
-    c(stri_extract_all_regex(newstring, "_x005F_x[:xdigit:]{4}_", simplify = T))
+    c(stri_extract_all_regex(v, "_x005F_x[:xdigit:]{4}_"))
   
   strings_unicode_clean <-
     stri_replace_all_fixed(strings_unicode, "_x005F", "")

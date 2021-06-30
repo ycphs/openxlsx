@@ -252,7 +252,7 @@ Workbook$methods(writeData = function(
   strFlag <- which(t == 1L)
   newStrs <- v[strFlag]
   if (length(newStrs) > 0) {
-    newStrs <- add_escape_unicode(replaceIllegalCharacters(newStrs))
+    newStrs <- replaceIllegalCharacters(newStrs)
     vl <- stri_length(newStrs)
     
     for (i in which(vl > 32767)) {
@@ -280,9 +280,12 @@ Number of characters exeed the limit of 32767."
       
       # v[i] <- stri_sub(v[i], 1, 32767)
     }
-    newStrs <- stri_join("<si><t xml:space=\"preserve\">", newStrs, "</t></si>")
-
+    
+    newStrs <- stri_join("<si><t xml:space=\"preserve\">",newStrs, "</t></si>")
+    
     uNewStr <- unique(newStrs)
+    
+    uNewStr<-sapply(uNewStr,add_escape_unicode)
 
     .self$updateSharedStrings(uNewStr)
     v[strFlag] <- match(newStrs, sharedStrings) - 1L
