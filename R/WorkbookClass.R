@@ -101,8 +101,8 @@ Workbook$methods(
     vdpi = openxlsx_getOp("vdpi", 300)
   ) {
     if (!missing(sheetName)) {
-      if (grepl(pattern = "([/\\*'?\\[:\\]+])",perl = T, x = sheetName)) {
-        stop("Illegal character in sheet names. Don't use the following [ ] * / \ ? :")
+      if (grepl(pattern = "([/\\\\\\*'?\\[:\\]+])", perl = TRUE, x = sheetName) || nchar(sheetName) == 0) {
+        stop("Illegal character in sheet names. Don't use the following [ ] * / \\\ ? :")
       }
     }
     newSheetIndex <- length(worksheets) + 1L
