@@ -41,15 +41,14 @@ update_cell <- function(x, wb, sheet, cell) {
   #   stop("sheet not in workbook")
 
   # 1) pull sheet to modify from workbook; 2) modify it; 3) push it back
-  cval  <- wb$worksheets[[sheet_id]]$sheet_data$cval
-  ctyp  <- wb$worksheets[[sheet_id]]$sheet_data$ctyp
+  cc  <- wb$worksheets[[sheet_id]]$sheet_data$cc
   
   
   # workbooks contain only entries for values currently present.
   # if A1 is filled, B1 is not filled and C1 is filled the sheet will only
   # contain fields A1 and C1.
-  cells_in_wb <- as.character(unlist(lapply(ctyp, function(x) sapply(x, function(y)y$r))))
-  rows_in_wb <- names(ctyp)
+  cells_in_wb <- as.character(unlist(lapply(cc, function(x) sapply(x, function(y)y[["typ"]]$r))))
+  rows_in_wb <- names(cc)
   
   
   if(!any(dimensions %in% cells_in_wb))
@@ -67,19 +66,24 @@ update_cell <- function(x, wb, sheet, cell) {
       for (col in cols) {
         i <- i+1
         
-        ctyp[[row]][[col]]$f <- NULL
-        ctyp[[row]][[col]]$s <- NULL
-        ctyp[[row]][[col]]$t <- NULL
-        cval[[row]][[col]]$v <- NULL
-        cval[[row]][[col]]$is <- NULL
+        cc[[row]][[col]][["val"]]$f <- NULL
+        cc[[row]][[col]][["typ"]]$s <- NULL
+        cc[[row]][[col]][["typ"]]$t <- NULL
+        cc[[row]][[col]][["val"]]$v <- NULL
+        cc[[row]][[col]][["val"]]$is <- NULL
+        cc[[row]][[col]][["attr"]]$t <- NULL
+        cc[[row]][[col]][["attr"]]$ref <- NULL
+        cc[[row]][[col]][["attr"]]$si <- NULL
         
         # for now create a str
         if (is.character(x)) {
-          ctyp[[row]][[col]]$t <- "inlineStr"
-          cval[[row]][[col]]$is <- as.character(x[i])
+          cc[[row]][[col]][["typ"]]$t <- "inlineStr"
+          cc[[row]][[col]][["val"]]$is <- as.character(x[i])
         } else {
-          cval[[row]][[col]]$v <- as.character(x[i])
+          cc[[row]][[col]][["val"]]$v <- as.character(x[i])
         }
+        
+        cc[[row]][[col]][["attr"]]$empty <- "empty"
         
       }
     }
@@ -88,8 +92,7 @@ update_cell <- function(x, wb, sheet, cell) {
   
   
   # push everything back to workbook
-  wb$worksheets[[sheet_id]]$sheet_data$cval  <- cval
-  wb$worksheets[[sheet_id]]$sheet_data$ctyp  <- ctyp
+  wb$worksheets[[sheet_id]]$sheet_data$cc  <- cc
   
   wb
 }
