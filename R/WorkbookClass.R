@@ -101,8 +101,8 @@ Workbook$methods(
     vdpi = openxlsx_getOp("vdpi", 300)
   ) {
     if (!missing(sheetName)) {
-      if (grepl(pattern = ":", x = sheetName)) {
-        stop("colon not allowed in sheet names in Excel")
+      if (grepl(pattern = "([/\\*'?\\[:\\]+])",perl = T, x = sheetName)) {
+        stop("Illegal character in sheet names. Don't use the following [ ] * / \ ? :")
       }
     }
     newSheetIndex <- length(worksheets) + 1L
@@ -219,11 +219,7 @@ Workbook$methods(
 Workbook$methods(
   cloneWorksheet = function(sheetName, clonedSheet) {
     clonedSheet <- validateSheet(clonedSheet)
-    if (!missing(sheetName)) {
-      if (grepl(pattern = ":", x = sheetName)) {
-        stop("colon not allowed in sheet names in Excel")
-      }
-    }
+    
     newSheetIndex <- length(worksheets) + 1L
     if (newSheetIndex > 1) {
       sheetId <-
@@ -1116,12 +1112,18 @@ Workbook$methods(
 
 Workbook$methods(
   validateSheet = function(sheetName) {
+    if (!missing(sheetName)) {
+      if (grepl(pattern = "([/\\*'?\\[:\\]+])",perl = T, x = sheetName)) {
+        stop("Illegal character in sheet names. Don't use the following [ ] * / \ ? :")
+      }
+    }
+    
     if (!is.numeric(sheetName)) {
       if (is.null(sheet_names)) {
         stop("Workbook does not contain any worksheets.", call. = FALSE)
       }
     }
-
+    
     if (is.numeric(sheetName)) {
       if (sheetName > length(sheet_names)) {
         stop("This Workbook only has ", length(sheet_names),
@@ -1918,12 +1920,15 @@ Workbook$methods(
     if (newSheetName %in% sheet_names) {
       stop(sprintf("Sheet %s already exists!", newSheetName))
     }
-
+    
+    if (grepl(pattern = "([/\\*'?\\[:\\]+])",perl = T, x = newSheetName)) {
+      stop("Illegal character in sheet names. Don't use the following [ ] * / \ ? :")
+    }
+    
     sheet <- validateSheet(sheet)
 
     oldName <- sheet_names[[sheet]]
     sheet_names[[sheet]] <<- newSheetName
-
     ## Rename in workbook
     sheetId <-
       regmatches(
