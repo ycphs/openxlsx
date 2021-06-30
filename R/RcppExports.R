@@ -217,6 +217,14 @@ set_sst <- function(sharedStrings) {
     .Call(`_openxlsx_set_sst`, sharedStrings)
 }
 
+list_to_attr <- function(attributes, node) {
+    .Call(`_openxlsx_list_to_attr`, attributes, node)
+}
+
+list_to_attr_full <- function(attributes, node, child) {
+    .Call(`_openxlsx_list_to_attr_full`, attributes, node, child)
+}
+
 map_cell_types_to_integer <- function(t) {
     .Call(`_openxlsx_map_cell_types_to_integer`, t)
 }

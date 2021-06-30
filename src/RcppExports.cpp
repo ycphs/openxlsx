@@ -710,6 +710,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// list_to_attr
+std::string list_to_attr(Rcpp::List attributes, std::string node);
+RcppExport SEXP _openxlsx_list_to_attr(SEXP attributesSEXP, SEXP nodeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type attributes(attributesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type node(nodeSEXP);
+    rcpp_result_gen = Rcpp::wrap(list_to_attr(attributes, node));
+    return rcpp_result_gen;
+END_RCPP
+}
+// list_to_attr_full
+std::string list_to_attr_full(Rcpp::List attributes, std::string node, std::string child);
+RcppExport SEXP _openxlsx_list_to_attr_full(SEXP attributesSEXP, SEXP nodeSEXP, SEXP childSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type attributes(attributesSEXP);
+    Rcpp::traits::input_parameter< std::string >::type node(nodeSEXP);
+    Rcpp::traits::input_parameter< std::string >::type child(childSEXP);
+    rcpp_result_gen = Rcpp::wrap(list_to_attr_full(attributes, node, child));
+    return rcpp_result_gen;
+END_RCPP
+}
 // map_cell_types_to_integer
 IntegerVector map_cell_types_to_integer(CharacterVector t);
 RcppExport SEXP _openxlsx_map_cell_types_to_integer(SEXP tSEXP) {
@@ -915,6 +940,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_openxlsx_calc_number_rows", (DL_FUNC) &_openxlsx_calc_number_rows, 2},
     {"_openxlsx_set_row", (DL_FUNC) &_openxlsx_set_row, 2},
     {"_openxlsx_set_sst", (DL_FUNC) &_openxlsx_set_sst, 1},
+    {"_openxlsx_list_to_attr", (DL_FUNC) &_openxlsx_list_to_attr, 2},
+    {"_openxlsx_list_to_attr_full", (DL_FUNC) &_openxlsx_list_to_attr_full, 3},
     {"_openxlsx_map_cell_types_to_integer", (DL_FUNC) &_openxlsx_map_cell_types_to_integer, 1},
     {"_openxlsx_map_cell_types_to_char", (DL_FUNC) &_openxlsx_map_cell_types_to_char, 1},
     {"_openxlsx_build_cell_types_integer", (DL_FUNC) &_openxlsx_build_cell_types_integer, 2},

@@ -6,9 +6,9 @@ std::string set_row(Rcpp::List row_attr, Rcpp::List cells) {
   pugi::xml_document doc;
   
   pugi::xml_node row = doc.append_child("row");
+  Rcpp::CharacterVector attrnams = row_attr.names();
   
   for (auto i = 0; i < row_attr.length(); ++i) {
-    Rcpp::CharacterVector attrnams = row_attr.names();
     row.append_attribute(attrnams[i]) = Rcpp::as<std::string>(row_attr[i]).c_str();
   }
   
@@ -102,4 +102,50 @@ Rcpp::CharacterVector set_sst(Rcpp::CharacterVector sharedStrings) {
     }
     
     return sst;
+}
+
+
+// [[Rcpp::export]]
+std::string list_to_attr(Rcpp::List attributes, std::string node) {
+  
+  pugi::xml_document doc;
+  
+  for (auto i = 0; i < attributes.length(); ++i) {
+    pugi::xml_node nds = doc.append_child(node.c_str());
+    
+    Rcpp::List attrs = attributes[i];
+    Rcpp::CharacterVector attrnams = attrs.names();
+    for (auto j = 0; j < attrs.length(); ++j) {
+      nds.append_attribute(attrnams[j]) = Rcpp::as<std::string>(attrs[j]).c_str();
+    }
+  }
+  
+  std::ostringstream oss;
+  doc.print(oss, " ", pugi::format_raw);
+  // doc.print(oss);
+  
+  return oss.str();
+}
+
+
+// [[Rcpp::export]]
+std::string list_to_attr_full(Rcpp::List attributes, std::string node, std::string child) {
+  
+  pugi::xml_document doc;
+  pugi::xml_node nds = doc.append_child(node.c_str());
+  for (auto i = 0; i < attributes.length(); ++i) {
+    nds.append_child(child.c_str());
+    
+    Rcpp::List attrs = attributes[i];
+    Rcpp::CharacterVector attrnams = attrs.names();
+    for (auto j = 0; j < attrs.length(); ++j) {
+      nds.append_attribute(attrnams[j]) = Rcpp::as<std::string>(attrs[j]).c_str();
+    }
+  }
+  
+  std::ostringstream oss;
+  doc.print(oss, " ", pugi::format_raw);
+  // doc.print(oss);
+  
+  return oss.str();
 }
