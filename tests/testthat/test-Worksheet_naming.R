@@ -43,4 +43,18 @@ test_that("Worksheet names", {
   
   expect_equal(sheetname,names(wb))
   expect_equal("test &quot;A&quot;",wb$sheet_names)
+  
+  ### test for illegal characters
+  
+  wb <- createWorkbook()
+  
+  addWorksheet(wb, "Test")
+  for(i in c("[", "]", "*", "/",  "?", ":")){
+    sheetname <- paste0('test_',i)
+    expect_error(addWorksheet(wb, sheetname))
+    expect_error(cloneWorksheet(wb, "Test", sheetname))
+    expect_error(renameWorksheet(wb, "Test", sheetname))
+    expect_error(parse(names(wb)<- sheetname))
+  }
+  
 })
