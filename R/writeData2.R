@@ -1,3 +1,30 @@
+#' dummy function to write data
+#' @param wb workbook
+#' @param sheet sheet
+#' @param data data to export
+#' @param colNames include colnames?
+#' @param rowNames include rownames?
+#' @param startRow row to place it
+#' @param startCol col to place it
+#' 
+#' @examples 
+#' # create a workbook and add some sheets
+#' wb <- createWorkbook()
+#' 
+#' addWorksheet(wb, "sheet1")
+#' writeData2(wb, "sheet1", mtcars, colNames = TRUE, rowNames = TRUE)
+#' 
+#' addWorksheet(wb, "sheet2")
+#' writeData2(wb, "sheet2", cars, colNames = FALSE)
+#' 
+#' addWorksheet(wb, "sheet3")
+#' writeData2(wb, "sheet3", letters)
+#' 
+#' addWorksheet(wb, "sheet4")
+#' writeData2(wb, "sheet4", as.data.frame(Titanic), startRow = 2, startCol = 2)
+#' 
+#' saveWorkbook(wb, file = "/tmp/test.xlsx", overwrite = TRUE)
+#'
 #' @export
 writeData2 <-function(wb, sheet, data,
                       colNames = TRUE, rowNames = FALSE,
@@ -47,116 +74,81 @@ writeData2 <-function(wb, sheet, data,
   endRow <- (startRow -1) + data_nrow
   endCol <- (startCol -1) + data_ncol
   
-  rows_attr <- cols_attr <- vtyp <- vector("list", data_nrow)
   
-  cn <- function(x) {
-    x <- character(0)
-    attr(x, "names") <- character(0)
-    x
-  }
+  dims <- paste0(int2col(startCol), startRow,
+                 ":",
+                 int2col(endCol), endRow)
   
+  wb$worksheets[[sheetno]]$dimension <- paste0("<dimension ref=\"", dims, "\"/>")
+  
+  # rtyp character vector per row 
+  # list(c("A1, ..., "k1"), ...,  c("An", ..., "kn"))
+  rtyp <- openxlsx:::dims_to_dataframe(dims, fill = TRUE)
+  
+  rows_attr <- cols_attr <- cc <- vector("list", data_nrow)
   
   cols_attr <- lapply(seq_len(data_nrow),
-                      function(x) c(collapsed="false",
-                                    customWidth="true",
-                                    hidden="false",
-                                    outlineLevel="0",
-                                    max="121",
-                                    min="1",
-                                    style="0",
-                                    width="9.14"))
+                      function(x) list(collapsed="false",
+                                       customWidth="true",
+                                       hidden="false",
+                                       outlineLevel="0",
+                                       max="121",
+                                       min="1",
+                                       style="0",
+                                       width="9.14"))
   
-  wb$worksheets[[sheetno]]$cols_attr <- cols_attr
+  wb$worksheets[[sheetno]]$cols_attr <- openxlsx:::list_to_attr(cols_attr, "col")
   
   
   
   rows_attr <- lapply(startRow:endRow,
-                      function(x) c("r" = as.character(x),
-                                    "spans" = paste0("1:", data_ncol),
-                                    "x14ac:dyDescent"="0.25"))
+                      function(x) list("r" = as.character(x),
+                                       "spans" = paste0("1:", data_ncol),
+                                       "x14ac:dyDescent"="0.25"))
+  names(rows_attr) <- rownames(rtyp)
   
-  wb$worksheets[[sheetno]]$rows_attr <- rows_attr
-  
-  # fval list per row
-  fval <- lapply(seq_len(data_nrow),
-                 function(x) 
-                   lapply(seq_len(data_ncol),
-                          function(x)
-                            character(0)))
-  
-  wb$worksheets[[sheetno]]$sheet_data$fval <- fval
-  
-  # ftyp list per row
-  ftyp <-  lapply(seq_len(data_nrow),
-                  function(x) 
-                    lapply(seq_len(data_ncol),
-                           function(x) 
-                             list()))
-  
-  wb$worksheets[[sheetno]]$sheet_data$ftyp <- ftyp
-  
-  # rtyp character vector per row 
-  # list(c("A1, ..., "k1"), ...,  c("An", ..., "kn"))
-  rtyp <- lapply(startRow:endRow, function(x) 
-    paste0(openxlsx:::convert_to_excel_ref(startCol:endCol, LETTERS), x))
-  
-  wb$worksheets[[sheetno]]$sheet_data$rtyp <- rtyp
-  
-  # styp character vector per row (style typ, choose 1)
-  styp <- lapply(seq_len(data_nrow), function(x)
-    rep("", data_ncol))
+  wb$worksheets[[sheetno]]$sheet_data$row_attr <- rows_attr
   
   
-  wb$worksheets[[sheetno]]$sheet_data$styp <- styp
   
   
-  xlsx_types <- function(x) {
-    res <- NULL
-    for (cls in x) {
-      if (cls == "numeric" | cls == "integer")
-        res <- c(res, "")
-      if (cls == "character" | cls == "factor")
-        res <- c(res, "str")
-    }
-    res
+  numcell <- function(x,y){
+    list(val = list(v = as.character(x)),
+         typ = list(r = y),
+         attr = list(empty = "empty"))
   }
   
-  # ttyp character vector per row ("s", "str" or "" )
-  ttyp <- lapply(seq_len(data_nrow), function(x)
-    xlsx_types(data_class))
+  chrcell <- function(x,y){
+    list(val = list(v = x),
+         typ = list(r = y, t = "str"),
+         attr = list(empty = "empty"))
+  }
   
-  strtyp <- "str"
-  
-  # for data frames set first row with names as str
-  if (is_data_frame & colNames)
-    ttyp[[1]] <- rep(strtyp, length(ttyp[[1]]))
-  
-  wb$worksheets[[sheetno]]$sheet_data$ttyp <- ttyp
-  
-  
-  vval <- lapply(seq_len(data_nrow),
-                 function(x) lapply(seq_len(data_ncol),
-                                    function(i) as.character(data[x, i])))
-  
-  wb$worksheets[[sheetno]]$sheet_data$vval <- vval
+  cell <- function(x, y, data_class) {
+    z <- NULL
+    if (data_class == "numeric")
+      z <- numcell(x,y)
+    if (data_class %in% c("character", "factor"))
+      z <- chrcell(x,y)
+    
+    z
+  }
   
   
-  vtyp <- lapply(seq_len(data_nrow),
-                 function(x) 
-                   lapply(seq_len(data_ncol),
-                          function(x) 
-                            lapply(1,
-                                   function(x)
-                                     cn())))
+  for (i in seq_len(nrow(data))) {
   
-  wb$worksheets[[sheetno]]$sheet_data$vtyp <- vtyp
+      col <- vector("list", ncol(data))
+      for (j in seq_along(data)) {
+        dc <- ifelse(colNames && i == 1, "character", data_class[j])
+        col[[j]] <- cell(data[i, j], rtyp[i, j], dc)
+      }
+      names(col) <- colnames(rtyp)
+      
+      cc[[i]] <- col
+  }
+  names(cc) <- rownames(rtyp)
   
-  wb$worksheets[[sheetno]]$dimension <- paste0("<dimension ref=\"",
-                                               openxlsx:::convert_to_excel_ref(startCol, LETTERS),
-                                               startRow,
-                                               ":",
-                                               openxlsx:::convert_to_excel_ref(endCol, LETTERS),
-                                               endRow, "\"/>")
+  wb$worksheets[[sheetno]]$sheet_data$cc <- cc
   
   # update a few styles informations
   wb$styles$numFmts <- character(0)
