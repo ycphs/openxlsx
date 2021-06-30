@@ -24,21 +24,13 @@ SEXP write_worksheet_xml_2( std::string prior,
   
   // sheet_data will be in order, just need to check for row_heights
   // CharacterVector cell_col = int_2_cell_ref(sheet_data.field("cols"));
-  List cell_typ = sheet_data.field("ctyp");
-  List cell_val = sheet_data.field("cval");
+  List cc = sheet_data.field("cc");
   
   xmlFile << "<sheetData>";
   
   for (size_t i = 0; i < rows_attr.length(); ++i) {
     
-    Rcpp::List row  = rows_attr[i];
-    Rcpp::List typ  = cell_typ[i];
-    Rcpp::List val  = cell_val[i];
-    
-    // Rf_PrintValue(row);
-    // Rf_PrintValue(val);
-    // Rf_PrintValue(typ);
-    xmlFile << set_row(row, val, typ);
+    xmlFile << set_row(rows_attr[i], cc[i]);
     
   }
   

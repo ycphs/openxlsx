@@ -1,7 +1,7 @@
 #include "openxlsx_types.h"
 
 // [[Rcpp::export]]
-std::string set_row(Rcpp::List row_attr, Rcpp::List col_vals, Rcpp::List col_attr) {
+std::string set_row(Rcpp::List row_attr, Rcpp::List cells) {
   
   pugi::xml_document doc;
   
@@ -12,17 +12,25 @@ std::string set_row(Rcpp::List row_attr, Rcpp::List col_vals, Rcpp::List col_att
     row.append_attribute(attrnams[i]) = Rcpp::as<std::string>(row_attr[i]).c_str();
   }
   
-  for (auto i = 0; i < col_attr.length(); ++i) {
+  for (auto i = 0; i < cells.length(); ++i) {
     
     // create node <c>
     pugi::xml_node cell = row.append_child("c");
+    
+    Rcpp::List cll = cells[i];
+    // Rf_PrintValue(cll);
 
-    Rcpp::List cell_atr = col_attr[i];
-    Rcpp::List cell_val = col_vals[i];
+    Rcpp::List cell_atr = cll["typ"];
+    Rcpp::List cell_val = cll["val"];
+    Rcpp::List attr_val = cll["attr"];
+    
+    // Rf_PrintValue(cell_atr);
+    // Rf_PrintValue(cell_val);
+    // Rf_PrintValue(attr_val);
     
     std::vector<std::string> cell_atr_names = cell_atr.names();
     std::vector<std::string> cell_val_names = cell_val.names();
-    
+    std::vector<std::string> attr_val_names = attr_val.names();
     // append attributes <c r="A1" ...>
     for (auto j = 0; j < cell_atr.length(); ++j) {
       std::string c = cell_atr[j];
@@ -38,7 +46,21 @@ std::string set_row(Rcpp::List row_attr, Rcpp::List col_vals, Rcpp::List col_att
       
       // <f> ... </f>
       if(c_nam.compare("f") == 0) {
-        cell.append_child(c_nam.c_str()).append_child(pugi::node_pcdata).set_value(c_val.c_str());
+        
+        pugi::xml_node f = cell.append_child(c_nam.c_str());
+        
+        for (auto k = 0; k < attr_val.length(); ++k) {
+          std::string c_atr = attr_val_names[k];
+          
+          if (c_atr.compare("empty") == 0) {
+            cell.append_child(c_nam.c_str()).append_child(pugi::node_pcdata).set_value(c_val.c_str());
+          } else {
+            std::string c = attr_val[k];
+            f.append_attribute(attr_val_names[k].c_str()) = c.c_str();
+          }
+        }
+        
+        f.set_value(c_val.c_str());
       }
       
       // <is><t> ... </t></is>

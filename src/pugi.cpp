@@ -405,6 +405,10 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
         std::string val_n = "empty";
         val_name.push_back(val_n);
         v_c[0] = val_s;
+        
+        // is empty too
+        atr_name.push_back("empty");
+        a_c.push_back("empty");
       }
       
       v_c.attr("names") = val_name;

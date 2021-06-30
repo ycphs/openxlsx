@@ -82,4 +82,4 @@ string itos(int i);
 SEXP write_file(std::string parent, std::string xmlText, std::string parentEnd, std::string R_fileName);
 CharacterVector markUTF8(CharacterVector x, bool clone = false);
 
-std::string set_row(Rcpp::List row_attr, Rcpp::List cell_typ, Rcpp::List cell_val);
+std::string set_row(Rcpp::List row_attr, Rcpp::List cell_typ);
