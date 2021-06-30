@@ -236,10 +236,9 @@ wb_to_df <- function(xlsxFile,
                             "dimension",
                             "ref")
   
-  cval  <- wb$worksheets[[sheet]]$sheet_data$cval
-  ctyp  <- wb$worksheets[[sheet]]$sheet_data$ctyp
+  cc  <- wb$worksheets[[sheet]]$sheet_data$cc
   
-  rnams <- names(cval)
+  rnams <- names(cc)
   
   
   # internet says: numFmtId > 0 and applyNumberFormat == 1
@@ -297,18 +296,18 @@ wb_to_df <- function(xlsxFile,
   
   for (row in keep_row) {
     
-    rowvals    <-  cval[[row]]
+    rowvals    <-  cc[[row]]
     
     keep_col <- keep_cols[keep_cols %in% names(rowvals)]
     
     for (col in keep_col) {
       
-      val       <- rowvals[[col]]
+      val       <- rowvals[[col]][["val"]]
       
       if (!is.null(val$v) | !is.null(val$is)) {
         
-        this_ttyp <- ctyp[[row]][[col]][["t"]]
-        this_styp <- ctyp[[row]][[col]][["s"]]
+        this_ttyp <- rowvals[[col]][["typ"]][["t"]]
+        this_styp <- rowvals[[col]][["typ"]][["s"]]
         
         if (!is.null(this_ttyp)) {
           
