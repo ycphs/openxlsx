@@ -459,7 +459,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
   cc.attr("names") = rownames;
   
   wb.field("row_attr") = row_attributes;
-  wb.field("cval")  = cc;
+  wb.field("cc")  = cc;
   
 }
 
