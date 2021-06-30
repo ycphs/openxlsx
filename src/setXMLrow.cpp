@@ -52,15 +52,15 @@ std::string set_row(Rcpp::List row_attr, Rcpp::List cells) {
         for (auto k = 0; k < attr_val.length(); ++k) {
           std::string c_atr = attr_val_names[k];
           
-          if (c_atr.compare("empty") == 0) {
-            cell.append_child(c_nam.c_str()).append_child(pugi::node_pcdata).set_value(c_val.c_str());
-          } else {
+          if (c_atr.compare("empty") != 0) {
             std::string c = attr_val[k];
             f.append_attribute(attr_val_names[k].c_str()) = c.c_str();
+            f.set_value(c_val.c_str());
           }
         }
         
-        f.set_value(c_val.c_str());
+        f.append_child(pugi::node_pcdata).set_value(c_val.c_str());
+        
       }
       
       // <is><t> ... </t></is>
