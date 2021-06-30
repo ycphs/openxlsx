@@ -302,7 +302,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
   
   std::string r_str = "r";
   
-  Rcpp::List v(n), t(n);
+  Rcpp::List cc(n);
   Rcpp::List row_attributes(n);
   std::vector<std::string> rownames;
   
@@ -314,7 +314,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
     size_t k = std::distance(worksheet.begin(), worksheet.end());
     auto itr_cols = 0;
     
-    Rcpp::List v_r(k), t_r(k);
+    Rcpp::List cc_r(k);
     std::vector<std::string> colnames;
     
     
@@ -327,11 +327,14 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
          col = col.next_sibling())
     {
       
+      Rcpp::List cc_cell(3);
+      
+      
       auto nn = std::distance(col.children().begin(), col.children().end());
       auto tt = nn; if (tt == 0) ++tt;
       
-      Rcpp::List v_c(tt), t_c;
-      std::vector<std::string> val_name, typ_name;
+      Rcpp::List v_c(tt), t_c, a_c;
+      std::vector<std::string> val_name, typ_name, atr_name;
       
       
       // get r attr e.g. "A1" and return colnames "A"
@@ -365,6 +368,22 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
           std::string val_s = "";
           std::string val_n = "";
           
+          
+          // additional attributes to <f t="shared" ...>
+          for (pugi::xml_attribute cattr = val.first_attribute();
+               cattr;
+               cattr = cattr.next_attribute())
+          {
+            atr_name.push_back(cattr.name());
+            a_c.push_back(cattr.value());
+          }
+          
+          if (a_c.length() == 0) {
+            atr_name.push_back("empty");
+            a_c.push_back("empty");
+          }
+          
+          
           val_n = val.name();
           
           // is nodes contain additional t node.
@@ -386,15 +405,20 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
         std::string val_n = "empty";
         val_name.push_back(val_n);
         v_c[0] = val_s;
-        
       }
       
       v_c.attr("names") = val_name;
       t_c.attr("names") = typ_name;
+      a_c.attr("names") = atr_name;
       
-      v_r[itr_cols] = v_c;
-      t_r[itr_cols] = t_c;
+      cc_cell[0] = v_c;
+      cc_cell[1] = t_c;
+      cc_cell[2] = a_c;
       
+      std::vector<std::string> cc_cell_nam = {"val", "typ", "attr"};
+      cc_cell.attr("names") = cc_cell_nam;
+      
+      cc_r[itr_cols] = cc_cell;
       
       /* row is done */
       ++itr_cols;
@@ -424,23 +448,18 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
     
     /* ---------------------------------------------------------------------- */
     
-    v_r.attr("names") = colnames;
-    v[itr_rows]  = v_r;
-    
-    t_r.attr("names") = colnames;
-    t[itr_rows] = t_r;
+    cc_r.attr("names") = colnames;
+    cc[itr_rows]  = cc_r;
     
     ++itr_rows;
   }
   
   row_attributes.attr("names") = rownames;
   
-  v.attr("names") = rownames;
-  t.attr("names") = rownames;
+  cc.attr("names") = rownames;
   
   wb.field("row_attr") = row_attributes;
-  wb.field("cval")  = v;
-  wb.field("ctyp")  = t;
+  wb.field("cval")  = cc;
   
 }
 
