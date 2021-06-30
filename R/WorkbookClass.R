@@ -1062,7 +1062,7 @@ Workbook$methods(
       )
 
      ## write styles.xml
-    if(is.null(workbook$styles_xml)) {
+    if(is.null(styles_xml)) {
       write_file(
         head = '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac x16r2 xr" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" xmlns:x16r2="http://schemas.microsoft.com/office/spreadsheetml/2015/02/main" xmlns:xr="http://schemas.microsoft.com/office/spreadsheetml/2014/revision">',
         body = pxml(styleXML),
@@ -1072,7 +1072,7 @@ Workbook$methods(
     } else {
       write_file(
         head = '',
-        body = workbook$styles_xml,
+        body = styles_xml,
         tail = '',
         fl = file.path(xlDir, "styles.xml")
       )
@@ -17892,7 +17892,7 @@ Workbook$methods(
     stylesTxt <- readXML(stylesXML)
     stylesTxt <- removeHeadTag(stylesTxt)
     # use pugi to import xml
-    styles_xml <- readXML(stylesXML)
+    styles_XML <- readXML(stylesXML)
 
     ## Indexed colours
     vals <- getNodes(xml = stylesTxt, tagIn = "<indexedColors>")
@@ -17901,29 +17901,29 @@ Workbook$methods(
         stri_join("<colors>", vals, "</colors>")
     }
 
-    styles$numFmts <<- numFmts <- getXML3(styles_xml, "styleSheet", "numFmts", "numFmt")
+    styles$numFmts <<- numFmts <- getXML3(styles_XML, "styleSheet", "numFmts", "numFmt")
     # numFmts_attr <- getXMLattr(numFmts, "numFmt")
 
     ## dxf
-    styles$dxfs <<- dxf <- getXML3(styles_xml, "styleSheet", "dxfs", "dxf")
+    styles$dxfs <<- dxf <- getXML3(styles_XML, "styleSheet", "dxfs", "dxf")
 
-    tableStyles <- getXML2(styles_xml, "styleSheet", "tableStyles")
+    tableStyles <- getXML2(styles_XML, "styleSheet", "tableStyles")
     if (length(tableStyles) > 0) {
       styles$tableStyles <<- tableStyles
     }
 
-    # extLst <- getXML2(styles_xml, "styleSheet", "extLst")
+    # extLst <- getXML2(styles_XML, "styleSheet", "extLst")
     # if (length(extLst) > 0) {
     #  styles$extLst <<- extLst
     # }
 
-    styles$borders <<- borders <- getXML3(styles_xml, "styleSheet", "borders", "border")
+    styles$borders <<- borders <- getXML3(styles_XML, "styleSheet", "borders", "border")
 
-    styles$fills <<- fills <- getXML3(styles_xml, "styleSheet", "fills", "fill")
+    styles$fills <<- fills <- getXML3(styles_XML, "styleSheet", "fills", "fill")
 
-    styles$cellStyleXfs <<- cellStyleXfs <- getXML3(styles_xml, "styleSheet", "cellStyleXfs", "xf")
+    styles$cellStyleXfs <<- cellStyleXfs <- getXML3(styles_XML, "styleSheet", "cellStyleXfs", "xf")
 
-    styles$cellXfs <<- cellXfs <- getXML3(styles_xml, "styleSheet", "cellXfs", "xf")
+    styles$cellXfs <<- cellXfs <- getXML3(styles_XML, "styleSheet", "cellXfs", "xf")
 
     ## Number formats
     numFmts <- getChildlessNode(xml = stylesTxt, tag = "numFmt")
@@ -17942,7 +17942,7 @@ Workbook$methods(
 
     ## fonts will maintain, sz, color, name, family scheme
     
-    styles$fonts <<- fonts <- getXML3(styles_xml, "styleSheet", "fonts", "font")
+    styles$fonts <<- fonts <- getXML3(styles_XML, "styleSheet", "fonts", "font")
     fonts <- buildFontList(fonts)
 
 

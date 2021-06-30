@@ -39,6 +39,7 @@ Workbook <- setRefClass("Workbook",
     "styleObjects" = "ANY",
 
     "styles" = "ANY",
+    "styles_xml" = "ANY",
     "tables" = "ANY",
     "tables.xml.rels" = "ANY",
     "theme" = "ANY",
