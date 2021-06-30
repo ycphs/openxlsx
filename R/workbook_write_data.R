@@ -252,7 +252,7 @@ Workbook$methods(writeData = function(
   strFlag <- which(t == 1L)
   newStrs <- v[strFlag]
   if (length(newStrs) > 0) {
-    newStrs <- replaceIllegalCharacters(newStrs)
+    newStrs <- add_escape_unicode(replaceIllegalCharacters(newStrs))
     vl <- stri_length(newStrs)
     
     for (i in which(vl > 32767)) {

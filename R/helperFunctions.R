@@ -386,6 +386,37 @@ replaceIllegalCharacters <- function(v) {
 }
 
 
+
+add_escape_unicode <- function(v) {
+ 
+  strings_unicode <-
+    c(stri_extract_all_regex(v, "_x+[:xdigit:]{4}+_", simplify = T))
+  
+  strings_unicode_clean <- paste0("_x005F", strings_unicode)
+  
+  v <- stri_replace_all_fixed(v, strings_unicode, strings_unicode_clean)
+  
+  
+  
+  
+  return(v)
+}
+
+
+
+remove_escape_unicode <- function(v) {
+  strings_unicode <-
+    c(stri_extract_all_regex(newstring, "_x005F_x[:xdigit:]{4}_", simplify = T))
+  
+  strings_unicode_clean <-
+    stri_replace_all_fixed(strings_unicode, "_x005F", "")
+  
+  v <-
+    stri_replace_all_fixed(v, strings_unicode, strings_unicode_clean)
+  return(v)
+}
+
+
 replaceXMLEntities <- function(v) {
   v <- gsub("&amp;", "&", v, fixed = TRUE)
   v <- gsub("&quot;", '"', v, fixed = TRUE)
@@ -840,7 +871,7 @@ getSharedStringsFromFile <- function(sharedStringsFile, isFile) {
   
   ## XML replacements
   sharedStrings <- replaceXMLEntities(sharedStrings)
-  
+  sharedStrings<-remove_escape_unicode(sharedStrings)
   return(sharedStrings)
 }
 
