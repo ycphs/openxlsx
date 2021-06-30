@@ -35,7 +35,7 @@ dims_to_dataframe <- function(dims, fill = FALSE) {
   mm <- matrix(data = data,
                nrow = length(rows),
                ncol = length(cols),
-               dimnames = list(rows, cols))
+               dimnames = list(rows, cols), byrow = TRUE)
   
   z <- as.data.frame(mm)
   z
