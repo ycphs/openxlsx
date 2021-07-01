@@ -422,11 +422,16 @@ wb_to_df <- function(xlsxFile,
   
   # could make it optional or explicit
   if (convert) {
-    nums <- names(types[types == 1])
-    dtes <- names(types[types == 2])
     
-    z[nums] <- lapply(z[nums], as.numeric)
-    z[dtes] <- lapply(z[dtes], as.Date)
+    if (!any(is.na(names(types)))) {
+      nums <- names(types[types == 1])
+      dtes <- names(types[types == 2])
+      
+      z[nums] <- lapply(z[nums], as.numeric)
+      z[dtes] <- lapply(z[dtes], as.Date)
+    } else {
+      warning("could not convert. Missing in row used for variable names")
+    }
   }
   
   attr(z, "tt") <- tt

@@ -62,7 +62,7 @@ writeData2 <-function(wb, sheet, data,
   
   
   
-  sheet_data <- list()
+  
   
   # create a data frame
   if (!is_data_frame)
@@ -79,64 +79,68 @@ writeData2 <-function(wb, sheet, data,
                  ":",
                  int2col(endCol), endRow)
   
-  wb$worksheets[[sheetno]]$dimension <- paste0("<dimension ref=\"", dims, "\"/>")
-  
-  # rtyp character vector per row 
-  # list(c("A1, ..., "k1"), ...,  c("An", ..., "kn"))
-  rtyp <- openxlsx:::dims_to_dataframe(dims, fill = TRUE)
-  
-  rows_attr <- cols_attr <- cc <- vector("list", data_nrow)
-  
-  cols_attr <- lapply(seq_len(data_nrow),
-                      function(x) list(collapsed="false",
-                                       customWidth="true",
-                                       hidden="false",
-                                       outlineLevel="0",
-                                       max="121",
-                                       min="1",
-                                       style="0",
-                                       width="9.14"))
-  
-  wb$worksheets[[sheetno]]$cols_attr <- openxlsx:::list_to_attr(cols_attr, "col")
-  
-  
-  
-  rows_attr <- lapply(startRow:endRow,
-                      function(x) list("r" = as.character(x),
-                                       "spans" = paste0("1:", data_ncol),
-                                       "x14ac:dyDescent"="0.25"))
-  names(rows_attr) <- rownames(rtyp)
-  
-  wb$worksheets[[sheetno]]$sheet_data$row_attr <- rows_attr
-  
-  
-  
-  
-  numcell <- function(x,y){
-    list(val = list(v = as.character(x)),
-         typ = list(r = y),
-         attr = list(empty = "empty"))
-  }
-  
-  chrcell <- function(x,y){
-    list(val = list(v = x),
-         typ = list(r = y, t = "str"),
-         attr = list(empty = "empty"))
-  }
-  
-  cell <- function(x, y, data_class) {
-    z <- NULL
-    if (data_class == "numeric")
-      z <- numcell(x,y)
-    if (data_class %in% c("character", "factor"))
-      z <- chrcell(x,y)
+  if (class(wb$worksheets[[sheetno]]$sheet_data$cc) == "uninitializedField") {
     
-    z
-  }
-  
-  
-  for (i in seq_len(nrow(data))) {
-  
+    
+    sheet_data <- list()
+    wb$worksheets[[sheetno]]$dimension <- paste0("<dimension ref=\"", dims, "\"/>")
+    
+    # rtyp character vector per row 
+    # list(c("A1, ..., "k1"), ...,  c("An", ..., "kn"))
+    rtyp <- openxlsx:::dims_to_dataframe(dims, fill = TRUE)
+    
+    rows_attr <- cols_attr <- cc <- vector("list", data_nrow)
+    
+    cols_attr <- lapply(seq_len(data_nrow),
+                        function(x) list(collapsed="false",
+                                         customWidth="true",
+                                         hidden="false",
+                                         outlineLevel="0",
+                                         max="121",
+                                         min="1",
+                                         style="0",
+                                         width="9.14"))
+    
+    wb$worksheets[[sheetno]]$cols_attr <- openxlsx:::list_to_attr(cols_attr, "col")
+    
+    
+    
+    rows_attr <- lapply(startRow:endRow,
+                        function(x) list("r" = as.character(x),
+                                         "spans" = paste0("1:", data_ncol),
+                                         "x14ac:dyDescent"="0.25"))
+    names(rows_attr) <- rownames(rtyp)
+    
+    wb$worksheets[[sheetno]]$sheet_data$row_attr <- rows_attr
+    
+    
+    
+    
+    numcell <- function(x,y){
+      list(val = list(v = as.character(x)),
+           typ = list(r = y),
+           attr = list(empty = "empty"))
+    }
+    
+    chrcell <- function(x,y){
+      list(val = list(v = x),
+           typ = list(r = y, t = "str"),
+           attr = list(empty = "empty"))
+    }
+    
+    cell <- function(x, y, data_class) {
+      z <- NULL
+      if (data_class == "numeric")
+        z <- numcell(x,y)
+      if (data_class %in% c("character", "factor"))
+        z <- chrcell(x,y)
+      
+      z
+    }
+    
+    
+    for (i in seq_len(nrow(data))) {
+      
       col <- vector("list", ncol(data))
       for (j in seq_along(data)) {
         dc <- ifelse(colNames && i == 1, "character", data_class[j])
@@ -145,15 +149,19 @@ writeData2 <-function(wb, sheet, data,
       names(col) <- colnames(rtyp)
       
       cc[[i]] <- col
+    }
+    names(cc) <- rownames(rtyp)
+    
+    wb$worksheets[[sheetno]]$sheet_data$cc <- cc
+    
+    # update a few styles informations
+    wb$styles$numFmts <- character(0)
+    wb$styles$cellXfs <- "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>"
+    wb$styles$dxfs <- character(0)
+  } else {
+    # update cell(s)
+    wb <- update_cell(x = data, wb, sheetno, dims, data_class, colNames)
   }
-  names(cc) <- rownames(rtyp)
-  
-  wb$worksheets[[sheetno]]$sheet_data$cc <- cc
-  
-  # update a few styles informations
-  wb$styles$numFmts <- character(0)
-  wb$styles$cellXfs <- "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>"
-  wb$styles$dxfs <- character(0)
   
   wb 
 }

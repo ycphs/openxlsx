@@ -193,6 +193,18 @@ class(df$z) <- c(class(df$z), "formula")
 
 writeData(wb, sheet = "Formula", x = df)
 
+###########################################################################
+# update cell range and add mtcars 
+xlsxFile <- system.file("extdata", "inlinestr.xlsx", package = "openxlsx")
+wb2 <- loadWorkbook(xlsxFile)
+
+# read dataset with inlinestr
+wb_to_df(wb2)
+# read.xlsx(wb2)
+writeData(wb2, 1, mtcars, startCol = 4, startRow = 4)
+wb_to_df(wb2)
+saveWorkbook(wb2, "/tmp/test.xlsx", overwrite = TRUE)
+
 
 #####################################################################################
 ## Save workbook
