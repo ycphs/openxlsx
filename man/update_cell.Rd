@@ -4,7 +4,7 @@
 \alias{update_cell}
 \title{replace data in a single cell}
 \usage{
-update_cell(x, wb, sheet, cell, data_class, colNames)
+update_cell(x, wb, sheet, cell, data_class, colNames = FALSE)
 }
 \arguments{
 \item{x}{value you want to insert}
@@ -14,6 +14,10 @@ update_cell(x, wb, sheet, cell, data_class, colNames)
 \item{sheet}{the sheet you want to update}
 
 \item{cell}{the cell you want to update in Excel conotation e.g. "A1"}
+
+\item{data_class}{optional data class object}
+
+\item{colNames}{if TRUE colNames are passed down}
 }
 \description{
 Minimal invasive update of a single cell for imported workbooks.
@@ -23,5 +27,11 @@ Minimal invasive update of a single cell for imported workbooks.
    wb <- loadWorkbook(xlsxFile)
    wb <- update_cell(x = c(1:3), wb = wb, sheet = "Sheet1", cell = "D4:D6")
    wb <- update_cell(x = c("x", "y", "z"), wb = wb, sheet = "Sheet1", cell = "B3:D3")
+   wb <- update_cell(x = 7, wb = wb, sheet = "Sheet1", cell = "D4")
+   
+   wb <- loadWorkbook(xlsxFile)
    wb <- update_cell(x = 7, wb = wb, sheet = "Sheet1", cell = "A4")
+   
+   wb_to_df(wb)
+   
 }

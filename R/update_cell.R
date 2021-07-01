@@ -7,6 +7,8 @@
 #' @param wb the workbook you want to update
 #' @param sheet the sheet you want to update
 #' @param cell the cell you want to update in Excel conotation e.g. "A1"
+#' @param data_class optional data class object
+#' @param colNames if TRUE colNames are passed down
 #' 
 #' @examples 
 #'    xlsxFile <- system.file("extdata", "update_test.xlsx", package = "openxlsx")

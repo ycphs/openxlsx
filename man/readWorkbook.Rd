@@ -15,11 +15,8 @@ readWorkbook(
   skipEmptyCols = TRUE,
   rows = NULL,
   cols = NULL,
-  check.names = FALSE,
-  sep.names = ".",
-  namedRegion = NULL,
-  na.strings = "NA",
-  fillMergedCells = FALSE
+  namedRegion,
+  na.strings = "NA"
 )
 }
 \arguments{
@@ -47,16 +44,9 @@ If NULL, all rows are read.}
 \item{cols}{A numeric vector specifying which columns in the Excel file to read.
 If NULL, all columns are read.}
 
-\item{check.names}{logical. If TRUE then the names of the variables in the data frame
-are checked to ensure that they are syntactically valid variable names}
-
-\item{sep.names}{One character which substitutes blanks in column names. By default, "."}
-
 \item{namedRegion}{A named region in the Workbook. If not NULL startRow, rows and cols parameters are ignored.}
 
 \item{na.strings}{A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.}
-
-\item{fillMergedCells}{If TRUE, the value in a merged cell is given to all cells within the merge.}
 }
 \value{
 data.frame
