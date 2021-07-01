@@ -517,7 +517,7 @@ SEXP getXMLXPtr2attr(XPtrXML doc, std::string level1, std::string child) {
        worksheet = worksheet.next_sibling(child.c_str()))
   {
     
-    Rcpp::CharacterVector res;
+    Rcpp::List res;
     std::vector<std::string> nam;
     
     for (pugi::xml_attribute attr = worksheet.first_attribute();
@@ -548,7 +548,7 @@ SEXP getXMLXPtr3attr(XPtrXML doc, std::string level1, std::string level2, std::s
        worksheet = worksheet.next_sibling(child.c_str()))
   {
     
-    Rcpp::CharacterVector res;
+    Rcpp::List res;
     std::vector<std::string> nam;
     
     for (pugi::xml_attribute attr = worksheet.first_attribute();
@@ -602,7 +602,7 @@ SEXP getXMLXPtr4attr(XPtrXML doc, std::string level1, std::string level2, std::s
          row = row.next_sibling(child.c_str()))
     {
       
-      Rcpp::CharacterVector res;
+      Rcpp::List res;
       std::vector<std::string> nam;
       
       for (pugi::xml_attribute attr = row.first_attribute();
@@ -677,7 +677,7 @@ SEXP getXMLXPtr5attr(XPtrXML doc, std::string level1, std::string level2, std::s
            col = col.next_sibling(child.c_str()))
       {
         
-        Rcpp::CharacterVector res;
+        Rcpp::List res;
         std::vector<std::string> nam;
         
         for (pugi::xml_attribute attr = col.first_attribute();
