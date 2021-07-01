@@ -1107,6 +1107,8 @@ Workbook$methods(
   updateSharedStrings = function(uNewStr) {
     ## Function will return named list of references to new strings
     uStr <- uNewStr[which(!uNewStr %in% sharedStrings)]
+   
+    
     uCount <- attr(sharedStrings, "uniqueCount")
     sharedStrings <<- append(sharedStrings, uStr)
 

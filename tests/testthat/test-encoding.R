@@ -95,10 +95,8 @@ test_that("Unicode escapes",{
   test_char <- "_topic_ext_xb025_tm"
   df <- data.frame(col = test_char)
   tmp_file <- openxlsx:::temp_xlsx()
-  tmp_file<-"test1.xlsx"
   write.xlsx(df,tmp_file)
-  df1<-read.xlsx(tmp_file)
-  print(df1)
-  print(df)
+  df1 <- read.xlsx(tmp_file,sheet = 1)
+  expect_equal(df,df1)
 })
 

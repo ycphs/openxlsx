@@ -281,12 +281,13 @@ Number of characters exeed the limit of 32767."
       # v[i] <- stri_sub(v[i], 1, 32767)
     }
     
+    newStrs<-as.character(unlist(sapply(newStrs,add_escape_unicode)))
     newStrs <- stri_join("<si><t xml:space=\"preserve\">",newStrs, "</t></si>")
     
     uNewStr <- unique(newStrs)
     
-    uNewStr<-sapply(uNewStr,add_escape_unicode)
 
+    
     .self$updateSharedStrings(uNewStr)
     v[strFlag] <- match(newStrs, sharedStrings) - 1L
   }
