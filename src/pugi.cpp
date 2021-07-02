@@ -307,9 +307,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
   std::vector<std::string> rownames;
   
   
-  for (pugi::xml_node worksheet = ws.child("row");
-       worksheet;
-       worksheet = worksheet.next_sibling())
+  for (auto worksheet: ws.children("row"))
   {
     size_t k = std::distance(worksheet.begin(), worksheet.end());
     auto itr_cols = 0;
@@ -321,22 +319,20 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
     /* ---------------------------------------------------------------------- */
     /* read cval, and ctyp -------------------------------------------------- */
     /* ---------------------------------------------------------------------- */
-    
-    for (pugi::xml_node col = worksheet.child("c");
-         col;
-         col = col.next_sibling())
+
+    for (auto col : worksheet.children("c"))
     {
-      
+
       Rcpp::List cc_cell(3);
-      
-      
+
+
       auto nn = std::distance(col.children().begin(), col.children().end());
       auto tt = nn; if (tt == 0) ++tt;
-      
+
       Rcpp::List v_c(tt), t_c, a_c;
       std::vector<std::string> val_name, typ_name, atr_name;
-      
-      
+
+
       // get r attr e.g. "A1" and return colnames "A"
       std::string colrow = col.attribute("r").value();
       // remove numeric from string
@@ -345,47 +341,41 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
                                   &isdigit),
                                   colrow.end());
       colnames.push_back(colrow);
-      
-      
+
+
       // typ: attribute ------------------------------------------------------
-      for (pugi::xml_attribute attr = col.first_attribute();
-           attr;
-           attr = attr.next_attribute())
+      for (auto attr : col.attributes())
       {
         typ_name.push_back(attr.name());
         t_c.push_back(attr.value());
       }
-      
+
       // val -------------------------------------------------------------------
-      
+
       if (nn > 0) {
         auto val_itr = 0;
-        for (pugi::xml_node val = col.first_child();
-             val;
-             val = val.next_sibling())
+        for (auto val: col.children())
         {
-          
+
           std::string val_s = "";
           std::string val_n = "";
-          
-          
+
+
           // additional attributes to <f t="shared" ...>
-          for (pugi::xml_attribute cattr = val.first_attribute();
-               cattr;
-               cattr = cattr.next_attribute())
+          for (auto cattr : val.attributes())
           {
             atr_name.push_back(cattr.name());
             a_c.push_back(cattr.value());
           }
-          
+
           if (a_c.length() == 0) {
             atr_name.push_back("empty");
             a_c.push_back("empty");
           }
-          
-          
+
+
           val_n = val.name();
-          
+
           // is nodes contain additional t node.
           // TODO: check if multiple t nodes are possible, for now return one.
           if (val.child("t")) {
@@ -394,7 +384,7 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
           } else {
             val_s = val.child_value();
           }
-          
+
           val_name.push_back(val_n);
           v_c[val_itr] = val_s;
           ++val_itr;
@@ -405,53 +395,51 @@ void loadvals(Rcpp::Reference wb, XPtrXML doc) {
         std::string val_n = "empty";
         val_name.push_back(val_n);
         v_c[0] = val_s;
-        
+
         // is empty too
         atr_name.push_back("empty");
         a_c.push_back("empty");
       }
-      
+
       v_c.attr("names") = val_name;
       t_c.attr("names") = typ_name;
       a_c.attr("names") = atr_name;
-      
+
       cc_cell[0] = v_c;
       cc_cell[1] = t_c;
       cc_cell[2] = a_c;
-      
+
       std::vector<std::string> cc_cell_nam = {"val", "typ", "attr"};
       cc_cell.attr("names") = cc_cell_nam;
-      
+
       cc_r[itr_cols] = cc_cell;
-      
+
       /* row is done */
       ++itr_cols;
     }
-    
-    
+
+
     /* row attributes ------------------------------------------------------- */
-    
+
     Rcpp::List row_attr;
     std::vector<std::string> row_attr_nam;
-    
-    for (pugi::xml_attribute attr = worksheet.first_attribute();
-         attr;
-         attr = attr.next_attribute())
+
+    for (auto attr : worksheet.attributes())
     {
       row_attr_nam.push_back(attr.name());
       row_attr.push_back(attr.value());
-      
+
       // push row name back (will assign it to list)
       if (attr.name() == r_str)
         rownames.push_back(attr.value());
-      
+
     }
     row_attr.attr("names") = row_attr_nam;
-    
+
     row_attributes[itr_rows] = row_attr;
-    
+
     /* ---------------------------------------------------------------------- */
-    
+
     cc_r.attr("names") = colnames;
     cc[itr_rows]  = cc_r;
     
