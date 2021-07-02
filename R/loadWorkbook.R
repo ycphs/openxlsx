@@ -56,8 +56,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   # .relsXML           <- xmlFiles[grepl("_rels/.rels$", xmlFiles, perl = TRUE)]
   # appXML             <- xmlFiles[grepl("app.xml$", xmlFiles, perl = TRUE)]
   
-  xmlFiles <<- xmlFiles
-  ContentTypesXML <<- xmlFiles[grepl("\\[Content_Types\\].xml$", xmlFiles, perl = TRUE)]
+  ContentTypesXML <- xmlFiles[grepl("\\[Content_Types\\].xml$", xmlFiles, perl = TRUE)]
 
   drawingsXML <- xmlFiles[grepl("drawings/drawing[0-9]+.xml$", xmlFiles, perl = TRUE)]
   worksheetsXML <- xmlFiles[grepl("/worksheets/sheet[0-9]+", xmlFiles, perl = TRUE)]
@@ -75,7 +74,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   commentsXML <- xmlFiles[grepl("xl/comments[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   threadCommentsXML <- xmlFiles[grepl("xl/threadedComments/threadedComment[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   personXML <- xmlFiles[grepl("xl/persons/person.xml$", xmlFiles, perl = TRUE)]
-  commentsrelXML <<- xmlFiles[grepl("xl/worksheets/_rels/sheet[0-9]+\\.xml", xmlFiles, perl = TRUE)]
+  commentsrelXML <- xmlFiles[grepl("xl/worksheets/_rels/sheet[0-9]+\\.xml", xmlFiles, perl = TRUE)]
   embeddings <- xmlFiles[grepl("xl/embeddings", xmlFiles, perl = TRUE)]
 
   charts <- xmlFiles[grepl("xl/charts/.*xml$", xmlFiles, perl = TRUE)]
