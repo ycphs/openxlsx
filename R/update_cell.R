@@ -53,7 +53,7 @@ update_cell <- function(x, wb, sheet, cell, data_class, colNames = FALSE) {
 
   # 1) pull sheet to modify from workbook; 2) modify it; 3) push it back
   cc  <- wb$worksheets[[sheet_id]]$sheet_data$cc
-  row_attr <- wb2$worksheets[[sheet_id]]$sheet_data$row_attr
+  row_attr <- wb$worksheets[[sheet_id]]$sheet_data$row_attr
   
   # workbooks contain only entries for values currently present.
   # if A1 is filled, B1 is not filled and C1 is filled the sheet will only
