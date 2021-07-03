@@ -626,39 +626,6 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# openPrimeR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # PloGO2
 
 <details>
@@ -693,39 +660,6 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 ```
 # rbiom
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# RIPAT
 
 <details>
 
