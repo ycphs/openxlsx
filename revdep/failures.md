@@ -64,79 +64,6 @@
 
 
 ```
-# bibliometrix
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘boot’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-...
-  cannot open URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘brio’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘brio’ failed
-
-
-```
-### CRAN
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/boot_1.3-28.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘boot’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-...
-  cannot open URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/brio_1.1.2.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘brio’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘brio’ failed
-
-
-```
 # cbaf
 
 <details>
@@ -626,6 +553,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
+# openPrimeR
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # PloGO2
 
 <details>
@@ -660,6 +620,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 ```
 # rbiom
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# RIPAT
 
 <details>
 
