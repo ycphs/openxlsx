@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-02                   |
+|date     |2021-06-30                   |
 
 # Dependencies
 
@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (26)
+## Failed to check (24)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -42,10 +42,8 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
 |sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
 |stplanr        |?       |      |        |     |
