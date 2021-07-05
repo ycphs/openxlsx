@@ -12,7 +12,6 @@
 |tz       |UTC                          |
 |date     |2021-07-05                   |
 
-
 # Dependencies
 
 |package  |old   |new        |Δ  |
@@ -24,15 +23,13 @@
 
 # Revdeps
 
-
 ## Failed to check (28)
-
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|cbaf           |?       |      |        |     |
+|bibliometrix   |3.1.4   |1     |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -46,10 +43,11 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
+|openPrimeR     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |1       |2    |
 |RIPAT          |?       |      |        |     |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
