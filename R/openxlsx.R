@@ -137,7 +137,7 @@ openxlsx_setOp <- function(x, value) {
       stop("x cannot be an unnamed list", call. = FALSE)
     }
     
-    return(invisible(mapply(openxlsx_setOp, x = names(x), value = x)))
+    mapply(openxlsx_setOp, x = names(x), value = x)
   }
   
   value <- as.list(value)

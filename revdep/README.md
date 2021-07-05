@@ -12,6 +12,7 @@
 |tz       |UTC                          |
 |date     |2021-07-05                   |
 
+
 # Dependencies
 
 |package  |old   |new        |Δ  |
@@ -23,7 +24,9 @@
 
 # Revdeps
 
+
 ## Failed to check (28)
+
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -43,11 +46,10 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |1       |2    |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
