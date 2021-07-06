@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-05                   |
+|date     |2021-07-06                   |
 
 # Dependencies
 
@@ -51,9 +51,7 @@
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
-|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.0  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
