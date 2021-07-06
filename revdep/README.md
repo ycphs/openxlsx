@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-03                   |
+|date     |2021-07-05                   |
 
 # Dependencies
 
@@ -23,13 +23,13 @@
 
 # Revdeps
 
-## Failed to check (30)
+## Failed to check (28)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|cbaf           |?       |      |        |     |
+|bibliometrix   |3.1.4   |1     |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |

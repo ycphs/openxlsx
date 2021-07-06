@@ -64,36 +64,67 @@
 
 
 ```
-# cbaf
+# bibliometrix
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 3.1.4
+* GitHub: https://github.com/massimoaria/bibliometrix
+* Source code: https://github.com/cran/bibliometrix
+* Date/Publication: 2021-07-05 14:40:05 UTC
+* Number of recursive dependencies: 163
+
+Run `revdep_details(, "bibliometrix")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘bibliometrix’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/bibliometrix/new/bibliometrix.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘bibliometrix’ ...
+** package ‘bibliometrix’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/bibliometrix/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘bibliometrix’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/bibliometrix/new/bibliometrix.Rcheck/bibliometrix’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘bibliometrix’ ...
+** package ‘bibliometrix’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/bibliometrix/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘bibliometrix’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/bibliometrix/old/bibliometrix.Rcheck/bibliometrix’
 
 
 ```
