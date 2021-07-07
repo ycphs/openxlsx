@@ -89,7 +89,7 @@
 
       
 
-      </header><script src="Introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="Introduction_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction</h1>
@@ -460,135 +460,135 @@ cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span cla
 <div id="image-compression-using-pca" class="section level3">
 <h3 class="hasAnchor">
 <a href="#image-compression-using-pca" class="anchor"></a>Image Compression using PCA</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">require</span>(openxlsx)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">require</span>(jpeg)</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">require</span>(ggplot2)</span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>plotFn &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...){</span>
-<span id="cb17-6"><a href="#cb17-6"></a>  colvec &lt;-<span class="st"> </span><span class="kw">grey</span>(x)</span>
-<span id="cb17-7"><a href="#cb17-7"></a>  colmat &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">match</span>(colvec, <span class="kw">unique</span>(colvec)), <span class="dt">dim =</span> <span class="kw">dim</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span>
-<span id="cb17-8"><a href="#cb17-8"></a>  <span class="kw">image</span>(<span class="dt">x =</span> <span class="dv">0</span><span class="op">:</span>(<span class="kw">dim</span>(colmat)[<span class="dv">2</span>]), <span class="dt">y =</span> <span class="dv">0</span><span class="op">:</span>(<span class="kw">dim</span>(colmat)[<span class="dv">1</span>]), <span class="dt">z =</span> <span class="kw">t</span>(colmat[<span class="kw">nrow</span>(colmat)<span class="op">:</span><span class="dv">1</span>, ]),</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    <span class="dt">col =</span> <span class="kw">unique</span>(colvec), <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">""</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">asp =</span> <span class="dv">1</span>,</span>
-<span id="cb17-10"><a href="#cb17-10"></a>    <span class="dt">bty =</span><span class="st">"n"</span>, <span class="dt">frame.plot=</span>F, <span class="dt">ann=</span><span class="ot">FALSE</span>)</span>
-<span id="cb17-11"><a href="#cb17-11"></a>}</span>
-<span id="cb17-12"><a href="#cb17-12"></a></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="co">## Create workbook and add a worksheet, hide gridlines</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a>wb &lt;-<span class="st"> </span><span class="kw">createWorkbook</span>(<span class="st">"Einstein"</span>)</span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="kw">addWorksheet</span>(wb, <span class="st">"Original Image"</span>, <span class="dt">gridLines =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb17-16"><a href="#cb17-16"></a></span>
-<span id="cb17-17"><a href="#cb17-17"></a>A &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">file.path</span>(<span class="kw">path.package</span>(<span class="st">"openxlsx"</span>), <span class="st">"einstein.jpg"</span>))</span>
-<span id="cb17-18"><a href="#cb17-18"></a>height &lt;-<span class="st"> </span><span class="kw">nrow</span>(A); width &lt;-<span class="st"> </span><span class="kw">ncol</span>(A)</span>
-<span id="cb17-19"><a href="#cb17-19"></a></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="co">## write "Original Image" to cell B2</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="kw">writeData</span>(wb, <span class="dv">1</span>, <span class="st">"Original Image"</span>, <span class="dt">xy =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb17-22"><a href="#cb17-22"></a></span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="co">## write Object size to cell B3</span></span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="kw">writeData</span>(wb, <span class="dv">1</span>, <span class="kw">sprintf</span>(<span class="st">"Image object size: %s bytes"</span>,</span>
-<span id="cb17-25"><a href="#cb17-25"></a>                         <span class="kw">format</span>(<span class="kw">object.size</span>(A<span class="op">+</span><span class="dv">0</span>)[[<span class="dv">1</span>]], <span class="dt">big.mark=</span><span class="st">','</span>)), </span>
-<span id="cb17-26"><a href="#cb17-26"></a>          <span class="dt">xy =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))  <span class="co">## equivalent to startCol = 2, startRow = 3</span></span>
-<span id="cb17-27"><a href="#cb17-27"></a></span>
-<span id="cb17-28"><a href="#cb17-28"></a><span class="co">## Plot image</span></span>
-<span id="cb17-29"><a href="#cb17-29"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="dt">xpd =</span> <span class="ot">NA</span>); <span class="kw">plotFn</span>(A)</span>
-<span id="cb17-30"><a href="#cb17-30"></a></span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="co">## insert plot currently showing in plot window</span></span>
-<span id="cb17-32"><a href="#cb17-32"></a><span class="kw">insertPlot</span>(wb, <span class="dv">1</span>, width, height, <span class="dt">units=</span><span class="st">"px"</span>, <span class="dt">startRow=</span> <span class="dv">5</span>, <span class="dt">startCol =</span> <span class="dv">2</span>)       </span>
-<span id="cb17-33"><a href="#cb17-33"></a></span>
-<span id="cb17-34"><a href="#cb17-34"></a><span class="co">## SVD of covariance matrix</span></span>
-<span id="cb17-35"><a href="#cb17-35"></a>rMeans &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(A)</span>
-<span id="cb17-36"><a href="#cb17-36"></a>rowMeans &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">"cbind"</span>, <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(A), <span class="cf">function</span>(X) rMeans))</span>
-<span id="cb17-37"><a href="#cb17-37"></a>A &lt;-<span class="st"> </span>A <span class="op">-</span><span class="st"> </span>rowMeans</span>
-<span id="cb17-38"><a href="#cb17-38"></a>E &lt;-<span class="st"> </span><span class="kw">svd</span>(A <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(A) <span class="op">/</span><span class="st"> </span>(<span class="kw">ncol</span>(A) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># SVD on covariance matrix of A</span></span>
-<span id="cb17-39"><a href="#cb17-39"></a>pve &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"Eigenvalues"</span> =<span class="st"> </span>E<span class="op">$</span>d, </span>
-<span id="cb17-40"><a href="#cb17-40"></a>                  <span class="st">"PVE"</span> =<span class="st"> </span>E<span class="op">$</span>d<span class="op">/</span><span class="kw">sum</span>(E<span class="op">$</span>d),</span>
-<span id="cb17-41"><a href="#cb17-41"></a>                  <span class="st">"Cumulative PVE"</span> =<span class="st"> </span><span class="kw">cumsum</span>(E<span class="op">$</span>d<span class="op">/</span><span class="kw">sum</span>(E<span class="op">$</span>d)))</span>
-<span id="cb17-42"><a href="#cb17-42"></a></span>
-<span id="cb17-43"><a href="#cb17-43"></a><span class="co">## write eigenvalues to worksheet</span></span>
-<span id="cb17-44"><a href="#cb17-44"></a><span class="kw">addWorksheet</span>(wb, <span class="st">"Principal Component Analysis"</span>)</span>
-<span id="cb17-45"><a href="#cb17-45"></a>hs &lt;-<span class="st"> </span><span class="kw">createStyle</span>(<span class="dt">fontColour =</span> <span class="st">"#ffffff"</span>, <span class="dt">fgFill =</span> <span class="st">"#4F80BD"</span>,</span>
-<span id="cb17-46"><a href="#cb17-46"></a>                  <span class="dt">halign =</span> <span class="st">"CENTER"</span>, <span class="dt">textDecoration =</span> <span class="st">"Bold"</span>,</span>
-<span id="cb17-47"><a href="#cb17-47"></a>                  <span class="dt">border =</span> <span class="st">"TopBottomLeftRight"</span>, <span class="dt">borderColour =</span> <span class="st">"#4F81BD"</span>)</span>
-<span id="cb17-48"><a href="#cb17-48"></a></span>
-<span id="cb17-49"><a href="#cb17-49"></a><span class="kw">writeData</span>(wb, <span class="dv">2</span>, <span class="dt">x=</span><span class="st">"Proportions of variance explained by Eigenvector"</span> ,<span class="dt">startRow =</span> <span class="dv">2</span>)</span>
-<span id="cb17-50"><a href="#cb17-50"></a><span class="kw">mergeCells</span>(wb, <span class="dt">sheet=</span><span class="dv">2</span>, <span class="dt">cols=</span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">rows=</span><span class="dv">2</span>)</span>
-<span id="cb17-51"><a href="#cb17-51"></a></span>
-<span id="cb17-52"><a href="#cb17-52"></a><span class="kw">setColWidths</span>(wb, <span class="dv">2</span>, <span class="dt">cols =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">widths =</span> <span class="kw">c</span>(<span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">15</span>))</span>
-<span id="cb17-53"><a href="#cb17-53"></a><span class="kw">writeData</span>(wb, <span class="dv">2</span>, <span class="dt">x=</span>pve, <span class="dt">startRow =</span> <span class="dv">3</span>, <span class="dt">startCol =</span> <span class="dv">1</span>, <span class="dt">borders=</span><span class="st">"rows"</span>, <span class="dt">headerStyle=</span>hs)</span>
-<span id="cb17-54"><a href="#cb17-54"></a></span>
-<span id="cb17-55"><a href="#cb17-55"></a><span class="co">## Plots</span></span>
-<span id="cb17-56"><a href="#cb17-56"></a>pve &lt;-<span class="st"> </span><span class="kw">cbind</span>(pve, <span class="st">"Ind"</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(pve))</span>
-<span id="cb17-57"><a href="#cb17-57"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> pve[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,], <span class="kw">aes</span>(<span class="dt">x =</span> Ind, <span class="dt">y =</span> <span class="dv">100</span><span class="op">*</span>PVE)) <span class="op">+</span></span>
-<span id="cb17-58"><a href="#cb17-58"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">"identity"</span>, <span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span></span>
-<span id="cb17-59"><a href="#cb17-59"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Principal Component Index"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">"Proportion of Variance Explained"</span>) <span class="op">+</span></span>
-<span id="cb17-60"><a href="#cb17-60"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb17-61"><a href="#cb17-61"></a></span>
-<span id="cb17-62"><a href="#cb17-62"></a><span class="co">## Write plot to worksheet 2</span></span>
-<span id="cb17-63"><a href="#cb17-63"></a><span class="kw">insertPlot</span>(wb, <span class="dv">2</span>, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">height =</span> <span class="dv">4</span>, <span class="dt">startCol =</span> <span class="st">"E"</span>, <span class="dt">startRow =</span> <span class="dv">2</span>) </span>
-<span id="cb17-64"><a href="#cb17-64"></a></span>
-<span id="cb17-65"><a href="#cb17-65"></a><span class="co">## Plot of cumulative explained variance</span></span>
-<span id="cb17-66"><a href="#cb17-66"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> pve[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>,], <span class="kw">aes</span>(<span class="dt">x =</span> Ind, <span class="dt">y =</span> <span class="dv">100</span><span class="op">*</span>Cumulative.PVE)) <span class="op">+</span></span>
-<span id="cb17-67"><a href="#cb17-67"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="fl">2.5</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">"Number of PCs"</span>) <span class="op">+</span></span>
-<span id="cb17-68"><a href="#cb17-68"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Cumulative Proportion of Variance Explained"</span>)</span>
-<span id="cb17-69"><a href="#cb17-69"></a><span class="kw">insertPlot</span>(wb, <span class="dv">2</span>, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">height =</span> <span class="dv">4</span>, <span class="dt">xy=</span> <span class="kw">c</span>(<span class="st">"M"</span>, <span class="dv">2</span>)) </span>
-<span id="cb17-70"><a href="#cb17-70"></a></span>
-<span id="cb17-71"><a href="#cb17-71"></a></span>
-<span id="cb17-72"><a href="#cb17-72"></a><span class="co">## Reconstruct image using increasing number of PCs</span></span>
-<span id="cb17-73"><a href="#cb17-73"></a>nPCs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">200</span>)</span>
-<span id="cb17-74"><a href="#cb17-74"></a>startRow &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">24</span>), <span class="dt">each =</span> <span class="dv">3</span>)</span>
-<span id="cb17-75"><a href="#cb17-75"></a>startCol &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"B"</span>, <span class="st">"H"</span>, <span class="st">"N"</span>), <span class="dv">2</span>)</span>
-<span id="cb17-76"><a href="#cb17-76"></a></span>
-<span id="cb17-77"><a href="#cb17-77"></a><span class="co">## create a worksheet to save reconstructed images to</span></span>
-<span id="cb17-78"><a href="#cb17-78"></a><span class="kw">addWorksheet</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="dt">zoom =</span> <span class="dv">90</span>)</span>
-<span id="cb17-79"><a href="#cb17-79"></a></span>
-<span id="cb17-80"><a href="#cb17-80"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(nPCs)){</span>
-<span id="cb17-81"><a href="#cb17-81"></a>  </span>
-<span id="cb17-82"><a href="#cb17-82"></a>  V &lt;-<span class="st"> </span>E<span class="op">$</span>v[, <span class="dv">1</span><span class="op">:</span>nPCs[i]]</span>
-<span id="cb17-83"><a href="#cb17-83"></a>  imgHat &lt;-<span class="st"> </span><span class="kw">t</span>(V) <span class="op">%*%</span><span class="st"> </span>A  <span class="co">## project img data on to PCs</span></span>
-<span id="cb17-84"><a href="#cb17-84"></a>  imgSize &lt;-<span class="st"> </span><span class="kw">object.size</span>(V) <span class="op">+</span><span class="st"> </span><span class="kw">object.size</span>(imgHat) <span class="op">+</span><span class="st"> </span><span class="kw">object.size</span>(rMeans)</span>
-<span id="cb17-85"><a href="#cb17-85"></a>  </span>
-<span id="cb17-86"><a href="#cb17-86"></a>  imgHat &lt;-<span class="st"> </span>V <span class="op">%*%</span><span class="st"> </span>imgHat <span class="op">+</span><span class="st"> </span>rowMeans  <span class="co">## reconstruct from PCs and add back row means</span></span>
-<span id="cb17-87"><a href="#cb17-87"></a>  imgHat &lt;-<span class="st"> </span><span class="kw">round</span>((imgHat <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(imgHat)) <span class="op">/</span><span class="st"> </span>(<span class="kw">max</span>(imgHat) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(imgHat))<span class="op">*</span><span class="dv">255</span>) <span class="co"># scale</span></span>
-<span id="cb17-88"><a href="#cb17-88"></a>  <span class="kw">plotFn</span>(imgHat<span class="op">/</span><span class="dv">255</span>)</span>
-<span id="cb17-89"><a href="#cb17-89"></a>  </span>
-<span id="cb17-90"><a href="#cb17-90"></a>  <span class="co">## write strings to worksheet 3</span></span>
-<span id="cb17-91"><a href="#cb17-91"></a>  <span class="kw">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
-<span id="cb17-92"><a href="#cb17-92"></a>            <span class="kw">sprintf</span>(<span class="st">"Number of principal components used:  %s"</span>, </span>
-<span id="cb17-93"><a href="#cb17-93"></a>                    nPCs[[i]]), startCol[i], startRow[i])</span>
-<span id="cb17-94"><a href="#cb17-94"></a>  </span>
-<span id="cb17-95"><a href="#cb17-95"></a>  <span class="kw">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
-<span id="cb17-96"><a href="#cb17-96"></a>            <span class="kw">sprintf</span>(<span class="st">"Sum of component object sizes: %s bytes"</span>,</span>
-<span id="cb17-97"><a href="#cb17-97"></a>                    <span class="kw">format</span>(<span class="kw">as.numeric</span>(imgSize), <span class="dt">big.mark=</span><span class="st">','</span>)), startCol[i], startRow[i]<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb17-98"><a href="#cb17-98"></a>  </span>
-<span id="cb17-99"><a href="#cb17-99"></a>  <span class="co">## write reconstruced image</span></span>
-<span id="cb17-100"><a href="#cb17-100"></a>  <span class="kw">insertPlot</span>(wb, <span class="st">"Reconstructed Images"</span>, width, height, <span class="dt">units=</span><span class="st">"px"</span>,</span>
-<span id="cb17-101"><a href="#cb17-101"></a>             <span class="dt">xy =</span> <span class="kw">c</span>(startCol[i], startRow[i]<span class="op">+</span><span class="dv">3</span>))</span>
-<span id="cb17-102"><a href="#cb17-102"></a>  </span>
-<span id="cb17-103"><a href="#cb17-103"></a>}</span>
-<span id="cb17-104"><a href="#cb17-104"></a></span>
-<span id="cb17-105"><a href="#cb17-105"></a><span class="co"># hide grid lines</span></span>
-<span id="cb17-106"><a href="#cb17-106"></a><span class="kw">showGridLines</span>(wb, <span class="dt">sheet =</span> <span class="dv">3</span>, <span class="dt">showGridLines =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb17-107"><a href="#cb17-107"></a></span>
-<span id="cb17-108"><a href="#cb17-108"></a><span class="co">## Make text above images BOLD</span></span>
-<span id="cb17-109"><a href="#cb17-109"></a>boldStyle &lt;-<span class="st"> </span><span class="kw">createStyle</span>(<span class="dt">textDecoration=</span><span class="st">"BOLD"</span>)</span>
-<span id="cb17-110"><a href="#cb17-110"></a></span>
-<span id="cb17-111"><a href="#cb17-111"></a><span class="co">## only want to apply style to specified cells (not all combinations of rows &amp; cols)</span></span>
-<span id="cb17-112"><a href="#cb17-112"></a><span class="kw">addStyle</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="dt">style=</span>boldStyle, </span>
-<span id="cb17-113"><a href="#cb17-113"></a>         <span class="dt">rows =</span> <span class="kw">c</span>(startRow, startRow<span class="op">+</span><span class="dv">1</span>), <span class="dt">cols =</span> <span class="kw">rep</span>(startCol, <span class="dv">2</span>), </span>
-<span id="cb17-114"><a href="#cb17-114"></a>         <span class="dt">gridExpand =</span> <span class="ot">FALSE</span>)  </span>
-<span id="cb17-115"><a href="#cb17-115"></a></span>
-<span id="cb17-116"><a href="#cb17-116"></a><span class="co">## save workbook to working directory</span></span>
-<span id="cb17-117"><a href="#cb17-117"></a><span class="kw">saveWorkbook</span>(wb, <span class="st">"Image dimensionality reduction.xlsx"</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>) </span>
-<span id="cb17-118"><a href="#cb17-118"></a></span>
-<span id="cb17-119"><a href="#cb17-119"></a></span>
-<span id="cb17-120"><a href="#cb17-120"></a></span>
-<span id="cb17-121"><a href="#cb17-121"></a></span>
-<span id="cb17-122"><a href="#cb17-122"></a><span class="co">## remove example files for cran test</span></span>
-<span id="cb17-123"><a href="#cb17-123"></a><span class="cf">if</span> (<span class="kw">identical</span>(<span class="kw">Sys.getenv</span>(<span class="st">"NOT_CRAN"</span>, <span class="dt">unset =</span> <span class="st">"true"</span>), <span class="st">"false"</span>)) {</span>
-<span id="cb17-124"><a href="#cb17-124"></a>file_list&lt;-<span class="kw">list.files</span>(<span class="dt">pattern=</span><span class="st">"</span><span class="ch">\\</span><span class="st">.xlsx"</span>,<span class="dt">recursive =</span> T)</span>
-<span id="cb17-125"><a href="#cb17-125"></a>file_list&lt;-fl[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">"inst/extdata"</span>,file_list)<span class="op">&amp;!</span><span class="kw">grepl</span>(<span class="st">"man/"</span>,file_list)]</span>
-<span id="cb17-126"><a href="#cb17-126"></a></span>
-<span id="cb17-127"><a href="#cb17-127"></a><span class="cf">if</span>(<span class="kw">length</span>(file_list)<span class="op">&gt;</span><span class="dv">0</span>){</span>
-<span id="cb17-128"><a href="#cb17-128"></a><span class="kw">rm</span>(file_list)</span>
-<span id="cb17-129"><a href="#cb17-129"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(openxlsx)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(jpeg)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plotFn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...){</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  colvec <span class="ot">&lt;-</span> <span class="fu">grey</span>(x)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  colmat <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">match</span>(colvec, <span class="fu">unique</span>(colvec)), <span class="at">dim =</span> <span class="fu">dim</span>(x)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">image</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>(<span class="fu">dim</span>(colmat)[<span class="dv">2</span>]), <span class="at">y =</span> <span class="dv">0</span><span class="sc">:</span>(<span class="fu">dim</span>(colmat)[<span class="dv">1</span>]), <span class="at">z =</span> <span class="fu">t</span>(colmat[<span class="fu">nrow</span>(colmat)<span class="sc">:</span><span class="dv">1</span>, ]),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">unique</span>(colvec), <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bty =</span><span class="st">"n"</span>, <span class="at">frame.plot=</span>F, <span class="at">ann=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Create workbook and add a worksheet, hide gridlines</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>(<span class="st">"Einstein"</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Original Image"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">readJPEG</span>(<span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">"openxlsx"</span>), <span class="st">"einstein.jpg"</span>))</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">nrow</span>(A); width <span class="ot">&lt;-</span> <span class="fu">ncol</span>(A)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="do">## write "Original Image" to cell B2</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">1</span>, <span class="st">"Original Image"</span>, <span class="at">xy =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="do">## write Object size to cell B3</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">1</span>, <span class="fu">sprintf</span>(<span class="st">"Image object size: %s bytes"</span>,</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">format</span>(<span class="fu">object.size</span>(A<span class="sc">+</span><span class="dv">0</span>)[[<span class="dv">1</span>]], <span class="at">big.mark=</span><span class="st">','</span>)), </span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">xy =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))  <span class="do">## equivalent to startCol = 2, startRow = 3</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot image</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">xpd =</span> <span class="cn">NA</span>); <span class="fu">plotFn</span>(A)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="do">## insert plot currently showing in plot window</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">1</span>, width, height, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">startRow=</span> <span class="dv">5</span>, <span class="at">startCol =</span> <span class="dv">2</span>)       </span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="do">## SVD of covariance matrix</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>rMeans <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(A)</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>rowMeans <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"cbind"</span>, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(A), <span class="cf">function</span>(X) rMeans))</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> A <span class="sc">-</span> rowMeans</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fu">svd</span>(A <span class="sc">%*%</span> <span class="fu">t</span>(A) <span class="sc">/</span> (<span class="fu">ncol</span>(A) <span class="sc">-</span> <span class="dv">1</span>)) <span class="co"># SVD on covariance matrix of A</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Eigenvalues"</span> <span class="ot">=</span> E<span class="sc">$</span>d, </span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"PVE"</span> <span class="ot">=</span> E<span class="sc">$</span>d<span class="sc">/</span><span class="fu">sum</span>(E<span class="sc">$</span>d),</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Cumulative PVE"</span> <span class="ot">=</span> <span class="fu">cumsum</span>(E<span class="sc">$</span>d<span class="sc">/</span><span class="fu">sum</span>(E<span class="sc">$</span>d)))</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="do">## write eigenvalues to worksheet</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Principal Component Analysis"</span>)</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>hs <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fontColour =</span> <span class="st">"#ffffff"</span>, <span class="at">fgFill =</span> <span class="st">"#4F80BD"</span>,</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>                  <span class="at">halign =</span> <span class="st">"CENTER"</span>, <span class="at">textDecoration =</span> <span class="st">"Bold"</span>,</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>                  <span class="at">border =</span> <span class="st">"TopBottomLeftRight"</span>, <span class="at">borderColour =</span> <span class="st">"#4F81BD"</span>)</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">2</span>, <span class="at">x=</span><span class="st">"Proportions of variance explained by Eigenvector"</span> ,<span class="at">startRow =</span> <span class="dv">2</span>)</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="fu">mergeCells</span>(wb, <span class="at">sheet=</span><span class="dv">2</span>, <span class="at">cols=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">rows=</span><span class="dv">2</span>)</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="dv">2</span>, <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">15</span>))</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">2</span>, <span class="at">x=</span>pve, <span class="at">startRow =</span> <span class="dv">3</span>, <span class="at">startCol =</span> <span class="dv">1</span>, <span class="at">borders=</span><span class="st">"rows"</span>, <span class="at">headerStyle=</span>hs)</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="do">## Plots</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pve, <span class="st">"Ind"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pve))</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pve[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,], <span class="fu">aes</span>(<span class="at">x =</span> Ind, <span class="at">y =</span> <span class="dv">100</span><span class="sc">*</span>PVE)) <span class="sc">+</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Principal Component Index"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Proportion of Variance Explained"</span>) <span class="sc">+</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="do">## Write plot to worksheet 2</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">2</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">startCol =</span> <span class="st">"E"</span>, <span class="at">startRow =</span> <span class="dv">2</span>) </span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot of cumulative explained variance</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pve[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,], <span class="fu">aes</span>(<span class="at">x =</span> Ind, <span class="at">y =</span> <span class="dv">100</span><span class="sc">*</span>Cumulative.PVE)) <span class="sc">+</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Number of PCs"</span>) <span class="sc">+</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Cumulative Proportion of Variance Explained"</span>)</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">2</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">xy=</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="dv">2</span>)) </span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="do">## Reconstruct image using increasing number of PCs</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>nPCs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">200</span>)</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>startRow <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">24</span>), <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>startCol <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"H"</span>, <span class="st">"N"</span>), <span class="dv">2</span>)</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="do">## create a worksheet to save reconstructed images to</span></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="at">zoom =</span> <span class="dv">90</span>)</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(nPCs)){</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> E<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span>nPCs[i]]</span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> <span class="fu">t</span>(V) <span class="sc">%*%</span> A  <span class="do">## project img data on to PCs</span></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>  imgSize <span class="ot">&lt;-</span> <span class="fu">object.size</span>(V) <span class="sc">+</span> <span class="fu">object.size</span>(imgHat) <span class="sc">+</span> <span class="fu">object.size</span>(rMeans)</span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> V <span class="sc">%*%</span> imgHat <span class="sc">+</span> rowMeans  <span class="do">## reconstruct from PCs and add back row means</span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> <span class="fu">round</span>((imgHat <span class="sc">-</span> <span class="fu">min</span>(imgHat)) <span class="sc">/</span> (<span class="fu">max</span>(imgHat) <span class="sc">-</span> <span class="fu">min</span>(imgHat))<span class="sc">*</span><span class="dv">255</span>) <span class="co"># scale</span></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotFn</span>(imgHat<span class="sc">/</span><span class="dv">255</span>)</span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write strings to worksheet 3</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sprintf</span>(<span class="st">"Number of principal components used:  %s"</span>, </span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>                    nPCs[[i]]), startCol[i], startRow[i])</span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sprintf</span>(<span class="st">"Sum of component object sizes: %s bytes"</span>,</span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">format</span>(<span class="fu">as.numeric</span>(imgSize), <span class="at">big.mark=</span><span class="st">','</span>)), startCol[i], startRow[i]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write reconstruced image</span></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insertPlot</span>(wb, <span class="st">"Reconstructed Images"</span>, width, height, <span class="at">units=</span><span class="st">"px"</span>,</span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>             <span class="at">xy =</span> <span class="fu">c</span>(startCol[i], startRow[i]<span class="sc">+</span><span class="dv">3</span>))</span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="co"># hide grid lines</span></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="fu">showGridLines</span>(wb, <span class="at">sheet =</span> <span class="dv">3</span>, <span class="at">showGridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a><span class="do">## Make text above images BOLD</span></span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>boldStyle <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration=</span><span class="st">"BOLD"</span>)</span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a><span class="do">## only want to apply style to specified cells (not all combinations of rows &amp; cols)</span></span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="at">style=</span>boldStyle, </span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>         <span class="at">rows =</span> <span class="fu">c</span>(startRow, startRow<span class="sc">+</span><span class="dv">1</span>), <span class="at">cols =</span> <span class="fu">rep</span>(startCol, <span class="dv">2</span>), </span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>         <span class="at">gridExpand =</span> <span class="cn">FALSE</span>)  </span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a><span class="do">## save workbook to working directory</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="st">"Image dimensionality reduction.xlsx"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a><span class="do">## remove example files for cran test</span></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">Sys.getenv</span>(<span class="st">"NOT_CRAN"</span>, <span class="at">unset =</span> <span class="st">"true"</span>), <span class="st">"false"</span>)) {</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>file_list<span class="ot">&lt;-</span><span class="fu">list.files</span>(<span class="at">pattern=</span><span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx"</span>,<span class="at">recursive =</span> T)</span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>file_list<span class="ot">&lt;-</span>fl[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"inst/extdata"</span>,file_list)<span class="sc">&amp;!</span><span class="fu">grepl</span>(<span class="st">"man/"</span>,file_list)]</span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(file_list)<span class="sc">&gt;</span><span class="dv">0</span>){</span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(file_list)</span>
+<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
   </div>
