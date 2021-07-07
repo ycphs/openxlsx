@@ -1,3 +1,4 @@
+
 test_that("option names are appropriate", {
   bad <- grep("^openxlsx[.].*", names(op.openxlsx), value = TRUE, invert = TRUE)
   expect_equal(bad, character(0))
@@ -38,11 +39,13 @@ test_that("changing options", {
   # Multiple Ops returns error
   expect_error(openxlsx_getOp(c("withFilter", "borders")), "length 1")
   
+  openxlsx_resetOp()
   options(op)
 })
 
 test_that("openxlsx_setOp() works with list [#215]", {
   op <- options()
   expect_error(openxlsx_setOp(list(withFilter = TRUE, keepNA = TRUE)), NA)
+  openxlsx_resetOp()
   options(op)
 })

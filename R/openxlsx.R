@@ -114,7 +114,6 @@ op.openxlsx <- list(
   openxlsx.withFilter       = NULL
 )
 
-
 #' @param x An option name (\code{"openxlsx."} prefix optional)
 #' @param default A default value if \code{NULL}
 #' @rdname openxlsx_options
@@ -162,4 +161,8 @@ check_openxlsx_op <- function(x) {
   }
   
   x
+}
+
+openxlsx_resetOp <- function() {
+  options(op.openxlsx)
 }
