@@ -2,9 +2,12 @@
 % Please edit documentation in R/wrappers.R
 \name{createNamedRegion}
 \alias{createNamedRegion}
-\title{Create a named region.}
+\alias{deleteNamedRegion}
+\title{Create / edit/ delete a named region.}
 \usage{
-createNamedRegion(wb, sheet, cols, rows, name)
+createNamedRegion(wb, sheet, cols, rows, name, overwrite = FALSE)
+
+deleteNamedRegion(wb, name)
 }
 \arguments{
 \item{wb}{A workbook object}
@@ -16,6 +19,8 @@ createNamedRegion(wb, sheet, cols, rows, name)
 \item{rows}{Numeric vector specifying rows to include in region}
 
 \item{name}{Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.}
+
+\item{overwrite}{Boolean. Overwrite if exists ? Default to FALSE}
 }
 \description{
 Create a named region
@@ -57,6 +62,7 @@ head(df)
 df <- read.xlsx(out_file, namedRegion = "iris2")
 head(df)
 }
+
 }
 \seealso{
 \code{\link{getNamedRegions}}
