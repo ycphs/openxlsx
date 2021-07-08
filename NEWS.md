@@ -1,9 +1,5 @@
 # openxlsx (development version)
 
-## Fixes
-
-* `openxlsx_setOp()` now works with named list ([#215](https://github.com/ycphs/openxlsx/issues/215))
-
 # openxlsx 4.2.4
 
 ## Fixes

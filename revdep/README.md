@@ -12,6 +12,7 @@
 |tz       |UTC                          |
 |date     |2021-07-07                   |
 
+
 # Dependencies
 
 |package  |old   |new        |Δ  |
@@ -23,13 +24,16 @@
 
 # Revdeps
 
-## Failed to check (29)
+
+## Failed to check (27)
+
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
 |cbaf           |?       |      |        |     |
+|bibliometrix   |3.1.4   |1     |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
