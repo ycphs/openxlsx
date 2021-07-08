@@ -21,17 +21,23 @@ Error in download.file(url, destfile, method, mode = "wb", ...) :
   download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1094631424 != reported length 1623464748
+  downloaded length 657276928 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1094631424 != reported length 1623464748
+  downloaded length 657276928 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
   URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 550925
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/0c0941b66c6d546250da89cd9dfbc1a0e6c6b2da20d7eaa24f014c0833bf9aca.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/0c0941b66c6d546250da89cd9dfbc1a0e6c6b2da20d7eaa24f014c0833bf9aca.tar.gz': status was 'Failure when receiving data from the peer'
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+  download of package ‘zip’ failed
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+  download of package ‘zip’ failed
 
 
 ```
@@ -45,17 +51,23 @@ Error in download.file(url, destfile, method, mode = "wb", ...) :
   download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1094631424 != reported length 1623464748
+  downloaded length 657276928 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1094631424 != reported length 1623464748
+  downloaded length 657276928 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
   URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 550925
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/0c0941b66c6d546250da89cd9dfbc1a0e6c6b2da20d7eaa24f014c0833bf9aca.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/0c0941b66c6d546250da89cd9dfbc1a0e6c6b2da20d7eaa24f014c0833bf9aca.tar.gz': status was 'Failure when receiving data from the peer'
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+  download of package ‘zip’ failed
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+  download of package ‘zip’ failed
 
 
 ```
@@ -78,7 +90,21 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/tibble_3.1.2.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 809679
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 809679
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/acbb050fd96d1a41388bea9b78b72f770bde4cc49789d5095d36e9b7cc73d583.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/acbb050fd96d1a41388bea9b78b72f770bde4cc49789d5095d36e9b7cc73d583.tar.gz': status was 'Failure when receiving data from the peer'
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘tibble’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘tibble’ failed
 
 
 ```
@@ -88,7 +114,21 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/tibble_3.1.2.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 809679
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 809679
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/acbb050fd96d1a41388bea9b78b72f770bde4cc49789d5095d36e9b7cc73d583.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/acbb050fd96d1a41388bea9b78b72f770bde4cc49789d5095d36e9b7cc73d583.tar.gz': status was 'Failure when receiving data from the peer'
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘tibble’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘tibble’ failed
 
 
 ```
@@ -532,7 +572,21 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/matrixStats_0.59.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 2312556
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 2312556
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/6a348eb8bb34a056fd45c56608faf37fec5ea50980859aae1a6b533cea9bfe1f.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/6a348eb8bb34a056fd45c56608faf37fec5ea50980859aae1a6b533cea9bfe1f.tar.gz': status was 'Failure when receiving data from the peer'
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘matrixStats’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘matrixStats’ failed
 
 
 ```
@@ -542,7 +596,21 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/matrixStats_0.59.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 2312556
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 32768 != reported length 2312556
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/6a348eb8bb34a056fd45c56608faf37fec5ea50980859aae1a6b533cea9bfe1f.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/6a348eb8bb34a056fd45c56608faf37fec5ea50980859aae1a6b533cea9bfe1f.tar.gz': status was 'Failure when receiving data from the peer'
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘matrixStats’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘matrixStats’ failed
 
 
 ```
@@ -748,69 +816,94 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.2.0
+* GitHub: NA
+* Source code: https://github.com/cran/sangeranalyseR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 142
+
+Run `revdep_details(, "sangeranalyseR")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
+    ```
+
+*   checking for portable file names ... WARNING
+    ```
+    Found the following file with a non-portable file name:
+      docs/wallpaperflare.com_wallpaper (1).jpg
+    These are not fully portable file names.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Depends: includes the non-default packages:
+      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
+      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
+      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
+      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
+      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
+    Adding so many packages to the search path is excessive and importing
+    selectively is preferable.
+    ```
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+      docs/build/html/.buildinfo
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Error: package ‘phangorn’ could not be loaded
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Error: package ‘phangorn’ could not be loaded
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
 # SEtools
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# sigFeature
 
 <details>
 

@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (28)
+## Failed to check (27)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -47,9 +47,8 @@
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
 |TPP            |3.20.0  |1     |        |3    |
