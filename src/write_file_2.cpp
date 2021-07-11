@@ -106,10 +106,12 @@ SEXP write_worksheet_xml_2( std::string prior
       if(!CharacterVector::is_na(cell_types[j-1])){
         
         //If we have a c value we might have an f value
-        if(CharacterVector::is_na(cell_fn[j-1])){ // no function
-          
-          cell_xml += "\" t=\"" + cell_types[j-1] + "\"><v>" + cell_value[j-1] + "</v></c>";
-
+        if(CharacterVector::is_na(cell_fn[j-1])){ // no function: v or is
+          if(Rcpp::as<std::string>(cell_types[j-1]).compare("inlineStr") == 0){
+            cell_xml += "\" t=\"" + cell_types[j-1] + "\">" + "<is><t>" + cell_value[j-1] + "</t></is></c>";
+          }else{
+            cell_xml += "\" t=\"" + cell_types[j-1] + "\"><v>" + cell_value[j-1] + "</v></c>";
+          }
         }else{
           if(CharacterVector::is_na(cell_value[j-1])){ // If v is NA
             cell_xml += "\" t=\"" + cell_types[j-1] + "\">" + cell_fn[j-1] + "</c>";
