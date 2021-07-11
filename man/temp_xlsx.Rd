@@ -6,6 +6,9 @@
 \usage{
 temp_xlsx(name = "temp_xlsx")
 }
+\arguments{
+\item{name}{for the temp file}
+}
 \description{
 helper function to create tempory directory for testing purpose
 }
