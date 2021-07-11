@@ -34,6 +34,8 @@ IntegerVector map_cell_types_to_integer(CharacterVector t){
       t_res[i] = 3;
     }else if(t[i] == "e"){
       t_res[i] = 4;
+    }else if(t[i] == "inlineStr"){
+      t_res[i] = 5;
     }
     
   }
@@ -72,6 +74,8 @@ CharacterVector map_cell_types_to_char(IntegerVector t){
       t_res[i] = "str";
     }else if(t[i] == 4){
       t_res[i] = "e";
+    }else if(t[i] == 5){
+      t_res[i] = "inlineStr";
     }else{
       t_res[i] = "s";
     }

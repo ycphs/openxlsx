@@ -1,5 +1,9 @@
 # openxlsx (development version)
 
+## Fixes
+
+* `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing it with `saveWorkbook()`
+
 # openxlsx 4.2.4
 
 ## Fixes

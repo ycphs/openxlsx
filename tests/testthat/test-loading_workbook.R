@@ -933,3 +933,25 @@ test_that("Load and saving a file with Threaded Comments works", {
   expect_silent(saveWorkbook(wb, file = temp_xlsx()))
   
 })
+
+test_that("Read and save file with inlineStr", {
+  ## loadThreadComment.xlsx is a simple xlsx file that uses Threaded Comment.
+  fl <- system.file("extdata", "inlineStr.xlsx", package = "openxlsx")
+  wb <- loadWorkbook(fl)
+  wb_df <- readWorkbook(wb)
+  
+  df <- data.frame(
+    this = c("is an xlsx file", "written with writexl::write_xlsx"),
+    it = c("cannot be read", "with open.xlsx::read.xlsx"),
+    stringsAsFactors = FALSE)
+  
+  # compare file imported with inlineStr
+  expect_true(all.equal(df, wb_df, compare.attributes = FALSE))
+  
+  tmp_xlsx <- temp_xlsx()
+  # Check that wb can be saved without error and reimported
+  expect_silent(saveWorkbook(wb, file = tmp_xlsx))
+  wb_df_re <- readWorkbook(loadWorkbook(tmp_xlsx))
+  expect_true(all.equal(wb_df, wb_df_re, compare.attributes = FALSE))
+  
+})
