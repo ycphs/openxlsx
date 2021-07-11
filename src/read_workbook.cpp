@@ -325,7 +325,7 @@ List getCellInfo(std::string xmlFile,
       isPos = xml.find("</t></is>", pos + 8); // have to at least pass <c r="XX">
       
       // read node <v>
-      if(vPos < nextPos){
+      if((vPos < nextPos) & (vPos < isPos)){
         
         cell = xml.substr(pos, nextPos - pos);
         
@@ -395,10 +395,10 @@ List getCellInfo(std::string xmlFile,
             string_refs[i] = r[i];
           }
         }
-      }
-      
-      // read node <is>
-      if (isPos < nextPos) {
+        
+        i++; // INCREMENT OVER OCCURENCES
+      } else // read node <is>
+      if ((isPos < nextPos)  & (isPos < vPos)) {
         
         cell = xml.substr(pos, nextPos - pos);
         
@@ -422,9 +422,9 @@ List getCellInfo(std::string xmlFile,
           v[i] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
           string_refs[i] = r[i];
         }
+        
+        i++; // INCREMENT OVER OCCURENCES
       }
-      
-      i++; // INCREMENT OVER OCCURENCES
       
       pos = nextPos;
       
