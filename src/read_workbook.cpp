@@ -406,7 +406,7 @@ List getCellInfo(std::string xmlFile,
         }
         string_refs[j] = r[j];
         
-      }else if(t[j] == "str" | t[j] == "inlineStr"){
+      }else if((t[j] == "str") || (t[j] == "inlineStr")){
         string_refs[j] = r[j];
       }
       /* preparation is finished */
