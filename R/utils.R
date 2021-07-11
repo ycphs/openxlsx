@@ -49,6 +49,9 @@ get_set_options <- function() {
   op
 }
 
+
+#' helper function to create tempory directory for testing purpose
+#' @export
 temp_xlsx <- function(name = "temp_xlsx") {
   tempfile(pattern = paste0(name, "_"), fileext = ".xlsx")
 }
