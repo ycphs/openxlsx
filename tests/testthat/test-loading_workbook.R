@@ -948,6 +948,12 @@ test_that("Read and save file with inlineStr", {
   # compare file imported with inlineStr
   expect_true(all.equal(df, wb_df, compare.attributes = FALSE))
   
+  df_read_xlsx <- read.xlsx(fl)
+  df_readWorkbook <- readWorkbook(fl)
+  
+  expect_true(all.equal(df, df_read_xlsx, compare.attributes = FALSE))
+  expect_true(all.equal(df, df_readWorkbook, compare.attributes = FALSE))
+  
   tmp_xlsx <- temp_xlsx()
   # Check that wb can be saved without error and reimported
   expect_silent(saveWorkbook(wb, file = tmp_xlsx))

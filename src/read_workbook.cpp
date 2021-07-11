@@ -264,10 +264,21 @@ List getCellInfo(std::string xmlFile,
   
   // count cells with children
   int ocs = 0;
-  string::size_type start = 0;
+  string::size_type start;
+  
+  // run this twice, once for <v> and once for <is>
+  // TODO: integrate this into a single loop or at least check if there is any
+  // <is> node prior to running it every time which is potentially wasteful.
+  start = 0;
   while((start = xml.find("</v>", start)) != string::npos){
     ++ocs;
     start += 4;
+  }
+  
+  start = 0;
+  while((start = xml.find("</t></is>", start)) != string::npos){
+    ++ocs;
+    start += 9;
   }
   
   if(ocs == 0){
@@ -301,6 +312,7 @@ List getCellInfo(std::string xmlFile,
   int ss_ind = 0;
   size_t nextPos = 3;
   size_t vPos = 2;
+  size_t isPos = 2;
   pos = xml.find("<c ", 0);
   
   // PULL OUT CELL AND ATTRIBUTES
@@ -309,8 +321,10 @@ List getCellInfo(std::string xmlFile,
     if(pos != std::string::npos){
       
       nextPos = xml.find("<c ", pos + 9);
-      vPos = xml.find("</v>", pos + 8); // have to atleast pass <c r="XX">
+      vPos = xml.find("</v>", pos + 8); // have to at least pass <c r="XX">
+      isPos = xml.find("</t></is>", pos + 8); // have to at least pass <c r="XX">
       
+      // read node <v>
       if(vPos < nextPos){
         
         cell = xml.substr(pos, nextPos - pos);
@@ -381,14 +395,41 @@ List getCellInfo(std::string xmlFile,
             string_refs[i] = r[i];
           }
         }
-        
-        i++; // INCREMENT OVER OCCURENCES
       }
+      
+      // read node <is>
+      if (isPos < nextPos) {
+        
+        cell = xml.substr(pos, nextPos - pos);
+        
+        // Pull out ref
+        pos = cell.find(rtag, 0);  // find r="
+        endPos = cell.find(tagEnd, pos + 3);  // find next "
+        r[i] = cell.substr(pos + 3, endPos - pos - 3).c_str();
+        
+        // Pull out type
+        pos = cell.find(ttag, 0);  // find t="
+        if(pos != std::string::npos){
+          endPos = cell.find(tagEnd, pos + 4);  // find next "
+          t[i] = cell.substr(pos + 4, endPos - pos - 4).c_str();
+        }
+       
+        // find <is><t> tag and </t></is> end tag
+        endPos = cell.find("</t></is>", 0);
+        if(endPos != std::string::npos){
+          pos = cell.find("<is><t", 0);
+          pos = cell.find(">", pos);
+          v[i] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
+          string_refs[i] = r[i];
+        }
+      }
+      
+      i++; // INCREMENT OVER OCCURENCES
       
       pos = nextPos;
       
     }
-  } // end of while loop over occurences
+  } // end of while loop over occurrences
   // END OF CELL AND ATTRIBUTION GATHERING
   
   string_refs = string_refs[!is_na(string_refs)];
