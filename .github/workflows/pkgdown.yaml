@@ -34,12 +34,12 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
     
       - name: Install system requirements
-        run: sudo -s apt install libharfbuzz-dev libfribidi-dev libcurl4-openssl-dev
-      
+        run: sudo -s apt install libharfbuzz-dev libfribidi-dev libcurl4-openssl-dev libicu-dev
+  
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
-          install.packages("pkgdown")
+          install.packages(c("pkgdown","stringi"))
         shell: Rscript {0}
 
       - name: Install package
