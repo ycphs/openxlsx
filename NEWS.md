@@ -3,6 +3,7 @@
 ## Fixes
 
 * `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing the workbook with `saveWorkbook()`. Similar `read.xlsx` and `readWorkbook` import `inlineStr`.
+* `read.xlsx()` no longer changes random seed ([#183](https://github.com/ycphs/openxlsx/issues/183))
 
 # openxlsx 4.2.4
 
