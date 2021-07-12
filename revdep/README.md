@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-08                   |
+|date     |2021-07-12                   |
 
 # Dependencies
 
@@ -23,17 +23,17 @@
 
 # Revdeps
 
-## Failed to check (32)
+## Failed to check (28)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
+|Ecfun          |?       |      |        |     |
 |emdi           |?       |      |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
@@ -48,14 +48,10 @@
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
 |sangeranalyseR |?       |      |        |     |
-|SEERaBomb      |?       |      |        |     |
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
-|sstModel       |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|SwathXtend     |2.14.0  |1     |1       |2    |
-|toxEval        |?       |      |        |     |
 |TPP            |3.20.0  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
