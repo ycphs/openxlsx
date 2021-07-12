@@ -25,6 +25,7 @@
 
 ## Failed to check (28)
 
+
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
@@ -51,8 +52,9 @@
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
+|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
+|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.0  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
-

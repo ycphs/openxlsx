@@ -2,7 +2,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -20,10 +20,12 @@
 
 
 
+
 ```
 ### CRAN
 
 ```
+
 
 
 
@@ -35,7 +37,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -68,7 +70,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -101,7 +103,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -134,7 +136,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -167,7 +169,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -200,7 +202,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -229,11 +231,11 @@
 
 
 ```
-# emdi
+# ddPCRclust
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -266,7 +268,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -299,7 +301,7 @@
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -360,7 +362,7 @@ Run `revdep_details(, "hypeR")` for more info
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+Error in dyn.load(file, DLLpath = DLLpath, ...) :
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
   libglpk.so.40: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
@@ -378,7 +380,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+Error in dyn.load(file, DLLpath = DLLpath, ...) :
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
   libglpk.so.40: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
@@ -392,7 +394,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -425,7 +427,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -458,7 +460,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -491,7 +493,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -524,7 +526,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -557,7 +559,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -590,7 +592,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -623,7 +625,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -656,7 +658,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -689,7 +691,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -722,7 +724,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -755,7 +757,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -788,7 +790,40 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# struct
+
+<details>
+
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -821,7 +856,40 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
+* Version:
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# TarSeqQC
+
+<details>
+
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -867,7 +935,7 @@ Run `revdep_details(, "TPP")` for more info
 ## In both
 
 *   R CMD check timed out
-    
+
 
 *   checking installed package size ... NOTE
     ```
@@ -892,9 +960,9 @@ Run `revdep_details(, "TPP")` for more info
     File ‘TPP/R/TPP.R’:
       .onLoad calls:
         packageStartupMessage(msgText, "\n")
-    
+
     See section ‘Good practice’ in '?.onAttach'.
-    
+
     fitSigmoidCCR: no visible global function definition for
       ‘capture.output’
     modelSelector: no visible binding for global variable ‘testHypothesis’
@@ -916,7 +984,7 @@ Run `revdep_details(, "TPP")` for more info
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
@@ -949,7 +1017,7 @@ Run `revdep_details(, "TPP")` for more info
 
 <details>
 
-* Version: 
+* Version:
 * GitHub: https://github.com/ycphs/openxlsx
 * Source code: NA
 * Number of recursive dependencies: 0
