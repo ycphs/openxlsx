@@ -232,7 +232,7 @@ read.xlsx.Workbook <- function(xlsxFile,
 
 
   ## If any t="str" exist, add v to sharedStrings and replace v with newSharedStringsInd
-  str_inds <- which(t == 3) ## "str"
+  str_inds <- which(t %in% c(3, 5)) ## "str" or "inlineStr"
   if (length(str_inds) > 0) {
     unique_strs <- unique(v[str_inds])
     unique_strs[unique_strs == "#N/A"] <- NA
