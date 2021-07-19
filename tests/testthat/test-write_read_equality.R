@@ -28,6 +28,7 @@ test_that("Writing then reading returns identical data.frame 1", {
   class(df$Percentage) <- "percentage"
   class(df$TinyNumber) <- "scientific"
 
+  op <- options()
   options("openxlsx.dateFormat" = "yyyy-mm-dd")
 
   fileName <- file.path(tempdir(), "allClasses.xlsx")
@@ -39,6 +40,7 @@ test_that("Writing then reading returns identical data.frame 1", {
   unlink(fileName, recursive = TRUE, force = TRUE)
 
   expect_equal(object = getwd(), curr_wd)
+  options(op)
 })
 
 test_that("Writing then reading returns identical data.frame 2", {
@@ -112,7 +114,6 @@ test_that("Writing then reading returns identical data.frame 2", {
 test_that("Writing then reading rowNames, colNames combinations", {
   op <- options()
   options(stringsAsFactors = FALSE)
-  on.exit(options(op), add = TRUE)
   
   
   fileName <- temp_xlsx()
@@ -163,13 +164,13 @@ test_that("Writing then reading rowNames, colNames combinations", {
   expect_equal(getwd(), curr_wd)
   
   unlink(fileName, recursive = TRUE, force = TRUE)
+  options(op)
 })
 
 
 test_that("Writing then reading returns identical data.frame 3", {
   op <- options()
   options(openxlsx.dateFormat = "yyyy-mm-dd")
-  on.exit(options(op), add = TRUE)
 
   ## data
   df <- data.frame(
@@ -218,6 +219,7 @@ test_that("Writing then reading returns identical data.frame 3", {
   expect_identical(x, NULL)
 
   unlink(fileName, recursive = TRUE, force = TRUE)
+  options(op)
 })
 
 

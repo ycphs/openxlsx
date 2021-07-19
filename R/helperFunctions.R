@@ -813,8 +813,14 @@ buildFillList <- function(fills) {
   return(fillAttrs)
 }
 
-
+# Can test with below:
+# x <- "<definedName name=\"_xlnm._FilterDatabase\" localSheetId=\"0\" hidden=\"1\">'A & B < D > D'!$A$1:$A$10</definedName>"
 getDefinedNamesSheet <- function(x) {
+  sub("'?\\!.*", "", sub("^.*>'", "", x))
+}
+
+# Not used but kepted in case fix above isn't correct
+getDefinedNamedSheet_ <- function(x) {
   belongTo <- unlist(lapply(strsplit(x, split = ">|<"), "[[", 3))
   quoted <- grepl("^'", belongTo)
   
@@ -824,7 +830,6 @@ getDefinedNamesSheet <- function(x) {
   
   return(belongTo)
 }
-
 
 getSharedStringsFromFile <- function(sharedStringsFile, isFile) {
   

@@ -114,7 +114,6 @@ op.openxlsx <- list(
   openxlsx.withFilter       = NULL
 )
 
-
 #' @param x An option name (\code{"openxlsx."} prefix optional)
 #' @param default A default value if \code{NULL}
 #' @rdname openxlsx_options
@@ -137,7 +136,7 @@ openxlsx_setOp <- function(x, value) {
       stop("x cannot be an unnamed list", call. = FALSE)
     }
     
-    mapply(openxlsx_setOp, x = names(x), value = x)
+    return(invisible(mapply(openxlsx_setOp, x = names(x), value = x)))
   }
   
   value <- as.list(value)
@@ -162,4 +161,8 @@ check_openxlsx_op <- function(x) {
   }
   
   x
+}
+
+openxlsx_resetOp <- function() {
+  options(op.openxlsx)
 }

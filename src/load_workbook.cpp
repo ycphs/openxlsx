@@ -472,6 +472,14 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
               has_v = true;
             }
             
+            // find <is><t> tag and </t></is> end tag
+            endPos = cell.find("</t></is>", 0);
+            if(endPos != std::string::npos){
+              pos = cell.find("<is><t", 0);
+              pos = cell.find(">", pos);
+              v[j] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
+              has_v = true;
+            }
             
             // Pull out type
             pos_t = cell.find(" t=", 0);
