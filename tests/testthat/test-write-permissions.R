@@ -8,7 +8,11 @@ test_that("test failed write errors for saveWorkbook", {
   wb <- createWorkbook()
   addWorksheet(wb, "name")
 
-  expect_warning(write.xlsx(x = cars, file = tempFile, overwrite = TRUE))
+  expect_warning(write.xlsx(
+    x = cars, file = tempFile, overwrite = TRUE
+  ),
+  regexp = "Permission denied"
+  )
 
   unlink(tempFile, recursive = TRUE, force = TRUE)
 })
