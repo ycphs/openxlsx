@@ -2,17 +2,18 @@
 context("error without write permissions")
 
 test_that("test failed write errors for saveWorkbook", {
-  tempFile <- fs::file_temp(ext = "xlsx")
-  fs::file_create(tempFile, mode = "a=rx")
+  temp_file <- tempfile()
+  file.create(temp_file)
+  Sys.chmod(path = temp_file, mode = "444")
 
   wb <- createWorkbook()
   addWorksheet(wb, "name")
 
   expect_warning(write.xlsx(
-    x = cars, file = tempFile, overwrite = TRUE
+    x = cars, file = temp_file, overwrite = TRUE
   ),
   regexp = "Permission denied"
   )
 
-  unlink(tempFile, recursive = TRUE, force = TRUE)
+  unlink(temp_file, recursive = TRUE, force = TRUE)
 })

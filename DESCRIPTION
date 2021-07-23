@@ -47,7 +47,6 @@ Imports:
     utils,
     zip
 Suggests:
-    fs (>= 1.5.0),
     knitr,
     rmarkdown,
     roxygen2,
@@ -56,8 +55,6 @@ LinkingTo:
     Rcpp
 VignetteBuilder: 
     knitr
-Remotes: 
-    r-lib/fs
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.1.1
