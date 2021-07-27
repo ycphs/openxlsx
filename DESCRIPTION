@@ -43,7 +43,6 @@ Imports:
     grDevices,
     methods,
     Rcpp,
-    stats,
     utils,
     zip,
     stringi
@@ -51,7 +50,7 @@ Suggests:
     knitr,
     testthat,
     roxygen2,
-    rmarkdown 
+    rmarkdown
 LinkingTo: 
     Rcpp
 VignetteBuilder: 
@@ -78,7 +77,6 @@ Collate:
     'openXL.R'
     'openxlsx-package.R'
     'openxlsx.R'
-    'openxlsxCoerce.R'
     'readWorkbook.R'
     'sheet_data_class.R'
     'utils.R'
