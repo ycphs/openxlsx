@@ -1088,13 +1088,13 @@ Workbook$methods(
     )
 
     ## reset styles - maintain any changes to base font
-    baseFont <- styles$fonts[[1]]
-    styles <<-
-      genBaseStyleSheet(styles$dxfs,
-        tableStyles = styles$tableStyles,
-        extLst = styles$extLst
-      )
-    styles$fonts[[1]] <<- baseFont
+    #baseFont <- styles$fonts[[1]]
+    #styles <<-
+    #  genBaseStyleSheet(styles$dxfs,
+    #    tableStyles = styles$tableStyles,
+    #    extLst = styles$extLst
+    #  )
+    #styles$fonts[[1]] <<- baseFont
 
 
     return(file.path(tmpDir, tmpFile))
@@ -3989,9 +3989,10 @@ Workbook$methods(
           c(getNodes(xml, tagIn = "<font>"), "")
         }))
     } else {
-      fonts <- getNodes(xml = stylesTxt, tagIn = "<font>")
+      fonts <- getNodes(xml = stylesTxt, tagIn = "<fonts")
+      fonts <- getNodes(paste0(fonts, ">"), "<font>")
     }
-    styles$fonts[[1]] <<- fonts[[1]]
+    styles$fonts <<- fonts
     fonts <- buildFontList(fonts)
 
 
