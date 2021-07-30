@@ -904,10 +904,8 @@ CharacterVector getChildlessNode(std::string xml, std::string tag) {
   
   std::vector<std::string> r;
   std::string res = "";
-  
-  // check "<tag "
-  std::string begTag = "<" + tag + " ";
-  std::string endTag = ">";
+
+  // check "<tag/>"
   std::string begendTag = "<" + tag + "/>";
 
   goit = xml.find(begendTag, begPos);
@@ -917,6 +915,10 @@ CharacterVector getChildlessNode(std::string xml, std::string tag) {
     CharacterVector out = wrap(r);  
     return markUTF8(out);
   }
+  
+  // check "<tag "
+  std::string begTag = "<" + tag + " ";
+  std::string endTag = ">";
   
   // initial check, which kind of tags to expect
   begPos = xml.find(begTag, begPos);
