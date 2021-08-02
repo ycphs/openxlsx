@@ -17,7 +17,27 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/BH_1.75.0-0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 35730 != reported length 11877941
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 35730 != reported length 11877941
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/c9896a3c1f9105d123f62922608429a5e49cced57add1cad92acc8d3451d7d49.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1253752832 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -27,7 +47,27 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest/src/contrib/BH_1.75.0-0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 35730 != reported length 11877941
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 35730 != reported length 11877941
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://rspm-sync.rstudio.com/bin/4.1-bionic/c9896a3c1f9105d123f62922608429a5e49cced57add1cad92acc8d3451d7d49.tar.gz': status was 'Failure when receiving data from the peer'
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1253752832 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -65,39 +105,6 @@
 
 ```
 # CHRONOS
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# CNVPanelizer
 
 <details>
 
@@ -196,73 +203,7 @@
 
 
 ```
-# Ecfun
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # emdi
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# fedup
 
 <details>
 
@@ -336,7 +277,7 @@
 * GitHub: https://github.com/montilab/hypeR
 * Source code: https://github.com/cran/hypeR
 * Date/Publication: 2021-05-19
-* Number of recursive dependencies: 151
+* Number of recursive dependencies: 154
 
 Run `revdep_details(, "hypeR")` for more info
 
@@ -454,39 +395,6 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# MatrixQCvis
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # MicroSEC
 
 <details>
@@ -553,106 +461,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# openPrimeR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# PloGO2
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # rbiom
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# RIPAT
 
 <details>
 
@@ -780,32 +589,61 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.6.0
+* GitHub: https://github.com/plger/SEtools
+* Source code: https://github.com/cran/SEtools
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 126
+
+Run `revdep_details(, "SEtools")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘SEtools’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘SEtools’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
+  libv8.so.3.14.5: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘SEtools’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/SEtools’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘SEtools’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
+  libv8.so.3.14.5: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘SEtools’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/old/SEtools.Rcheck/SEtools’
 
 
 ```
@@ -846,10 +684,40 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.4.2
+* GitHub: NA
+* Source code: https://github.com/cran/structToolbox
+* Date/Publication: 2021-07-18
+* Number of recursive dependencies: 200
+
+Run `revdep_details(, "structToolbox")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.7Mb
+      sub-directories of 1Mb or more:
+        R     3.3Mb
+        doc   3.1Mb
+    ```
+
+# TarSeqQC
+
+<details>
+
+* Version: 1.22.0
+* GitHub: NA
+* Source code: https://github.com/cran/TarSeqQC
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 95
+
+Run `revdep_details(, "TarSeqQC")` for more info
 
 </details>
 
@@ -858,8 +726,29 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 ### Devel
 
 ```
+* using log directory ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/TarSeqQC/new/TarSeqQC.Rcheck’
+* using R version 4.1.0 (2021-05-18)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘TarSeqQC/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘TarSeqQC’ version ‘1.22.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'Rsamtools', 'GenomicAlignments'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
+
+
+See
+  ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/TarSeqQC/new/TarSeqQC.Rcheck/00check.log’
+for details.
 
 
 
@@ -879,10 +768,10 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 3.20.0
+* Version: 3.20.1
 * GitHub: NA
 * Source code: https://github.com/cran/TPP
-* Date/Publication: 2021-05-19
+* Date/Publication: 2021-07-27
 * Number of recursive dependencies: 95
 
 Run `revdep_details(, "TPP")` for more info
@@ -938,39 +827,6 @@ Run `revdep_details(, "TPP")` for more info
     ```
 
 # uncoverappLib
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# upstartr
 
 <details>
 
