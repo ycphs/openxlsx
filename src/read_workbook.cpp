@@ -153,10 +153,6 @@ List getCellInfo(std::string xmlFile,
   //read in file
   std::string buf;
   
-  // ifstream file;
-  // file.open(xmlFile.c_str());
-  // while (file >> buf)
-  // xml += buf + ' ';
   std::string xml = read_file_newline(xmlFile);  
   std::string xml2 = "";
   std::string rtag = "r=";
@@ -264,8 +260,11 @@ List getCellInfo(std::string xmlFile,
   
   // count cells with children
   int ocs = 0;
+  // can not use pos for start, as the xml and pos were changed
   string::size_type start = 0;
-  while((start = xml.find("</v>", start)) != string::npos){
+  
+  // get number of nodes, start is only required for this while loop
+  while((start = xml.find("<c ", start)) != string::npos){
     ++ocs;
     start += 4;
   }
@@ -278,118 +277,165 @@ List getCellInfo(std::string xmlFile,
   // pull out cell merges
   CharacterVector merge_cell_xml = getChildlessNode(xml2, "mergeCell");
   
-  
+  CharacterVector s(ocs);
   CharacterVector r(ocs);
   CharacterVector t(ocs);
   CharacterVector v(ocs);
   CharacterVector string_refs(ocs);
-  std::fill(string_refs.begin(), string_refs.end(), NA_STRING);
   
-  int s_ocs = 0;
-  if(getDates)
-    s_ocs = ocs;
+  t.fill("n");
+  v.fill(NA_STRING);
+  s.fill(NA_STRING);
+  string_refs.fill(NA_STRING);
   
-  CharacterVector s(s_ocs);
-  
-  std::fill(t.begin(), t.end(), "n");
-  std::fill(v.begin(), v.end(), NA_STRING);
-  std::fill(s.begin(), s.end(), NA_STRING);
-  
-  
-  
-  int i = 0;
-  int ss_ind = 0;
+  int j = 0;
   size_t nextPos = 3;
-  size_t vPos = 2;
+  bool has_v = false;
+  bool has_f = false;
+  
   pos = xml.find("<c ", 0);
+  size_t pos_t = pos;
+  size_t pos_f = pos;
   
   // PULL OUT CELL AND ATTRIBUTES
-  while(i < ocs){
+  while(j < ocs){
     
     if(pos != std::string::npos){
       
       nextPos = xml.find("<c ", pos + 9);
-      vPos = xml.find("</v>", pos + 8); // have to atleast pass <c r="XX">
+      cell = xml.substr(pos, nextPos - pos);
       
-      if(vPos < nextPos){
-        
-        cell = xml.substr(pos, nextPos - pos);
-        
-        // Pull out ref
-        pos = cell.find(rtag, 0);  // find r="
-        endPos = cell.find(tagEnd, pos + 3);  // find next "
-        r[i] = cell.substr(pos + 3, endPos - pos - 3).c_str();
-        
-        // Pull out type
-        pos = cell.find(ttag, 0);  // find t="
-        if(pos != std::string::npos){
-          endPos = cell.find(tagEnd, pos + 4);  // find next "
-          t[i] = cell.substr(pos + 4, endPos - pos - 4).c_str();
-        }
-        
-        // Pull out style
-        if(getDates){
-          pos = cell.find(stag, 0);  // find s="
-          if(pos != std::string::npos){
-            endPos = cell.find(tagEnd, pos + 4);  // find next "
-            s[i] = cell.substr(pos + 4, endPos - pos - 4).c_str();
-          }
-        }
-        
-        
-        // If the value is s or shared we replace with sharedString
-        // If it's b we replace with "TRUE" or "FALSE"
-        // If the value is str it's already a string
-        if(t[i] == "e"){
-          
-          v[i] = NA_STRING;
-          
-        }else{
-          
-          // find <v> tag and </v> end tag
-          endPos = cell.find(vtagEnd, 0);
-          if(endPos != std::string::npos){
-            pos = cell.find("<v", 0);
-            pos = cell.find(">", pos);
-            v[i] = cell.substr(pos + 1, endPos - pos - 1);
-          }
-          
-          
-          // possible values for t are n, s, shared, b, str, e 
-          
-          // do replacement
-          if(t[i] == "s"){
-            
-            ss_ind = atoi(v[i]);
-            v[i] = sharedStrings[ss_ind];
-            
-            if(v[i] == "openxlsx_na_vlu"){
-              v[i] = NA_STRING;
-            }
-            
-            string_refs[i] = r[i];
-            
-          }else if(t[i] == "b"){
-            if(v[i] == "1"){
-              v[i] = "TRUE";
-            }else{
-              v[i] = "FALSE";
-            }
-            string_refs[i] = r[i];
-            
-          }else if(t[i] == "str"){
-            string_refs[i] = r[i];
-          }
-        }
-        
-        i++; // INCREMENT OVER OCCURENCES
+      // Pull out ref
+      pos = cell.find("r=", 0);  // find r="
+      endPos = cell.find(tagEnd, pos + 3);  // find next "
+      r[j] = cell.substr(pos + 3, endPos - pos - 3).c_str();
+      
+      buf = cell.substr(pos + 3, endPos - pos - 3);
+      
+      buf.erase(std::remove_if(buf.begin(), buf.end(), ::isalpha), buf.end());
+      
+      
+      // Pull out style
+      pos = cell.find(" s=", 0);  // find s="
+      if(pos != std::string::npos){
+        endPos = cell.find(tagEnd, pos + 4);  // find next "
+        s[j] = cell.substr(pos + 4, endPos - pos - 4);
       }
       
-      pos = nextPos;
+      // find <v> tag and </v> end tag
+      endPos = cell.find("</v>", 0);
+      if(endPos != std::string::npos){
+        pos = cell.find("<v", 0);
+        pos = cell.find(">", pos);
+        v[j] = cell.substr(pos + 1, endPos - pos - 1);
+        has_v = true;
+      }
       
-    }
-  } // end of while loop over occurences
-  // END OF CELL AND ATTRIBUTION GATHERING
+      // find <is><t> tag and </t></is> end tag
+      endPos = cell.find("</t></is>", 0);
+      if(endPos != std::string::npos){
+        pos = cell.find("<is><t", 0);
+        pos = cell.find(">", pos);
+        v[j] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
+        has_v = true;
+      }
+      
+      // Pull out type
+      pos_t = cell.find(" t=", 0);
+      pos_f = cell.find("<f", 0);
+      
+      // have both
+      if((pos_f != std::string::npos) & (pos_t != std::string::npos)){ // have f
+        
+        
+        // will always have f
+        // endPos = cell.find("</f>", pos_f + 3);
+        // if(endPos == std::string::npos){
+        //   endPos = cell.find("/>", pos_f + 3);
+        //   f[j] = cell.substr(pos_f, endPos - pos_f + 2);
+        // }else{
+        //   f[j] = cell.substr(pos_f, endPos - pos_f + 4);
+        // }
+        has_f = true;
+        
+        // do we really have t
+        if(pos_t < pos_f){
+          endPos = cell.find(tagEnd, pos_t + 4);  // find next "
+          t[j] = cell.substr(pos_t + 4, endPos - pos_t - 4);
+        }
+        
+        
+      }else if(pos_t != std::string::npos){ // only have t
+        
+        endPos = cell.find(tagEnd, pos_t + 4);  // find next "
+        t[j] = cell.substr(pos_t + 4, endPos - pos_t - 4);
+        
+        
+      }else if(pos_f != std::string::npos){ // only have f
+        
+        // endPos = cell.find("</f>", pos_f + 3);
+        // if(endPos == std::string::npos){
+        //   endPos = cell.find("/>", pos_f + 3);
+        //   f[j] = cell.substr(pos_f, endPos - pos_f + 2);
+        // }else{
+        //   f[j] = cell.substr(pos_f, endPos - pos_f + 4);
+        // }
+        has_f = true;
+        
+      }
+      
+      /* since we return only a data frame, we do the preparation here */
+      if(t[j] == "s"){
+        
+        auto ss_ind = atoi(v[j]);
+        v[j] = sharedStrings[ss_ind];
+        
+        if(v[j] == "openxlsx_na_vlu"){
+          v[j] = NA_STRING;
+        }
+        
+        string_refs[j] = r[j];
+        
+      }else if(t[j] == "e") {
+        v[j] = NA_STRING; // exception from loadWorkbook
+      }else if(t[j] == "b"){
+        if(v[j] == "1"){
+          v[j] = "TRUE";
+        }else{
+          v[j] = "FALSE";
+        }
+        string_refs[j] = r[j];
+        
+      }else if((t[j] == "str") || (t[j] == "inlineStr")){
+        string_refs[j] = r[j];
+      }
+      /* preparation is finished */
+      
+      
+      if(has_f & (!has_v) & (t[j] != "n")){
+        
+        v[j] = NA_STRING;
+        
+      }else if(has_f & !has_v){
+        
+        t[j] = NA_STRING;
+        v[j] = NA_STRING;
+        
+      }else if(has_f | has_v){
+        
+      }else{ //only have s and r
+        t[j] = NA_STRING;
+        v[j] = NA_STRING;
+      }
+      
+      j++; // INCREMENT OVER OCCURENCES
+      pos = nextPos;
+      pos_t = nextPos;
+      pos_f = nextPos;
+      
+      
+    }  // end of while loop over occurences
+  }  // END OF CELL AND ATTRIBUTION GATHERING
   
   string_refs = string_refs[!is_na(string_refs)];
   

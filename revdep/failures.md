@@ -257,6 +257,39 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
+# Ecfun
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # emdi
 
 <details>
@@ -681,6 +714,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 ```
 # RIPAT
+
 
 <details>
 

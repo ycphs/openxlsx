@@ -1,5 +1,11 @@
 # openxlsx (development version)
 
+## Fixes
+
+* `openxlsx_setOp()` now works with named list ([#215](https://github.com/ycphs/openxlsx/issues/215))  
+* `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing the workbook with `saveWorkbook()`. Similar `read.xlsx` and `readWorkbook` import `inlineStr`.
+* `read.xlsx()` no longer changes random seed ([#183](https://github.com/ycphs/openxlsx/issues/183))
+
 # openxlsx 4.2.4
 
 ## Fixes
@@ -28,15 +34,15 @@
 
 
 # openxlsx 4.2.3
- 
+
 ## New Features
 
 * Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for `createNamedRegion()` ([#103](https://github.com/ycphs/openxlsx/issues/103)), `writeComment()`, `writeData()`, `writeDataTable()` and `writeFormula()`. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to @shrektan for the PR [#118](https://github.com/ycphs/openxlsx/pull/118).
 
 * `setColWidths()` now supports zero-length `cols`, which is convinient when `cols` is dynamically provided [#128](https://github.com/ycphs/openxlsx/issues/128). Thanks to @shrektan for the feature request and the PR.
- 
+
 ## Fixes for Check issues
- 
+
 * Fix to pass the tests for link-time optimization type mismatches
 
 * Fix to pass the checks of native code (C/C++) based on static code analysis
@@ -59,8 +65,8 @@
 
 * Added Tests for new parameter of `saveWorkbook()`
 
-## Bug Fixes 
- 
+## Bug Fixes
+
 * Solved CRAN check errors based on the change disussed in [PR#17277](https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277)
 
 # openxlsx 4.2.0
@@ -69,7 +75,7 @@
 
 * Added `groupColumns()`, `groupRows()`, `ungroupColumns()`, and `ungroupRows()` to group/ugroup columns/rows ([#32](https://github.com/ycphs/openxlsx/issues/32))
 
-## Bug Fixes 
+## Bug Fixes
 
 * Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
 
@@ -160,19 +166,19 @@
 
 *  `deleteNamedRegions` to delete named region and optionally the worksheet data
 
-*  set Workbook properties 'title', 'subject', 'category' 
+*  set Workbook properties 'title', 'subject', 'category'
 
 ## Bug Fixes
 
 *  `pageSetup` fails when passing in sheet by name
 
-*  matching sheet names with special characters now works 
+*  matching sheet names with special characters now works
 
 *  `skipEmptyCols` being ignored by `read.xlsx.Workbook`
 
 *  zero column data.frames would throw an error.
 
-*  `read.xlsx` on files created using apache poi failed to match sheet name to xml file. 
+*  `read.xlsx` on files created using apache poi failed to match sheet name to xml file.
 
 *  deleted table re-appearing after save & load.
 
@@ -194,7 +200,7 @@
 
 *  options("openxlsx.zipflags") to pass additional flags to zip application e.g. compression level
 
-*  `getTables()` and `removeTable()` to show and remove Excel table objects 
+*  `getTables()` and `removeTable()` to show and remove Excel table objects
 
 *  set column to 'hidden' with `setColWidths()`
 
@@ -234,7 +240,7 @@
 
 ## Bug Fixes
 
-*  Fix date time conversion accuracy issues. 
+*  Fix date time conversion accuracy issues.
 
 *  Allow multibyte characters in names and comments.
 
@@ -304,7 +310,7 @@
 
 *  `getDateOrigin` function to return the date origin used internally by the xlsx file to pass to
   `convertToDate`
-  
+
 *  Auto-detection of date cells. Cells that "look" like dates will be converted to dates when reading from file.
 
 *  `read.xlsx.Workbook` to read from workbook objects
@@ -342,7 +348,7 @@
 *  extended `numFmt` formatting to numeric rounding also added option("openxlsx.numFmt" = ...)
  for default number formatting of numeric columns
 
-*  additional `numFmt` "comma" to format numerics with "," thousands separator 
+*  additional `numFmt` "comma" to format numerics with "," thousands separator
 
 *  `tableName` parameter to `writeDataTable` to assign the table a name
 
@@ -448,7 +454,7 @@
 
 *  conversion of numeric data to integer in `read.xlsx` fixed.
 
-*  `readWorkbook`/`read.xlsx` should work now. Empty values are 
+*  `readWorkbook`/`read.xlsx` should work now. Empty values are
   now padded with NA. Many other bugs fixed.
 
 *  borders on single row and/or column data.frames now work.

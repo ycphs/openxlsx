@@ -10,20 +10,23 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-01                   |
+|date     |2021-07-12                   |
+
 
 # Dependencies
 
 |package  |old   |new        |Δ  |
 |:--------|:-----|:----------|:--|
 |openxlsx |4.2.4 |4.2.4.9000 |*  |
-|Rcpp     |1.0.6 |1.0.6      |   |
+|Rcpp     |1.0.7 |1.0.7      |   |
 |stringi  |1.6.2 |1.6.2      |   |
 |zip      |2.2.0 |2.2.0      |   |
 
 # Revdeps
 
-## Failed to check (28)
+
+## Failed to check (27)
+
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -34,6 +37,7 @@
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
+|Ecfun          |?       |      |        |     |
 |emdi           |?       |      |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
@@ -47,7 +51,7 @@
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
