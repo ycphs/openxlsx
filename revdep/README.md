@@ -23,13 +23,12 @@
 
 # Revdeps
 
-## Failed to check (26)
+## Failed to check (27)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -47,10 +46,12 @@
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |1       |2    |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
+|upstartr       |?       |      |        |     |
 
