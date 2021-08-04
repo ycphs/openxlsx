@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-08-02                   |
+|date     |2021-08-04                   |
 
 # Dependencies
 
@@ -23,28 +23,34 @@
 
 # Revdeps
 
-## Failed to check (20)
+## Failed to check (26)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
+|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
+|CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |?       |      |        |     |
+|fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
 |hypeR          |1.8.0   |1     |        |     |
 |isoreader      |?       |      |        |     |
 |maEndToEnd     |?       |      |        |     |
+|MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
+|openPrimeR     |?       |      |        |     |
+|PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
+|RIPAT          |?       |      |        |     |
 |sangeranalyseR |1.2.0   |1     |1       |2    |
-|SEtools        |1.6.0   |1     |        |     |
+|SEtools        |?       |      |        |     |
 |stplanr        |?       |      |        |     |
-|structToolbox  |1.4.2   |1     |        |1    |
-|TarSeqQC       |?       |      |        |     |
+|structToolbox  |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 
