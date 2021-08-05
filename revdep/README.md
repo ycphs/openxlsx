@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-07-12                   |
+|date     |2021-08-04                   |
 
 # Dependencies
 
@@ -18,7 +18,7 @@
 |:--------|:-----|:----------|:--|
 |openxlsx |4.2.4 |4.2.4.9000 |*  |
 |Rcpp     |1.0.7 |1.0.7      |   |
-|stringi  |1.6.2 |1.6.2      |   |
+|stringi  |1.7.3 |1.7.3      |   |
 |zip      |2.2.0 |2.2.0      |   |
 
 # Revdeps
@@ -33,7 +33,6 @@
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
-|Ecfun          |?       |      |        |     |
 |emdi           |?       |      |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
@@ -47,11 +46,12 @@
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |1       |2    |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|TPP            |3.20.0  |1     |        |3    |
+|TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
 
