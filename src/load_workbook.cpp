@@ -918,54 +918,68 @@ CharacterVector getChildlessNode(std::string xml, std::string tag) {
   while( begPos != std::string::npos ) {
 
     endPos = xml.find(endTag, begPos);
-    if(endPos == std::string::npos) break;
+    if(begPos == std::string::npos || endPos == std::string::npos) break;
     res = xml.substr(begPos, (endPos - begPos) + endTag.length());
+    if (res.length() == 0) break;
 
+    auto itr = 0;
+    // check if we have either <foo ...>, <foo/>, or <foo>. We have to avoid
+    // <foos...>
     while (
         res.substr(begTag.length(),1).compare(" ") != 0 && // <foo ...>
           res.substr(begTag.length(),1).compare("/") != 0 && // <foo/>
           res.substr(begTag.length(),1).compare(">") != 0    // <foo>
     ) {
+      
+      if (itr == 0) begPos = begPos + begTag.length();
+      if(begPos == std::string::npos || endPos == std::string::npos) break;
 
       Rcpp::checkUserInterrupt();
 
       begPos = xml.find(begTag, begPos);
       endPos = xml.find(endTag, begPos);
 
-      if(begPos == std::string::npos) break;
+      if(begPos == std::string::npos || endPos == std::string::npos) break;
       res = xml.substr(begPos, (endPos - begPos) + endTag.length());
-      begPos = endPos + endTag.length();
+      begPos = begPos + endTag.length();
+
+      ++itr;
     }
 
-    // check if last 2 characters are "/>"
-    // <foo/> or <foo></foo>
+    // if we have <foo> we need to find the matching closing tag </foo>
+    bool closingtag = false;
     if (res.substr( res.length() - 2 ).compare("/>") != 0) {
-      // check </tag>
+      // this node has </tag>
       temp_endTag = "</" + tag + ">";
+      closingtag = true;
     } else {
       temp_endTag = endTag;
     }
 
-    begPos = xml.find(begTag, begPos);
-    endPos = xml.find(temp_endTag, begPos);
+    // if we have a closing tag, we need to reposition the endPos. Previously
+    // it was at the end of <foo>. Now we search for </foo>
+    if (closingtag) {
+      endPos = xml.find(temp_endTag, begPos);
+      if(begPos == std::string::npos || endPos == std::string::npos) break;
+      
+      // read from initial "<" to final ">"
+      res = xml.substr(begPos, (endPos - begPos) + temp_endTag.length());
+      if (res.length() == 0) break;
+    }
 
-    if(begPos == std::string::npos) break;
-
-    // read from initial "<" to final ">"
-    res = xml.substr(begPos, (endPos - begPos) + temp_endTag.length());
+    if(begPos == std::string::npos || endPos == std::string::npos) break;
 
     begPos = endPos + temp_endTag.length();
+    begPos = xml.find(begTag, begPos);
     r.push_back(res);
 
-    if(begPos == std::string::npos) break;
+    if(begPos == std::string::npos || endPos == std::string::npos) break;
   }
 
   CharacterVector out = wrap(r);
   return markUTF8(out);
 
 }
-
-
 
 
 // [[Rcpp::export]]
