@@ -4061,7 +4061,7 @@ Workbook$methods(
             }
 
             flags <-
-              c("bold", "italic", "underline") %in% names(thisFont)
+              c("bold", "italic", "underline", "strikeout") %in% names(thisFont)
             if (any(flags)) {
               style$fontDecoration <- NULL
               if (flags[[1]]) {
@@ -4077,6 +4077,11 @@ Workbook$methods(
               if (flags[[3]]) {
                 style$fontDecoration <-
                   append(style$fontDecoration, "UNDERLINE")
+              }
+
+              if (flags[[4]]) {
+                style$fontDecoration <-
+                  append(style$fontDecoration, "STRIKEOUT")
               }
             }
           }

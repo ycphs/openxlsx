@@ -473,8 +473,9 @@ buildFontList <- function(fonts) {
   
   italic <- lapply(fonts, getChildlessNode, tag = "i")
   bold <- lapply(fonts, getChildlessNode, tag = "b")
-  underline <- lapply(fonts, getChildlessNode, tag = "u")
-  
+  underline <- lapply(fonts, getChildlessNode, tag = "u")  
+  strikeout <- lapply(fonts, getChildlessNode, tag = "strike")
+
   ## Build font objects
   ft <- replicate(list(), n = length(fonts))
   for (i in seq_along(fonts)) {
@@ -518,6 +519,11 @@ buildFontList <- function(fonts) {
     if (length(underline[[i]]) > 0) {
       f <- c(f, "underline")
       nms <- c(nms, "underline")
+    }
+
+    if (length(unlist(strikeout[i])) > 0) {
+      f <- c(f, strikeout[i])
+      nms <- c(nms, "strikeout")
     }
     
     f <- lapply(seq_along(f), function(i) unlist(f[i]))
