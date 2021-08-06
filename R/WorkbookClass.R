@@ -1640,9 +1640,9 @@ Workbook$methods(
   getBaseFont = function() {
     baseFont <- styles$fonts[[1]]
 
-    sz <- getAttrs(baseFont, "<sz ")
-    colour <- getAttrs(baseFont, "<color ")
-    name <- getAttrs(baseFont, "<name ")
+    sz <- getAttrs(baseFont, "sz")
+    colour <- getAttrs(baseFont, "color")
+    name <- getAttrs(baseFont, "name")
 
     if (length(sz[[1]]) == 0) {
       sz <- list("val" = "10")

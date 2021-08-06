@@ -465,11 +465,11 @@ getAttrs <- function(xml, tag) {
 
 
 buildFontList <- function(fonts) {
-  sz <- getAttrs(fonts, "<sz ")
-  colour <- getAttrsFont(fonts, "<color ")
-  name <- getAttrs(fonts, tag = "<name ")
-  family <- getAttrs(fonts, "<family ")
-  scheme <- getAttrs(fonts, "<scheme ")
+  sz <- getAttrs(fonts, "sz")
+  colour <- getAttrsFont(fonts, "color")
+  name <- getAttrs(fonts, tag = "name")
+  family <- getAttrs(fonts, "family")
+  scheme <- getAttrs(fonts, "scheme")
   
   italic <- lapply(fonts, getChildlessNode, tag = "i")
   bold <- lapply(fonts, getChildlessNode, tag = "b")
