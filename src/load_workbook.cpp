@@ -895,68 +895,74 @@ std::vector<std::string> getChildlessNode_ss(std::string xml, std::string tag){
 
 // [[Rcpp::export]]
 CharacterVector getChildlessNode(std::string xml, std::string tag) {
-  
+
   // size_t k = tag.length(); variable not used
   if(xml.length() == 0)
     return wrap(NA_STRING);
-  
-  size_t begPos = 0, endPos = 0, goit = 0;
-  
+
+  size_t begPos = 0, endPos = 0;
+
   std::vector<std::string> r;
   std::string res = "";
 
-  // check "<tag/>"
-  std::string begendTag = "<" + tag + "/>";
-
-  goit = xml.find(begendTag, begPos);
-  if (goit != std::string::npos) {
-    r.push_back(begendTag);
-
-    CharacterVector out = wrap(r);  
-    return markUTF8(out);
-  }
-  
   // check "<tag "
-  std::string begTag = "<" + tag + " ";
-  std::string endTag = ">";
-  
+  const std::string begTag = "<" + tag;
+  const std::string endTag = ">";
+  std::string temp_endTag = "";
+
   // initial check, which kind of tags to expect
   begPos = xml.find(begTag, begPos);
-  
+
   // if begTag was found
-  if(begPos != std::string::npos) {
-    
+  // try with <foo ... />
+  while( begPos != std::string::npos ) {
+
     endPos = xml.find(endTag, begPos);
+    if(endPos == std::string::npos) break;
     res = xml.substr(begPos, (endPos - begPos) + endTag.length());
-    
+
+    while (
+        res.substr(begTag.length(),1).compare(" ") != 0 && // <foo ...>
+          res.substr(begTag.length(),1).compare("/") != 0 && // <foo/>
+          res.substr(begTag.length(),1).compare(">") != 0    // <foo>
+    ) {
+
+      Rcpp::checkUserInterrupt();
+
+      begPos = xml.find(begTag, begPos);
+      endPos = xml.find(endTag, begPos);
+
+      if(begPos == std::string::npos) break;
+      res = xml.substr(begPos, (endPos - begPos) + endTag.length());
+      begPos = endPos + endTag.length();
+    }
+
     // check if last 2 characters are "/>"
     // <foo/> or <foo></foo>
     if (res.substr( res.length() - 2 ).compare("/>") != 0) {
       // check </tag>
-      endTag = "</" + tag + ">";
+      temp_endTag = "</" + tag + ">";
+    } else {
+      temp_endTag = endTag;
     }
-    
-    // try with <foo ... />
-    while( 1 ) {
-      
-      begPos = xml.find(begTag, begPos);
-      endPos = xml.find(endTag, begPos);
-      
-      if(begPos == std::string::npos) 
-        break;
-      
-      // read from initial "<" to final ">"
-      res = xml.substr(begPos, (endPos - begPos) + endTag.length());
-      
-      begPos = endPos + endTag.length();
-      r.push_back(res);
-    }
+
+    begPos = xml.find(begTag, begPos);
+    endPos = xml.find(temp_endTag, begPos);
+
+    if(begPos == std::string::npos) break;
+
+    // read from initial "<" to final ">"
+    res = xml.substr(begPos, (endPos - begPos) + temp_endTag.length());
+
+    begPos = endPos + temp_endTag.length();
+    r.push_back(res);
+
+    if(begPos == std::string::npos) break;
   }
-  
-  
-  CharacterVector out = wrap(r);  
+
+  CharacterVector out = wrap(r);
   return markUTF8(out);
-  
+
 }
 
 
