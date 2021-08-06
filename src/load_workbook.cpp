@@ -926,7 +926,7 @@ CharacterVector getChildlessNode(std::string xml, std::string tag) {
     // check if we have either <foo ...>, <foo/>, or <foo>. We have to avoid
     // <foos...>
     while (
-        res.substr(begTag.length(),1).compare(" ") != 0 && // <foo ...>
+        res.substr(begTag.length(),1).compare(" ") != 0 &&   // <foo ...>
           res.substr(begTag.length(),1).compare("/") != 0 && // <foo/>
           res.substr(begTag.length(),1).compare(">") != 0    // <foo>
     ) {
@@ -941,7 +941,6 @@ CharacterVector getChildlessNode(std::string xml, std::string tag) {
 
       if(begPos == std::string::npos || endPos == std::string::npos) break;
       res = xml.substr(begPos, (endPos - begPos) + endTag.length());
-      begPos = begPos + endTag.length();
 
       ++itr;
     }
