@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-08-04                   |
+|date     |2021-08-09                   |
 
 # Dependencies
 
@@ -23,12 +23,13 @@
 
 # Revdeps
 
-## Failed to check (27)
+## Failed to check (30)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
+|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -50,7 +51,9 @@
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
+|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
+|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
