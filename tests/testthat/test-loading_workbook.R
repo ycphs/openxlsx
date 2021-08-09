@@ -961,3 +961,54 @@ test_that("Read and save file with inlineStr", {
   expect_true(all.equal(wb_df, wb_df_re, compare.attributes = FALSE))
   
 })
+
+# tests for getChildlessNode returns the content of every node, single node or not. the name has only historical meaning
+test_that("read nodes", {
+
+  # read single node
+  test <- "<xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf>"
+  that <- openxlsx:::getChildlessNode(test, "xf")
+  expect_equal(test, that)
+
+  # real life example <foo/> and <foo>...</foo> mixed
+  cellXfs <- "<cellXfs count=\"8\"><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/><xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"3\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"5\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"6\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"7\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/></cellXfs>"
+  that <- openxlsx:::getChildlessNode(cellXfs, "xf")
+  test <- c("<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"3\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"5\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"6\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"7\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
+            "<xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf>", 
+            "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>"
+  )
+  expect_equal(test, that)
+
+  # test <foos/>
+  test <- "<xfs bla/>"
+  that <- openxlsx:::getChildlessNode(test, "xf")
+  expect_equal(character(0), that)
+
+  # test <foo/>
+  test <- "<b/><b/>"
+  that <- openxlsx:::getChildlessNode(test, "b")
+  test <- c(
+    "<b/>",
+    "<b/>"
+  )
+  expect_equal(test, that)
+
+  # test <foo>...</foo>
+  test <- "<b>a</b><b/>"
+  that <- openxlsx:::getChildlessNode(test, "b")
+  test <- c("<b>a</b>", "<b/>")
+  expect_equal(test, that)
+
+  # test <foos><foo/></foos>
+  test <- "<xfs><xf/></xfs>"
+  that <- openxlsx:::getChildlessNode(test, "xf")
+  test <- "<xf/>"
+  expect_equal(test, that)
+  
+})
