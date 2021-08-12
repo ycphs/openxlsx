@@ -3824,7 +3824,7 @@ Workbook$methods(
     
     
     
-    if (aSheet >= 1) {
+    if (aSheet >= 1 & nSheets > 0) {
       showText <-
         c(
           showText,
