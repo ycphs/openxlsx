@@ -39,7 +39,6 @@
 #' @seealso \code{\link{writeData}}
 #' @seealso \code{\link{removeTable}}
 #' @seealso \code{\link{getTables}}
-#' @importFrom stats na.omit
 #' @export
 #' @examples
 #' ## see package vignettes for further examples.
