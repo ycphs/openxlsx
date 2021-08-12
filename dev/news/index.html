@@ -151,6 +151,9 @@
 <code><a href="../reference/loadWorkbook.html">loadWorkbook()</a></code> imports <code>inlineStr</code>. Values remain <code>inlineStr</code> when writing the workbook with <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code>. Similar <code>read.xlsx</code> and <code>readWorkbook</code> import <code>inlineStr</code>.</li>
 <li>
 <code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> no longer changes random seed (<a href="https://github.com/ycphs/openxlsx/issues/183"><a href='https://github.com/ycphs/openxlsx/issues/183'>#183</a></a>)</li>
+<li>fixed a regression that caused fonts to be read in incorrectly (<a href="https://github.com/ycphs/openxlsx/issues/207"><a href='https://github.com/ycphs/openxlsx/issues/207'>#207</a></a>)</li>
+<li>add option to save as read only recommended (<a href="https://github.com/ychps/openxlsx/issues/201"><a href='https://github.com/ycphs/openxlsx/issues/201'>#201</a></a>)</li>
+<li>fixed writing hyperlink formulas (<a href="https://github.com/ychps/openxlsx/issues/200"><a href='https://github.com/ycphs/openxlsx/issues/200'>#200</a></a>)</li>
 </ul>
 </div>
 </div>
@@ -199,7 +202,7 @@
 </ul>
 </li>
 <li>
-<code>activeSheet</code> allows to set and get the active (displayed) sheet of a worbook.</li>
+<code>activeSheet</code> allows to set and get the active (displayed) sheet of a workbook.</li>
 <li>Adds new global options for workbook formatting (<a href="https://github.com/ycphs/openxlsx/issues/165"><a href='https://github.com/ycphs/openxlsx/issues/165'>#165</a></a>; see <code><a href="../reference/openxlsx_options.html">?op.openxlsx</a></code>)</li>
 </ul>
 </div>
@@ -213,7 +216,7 @@
 <a href="#new-features-1" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for <code><a href="../reference/createNamedRegion.html">createNamedRegion()</a></code> (<a href="https://github.com/ycphs/openxlsx/issues/103"><a href='https://github.com/ycphs/openxlsx/issues/103'>#103</a></a>), <code><a href="../reference/writeComment.html">writeComment()</a></code>, <code><a href="../reference/writeData.html">writeData()</a></code>, <code><a href="../reference/writeDataTable.html">writeDataTable()</a></code> and <code><a href="../reference/writeFormula.html">writeFormula()</a></code>. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the PR <a href="https://github.com/ycphs/openxlsx/pull/118"><a href='https://github.com/ycphs/openxlsx/issues/118'>#118</a></a>.</p></li>
-<li><p><code><a href="../reference/setColWidths.html">setColWidths()</a></code> now supports zero-length <code>cols</code>, which is convinient when <code>cols</code> is dynamically provided <a href="https://github.com/ycphs/openxlsx/issues/128"><a href='https://github.com/ycphs/openxlsx/issues/128'>#128</a></a>. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the feature request and the PR.</p></li>
+<li><p><code><a href="../reference/setColWidths.html">setColWidths()</a></code> now supports zero-length <code>cols</code>, which is convenient when <code>cols</code> is dynamically provided <a href="https://github.com/ycphs/openxlsx/issues/128"><a href='https://github.com/ycphs/openxlsx/issues/128'>#128</a></a>. Thanks to <a href='https://github.com/shrektan'>@shrektan</a> for the feature request and the PR.</p></li>
 </ul>
 </div>
 <div id="fixes-for-check-issues" class="section level2">
@@ -251,7 +254,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li>Solved CRAN check errors based on the change disussed in <a href="https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277">PR<a href='https://github.com/ycphs/openxlsx/issues/17277'>#17277</a></a>
+<li>Solved CRAN check errors based on the change discussed in <a href="https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277">PR<a href='https://github.com/ycphs/openxlsx/issues/17277'>#17277</a></a>
 </li>
 </ul>
 </div>
@@ -271,7 +274,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li>Allow xml-sensitve characters in sheetnames (<a href="https://github.com/ycphs/openxlsx/issues/78"><a href='https://github.com/ycphs/openxlsx/issues/78'>#78</a></a>)</li>
+<li>Allow xml-sensitive characters in sheetnames (<a href="https://github.com/ycphs/openxlsx/issues/78"><a href='https://github.com/ycphs/openxlsx/issues/78'>#78</a></a>)</li>
 </ul>
 </div>
 <div id="internal" class="section level2">
@@ -313,7 +316,7 @@
 <ul>
 <li><p>Fixed NEWS hyperlink</p></li>
 <li><p>Fixed writing of mixed EST/EDT datetimes</p></li>
-<li><p>Added description for <code><a href="../reference/writeFormula.html">writeFormula()</a></code> to use only english function names</p></li>
+<li><p>Added description for <code><a href="../reference/writeFormula.html">writeFormula()</a></code> to use only English function names</p></li>
 <li><p>Fixed validateSheet for special characters</p></li>
 </ul>
 </div>
@@ -352,7 +355,7 @@
 <h2 class="hasAnchor">
 <a href="#internal-2" class="anchor"></a>Internal</h2>
 <ul>
-<li>update to rogygen2 7.0.0</li>
+<li>update to roxygen2 7.0.0</li>
 </ul>
 </div>
 </div>
@@ -519,7 +522,7 @@
 <a href="#new-features-12" class="anchor"></a>New Features</h2>
 <ul>
 <li><p>improved performance of <code>read.xlsx</code> and <code>loadWorkbook</code></p></li>
-<li><p><code>writeFormula</code> funciton added to write cell formulas. Also columns with class “formula” are written as cell formulas similar how column classes determine cell styling</p></li>
+<li><p><code>writeFormula</code> function added to write cell formulas. Also columns with class “formula” are written as cell formulas similar how column classes determine cell styling</p></li>
 <li><p>Functionality to write comments and maintain comments with <code>loadWorkbook</code></p></li>
 <li><p><code>check.names</code> argument added <code>read.xlsx</code> to make syntactically valid variable names</p></li>
 <li><p><code>loadWorkbook</code> maintains cell indents</p></li>
@@ -564,7 +567,7 @@
 <li><p>Encoding fixed and multi-byte characters now supported.</p></li>
 <li><p><code>read.xlsx</code> now maintains multiple consecutive spaces and newline characters.</p></li>
 <li><p><code>convertToDate</code> &amp; <code>convertToDateTime</code> now handle NA values.</p></li>
-<li><p>multiple selected worksheet issue whioch preventing adding of new worksheets in Excel.</p></li>
+<li><p>multiple selected worksheet issue which preventing adding of new worksheets in Excel.</p></li>
 <li><p><code>zoom</code> parameter now limited to [10, 400] and documentation updated.</p></li>
 <li><p><code>write.xlsx</code> colnames parameter being assigned to rownames</p></li>
 <li><p>Handling of NaN and Inf values in <code>writeData</code></p></li>
@@ -623,7 +626,7 @@
 <a href="#new-features-15" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>writeData</code> now style based on column class the same as <code>writeDataTable</code></p></li>
-<li><p>Vignette “Formatting” for examples focussed on formatting</p></li>
+<li><p>Vignette “Formatting” for examples focused on formatting</p></li>
 <li><p>Customizable date formatting with <code>createStyle</code> and also through option(“openxlsx.dateFormat” = …)</p></li>
 <li><p>Customizable POSIX formatting with <code>createStyle</code> and also through option(“openxlsx.datetimeFormat” = …)</p></li>
 <li><p>Generalised <code>conditionalFormat</code> function to complex expressions and color scales.</p></li>
@@ -674,7 +677,7 @@
 <li><p><code>readWorkbook</code>/<code>read.xlsx</code> should work now. Empty values are now padded with NA. Many other bugs fixed.</p></li>
 <li><p>borders on single row and/or column data.frames now work.</p></li>
 <li><p><code>readWorkbook</code>/<code>read.xlsx</code> check for TRUE/FALSE values is now case-insensitive.</p></li>
-<li><p>sheet names containing invalid xml charcters (&amp;, &lt;, &gt;, ’, ") now work when referencing by name and will not result in a corrupt workbook.</p></li>
+<li><p>sheet names containing invalid xml characters (&amp;, &lt;, &gt;, ’, ") now work when referencing by name and will not result in a corrupt workbook.</p></li>
 <li><p>sheet names containing non-local characters can now be referenced by name.</p></li>
 <li><p>Invalid factor level when missing values in <code>writeData</code></p></li>
 <li><p><code>saveWorkbook</code> now accepts relative paths.</p></li>
