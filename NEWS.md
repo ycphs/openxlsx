@@ -30,7 +30,7 @@
 * `write.xlsx()` >> `buildWorkbook()` can now handle `colWidths` passed as either a single element or a `list()`
 * Added ability to change positioning of summary columns and rows.
   * These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
-* `activeSheet` allows to set and get the active (displayed) sheet of a worbook.
+* `activeSheet` allows to set and get the active (displayed) sheet of a workbook.
 * Adds new global options for workbook formatting ([#165](https://github.com/ycphs/openxlsx/issues/165); see `?op.openxlsx`)
 
 
@@ -42,7 +42,7 @@
 
 * Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for `createNamedRegion()` ([#103](https://github.com/ycphs/openxlsx/issues/103)), `writeComment()`, `writeData()`, `writeDataTable()` and `writeFormula()`. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to @shrektan for the PR [#118](https://github.com/ycphs/openxlsx/pull/118).
 
-* `setColWidths()` now supports zero-length `cols`, which is convinient when `cols` is dynamically provided [#128](https://github.com/ycphs/openxlsx/issues/128). Thanks to @shrektan for the feature request and the PR.
+* `setColWidths()` now supports zero-length `cols`, which is convenient when `cols` is dynamically provided [#128](https://github.com/ycphs/openxlsx/issues/128). Thanks to @shrektan for the feature request and the PR.
 
 ## Fixes for Check issues
 
@@ -70,7 +70,7 @@
 
 ## Bug Fixes
 
-* Solved CRAN check errors based on the change disussed in [PR#17277](https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277)
+* Solved CRAN check errors based on the change discussed in [PR#17277](https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277)
 
 # openxlsx 4.2.0
 
@@ -80,7 +80,7 @@
 
 ## Bug Fixes
 
-* Allow xml-sensitve characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
+* Allow xml-sensitive characters in sheetnames ([#78](https://github.com/ycphs/openxlsx/issues/78))
 
 ## Internal
 
@@ -106,7 +106,7 @@
 
 *  Fixed writing of mixed EST/EDT datetimes
 
-*  Added description for `writeFormula()` to use only english function names
+*  Added description for `writeFormula()` to use only English function names
 
 *  Fixed validateSheet for special characters
 
@@ -136,7 +136,7 @@
 
 ## Internal
 
-*  update to rogygen2 7.0.0
+*  update to roxygen2 7.0.0
 
 # openxlsx 4.1.3
 
@@ -277,7 +277,7 @@
 
 *  improved performance of `read.xlsx` and `loadWorkbook`
 
-*  `writeFormula` funciton added to write cell formulas. Also columns
+*  `writeFormula` function added to write cell formulas. Also columns
   with class "formula" are written as cell formulas similar how column
   classes determine cell styling
 
@@ -332,7 +332,7 @@
 
 *  `convertToDate` & `convertToDateTime` now handle NA values.
 
-*  multiple selected worksheet issue whioch preventing adding of new worksheets in Excel.
+*  multiple selected worksheet issue which preventing adding of new worksheets in Excel.
 
 *  `zoom` parameter now limited to [10, 400] and documentation updated.
 
@@ -396,7 +396,7 @@
 
 *  `writeData` now style based on column class the same as `writeDataTable`
 
-*  Vignette "Formatting" for examples focussed on formatting
+*  Vignette "Formatting" for examples focused on formatting
 
 *  Customizable date formatting with `createStyle` and also through option("openxlsx.dateFormat" = ...)
 
@@ -464,7 +464,7 @@
 
 *  `readWorkbook`/`read.xlsx` check for TRUE/FALSE values is now case-insensitive.
 
-*  sheet names containing invalid xml charcters (&, <, >, ', ") now work when referencing
+*  sheet names containing invalid xml characters (&, <, >, ', ") now work when referencing
   by name and will not result in a corrupt workbook.
 
 *  sheet names containing non-local characters can now be referenced by name.
