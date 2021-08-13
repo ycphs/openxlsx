@@ -8,6 +8,7 @@
 * fixed a regression that caused fonts to be read in incorrectly ([#207](https://github.com/ycphs/openxlsx/issues/207))
 * add option to save as read only recommended ([#201](https://github.com/ychps/openxlsx/issues/201))
 * fixed writing hyperlink formulas ([#200](https://github.com/ychps/openxlsx/issues/200))
+* write.xlsx now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
 
 # openxlsx 4.2.4
 
