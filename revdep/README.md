@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-08-09                   |
+|date     |2021-08-13                   |
 
 # Dependencies
 
@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (30)
+## Failed to check (31)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -32,6 +32,7 @@
 |cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
+|CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |?       |      |        |     |

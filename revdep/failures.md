@@ -21,9 +21,9 @@ Error in download.file(url, destfile, method, mode = "wb", ...) :
   download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1166327808 != reported length 1623464748
+  downloaded length 1398161408 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1166327808 != reported length 1623464748
+  downloaded length 1398161408 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
   URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
@@ -45,9 +45,9 @@ Error in download.file(url, destfile, method, mode = "wb", ...) :
   download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1166327808 != reported length 1623464748
+  downloaded length 1398161408 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1166327808 != reported length 1623464748
+  downloaded length 1398161408 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
   URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
@@ -159,6 +159,39 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 ```
 # CNVPanelizer
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CoTiMA
 
 <details>
 
