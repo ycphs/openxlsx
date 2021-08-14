@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-08-13                   |
+|date     |2021-08-14                   |
 
 # Dependencies
 
@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (31)
+## Failed to check (27)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -46,15 +46,11 @@
 |nanotatoR      |?       |      |        |     |
 |openPrimeR     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
-|rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
-|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 |upstartr       |?       |      |        |     |
