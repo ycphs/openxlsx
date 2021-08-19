@@ -38,3 +38,8 @@ test_that("Workbook properties", {
   setLastModifiedBy(wb, "Philipp 2")
   expect_true(grepl("<cp:lastModifiedBy>Philipp 2</cp:lastModifiedBy>", wb$core))
 })
+
+
+test_that("Workbook can print with 0 sheets [240]", {
+  expect_error(createWorkbook()$show(), NA)
+})
