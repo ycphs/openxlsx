@@ -2,7 +2,7 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 4.1.0 (2021-05-18) |
+|version  |R version 4.1.1 (2021-08-10) |
 |os       |Ubuntu 18.04.5 LTS           |
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-08-14                   |
+|date     |2021-08-19                   |
 
 # Dependencies
 
@@ -23,16 +23,16 @@
 
 # Revdeps
 
-## Failed to check (27)
+## Failed to check (26)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|cbaf           |?       |      |        |     |
+|bayesbr        |?       |      |        |     |
+|BayesianFROC   |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
-|CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |?       |      |        |     |
@@ -43,11 +43,10 @@
 |maEndToEnd     |?       |      |        |     |
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
-|nanotatoR      |?       |      |        |     |
 |openPrimeR     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |1       |2    |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |

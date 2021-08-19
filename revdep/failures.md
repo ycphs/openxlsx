@@ -17,21 +17,7 @@
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
+
 
 
 ```
@@ -41,21 +27,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
+
 
 
 ```
@@ -92,7 +64,40 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
-# cbaf
+# bayesbr
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# BayesianFROC
 
 <details>
 
@@ -159,59 +164,6 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 ```
 # CNVPanelizer
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-
-
-```
-### CRAN
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-
-
-```
-# CoTiMA
 
 <details>
 
@@ -521,7 +473,17 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz'
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affxparser’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affxparser’ failed
 
 
 ```
@@ -531,7 +493,17 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz'
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affxparser’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affxparser’ failed
 
 
 ```
@@ -554,7 +526,17 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz'
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affy’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affy’ failed
 
 
 ```
@@ -564,44 +546,21 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz'
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affy’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘affy’ failed
 
 
 ```
 # MicroSEC
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# nanotatoR
 
 <details>
 
@@ -737,90 +696,32 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 1.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/sangeranalyseR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 142
-
-Run `revdep_details(, "sangeranalyseR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
-    ```
-
-*   checking for portable file names ... WARNING
-    ```
-    Found the following file with a non-portable file name:
-      docs/wallpaperflare.com_wallpaper (1).jpg
-    These are not fully portable file names.
-    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
-      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
-      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
-      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
-      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-      docs/build/html/.buildinfo
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Error: package ‘phangorn’ could not be loaded
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Error: package ‘phangorn’ could not be loaded
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
 
 
 ```
