@@ -1,4 +1,4 @@
-# openxlsx (development version)
+# openxlsx 4.2.5
 
 ## Fixes
 
@@ -6,8 +6,8 @@
 * `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing the workbook with `saveWorkbook()`. Similar `read.xlsx` and `readWorkbook` import `inlineStr`.
 * `read.xlsx()` no longer changes random seed ([#183](https://github.com/ycphs/openxlsx/issues/183))
 * fixed a regression that caused fonts to be read in incorrectly ([#207](https://github.com/ycphs/openxlsx/issues/207))
-* add option to save as read only recommended ([#201](https://github.com/ychps/openxlsx/issues/201))
-* fixed writing hyperlink formulas ([#200](https://github.com/ychps/openxlsx/issues/200))
+* add option to save as read only recommended ([#201](https://github.com/ycphs/openxlsx/issues/201))
+* fixed writing hyperlink formulas ([#212](https://github.com/ycphs/openxlsx/issues/212))
 * `write.xlsx()` now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
 * `write.xlsx()` now again uses the default of `overwrite = TRUE` for saving files ([#249](https://github.com/ycphs/openxlsx/issues/249))
 * `Workbook$show()` no longer fails when called in a 0 sheet workbook([#240](https://github.com/ychps/openxlsx/issues/240))
@@ -85,7 +85,7 @@
 
 ## Bug Fixes
 
-* Solved CRAN check errors based on the change discussed in [PR#17277](https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277)
+* Solved CRAN check errors based on the change discussed in [PR#17277](https://bugs.r-project.org/show_bug.cgi?id=17277)
 
 # openxlsx 4.2.0
 
