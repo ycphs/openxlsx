@@ -4,7 +4,7 @@
 \alias{createNamedRegion}
 \title{Create a named region.}
 \usage{
-createNamedRegion(wb, sheet, cols, rows, name)
+createNamedRegion(wb, sheet, cols, rows, name, overwrite = FALSE)
 }
 \arguments{
 \item{wb}{A workbook object}
@@ -16,6 +16,8 @@ createNamedRegion(wb, sheet, cols, rows, name)
 \item{rows}{Numeric vector specifying rows to include in region}
 
 \item{name}{Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.}
+
+\item{overwrite}{Boolean. Overwrite if exists ? Default to FALSE}
 }
 \description{
 Create a named region
