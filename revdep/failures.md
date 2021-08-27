@@ -17,7 +17,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1091468400 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1091468400 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -27,7 +41,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1091468400 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1091468400 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -64,40 +92,7 @@
 
 
 ```
-# bayesbr
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# BayesianFROC
+# cbaf
 
 <details>
 
@@ -473,17 +468,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affxparser’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affxparser’ failed
+
 
 
 ```
@@ -493,17 +478,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affxparser_1.64.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affxparser’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affxparser’ failed
+
 
 
 ```
@@ -526,17 +501,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affy’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affy’ failed
+
 
 
 ```
@@ -546,21 +511,44 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/affy_1.70.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affy’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘affy’ failed
+
 
 
 ```
 # MicroSEC
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# nanotatoR
 
 <details>
 
@@ -627,6 +615,39 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 ```
 # PloGO2
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# rbiom
 
 <details>
 
@@ -758,6 +779,39 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
+# sigFeature
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # stplanr
 
 <details>
@@ -832,7 +886,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 * GitHub: NA
 * Source code: https://github.com/cran/TPP
 * Date/Publication: 2021-07-27
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 97
 
 Run `revdep_details(, "TPP")` for more info
 
