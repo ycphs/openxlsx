@@ -10,11 +10,11 @@ genBaseColStyle <- function(cc) {
   } else if ("currency" %in% cc) {
     colStyle$numFmt <- list(numFmtId = "164", "formatCode" = "&quot;$&quot;#,##0.00")
   } else if ("accounting" %in% cc) {
-    colStyle$numFmt <- list(numFmtIs = "44")
+    colStyle$numFmt <- list(numFmtId = "44")
   } else if ("hyperlink" %in% cc) {
     colStyle$fontColour <- list(theme = "10")
   } else if ("percentage" %in% cc) {
-    colStyle$numFmt <- list(numFmtIs = "10")
+    colStyle$numFmt <- list(numFmtId = "10")
   } else if ("scientific" %in% cc) {
     colStyle$numFmt <- list(numFmtId = "11")
   } else if (any(c("3", "comma") %in% cc)) {

@@ -17,3 +17,18 @@ test_that("test return values for saveWorkbook", {
   
 }
 )
+
+# regression test for a typo
+test_that("regression test for #248", {
+  
+  # Basic data frame
+  df <- data.frame(number = 1:3, percent = 4:6/100)
+  tempFile <- temp_xlsx()
+  
+  # no formatting
+  expect_silent(write.xlsx(df, tempFile, borders = "columns", overwrite = TRUE))
+  
+  # Change column class to percentage
+  class(df$percent) <- "percentage"
+  expect_silent(write.xlsx(df, tempFile, borders = "columns", overwrite = TRUE))
+})
