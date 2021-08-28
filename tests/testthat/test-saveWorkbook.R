@@ -40,7 +40,8 @@ test_that("creating hyperlinks", {
   # prepare a file
   tempFile <- temp_xlsx()
   wb <- createWorkbook()
-  addWorksheet(wb, "test")
+  sheet <- "test"
+  addWorksheet(wb, sheet)
   img <- "D:/somepath/somepicture.png"
   
   # warning: col and row provided, but not required
