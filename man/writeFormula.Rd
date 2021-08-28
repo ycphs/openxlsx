@@ -108,7 +108,7 @@ saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
 
 }
 \seealso{
-\code{\link{writeData}}
+\code{\link{writeData}} \code{\link{makeHyperlinkString}}
 }
 \author{
 Alexander Walker
