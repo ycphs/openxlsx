@@ -32,3 +32,31 @@ test_that("regression test for #248", {
   class(df$percent) <- "percentage"
   expect_silent(write.xlsx(df, tempFile, borders = "columns", overwrite = TRUE))
 })
+
+
+# test for hyperrefs
+test_that("creating hyperlinks", {
+  
+  # prepare a file
+  tempFile <- temp_xlsx()
+  wb <- createWorkbook()
+  addWorksheet(wb, "test")
+  img <- "D:/somepath/somepicture.png"
+  
+  # warning: col and row provided, but not required
+  expect_warning(
+    linkString <- makeHyperlinkString(col = 1, row = 4,
+                                      text = "test.png", file = img))
+  
+  linkString2 <- makeHyperlinkString(text = "test.png", file = img)
+  
+  # col and row not needed
+  expect_equal(linkString, linkString2)
+  
+  # write file without errors
+  writeFormula(wb, sheet, x = linkString, startCol = 1, startRow = 1)
+  expect_silent(saveWorkbook(wb, tempFile, overwrite = TRUE))
+  
+  # TODO: add a check that the written xlsx file contains linkString
+  
+})
