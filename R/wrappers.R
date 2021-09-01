@@ -2714,8 +2714,8 @@ names.Workbook <- function(x) {
 
 
 #' @name createNamedRegion
-#' @title Create a named region.
-#' @description Create a named region
+#' @title Create / delete a named region.
+#' @description Create / delete a named region
 #' @author Alexander Walker
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
@@ -2754,6 +2754,10 @@ names.Workbook <- function(x) {
 #' getNamedRegions(wb) ## From Workbook object
 #' getNamedRegions(out_file) ## From xlsx file
 #'
+#' ## delete one
+#' deleteNamedRegion(wb = wb, name = "iris2")
+#' getNamedRegions(wb)
+#' 
 #' ## read named regions
 #' df <- read.xlsx(wb, namedRegion = "iris")
 #' head(df)
@@ -2761,6 +2765,8 @@ names.Workbook <- function(x) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
+#' 
+#' @rdname NamedRegion
 createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
@@ -2828,7 +2834,7 @@ deleteNamedRegion <- function(wb, name) {
   if (tolower(name) %in% ex_names) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   } else {
-    warning(sprintf("Canno't  find Named region with name '%s'", name))
+    warning(sprintf("Canno't find Named region with name '%s'", name))
   }
   
   invisible(0)
@@ -2877,6 +2883,7 @@ deleteNamedRegion <- function(wb, name) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
+#' 
 getNamedRegions <- function(x) {
   UseMethod("getNamedRegions", x)
 }
