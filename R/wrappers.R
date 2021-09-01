@@ -2834,7 +2834,7 @@ deleteNamedRegion <- function(wb, name) {
   if (tolower(name) %in% ex_names) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   } else {
-    warning(sprintf("Canno't find Named region with name '%s'", name))
+    warning(sprintf("Cannot find Named region with name '%s'", name))
   }
   
   invisible(0)
