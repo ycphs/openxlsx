@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get named regions — getNamedRegions • openxlsx</title>
+<title>Create / delete a named region. — createNamedRegion • openxlsx</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Get named regions — getNamedRegions" />
-<meta property="og:description" content="Return a vector of named regions in a xlsx file or
-Workbook object" />
+<meta property="og:title" content="Create / delete a named region. — createNamedRegion" />
+<meta property="og:description" content="Create / delete a named region" />
 
 
 <meta name="robots" content="noindex">
@@ -134,30 +133,57 @@ Workbook object" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get named regions</h1>
+    <h1>Create / delete a named region.</h1>
     <small class="dont-index">Source: <a href='https://github.com/ycphs/openxlsx/blob/master/R/wrappers.R'><code>R/wrappers.R</code></a></small>
-    <div class="hidden name"><code>getNamedRegions.Rd</code></div>
+    <div class="hidden name"><code>NamedRegion.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return a vector of named regions in a xlsx file or
-Workbook object</p>
+    <p>Create / delete a named region</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getNamedRegions</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>createNamedRegion</span><span class='op'>(</span><span class='va'>wb</span>, <span class='va'>sheet</span>, <span class='va'>cols</span>, <span class='va'>rows</span>, <span class='va'>name</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>deleteNamedRegion</span><span class='op'>(</span><span class='va'>wb</span>, <span class='va'>name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An xlsx file or Workbook object</p></td>
+      <th>wb</th>
+      <td><p>A workbook object</p></td>
+    </tr>
+    <tr>
+      <th>sheet</th>
+      <td><p>A name or index of a worksheet</p></td>
+    </tr>
+    <tr>
+      <th>cols</th>
+      <td><p>Numeric vector specifying columns to include in region</p></td>
+    </tr>
+    <tr>
+      <th>rows</th>
+      <td><p>Numeric vector specifying rows to include in region</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>Boolean. Overwrite if exists ? Default to FALSE</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Region is given by: min(cols):max(cols) X min(rows):max(rows)</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='createNamedRegion.html'>createNamedRegion</a></code></p></div>
+    <div class='dont-index'><p><code><a href='getNamedRegions.html'>getNamedRegions</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## create named regions</span>
@@ -166,7 +192,7 @@ Workbook object</p>
 
 <span class='co'>## specify region</span>
 <span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='va'>iris</span>, startCol <span class='op'>=</span> <span class='fl'>1</span>, startRow <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-<span class='fu'><a href='createNamedRegion.html'>createNamedRegion</a></span><span class='op'>(</span>
+<span class='fu'>createNamedRegion</span><span class='op'>(</span>
   wb <span class='op'>=</span> <span class='va'>wb</span>,
   sheet <span class='op'>=</span> <span class='fl'>1</span>,
   name <span class='op'>=</span> <span class='st'>"iris"</span>,
@@ -175,15 +201,20 @@ Workbook object</p>
 <span class='op'>)</span>
 
 
-<span class='co'>## using writeData 'name' argument to create a named region</span>
+<span class='co'>## using writeData 'name' argument</span>
 <span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='va'>iris</span>, name <span class='op'>=</span> <span class='st'>"iris2"</span>, startCol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='va'>out_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".xlsx"</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='va'>out_file</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'>## see named regions</span>
-<span class='fu'>getNamedRegions</span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span> <span class='co'>## From Workbook object</span>
-<span class='fu'>getNamedRegions</span><span class='op'>(</span><span class='va'>out_file</span><span class='op'>)</span> <span class='co'>## From xlsx file</span>
+<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span> <span class='co'>## From Workbook object</span>
+<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span><span class='op'>(</span><span class='va'>out_file</span><span class='op'>)</span> <span class='co'>## From xlsx file</span>
+
+<span class='co'>## delete one</span>
+<span class='fu'>deleteNamedRegion</span><span class='op'>(</span>wb <span class='op'>=</span> <span class='va'>wb</span>, name <span class='op'>=</span> <span class='st'>"iris2"</span><span class='op'>)</span>
+<span class='fu'><a href='getNamedRegions.html'>getNamedRegions</a></span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span>
 
 <span class='co'>## read named regions</span>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read.xlsx.html'>read.xlsx</a></span><span class='op'>(</span><span class='va'>wb</span>, namedRegion <span class='op'>=</span> <span class='st'>"iris"</span><span class='op'>)</span>
