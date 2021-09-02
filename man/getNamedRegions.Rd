@@ -46,6 +46,7 @@ head(df)
 df <- read.xlsx(out_file, namedRegion = "iris2")
 head(df)
 }
+
 }
 \seealso{
 \code{\link{createNamedRegion}}

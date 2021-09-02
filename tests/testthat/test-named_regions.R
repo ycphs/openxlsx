@@ -361,3 +361,54 @@ test_that("Read namedRegion from specific sheet", {
   # Warning: Workbook has no such named region on this sheet. (Correct namedRegion, but wrong sheet selected.)
   expect_warning(read.xlsx(filename, sheet = "Sheet4", namedRegion = namedR, rowNames = FALSE, colNames = FALSE))
 })
+
+test_that("Overwrite and delete named regions", {
+  temp_file <- temp_xlsx()
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, "Sheet 1")
+  
+  ## create region
+  writeData(wb, sheet = 1, x = iris[1:11, ], startCol = 1, 
+            startRow = 1, name = "iris")
+
+  
+ 
+  init_nr <- getNamedRegions(wb) 
+  expect_equal(attr(init_nr, "position"), "A1:E12")
+  
+  # no overwrite
+  expect_error({
+    writeData(wb, sheet = 1, x = iris[1:11, ], startCol = 1, 
+            startRow = 1, name = "iris")
+  })
+ 
+  expect_error({
+    createNamedRegion(
+      wb = wb,
+      sheet = 1,
+      name = "iris",
+      rows = 1:5,
+      cols = 1:2
+    )
+  })
+  
+  # overwrite
+  createNamedRegion(
+    wb = wb,
+    sheet = 1,
+    name = "iris",
+    rows = 1:5,
+    cols = 1:2, 
+    overwrite = TRUE
+  )
+  
+  # check midification
+  modify_nr <- getNamedRegions(wb) 
+  expect_equal(attr(modify_nr, "position"), "A1:B5")
+  expect_true("iris" %in% modify_nr)
+ 
+  # delete name region
+  deleteNamedRegion(wb, "iris")
+  expect_false("iris" %in% getNamedRegions(wb))
+})
