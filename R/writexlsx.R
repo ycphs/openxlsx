@@ -6,7 +6,9 @@
 #' @author Alexander Walker, Jordan Mark Barbone
 #' @inheritParams buildWorkbook
 #' @param file A file path to save the xlsx file
-#' @param overwrite If `TRUE` will save over `file` if present (default: `FALSE`)
+#' @param overwrite If \code{FALSE} will not save over \code{file} if present (default: \code{TRUE})
+#' @param ... Additional arguments passed to \code{\link{buildWorkbook}}
+#' 
 #'
 #' \itemize{
 #'   \item{createWorkbook}
@@ -121,7 +123,7 @@
 #' }
 #'
 #' @export
-write.xlsx <- function(x, file, asTable = FALSE, overwrite = FALSE, ...) {
+write.xlsx <- function(x, file, asTable = FALSE, overwrite = TRUE, ...) {
   wb <- buildWorkbook(x, asTable = asTable, ...)
   saveWorkbook(wb, file = file, overwrite = overwrite)
   invisible(wb)

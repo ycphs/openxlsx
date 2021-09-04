@@ -4,7 +4,7 @@
 \alias{write.xlsx}
 \title{write data to an xlsx file}
 \usage{
-write.xlsx(x, file, asTable = FALSE, overwrite = FALSE, ...)
+write.xlsx(x, file, asTable = FALSE, overwrite = TRUE, ...)
 }
 \arguments{
 \item{x}{A data.frame or a (named) list of objects that can be handled by
@@ -16,7 +16,10 @@ write.xlsx(x, file, asTable = FALSE, overwrite = FALSE, ...)
 than \code{\link{writeData}} to write \code{x} to the file (default: 
 \code{FALSE})}
 
-\item{overwrite}{If `TRUE` will save over `file` if present (default: `FALSE`)
+\item{overwrite}{If \code{FALSE} will not save over \code{file} if present (default: \code{TRUE})}
+
+\item{...}{Additional arguments passed to \code{\link{buildWorkbook}}
+
 
 \itemize{
   \item{createWorkbook}
@@ -27,9 +30,6 @@ than \code{\link{writeData}} to write \code{x} to the file (default:
 }
 
 see details.}
-
-\item{...}{Additional arguments passed to \code{\link{writeData}}, 
-\code{\link{writeDataTable}}, \code{\link{setColWidths}}}
 }
 \value{
 A workbook object
