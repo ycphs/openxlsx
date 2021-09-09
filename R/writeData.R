@@ -451,7 +451,7 @@ writeData <- function(
 #' @param xy An alternative to specifying \code{startCol} and
 #' \code{startRow} individually.  A vector of the form
 #' \code{c(startCol, startRow)}.
-#' @seealso \code{\link{writeData}}
+#' @seealso \code{\link{writeData}} \code{\link{makeHyperlinkString}}
 #' @export writeFormula
 #' @rdname writeFormula
 #' @examples

@@ -2705,14 +2705,16 @@ names.Workbook <- function(x) {
 
 
 #' @name createNamedRegion
-#' @title Create a named region.
-#' @description Create a named region
+#' @title Create / delete a named region.
+#' @description Create / delete a named region
 #' @author Alexander Walker
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param rows Numeric vector specifying rows to include in region
 #' @param cols Numeric vector specifying columns to include in region
 #' @param name Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.
+#' @param overwrite Boolean. Overwrite if exists ? Default to FALSE
+#' 
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
 #' @export
 #' @seealso \code{\link{getNamedRegions}}
@@ -2743,6 +2745,10 @@ names.Workbook <- function(x) {
 #' getNamedRegions(wb) ## From Workbook object
 #' getNamedRegions(out_file) ## From xlsx file
 #'
+#' ## delete one
+#' deleteNamedRegion(wb = wb, name = "iris2")
+#' getNamedRegions(wb)
+#' 
 #' ## read named regions
 #' df <- read.xlsx(wb, namedRegion = "iris")
 #' head(df)
@@ -2750,7 +2756,9 @@ names.Workbook <- function(x) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
-createNamedRegion <- function(wb, sheet, cols, rows, name) {
+#' 
+#' @rdname NamedRegion
+createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   od <- getOption("OutDec")
   options("OutDec" = ".")
   on.exit(expr = options("OutDec" = od), add = TRUE)
@@ -2775,13 +2783,16 @@ createNamedRegion <- function(wb, sheet, cols, rows, name) {
   ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
   ex_names <- tolower(replaceXMLEntities(ex_names))
 
-  if (tolower(name) %in% ex_names) {
-    stop(sprintf("Named region with name '%s' already exists!", name))
-  } else if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
+  if (tolower(name) %in% ex_names & !overwrite) {
+    stop(sprintf("Named region with name '%s' already exists! Use overwrite  = TRUE if you want to replace it", name))
+  } else if (tolower(name) %in% ex_names & overwrite) {
+    wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
+  }  
+  
+  if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
     stop("name cannot look like a cell reference.")
   }
-
-
+  
   cols <- round(cols)
   rows <- round(rows)
 
@@ -2800,7 +2811,25 @@ createNamedRegion <- function(wb, sheet, cols, rows, name) {
 }
 
 
-
+#' @export
+#' @rdname NamedRegion
+deleteNamedRegion <- function(wb, name) {
+  
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  
+  ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
+  ex_names <- tolower(replaceXMLEntities(ex_names))
+  
+  if (tolower(name) %in% ex_names) {
+    wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
+  } else {
+    warning(sprintf("Cannot find Named region with name '%s'", name))
+  }
+  
+  invisible(0)
+}
 
 
 
@@ -2845,6 +2874,7 @@ createNamedRegion <- function(wb, sheet, cols, rows, name) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
+#' 
 getNamedRegions <- function(x) {
   UseMethod("getNamedRegions", x)
 }

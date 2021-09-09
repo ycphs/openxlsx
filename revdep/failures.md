@@ -17,21 +17,7 @@
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
+
 
 
 ```
@@ -41,58 +27,11 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 36008 != reported length 30765734
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/GO.db_3.13.0.tar.gz': status was 'Failure when receiving data from the peer'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘GO.db’ failed
+
 
 
 ```
 # artMS
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# cbaf
 
 <details>
 
@@ -159,59 +98,6 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 ```
 # CNVPanelizer
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-
-
-```
-### CRAN
-
-```
-
-
-
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  cannot open URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz'
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/bioc/src/contrib/XVector_0.32.0.tar.gz': status was 'SSL connect error'
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘XVector’ failed
-
-
-```
-# CoTiMA
 
 <details>
 
@@ -328,6 +214,61 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 ```
 
 
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# fasstr
+
+<details>
+
+* Version: 0.3.2
+* GitHub: https://github.com/bcgov/fasstr
+* Source code: https://github.com/cran/fasstr
+* Date/Publication: 2020-11-07 06:00:02 UTC
+* Number of recursive dependencies: 104
+
+Run `revdep_details(, "fasstr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/fasstr/new/fasstr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘fasstr/DESCRIPTION’ ... OK
+* this is package ‘fasstr’ version ‘0.3.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... ERROR
+Only *source* packages can be checked.
+* DONE
+Status: 1 ERROR
+
+
+
+
+See
+  ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/fasstr/new/fasstr.Rcheck/00check.log’
+for details.
 
 
 
@@ -700,6 +641,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
+# rbiom
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # RIPAT
 
 <details>
@@ -798,7 +772,6 @@ Run `revdep_details(, "sangeranalyseR")` for more info
 Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
   libglpk.so.40: cannot open shared object file: No such file or directory
-Error: package ‘phangorn’ could not be loaded
 Execution halted
 ERROR: lazy loading failed for package ‘sangeranalyseR’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
@@ -817,7 +790,6 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
   libglpk.so.40: cannot open shared object file: No such file or directory
-Error: package ‘phangorn’ could not be loaded
 Execution halted
 ERROR: lazy loading failed for package ‘sangeranalyseR’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
@@ -825,6 +797,39 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 ```
 # SEtools
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# sigFeature
 
 <details>
 
@@ -931,7 +936,7 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 * GitHub: NA
 * Source code: https://github.com/cran/TPP
 * Date/Publication: 2021-07-27
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 97
 
 Run `revdep_details(, "TPP")` for more info
 
