@@ -115,6 +115,8 @@ Vertical alignment of cell contents
    \item{\bold{italic}}{ Italicise cell contents}
    \item{\bold{underline}}{ Underline cell contents}
    \item{\bold{underline2}}{ Double underline cell contents}
+   \item{\bold{accounting}}{ Single accounting underline cell contents}
+   \item{\bold{accounting2}}{ Double accounting underline cell contents}
   }}
 
 \item{wrapText}{Logical. If \code{TRUE} cell contents will wrap to fit in column.}
