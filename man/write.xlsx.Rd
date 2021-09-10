@@ -4,7 +4,7 @@
 \alias{write.xlsx}
 \title{write data to an xlsx file}
 \usage{
-write.xlsx(x, file, asTable = FALSE, overwrite = FALSE, ...)
+write.xlsx(x, file, asTable = FALSE, overwrite = TRUE, ...)
 }
 \arguments{
 \item{x}{A data.frame or a (named) list of objects that can be handled by
@@ -16,20 +16,9 @@ write.xlsx(x, file, asTable = FALSE, overwrite = FALSE, ...)
 than \code{\link{writeData}} to write \code{x} to the file (default: 
 \code{FALSE})}
 
-\item{overwrite}{If `TRUE` will save over `file` if present (default: `FALSE`)
+\item{overwrite}{Overwrite existing file (Defaults to \code{TRUE} as with \code{write.table})}
 
-\itemize{
-  \item{createWorkbook}
-  \item{addWorksheet}
-  \item{writeData}
-  \item{freezePane}
-  \item{saveWorkbook}
-}
-
-see details.}
-
-\item{...}{Additional arguments passed to \code{\link{writeData}}, 
-\code{\link{writeDataTable}}, \code{\link{setColWidths}}}
+\item{...}{Additional arguments passed to \code{\link{buildWorkbook}}; see details}
 }
 \value{
 A workbook object
@@ -37,8 +26,8 @@ A workbook object
 \description{
 write a data.frame or list of data.frames to an xlsx file
 }
-\details{
-Optional parameters are:
+\section{Optional Parameters}{
+
 
 \bold{createWorkbook Parameters}
 \itemize{
@@ -84,17 +73,8 @@ between each column.  If "\code{all}" all cell borders are drawn.}
 \itemize{
   \item{\bold{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
 }
-
-
-\bold{saveWorkbook Parameters}
-\itemize{
-  \item{\bold{overwrite}}{ Overwrite existing file (Defaults to TRUE as with write.table)}
 }
 
-
-columns of x with class Date or POSIXt are automatically
-styled as dates and datetimes respectively.
-}
 \examples{
 
 ## write to working directory

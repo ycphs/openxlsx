@@ -16,9 +16,61 @@
 #'   than \code{\link{writeData}} to write \code{x} to the file (default: 
 #'   \code{FALSE})
 #' @param ... Additional arguments passed to \code{\link{writeData}}, 
-#'   \code{\link{writeDataTable}}, \code{\link{setColWidths}}
+#'   \code{\link{writeDataTable}}, \code{\link{setColWidths}} (see Optional
+#'   Parameters)
 #' @author Jordan Mark Barbone
 #' @returns A Workbook object
+#' 
+#' @details
+#' columns of x with class Date or POSIXt are automatically
+#' styled as dates and datetimes respectively.
+#' 
+#' @section Optional Parameters:
+#' 
+#' \bold{createWorkbook Parameters}
+#' \itemize{
+#'   \item{\bold{creator}}{ A string specifying the workbook author}
+#' }
+#'
+#' \bold{addWorksheet Parameters}
+#' \itemize{
+#'   \item{\bold{sheetName}}{ Name of the worksheet}
+#'   \item{\bold{gridLines}}{ A logical. If \code{FALSE}, the worksheet grid lines will be hidden.}
+#'   \item{\bold{tabColour}}{ Colour of the worksheet tab. A valid colour (belonging to colours())
+#'   or a valid hex colour beginning with "#".}
+#'   \item{\bold{zoom}}{ A numeric between 10 and 400. Worksheet zoom level as a percentage.}
+#' }
+#'
+#' \bold{writeData/writeDataTable Parameters}
+#' \itemize{
+#'   \item{\bold{startCol}}{ A vector specifying the starting column(s) to write df}
+#'   \item{\bold{startRow}}{ A vector specifying the starting row(s) to write df}
+#'   \item{\bold{xy}}{ An alternative to specifying startCol and startRow individually.
+#'  A vector of the form c(startCol, startRow)}
+#'   \item{\bold{colNames or col.names}}{ If \code{TRUE}, column names of x are written.}
+#'   \item{\bold{rowNames or row.names}}{ If \code{TRUE}, row names of x are written.}
+#'   \item{\bold{headerStyle}}{ Custom style to apply to column names.}
+#'   \item{\bold{borders}}{ Either "surrounding", "columns" or "rows" or NULL.  If "surrounding", a border is drawn around the
+#' data.  If "rows", a surrounding border is drawn a border around each row. If "columns", a surrounding border is drawn with a border
+#' between each column.  If "\code{all}" all cell borders are drawn.}
+#'   \item{\bold{borderColour}}{ Colour of cell border}
+#'   \item{\bold{borderStyle}}{ Border line style.}
+#'   \item{\bold{keepNA}} {If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
+#'   \item{\bold{na.string}} {If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel. Defaults to NULL.}
+#' }
+#'
+#' \bold{freezePane Parameters}
+#' \itemize{
+#'   \item{\bold{firstActiveRow}} {Top row of active region to freeze pane.}
+#'   \item{\bold{firstActiveCol}} {Furthest left column of active region to freeze pane.}
+#'   \item{\bold{firstRow}} {If \code{TRUE}, freezes the first row (equivalent to firstActiveRow = 2)}
+#'   \item{\bold{firstCol}} {If \code{TRUE}, freezes the first column (equivalent to firstActiveCol = 2)}
+#' }
+#'
+#' \bold{colWidths Parameters}
+#' \itemize{
+#'   \item{\bold{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
+#' }
 #' 
 #' @examples
 #' x <- data.frame(a = 1, b = 2)

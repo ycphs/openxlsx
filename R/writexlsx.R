@@ -6,73 +6,11 @@
 #' @author Alexander Walker, Jordan Mark Barbone
 #' @inheritParams buildWorkbook
 #' @param file A file path to save the xlsx file
-#' @param overwrite If `TRUE` will save over `file` if present (default: `FALSE`)
+#' @param overwrite Overwrite existing file (Defaults to \code{TRUE} as with \code{write.table})
+#' @param ... Additional arguments passed to \code{\link{buildWorkbook}}; see details
+#' 
+#' @inheritSection buildWorkbook Optional Parameters
 #'
-#' \itemize{
-#'   \item{createWorkbook}
-#'   \item{addWorksheet}
-#'   \item{writeData}
-#'   \item{freezePane}
-#'   \item{saveWorkbook}
-#' }
-#'
-#' see details.
-#' @details Optional parameters are:
-#'
-#' \bold{createWorkbook Parameters}
-#' \itemize{
-#'   \item{\bold{creator}}{ A string specifying the workbook author}
-#' }
-#'
-#' \bold{addWorksheet Parameters}
-#' \itemize{
-#'   \item{\bold{sheetName}}{ Name of the worksheet}
-#'   \item{\bold{gridLines}}{ A logical. If \code{FALSE}, the worksheet grid lines will be hidden.}
-#'   \item{\bold{tabColour}}{ Colour of the worksheet tab. A valid colour (belonging to colours())
-#'   or a valid hex colour beginning with "#".}
-#'   \item{\bold{zoom}}{ A numeric between 10 and 400. Worksheet zoom level as a percentage.}
-#' }
-#'
-#' \bold{writeData/writeDataTable Parameters}
-#' \itemize{
-#'   \item{\bold{startCol}}{ A vector specifying the starting column(s) to write df}
-#'   \item{\bold{startRow}}{ A vector specifying the starting row(s) to write df}
-#'   \item{\bold{xy}}{ An alternative to specifying startCol and startRow individually.
-#'  A vector of the form c(startCol, startRow)}
-#'   \item{\bold{colNames or col.names}}{ If \code{TRUE}, column names of x are written.}
-#'   \item{\bold{rowNames or row.names}}{ If \code{TRUE}, row names of x are written.}
-#'   \item{\bold{headerStyle}}{ Custom style to apply to column names.}
-#'   \item{\bold{borders}}{ Either "surrounding", "columns" or "rows" or NULL.  If "surrounding", a border is drawn around the
-#' data.  If "rows", a surrounding border is drawn a border around each row. If "columns", a surrounding border is drawn with a border
-#' between each column.  If "\code{all}" all cell borders are drawn.}
-#'   \item{\bold{borderColour}}{ Colour of cell border}
-#'   \item{\bold{borderStyle}}{ Border line style.}
-#'   \item{\bold{keepNA}} {If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
-#'   \item{\bold{na.string}} {If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel. Defaults to NULL.}
-#' }
-#'
-#' \bold{freezePane Parameters}
-#' \itemize{
-#'   \item{\bold{firstActiveRow}} {Top row of active region to freeze pane.}
-#'   \item{\bold{firstActiveCol}} {Furthest left column of active region to freeze pane.}
-#'   \item{\bold{firstRow}} {If \code{TRUE}, freezes the first row (equivalent to firstActiveRow = 2)}
-#'   \item{\bold{firstCol}} {If \code{TRUE}, freezes the first column (equivalent to firstActiveCol = 2)}
-#' }
-#'
-#' \bold{colWidths Parameters}
-#' \itemize{
-#'   \item{\bold{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
-#' }
-#'
-#'
-#' \bold{saveWorkbook Parameters}
-#' \itemize{
-#'   \item{\bold{overwrite}}{ Overwrite existing file (Defaults to TRUE as with write.table)}
-#' }
-#'
-#'
-#' columns of x with class Date or POSIXt are automatically
-#' styled as dates and datetimes respectively.
 #' @seealso \code{\link{addWorksheet}}
 #' @seealso \code{\link{writeData}}
 #' @seealso \code{\link{createStyle}} for style parameters
@@ -121,7 +59,7 @@
 #' }
 #'
 #' @export
-write.xlsx <- function(x, file, asTable = FALSE, overwrite = FALSE, ...) {
+write.xlsx <- function(x, file, asTable = FALSE, overwrite = TRUE, ...) {
   wb <- buildWorkbook(x, asTable = asTable, ...)
   saveWorkbook(wb, file = file, overwrite = overwrite)
   invisible(wb)
