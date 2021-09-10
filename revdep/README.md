@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-09-02                   |
+|date     |2021-09-10                   |
 
 # Dependencies
 
@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (28)
+## Failed to check (26)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -34,7 +34,6 @@
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |?       |      |        |     |
-|fasstr         |?       |      |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
 |hypeR          |1.8.0   |1     |        |     |
@@ -49,7 +48,6 @@
 |RIPAT          |?       |      |        |     |
 |sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
 |stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |

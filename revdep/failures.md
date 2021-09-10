@@ -229,61 +229,6 @@
 
 
 ```
-# fasstr
-
-<details>
-
-* Version: 0.3.2
-* GitHub: https://github.com/bcgov/fasstr
-* Source code: https://github.com/cran/fasstr
-* Date/Publication: 2020-11-07 06:00:02 UTC
-* Number of recursive dependencies: 104
-
-Run `revdep_details(, "fasstr")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/fasstr/new/fasstr.Rcheck’
-* using R version 4.1.1 (2021-08-10)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘fasstr/DESCRIPTION’ ... OK
-* this is package ‘fasstr’ version ‘0.3.2’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... ERROR
-Only *source* packages can be checked.
-* DONE
-Status: 1 ERROR
-
-
-
-
-See
-  ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/fasstr/new/fasstr.Rcheck/00check.log’
-for details.
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # fedup
 
 <details>
@@ -358,7 +303,7 @@ for details.
 * GitHub: https://github.com/montilab/hypeR
 * Source code: https://github.com/cran/hypeR
 * Date/Publication: 2021-05-19
-* Number of recursive dependencies: 154
+* Number of recursive dependencies: 153
 
 Run `revdep_details(, "hypeR")` for more info
 
@@ -715,7 +660,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 * GitHub: NA
 * Source code: https://github.com/cran/sangeranalyseR
 * Date/Publication: 2021-05-19
-* Number of recursive dependencies: 142
+* Number of recursive dependencies: 141
 
 Run `revdep_details(, "sangeranalyseR")` for more info
 
@@ -829,39 +774,6 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 
 ```
-# sigFeature
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # stplanr
 
 <details>
@@ -936,7 +848,7 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 * GitHub: NA
 * Source code: https://github.com/cran/TPP
 * Date/Publication: 2021-07-27
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 95
 
 Run `revdep_details(, "TPP")` for more info
 
