@@ -142,7 +142,7 @@
     <p>write a data.frame or list of data.frames to an xlsx file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write.xlsx</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>file</span>, asTable <span class='op'>=</span> <span class='cn'>FALSE</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>write.xlsx</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>file</span>, asTable <span class='op'>=</span> <span class='cn'>FALSE</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,30 +164,22 @@ than <code><a href='writeData.html'>writeData</a></code> to write <code>x</code>
     </tr>
     <tr>
       <th>overwrite</th>
-      <td><p>If `TRUE` will save over `file` if present (default: `FALSE`)</p>
-<ul>
-<li><p>createWorkbook</p></li>
-<li><p>addWorksheet</p></li>
-<li><p>writeData</p></li>
-<li><p>freezePane</p></li>
-<li><p>saveWorkbook</p></li>
-</ul>
-
-<p>see details.</p></td>
+      <td><p>Overwrite existing file (Defaults to <code>TRUE</code> as with <code>write.table</code>)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='writeData.html'>writeData</a></code>, 
-<code><a href='writeDataTable.html'>writeDataTable</a></code>, <code><a href='setColWidths.html'>setColWidths</a></code></p></td>
+      <td><p>Additional arguments passed to <code><a href='buildWorkbook.html'>buildWorkbook</a></code>; see details</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A workbook object</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="optional-parameters"><a class="anchor" href="#optional-parameters"></a>Optional Parameters</h2>
 
-    <p>Optional parameters are:</p>
+    
+
+
 <p><b>createWorkbook Parameters</b></p><ul>
 <li><p><b>creator</b> A string specifying the workbook author</p></li>
 </ul>
@@ -228,14 +220,6 @@ between each column.  If "<code>all</code>" all cell borders are drawn.</p></li>
 <li><p><b>colWidths</b> May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)</p></li>
 </ul>
 
-
-<p><b>saveWorkbook Parameters</b></p><ul>
-<li><p><b>overwrite</b> Overwrite existing file (Defaults to TRUE as with write.table)</p></li>
-</ul>
-
-
-<p>columns of x with class Date or POSIXt are automatically
-styled as dates and datetimes respectively.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='addWorksheet.html'>addWorksheet</a></code></p>
