@@ -1761,6 +1761,14 @@ Workbook$methods(
       fontNode <- stri_join(fontNode, '<u val="double"/>')
     }
 
+    if ("ACCOUNTING" %in% style$fontDecoration) {
+      fontNode <- stri_join(fontNode, '<u val="singleAccounting"/>')
+    }
+
+    if ("ACCOUNTING2" %in% style$fontDecoration) {
+      fontNode <- stri_join(fontNode, '<u val="doubleAccounting"/>')
+    }
+    
     if ("STRIKEOUT" %in% style$fontDecoration) {
       fontNode <- stri_join(fontNode, "<strike/>")
     }
