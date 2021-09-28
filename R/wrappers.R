@@ -2885,7 +2885,7 @@ getNamedRegions.default <- function(x) {
     stop(sprintf("File '%s' does not exist.", x))
   }
 
-  xmlDir <- file.path(tempdir(), "named_regions_tmp")
+  xmlDir <- tempfile()
   xmlFiles <- unzip(x, exdir = xmlDir)
 
   workbook <- grep("workbook.xml$", xmlFiles, perl = TRUE, value = TRUE)
@@ -3353,7 +3353,7 @@ getDateOrigin <- function(xlsxFile) {
   }
 
   ## create temp dir and unzip
-  xmlDir <- file.path(tempdir(), "_excelXMLRead")
+  xmlDir <- tempfile()
   xmlFiles <- unzip(xlsxFile, exdir = xmlDir)
 
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
@@ -3396,7 +3396,7 @@ getSheetNames <- function(file) {
   }
 
   ## create temp dir and unzip
-  xmlDir <- file.path(tempdir(), "_excelXMLRead")
+  xmlDir <- tempfile()
   xmlFiles <- unzip(file, exdir = xmlDir)
 
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
