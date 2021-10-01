@@ -97,39 +97,6 @@
 
 
 ```
-# CNVPanelizer
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # DAPAR
 
 <details>
@@ -164,72 +131,6 @@
 
 ```
 # ddPCRclust
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# emdi
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# fedup
 
 <details>
 
@@ -303,7 +204,7 @@
 * GitHub: https://github.com/montilab/hypeR
 * Source code: https://github.com/cran/hypeR
 * Date/Publication: 2021-05-19
-* Number of recursive dependencies: 153
+* Number of recursive dependencies: 154
 
 Run `revdep_details(, "hypeR")` for more info
 
@@ -421,205 +322,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# MatrixQCvis
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # MicroSEC
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# nanotatoR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# openPrimeR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# PloGO2
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# rbiom
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# RIPAT
 
 <details>
 
@@ -660,7 +363,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 * GitHub: NA
 * Source code: https://github.com/cran/sangeranalyseR
 * Date/Publication: 2021-05-19
-* Number of recursive dependencies: 141
+* Number of recursive dependencies: 142
 
 Run `revdep_details(, "sangeranalyseR")` for more info
 
@@ -745,98 +448,61 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.6.0
+* GitHub: https://github.com/plger/SEtools
+* Source code: https://github.com/cran/SEtools
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 126
+
+Run `revdep_details(, "SEtools")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘SEtools’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘SEtools’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
+  libv8.so.3.14.5: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘SEtools’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/SEtools’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
-
-
-```
-# stplanr
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# structToolbox
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
+* installing *source* package ‘SEtools’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
+  libv8.so.3.14.5: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘SEtools’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/old/SEtools.Rcheck/SEtools’
 
 
 ```
@@ -903,39 +569,6 @@ Run `revdep_details(, "TPP")` for more info
     ```
 
 # uncoverappLib
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# upstartr
 
 <details>
 
