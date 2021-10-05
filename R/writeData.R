@@ -179,6 +179,8 @@ writeData <- function(
   row.names
 ) {
 
+  x <- force(x)
+  
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
   
