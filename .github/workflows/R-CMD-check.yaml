@@ -20,13 +20,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'oldrel'}
+          - {os: windows-latest, r: 'oldrel-1'}
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: 'devel', http-user-agent: 'release'}
-          - {os: macOS-latest, r: 'oldrel'}
+          - {os: macOS-latest, r: 'oldrel-1'}
           - {os: macOS-latest, r: 'release'}
           - {os: macOS-latest, r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest, r: 'oldrel'}
+          - {os: ubuntu-latest, r: 'oldrel-1'}
           - {os: ubuntu-latest, r: 'release'}
           - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
 
