@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-10-05                   |
+|date     |2021-10-12                   |
 
 # Dependencies
 
@@ -23,12 +23,13 @@
 
 # Revdeps
 
-## Failed to check (26)
+## Failed to check (28)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
+|BoneProfileR   |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -50,6 +51,7 @@
 |sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
 |sigFeature     |?       |      |        |     |
+|stplanr        |0.8.4   |1     |        |1    |
 |structToolbox  |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
