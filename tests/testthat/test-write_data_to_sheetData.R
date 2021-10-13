@@ -276,7 +276,7 @@ test_that("write hyperlinks", {
   writeDataTable(wb, "channels", channels, tableName = "channels")
   writeFormula(wb, "channels", channels$formula, startRow = 2, startCol = 1)
   freezePane(wb, "channels", firstRow = TRUE)
-  setColWidths(wb, "channels", cols = 1:ncol(channels), widths = "auto")
+  setColWidths(wb, "channels", cols = seq_along(channels), widths = "auto")
   saveWorkbook(wb, file = tmp, overwrite = TRUE)
   
   # check the xls file for the correct string
