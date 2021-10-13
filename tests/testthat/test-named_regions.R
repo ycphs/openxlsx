@@ -148,7 +148,7 @@ test_that("Missing rows in named regions", {
 
   ## create region
   writeData(wb, sheet = 1, x = iris[1:11, ], startCol = 1, startRow = 1)
-  deleteData(wb, sheet = 1, col = 1:2, rows = c(6, 6))
+  deleteData(wb, sheet = 1, cols = 1:2, rows = c(6, 6))
 
   createNamedRegion(
     wb = wb,
@@ -225,7 +225,7 @@ test_that("Missing columns in named regions", {
 
   ## create region
   writeData(wb, sheet = 1, x = iris[1:11, ], startCol = 1, startRow = 1)
-  deleteData(wb, sheet = 1, col = 2, rows = 1:12, gridExpand = TRUE)
+  deleteData(wb, sheet = 1, cols = 2, rows = 1:12, gridExpand = TRUE)
 
   createNamedRegion(
     wb = wb,

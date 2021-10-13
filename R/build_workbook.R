@@ -93,7 +93,7 @@ buildWorkbook <- function(x, asTable = FALSE, ...) {
   isList <- inherits(x, "list")
   
   if (isList) {
-    params$sheetName <- params$sheetName %||% names(x) %||% paste0("Sheet ", seq_along(x))
+    params[["sheetName"]] <- params[["sheetName"]] %||% names(x) %||% paste0("Sheet ", seq_along(x))
   }
   
   ## create new Workbook object
@@ -103,11 +103,11 @@ buildWorkbook <- function(x, asTable = FALSE, ...) {
   if (isList) {
     do_call_params(addWorksheet, params, wb = list(wb), .map = TRUE)
   } else {
-    params$sheetName <- params$sheetName %||% "Sheet 1"
+    params[["sheetName"]] <- params[["sheetName"]] %||% "Sheet 1"
     do_call_params(addWorksheet, params, wb = wb)
   }
   
-  params$sheet <- params$sheet %||% params$sheetName
+  params[["sheet"]] <- params[["sheet"]] %||% params[["sheetName"]]
   
   # write Data
   if (asTable) {
@@ -127,25 +127,25 @@ do_setColWidths <- function(wb, x, params, isList) {
     x <- list(x)
   }
   
-  params$startCol <- params$startCol %||% 1
-  params$startCol <- rep_len(list(params$startCol), length.out = length(x))
-  params$colWidths <- params$colWidths %||% ""
-  params$colWidths <- rep_len(as.list(params$colWidths), length.out = length(x))
+  params[["startCol"]] <- params[["startCol"]] %||% 1
+  params[["startCol"]] <- rep_len(list(params[["startCol"]]), length.out = length(x))
+  params[["colWidths"]] <- params[["colWidths"]] %||% ""
+  params[["colWidths"]] <- rep_len(as.list(params[["colWidths"]]), length.out = length(x))
   
-  for (i in seq_along(wb$worksheets)) {
-    if (identical(params$colWidths[[i]], "auto")) {
+  for (i in seq_along(wb[["worksheets"]])) {
+    if (identical(params[["colWidths"]][[i]], "auto")) {
       setColWidths(
         wb,
         sheet = i,
-        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L, 
+        cols = seq_along(x[[i]]) + params[["startCol"]][[i]] - 1L, 
         widths = "auto"
       )
-    } else if (!identical(params$colWidths[[i]], "")) {
+    } else if (!identical(params[["colWidths"]][[i]], "")) {
       setColWidths(
         wb,
         sheet = i,
-        cols = seq_along(x[[i]]) + params$startCol[[i]] - 1L,
-        widths = params$colWidths[[i]]
+        cols = seq_along(x[[i]]) + params[["startCol"]][[i]] - 1L,
+        widths = params[["colWidths"]][[i]]
       )
     }
   }
