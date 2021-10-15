@@ -38,13 +38,13 @@ Set document headers and footers
 \details{
 Headers and footers can contain special tags
 \itemize{
-\item{\strong{&\link{Page}}}{ Page number}
-\item{\strong{&\link{Pages}}}{ Number of pages}
-\item{\strong{&\link{Date}}}{ Current date}
-\item{\strong{&\link{Time}}}{ Current time}
-\item{\strong{&\link{Path}}}{ File path}
-\item{\strong{&\link{File}}}{ File name}
-\item{\strong{&\link{Tab}}}{ Worksheet name}
+\item{\strong{&[Page]}}{ Page number}
+\item{\strong{&[Pages]}}{ Number of pages}
+\item{\strong{&[Date]}}{ Current date}
+\item{\strong{&[Time]}}{ Current time}
+\item{\strong{&[Path]}}{ File path}
+\item{\strong{&[File]}}{ File name}
+\item{\strong{&[Tab]}}{ Worksheet name}
 }
 }
 \examples{
