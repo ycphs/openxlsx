@@ -9,43 +9,43 @@
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
 #' @param array A bool if the function written is of type array
-#' @param xy An alternative to specifying \code{startCol} and
-#' \code{startRow} individually.  A vector of the form
-#' \code{c(startCol, startRow)}.
-#' @param colNames If \code{TRUE}, column names of x are written.
-#' @param rowNames If \code{TRUE}, data.frame row names of x are written.
-#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
+#' @param xy An alternative to specifying `startCol` and
+#' `startRow` individually.  A vector of the form
+#' `c(startCol, startRow)`.
+#' @param colNames If `TRUE`, column names of x are written.
+#' @param rowNames If `TRUE`, data.frame row names of x are written.
+#' @param row.names,col.names Deprecated, please use `rowNames`, `colNames` instead
 #' @param headerStyle Custom style to apply to column names.
-#' @param borders Either "\code{none}" (default), "\code{surrounding}",
-#' "\code{columns}", "\code{rows}" or \emph{respective abbreviations}.  If
-#' "\code{surrounding}", a border is drawn around the data.  If "\code{rows}",
+#' @param borders Either "`none`" (default), "`surrounding`",
+#' "`columns`", "`rows`" or *respective abbreviations*.  If
+#' "`surrounding`", a border is drawn around the data.  If "`rows`",
 #' a surrounding border is drawn with a border around each row. If
-#' "\code{columns}", a surrounding border is drawn with a border between
-#' each column. If "\code{all}" all cell borders are drawn.
-#' @param borderColour Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.webfx.com/web-design/color-picker/}{here}).
+#' "`columns`", a surrounding border is drawn with a border between
+#' each column. If "`all`" all cell borders are drawn.
+#' @param borderColour Colour of cell border.  A valid colour (belonging to `colours()` or a hex colour code, eg see [here](https://www.webfx.com/web-design/color-picker/)).
 #' @param borderStyle Border line style
 #' \itemize{
-#'    \item{\bold{none}}{ no border}
-#'    \item{\bold{thin}}{ thin border}
-#'    \item{\bold{medium}}{ medium border}
-#'    \item{\bold{dashed}}{ dashed border}
-#'    \item{\bold{dotted}}{ dotted border}
-#'    \item{\bold{thick}}{ thick border}
-#'    \item{\bold{double}}{ double line border}
-#'    \item{\bold{hair}}{ hairline border}
-#'    \item{\bold{mediumDashed}}{ medium weight dashed border}
-#'    \item{\bold{dashDot}}{ dash-dot border}
-#'    \item{\bold{mediumDashDot}}{ medium weight dash-dot border}
-#'    \item{\bold{dashDotDot}}{ dash-dot-dot border}
-#'    \item{\bold{mediumDashDotDot}}{ medium weight dash-dot-dot border}
-#'    \item{\bold{slantDashDot}}{ slanted dash-dot border}
+#'    \item{**none**}{ no border}
+#'    \item{**thin**}{ thin border}
+#'    \item{**medium**}{ medium border}
+#'    \item{**dashed**}{ dashed border}
+#'    \item{**dotted**}{ dotted border}
+#'    \item{**thick**}{ thick border}
+#'    \item{**double**}{ double line border}
+#'    \item{**hair**}{ hairline border}
+#'    \item{**mediumDashed**}{ medium weight dashed border}
+#'    \item{**dashDot**}{ dash-dot border}
+#'    \item{**mediumDashDot**}{ medium weight dash-dot border}
+#'    \item{**dashDotDot**}{ dash-dot-dot border}
+#'    \item{**mediumDashDotDot**}{ medium weight dash-dot-dot border}
+#'    \item{**slantDashDot**}{ slanted dash-dot border}
 #'   }
-#' @param withFilter If \code{TRUE} or \code{NA}, add filters to the column name row. NOTE can only have one filter per worksheet.
-#' @param keepNA If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.
-#' @param na.string If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.
+#' @param withFilter If `TRUE` or `NA`, add filters to the column name row. NOTE can only have one filter per worksheet.
+#' @param keepNA If `TRUE`, NA values are converted to #N/A (or `na.string`, if not NULL) in Excel, else NA cells will be empty.
+#' @param na.string If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
-#' @seealso \code{\link{writeDataTable}}
+#' @seealso [writeDataTable()]
 #' @export writeData
 #' @details Formulae written using writeFormula to a Workbook object will not get picked up by read.xlsx().
 #' This is because only the formula is written and left to Excel to evaluate the formula when the file is opened in Excel.
@@ -450,10 +450,10 @@ writeData <- function(
 #' @param startCol A vector specifying the starting column to write to.
 #' @param startRow A vector specifying the starting row to write to.
 #' @param array A bool if the function written is of type array
-#' @param xy An alternative to specifying \code{startCol} and
-#' \code{startRow} individually.  A vector of the form
-#' \code{c(startCol, startRow)}.
-#' @seealso \code{\link{writeData}} \code{\link{makeHyperlinkString}}
+#' @param xy An alternative to specifying `startCol` and
+#' `startRow` individually.  A vector of the form
+#' `c(startCol, startRow)`.
+#' @seealso [writeData()] [makeHyperlinkString()]
 #' @export writeFormula
 #' @rdname writeFormula
 #' @examples

@@ -29,13 +29,13 @@ See and get the openxlsx options
 }
 \details{
 \code{openxlsx_getOp()} retrieves the \code{"openxlsx"} options found in
-  \code{op.openxlsx}.  If none are set (currently `NULL`) retrieves the 
-  default option from \code{op.openxlsx}.  This will also check that the
-  intended option is a standard option (listed in \code{op.openxlsx}) and
-   will provide a warning otherwise.
-  
+\code{op.openxlsx}.  If none are set (currently \code{NULL}) retrieves the
+default option from \code{op.openxlsx}.  This will also check that the
+intended option is a standard option (listed in \code{op.openxlsx}) and
+will provide a warning otherwise.
+
 \code{openxlsx_setOp()} is a safer way to set an option as it will first
-  check that the option is a standard option (as above) before setting.
+check that the option is a standard option (as above) before setting.
 }
 \examples{
 openxlsx_getOp("borders")

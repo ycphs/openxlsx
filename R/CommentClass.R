@@ -67,12 +67,12 @@ Comment$methods(show = function() {
 #' @description Create a cell Comment object to pass to writeComment()
 #' @param comment Comment text. Character vector.
 #' @param author Author of comment. Character vector of length 1
-#' @param style A Style object or list of style objects the same length as comment vector. See \code{\link{createStyle}}.
+#' @param style A Style object or list of style objects the same length as comment vector. See [createStyle()].
 #' @param visible TRUE or FALSE. Is comment visible.
 #' @param width Textbox integer width in number of cells
 #' @param height Textbox integer height in number of cells
 #' @export
-#' @seealso \code{\link{writeComment}}
+#' @seealso [writeComment()]
 #' @examples
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "Sheet 1")
@@ -147,12 +147,12 @@ createComment <- function(comment,
 #' @param sheet A vector of names or indices of worksheets
 #' @param col Column a column number of letter
 #' @param row A row number.
-#' @param comment A Comment object. See \code{\link{createComment}}.
-#' @param xy An alternative to specifying \code{col} and
-#' \code{row} individually.  A vector of the form
-#' \code{c(col, row)}.
+#' @param comment A Comment object. See [createComment()].
+#' @param xy An alternative to specifying `col` and
+#' `row` individually.  A vector of the form
+#' `c(col, row)`.
 #' @export
-#' @seealso \code{\link{createComment}}
+#' @seealso [createComment()]
 #' @examples
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "Sheet 1")
@@ -228,11 +228,11 @@ writeComment <- function(wb, sheet, col, row, comment, xy = NULL) {
 #' @param sheet A vector of names or indices of worksheets
 #' @param cols Columns to delete comments from
 #' @param rows Rows to delete comments from
-#' @param gridExpand If \code{TRUE}, all data in rectangle min(rows):max(rows) X min(cols):max(cols)
+#' @param gridExpand If `TRUE`, all data in rectangle min(rows):max(rows) X min(cols):max(cols)
 #' will be removed.
 #' @export
-#' @seealso \code{\link{createComment}}
-#' @seealso \code{\link{writeComment}}
+#' @seealso [createComment()]
+#' @seealso [writeComment()]
 removeComment <- function(wb, sheet, cols, rows, gridExpand = TRUE) {
   sheet <- wb$validateSheet(sheet)
 

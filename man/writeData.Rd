@@ -61,21 +61,21 @@ each column. If "\code{all}" all cell borders are drawn.}
 
 \item{borderStyle}{Border line style
 \itemize{
-   \item{\bold{none}}{ no border}
-   \item{\bold{thin}}{ thin border}
-   \item{\bold{medium}}{ medium border}
-   \item{\bold{dashed}}{ dashed border}
-   \item{\bold{dotted}}{ dotted border}
-   \item{\bold{thick}}{ thick border}
-   \item{\bold{double}}{ double line border}
-   \item{\bold{hair}}{ hairline border}
-   \item{\bold{mediumDashed}}{ medium weight dashed border}
-   \item{\bold{dashDot}}{ dash-dot border}
-   \item{\bold{mediumDashDot}}{ medium weight dash-dot border}
-   \item{\bold{dashDotDot}}{ dash-dot-dot border}
-   \item{\bold{mediumDashDotDot}}{ medium weight dash-dot-dot border}
-   \item{\bold{slantDashDot}}{ slanted dash-dot border}
-  }}
+\item{\strong{none}}{ no border}
+\item{\strong{thin}}{ thin border}
+\item{\strong{medium}}{ medium border}
+\item{\strong{dashed}}{ dashed border}
+\item{\strong{dotted}}{ dotted border}
+\item{\strong{thick}}{ thick border}
+\item{\strong{double}}{ double line border}
+\item{\strong{hair}}{ hairline border}
+\item{\strong{mediumDashed}}{ medium weight dashed border}
+\item{\strong{dashDot}}{ dash-dot border}
+\item{\strong{mediumDashDot}}{ medium weight dash-dot border}
+\item{\strong{dashDotDot}}{ dash-dot-dot border}
+\item{\strong{mediumDashDotDot}}{ medium weight dash-dot-dot border}
+\item{\strong{slantDashDot}}{ slanted dash-dot border}
+}}
 
 \item{withFilter}{If \code{TRUE} or \code{NA}, add filters to the column name row. NOTE can only have one filter per worksheet.}
 
@@ -206,7 +206,7 @@ saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{writeDataTable}}
+\code{\link[=writeDataTable]{writeDataTable()}}
 }
 \author{
 Alexander Walker

@@ -18,7 +18,7 @@ createComment(
 
 \item{author}{Author of comment. Character vector of length 1}
 
-\item{style}{A Style object or list of style objects the same length as comment vector. See \code{\link{createStyle}}.}
+\item{style}{A Style object or list of style objects the same length as comment vector. See \code{\link[=createStyle]{createStyle()}}.}
 
 \item{visible}{TRUE or FALSE. Is comment visible.}
 
@@ -48,5 +48,5 @@ saveWorkbook(wb, file = "createCommentExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{writeComment}}
+\code{\link[=writeComment]{writeComment()}}
 }

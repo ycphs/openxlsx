@@ -22,7 +22,7 @@ will be removed.}
 Remove a cell comment from a worksheet
 }
 \seealso{
-\code{\link{createComment}}
+\code{\link[=createComment]{createComment()}}
 
-\code{\link{writeComment}}
+\code{\link[=writeComment]{writeComment()}}
 }

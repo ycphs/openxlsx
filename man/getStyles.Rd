@@ -18,5 +18,5 @@ wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "
 getStyles(wb)[1:3]
 }
 \seealso{
-\code{\link{replaceStyle}}
+\code{\link[=replaceStyle]{replaceStyle()}}
 }

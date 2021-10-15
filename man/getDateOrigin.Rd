@@ -17,7 +17,7 @@ Return the date origin used internally by an xlsx or xlsm file
 }
 \details{
 Excel stores dates as the number of days from either 1904-01-01 or 1900-01-01. This function
-checks the date origin being used in an Excel file and returns is so it can be used in \code{\link{convertToDate}}
+checks the date origin being used in an Excel file and returns is so it can be used in \code{\link[=convertToDate]{convertToDate()}}
 }
 \examples{
 
@@ -32,7 +32,7 @@ convertToDate(m[[1]], do)
 }
 }
 \seealso{
-\code{\link{convertToDate}}
+\code{\link[=convertToDate]{convertToDate()}}
 }
 \author{
 Alexander Walker

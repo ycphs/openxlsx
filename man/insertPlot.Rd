@@ -28,9 +28,9 @@ insertPlot(
 
 \item{xy}{Alternate way to specify startRow and startCol.  A vector of length 2 of form (startcol, startRow)}
 
-\item{startRow}{Row coordinate of upper left corner of figure. xy[[2]] when xy is given.}
+\item{startRow}{Row coordinate of upper left corner of figure. xy[\link{2}] when xy is given.}
 
-\item{startCol}{Column coordinate of upper left corner of figure. xy[[1]] when xy is given.}
+\item{startCol}{Column coordinate of upper left corner of figure. xy[\link{1}] when xy is given.}
 
 \item{fileType}{File type of image}
 
@@ -73,7 +73,7 @@ saveWorkbook(wb, "insertPlotExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{insertImage}}
+\code{\link[=insertImage]{insertImage()}}
 }
 \author{
 Alexander Walker

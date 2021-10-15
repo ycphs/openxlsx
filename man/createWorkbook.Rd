@@ -45,9 +45,9 @@ wb <- createWorkbook(
 )
 }
 \seealso{
-\code{\link{loadWorkbook}}
+\code{\link[=loadWorkbook]{loadWorkbook()}}
 
-\code{\link{saveWorkbook}}
+\code{\link[=saveWorkbook]{saveWorkbook()}}
 }
 \author{
 Alexander Walker

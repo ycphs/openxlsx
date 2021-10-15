@@ -69,7 +69,7 @@ head(df)
 
 }
 \seealso{
-\code{\link{getNamedRegions}}
+\code{\link[=getNamedRegions]{getNamedRegions()}}
 }
 \author{
 Alexander Walker

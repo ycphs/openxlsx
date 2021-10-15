@@ -30,15 +30,15 @@ saveWorkbook(wb, file = "saveWorkbookExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{createWorkbook}}
+\code{\link[=createWorkbook]{createWorkbook()}}
 
-\code{\link{addWorksheet}}
+\code{\link[=addWorksheet]{addWorksheet()}}
 
-\code{\link{loadWorkbook}}
+\code{\link[=loadWorkbook]{loadWorkbook()}}
 
-\code{\link{writeData}}
+\code{\link[=writeData]{writeData()}}
 
-\code{\link{writeDataTable}}
+\code{\link[=writeDataTable]{writeDataTable()}}
 }
 \author{
 Alexander Walker, Philipp Schauberger

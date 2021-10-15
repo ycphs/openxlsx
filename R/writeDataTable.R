@@ -10,20 +10,20 @@
 #' @param startRow A vector specifying the starting row to write df
 #' @param xy An alternative to specifying startCol and startRow individually.
 #' A vector of the form c(startCol, startRow)
-#' @param colNames If \code{TRUE}, column names of x are written.
-#' @param rowNames If \code{TRUE}, row names of x are written.
-#' @param row.names,col.names Deprecated, please use \code{rowNames}, \code{colNames} instead
+#' @param colNames If `TRUE`, column names of x are written.
+#' @param rowNames If `TRUE`, row names of x are written.
+#' @param row.names,col.names Deprecated, please use `rowNames`, `colNames` instead
 #' @param tableStyle Any excel table style name or "none" (see "formatting" vignette).
 #' @param tableName name of table in workbook. The table name must be unique.
 #' @param headerStyle Custom style to apply to column names.
-#' @param withFilter If \code{TRUE} or \code{NA}, columns with have filters in the first row.
-#' @param keepNA If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty.
-#' @param na.string If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel.
+#' @param withFilter If `TRUE` or `NA`, columns with have filters in the first row.
+#' @param keepNA If `TRUE`, NA values are converted to #N/A (or `na.string`, if not NULL) in Excel, else NA cells will be empty.
+#' @param na.string If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
-#' @param stack If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any
+#' @param stack If `TRUE` the new style is merged with any existing cell styles.  If FALSE, any
 #' existing style is replaced by the new style.
 #' \cr\cr
-#' \cr\bold{The below options correspond to Excel table options:}
+#' \cr**The below options correspond to Excel table options:**
 #' \cr
 #' \if{html}{\figure{tableoptions.png}{options: width="40\%" alt="Figure: table_options.png"}}
 #' \if{latex}{\figure{tableoptions.pdf}{options: width=7cm}}
@@ -35,10 +35,10 @@
 #' @details columns of x with class Date/POSIXt, currency, accounting,
 #' hyperlink, percentage are automatically styled as dates, currency, accounting,
 #' hyperlinks, percentages respectively.
-#' @seealso \code{\link{addWorksheet}}
-#' @seealso \code{\link{writeData}}
-#' @seealso \code{\link{removeTable}}
-#' @seealso \code{\link{getTables}}
+#' @seealso [addWorksheet()]
+#' @seealso [writeData()]
+#' @seealso [removeTable()]
+#' @seealso [getTables()]
 #' @export
 #' @examples
 #' ## see package vignettes for further examples.
