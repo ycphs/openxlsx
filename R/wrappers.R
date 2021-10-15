@@ -32,9 +32,8 @@ createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.
                            title = NULL,
                            subject = NULL,
                            category = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## check all inputs are valid
   if (length(creator) > 1) creator <- creator[[1]]
@@ -92,14 +91,8 @@ createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.
 #' saveWorkbook(wb, file = "saveWorkbookExample.xlsx", overwrite = TRUE)
 #' }
 saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
-
-  ## increase scipen to avoid writing in scientific
-  sci_pen <- getOption("scipen")
-  options("scipen" = 10000)
-  on.exit(options("scipen" = sci_pen), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -196,9 +189,8 @@ mergeCells <- function(wb, sheet, cols, rows) {
 #' @examples
 #' int2col(1:10)
 int2col <- function(x) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!is.numeric(x)) {
     stop("x must be numeric.")
@@ -220,9 +212,8 @@ int2col <- function(x) {
 #' @export
 #' @seealso \code{\link{mergeCells}}
 removeCellMerge <- function(wb, sheet, cols, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -262,9 +253,8 @@ removeCellMerge <- function(wb, sheet, cols, rows) {
 #' names(wb)
 #' # openXL(wb)
 sheets <- function(wb) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -373,9 +363,8 @@ addWorksheet <- function(wb,
                          orientation = openxlsx_getOp("orientation", "portrait"),
                          vdpi = openxlsx_getOp("vdpi", 300),
                          hdpi = openxlsx_getOp("hdpi", 300)) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (inherits(wb, "list")) {
     wb <- wb[[1]]
@@ -566,9 +555,8 @@ renameWorksheet <- function(wb, sheet, newName) {
     stop("First argument must be a Workbook.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   invisible(wb$setSheetName(sheet, newName))
 }
@@ -588,13 +576,8 @@ renameWorksheet <- function(wb, sheet, newName) {
 convertFromExcelRef <- function(col) {
 
   ## increase scipen to avoid writing in scientific
-  exSciPen <- getOption("scipen")
-  od <- getOption("OutDec")
-  options("scipen" = 10000)
-  options("OutDec" = ".")
-
-  on.exit(options("scipen" = exSciPen), add = TRUE)
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   col <- toupper(col)
   charFlag <- grepl("[A-Z]", col)
@@ -764,9 +747,8 @@ createStyle <- function(fontName = NULL,
                         hidden = NULL) {
 
   ### Error checking
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## if num fmt is made up of dd, mm, yy
   numFmt_original <- numFmt[[1]]
@@ -1032,9 +1014,8 @@ addStyle <- function(wb,
                      cols,
                      gridExpand = FALSE,
                      stack = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
 
   if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
@@ -1114,26 +1095,12 @@ getCellRefs <- function(cellCoords) {
     stop("Provide a data.frame containing integers!")
   }
 
-
-
-
-
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   l <- convert_to_excel_ref(cols = unlist(cellCoords[, 2]), LETTERS = LETTERS)
   paste0(l, cellCoords[, 1])
 }
-
-
-
-
-
-
-
-
-
 
 
 #' @name freezePane
@@ -1168,9 +1135,8 @@ getCellRefs <- function(cellCoords) {
 #' saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)
 #' }
 freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, firstRow = FALSE, firstCol = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (is.null(firstActiveRow) & is.null(firstActiveCol) & !firstRow & !firstCol) {
     return(invisible(0))
@@ -1183,8 +1149,6 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   if (!is.logical(firstCol)) {
     stop("firstCol must be TRUE/FALSE")
   }
-
-
 
 
   if (firstRow & !firstCol) {
@@ -1264,9 +1228,8 @@ convert2EMU <- function(d, units) {
 #' saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
 #' }
 insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, startCol = 1, units = "in", dpi = 300) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!file.exists(file)) {
     stop("File does not exist.")
@@ -1351,9 +1314,8 @@ setRowHeights <- function(wb, sheet, rows, heights) {
     stop("Greater number of height values than rows.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## Remove duplicates
   heights <- heights[!duplicated(rows)]
@@ -1411,9 +1373,8 @@ setRowHeights <- function(wb, sheet, rows, heights) {
 #' }
 #'
 setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, length(cols)), ignoreMergedCells = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -1534,9 +1495,8 @@ removeColWidths <- function(wb, sheet, cols) {
     cols <- convertFromExcelRef(cols)
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colWidths[[sheet]]))
   removeInds <- which(customCols %in% cols)
@@ -1573,9 +1533,8 @@ removeColWidths <- function(wb, sheet, cols) {
 #' saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)
 #' }
 removeRowHeights <- function(wb, sheet, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -1636,9 +1595,8 @@ removeRowHeights <- function(wb, sheet, rows) {
 #' }
 insertPlot <- function(wb, sheet, width = 6, height = 4, xy = NULL,
                        startRow = 1, startCol = 1, fileType = "png", units = "in", dpi = 300) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (is.null(dev.list()[[1]])) {
     warning("No plot to insert.")
@@ -1861,9 +1819,8 @@ modifyBaseFont <- function(wb, fontSize = 11, fontColour = "black", fontName = "
     stop("First argument must be a Workbook.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (fontSize < 0) stop("Invalid fontSize")
   fontColour <- validateColour(fontColour)
@@ -2003,9 +1960,8 @@ setHeaderFooter <- function(wb, sheet,
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   oddHeader <- headerFooterSub(header)
   oddFooter <- headerFooterSub(footer)
@@ -2167,9 +2123,8 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
                       fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
                       printTitleRows = NULL, printTitleCols = NULL,
                       summaryRow = NULL, summaryCol = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -2473,9 +2428,8 @@ protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure =
 #' saveWorkbook(wb, "showGridLinesExample.xlsx", overwrite = TRUE)
 #' }
 showGridLines <- function(wb, sheet, showGridLines = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -2619,9 +2573,8 @@ convertToDate <- function(x, origin = "1900-01-01", ...) {
 #' convertToDateTime(x, tz = "Australia/Perth")
 #' convertToDateTime(x, tz = "UTC")
 convertToDateTime <- function(x, origin = "1900-01-01", ...) {
-  sci_pen <- getOption("scipen")
-  options("scipen" = 10000)
-  on.exit(options("scipen" = sci_pen), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   x <- as.numeric(x)
   date <- convertToDate(x, origin)
@@ -2673,9 +2626,8 @@ names.Workbook <- function(x) {
 #' @param value a character vector the same length as wb
 #' @export
 `names<-.Workbook` <- function(x, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (any(duplicated(tolower(value)))) {
     stop("Worksheet names must be unique.")
@@ -2761,9 +2713,8 @@ names.Workbook <- function(x) {
 #' 
 #' @rdname NamedRegion
 createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -2954,9 +2905,8 @@ getNamedRegions.Workbook <- function(x) {
 #' saveWorkbook(wb, file = "addFilterExample.xlsx", overwrite = TRUE)
 #' }
 addFilter <- function(wb, sheet, rows, cols) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -3201,9 +3151,8 @@ setFooter <- function(wb, text, position = "center") {
 #'
 #' # openXL(wb)
 dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBlank = TRUE, showInputMsg = TRUE, showErrorMsg = TRUE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## rows and cols
   if (!is.numeric(cols)) {
@@ -3460,9 +3409,8 @@ sheetVisibility <- function(wb) {
 #' @param value a logical/character vector the same length as sheetVisibility(wb)
 #' @export
 `sheetVisibility<-` <- function(wb, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   value <- tolower(as.character(value))
   if (!any(value %in% c("true", "visible"))) {
@@ -3523,9 +3471,8 @@ sheetVisibility <- function(wb) {
 #' }
 #' ## In Excel: View tab -> Page Break Preview
 pageBreak <- function(wb, sheet, i, type = "row") {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -4363,9 +4310,8 @@ removeTable <- function(wb, sheet, table) {
 #' @export
 #'
 groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -4478,9 +4424,8 @@ ungroupColumns <- function(wb, sheet, cols) {
     stop("Invalid columns selected (<= 0).")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
   removeInds <- which(customCols %in% cols)
@@ -4537,9 +4482,8 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   hidden <- rep(as.character(as.integer(hidden)), length.out = length(rows))
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   levels <- rep("1", length(rows))
 
@@ -4565,9 +4509,8 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 #' @export
 
 ungroupRows <- function(wb, sheet, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -4685,17 +4628,13 @@ activeSheet <- function(wb) {
 #' @param value index of the active sheet or name of the active sheet
 #' @export
 `activeSheet<-` <- function(wb, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
 
-
-
   invisible(wb$setactiveSheet(value))
-
   invisible(wb)
 }

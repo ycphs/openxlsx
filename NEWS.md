@@ -17,6 +17,10 @@
 * improvements in how `openxlsx` creates temporary directories (see [#262](https://github.com/ychps/openxlsx/issues/262))
 
 
+## Improvements
+
+* `options()` are more consistently set in functions (see: [#]())
+
 # openxlsx 4.2.4
 
 ## Fixes
