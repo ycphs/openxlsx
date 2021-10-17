@@ -104,19 +104,14 @@ createComment <- function(comment,
     stop("comment argument must be a character vector")
   }
 
-  if (!"numeric" %in% class(width)) {
-    stop("width argument must be a numeric vector")
-  }
-
-  if (!"numeric" %in% class(height)) {
-    stop("height argument must be a numeric vector")
-  }
 
   if (!"logical" %in% class(visible)) {
     stop("visible argument must be a logical vector")
   }
 
 
+  assert_numeric1(width)
+  assert_numeric1(height)
 
   width <- round(width)
   height <- round(height)
