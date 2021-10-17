@@ -67,7 +67,7 @@ assert_numeric1 <- function(x, scalar = FALSE) {
   ok <- is.numeric(x) & length(x) == 1L
   
   if (scalar) {
-    ok <- ok && length(x) == 1L
+    ok <- ok && nchar(x) == 1L
     msg <- paste0(msg, "single number")
   } else {
     msg <- paste0(msg, "numeric vector of length 1L")
