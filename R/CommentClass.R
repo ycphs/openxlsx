@@ -1,6 +1,5 @@
 
 
-
 Comment <- setRefClass("Comment",
   fields = c(
     "text",
@@ -67,10 +66,11 @@ Comment$methods(show = function() {
 #' @description Create a cell Comment object to pass to writeComment()
 #' @param comment Comment text. Character vector.
 #' @param author Author of comment. Character vector of length 1
-#' @param style A Style object or list of style objects the same length as comment vector. See \code{\link{createStyle}}.
+#' @param style A Style object or list of style objects the same length as
+#'   comment vector. See \code{\link{createStyle}}.
 #' @param visible TRUE or FALSE. Is comment visible.
-#' @param width Textbox integer width in number of cells
-#' @param height Textbox integer height in number of cells
+#' @param width,height Width and height of textbook (in number of cells);
+#'   doubles are rounded with \code{base::round()}
 #' @export
 #' @seealso \code{\link{writeComment}}
 #' @examples
