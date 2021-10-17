@@ -9,6 +9,6 @@ test_that("int2col and col2int", {
             "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA")
   
   expect_equal(chrs, int2col(nums))
-  expect_equal(nums, col2int(chars))
+  expect_equal(nums, col2int(chrs))
   
 })
