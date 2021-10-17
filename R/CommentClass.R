@@ -1,6 +1,5 @@
 
 
-
 Comment <- setRefClass("Comment",
   fields = c(
     "text",
@@ -67,10 +66,11 @@ Comment$methods(show = function() {
 #' @description Create a cell Comment object to pass to writeComment()
 #' @param comment Comment text. Character vector.
 #' @param author Author of comment. Character vector of length 1
-#' @param style A Style object or list of style objects the same length as comment vector. See \code{\link{createStyle}}.
+#' @param style A Style object or list of style objects the same length as
+#'   comment vector. See \code{\link{createStyle}}.
 #' @param visible TRUE or FALSE. Is comment visible.
-#' @param width Textbox integer width in number of cells
-#' @param height Textbox integer height in number of cells
+#' @param width,height Width and height of textbook (in number of cells);
+#'   doubles are rounded with \code{base::round()}
 #' @export
 #' @seealso \code{\link{writeComment}}
 #' @examples
@@ -96,34 +96,18 @@ createComment <- function(comment,
                           visible = TRUE,
                           width = 2,
                           height = 4) {
-  if (!"character" %in% class(author)) {
-    stop("author argument must be a character vector")
-  }
-
-  if (!"character" %in% class(comment)) {
+  
+  if (!is.character(comment)) {
     stop("comment argument must be a character vector")
   }
 
-  if (!"numeric" %in% class(width)) {
-    stop("width argument must be a numeric vector")
-  }
-
-  if (!"numeric" %in% class(height)) {
-    stop("height argument must be a numeric vector")
-  }
-
-  if (!"logical" %in% class(visible)) {
-    stop("visible argument must be a logical vector")
-  }
-
-
+  assert_character1(author)
+  assert_numeric1(width)
+  assert_numeric1(height)
+  assert_true_false1(visible)
 
   width <- round(width)
   height <- round(height)
-
-  # n <- length(comment) variable not used
-  author <- author[1]
-  visible <- visible[1]
 
   if (is.null(style)) {
     style <- createStyle(fontName = "Tahoma", fontSize = 9, fontColour = "black")
@@ -132,12 +116,8 @@ createComment <- function(comment,
   author <- replaceIllegalCharacters(author)
   comment <- replaceIllegalCharacters(comment)
 
-
   invisible(Comment$new(text = comment, author = author, style = style, visible = visible, width = width[1], height = height[1]))
 }
-
-
-
 
 
 #' @name writeComment
@@ -218,9 +198,6 @@ writeComment <- function(wb, sheet, col, row, comment, xy = NULL) {
 }
 
 
-
-
-
 #' @name removeComment
 #' @title Remove a comment from a cell
 #' @description Remove a cell comment from a worksheet
@@ -236,10 +213,7 @@ writeComment <- function(wb, sheet, col, row, comment, xy = NULL) {
 removeComment <- function(wb, sheet, cols, rows, gridExpand = TRUE) {
   sheet <- wb$validateSheet(sheet)
 
-  if (!"Workbook" %in% class(wb)) {
-    stop("First argument must be a Workbook.")
-  }
-
+  assert_class(wb, "Workbook")
   cols <- convertFromExcelRef(cols)
   rows <- as.integer(rows)
 
