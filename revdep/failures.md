@@ -17,6 +17,67 @@
 
 
 
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1089036265 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1089036265 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
+
+```
+### CRAN
+
+```
+
+
+
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1089036265 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1089036265 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
+
+```
+# artMS
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
 
 
 
@@ -31,7 +92,40 @@
 
 
 ```
-# artMS
+# bayesbr
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# bibliometrix
 
 <details>
 
@@ -97,7 +191,73 @@
 
 
 ```
+# cbaf
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # CHRONOS
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CNVPanelizer
 
 <details>
 
@@ -218,11 +378,6 @@ Run `revdep_details(, "emdi")` for more info
     See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/00install.out’ for details.
     ```
 
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘simFrame’
-    ```
-
 ## Installation
 
 ### Devel
@@ -267,6 +422,39 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
+# fedup
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # GA4GHshiny
 
 <details>
@@ -300,67 +488,106 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# hypeR
+# genekitr
 
 <details>
 
-* Version: 1.8.0
-* GitHub: https://github.com/montilab/hypeR
-* Source code: https://github.com/cran/hypeR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 154
-
-Run `revdep_details(, "hypeR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘hypeR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘hypeR’ ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘hypeR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/hypeR’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘hypeR’ ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘hypeR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/old/hypeR.Rcheck/hypeR’
+
+
+
+
+
+
+```
+# isoreader
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
 # maEndToEnd
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# MatrixQCvis
 
 <details>
 
@@ -426,92 +653,168 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# sangeranalyseR
+# nanotatoR
 
 <details>
 
-* Version: 1.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/sangeranalyseR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 142
-
-Run `revdep_details(, "sangeranalyseR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
-    ```
-
-*   checking for portable file names ... WARNING
-    ```
-    Found the following file with a non-portable file name:
-      docs/wallpaperflare.com_wallpaper (1).jpg
-    These are not fully portable file names.
-    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
-      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
-      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
-      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
-      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-      docs/build/html/.buildinfo
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
+
+
+```
+# PloGO2
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# rbiom
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# RIPAT
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# sangeranalyseR
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
@@ -519,61 +822,65 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 1.6.0
-* GitHub: https://github.com/plger/SEtools
-* Source code: https://github.com/cran/SEtools
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 126
-
-Run `revdep_details(, "SEtools")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘SEtools’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘SEtools’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
-  libv8.so.3.14.5: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘SEtools’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/SEtools’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘SEtools’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
-  libv8.so.3.14.5: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘SEtools’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/old/SEtools.Rcheck/SEtools’
+
+
+
+
+
+
+```
+# sigFeature
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
@@ -581,31 +888,35 @@ ERROR: lazy loading failed for package ‘SEtools’
 
 <details>
 
-* Version: 1.4.3
-* GitHub: NA
-* Source code: https://github.com/cran/structToolbox
-* Date/Publication: 2021-09-21
-* Number of recursive dependencies: 200
-
-Run `revdep_details(, "structToolbox")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## Newly broken
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-## In both
+```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.7Mb
-      sub-directories of 1Mb or more:
-        R     3.3Mb
-        doc   3.1Mb
-    ```
 
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # TPP
 
 <details>
@@ -620,7 +931,7 @@ Run `revdep_details(, "TPP")` for more info
 
 </details>
 
-## Newly broken
+## Newly fixed
 
 *   checking examples ... ERROR
     ```
@@ -636,15 +947,15 @@ Run `revdep_details(, "TPP")` for more info
     > data(hdacCCR_smallExample)
     ...
     
+    > tppccrTransformed <- tppccrTransform(data=tppccrNorm)
+    Transforming dataset: Panobinostat_1
+    Transforming dataset: Panobinostat_2
+    Transformation complete.
+    
+    > tppccrFitted <- tppccrCurveFit(data=tppccrTransformed, nCores=1)
     
      *** caught segfault ***
-    address 0x55a800000004, cause 'memory not mapped'
-    
-    Traceback:
-     1: gc(verbose = FALSE)
-     2: tppccrCurveFit(data = tppccrTransformed, nCores = 1)
-    An irrecoverable exception occurred. R is aborting now ...
-    Segmentation fault (core dumped)
+    address 0x55e300000004, cause 'memory not mapped'
     ```
 
 ## In both

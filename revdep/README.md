@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-10-13                   |
+|date     |2021-10-18                   |
 
 # Dependencies
 
@@ -23,24 +23,36 @@
 
 # Revdeps
 
-## Failed to check (16)
+## Failed to check (28)
 
-|package                                    |version |error    |warning |note |
-|:------------------------------------------|:-------|:--------|:-------|:----|
-|appreci8R                                  |?       |         |        |     |
-|artMS                                      |?       |         |        |     |
-|BoneProfileR                               |?       |         |        |     |
-|CHRONOS                                    |?       |         |        |     |
-|DAPAR                                      |?       |         |        |     |
-|ddPCRclust                                 |?       |         |        |     |
-|emdi                                       |2.1.0   |1        |        |1    |
-|GA4GHshiny                                 |?       |         |        |     |
-|hypeR                                      |1.8.0   |1        |        |     |
-|maEndToEnd                                 |?       |         |        |     |
-|MicroSEC                                   |?       |         |        |     |
-|sangeranalyseR                             |1.2.0   |1        |1       |2    |
-|SEtools                                    |1.6.0   |1        |        |     |
-|[structToolbox](failures.md#structtoolbox) |1.4.3   |__+1__   |        |1    |
-|[TPP](failures.md#tpp)                     |3.20.1  |1 __+1__ |        |3    |
-|uncoverappLib                              |?       |         |        |     |
+|package        |version |error |warning |note |
+|:--------------|:-------|:-----|:-------|:----|
+|appreci8R      |?       |      |        |     |
+|artMS          |?       |      |        |     |
+|bayesbr        |?       |      |        |     |
+|bibliometrix   |?       |      |        |     |
+|BoneProfileR   |?       |      |        |     |
+|cbaf           |?       |      |        |     |
+|CHRONOS        |?       |      |        |     |
+|CNVPanelizer   |?       |      |        |     |
+|DAPAR          |?       |      |        |     |
+|ddPCRclust     |?       |      |        |     |
+|emdi           |2.1.0   |1     |        |     |
+|fedup          |?       |      |        |     |
+|GA4GHshiny     |?       |      |        |     |
+|genekitr       |?       |      |        |     |
+|isoreader      |?       |      |        |     |
+|maEndToEnd     |?       |      |        |     |
+|MatrixQCvis    |?       |      |        |     |
+|MicroSEC       |?       |      |        |     |
+|nanotatoR      |?       |      |        |     |
+|PloGO2         |?       |      |        |     |
+|rbiom          |?       |      |        |     |
+|RIPAT          |?       |      |        |     |
+|sangeranalyseR |?       |      |        |     |
+|SEtools        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
+|structToolbox  |?       |      |        |     |
+|TPP            |3.20.1  |1 -1  |        |3    |
+|uncoverappLib  |?       |      |        |     |
 
