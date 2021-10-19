@@ -17,21 +17,7 @@
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1089036265 != reported length 1623464748
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1089036265 != reported length 1623464748
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
 
 
 ```
@@ -41,21 +27,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1089036265 != reported length 1623464748
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1089036265 != reported length 1623464748
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
 
 
 ```
@@ -92,106 +64,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
-# bayesbr
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# bibliometrix
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # BoneProfileR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# cbaf
 
 <details>
 
@@ -686,6 +559,74 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
+# openPrimeR
+
+<details>
+
+* Version: 1.14.0
+* GitHub: NA
+* Source code: https://github.com/cran/openPrimeR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 165
+
+Run `revdep_details(, "openPrimeR")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.8Mb
+      sub-directories of 1Mb or more:
+        R         1.3Mb
+        extdata  10.3Mb
+    ```
+
+# parameters
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # PloGO2
 
 <details>
@@ -752,72 +693,149 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# RIPAT
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # sangeranalyseR
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.2.0
+* GitHub: NA
+* Source code: https://github.com/cran/sangeranalyseR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 142
+
+Run `revdep_details(, "sangeranalyseR")` for more info
 
 </details>
 
-## Error before installation
+## In both
 
-### Devel
+*   R CMD check timed out
+    
 
-```
+*   checking for portable file names ... WARNING
+    ```
+    Found the following file with a non-portable file name:
+      docs/wallpaperflare.com_wallpaper (1).jpg
+    These are not fully portable file names.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    ```
 
+*   checking R files for non-ASCII characters ... WARNING
+    ```
+    Found the following files with non-ASCII characters:
+      ClassSangerAlignment.R
+      ClassSangerContig.R
+      ClassSangerRead.R
+    Portable packages must use only ASCII characters in their R code,
+    except perhaps in comments.
+    Use \uxxxx escapes for other characters.
+    ```
 
+*   checking for missing documentation entries ... WARNING
+    ```
+    Undocumented S4 methods:
+      generic 'readTable' and siglist 'SangerContig'
+    All user-level objects in a package (including S4 classes and methods)
+    should have documentation entries.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
 
+*   checking for code/documentation mismatches ... WARNING
+    ```
+    Codoc mismatches from documentation object 'SangerAlignment-class-generateReportSA':
+    \S4method{generateReportSA}{SangerAlignment}
+      Code: function(object, outputDir, includeSangerContig = TRUE,
+                     includeSangerRead = TRUE, colors)
+      Docs: function(object, outputDir, includeSangerContig = TRUE,
+                     includeSangerRead = TRUE)
+      Argument names in code not in docs:
+        colors
+    
+    Codoc mismatches from documentation object 'SangerAlignment-class-launchAppSA':
+    ...
+      Docs: function(object, outputDir = NULL)
+      Argument names in code not in docs:
+        colors
+    
+    Codoc mismatches from documentation object 'launchAppSC':
+    launchAppSC
+      Code: function(object, outputDir = NULL, colors = "default")
+      Docs: function(object, outputDir = NULL)
+      Argument names in code not in docs:
+        colors
+    ```
 
+*   checking package dependencies ... NOTE
+    ```
+    Depends: includes the non-default packages:
+      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
+      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
+      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
+      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
+      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
+    Adding so many packages to the search path is excessive and importing
+    selectively is preferable.
+    ```
 
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+      docs/build/html/.buildinfo
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
 
-```
-### CRAN
+*   checking installed package size ... NOTE
+    ```
+      installed size is 11.6Mb
+      sub-directories of 1Mb or more:
+        doc       4.4Mb
+        extdata   5.5Mb
+    ```
 
-```
+*   checking top-level files ... NOTE
+    ```
+    File
+      LICENSE
+    is not mentioned in the DESCRIPTION file.
+    ```
 
+*   checking dependencies in R code ... NOTE
+    ```
+    Packages in Depends field not imported from:
+      ‘BiocStyle’ ‘phangorn’ ‘reshape2’ ‘zeallot’
+      These packages need to be imported from (in the NAMESPACE file)
+      for when this namespace is loaded but not attached.
+    package 'methods' is used but not declared
+    ```
 
+*   checking R code for possible problems ... NOTE
+    ```
+    SangerAlignment: no visible global function definition for ‘new’
+    SangerAlignmentServer: no visible binding for '<<-' assignment to
+      ‘NEW_SANGER_ALIGNED_CONSENSUS_READ_SET’
+    SangerAlignmentServer: no visible global function definition for
+      ‘colorRamp’
+    SangerContig: no visible global function definition for ‘new’
+    SangerContigServer: no visible binding for '<<-' assignment to
+      ‘NEW_SANGER_CONTIG’
+    SangerContigServer: no visible global function definition for
+      ‘colorRamp’
+    ...
+      mtext new par pdf quantile read.csv rect rgb rtree shinyApp
+      shinyOptions str_split
+    Consider adding
+      importFrom("grDevices", "colorRamp", "dev.off", "pdf", "rgb")
+      importFrom("graphics", "axis", "lines", "mtext", "par", "rect")
+      importFrom("methods", "callNextMethod", "new")
+      importFrom("stats", "IQR", "quantile")
+      importFrom("utils", "read.csv")
+    to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+    contains 'methods').
+    ```
 
-
-
-
-```
 # SEtools
 
 <details>
@@ -851,7 +869,7 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# sigFeature
+# stplanr
 
 <details>
 
@@ -930,33 +948,6 @@ ERROR: lazy loading failed for package ‘emdi’
 Run `revdep_details(, "TPP")` for more info
 
 </details>
-
-## Newly fixed
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘TPP-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: tppccrCurveFit
-    > ### Title: Fit dose response curves
-    > ### Aliases: tppccrCurveFit
-    > 
-    > ### ** Examples
-    > 
-    > data(hdacCCR_smallExample)
-    ...
-    
-    > tppccrTransformed <- tppccrTransform(data=tppccrNorm)
-    Transforming dataset: Panobinostat_1
-    Transforming dataset: Panobinostat_2
-    Transformation complete.
-    
-    > tppccrFitted <- tppccrCurveFit(data=tppccrTransformed, nCores=1)
-    
-     *** caught segfault ***
-    address 0x55e300000004, cause 'memory not mapped'
-    ```
 
 ## In both
 

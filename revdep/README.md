@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-10-18                   |
+|date     |2021-10-19                   |
 
 # Dependencies
 
@@ -23,16 +23,13 @@
 
 # Revdeps
 
-## Failed to check (28)
+## Failed to check (26)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|bayesbr        |?       |      |        |     |
-|bibliometrix   |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
-|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
@@ -46,13 +43,14 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
+|openPrimeR     |1.14.0  |1     |        |2    |
+|parameters     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |4       |6    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
+|stplanr        |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|TPP            |3.20.1  |1 -1  |        |3    |
+|TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 
