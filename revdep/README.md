@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-10-19                   |
+|date     |2021-10-20                   |
 
 # Dependencies
 
@@ -23,34 +23,41 @@
 
 # Revdeps
 
-## Failed to check (26)
+## Failed to check (33)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
+|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
+|CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |2.1.0   |1     |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
 |genekitr       |?       |      |        |     |
+|hypeR          |1.8.0   |1     |        |     |
 |isoreader      |?       |      |        |     |
 |maEndToEnd     |?       |      |        |     |
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |1.14.0  |1     |        |2    |
+|openPrimeR     |?       |      |        |     |
 |parameters     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|sangeranalyseR |1.2.0   |1     |4       |6    |
+|RIPAT          |?       |      |        |     |
+|sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
-|stplanr        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
+|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
+|SwathXtend     |2.14.0  |1     |1       |2    |
+|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 

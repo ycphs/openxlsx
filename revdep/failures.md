@@ -97,6 +97,39 @@
 
 
 ```
+# cbaf
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # CHRONOS
 
 <details>
@@ -131,6 +164,39 @@
 
 ```
 # CNVPanelizer
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CoTiMA
 
 <details>
 
@@ -394,6 +460,66 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
+# hypeR
+
+<details>
+
+* Version: 1.8.0
+* GitHub: https://github.com/montilab/hypeR
+* Source code: https://github.com/cran/hypeR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 154
+
+Run `revdep_details(, "hypeR")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘hypeR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘hypeR’ ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘hypeR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/hypeR’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘hypeR’ ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘hypeR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/old/hypeR.Rcheck/hypeR’
+
+
+```
 # isoreader
 
 <details>
@@ -563,37 +689,35 @@ ERROR: lazy loading failed for package ‘emdi’
 
 <details>
 
-* Version: 1.14.0
-* GitHub: NA
-* Source code: https://github.com/cran/openPrimeR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 165
-
-Run `revdep_details(, "openPrimeR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
+```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is 12.8Mb
-      sub-directories of 1Mb or more:
-        R         1.3Mb
-        extdata  10.3Mb
-    ```
 
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # parameters
 
 <details>
@@ -693,149 +817,72 @@ Run `revdep_details(, "openPrimeR")` for more info
 
 
 ```
+# RIPAT
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # sangeranalyseR
 
 <details>
 
-* Version: 1.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/sangeranalyseR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 142
-
-Run `revdep_details(, "sangeranalyseR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-*   checking for portable file names ... WARNING
-    ```
-    Found the following file with a non-portable file name:
-      docs/wallpaperflare.com_wallpaper (1).jpg
-    These are not fully portable file names.
-    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
-    ```
+```
 
-*   checking R files for non-ASCII characters ... WARNING
-    ```
-    Found the following files with non-ASCII characters:
-      ClassSangerAlignment.R
-      ClassSangerContig.R
-      ClassSangerRead.R
-    Portable packages must use only ASCII characters in their R code,
-    except perhaps in comments.
-    Use \uxxxx escapes for other characters.
-    ```
 
-*   checking for missing documentation entries ... WARNING
-    ```
-    Undocumented S4 methods:
-      generic 'readTable' and siglist 'SangerContig'
-    All user-level objects in a package (including S4 classes and methods)
-    should have documentation entries.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
 
-*   checking for code/documentation mismatches ... WARNING
-    ```
-    Codoc mismatches from documentation object 'SangerAlignment-class-generateReportSA':
-    \S4method{generateReportSA}{SangerAlignment}
-      Code: function(object, outputDir, includeSangerContig = TRUE,
-                     includeSangerRead = TRUE, colors)
-      Docs: function(object, outputDir, includeSangerContig = TRUE,
-                     includeSangerRead = TRUE)
-      Argument names in code not in docs:
-        colors
-    
-    Codoc mismatches from documentation object 'SangerAlignment-class-launchAppSA':
-    ...
-      Docs: function(object, outputDir = NULL)
-      Argument names in code not in docs:
-        colors
-    
-    Codoc mismatches from documentation object 'launchAppSC':
-    launchAppSC
-      Code: function(object, outputDir = NULL, colors = "default")
-      Docs: function(object, outputDir = NULL)
-      Argument names in code not in docs:
-        colors
-    ```
 
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
-      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
-      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
-      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
-      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
 
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-      docs/build/html/.buildinfo
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is 11.6Mb
-      sub-directories of 1Mb or more:
-        doc       4.4Mb
-        extdata   5.5Mb
-    ```
+```
+### CRAN
 
-*   checking top-level files ... NOTE
-    ```
-    File
-      LICENSE
-    is not mentioned in the DESCRIPTION file.
-    ```
+```
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Packages in Depends field not imported from:
-      ‘BiocStyle’ ‘phangorn’ ‘reshape2’ ‘zeallot’
-      These packages need to be imported from (in the NAMESPACE file)
-      for when this namespace is loaded but not attached.
-    package 'methods' is used but not declared
-    ```
 
-*   checking R code for possible problems ... NOTE
-    ```
-    SangerAlignment: no visible global function definition for ‘new’
-    SangerAlignmentServer: no visible binding for '<<-' assignment to
-      ‘NEW_SANGER_ALIGNED_CONSENSUS_READ_SET’
-    SangerAlignmentServer: no visible global function definition for
-      ‘colorRamp’
-    SangerContig: no visible global function definition for ‘new’
-    SangerContigServer: no visible binding for '<<-' assignment to
-      ‘NEW_SANGER_CONTIG’
-    SangerContigServer: no visible global function definition for
-      ‘colorRamp’
-    ...
-      mtext new par pdf quantile read.csv rect rgb rtree shinyApp
-      shinyOptions str_split
-    Consider adding
-      importFrom("grDevices", "colorRamp", "dev.off", "pdf", "rgb")
-      importFrom("graphics", "axis", "lines", "mtext", "par", "rect")
-      importFrom("methods", "callNextMethod", "new")
-      importFrom("stats", "IQR", "quantile")
-      importFrom("utils", "read.csv")
-    to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
-    contains 'methods').
-    ```
 
+
+
+
+```
 # SEtools
 
 <details>
@@ -869,7 +916,40 @@ Run `revdep_details(, "sangeranalyseR")` for more info
 
 
 ```
-# stplanr
+# sigFeature
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# struct
 
 <details>
 
@@ -903,6 +983,115 @@ Run `revdep_details(, "sangeranalyseR")` for more info
 
 ```
 # structToolbox
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# SwathXtend
+
+<details>
+
+* Version: 2.14.0
+* GitHub: NA
+* Source code: https://github.com/cran/SwathXtend
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 14
+
+Run `revdep_details(, "SwathXtend")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+*   checking Rd files ... WARNING
+    ```
+    prepare_Rd: applyttest.Rd:27-28: Dropping empty section \details
+    prepare_Rd: applyttest.Rd:36-37: Dropping empty section \note
+    prepare_Rd: applyttest.Rd:34-35: Dropping empty section \author
+    prepare_Rd: applyttest.Rd:32-33: Dropping empty section \references
+    prepare_Rd: applyttestPep.Rd:26-27: Dropping empty section \details
+    prepare_Rd: applyttestPep.Rd:35-36: Dropping empty section \note
+    prepare_Rd: applyttestPep.Rd:33-34: Dropping empty section \author
+    prepare_Rd: applyttestPep.Rd:31-32: Dropping empty section \references
+    prepare_Rd: coverage.Rd:7-9: Dropping empty section \description
+    prepare_Rd: coverage.Rd:35-37: Dropping empty section \note
+    ...
+    prepare_Rd: reliabilityCheckSwath.Rd:40-42: Dropping empty section \references
+    prepare_Rd: reliabilityCheckSwath.Rd:52-54: Dropping empty section \seealso
+    checkRd: (5) reliabilityCheckSwath.Rd:0-64: Must have a \description
+    prepare_Rd: swath.means.Rd:7-9: Dropping empty section \description
+    prepare_Rd: swath.means.Rd:22-24: Dropping empty section \details
+    prepare_Rd: swath.means.Rd:34-36: Dropping empty section \note
+    prepare_Rd: swath.means.Rd:31-33: Dropping empty section \author
+    prepare_Rd: swath.means.Rd:28-30: Dropping empty section \references
+    prepare_Rd: swath.means.Rd:40-42: Dropping empty section \seealso
+    checkRd: (5) swath.means.Rd:0-60: Must have a \description
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 352.1Mb
+      sub-directories of 1Mb or more:
+        files  351.3Mb
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    reliabilityCheckSwath: warning in venn.diagram(list(seedSwath =
+      ds.seed$Peptide, extSwath = ds.ext$Peptide), file = "venn of
+      peptide.png", category.names = c("seed", "extended"), fill =
+      c("aquamarine1", "chartreuse"), main = paste("Peptides at FDR pass",
+      nfdr)): partial argument match of 'file' to 'filename'
+    reliabilityCheckSwath: warning in venn.diagram(list(seedSwath =
+      ds.seed$Protein, extSwath = ds.ext$Protein), file = "venn of
+      protein.png", category.names = c("seed", "extended"), fill =
+      c("aquamarine1", "chartreuse"), main = paste("Proteins at FDR pass",
+      nfdr)): partial argument match of 'file' to 'filename'
+    ...
+                 "rainbow", "terrain.colors")
+      importFrom("graphics", "abline", "axis", "barplot", "boxplot", "hist",
+                 "layout", "legend", "lines", "mtext", "par", "points",
+                 "segments", "text")
+      importFrom("stats", "aggregate", "as.formula", "cor", "density", "lm",
+                 "lowess", "median", "na.omit", "predict", "resid",
+                 "residuals", "sd", "t.test")
+      importFrom("utils", "data", "read.delim", "read.delim2", "write.csv",
+                 "write.table")
+    to your NAMESPACE file.
+    ```
+
+# TarSeqQC
 
 <details>
 
