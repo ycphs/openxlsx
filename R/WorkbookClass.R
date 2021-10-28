@@ -3961,12 +3961,12 @@ Workbook$methods(
       }
     }
 
-    tableStyles <- getNodes(xml = stylesTxt, tagIn = "<tableStyles")
+    tableStyles <- getChildlessNode(stylesTxt, tag = "tableStyles")
     if (length(tableStyles) > 0) {
-      styles$tableStyles <<- stri_join(tableStyles, ">")
+      styles$tableStyles <<- tableStyles
     }
 
-    extLst <- getNodes(xml = stylesTxt, tagIn = "<extLst>")
+    extLst <- getChildlessNode(stylesTxt, tag = "extLst")
     if (length(extLst) > 0) {
       styles$extLst <<- extLst
     }
