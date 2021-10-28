@@ -223,6 +223,11 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$workbook$calcPr <- calcPr
     }
 
+    ## additional workbook attributes
+    extLst <- getChildlessNode(xml = workbook, tag = "extLst")
+    if (length(extLst) > 0) {
+      wb$workbook$extLst <- extLst
+    }
 
     workbookPr <- getChildlessNode(xml = workbook, tag = "workbookPr")
     if (length(workbookPr) > 0) {
