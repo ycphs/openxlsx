@@ -17,7 +17,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -27,7 +41,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -164,39 +192,6 @@
 
 ```
 # CNVPanelizer
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# CoTiMA
 
 <details>
 
@@ -689,35 +684,37 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.14.0
+* GitHub: NA
+* Source code: https://github.com/cran/openPrimeR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 165
+
+Run `revdep_details(, "openPrimeR")` for more info
 
 </details>
 
-## Error before installation
+## In both
 
-### Devel
+*   R CMD check timed out
+    
 
-```
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.8Mb
+      sub-directories of 1Mb or more:
+        R         1.3Mb
+        extdata  10.3Mb
+    ```
 
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # parameters
 
 <details>
@@ -817,69 +814,92 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# RIPAT
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # sangeranalyseR
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.2.0
+* GitHub: NA
+* Source code: https://github.com/cran/sangeranalyseR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 142
+
+Run `revdep_details(, "sangeranalyseR")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
+    ```
+
+*   checking for portable file names ... WARNING
+    ```
+    Found the following file with a non-portable file name:
+      docs/wallpaperflare.com_wallpaper (1).jpg
+    These are not fully portable file names.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Depends: includes the non-default packages:
+      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
+      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
+      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
+      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
+      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
+    Adding so many packages to the search path is excessive and importing
+    selectively is preferable.
+    ```
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+      docs/build/html/.buildinfo
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
@@ -916,182 +936,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# sigFeature
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# struct
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # structToolbox
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# SwathXtend
-
-<details>
-
-* Version: 2.14.0
-* GitHub: NA
-* Source code: https://github.com/cran/SwathXtend
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 14
-
-Run `revdep_details(, "SwathXtend")` for more info
-
-</details>
-
-## In both
-
-*   R CMD check timed out
-    
-
-*   checking Rd files ... WARNING
-    ```
-    prepare_Rd: applyttest.Rd:27-28: Dropping empty section \details
-    prepare_Rd: applyttest.Rd:36-37: Dropping empty section \note
-    prepare_Rd: applyttest.Rd:34-35: Dropping empty section \author
-    prepare_Rd: applyttest.Rd:32-33: Dropping empty section \references
-    prepare_Rd: applyttestPep.Rd:26-27: Dropping empty section \details
-    prepare_Rd: applyttestPep.Rd:35-36: Dropping empty section \note
-    prepare_Rd: applyttestPep.Rd:33-34: Dropping empty section \author
-    prepare_Rd: applyttestPep.Rd:31-32: Dropping empty section \references
-    prepare_Rd: coverage.Rd:7-9: Dropping empty section \description
-    prepare_Rd: coverage.Rd:35-37: Dropping empty section \note
-    ...
-    prepare_Rd: reliabilityCheckSwath.Rd:40-42: Dropping empty section \references
-    prepare_Rd: reliabilityCheckSwath.Rd:52-54: Dropping empty section \seealso
-    checkRd: (5) reliabilityCheckSwath.Rd:0-64: Must have a \description
-    prepare_Rd: swath.means.Rd:7-9: Dropping empty section \description
-    prepare_Rd: swath.means.Rd:22-24: Dropping empty section \details
-    prepare_Rd: swath.means.Rd:34-36: Dropping empty section \note
-    prepare_Rd: swath.means.Rd:31-33: Dropping empty section \author
-    prepare_Rd: swath.means.Rd:28-30: Dropping empty section \references
-    prepare_Rd: swath.means.Rd:40-42: Dropping empty section \seealso
-    checkRd: (5) swath.means.Rd:0-60: Must have a \description
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 352.1Mb
-      sub-directories of 1Mb or more:
-        files  351.3Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    reliabilityCheckSwath: warning in venn.diagram(list(seedSwath =
-      ds.seed$Peptide, extSwath = ds.ext$Peptide), file = "venn of
-      peptide.png", category.names = c("seed", "extended"), fill =
-      c("aquamarine1", "chartreuse"), main = paste("Peptides at FDR pass",
-      nfdr)): partial argument match of 'file' to 'filename'
-    reliabilityCheckSwath: warning in venn.diagram(list(seedSwath =
-      ds.seed$Protein, extSwath = ds.ext$Protein), file = "venn of
-      protein.png", category.names = c("seed", "extended"), fill =
-      c("aquamarine1", "chartreuse"), main = paste("Proteins at FDR pass",
-      nfdr)): partial argument match of 'file' to 'filename'
-    ...
-                 "rainbow", "terrain.colors")
-      importFrom("graphics", "abline", "axis", "barplot", "boxplot", "hist",
-                 "layout", "legend", "lines", "mtext", "par", "points",
-                 "segments", "text")
-      importFrom("stats", "aggregate", "as.formula", "cor", "density", "lm",
-                 "lowess", "median", "na.omit", "predict", "resid",
-                 "residuals", "sd", "t.test")
-      importFrom("utils", "data", "read.delim", "read.delim2", "write.csv",
-                 "write.table")
-    to your NAMESPACE file.
-    ```
-
-# TarSeqQC
 
 <details>
 

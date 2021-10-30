@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-10-20                   |
+|date     |2021-10-30                   |
 
 # Dependencies
 
@@ -23,7 +23,7 @@
 
 # Revdeps
 
-## Failed to check (33)
+## Failed to check (27)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -33,7 +33,6 @@
 |cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
-|CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |2.1.0   |1     |        |     |
@@ -46,18 +45,13 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
+|openPrimeR     |1.14.0  |1     |        |2    |
 |parameters     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.2.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
-|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|SwathXtend     |2.14.0  |1     |1       |2    |
-|TarSeqQC       |?       |      |        |     |
 |TPP            |3.20.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 
