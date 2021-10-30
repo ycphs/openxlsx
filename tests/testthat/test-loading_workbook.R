@@ -1012,3 +1012,33 @@ test_that("read nodes", {
   expect_equal(test, that)
   
 })
+
+test_that("sheet visibility", {
+
+  # example is rather slow (lots of hidden cols)
+  fl <- system.file("extdata", "ColorTabs3.xlsx", package = "openxlsx")
+  tmp_dir <- temp_xlsx()
+  
+  exp_sheets <- c("Nums", "Chars", "hidden")
+  exp_vis <- c("visible", "visible", "hidden")
+
+  # after load
+  wb <- loadWorkbook(fl)
+  wb_sheets <- openxlsx::sheets(wb)
+  wb_vis <- openxlsx::sheetVisibility(wb)
+  
+  # save
+  saveWorkbook(wb, tmp_dir)
+  
+  # re-import
+  wb2 <- loadWorkbook(tmp_dir)
+  wb2_sheets <- openxlsx::sheets(wb)
+  wb2_vis <- openxlsx::sheetVisibility(wb)
+  
+  expect_equal(exp_sheets, wb_sheets)
+  expect_equal(exp_vis, wb_vis)
+  
+  expect_equal(exp_sheets, wb2_sheets)
+  expect_equal(exp_vis, wb2_vis)
+  
+})
