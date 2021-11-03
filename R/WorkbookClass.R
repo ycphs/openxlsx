@@ -974,6 +974,10 @@ Workbook$methods(
         )
     }
 
+    for (i in seq_along(worksheets))
+      if (length(drawings[[i]])==0)
+        ct <- ct[!grepl(sprintf("drawing%s.xml", i), ct)]
+    
     ## write [Content_type]
     write_file(
       head = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
