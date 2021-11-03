@@ -2140,7 +2140,13 @@ Workbook$methods(
             }
           }
 
-
+          for (i in seq_along(drawings_rels))
+            if (length(drawings_rels[[i]])==0)
+              ws_rels <- ws_rels[!grepl(sprintf("drawing%s.xml", i), ws_rels)]
+          
+          for (i in seq_along(vml_rels))
+            if (length(vml_rels[[i]])==0)
+              ws_rels <- ws_rels[!grepl(sprintf("vmlDrawing%s.vml", i), ws_rels)]
 
           write_file(
             head = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">',
