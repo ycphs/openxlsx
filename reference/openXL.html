@@ -157,9 +157,9 @@ application, in a portable manner.</p>
 <p>In Windows (c) and Mac (c), it uses system default handlers,
 given the file type.</p>
 <p>In Linux it searches (via <code>which</code>) for available xls/xlsx
-reader applications (unless <code><a href='https://rdrr.io/r/base/options.html'>options('openxlsx.excelApp')</a></code>
+reader applications (unless <code>options('openxlsx.excelApp')</code>
 is set to the app bin path), and if it finds anything, sets
-<code><a href='https://rdrr.io/r/base/options.html'>options('openxlsx.excelApp')</a></code> to the program choosen by
+<code>options('openxlsx.excelApp')</code> to the program choosen by
 the user via a menu (if many are present, otherwise it will
 set the only available). Currently searched for apps are
 Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
@@ -182,123 +182,124 @@ Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
     <p>Luca Braglia</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># file example</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span><span class='op'>(</span><span class='va'>writeData</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; writDt&gt; ## See formatting vignette for further examples.
-#&gt; writDt&gt; 
-#&gt; writDt&gt; ## Options for default styling (These are the defaults)
-#&gt; writDt&gt; options("openxlsx.borderColour" = "black")
-#&gt; 
-#&gt; writDt&gt; options("openxlsx.borderStyle" = "thin")
-#&gt; 
-#&gt; writDt&gt; options("openxlsx.dateFormat" = "mm/dd/yyyy")
-#&gt; 
-#&gt; writDt&gt; options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
-#&gt; 
-#&gt; writDt&gt; options("openxlsx.numFmt" = NULL)
-#&gt; 
-#&gt; writDt&gt; ## Change the default border colour to #4F81BD
-#&gt; writDt&gt; options("openxlsx.borderColour" = "#4F81BD")
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Create Workbook object and add worksheets
-#&gt; writDt&gt; wb &lt;- createWorkbook()
-#&gt; 
-#&gt; writDt&gt; ## Add worksheets
-#&gt; writDt&gt; addWorksheet(wb, "Cars")
-#&gt; 
-#&gt; writDt&gt; addWorksheet(wb, "Formula")
-#&gt; 
-#&gt; writDt&gt; x &lt;- mtcars[1:6, ]
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x, startCol = 2, startRow = 3, rowNames = TRUE)
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Bordering
-#&gt; writDt&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x,
-#&gt; writDt+   rowNames = TRUE, startCol = "O", startRow = 3,
-#&gt; writDt+   borders = "surrounding", borderColour = "black"
-#&gt; writDt+ ) ## black border
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x,
-#&gt; writDt+   rowNames = TRUE,
-#&gt; writDt+   startCol = 2, startRow = 12, borders = "columns"
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x,
-#&gt; writDt+   rowNames = TRUE,
-#&gt; writDt+   startCol = "O", startRow = 12, borders = "rows"
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Header Styles
-#&gt; writDt&gt; 
-#&gt; writDt&gt; hs1 &lt;- createStyle(
-#&gt; writDt+   fgFill = "#DCE6F1", halign = "CENTER", textDecoration = "italic",
-#&gt; writDt+   border = "Bottom"
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x,
-#&gt; writDt+   colNames = TRUE, rowNames = TRUE, startCol = "B",
-#&gt; writDt+   startRow = 23, borders = "rows", headerStyle = hs1, borderStyle = "dashed"
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; hs2 &lt;- createStyle(
-#&gt; writDt+   fontColour = "#ffffff", fgFill = "#4F80BD",
-#&gt; writDt+   halign = "center", valign = "center", textDecoration = "bold",
-#&gt; writDt+   border = "TopBottomLeftRight"
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x,
-#&gt; writDt+   colNames = TRUE, rowNames = TRUE,
-#&gt; writDt+   startCol = "O", startRow = 23, borders = "columns", headerStyle = hs2
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Hyperlinks
-#&gt; writDt&gt; ## - vectors/columns with class 'hyperlink' are written as hyperlinks'
-#&gt; writDt&gt; 
-#&gt; writDt&gt; v &lt;- rep("https://CRAN.R-project.org/", 4)
-#&gt; 
-#&gt; writDt&gt; names(v) &lt;- paste0("Hyperlink", 1:4) # Optional: names will be used as display text
-#&gt; 
-#&gt; writDt&gt; class(v) &lt;- "hyperlink"
-#&gt; 
-#&gt; writDt&gt; writeData(wb, "Cars", x = v, xy = c("B", 32))
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Formulas
-#&gt; writDt&gt; ## - vectors/columns with class 'formula' are written as formulas'
-#&gt; writDt&gt; 
-#&gt; writDt&gt; df &lt;- data.frame(
-#&gt; writDt+   x = 1:3, y = 1:3,
-#&gt; writDt+   z = paste0(paste0("A", 1:3 + 1L), paste0("B", 1:3 + 1L), sep = " + "),
-#&gt; writDt+   stringsAsFactors = FALSE
-#&gt; writDt+ )
-#&gt; 
-#&gt; writDt&gt; class(df$z) &lt;- c(class(df$z), "formula")
-#&gt; 
-#&gt; writDt&gt; writeData(wb, sheet = "Formula", x = df)
-#&gt; 
-#&gt; writDt&gt; #####################################################################################
-#&gt; writDt&gt; ## Save workbook
-#&gt; writDt&gt; ## Open in excel without saving file: openXL(wb)
-#&gt; writDt&gt; ## Not run: 
-#&gt; writDt&gt; ##D saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)
-#&gt; writDt&gt; ## End(Not run)
-#&gt; writDt&gt; 
-#&gt; writDt&gt; 
-#&gt; writDt&gt; </div><div class='input'><span class='co'># openXL("writeDataExample.xlsx")</span>
-
-<span class='co'># (not yet saved) Workbook example</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='op'>]</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span><span class='op'>)</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>, startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='co'># openXL(wb)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># file example</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span><span class='op'>(</span><span class='va'>writeData</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## See formatting vignette for further examples.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Options for default styling (These are the defaults)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.borderColour" = "black")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.borderStyle" = "thin")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.dateFormat" = "mm/dd/yyyy")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.numFmt" = NULL)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Change the default border colour to #4F81BD</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; options("openxlsx.borderColour" = "#4F81BD")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Create Workbook object and add worksheets</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; wb &lt;- createWorkbook()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Add worksheets</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; addWorksheet(wb, "Cars")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; addWorksheet(wb, "Formula")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; x &lt;- mtcars[1:6, ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x, startCol = 2, startRow = 3, rowNames = TRUE)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Bordering</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   rowNames = TRUE, startCol = "O", startRow = 3,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   borders = "surrounding", borderColour = "black"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ ) ## black border</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   rowNames = TRUE,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   startCol = 2, startRow = 12, borders = "columns"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   rowNames = TRUE,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   startCol = "O", startRow = 12, borders = "rows"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Header Styles</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; hs1 &lt;- createStyle(</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   fgFill = "#DCE6F1", halign = "CENTER", textDecoration = "italic",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   border = "Bottom"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   colNames = TRUE, rowNames = TRUE, startCol = "B",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   startRow = 23, borders = "rows", headerStyle = hs1, borderStyle = "dashed"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; hs2 &lt;- createStyle(</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   fontColour = "#ffffff", fgFill = "#4F80BD",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   halign = "center", valign = "center", textDecoration = "bold",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   border = "TopBottomLeftRight"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   colNames = TRUE, rowNames = TRUE,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   startCol = "O", startRow = 23, borders = "columns", headerStyle = hs2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Hyperlinks</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## - vectors/columns with class 'hyperlink' are written as hyperlinks'</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; v &lt;- rep("https://CRAN.R-project.org/", 4)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; names(v) &lt;- paste0("Hyperlink", 1:4) # Optional: names will be used as display text</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; class(v) &lt;- "hyperlink"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, "Cars", x = v, xy = c("B", 32))</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Formulas</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## - vectors/columns with class 'formula' are written as formulas'</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; df &lt;- data.frame(</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   x = 1:3, y = 1:3,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   z = paste0(paste0("A", 1:3 + 1L), paste0("B", 1:3 + 1L), sep = " + "),</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+   stringsAsFactors = FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt+ )</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; class(df$z) &lt;- c(class(df$z), "formula")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; writeData(wb, sheet = "Formula", x = df)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; #####################################################################################</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Save workbook</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Open in excel without saving file: openXL(wb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## Not run: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ##D saveWorkbook(wb, "writeDataExample.xlsx", overwrite = TRUE)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; ## End(Not run)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> writDt&gt; </span>
+<span class='r-in'><span class='co'># openXL("writeDataExample.xlsx")</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># (not yet saved) Workbook example</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>, startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># openXL(wb)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

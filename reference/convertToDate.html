@@ -169,11 +169,13 @@
     <div class='dont-index'><p><code><a href='writeData.html'>writeData</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## 2014 April 21st to 25th</span>
-<span class='fu'>convertToDate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41750</span>, <span class='fl'>41751</span>, <span class='fl'>41752</span>, <span class='fl'>41753</span>, <span class='fl'>41754</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2014-04-21" "2014-04-22" "2014-04-23" "2014-04-24" "2014-04-25"
-#&gt; [6] NA          </div><div class='input'><span class='fu'>convertToDate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41750.2</span>, <span class='fl'>41751.99</span>, <span class='cn'>NA</span>, <span class='fl'>41753</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2014-04-21" "2014-04-22" NA           "2014-04-24"</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## 2014 April 21st to 25th</span></span>
+<span class='r-in'><span class='fu'>convertToDate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41750</span>, <span class='fl'>41751</span>, <span class='fl'>41752</span>, <span class='fl'>41753</span>, <span class='fl'>41754</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2014-04-21" "2014-04-22" "2014-04-23" "2014-04-24" "2014-04-25"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6] NA          </span>
+<span class='r-in'><span class='fu'>convertToDate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41750.2</span>, <span class='fl'>41751.99</span>, <span class='cn'>NA</span>, <span class='fl'>41753</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2014-04-21" "2014-04-22" NA           "2014-04-24"</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

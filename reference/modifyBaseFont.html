@@ -174,18 +174,18 @@ with Arial. Base font is black, size 11, Calibri.</p>
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## create a workbook</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span><span class='op'>)</span>
-<span class='co'>## modify base font to size 10 Arial Narrow in red</span>
-<span class='fu'>modifyBaseFont</span><span class='op'>(</span><span class='va'>wb</span>, fontSize <span class='op'>=</span> <span class='fl'>10</span>, fontColour <span class='op'>=</span> <span class='st'>"#FF0000"</span>, fontName <span class='op'>=</span> <span class='st'>"Arial Narrow"</span><span class='op'>)</span>
-
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span>, <span class='va'>iris</span><span class='op'>)</span>
-<span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span>, x <span class='op'>=</span> <span class='va'>iris</span>, startCol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='co'>## font colour does not affect tables</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"modifyBaseFontExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## create a workbook</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'>## modify base font to size 10 Arial Narrow in red</span></span>
+<span class='r-in'><span class='fu'>modifyBaseFont</span><span class='op'>(</span><span class='va'>wb</span>, fontSize <span class='op'>=</span> <span class='fl'>10</span>, fontColour <span class='op'>=</span> <span class='st'>"#FF0000"</span>, fontName <span class='op'>=</span> <span class='st'>"Arial Narrow"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span>, <span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='writeDataTable.html'>writeDataTable</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"S1"</span>, x <span class='op'>=</span> <span class='va'>iris</span>, startCol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> <span class='co'>## font colour does not affect tables</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"modifyBaseFontExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

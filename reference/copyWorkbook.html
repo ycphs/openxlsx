@@ -158,17 +158,20 @@
     <p>Workbook</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>wb2</span> <span class='op'>&lt;-</span> <span class='va'>wb</span> <span class='co'>## does not create a copy</span>
-<span class='va'>wb3</span> <span class='op'>&lt;-</span> <span class='fu'>copyWorkbook</span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span> <span class='co'>## wrapper for wb$copy()</span>
-
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span><span class='op'>)</span> <span class='co'>## adds worksheet to both wb and wb2 but not wb3</span>
-
-<span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Sheet1"</div><div class='input'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Sheet1"</div><div class='input'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; character(0)</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wb2</span> <span class='op'>&lt;-</span> <span class='va'>wb</span> <span class='co'>## does not create a copy</span></span>
+<span class='r-in'><span class='va'>wb3</span> <span class='op'>&lt;-</span> <span class='fu'>copyWorkbook</span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span> <span class='co'>## wrapper for wb$copy()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span><span class='op'>)</span> <span class='co'>## adds worksheet to both wb and wb2 but not wb3</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Sheet1"</span>
+<span class='r-in'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Sheet1"</span>
+<span class='r-in'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>wb3</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> character(0)</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

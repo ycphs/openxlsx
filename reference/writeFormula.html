@@ -183,7 +183,7 @@
       <th>xy</th>
       <td><p>An alternative to specifying <code>startCol</code> and
 <code>startRow</code> individually.  A vector of the form
-<code><a href='https://rdrr.io/r/base/c.html'>c(startCol, startRow)</a></code>.</p></td>
+<code>c(startCol, startRow)</code>.</p></td>
     </tr>
     </table>
 
@@ -206,66 +206,66 @@ The examples below show a small list of possible formulas:</p><ul>
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## There are 3 ways to write a formula</span>
-
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span><span class='op'>)</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span>, x <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
-
-<span class='co'>## SEE int2col() to convert int to Excel column label</span>
-
-<span class='co'>## 1. -  As a character vector using writeFormula</span>
-
-<span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SUM(A2:A151)"</span>, <span class='st'>"AVERAGE(B2:B151)"</span><span class='op'>)</span> <span class='co'>## skip header row</span>
-<span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='va'>v</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, x <span class='op'>=</span> <span class='st'>"A2 + B2"</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-
-
-<span class='co'>## 2. - As a data.frame column with class "formula" using writeData</span>
-
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>,
-  z2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span><span class='st'>"ADDRESS(1,%s)"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>,
-  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z2</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span>
-
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 2"</span><span class='op'>)</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-
-
-
-<span class='co'>## 3. - As a vector with class "formula" using writeData</span>
-
-<span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SUM(A2:A4)"</span>, <span class='st'>"AVERAGE(B2:B4)"</span>, <span class='st'>"MEDIAN(C2:C4)"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v2</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span>
-
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>v2</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-
-<span class='co'>## Save workbook</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeFormulaExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-
-<span class='co'>## 4. - Writing internal hyperlinks</span>
-
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet2"</span><span class='op'>)</span>
-<span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span>, x <span class='op'>=</span> <span class='st'>'=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")'</span><span class='op'>)</span>
-
-<span class='co'>## Save workbook</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeFormulaHyperlinkExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'>## There are 3 ways to write a formula</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span>, x <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## SEE int2col() to convert int to Excel column label</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## 1. -  As a character vector using writeFormula</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SUM(A2:A151)"</span>, <span class='st'>"AVERAGE(B2:B151)"</span><span class='op'>)</span> <span class='co'>## skip header row</span></span>
+<span class='r-in'><span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, x <span class='op'>=</span> <span class='va'>v</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, x <span class='op'>=</span> <span class='st'>"A2 + B2"</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## 2. - As a data.frame column with class "formula" using writeData</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span class='r-in'>  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,</span>
+<span class='r-in'>  y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,</span>
+<span class='r-in'>  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>,</span>
+<span class='r-in'>  z2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span><span class='st'>"ADDRESS(1,%s)"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>,</span>
+<span class='r-in'>  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z2</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## 3. - As a vector with class "formula" using writeData</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SUM(A2:A4)"</span>, <span class='st'>"AVERAGE(B2:B4)"</span>, <span class='st'>"MEDIAN(C2:C4)"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v2</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, x <span class='op'>=</span> <span class='va'>v2</span>, startCol <span class='op'>=</span> <span class='fl'>10</span>, startRow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Save workbook</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeFormulaExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## 4. - Writing internal hyperlinks</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>writeFormula</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet1"</span>, x <span class='op'>=</span> <span class='st'>'=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")'</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Save workbook</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeFormulaHyperlinkExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -153,15 +153,22 @@
 <code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> no longer changes random seed (<a href="https://github.com/ycphs/openxlsx/issues/183"><a href='https://github.com/ycphs/openxlsx/issues/183'>#183</a></a>)</li>
 <li>fixed a regression that caused fonts to be read in incorrectly (<a href="https://github.com/ycphs/openxlsx/issues/207"><a href='https://github.com/ycphs/openxlsx/issues/207'>#207</a></a>)</li>
 <li>add option to save as read only recommended (<a href="https://github.com/ycphs/openxlsx/issues/201"><a href='https://github.com/ycphs/openxlsx/issues/201'>#201</a></a>)</li>
-<li>fixed writing hyperlink formulas (<a href="https://github.com/ycphs/openxlsx/issues/212"><a href='https://github.com/ycphs/openxlsx/issues/212'>#212</a></a>)</li>
+<li>fixed writing hyperlink formulas (<a href="https://github.com/ycphs/openxlsx/issues/200"><a href='https://github.com/ycphs/openxlsx/issues/200'>#200</a></a>)</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> now throws an error if it doesn’t have write permissions (<a href="https://github.com/ycphs/openxlsx/issues/190"><a href='https://github.com/ycphs/openxlsx/issues/190'>#190</a></a>)</li>
 <li>
-<code>Workbook$show()</code> no longer fails when called in a 0 sheet workbook(<a href="https://github.com/ychps/openxlsx/issues/240"><a href='https://github.com/ycphs/openxlsx/issues/240'>#240</a></a>)</li>
+<code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> now again uses the default of <code>overwrite = TRUE</code> for saving files (<a href="https://github.com/ycphs/openxlsx/issues/249"><a href='https://github.com/ycphs/openxlsx/issues/249'>#249</a></a>)</li>
 <li>
-<code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> again accepts <code>.xlsm</code> files (<a href="https://github.com/ychps/openxlsx/issues/205"><a href='https://github.com/ycphs/openxlsx/issues/205'>#205</a></a>, <a href="https://github.com/ychps/openxlsx/issues/209"><a href='https://github.com/ycphs/openxlsx/issues/209'>#209</a></a>)</li>
+<code>Workbook$show()</code> no longer fails when called in a 0 sheet workbook(<a href="https://github.com/ycphs/openxlsx/issues/240"><a href='https://github.com/ycphs/openxlsx/issues/240'>#240</a></a>)</li>
 <li>
-<code><a href="../reference/makeHyperlinkString.html">makeHyperlinkString()</a></code> does no longer require a sheet argument (<a href="https://github.com/ychps/openxlsx/issues/57"><a href='https://github.com/ycphs/openxlsx/issues/57'>#57</a></a>, <a href="https://github.com/ychps/openxlsx/issues/58"><a href='https://github.com/ycphs/openxlsx/issues/58'>#58</a></a>)</li>
+<code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> again accepts <code>.xlsm</code> files (<a href="https://github.com/ycphs/openxlsx/issues/205"><a href='https://github.com/ycphs/openxlsx/issues/205'>#205</a></a>, <a href="https://github.com/ycphs/openxlsx/issues/209"><a href='https://github.com/ycphs/openxlsx/issues/209'>#209</a></a>)</li>
+<li>
+<code><a href="../reference/makeHyperlinkString.html">makeHyperlinkString()</a></code> does no longer require a sheet argument (<a href="https://github.com/ycphs/openxlsx/issues/57"><a href='https://github.com/ycphs/openxlsx/issues/57'>#57</a></a>, <a href="https://github.com/ycphs/openxlsx/issues/58"><a href='https://github.com/ycphs/openxlsx/issues/58'>#58</a></a>)</li>
+<li>improvements in how <code>openxlsx</code> creates temporary directories (see <a href="https://github.com/ycphs/openxlsx/issues/262"><a href='https://github.com/ycphs/openxlsx/issues/262'>#262</a></a>)</li>
+<li>
+<code><a href="../reference/writeData.html">writeData()</a></code> calls <code>force(x)</code> to evaluate the object before options are set (<a href="https://github.com/ycphs/openxlsx/issues/264"><a href='https://github.com/ycphs/openxlsx/issues/264'>#264</a></a>)</li>
+<li>
+<code><a href="../reference/createComment.html">createComment()</a></code> now correctly handles <code>integers</code> in <code>width</code> and <code>height</code> (<a href="https://github.com/ycphs/openxlsx/issues/275"><a href='https://github.com/ycphs/openxlsx/issues/275'>#275</a></a>)</li>
 </ul>
 </div>
 </div>
@@ -187,7 +194,7 @@
 <ul>
 <li>adds <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> to generate a <code>Workbook</code> object from a (named) list or a data.frame (<a href="https://github.com/ycphs/openxlsx/issues/192"><a href='https://github.com/ycphs/openxlsx/issues/192'>#192</a></a>, <a href="https://github.com/ycphs/openxlsx/issues/187"><a href='https://github.com/ycphs/openxlsx/issues/187'>#187</a></a>)
 <ul>
-<li>this is now recommended rather than the <code><a href="../reference/write.xlsx.html">write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</a></code> functionality before</li>
+<li>this is now recommended rather than the <code>write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</code> functionality before</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> is now a wrapper for <code>wb &lt;- buildWorkbook(x); saveWorkbook(x, file)</code>
 </li>
