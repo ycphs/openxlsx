@@ -17,7 +17,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -27,7 +41,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 305430528 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -97,7 +125,73 @@
 
 
 ```
+# cbaf
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # CHRONOS
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CNVPanelizer
 
 <details>
 
@@ -218,11 +312,6 @@ Run `revdep_details(, "emdi")` for more info
     See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/00install.out’ for details.
     ```
 
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘simFrame’
-    ```
-
 ## Installation
 
 ### Devel
@@ -267,7 +356,73 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
+# fedup
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # GA4GHshiny
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# genekitr
 
 <details>
 
@@ -360,6 +515,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
+# isoreader
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # maEndToEnd
 
 <details>
@@ -393,7 +581,207 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
+# MatrixQCvis
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # MicroSEC
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# nanotatoR
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# openPrimeR
+
+<details>
+
+* Version: 1.14.0
+* GitHub: NA
+* Source code: https://github.com/cran/openPrimeR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 165
+
+Run `revdep_details(, "openPrimeR")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.8Mb
+      sub-directories of 1Mb or more:
+        R         1.3Mb
+        extdata  10.3Mb
+    ```
+
+# parameters
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# PloGO2
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# rbiom
 
 <details>
 
@@ -519,61 +907,32 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 1.6.0
-* GitHub: https://github.com/plger/SEtools
-* Source code: https://github.com/cran/SEtools
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 126
-
-Run `revdep_details(, "SEtools")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘SEtools’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘SEtools’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
-  libv8.so.3.14.5: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘SEtools’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/new/SEtools.Rcheck/SEtools’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘SEtools’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/SEtools/V8/libs/V8.so':
-  libv8.so.3.14.5: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘SEtools’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/SEtools/old/SEtools.Rcheck/SEtools’
+
+
+
+
 
 
 ```
@@ -581,31 +940,35 @@ ERROR: lazy loading failed for package ‘SEtools’
 
 <details>
 
-* Version: 1.4.3
-* GitHub: NA
-* Source code: https://github.com/cran/structToolbox
-* Date/Publication: 2021-09-21
-* Number of recursive dependencies: 200
-
-Run `revdep_details(, "structToolbox")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## Newly broken
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-## In both
+```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.7Mb
-      sub-directories of 1Mb or more:
-        R     3.3Mb
-        doc   3.1Mb
-    ```
 
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # TPP
 
 <details>
@@ -619,33 +982,6 @@ Run `revdep_details(, "structToolbox")` for more info
 Run `revdep_details(, "TPP")` for more info
 
 </details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘TPP-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: tppccrCurveFit
-    > ### Title: Fit dose response curves
-    > ### Aliases: tppccrCurveFit
-    > 
-    > ### ** Examples
-    > 
-    > data(hdacCCR_smallExample)
-    ...
-    
-    
-     *** caught segfault ***
-    address 0x55a800000004, cause 'memory not mapped'
-    
-    Traceback:
-     1: gc(verbose = FALSE)
-     2: tppccrCurveFit(data = tppccrTransformed, nCores = 1)
-    An irrecoverable exception occurred. R is aborting now ...
-    Segmentation fault (core dumped)
-    ```
 
 ## In both
 

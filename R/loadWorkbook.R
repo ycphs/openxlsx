@@ -174,7 +174,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
     is_chart_sheet <- sheetrId %in% chartSheetRIds
-    is_visible <- !grepl("hidden", unlist(strsplit(sheets, split = "<sheet ")[-1]))
+    is_visible <- !grepl("hidden", sheets)
     if (length(is_visible) != length(sheetrId)) {
       is_visible <- rep(TRUE, length(sheetrId))
     }

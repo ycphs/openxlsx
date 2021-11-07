@@ -16,6 +16,7 @@
 * `makeHyperlinkString()` does no longer require a sheet argument ([#57](https://github.com/ychps/openxlsx/issues/57), [#58](https://github.com/ychps/openxlsx/issues/58))
 * improvements in how `openxlsx` creates temporary directories (see [#262](https://github.com/ychps/openxlsx/issues/262))
 * `writeData()` calls `force(x)` to evaluate the object before options are set ([#264](https://github.com/ycphs/openxlsx/issues/264))
+* `createComment()` now correctly handles `integers` in `width` and `height` ([#275](https://github.com/ycphs/openxlsx/issues/275))
 
 # openxlsx 4.2.4
 
