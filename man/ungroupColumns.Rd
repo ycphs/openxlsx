@@ -20,7 +20,7 @@ Ungroup a selection of columns
 If column was previously hidden, it will now be shown
 }
 \seealso{
-\code{\link{ungroupRows}} To ungroup rows
+\code{\link[=ungroupRows]{ungroupRows()}} To ungroup rows
 }
 \author{
 Joshua Sturm

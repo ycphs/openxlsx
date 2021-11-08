@@ -32,5 +32,5 @@ saveWorkbook(wb, "pageBreakExample.xlsx", TRUE)
 ## In Excel: View tab -> Page Break Preview
 }
 \seealso{
-\code{\link{addWorksheet}}
+\code{\link[=addWorksheet]{addWorksheet()}}
 }

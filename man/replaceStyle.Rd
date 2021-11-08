@@ -37,7 +37,7 @@ saveWorkbook(wb, "replaceStyleExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{getStyles}}
+\code{\link[=getStyles]{getStyles()}}
 }
 \author{
 Alexander Walker

@@ -42,7 +42,7 @@ saveWorkbook(wb, file = "addFilterExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{writeData}}
+\code{\link[=writeData]{writeData()}}
 
-\code{\link{addFilter}}
+\code{\link[=addFilter]{addFilter()}}
 }

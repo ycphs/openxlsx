@@ -6,15 +6,15 @@
 #' @author Alexander Walker, Jordan Mark Barbone
 #' @inheritParams buildWorkbook
 #' @param file A file path to save the xlsx file
-#' @param overwrite Overwrite existing file (Defaults to \code{TRUE} as with \code{write.table})
-#' @param ... Additional arguments passed to \code{\link{buildWorkbook}}; see details
+#' @param overwrite Overwrite existing file (Defaults to `TRUE` as with `write.table`)
+#' @param ... Additional arguments passed to [buildWorkbook()]; see details
 #' 
 #' @inheritSection buildWorkbook Optional Parameters
 #'
-#' @seealso \code{\link{addWorksheet}}
-#' @seealso \code{\link{writeData}}
-#' @seealso \code{\link{createStyle}} for style parameters
-#' @seealso \code{\link{buildWorkbook}}
+#' @seealso [addWorksheet()]
+#' @seealso [writeData()]
+#' @seealso [createStyle()] for style parameters
+#' @seealso [buildWorkbook()]
 #' @return A workbook object
 #' @examples
 #'

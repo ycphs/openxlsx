@@ -75,9 +75,9 @@ xlsxFile <- system.file("extdata", "readTest.xlsx", package = "openxlsx")
 df1 <- readWorkbook(xlsxFile = xlsxFile, sheet = 1, rows = c(1, 3, 5), cols = 1:3)
 }
 \seealso{
-\code{\link{getNamedRegions}}
+\code{\link[=getNamedRegions]{getNamedRegions()}}
 
-\code{\link{read.xlsx}}
+\code{\link[=read.xlsx]{read.xlsx()}}
 }
 \author{
 Alexander Walker

@@ -52,7 +52,7 @@ saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{createStyle}}
+\code{\link[=createStyle]{createStyle()}}
 
 expand.grid
 }

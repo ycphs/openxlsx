@@ -37,7 +37,7 @@ saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{removeRowHeights}}
+\code{\link[=removeRowHeights]{removeRowHeights()}}
 }
 \author{
 Alexander Walker

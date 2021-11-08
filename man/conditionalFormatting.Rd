@@ -29,7 +29,7 @@ conditionalFormatting(
 
 \item{style}{A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")}
 
-\item{type}{Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
+\item{type}{Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith',
 'endsWith', 'topN', 'bottomN', 'contains' or 'notContains' (case insensitive).}
 
 \item{...}{See below}
@@ -42,69 +42,69 @@ See Examples.
 
 If type == "expression"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is an expression. Valid operators are "<", "<=", ">", ">=", "==", "!=".}
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is an expression. Valid operators are "<", "<=", ">", ">=", "==", "!=".}
 }
 
 If type == "colourScale"
 \itemize{
-  \item{style is a vector of colours with length 2 or 3}
-  \item{rule can be NULL or a vector of colours of equal length to styles}
+\item{style is a vector of colours with length 2 or 3}
+\item{rule can be NULL or a vector of colours of equal length to styles}
 }
 
 If type == "databar"
 \itemize{
-  \item{style is a vector of colours with length 2 or 3}
-  \item{rule is a numeric vector specifying the range of the databar colours. Must be equal length to style}
-  \item{...
-  \itemize{
-    \item{\bold{showvalue} If FALSE the cell value is hidden. Default TRUE.}
-    \item{\bold{gradient} If FALSE colour gradient is removed. Default TRUE.}
-    \item{\bold{border} If FALSE the border around the database is hidden. Default TRUE.}
-     }
-   }
+\item{style is a vector of colours with length 2 or 3}
+\item{rule is a numeric vector specifying the range of the databar colours. Must be equal length to style}
+\item{...
+\itemize{
+\item{\strong{showvalue} If FALSE the cell value is hidden. Default TRUE.}
+\item{\strong{gradient} If FALSE colour gradient is removed. Default TRUE.}
+\item{\strong{border} If FALSE the border around the database is hidden. Default TRUE.}
+}
+}
 }
 
 If type == "duplicates"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is ignored.}
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is ignored.}
 }
 
 If type == "contains"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is the text to look for within cells}
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is the text to look for within cells}
 }
 
 If type == "between"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)}
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)}
 }
 
 If type == "topN"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is ignored}
-  \item{...
-  \itemize{
-    \item{\bold{rank} numeric vector of length 1 indicating number of highest values.}
-    \item{\bold{percent} TRUE if you want top N percentage.}
-     }
-   }
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is ignored}
+\item{...
+\itemize{
+\item{\strong{rank} numeric vector of length 1 indicating number of highest values.}
+\item{\strong{percent} TRUE if you want top N percentage.}
+}
+}
 }
 
 If type == "bottomN"
 \itemize{
-  \item{style is a Style object. See \code{\link{createStyle}}}
-  \item{rule is ignored}
-  \item{...
-  \itemize{
-    \item{\bold{rank} numeric vector of length 1 indicating number of lowest values.}
-    \item{\bold{percent} TRUE if you want bottom N percentage.}
-     }
-   }
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is ignored}
+\item{...
+\itemize{
+\item{\strong{rank} numeric vector of length 1 indicating number of lowest values.}
+\item{\strong{percent} TRUE if you want bottom N percentage.}
+}
+}
 }
 }
 \examples{
@@ -306,7 +306,7 @@ saveWorkbook(wb, file = "databarExample.xlsx", overwrite = TRUE)
 
 }
 \seealso{
-\code{\link{createStyle}}
+\code{\link[=createStyle]{createStyle()}}
 }
 \author{
 Alexander Walker, Philipp Schauberger

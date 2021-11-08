@@ -10,7 +10,7 @@
 #' @param col column number of letter for hyperlink to link to
 #' @param text display text
 #' @param file Excel file name to point to. If NULL hyperlink is internal.
-#' @seealso \code{\link{writeFormula}}
+#' @seealso [writeFormula()]
 #' @export makeHyperlinkString
 #' @examples
 #'

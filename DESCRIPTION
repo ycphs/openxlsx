@@ -91,3 +91,4 @@ Collate:
     'writeDataTable.R'
     'writexlsx.R'
     'zzz.R'
+Roxygen: list(markdown = TRUE)

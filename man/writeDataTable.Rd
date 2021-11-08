@@ -65,7 +65,7 @@ A vector of the form c(startCol, startRow)}
 \item{stack}{If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.
 \cr\cr
-\cr\bold{The below options correspond to Excel table options:}
+\cr\strong{The below options correspond to Excel table options:}
 \cr
 \if{html}{\figure{tableoptions.png}{options: width="40\%" alt="Figure: table_options.png"}}
 \if{latex}{\figure{tableoptions.pdf}{options: width=7cm}}}
@@ -185,11 +185,11 @@ saveWorkbook(wb, file = "tableStylesGallery.xlsx", overwrite = TRUE)
 
 }
 \seealso{
-\code{\link{addWorksheet}}
+\code{\link[=addWorksheet]{addWorksheet()}}
 
-\code{\link{writeData}}
+\code{\link[=writeData]{writeData()}}
 
-\code{\link{removeTable}}
+\code{\link[=removeTable]{removeTable()}}
 
-\code{\link{getTables}}
+\code{\link[=getTables]{getTables()}}
 }
