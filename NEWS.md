@@ -19,7 +19,7 @@
 
 ## Improvements
 
-* `options()` are more consistently set in functions (see: [#]())
+* `options()` are more consistently set in functions (see: [#289](https://github.com/ychps/openxlsx/issues/262))
 
 # openxlsx 4.2.4
 
