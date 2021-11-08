@@ -1,7 +1,5 @@
 
-
 context("Date/Time Conversions")
-
 
 
 test_that("convert to date", {
@@ -16,7 +14,6 @@ test_that("convert to date", {
   expect_equal(convertToDate(serialDate), earlyDate)
 
 })
-
 
 
 test_that("convert to datetime", {
@@ -35,7 +32,6 @@ test_that("convert to datetime", {
 })
 
 
-
 test_that("read.xlsx detectDates", {
   
   xlsxFile <- system.file("extdata", "gh_issue_288.xlsx", package = "openxlsx")
@@ -50,4 +46,3 @@ test_that("read.xlsx detectDates", {
   expect_equal(ref_num, ref_num)
   
 })
- 
