@@ -42,7 +42,7 @@ test_that("read.xlsx detectDates", {
   tst_dat <- read.xlsx(xlsxFile, detectDates = TRUE)
   tst_num <- read.xlsx(xlsxFile, detectDates = FALSE)
   
-  expect_equal(ref_dat, ref_dat)
-  expect_equal(ref_num, ref_num)
+  expect_equal(ref_dat, tst_dat)
+  expect_equal(ref_num, tst_num)
   
 })
