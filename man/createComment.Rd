@@ -18,13 +18,13 @@ createComment(
 
 \item{author}{Author of comment. Character vector of length 1}
 
-\item{style}{A Style object or list of style objects the same length as comment vector. See \code{\link{createStyle}}.}
+\item{style}{A Style object or list of style objects the same length as
+comment vector. See \code{\link{createStyle}}.}
 
 \item{visible}{TRUE or FALSE. Is comment visible.}
 
-\item{width}{Textbox integer width in number of cells}
-
-\item{height}{Textbox integer height in number of cells}
+\item{width, height}{Width and height of textbook (in number of cells);
+doubles are rounded with \code{base::round()}}
 }
 \description{
 Create a cell Comment object to pass to writeComment()

@@ -62,6 +62,22 @@ assert_unique <- function(x, case_sensitive = TRUE) {
   }
 }
 
+assert_numeric1 <- function(x, scalar = FALSE) {
+  msg <- paste0(substitute(x), " must be a ")
+  ok <- is.numeric(x) & length(x) == 1L
+  
+  if (scalar) {
+    ok <- ok && nchar(x) == 1L
+    msg <- paste0(msg, "single number")
+  } else {
+    msg <- paste0(msg, "numeric vector of length 1L")
+  }
+  
+  if (!ok) {
+    stop(msg, call. = FALSE)
+  }
+}
+
 # validates ---------------------------------------------------------------
 
 validate_StyleName <- function(x) {

@@ -199,6 +199,22 @@ int2col <- function(x) {
   convert_to_excel_ref(cols = x, LETTERS = LETTERS)
 }
 
+#' @name col2int
+#' @title Convert Excel column to integer
+#' @description Converts an Excel column label to an integer.
+#' @param x A character vector
+#' @export
+#' @examples
+#' col2int(LETTERS)
+col2int <- function(x) {
+  
+  if (!is.character(x)) {
+    stop("x must be character")
+  }
+  
+  as.integer(sapply(x, cell_ref_to_col))
+}
+
 
 #' @name removeCellMerge
 #' @title Create a new Workbook object

@@ -41,5 +41,10 @@ test_that("Workbook properties", {
 
 
 test_that("Workbook can print with 0 sheets [240]", {
-  expect_error(createWorkbook()$show(), NA)
+  
+  compare_text <- "A Workbook object.\n \nWorksheets:\n No worksheets attached\n"
+  printed_text <- capture_output(x <- createWorkbook()$show())
+  expect_null(x)
+  expect_equal(compare_text, printed_text)
+  
 })
