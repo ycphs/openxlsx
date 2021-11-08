@@ -180,38 +180,38 @@ existing style is replaced by the new style.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='createStyle.html'>createStyle</a></code></p>
+    <div class='dont-index'><p><code><a href='createStyle.html'>createStyle()</a></code></p>
 <p>expand.grid</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## See package vignette for more examples.</span>
-
-<span class='co'>## Create a new workbook</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='st'>"My name here"</span><span class='op'>)</span>
-
-<span class='co'>## Add a worksheets</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Expenditure"</span>, gridLines <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='co'>## write data to worksheet 1</span>
-<span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>USPersonalExpenditure</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>## create and add a style to the column headers</span>
-<span class='va'>headerStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>
-  fontSize <span class='op'>=</span> <span class='fl'>14</span>, fontColour <span class='op'>=</span> <span class='st'>"#FFFFFF"</span>, halign <span class='op'>=</span> <span class='st'>"center"</span>,
-  fgFill <span class='op'>=</span> <span class='st'>"#4F81BD"</span>, border <span class='op'>=</span> <span class='st'>"TopBottom"</span>, borderColour <span class='op'>=</span> <span class='st'>"#4F81BD"</span>
-<span class='op'>)</span>
-
-<span class='co'>## style for body</span>
-<span class='va'>bodyStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>border <span class='op'>=</span> <span class='st'>"TopBottom"</span>, borderColour <span class='op'>=</span> <span class='st'>"#4F81BD"</span><span class='op'>)</span>
-<span class='fu'>addStyle</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>bodyStyle</span>, rows <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>6</span>, cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, gridExpand <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='setColWidths.html'>setColWidths</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, widths <span class='op'>=</span> <span class='fl'>21</span><span class='op'>)</span> <span class='co'>## set column width for row names column</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## See package vignette for more examples.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Create a new workbook</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='st'>"My name here"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Add a worksheets</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Expenditure"</span>, gridLines <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## write data to worksheet 1</span></span>
+<span class='r-in'><span class='fu'><a href='writeData.html'>writeData</a></span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>USPersonalExpenditure</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## create and add a style to the column headers</span></span>
+<span class='r-in'><span class='va'>headerStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span></span>
+<span class='r-in'>  fontSize <span class='op'>=</span> <span class='fl'>14</span>, fontColour <span class='op'>=</span> <span class='st'>"#FFFFFF"</span>, halign <span class='op'>=</span> <span class='st'>"center"</span>,</span>
+<span class='r-in'>  fgFill <span class='op'>=</span> <span class='st'>"#4F81BD"</span>, border <span class='op'>=</span> <span class='st'>"TopBottom"</span>, borderColour <span class='op'>=</span> <span class='st'>"#4F81BD"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## style for body</span></span>
+<span class='r-in'><span class='va'>bodyStyle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>border <span class='op'>=</span> <span class='st'>"TopBottom"</span>, borderColour <span class='op'>=</span> <span class='st'>"#4F81BD"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>addStyle</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>bodyStyle</span>, rows <span class='op'>=</span> <span class='fl'>2</span><span class='op'>:</span><span class='fl'>6</span>, cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, gridExpand <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='setColWidths.html'>setColWidths</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, cols <span class='op'>=</span> <span class='fl'>1</span>, widths <span class='op'>=</span> <span class='fl'>21</span><span class='op'>)</span> <span class='co'>## set column width for row names column</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"addStyleExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

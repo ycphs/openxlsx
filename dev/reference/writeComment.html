@@ -165,53 +165,54 @@
     </tr>
     <tr>
       <th>comment</th>
-      <td><p>A Comment object. See <code><a href='createComment.html'>createComment</a></code>.</p></td>
+      <td><p>A Comment object. See <code><a href='createComment.html'>createComment()</a></code>.</p></td>
     </tr>
     <tr>
       <th>xy</th>
       <td><p>An alternative to specifying <code>col</code> and
 <code>row</code> individually.  A vector of the form
-<code><a href='https://rdrr.io/r/base/c.html'>c(col, row)</a></code>.</p></td>
+<code>c(col, row)</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='createComment.html'>createComment</a></code></p></div>
+    <div class='dont-index'><p><code><a href='createComment.html'>createComment()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span><span class='op'>)</span>
-
-<span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createComment.html'>createComment</a></span><span class='op'>(</span>comment <span class='op'>=</span> <span class='st'>"this is comment"</span><span class='op'>)</span>
-<span class='fu'>writeComment</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, col <span class='op'>=</span> <span class='st'>"B"</span>, row <span class='op'>=</span> <span class='fl'>10</span>, comment <span class='op'>=</span> <span class='va'>c1</span><span class='op'>)</span>
-
-<span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontSize <span class='op'>=</span> <span class='fl'>12</span>, fontColour <span class='op'>=</span> <span class='st'>"red"</span>, textDecoration <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"BOLD"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontSize <span class='op'>=</span> <span class='fl'>9</span>, fontColour <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
-
-<span class='va'>c2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createComment.html'>createComment</a></span><span class='op'>(</span>comment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"This Part Bold red\n\n"</span>, <span class='st'>"This part black"</span><span class='op'>)</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>c2</span>
-</div><div class='output co'>#&gt; Author: 
-#&gt; Text:
-#&gt;  This Part Bold red
-#&gt; 
-#&gt; This part black
-#&gt; 
-#&gt; Style:
-#&gt; Font size: 12
-#&gt; Font colour: #FF0000
-#&gt; Font decoration: BOLD
-#&gt; 
-#&gt; 
-#&gt; Font size: 9
-#&gt; Font colour: #000000
-#&gt; 
-#&gt; </div><div class='input'>
-<span class='fu'>writeComment</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, col <span class='op'>=</span> <span class='fl'>6</span>, row <span class='op'>=</span> <span class='fl'>3</span>, comment <span class='op'>=</span> <span class='va'>c2</span><span class='op'>)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"writeCommentExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Sheet 1"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createComment.html'>createComment</a></span><span class='op'>(</span>comment <span class='op'>=</span> <span class='st'>"this is comment"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>writeComment</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, col <span class='op'>=</span> <span class='st'>"B"</span>, row <span class='op'>=</span> <span class='fl'>10</span>, comment <span class='op'>=</span> <span class='va'>c1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontSize <span class='op'>=</span> <span class='fl'>12</span>, fontColour <span class='op'>=</span> <span class='st'>"red"</span>, textDecoration <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"BOLD"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>fontSize <span class='op'>=</span> <span class='fl'>9</span>, fontColour <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>c2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createComment.html'>createComment</a></span><span class='op'>(</span>comment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"This Part Bold red\n\n"</span>, <span class='st'>"This part black"</span><span class='op'>)</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>c2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Author: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Text:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  This Part Bold red</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> This part black</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Style:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Font size: 12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Font colour: #FF0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Font decoration: BOLD</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Font size: 9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Font colour: #000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeComment</span><span class='op'>(</span><span class='va'>wb</span>, <span class='fl'>1</span>, col <span class='op'>=</span> <span class='fl'>6</span>, row <span class='op'>=</span> <span class='fl'>3</span>, comment <span class='op'>=</span> <span class='va'>c2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"writeCommentExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

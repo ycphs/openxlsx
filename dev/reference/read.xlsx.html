@@ -240,65 +240,71 @@ This is because only the formula is written and left to be evaluated when the fi
 Opening, saving and closing the file with Excel will resolve this.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='getNamedRegions.html'>getNamedRegions</a></code></p></div>
+    <div class='dont-index'><p><code><a href='getNamedRegions.html'>getNamedRegions()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span>
-<span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df1</span>, <span class='va'>class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Var1        Var2        Var3        Var4        Var5        Var6 
-#&gt;   "logical"   "numeric"   "numeric" "character"   "numeric" "character" 
-#&gt;        Var7 
-#&gt;   "numeric" </div><div class='input'>
-<span class='va'>df2</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>3</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>df2</span><span class='op'>$</span><span class='va'>Date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='convertToDate.html'>convertToDate</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>$</span><span class='va'>Date</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df2</span>, <span class='va'>class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Date       value        word        bool      wordZ2 
-#&gt;      "Date"   "numeric" "character"   "logical" "character" </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         Date     value      word  bool  wordZ2
-#&gt; 1 2014-04-28 0.8390764 N-U-B-R-A FALSE FALSE-Z
-#&gt; 2 2014-04-27 0.8863800 N-Z-P-S-Y  TRUE  TRUE-Z
-#&gt; 3 2014-04-26 0.5741314 C-G-D-X-H  TRUE  TRUE-Z
-#&gt; 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z
-#&gt; 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z
-#&gt; 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</div><div class='input'>
-<span class='va'>df2</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span>
-  xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>3</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  detectDates <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df2</span>, <span class='va'>class</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Date       value        word        bool      wordZ2 
-#&gt;      "Date"   "numeric" "character"   "logical" "character" </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         Date     value      word  bool  wordZ2
-#&gt; 1 2014-04-28 0.8390764 N-U-B-R-A FALSE FALSE-Z
-#&gt; 2 2014-04-27 0.8863800 N-Z-P-S-Y  TRUE  TRUE-Z
-#&gt; 3 2014-04-26 0.5741314 C-G-D-X-H  TRUE  TRUE-Z
-#&gt; 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z
-#&gt; 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z
-#&gt; 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</div><div class='input'>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>df3</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>, colNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>df4</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>, colNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>df3</span>, <span class='va'>df4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>df3</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>wb</span>,
-  sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='co'>## URL</span>
-<span class='co'>##</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='st'>"https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>xlsxFile</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df1</span>, <span class='va'>class</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        Var1        Var2        Var3        Var4        Var5        Var6 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   "logical"   "numeric"   "numeric" "character"   "numeric" "character" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        Var7 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   "numeric" </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df2</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>3</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df2</span><span class='op'>$</span><span class='va'>Date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='convertToDate.html'>convertToDate</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>$</span><span class='va'>Date</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df2</span>, <span class='va'>class</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        Date       value        word        bool      wordZ2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      "Date"   "numeric" "character"   "logical" "character" </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Date     value      word  bool  wordZ2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 2014-04-28 0.8390764 N-U-B-R-A FALSE FALSE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 2014-04-27 0.8863800 N-Z-P-S-Y  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 2014-04-26 0.5741314 C-G-D-X-H  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df2</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span></span>
+<span class='r-in'>  xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>3</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>  detectDates <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>df2</span>, <span class='va'>class</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        Date       value        word        bool      wordZ2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      "Date"   "numeric" "character"   "logical" "character" </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Date     value      word  bool  wordZ2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 2014-04-28 0.8390764 N-U-B-R-A FALSE FALSE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 2014-04-27 0.8863800 N-Z-P-S-Y  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 2014-04-26 0.5741314 C-G-D-X-H  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 2014-04-25 0.1366065      &lt;NA&gt; FALSE FALSE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 2014-04-24 0.3692582 B-K-A-O-W  TRUE  TRUE-Z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 2014-04-23        NA H-P-G-O-K  TRUE  TRUE-Z</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df3</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>, colNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df4</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>, colNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>df3</span>, <span class='va'>df4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loadWorkbook.html'>loadWorkbook</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df3</span> <span class='op'>&lt;-</span> <span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>wb</span>,</span>
+<span class='r-in'>  sheet <span class='op'>=</span> <span class='fl'>2</span>, skipEmptyRows <span class='op'>=</span> <span class='cn'>FALSE</span>,</span>
+<span class='r-in'>  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## URL</span></span>
+<span class='r-in'><span class='co'>##</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='st'>"https://github.com/awalker89/openxlsx/raw/master/inst/readTest.xlsx"</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>read.xlsx</span><span class='op'>(</span><span class='va'>xlsxFile</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

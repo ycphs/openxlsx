@@ -150,18 +150,18 @@
     <tr>
       <th>x</th>
       <td><p>A data.frame or a (named) list of objects that can be handled by
-<code><a href='writeData.html'>writeData</a></code> or <code><a href='writeDataTable.html'>writeDataTable</a></code> to write to file</p></td>
+<code><a href='writeData.html'>writeData()</a></code> or <code><a href='writeDataTable.html'>writeDataTable()</a></code> to write to file</p></td>
     </tr>
     <tr>
       <th>asTable</th>
-      <td><p>If <code>TRUE</code> will use <code><a href='writeDataTable.html'>writeDataTable</a></code> rather
-than <code><a href='writeData.html'>writeData</a></code> to write <code>x</code> to the file (default: 
+      <td><p>If <code>TRUE</code> will use <code><a href='writeDataTable.html'>writeDataTable()</a></code> rather
+than <code><a href='writeData.html'>writeData()</a></code> to write <code>x</code> to the file (default:
 <code>FALSE</code>)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='writeData.html'>writeData</a></code>, 
-<code><a href='writeDataTable.html'>writeDataTable</a></code>, <code><a href='setColWidths.html'>setColWidths</a></code> (see Optional
+      <td><p>Additional arguments passed to <code><a href='writeData.html'>writeData()</a></code>,
+<code><a href='writeDataTable.html'>writeDataTable()</a></code>, <code><a href='setColWidths.html'>setColWidths()</a></code> (see Optional
 Parameters)</p></td>
     </tr>
     </table>
@@ -171,12 +171,12 @@ Parameters)</p></td>
     <p>A Workbook object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function can be used as shortcut to create a workbook object from a 
-  data.frame or named list.  If names are available in the list they will be
-  used as the worksheet names.  The parameters in <code>...</code> are collected
-  and passed to <code><a href='writeData.html'>writeData</a></code> or <code><a href='writeDataTable.html'>writeDataTable</a></code> to
-  initially create the Workbook objects then appropriate parameters are 
-  passed to <code><a href='setColWidths.html'>setColWidths</a></code>.</p>
+    <p>This function can be used as shortcut to create a workbook object from a
+data.frame or named list.  If names are available in the list they will be
+used as the worksheet names.  The parameters in <code>...</code> are collected
+and passed to <code><a href='writeData.html'>writeData()</a></code> or <code><a href='writeDataTable.html'>writeDataTable()</a></code> to
+initially create the Workbook objects then appropriate parameters are
+passed to <code><a href='setColWidths.html'>setColWidths()</a></code>.</p>
 <p>columns of x with class Date or POSIXt are automatically
 styled as dates and datetimes respectively.</p>
     <h2 class="hasAnchor" id="optional-parameters"><a class="anchor" href="#optional-parameters"></a>Optional Parameters</h2>
@@ -184,94 +184,96 @@ styled as dates and datetimes respectively.</p>
     
 
 
-<p><b>createWorkbook Parameters</b></p><ul>
-<li><p><b>creator</b> A string specifying the workbook author</p></li>
+<p><strong>createWorkbook Parameters</strong></p><ul>
+<li><p><strong>creator</strong> A string specifying the workbook author</p></li>
 </ul>
 
-<p><b>addWorksheet Parameters</b></p><ul>
-<li><p><b>sheetName</b> Name of the worksheet</p></li>
-<li><p><b>gridLines</b> A logical. If <code>FALSE</code>, the worksheet grid lines will be hidden.</p></li>
-<li><p><b>tabColour</b> Colour of the worksheet tab. A valid colour (belonging to colours())
-  or a valid hex colour beginning with "#".</p></li>
-<li><p><b>zoom</b> A numeric between 10 and 400. Worksheet zoom level as a percentage.</p></li>
+<p><strong>addWorksheet Parameters</strong></p><ul>
+<li><p><strong>sheetName</strong> Name of the worksheet</p></li>
+<li><p><strong>gridLines</strong> A logical. If <code>FALSE</code>, the worksheet grid lines will be hidden.</p></li>
+<li><p><strong>tabColour</strong> Colour of the worksheet tab. A valid colour (belonging to colours())
+or a valid hex colour beginning with "#".</p></li>
+<li><p><strong>zoom</strong> A numeric between 10 and 400. Worksheet zoom level as a percentage.</p></li>
 </ul>
 
-<p><b>writeData/writeDataTable Parameters</b></p><ul>
-<li><p><b>startCol</b> A vector specifying the starting column(s) to write df</p></li>
-<li><p><b>startRow</b> A vector specifying the starting row(s) to write df</p></li>
-<li><p><b>xy</b> An alternative to specifying startCol and startRow individually.
- A vector of the form c(startCol, startRow)</p></li>
-<li><p><b>colNames or col.names</b> If <code>TRUE</code>, column names of x are written.</p></li>
-<li><p><b>rowNames or row.names</b> If <code>TRUE</code>, row names of x are written.</p></li>
-<li><p><b>headerStyle</b> Custom style to apply to column names.</p></li>
-<li><p><b>borders</b> Either "surrounding", "columns" or "rows" or NULL.  If "surrounding", a border is drawn around the
+<p><strong>writeData/writeDataTable Parameters</strong></p><ul>
+<li><p><strong>startCol</strong> A vector specifying the starting column(s) to write df</p></li>
+<li><p><strong>startRow</strong> A vector specifying the starting row(s) to write df</p></li>
+<li><p><strong>xy</strong> An alternative to specifying startCol and startRow individually.
+A vector of the form c(startCol, startRow)</p></li>
+<li><p><strong>colNames or col.names</strong> If <code>TRUE</code>, column names of x are written.</p></li>
+<li><p><strong>rowNames or row.names</strong> If <code>TRUE</code>, row names of x are written.</p></li>
+<li><p><strong>headerStyle</strong> Custom style to apply to column names.</p></li>
+<li><p><strong>borders</strong> Either "surrounding", "columns" or "rows" or NULL.  If "surrounding", a border is drawn around the
 data.  If "rows", a surrounding border is drawn a border around each row. If "columns", a surrounding border is drawn with a border
 between each column.  If "<code>all</code>" all cell borders are drawn.</p></li>
-<li><p><b>borderColour</b> Colour of cell border</p></li>
-<li><p><b>borderStyle</b> Border line style.</p></li>
-<li><p><b>keepNA</b> If <code>TRUE</code>, NA values are converted to #N/A (or <code>na.string</code>, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.</p></li>
-<li><p><b>na.string</b> If not NULL, and if <code>keepNA</code> is <code>TRUE</code>, NA values are converted to this string in Excel. Defaults to NULL.</p></li>
+<li><p><strong>borderColour</strong> Colour of cell border</p></li>
+<li><p><strong>borderStyle</strong> Border line style.</p></li>
+<li><p><strong>keepNA</strong> If <code>TRUE</code>, NA values are converted to #N/A (or <code>na.string</code>, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.</p></li>
+<li><p><strong>na.string</strong> If not NULL, and if <code>keepNA</code> is <code>TRUE</code>, NA values are converted to this string in Excel. Defaults to NULL.</p></li>
 </ul>
 
-<p><b>freezePane Parameters</b></p><ul>
-<li><p><b>firstActiveRow</b> Top row of active region to freeze pane.</p></li>
-<li><p><b>firstActiveCol</b> Furthest left column of active region to freeze pane.</p></li>
-<li><p><b>firstRow</b> If <code>TRUE</code>, freezes the first row (equivalent to firstActiveRow = 2)</p></li>
-<li><p><b>firstCol</b> If <code>TRUE</code>, freezes the first column (equivalent to firstActiveCol = 2)</p></li>
+<p><strong>freezePane Parameters</strong></p><ul>
+<li><p><strong>firstActiveRow</strong> Top row of active region to freeze pane.</p></li>
+<li><p><strong>firstActiveCol</strong> Furthest left column of active region to freeze pane.</p></li>
+<li><p><strong>firstRow</strong> If <code>TRUE</code>, freezes the first row (equivalent to firstActiveRow = 2)</p></li>
+<li><p><strong>firstCol</strong> If <code>TRUE</code>, freezes the first column (equivalent to firstActiveCol = 2)</p></li>
 </ul>
 
-<p><b>colWidths Parameters</b></p><ul>
-<li><p><b>colWidths</b> May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)</p></li>
+<p><strong>colWidths Parameters</strong></p><ul>
+<li><p><strong>colWidths</strong> May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='write.xlsx.html'>write.xlsx</a></code></p></div>
+    <div class='dont-index'><p><code><a href='write.xlsx.html'>write.xlsx()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Jordan Mark Barbone</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='va'>x</span>, b <span class='op'>=</span> <span class='va'>x</span>, c <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
-<span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; A Workbook object.
-#&gt;  
-#&gt; Worksheets:
-#&gt;  Sheet 1: "a"
-#&gt;  
-#&gt; 
-#&gt;  Sheet 2: "b"
-#&gt;  
-#&gt; 
-#&gt;  Sheet 3: "c"
-#&gt;  
-#&gt; 
-#&gt;  
-#&gt;  Worksheet write order: 1, 2, 3
-#&gt;  Active Sheet 1: "a" 
-#&gt; 	Position: 1
-#&gt; </div><div class='input'><span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span>, tableStyle <span class='op'>=</span> <span class='st'>"TableStyleLight8"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; A Workbook object.
-#&gt;  
-#&gt; Worksheets:
-#&gt;  Sheet 1: "a"
-#&gt;  
-#&gt; 
-#&gt;  Sheet 2: "b"
-#&gt;  
-#&gt; 
-#&gt;  Sheet 3: "c"
-#&gt;  
-#&gt; 
-#&gt;  
-#&gt;  Worksheet write order: 1, 2, 3
-#&gt;  Active Sheet 1: "a" 
-#&gt; 	Position: 1
-#&gt; </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='va'>x</span>, b <span class='op'>=</span> <span class='va'>x</span>, c <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A Workbook object.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Worksheets:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 1: "a"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 2: "b"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 3: "c"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Worksheet write order: 1, 2, 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Active Sheet 1: "a" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	Position: 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>buildWorkbook</span><span class='op'>(</span><span class='va'>y</span>, asTable <span class='op'>=</span> <span class='cn'>TRUE</span>, tableStyle <span class='op'>=</span> <span class='st'>"TableStyleLight8"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> A Workbook object.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Worksheets:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 1: "a"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 2: "b"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Sheet 3: "c"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Worksheet write order: 1, 2, 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Active Sheet 1: "a" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	Position: 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

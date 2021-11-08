@@ -166,7 +166,7 @@
 <code><a href="../reference/makeHyperlinkString.html">makeHyperlinkString()</a></code> does no longer require a sheet argument (<a href="https://github.com/ychps/openxlsx/issues/57"><a href='https://github.com/ycphs/openxlsx/issues/57'>#57</a></a>, <a href="https://github.com/ychps/openxlsx/issues/58"><a href='https://github.com/ycphs/openxlsx/issues/58'>#58</a></a>)</li>
 <li>improvements in how <code>openxlsx</code> creates temporary directories (see <a href="https://github.com/ychps/openxlsx/issues/262"><a href='https://github.com/ycphs/openxlsx/issues/262'>#262</a></a>)</li>
 <li>
-<code><a href="../reference/writeData.html">writeData()</a></code> calls <code><a href="https://rdrr.io/r/base/force.html">force(x)</a></code> to evaluate the object before options are set (<a href="https://github.com/ycphs/openxlsx/issues/264"><a href='https://github.com/ycphs/openxlsx/issues/264'>#264</a></a>)</li>
+<code><a href="../reference/writeData.html">writeData()</a></code> calls <code>force(x)</code> to evaluate the object before options are set (<a href="https://github.com/ycphs/openxlsx/issues/264"><a href='https://github.com/ycphs/openxlsx/issues/264'>#264</a></a>)</li>
 <li>
 <code><a href="../reference/createComment.html">createComment()</a></code> now correctly handles <code>integers</code> in <code>width</code> and <code>height</code> (<a href="https://github.com/ycphs/openxlsx/issues/275"><a href='https://github.com/ycphs/openxlsx/issues/275'>#275</a></a>)</li>
 </ul>
@@ -194,7 +194,7 @@
 <ul>
 <li>adds <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> to generate a <code>Workbook</code> object from a (named) list or a data.frame (<a href="https://github.com/ycphs/openxlsx/issues/192"><a href='https://github.com/ycphs/openxlsx/issues/192'>#192</a></a>, <a href="https://github.com/ycphs/openxlsx/issues/187"><a href='https://github.com/ycphs/openxlsx/issues/187'>#187</a></a>)
 <ul>
-<li>this is now recommended rather than the <code><a href="../reference/write.xlsx.html">write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</a></code> functionality before</li>
+<li>this is now recommended rather than the <code>write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</code> functionality before</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> is now a wrapper for <code>wb &lt;- buildWorkbook(x); saveWorkbook(x, file)</code>
 </li>

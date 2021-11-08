@@ -166,18 +166,21 @@
     <p>Excel stores dates as number of days from some origin date</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## 2014-07-01, 2014-06-30, 2014-06-29</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41821.8127314815</span>, <span class='fl'>41820.8127314815</span>, <span class='cn'>NA</span>, <span class='fl'>41819</span>, <span class='cn'>NaN</span><span class='op'>)</span>
-<span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"
-#&gt; [3] NA                        "2014-06-29 00:00:00 UTC"
-#&gt; [5] NA                       </div><div class='input'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, tz <span class='op'>=</span> <span class='st'>"Australia/Perth"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2014-07-01 11:30:20 UTC" "2014-06-30 11:30:20 UTC"
-#&gt; [3] NA                        "2014-06-28 16:00:00 UTC"
-#&gt; [5] NA                       </div><div class='input'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, tz <span class='op'>=</span> <span class='st'>"UTC"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"
-#&gt; [3] NA                        "2014-06-29 00:00:00 UTC"
-#&gt; [5] NA                       </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## 2014-07-01, 2014-06-30, 2014-06-29</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>41821.8127314815</span>, <span class='fl'>41820.8127314815</span>, <span class='cn'>NA</span>, <span class='fl'>41819</span>, <span class='cn'>NaN</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] NA                        "2014-06-29 00:00:00 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5] NA                       </span>
+<span class='r-in'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, tz <span class='op'>=</span> <span class='st'>"Australia/Perth"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2014-07-01 11:30:20 UTC" "2014-06-30 11:30:20 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] NA                        "2014-06-28 16:00:00 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5] NA                       </span>
+<span class='r-in'><span class='fu'>convertToDateTime</span><span class='op'>(</span><span class='va'>x</span>, tz <span class='op'>=</span> <span class='st'>"UTC"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2014-07-01 19:30:20 UTC" "2014-06-30 19:30:20 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] NA                        "2014-06-29 00:00:00 UTC"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5] NA                       </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

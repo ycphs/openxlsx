@@ -196,7 +196,7 @@
       <th>xy</th>
       <td><p>An alternative to specifying <code>startCol</code> and
 <code>startRow</code> individually.  A vector of the form
-<code><a href='https://rdrr.io/r/base/c.html'>c(startCol, startRow)</a></code>.</p></td>
+<code>c(startCol, startRow)</code>.</p></td>
     </tr>
     <tr>
       <th>colNames</th>
@@ -226,20 +226,20 @@ each column. If "<code>all</code>" all cell borders are drawn.</p></td>
     <tr>
       <th>borderStyle</th>
       <td><p>Border line style</p><ul>
-<li><p><b>none</b> no border</p></li>
-<li><p><b>thin</b> thin border</p></li>
-<li><p><b>medium</b> medium border</p></li>
-<li><p><b>dashed</b> dashed border</p></li>
-<li><p><b>dotted</b> dotted border</p></li>
-<li><p><b>thick</b> thick border</p></li>
-<li><p><b>double</b> double line border</p></li>
-<li><p><b>hair</b> hairline border</p></li>
-<li><p><b>mediumDashed</b> medium weight dashed border</p></li>
-<li><p><b>dashDot</b> dash-dot border</p></li>
-<li><p><b>mediumDashDot</b> medium weight dash-dot border</p></li>
-<li><p><b>dashDotDot</b> dash-dot-dot border</p></li>
-<li><p><b>mediumDashDotDot</b> medium weight dash-dot-dot border</p></li>
-<li><p><b>slantDashDot</b> slanted dash-dot border</p></li>
+<li><p><strong>none</strong> no border</p></li>
+<li><p><strong>thin</strong> thin border</p></li>
+<li><p><strong>medium</strong> medium border</p></li>
+<li><p><strong>dashed</strong> dashed border</p></li>
+<li><p><strong>dotted</strong> dotted border</p></li>
+<li><p><strong>thick</strong> thick border</p></li>
+<li><p><strong>double</strong> double line border</p></li>
+<li><p><strong>hair</strong> hairline border</p></li>
+<li><p><strong>mediumDashed</strong> medium weight dashed border</p></li>
+<li><p><strong>dashDot</strong> dash-dot border</p></li>
+<li><p><strong>mediumDashDot</strong> medium weight dash-dot border</p></li>
+<li><p><strong>dashDotDot</strong> dash-dot-dot border</p></li>
+<li><p><strong>mediumDashDotDot</strong> medium weight dash-dot-dot border</p></li>
+<li><p><strong>slantDashDot</strong> slanted dash-dot border</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -277,117 +277,117 @@ each column. If "<code>all</code>" all cell borders are drawn.</p></td>
 This is because only the formula is written and left to Excel to evaluate the formula when the file is opened in Excel.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='writeDataTable.html'>writeDataTable</a></code></p></div>
+    <div class='dont-index'><p><code><a href='writeDataTable.html'>writeDataTable()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## See formatting vignette for further examples.</span>
-
-<span class='co'>## Options for default styling (These are the defaults)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderColour"</span> <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderStyle"</span> <span class='op'>=</span> <span class='st'>"thin"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.dateFormat"</span> <span class='op'>=</span> <span class='st'>"mm/dd/yyyy"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.datetimeFormat"</span> <span class='op'>=</span> <span class='st'>"yyyy-mm-dd hh:mm:ss"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.numFmt"</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='co'>## Change the default border colour to #4F81BD</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderColour"</span> <span class='op'>=</span> <span class='st'>"#4F81BD"</span><span class='op'>)</span>
-
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Create Workbook object and add worksheets</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'>## Add worksheets</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Formula"</span><span class='op'>)</span>
-
-
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='op'>]</span>
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>, startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Bordering</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,
-  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>, startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>,
-  borders <span class='op'>=</span> <span class='st'>"surrounding"</span>, borderColour <span class='op'>=</span> <span class='st'>"black"</span>
-<span class='op'>)</span> <span class='co'>## black border</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,
-  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>12</span>, borders <span class='op'>=</span> <span class='st'>"columns"</span>
-<span class='op'>)</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,
-  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>12</span>, borders <span class='op'>=</span> <span class='st'>"rows"</span>
-<span class='op'>)</span>
-
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Header Styles</span>
-
-<span class='va'>hs1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>
-  fgFill <span class='op'>=</span> <span class='st'>"#DCE6F1"</span>, halign <span class='op'>=</span> <span class='st'>"CENTER"</span>, textDecoration <span class='op'>=</span> <span class='st'>"italic"</span>,
-  border <span class='op'>=</span> <span class='st'>"Bottom"</span>
-<span class='op'>)</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,
-  colNames <span class='op'>=</span> <span class='cn'>TRUE</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>, startCol <span class='op'>=</span> <span class='st'>"B"</span>,
-  startRow <span class='op'>=</span> <span class='fl'>23</span>, borders <span class='op'>=</span> <span class='st'>"rows"</span>, headerStyle <span class='op'>=</span> <span class='va'>hs1</span>, borderStyle <span class='op'>=</span> <span class='st'>"dashed"</span>
-<span class='op'>)</span>
-
-
-<span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span>
-  fontColour <span class='op'>=</span> <span class='st'>"#ffffff"</span>, fgFill <span class='op'>=</span> <span class='st'>"#4F80BD"</span>,
-  halign <span class='op'>=</span> <span class='st'>"center"</span>, valign <span class='op'>=</span> <span class='st'>"center"</span>, textDecoration <span class='op'>=</span> <span class='st'>"bold"</span>,
-  border <span class='op'>=</span> <span class='st'>"TopBottomLeftRight"</span>
-<span class='op'>)</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,
-  colNames <span class='op'>=</span> <span class='cn'>TRUE</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>23</span>, borders <span class='op'>=</span> <span class='st'>"columns"</span>, headerStyle <span class='op'>=</span> <span class='va'>hs2</span>
-<span class='op'>)</span>
-
-
-
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Hyperlinks</span>
-<span class='co'>## - vectors/columns with class 'hyperlink' are written as hyperlinks'</span>
-
-<span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"https://CRAN.R-project.org/"</span>, <span class='fl'>4</span><span class='op'>)</span>
-<span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Hyperlink"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span> <span class='co'># Optional: names will be used as display text</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"hyperlink"</span>
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, x <span class='op'>=</span> <span class='va'>v</span>, xy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>32</span><span class='op'>)</span><span class='op'>)</span>
-
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Formulas</span>
-<span class='co'>## - vectors/columns with class 'formula' are written as formulas'</span>
-
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>,
-  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span>
-
-<span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='st'>"Formula"</span>, x <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-
-
-<span class='co'>#####################################################################################</span>
-<span class='co'>## Save workbook</span>
-<span class='co'>## Open in excel without saving file: openXL(wb)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeDataExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'>## See formatting vignette for further examples.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Options for default styling (These are the defaults)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderColour"</span> <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderStyle"</span> <span class='op'>=</span> <span class='st'>"thin"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.dateFormat"</span> <span class='op'>=</span> <span class='st'>"mm/dd/yyyy"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.datetimeFormat"</span> <span class='op'>=</span> <span class='st'>"yyyy-mm-dd hh:mm:ss"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.numFmt"</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Change the default border colour to #4F81BD</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='st'>"openxlsx.borderColour"</span> <span class='op'>=</span> <span class='st'>"#4F81BD"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Create Workbook object and add worksheets</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Add worksheets</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Formula"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='op'>]</span></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>, startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Bordering</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,</span>
+<span class='r-in'>  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>, startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>3</span>,</span>
+<span class='r-in'>  borders <span class='op'>=</span> <span class='st'>"surrounding"</span>, borderColour <span class='op'>=</span> <span class='st'>"black"</span></span>
+<span class='r-in'><span class='op'>)</span> <span class='co'>## black border</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,</span>
+<span class='r-in'>  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>  startCol <span class='op'>=</span> <span class='fl'>2</span>, startRow <span class='op'>=</span> <span class='fl'>12</span>, borders <span class='op'>=</span> <span class='st'>"columns"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,</span>
+<span class='r-in'>  rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>  startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>12</span>, borders <span class='op'>=</span> <span class='st'>"rows"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Header Styles</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>hs1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span></span>
+<span class='r-in'>  fgFill <span class='op'>=</span> <span class='st'>"#DCE6F1"</span>, halign <span class='op'>=</span> <span class='st'>"CENTER"</span>, textDecoration <span class='op'>=</span> <span class='st'>"italic"</span>,</span>
+<span class='r-in'>  border <span class='op'>=</span> <span class='st'>"Bottom"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,</span>
+<span class='r-in'>  colNames <span class='op'>=</span> <span class='cn'>TRUE</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>, startCol <span class='op'>=</span> <span class='st'>"B"</span>,</span>
+<span class='r-in'>  startRow <span class='op'>=</span> <span class='fl'>23</span>, borders <span class='op'>=</span> <span class='st'>"rows"</span>, headerStyle <span class='op'>=</span> <span class='va'>hs1</span>, borderStyle <span class='op'>=</span> <span class='st'>"dashed"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>hs2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createStyle.html'>createStyle</a></span><span class='op'>(</span></span>
+<span class='r-in'>  fontColour <span class='op'>=</span> <span class='st'>"#ffffff"</span>, fgFill <span class='op'>=</span> <span class='st'>"#4F80BD"</span>,</span>
+<span class='r-in'>  halign <span class='op'>=</span> <span class='st'>"center"</span>, valign <span class='op'>=</span> <span class='st'>"center"</span>, textDecoration <span class='op'>=</span> <span class='st'>"bold"</span>,</span>
+<span class='r-in'>  border <span class='op'>=</span> <span class='st'>"TopBottomLeftRight"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, <span class='va'>x</span>,</span>
+<span class='r-in'>  colNames <span class='op'>=</span> <span class='cn'>TRUE</span>, rowNames <span class='op'>=</span> <span class='cn'>TRUE</span>,</span>
+<span class='r-in'>  startCol <span class='op'>=</span> <span class='st'>"O"</span>, startRow <span class='op'>=</span> <span class='fl'>23</span>, borders <span class='op'>=</span> <span class='st'>"columns"</span>, headerStyle <span class='op'>=</span> <span class='va'>hs2</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Hyperlinks</span></span>
+<span class='r-in'><span class='co'>## - vectors/columns with class 'hyperlink' are written as hyperlinks'</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"https://CRAN.R-project.org/"</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='names.html'>names</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Hyperlink"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span> <span class='co'># Optional: names will be used as display text</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>v</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"hyperlink"</span></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"Cars"</span>, x <span class='op'>=</span> <span class='va'>v</span>, xy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>32</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Formulas</span></span>
+<span class='r-in'><span class='co'>## - vectors/columns with class 'formula' are written as formulas'</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span class='r-in'>  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,</span>
+<span class='r-in'>  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"B"</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>1L</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" + "</span><span class='op'>)</span>,</span>
+<span class='r-in'>  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>z</span><span class='op'>)</span>, <span class='st'>"formula"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>writeData</span><span class='op'>(</span><span class='va'>wb</span>, sheet <span class='op'>=</span> <span class='st'>"Formula"</span>, x <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#####################################################################################</span></span>
+<span class='r-in'><span class='co'>## Save workbook</span></span>
+<span class='r-in'><span class='co'>## Open in excel without saving file: openXL(wb)</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'><a href='saveWorkbook.html'>saveWorkbook</a></span><span class='op'>(</span><span class='va'>wb</span>, <span class='st'>"writeDataExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

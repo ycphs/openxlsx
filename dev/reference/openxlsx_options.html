@@ -171,18 +171,20 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>openxlsx_getOp()</code> retrieves the <code>"openxlsx"</code> options found in
-  <code>op.openxlsx</code>.  If none are set (currently `NULL`) retrieves the 
-  default option from <code>op.openxlsx</code>.  This will also check that the
-  intended option is a standard option (listed in <code>op.openxlsx</code>) and
-   will provide a warning otherwise.</p>  
+<code>op.openxlsx</code>.  If none are set (currently <code>NULL</code>) retrieves the
+default option from <code>op.openxlsx</code>.  This will also check that the
+intended option is a standard option (listed in <code>op.openxlsx</code>) and
+will provide a warning otherwise.</p>
 <p><code>openxlsx_setOp()</code> is a safer way to set an option as it will first
-  check that the option is a standard option (as above) before setting.</p>
+check that the option is a standard option (as above) before setting.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>openxlsx_getOp</span><span class='op'>(</span><span class='st'>"borders"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='va'>op.openxlsx</span><span class='op'>[[</span><span class='st'>"openxlsx.borders"</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>openxlsx_getOp</span><span class='op'>(</span><span class='st'>"borders"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-in'><span class='va'>op.openxlsx</span><span class='op'>[[</span><span class='st'>"openxlsx.borders"</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -168,25 +168,25 @@ If flag is <code>FALSE</code>, then no return value is returned.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='createWorkbook.html'>createWorkbook</a></code></p>
-<p><code><a href='addWorksheet.html'>addWorksheet</a></code></p>
-<p><code><a href='loadWorkbook.html'>loadWorkbook</a></code></p>
-<p><code><a href='writeData.html'>writeData</a></code></p>
-<p><code><a href='writeDataTable.html'>writeDataTable</a></code></p></div>
+    <div class='dont-index'><p><code><a href='createWorkbook.html'>createWorkbook()</a></code></p>
+<p><code><a href='addWorksheet.html'>addWorksheet()</a></code></p>
+<p><code><a href='loadWorkbook.html'>loadWorkbook()</a></code></p>
+<p><code><a href='writeData.html'>writeData()</a></code></p>
+<p><code><a href='writeDataTable.html'>writeDataTable()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Alexander Walker, Philipp Schauberger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Create a new workbook and add a worksheet</span>
-<span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='st'>"Creator of workbook"</span><span class='op'>)</span>
-<span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, sheetName <span class='op'>=</span> <span class='st'>"My first worksheet"</span><span class='op'>)</span>
-
-<span class='co'>## Save workbook to working directory</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>saveWorkbook</span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"saveWorkbookExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## Create a new workbook and add a worksheet</span></span>
+<span class='r-in'><span class='va'>wb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createWorkbook.html'>createWorkbook</a></span><span class='op'>(</span><span class='st'>"Creator of workbook"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='addWorksheet.html'>addWorksheet</a></span><span class='op'>(</span><span class='va'>wb</span>, sheetName <span class='op'>=</span> <span class='st'>"My first worksheet"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Save workbook to working directory</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>saveWorkbook</span><span class='op'>(</span><span class='va'>wb</span>, file <span class='op'>=</span> <span class='st'>"saveWorkbookExample.xlsx"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

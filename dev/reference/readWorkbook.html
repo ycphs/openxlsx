@@ -238,19 +238,19 @@ are checked to ensure that they are syntactically valid variable names</p></td>
     <p>Creates a data.frame of all data in worksheet.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='getNamedRegions.html'>getNamedRegions</a></code></p>
-<p><code><a href='read.xlsx.html'>read.xlsx</a></code></p></div>
+    <div class='dont-index'><p><code><a href='getNamedRegions.html'>getNamedRegions()</a></code></p>
+<p><code><a href='read.xlsx.html'>read.xlsx()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Alexander Walker</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span>
-<span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-
-<span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span>
-<span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>, cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>xlsxFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"readTest.xlsx"</span>, package <span class='op'>=</span> <span class='st'>"openxlsx"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>df1</span> <span class='op'>&lt;-</span> <span class='fu'>readWorkbook</span><span class='op'>(</span>xlsxFile <span class='op'>=</span> <span class='va'>xlsxFile</span>, sheet <span class='op'>=</span> <span class='fl'>1</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>, cols <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
