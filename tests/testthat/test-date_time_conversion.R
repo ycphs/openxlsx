@@ -33,3 +33,21 @@ test_that("convert to datetime", {
   x_datetime <- convertToDateTime(x, tx = "UTC")
   attr(x_datetime, "tzone") <- "UTC"
 })
+
+
+
+test_that("read.xlsx detectDates", {
+  
+  xlsxFile <- system.file("extdata", "gh_issue_288.xlsx", package = "openxlsx")
+  
+  ref_dat <- data.frame(Date = c(as.Date(c("2021-10-20", "2021-11-03"))))
+  ref_num <- data.frame(Date = c(44489.4, 44503.0))
+  
+  tst_dat <- read.xlsx(xlsxFile, detectDates = TRUE)
+  tst_num <- read.xlsx(xlsxFile, detectDates = FALSE)
+  
+  expect_equal(ref_dat, ref_dat)
+  expect_equal(ref_num, ref_num)
+  
+})
+ 
