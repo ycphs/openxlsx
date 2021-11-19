@@ -18,6 +18,27 @@ groupRows(wb, sheet, rows, hidden = FALSE)
 \description{
 Group a selection of rows
 }
+\examples{
+wb <- createWorkbook()
+addWorksheet(wb, 'Sheet1')
+writeData(wb, "Sheet1", iris) 
+writeData(wb, "Sheet2", iris)
+
+## create list of groups
+# lines used for grouping (here: species)
+grp <- list(
+  seq(2, 51),
+  seq(52, 101),
+  seq(102, 151)
+)
+# assign group levels
+names(grp) <- c("1","0","1") 
+groupRows(wb, "Sheet1", rows = grp)
+
+# different grouping
+names(grp) <- c("1","2","3")
+groupRows(wb, "Sheet2", rows = grp)
+}
 \seealso{
 \code{\link[=ungroupRows]{ungroupRows()}} to ungroup rows. \code{\link[=groupColumns]{groupColumns()}} for grouping columns.
 }
