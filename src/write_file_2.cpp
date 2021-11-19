@@ -140,11 +140,11 @@ SEXP write_worksheet_xml_2( std::string prior
 
         if ((unique_rows[i] == row_heights_rows[h]) && (unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
           // Row is grouped and has a custom height
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
           h++;
           l++;
         } else if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+          xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
           l++;
         } else if ((unique_rows[i] == row_heights_rows[h]) && row_has_data) {
           // Row has custom height
@@ -154,7 +154,7 @@ SEXP write_worksheet_xml_2( std::string prior
           // Row has data
           xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
         } else {
-          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] +"\"/>";
+          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] +"\"/>";
           h++;
           l++;
         }
@@ -175,12 +175,12 @@ SEXP write_worksheet_xml_2( std::string prior
     } else if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) {
 
       if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
         l++;
       } else if (row_has_data) {
         xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
       } else {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"1\" hidden=\"" + outline_levels_hidden[l] + "\"/>";
+        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\"/>";
         l++;
       }
     } else {
