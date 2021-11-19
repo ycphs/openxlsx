@@ -4533,6 +4533,8 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @examples 
 #' wb <- createWorkbook()
 #' addWorksheet(wb, 'Sheet1')
+#' addWorksheet(wb, 'Sheet2')
+#' 
 #' writeData(wb, "Sheet1", iris) 
 #' writeData(wb, "Sheet2", iris)
 #' 
