@@ -649,7 +649,7 @@ Workbook$methods(
 
     ## xl/comments.xml
     if (nComments > 0 | nVML > 0) {
-      for (i in 1:nSheets) {
+      for (i in seq_len(nSheets)) {
         if (length(comments[[i]]) > 0) {
           fn <- sprintf("comments%s.xml", i)
 
@@ -676,7 +676,7 @@ Workbook$methods(
         }
       }
 
-      .self$writeDrawingVML(xldrawingsDir)
+      .self$writeDrawingVML(xldrawingsDir, vml)
     }
     
     ## Threaded Comments xl/threadedComments/threadedComment.xml
@@ -1262,8 +1262,10 @@ Workbook$methods(
 
 
 Workbook$methods(
-  writeDrawingVML = function(dir) {
+  writeDrawingVML = function(dir, vml) {
+
     for (i in seq_along(comments)) {
+      file_dir <- file.path(dir, sprintf("vmlDrawing%s.vml", i))
       id <- 1025
 
       cd <- unlist(lapply(comments[[i]], "[[", "clientData"))
@@ -1285,17 +1287,17 @@ Workbook$methods(
                     <v:path gradientshapeok="t" o:connecttype="rect"/>
                     </v:shapetype>'
           ),
-          file = file.path(dir, sprintf("vmlDrawing%s.vml", i)),
+          file = file_dir,
           sep = " "
         )
       }
 
       if (nComments > 0) {
-        for (j in 1:nComments) {
+        for (j in seq_len(nComments)) {
           id <- id + 1L
           write(
             x = genBaseShapeVML(cd[j], id),
-            file = file.path(dir, sprintf("vmlDrawing%s.vml", i)),
+            file = file_dir,
             append = TRUE
           )
         }
@@ -1304,7 +1306,7 @@ Workbook$methods(
       if (length(vml[[i]]) > 0) {
         write(
           x = vml[[i]],
-          file = file.path(dir, sprintf("vmlDrawing%s.vml", i)),
+          file = file_dir,
           append = TRUE
         )
       }
@@ -1312,12 +1314,15 @@ Workbook$methods(
       if (nComments > 0 | length(vml[[i]]) > 0) {
         write(
           x = "</xml>",
-          file = file.path(dir, sprintf("vmlDrawing%s.vml", i)),
+          file = file_dir,
           append = TRUE
         )
         worksheets[[i]]$legacyDrawing <<-
           '<legacyDrawing r:id="rIdvml"/>'
       }
+
+      # this is a bit stupid. we have already written the file, re-import it here and will write it again later on
+      vml[[i]] <<- paste(trimws(readLines(file_dir), "both"), collapse = " ")
     }
   }
 )
@@ -2017,8 +2022,10 @@ Workbook$methods(
       }
 
       ## vml drawing
-      if (length(vml_rels[[i]]) > 0) {
+      if (length(vml[[i]]) > 0)
         has_vmldrawing <- TRUE
+
+      if (length(vml_rels[[i]]) > 0) {
         file.copy(
           from = vml_rels[[i]],
           to = file.path(
