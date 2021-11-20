@@ -17,7 +17,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1581962912 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1581962912 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -27,77 +41,25 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1581962912 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1581962912 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
 # artMS
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# bayesbr
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# bibliometrix
 
 <details>
 
@@ -398,7 +360,7 @@ Run `revdep_details(, "emdi")` for more info
 ** byte-compile and prepare package for lazy loading
 Error in dyn.load(file, DLLpath = DLLpath, ...) : 
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
+  libgdal.so.20: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
@@ -419,7 +381,7 @@ ERROR: lazy loading failed for package ‘emdi’
 ** byte-compile and prepare package for lazy loading
 Error in dyn.load(file, DLLpath = DLLpath, ...) : 
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
+  libgdal.so.20: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
@@ -526,40 +488,67 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# isoreader
+# hypeR
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.8.0
+* GitHub: https://github.com/montilab/hypeR
+* Source code: https://github.com/cran/hypeR
+* Date/Publication: 2021-05-19
+* Number of recursive dependencies: 154
+
+Run `revdep_details(, "hypeR")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘hypeR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘hypeR’ ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘hypeR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/new/hypeR.Rcheck/hypeR’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘hypeR’ ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/hypeR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘hypeR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/hypeR/old/hypeR.Rcheck/hypeR’
 
 
 ```
-# lares
+# isoreader
 
 <details>
 
@@ -791,39 +780,6 @@ ERROR: lazy loading failed for package ‘emdi’
 
 ```
 # PloGO2
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# rbiom
 
 <details>
 

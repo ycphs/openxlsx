@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-11-09                   |
+|date     |2021-11-20                   |
 |pandoc   |2.7.3 @ /usr/bin/pandoc      |
 
 # Dependencies
@@ -24,14 +24,12 @@
 
 # Revdeps
 
-## Failed to check (32)
+## Failed to check (29)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
-|bayesbr        |?       |      |        |     |
-|bibliometrix   |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
 |cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
@@ -43,8 +41,8 @@
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
 |genekitr       |?       |      |        |     |
+|hypeR          |1.8.0   |1     |        |     |
 |isoreader      |?       |      |        |     |
-|lares          |?       |      |        |     |
 |maEndToEnd     |?       |      |        |     |
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
@@ -52,7 +50,6 @@
 |openPrimeR     |?       |      |        |     |
 |parameters     |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
-|rbiom          |?       |      |        |     |
 |RIPAT          |?       |      |        |     |
 |sangeranalyseR |?       |      |        |     |
 |SEtools        |?       |      |        |     |
