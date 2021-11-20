@@ -1990,11 +1990,12 @@ Workbook$methods(
                                xlworksheetsRelsDir) {
     ## write worksheets
     # nSheets <- length(worksheets)
-
-    has_drawing <- FALSE
-    has_vmldrawing <- FALSE
     
     for (i in seq_along(worksheets)) {
+
+      has_drawing <- FALSE
+      has_vmldrawing <- FALSE
+
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
         has_drawing <- TRUE
