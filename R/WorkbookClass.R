@@ -974,6 +974,11 @@ Workbook$methods(
         )
     }
 
+    # check if file contains any drawings
+    for (i in seq_along(worksheets)) {
+      if (length(drawings[[i]])==0) ct <- ct[!grepl(sprintf("drawing%s.xml", i), ct)]
+    }
+
     ## write [Content_type]
     write_file(
       head = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
@@ -1985,10 +1990,14 @@ Workbook$methods(
                                xlworksheetsRelsDir) {
     ## write worksheets
     # nSheets <- length(worksheets)
+
+    has_drawing <- FALSE
+    has_vmldrawing <- FALSE
     
     for (i in seq_along(worksheets)) {
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
+        has_drawing <- TRUE
         write_file(
           head = '<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
           body = pxml(drawings[[i]]),
@@ -2008,6 +2017,7 @@ Workbook$methods(
 
       ## vml drawing
       if (length(vml_rels[[i]]) > 0) {
+        has_vmldrawing <- TRUE
         file.copy(
           from = vml_rels[[i]],
           to = file.path(
@@ -2136,6 +2146,9 @@ Workbook$methods(
             }
           }
 
+          # cleanup ws_rels remove non existent references to drawing/ and vmlDrawing/
+          if (!has_drawing) ws_rels <- ws_rels[!grepl(sprintf("drawing%s.xml", i), ws_rels)]
+          if (!has_vmldrawing) ws_rels <- ws_rels[!grepl(sprintf("vmlDrawing%s.vml", i), ws_rels)]
 
 
           write_file(
