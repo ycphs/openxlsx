@@ -288,3 +288,24 @@ test_that("write hyperlinks", {
   
   expect_true(all(res))
 })
+
+
+test_that("write list containing NA",{
+  
+  data <- data.frame(i=1:3)
+  data$x <- list(1, c(2, 3), c(4, NA, 5))
+  
+  xlsx_file <- temp_xlsx()
+  wb <- createWorkbook()
+  addWorksheet(wb, "Sheet1")
+  writeData(wb, sheet = 1, data, sep = ";", na.string = "")
+  saveWorkbook(wb, file = xlsx_file, overwrite=TRUE)
+  
+  res <- read.xlsx(xlsx_file)
+  exp <- data.frame(i = 1:3,
+                    x = c("1", "2;3", "4;;5"),
+                    stringsAsFactors = FALSE)
+  
+  expect_equal(exp, res)
+  
+})
