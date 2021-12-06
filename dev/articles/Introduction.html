@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,12 +46,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -74,7 +70,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ycphs/openxlsx/">
+  <a href="https://github.com/ycphs/openxlsx/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -93,76 +89,76 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction</h1>
-                        <h4 class="author">Alexander Walker, Philipp Schauberger</h4>
+                        <h4 data-toc-skip class="author">Alexander Walker, Philipp Schauberger</h4>
             
-            <h4 class="date">2021-11-20</h4>
+            <h4 data-toc-skip class="date">2021-12-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/master/vignettes/Introduction.Rmd"><code>vignettes/Introduction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/HEAD/vignettes/Introduction.Rmd" class="external-link"><code>vignettes/Introduction.Rmd</code></a></small>
       <div class="hidden name"><code>Introduction.Rmd</code></div>
 
     </div>
 
     
     
-<div id="basic-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-examples" class="anchor"></a>Basic Examples</h2>
-<div id="write-xlsx" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-xlsx" class="anchor"></a>write.xlsx</h3>
+<div class="section level2">
+<h2 id="basic-examples">Basic Examples<a class="anchor" aria-label="anchor" href="#basic-examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="write-xlsx">write.xlsx<a class="anchor" aria-label="anchor" href="#write-xlsx"></a>
+</h3>
 <p>The simplest way to write to a workbook is write.xlsx(). By default, write.xlsx calls writeData. If asTable is TRUE write.xlsx will write x as an Excel table.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## write to working directory</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html" class="external-link">openxlsx</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX1.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable1.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="write-list-of-data-frames-to-xlsx-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-list-of-data-frames-to-xlsx-file" class="anchor"></a>write list of data.frames to xlsx-file</h3>
+<div class="section level3">
+<h3 id="write-list-of-data-frames-to-xlsx-file">write list of data.frames to xlsx-file<a class="anchor" aria-label="anchor" href="#write-list-of-data-frames-to-xlsx-file"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## write a list of data.frames to individual worksheets using list names as worksheet names</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"MTCARS"</span> <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"MTCARS"</span> <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSX2.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable2.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="write-xlsx-also-accepts-styling-parameters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-xlsx-also-accepts-styling-parameters" class="anchor"></a>write.xlsx also accepts styling parameters</h3>
-<div id="the-simplest-way-is-to-set-default-options-and-set-column-class" class="section level4">
-<h4 class="hasAnchor">
-<a href="#the-simplest-way-is-to-set-default-options-and-set-column-class" class="anchor"></a>The simplest way is to set default options and set column class</h4>
+<div class="section level3">
+<h3 id="write-xlsx-also-accepts-styling-parameters">write.xlsx also accepts styling parameters<a class="anchor" aria-label="anchor" href="#write-xlsx-also-accepts-styling-parameters"></a>
+</h3>
+<div class="section level4">
+<h4 id="the-simplest-way-is-to-set-default-options-and-set-column-class">The simplest way is to set default options and set column class<a class="anchor" aria-label="anchor" href="#the-simplest-way-is-to-set-default-options-and-set-column-class"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"mm/dd/yyyy"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd hh:mm:ss"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co">## For default style rounding of numeric columns</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"mm/dd/yyyy"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd hh:mm:ss"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co">## For default style rounding of numeric columns</span>
 
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">19</span>, <span class="st">"LogicalT"</span> <span class="op">=</span> <span class="cn">TRUE</span>,
-                 <span class="st">"Time"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">19</span><span class="op">*</span><span class="fl">60</span><span class="op">*</span><span class="fl">60</span>,
-                 <span class="st">"Cash"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"$"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, <span class="st">"Cash2"</span> <span class="op">=</span> <span class="fl">31</span><span class="op">:</span><span class="fl">50</span>,
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">19</span>, <span class="st">"LogicalT"</span> <span class="op">=</span> <span class="cn">TRUE</span>,
+                 <span class="st">"Time"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">19</span><span class="op">*</span><span class="fl">60</span><span class="op">*</span><span class="fl">60</span>,
+                 <span class="st">"Cash"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"$"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, <span class="st">"Cash2"</span> <span class="op">=</span> <span class="fl">31</span><span class="op">:</span><span class="fl">50</span>,
                  <span class="st">"hLink"</span> <span class="op">=</span> <span class="st">"https://CRAN.R-project.org/"</span>,
-                 <span class="st">"Percentage"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out<span class="op">=</span><span class="fl">20</span><span class="op">)</span>,
-                 <span class="st">"TinyNumbers"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1E9</span>,  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+                 <span class="st">"Percentage"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out<span class="op">=</span><span class="fl">20</span><span class="op">)</span>,
+                 <span class="st">"TinyNumbers"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1E9</span>,  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Cash</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Cash2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"accounting"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hLink</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"hyperlink"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"percentage"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TinyNumbers</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"scientific"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Cash</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Cash2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"accounting"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hLink</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"hyperlink"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"percentage"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TinyNumbers</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"scientific"</span>
 
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"writeXLSX3.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">df</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable3.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="workbook-styles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workbook-styles" class="anchor"></a>Workbook styles</h2>
-<div id="define-a-style-for-column-headers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#define-a-style-for-column-headers" class="anchor"></a>define a style for column headers</h3>
+<div class="section level2">
+<h2 id="workbook-styles">Workbook styles<a class="anchor" aria-label="anchor" href="#workbook-styles"></a>
+</h2>
+<div class="section level3">
+<h3 id="define-a-style-for-column-headers">define a style for column headers<a class="anchor" aria-label="anchor" href="#define-a-style-for-column-headers"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontColour <span class="op">=</span> <span class="st">"#ffffff"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span>,
                   halign <span class="op">=</span> <span class="st">"center"</span>, valign <span class="op">=</span> <span class="st">"center"</span>, textDecoration <span class="op">=</span> <span class="st">"Bold"</span>,
@@ -174,49 +170,49 @@
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"writeXLSXTable4.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span>,
 headerStyle <span class="op">=</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>textRotation <span class="op">=</span> <span class="fl">45</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="when-writing-a-list-the-stylings-will-apply-to-all-list-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#when-writing-a-list-the-stylings-will-apply-to-all-list-elements" class="anchor"></a>When writing a list, the stylings will apply to all list elements</h3>
+<div class="section level3">
+<h3 id="when-writing-a-list-the-stylings-will-apply-to-all-list-elements">When writing a list, the stylings will apply to all list elements<a class="anchor" aria-label="anchor" href="#when-writing-a-list-the-stylings-will-apply-to-all-list-elements"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"colClasses"</span> <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"colClasses"</span> <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSX6.xlsx"</span>, borders <span class="op">=</span> <span class="st">"columns"</span>, headerStyle <span class="op">=</span> <span class="va">hs</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">l</span>, file <span class="op">=</span> <span class="st">"writeXLSXTable5.xlsx"</span>, asTable <span class="op">=</span> <span class="cn">TRUE</span>, tableStyle <span class="op">=</span> <span class="st">"TableStyleLight2"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"writeXLSX6.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"writeXLSXTable5.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="write-xlsx-returns-the-workbook-object-for-further-editing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-xlsx-returns-the-workbook-object-for-further-editing" class="anchor"></a>write.xlsx returns the workbook object for further editing</h3>
+<div class="section level3">
+<h3 id="write-xlsx-returns-the-workbook-object-for-further-editing">write.xlsx returns the workbook object for further editing<a class="anchor" aria-label="anchor" href="#write-xlsx-returns-the-workbook-object-for-further-editing"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"writeXLSX6.xlsx"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, widths <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"writeXLSX6.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="workbook-creation-walk-through" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workbook-creation-walk-through" class="anchor"></a>Workbook creation walk-through</h2>
-<div id="create-workbook-and-set-default-border-colour-and-style" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-workbook-and-set-default-border-colour-and-style" class="anchor"></a>create workbook and set default border Colour and style</h3>
+<div class="section level2">
+<h2 id="workbook-creation-walk-through">Workbook creation walk-through<a class="anchor" aria-label="anchor" href="#workbook-creation-walk-through"></a>
+</h2>
+<div class="section level3">
+<h3 id="create-workbook-and-set-default-border-colour-and-style">create workbook and set default border Colour and style<a class="anchor" aria-label="anchor" href="#create-workbook-and-set-default-border-colour-and-style"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/modifyBaseFont.html">modifyBaseFont</a></span><span class="op">(</span><span class="va">wb</span>, fontSize <span class="op">=</span> <span class="fl">10</span>, fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="add-sheets" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-sheets" class="anchor"></a>Add Sheets</h3>
+<div class="section level3">
+<h3 id="add-sheets">Add Sheets<a class="anchor" aria-label="anchor" href="#add-sheets"></a>
+</h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Iris"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="write-data-to-sheet-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-data-to-sheet-1" class="anchor"></a>write data to sheet 1</h3>
+<div class="section level3">
+<h3 id="write-data-to-sheet-1">write data to sheet 1<a class="anchor" aria-label="anchor" href="#write-data-to-sheet-1"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/freezePane.html">freezePane</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, firstRow <span class="op">=</span> <span class="cn">TRUE</span>, firstCol <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## freeze first row and column</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>,
@@ -225,30 +221,30 @@ tableStyle <span class="op">=</span> <span class="st">"TableStyleLight9"</span><
 
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="st">"A"</span>, widths <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="write-data-to-sheet-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-data-to-sheet-2" class="anchor"></a>write data to sheet 2</h3>
+<div class="section level3">
+<h3 id="write-data-to-sheet-2">write data to sheet 2<a class="anchor" aria-label="anchor" href="#write-data-to-sheet-2"></a>
+</h3>
 <p>iris data.frame is added as excel table on sheet 2.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, <span class="va">iris</span>, startCol <span class="op">=</span> <span class="st">"K"</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="fu">qplot</span><span class="op">(</span>data<span class="op">=</span><span class="va">iris</span>, x <span class="op">=</span> <span class="va">Sepal.Length</span>, y<span class="op">=</span> <span class="va">Sepal.Width</span>, colour <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>
-<span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, xy<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span> <span class="co">## insert plot at cell B16</span>
+<span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, xy<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span> <span class="co">## insert plot at cell B16</span>
 
-<span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
-<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">var</span><span class="op">)</span></code></pre></div>
+<span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
+<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">var</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="add-write-group-means" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-write-group-means" class="anchor"></a>add write group means</h3>
+<div class="section level3">
+<h3 id="add-write-group-means">add write group means<a class="anchor" aria-label="anchor" href="#add-write-group-means"></a>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">headSty</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fgFill<span class="op">=</span><span class="st">"#DCE6F1"</span>, halign<span class="op">=</span><span class="st">"center"</span>, border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="st">"Iris dataset group means"</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="va">means</span>, startCol <span class="op">=</span> <span class="st">"B"</span>, startRow<span class="op">=</span><span class="fl">3</span>, borders<span class="op">=</span><span class="st">"rows"</span>, headerStyle <span class="op">=</span> <span class="va">headSty</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="add-write-group-variances" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-write-group-variances" class="anchor"></a>add write group variances</h3>
+<div class="section level3">
+<h3 id="add-write-group-variances">add write group variances<a class="anchor" aria-label="anchor" href="#add-write-group-variances"></a>
+</h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="st">"Iris dataset group variances"</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x<span class="op">=</span> <span class="va">vars</span>, startCol <span class="op">=</span> <span class="st">"B"</span>, startRow<span class="op">=</span><span class="fl">10</span>, borders<span class="op">=</span><span class="st">"columns"</span>,
@@ -257,30 +253,30 @@ headerStyle <span class="op">=</span> <span class="va">headSty</span><span class
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, widths <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="co">## width is recycled for each col</span>
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols<span class="op">=</span><span class="fl">11</span><span class="op">:</span><span class="fl">15</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="add-style-mean-variance-table-headers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-style-mean-variance-table-headers" class="anchor"></a>add style mean &amp; variance table headers</h3>
+<div class="section level3">
+<h3 id="add-style-mean-variance-table-headers">add style mean &amp; variance table headers<a class="anchor" aria-label="anchor" href="#add-style-mean-variance-table-headers"></a>
+</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontSize<span class="op">=</span><span class="fl">14</span>, textDecoration<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, style <span class="op">=</span> <span class="va">s1</span>, rows<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span>, cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontSize<span class="op">=</span><span class="fl">14</span>, textDecoration<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, style <span class="op">=</span> <span class="va">s1</span>, rows<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span>, cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="save-workbook" class="section level3">
-<h3 class="hasAnchor">
-<a href="#save-workbook" class="anchor"></a>save workbook</h3>
+<div class="section level3">
+<h3 id="save-workbook">save workbook<a class="anchor" aria-label="anchor" href="#save-workbook"></a>
+</h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"basics.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## save to working directory</span></code></pre></div>
 </div>
 </div>
-<div id="gallery" class="section level2">
-<h2 class="hasAnchor">
-<a href="#gallery" class="anchor"></a>Gallery</h2>
+<div class="section level2">
+<h2 id="gallery">Gallery<a class="anchor" aria-label="anchor" href="#gallery"></a>
+</h2>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## inspired by xtable gallery</span>
 <span class="co">#https://CRAN.R-project.org/package=xtable/vignettes/xtableGallery.pdf</span>
 
 <span class="co">## Create a new workbook</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">tli</span>, package <span class="op">=</span> <span class="st">"xtable"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tli</span>, package <span class="op">=</span> <span class="st">"xtable"</span><span class="op">)</span>
 
 <span class="co">## data.frame</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span>
@@ -290,176 +286,176 @@ headerStyle <span class="op">=</span> <span class="va">headSty</span><span class
 
 <span class="co">## matrix</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"matrix"</span>
-<span class="va">design.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">grade</span>, data <span class="op">=</span> <span class="va">my.df</span><span class="op">)</span>
+<span class="va">design.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">grade</span>, data <span class="op">=</span> <span class="va">my.df</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">design.matrix</span><span class="op">)</span>
 
 <span class="co">## aov</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"aov"</span>
-<span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">ethnicty</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">disadvg</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
+<span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">ethnicty</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">disadvg</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm1</span><span class="op">)</span>
 
 <span class="co">## lm</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"lm"</span>
-<span class="va">fm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span><span class="op">*</span><span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
+<span class="va">fm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span><span class="op">*</span><span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm2</span><span class="op">)</span>
 
 <span class="co">## anova 1 </span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"anova"</span>
-<span class="va">my.anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fm2</span><span class="op">)</span>
+<span class="va">my.anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">fm2</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.anova</span><span class="op">)</span>
 
 <span class="co">## anova 2</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"anova2"</span>
-<span class="va">fm2b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
-<span class="va">my.anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fm2b</span>, <span class="va">fm2</span><span class="op">)</span>
+<span class="va">fm2b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span>
+<span class="va">my.anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">fm2b</span>, <span class="va">fm2</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.anova2</span><span class="op">)</span>
 
 <span class="co">## glm</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"glm"</span>
-<span class="va">fm3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">disadvg</span> <span class="op">~</span> <span class="va">ethnicty</span><span class="op">*</span><span class="va">grade</span>, data <span class="op">=</span> <span class="va">tli</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">fm3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">disadvg</span> <span class="op">~</span> <span class="va">ethnicty</span><span class="op">*</span><span class="va">grade</span>, data <span class="op">=</span> <span class="va">tli</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm3</span><span class="op">)</span>
 
 <span class="co">## prcomp</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"prcomp"</span>
-<span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span>
+<span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">pr1</span><span class="op">)</span>
 
 <span class="co">## summary.prcomp</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.prcomp"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## simple table</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"table"</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span>
-<span class="va">airquality</span><span class="op">$</span><span class="va">OzoneG80</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&gt;</span> <span class="fl">80</span>,
-levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Oz &lt;= 80"</span>, <span class="st">"Oz &gt; 80"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">airquality</span><span class="op">$</span><span class="va">Month</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Month</span>,
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span>
+<span class="va">airquality</span><span class="op">$</span><span class="va">OzoneG80</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&gt;</span> <span class="fl">80</span>,
+levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
+labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oz &lt;= 80"</span>, <span class="st">"Oz &gt; 80"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">airquality</span><span class="op">$</span><span class="va">Month</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Month</span>,
 levels <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">9</span>,
 labels <span class="op">=</span> <span class="va">month.abb</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span>
-<span class="va">my.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">OzoneG80</span>,<span class="va">Month</span><span class="op">)</span> <span class="op">)</span>
+<span class="va">my.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">OzoneG80</span>,<span class="va">Month</span><span class="op">)</span> <span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.table</span><span class="op">)</span>
 
 <span class="co">## survdiff 1</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"survdiff1"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html" class="external-link">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## survdiff 2</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"survdiff2"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">expect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survexp.html">survexp</a></span><span class="op">(</span><span class="va">futime</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/ratetable.html">ratetable</a></span><span class="op">(</span>age<span class="op">=</span><span class="op">(</span><span class="va">accept.dt</span> <span class="op">-</span> <span class="va">birth.dt</span><span class="op">)</span>,
+<span class="va">expect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survexp.html" class="external-link">survexp</a></span><span class="op">(</span><span class="va">futime</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/ratetable.html" class="external-link">ratetable</a></span><span class="op">(</span>age<span class="op">=</span><span class="op">(</span><span class="va">accept.dt</span> <span class="op">-</span> <span class="va">birth.dt</span><span class="op">)</span>,
       sex<span class="op">=</span><span class="fl">1</span>,year<span class="op">=</span><span class="va">accept.dt</span>,race<span class="op">=</span><span class="st">"white"</span><span class="op">)</span>, <span class="va">jasa</span>, cohort<span class="op">=</span><span class="cn">FALSE</span>,
       ratetable<span class="op">=</span><span class="va">survexp.usr</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">jasa</span><span class="op">$</span><span class="va">futime</span>, <span class="va">jasa</span><span class="op">$</span><span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="va">expect</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html" class="external-link">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">jasa</span><span class="op">$</span><span class="va">futime</span>, <span class="va">jasa</span><span class="op">$</span><span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html" class="external-link">offset</a></span><span class="op">(</span><span class="va">expect</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## coxph 1</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"coxph1"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">bladder</span><span class="op">$</span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bladder</span><span class="op">$</span><span class="va">rx</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Pla"</span>,<span class="st">"Thi"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span>
+<span class="va">bladder</span><span class="op">$</span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">bladder</span><span class="op">$</span><span class="va">rx</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pla"</span>,<span class="st">"Thi"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## coxph 2</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"coxph2"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html" class="external-link">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## cox.zph</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"cox.zph"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html">cox.zph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">ecog.ps</span>,  data<span class="op">=</span><span class="va">ovarian</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html" class="external-link">cox.zph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">ecog.ps</span>,  data<span class="op">=</span><span class="va">ovarian</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## summary.coxph 1</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.coxph1"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## summary.coxph 2</span>
 <span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.coxph2"</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html" class="external-link">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 
 <span class="co">## view without saving</span>
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="further-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-examples" class="anchor"></a>Further Examples</h2>
-<div id="stock-price" class="section level3">
-<h3 class="hasAnchor">
-<a href="#stock-price" class="anchor"></a>Stock Price</h3>
+<div class="section level2">
+<h2 id="further-examples">Further Examples<a class="anchor" aria-label="anchor" href="#further-examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="stock-price">Stock Price<a class="anchor" aria-label="anchor" href="#stock-price"></a>
+</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co">## read historical prices from yahoo finance</span>
 <span class="va">ticker</span> <span class="op">&lt;-</span> <span class="st">"CBA.AX"</span>
-<span class="va">csv.url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"http://ichart.finance.yahoo.com/table.csv?s="</span>,
+<span class="va">csv.url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"http://ichart.finance.yahoo.com/table.csv?s="</span>,
 <span class="va">ticker</span>, <span class="st">"&amp;a=01&amp;b=9&amp;c=2009&amp;d=01&amp;e=9&amp;f=2014&amp;g=d&amp;ignore=.csv"</span><span class="op">)</span>
-<span class="va">prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="va">csv.url</span><span class="op">)</span>, as.is <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">prices</span><span class="op">$</span><span class="va">Date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span>
+<span class="va">prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="va">csv.url</span><span class="op">)</span>, as.is <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">prices</span><span class="op">$</span><span class="va">Date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span>
 <span class="va">close</span> <span class="op">&lt;-</span> <span class="va">prices</span><span class="op">$</span><span class="va">Close</span>
-<span class="va">prices</span><span class="op">$</span><span class="va">logReturns</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">close</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">]</span><span class="op">/</span><span class="va">close</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="va">prices</span><span class="op">$</span><span class="va">logReturns</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">close</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">]</span><span class="op">/</span><span class="va">close</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## Create plot of price series and add to worksheet</span>
-<span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">prices</span>, <span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Close</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">prices</span>, <span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Close</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
 <span class="fu">geom_line</span><span class="op">(</span>colour<span class="op">=</span><span class="st">"royalblue2"</span><span class="op">)</span> <span class="op">+</span>
 <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Price"</span>, title <span class="op">=</span> <span class="va">ticker</span><span class="op">)</span> <span class="op">+</span>
 <span class="fu">geom_area</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"royalblue1"</span>,alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
-<span class="fu">coord_cartesian</span><span class="op">(</span>ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">+</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> 
+<span class="fu">coord_cartesian</span><span class="op">(</span>ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">+</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> 
 
 <span class="co">## Add worksheet and write plot to sheet</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"CBA"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"J"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## Histogram of log returns</span>
 <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">prices</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">logReturns</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_bar</span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">0.0025</span><span class="op">)</span> <span class="op">+</span>
 <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Histogram of log returns"</span><span class="op">)</span>
 
 <span class="co">## currency </span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span> <span class="co">## styles as currency in workbook</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span> <span class="co">## styles as currency in workbook</span>
 
 <span class="co">## write historical data and  histogram of returns</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"CBA"</span>, x <span class="op">=</span> <span class="va">prices</span><span class="op">)</span>
 <span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, startRow<span class="op">=</span><span class="fl">25</span>, startCol <span class="op">=</span> <span class="st">"J"</span><span class="op">)</span>
 
 <span class="co">## Add conditional formatting to show where logReturn &gt; 0.01 using default style</span>
-<span class="fu"><a href="../reference/conditionalFormat.html">conditionalFormat</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/conditionalFormat.html">conditionalFormat</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,
 rule <span class="op">=</span> <span class="st">"$H2 &gt; 0.01"</span><span class="op">)</span>
 
 <span class="co">## style log return col as a percentage  </span>
 <span class="va">logRetStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>numFmt <span class="op">=</span> <span class="st">"percentage"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, style <span class="op">=</span> <span class="va">logRetStyle</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, 
+<span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, style <span class="op">=</span> <span class="va">logRetStyle</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, 
 cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet<span class="op">=</span><span class="fl">1</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
+<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet<span class="op">=</span><span class="fl">1</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
 <span class="co">## save workbook to working directory</span>
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"stockPrice.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"stockPrice.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="image-compression-using-pca" class="section level3">
-<h3 class="hasAnchor">
-<a href="#image-compression-using-pca" class="anchor"></a>Image Compression using PCA</h3>
+<div class="section level3">
+<h3 id="image-compression-using-pca">Image Compression using PCA<a class="anchor" aria-label="anchor" href="#image-compression-using-pca"></a>
+</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">require</span>(openxlsx)</span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="kw">require</span>(jpeg)</span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="kw">require</span>(ggplot2)</span>
@@ -604,11 +600,13 @@ cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span cla
 
 
       <footer><div class="copyright">
-  <p>Developed by Philipp Schauberger, Alexander Walker.</p>
+  <p></p>
+<p>Developed by Philipp Schauberger, Alexander Walker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -616,6 +614,8 @@ cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span cla
 
   
 
+
+  
 
   </body>
 </html>

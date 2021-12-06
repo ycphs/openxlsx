@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,12 +46,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -74,7 +70,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ycphs/openxlsx/">
+  <a href="https://github.com/ycphs/openxlsx/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -93,40 +89,40 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Formating with xlsx</h1>
-                        <h4 class="author">Alexander Walker, Philipp Schauberger</h4>
+                        <h4 data-toc-skip class="author">Alexander Walker, Philipp Schauberger</h4>
             
-            <h4 class="date">2021-11-20</h4>
+            <h4 data-toc-skip class="date">2021-12-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/master/vignettes/Formatting.Rmd"><code>vignettes/Formatting.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/HEAD/vignettes/Formatting.Rmd" class="external-link"><code>vignettes/Formatting.Rmd</code></a></small>
       <div class="hidden name"><code>Formatting.Rmd</code></div>
 
     </div>
 
     
     
-<div id="formatting-with-writedata-and-writedatatable" class="section level2">
-<h2 class="hasAnchor">
-<a href="#formatting-with-writedata-and-writedatatable" class="anchor"></a>Formatting with writeData and writeDataTable</h2>
+<div class="section level2">
+<h2 id="formatting-with-writedata-and-writedatatable">Formatting with writeData and writeDataTable<a class="anchor" aria-label="anchor" href="#formatting-with-writedata-and-writedatatable"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## data.frame to write</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">4</span>,
-                 <span class="st">"Logical"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-                 <span class="st">"Currency"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"$"</span>,<span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">4</span>,
+                 <span class="st">"Logical"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
+                 <span class="st">"Currency"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"$"</span>,<span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,
                  <span class="st">"Accounting"</span> <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span>,
                  <span class="st">"hLink"</span> <span class="op">=</span> <span class="st">"https://CRAN.R-project.org/"</span>, 
-                 <span class="st">"Percentage"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, length.out<span class="op">=</span><span class="fl">5</span><span class="op">)</span>,
-                 <span class="st">"TinyNumber"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1E9</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+                 <span class="st">"Percentage"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, length.out<span class="op">=</span><span class="fl">5</span><span class="op">)</span>,
+                 <span class="st">"TinyNumber"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1E9</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Currency</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Accounting</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"accounting"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hLink</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"hyperlink"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"percentage"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TinyNumber</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"scientific"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Currency</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Accounting</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"accounting"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hLink</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"hyperlink"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Percentage</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"percentage"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TinyNumber</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"scientific"</span>
 
 <span class="co">## Formatting can be applied simply through the write functions</span>
 <span class="co">## global options can be set to further simplify things</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F81BD"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F81BD"</span><span class="op">)</span>
 
 <span class="co">## create a workbook and add a worksheet</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
@@ -146,7 +142,7 @@
           borders <span class="op">=</span> <span class="st">"rows"</span>, borderStyle <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span>
 
 <span class="co">## to change the display text for a hyperlink column just write over those cells</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Hyperlink"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, startRow <span class="op">=</span> <span class="fl">17</span>, startCol <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Hyperlink"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, startRow <span class="op">=</span> <span class="fl">17</span>, startCol <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>
 
 
 <span class="co">## writing as an Excel Table</span>
@@ -159,20 +155,20 @@
 
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co">## opens a temp version</span></code></pre></div>
 </div>
-<div id="use-of-pre-defined-table-styles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#use-of-pre-defined-table-styles" class="anchor"></a>Use of pre-defined table styles</h2>
+<div class="section level2">
+<h2 id="use-of-pre-defined-table-styles">Use of pre-defined table styles<a class="anchor" aria-label="anchor" href="#use-of-pre-defined-table-styles"></a>
+</h2>
 <p>The ‘tableStyle’ argument in writeDataTable can be any of the predefined tableStyles in Excel.</p>
 <p><img src="tableStyles.PNG"></p>
 </div>
-<div id="date-formatting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#date-formatting" class="anchor"></a>Date Formatting</h2>
+<div class="section level2">
+<h2 id="date-formatting">Date Formatting<a class="anchor" aria-label="anchor" href="#date-formatting"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># data.frame of dates</span>
-<span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">dates</span>, <span class="va">dates</span><span class="op">)</span>
-<span class="fu"><a href="../reference/names.html">names</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
+<span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dates</span>, <span class="va">dates</span><span class="op">)</span>
+<span class="fu"><a href="../reference/names.html">names</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
 
 <span class="co">## Date Formatting</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
@@ -180,10 +176,10 @@
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="va">dates</span><span class="op">)</span> <span class="co">## write without styling</span>
 
 <span class="co">## openxlsx converts columns of class "Date" to Excel dates with the format given by</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span>, <span class="st">"mm/dd/yyyy"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span>, <span class="st">"mm/dd/yyyy"</span><span class="op">)</span>
 
 <span class="co">## this can be set via (for example)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"yyyy/mm/dd"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"yyyy/mm/dd"</span><span class="op">)</span>
 <span class="co">## custom date formats can be made up of any combination of:</span>
 <span class="co">##   d, dd, ddd, dddd, m, mm, mmm, mmmm, mmmmm, yy, yyyy</span>
 
@@ -215,23 +211,23 @@
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, widths <span class="op">=</span> <span class="fl">23</span><span class="op">)</span>
 
 <span class="co">## The default date format used in writeData and writeDataTable can be set with:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"dd/mm/yyyy"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"dd/mm/yyyy"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting"</span>, <span class="va">dates</span>, startRow  <span class="op">=</span> <span class="fl">8</span>, borders <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.dateFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting"</span>, <span class="va">dates</span>, startRow  <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Date Formatting.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="datetime-formatting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#datetime-formatting" class="anchor"></a>DateTime Formatting</h2>
+<div class="section level2">
+<h2 id="datetime-formatting">DateTime Formatting<a class="anchor" aria-label="anchor" href="#datetime-formatting"></a>
+</h2>
 <p>The conversion from POSIX to Excel datetimes is dependent on the timezone you are in. If POSIX values are being written incorrectly, try setting the timezone with (for example)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>TZ <span class="op">=</span> <span class="st">"Australia/Sydney"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TZ <span class="op">=</span> <span class="st">"Australia/Sydney"</span><span class="op">)</span>
 
-<span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">*</span><span class="fl">10000</span><span class="op">)</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">dateTimes</span>, <span class="va">dateTimes</span><span class="op">)</span>
-<span class="fu"><a href="../reference/names.html">names</a></span><span class="op">(</span><span class="va">dateTimes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
+<span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"d1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">*</span><span class="fl">10000</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="va">dateTimes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dateTimes</span>, <span class="va">dateTimes</span><span class="op">)</span>
+<span class="fu"><a href="../reference/names.html">names</a></span><span class="op">(</span><span class="va">dateTimes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
 
 <span class="co">## POSIX Formatting</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
@@ -239,10 +235,10 @@
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="va">dateTimes</span><span class="op">)</span> <span class="co">## write without styling</span>
 
 <span class="co">## openxlsx converts columns of class "POSIxt" to Excel datetimes with the format given by</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span>, <span class="st">"yyyy/mm/dd hh:mm:ss"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span>, <span class="st">"yyyy/mm/dd hh:mm:ss"</span><span class="op">)</span>
 
 <span class="co">## this can be set via (for example)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd hh:mm:ss"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy-mm-dd hh:mm:ss"</span><span class="op">)</span>
 <span class="co">## custom datetime formats can be made up of any combination of:</span>
 <span class="co">## d, dd, ddd, dddd, m, mm, mmm, mmmm, mmmmm, yy, yyyy, h, hh, m, mm, s, ss, AM/PM</span>
 
@@ -263,18 +259,18 @@
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, widths <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 
 <span class="co">## The default date format used in writeData and writeDataTable can be set with:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy/mm/dd hh:mm:ss"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"yyyy/mm/dd hh:mm:ss"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"DateTime Formatting"</span>, <span class="va">dateTimes</span>, startRow  <span class="op">=</span> <span class="fl">8</span>, borders <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"hh:mm:ss AM/PM"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.datetimeFormat"</span> <span class="op">=</span> <span class="st">"hh:mm:ss AM/PM"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"DateTime Formatting"</span>, <span class="va">dateTimes</span>, startRow  <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"DateTime Formatting.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"DateTime Formatting.xlsx"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="conditional-formatting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conditional-formatting" class="anchor"></a>Conditional Formatting</h2>
+<div class="section level2">
+<h2 id="conditional-formatting">Conditional Formatting<a class="anchor" aria-label="anchor" href="#conditional-formatting"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"cellIs"</span><span class="op">)</span>
@@ -314,27 +310,27 @@
 <span class="fu"><a href="../reference/conditionalFormatting.html">conditionalFormatting</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Dependent on 1"</span>, cols<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, rows<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, rule<span class="op">=</span><span class="st">"$A$1&gt;0"</span>, style <span class="op">=</span> <span class="va">posStyle</span><span class="op">)</span>
 
 <span class="co">## highlight duplicates using default style</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Duplicates"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Duplicates"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/conditionalFormatting.html">conditionalFormatting</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Duplicates"</span>, cols <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, type <span class="op">=</span> <span class="st">"duplicates"</span><span class="op">)</span>
 
 <span class="co">## cells containing text</span>
-<span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">10</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsText"</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="va">fn</span><span class="op">)</span><span class="op">)</span>
+<span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">10</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsText"</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="va">fn</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/conditionalFormatting.html">conditionalFormatting</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsText"</span>, cols <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, type <span class="op">=</span> <span class="st">"contains"</span>, rule <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
 
 <span class="co">## colourscale colours cells based on cell value</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.xlsx.html">read.xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, <span class="va">df</span>, colNames<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>  <span class="co">## write data.frame</span>
 
 <span class="co">## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())</span>
 <span class="co">## If rule is NULL, min and max of cells is used. Rule must be the same length as style or NULL.</span>
-<span class="fu"><a href="../reference/conditionalFormatting.html">conditionalFormatting</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, cols<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, rows<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>,
-   style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span>, 
-   rule <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">255</span><span class="op">)</span>, 
+<span class="fu"><a href="../reference/conditionalFormatting.html">conditionalFormatting</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, cols<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, rows<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>,
+   style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span>, 
+   rule <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">255</span><span class="op">)</span>, 
    type <span class="op">=</span> <span class="st">"colourScale"</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fl">1.07</span><span class="op">)</span>
-<span class="fu"><a href="../reference/setRowHeights.html">setRowHeights</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, heights <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span> 
+<span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fl">1.07</span><span class="op">)</span>
+<span class="fu"><a href="../reference/setRowHeights.html">setRowHeights</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"colourScale"</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, heights <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span> 
 
 <span class="co">## Databars</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"databar"</span>, <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>
@@ -344,19 +340,19 @@
 
 <span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="numeric-formatting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#numeric-formatting" class="anchor"></a>Numeric Formatting</h2>
+<div class="section level2">
+<h2 id="numeric-formatting">Numeric Formatting<a class="anchor" aria-label="anchor" href="#numeric-formatting"></a>
+</h2>
 <p>numeric columns styling can be set using the numFmt parameter in createStyle or a default can be set with, for example, options(“openxlsx.numFmt” = “#,#0.00”)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 1"</span><span class="op">)</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">12.987654321</span>, ncol <span class="op">=</span> <span class="fl">7</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="co">## data.frame to write</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">12.987654321</span>, ncol <span class="op">=</span> <span class="fl">7</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="co">## data.frame to write</span>
 <span class="va">df</span><span class="op">[</span> ,<span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span> ,<span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">*</span><span class="fl">1E6</span>
 
 <span class="co">## Set column 1 class to "comma" to get comma separated thousands</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">X1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"comma"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">X1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"comma"</span>
 
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="va">df</span><span class="op">)</span>
 <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>numFmt <span class="op">=</span> <span class="st">"0.0"</span><span class="op">)</span>
@@ -378,20 +374,20 @@
 <span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, style <span class="op">=</span> <span class="va">s</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, cols <span class="op">=</span> <span class="fl">7</span>, gridExpand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co">## set a default number format for numeric columns of data.frames</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="st">"$* #,#0.00"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Using Default Options"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2345.1235</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>, startCol <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="st">"$* #,#0.00"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"Using Default Options"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">2345.1235</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>, startCol <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
 
 <span class="co">## Using default numFmt to round to 2 dp (Any numeric column will be affected)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 2"</span><span class="op">)</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span>; <span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span>; <span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">df</span>, startCol <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">df</span>, startCol <span class="op">=</span> <span class="fl">13</span>, borders <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span>
 
 <span class="co">## To stop auto-formatting numerics set</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 3"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 
@@ -410,11 +406,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Philipp Schauberger, Alexander Walker.</p>
+  <p></p>
+<p>Developed by Philipp Schauberger, Alexander Walker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -422,6 +420,8 @@
 
   
 
+
+  
 
   </body>
 </html>
