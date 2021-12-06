@@ -705,6 +705,7 @@ convertFromExcelRef <- function(col) {
 #'    \item{**left**}{ Left horizontal align cell contents}
 #'    \item{**right**}{ Right horizontal align cell contents}
 #'    \item{**center**}{ Center horizontal align cell contents}
+#'    \item{**justify**}{ Justify horizontal align cell contents}
 #'   }
 #'
 #' @param valign A name
@@ -822,7 +823,7 @@ createStyle <- function(fontName = NULL,
 
   if (!is.null(halign)) {
     halign <- tolower(halign[[1]])
-    if (!halign %in% c("left", "right", "center")) {
+    if (!halign %in% c("left", "right", "center", "justify")) {
       stop("Invalid halign argument!")
     }
   }

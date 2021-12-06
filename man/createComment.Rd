@@ -20,7 +20,6 @@ createComment(
 
 \item{style}{A Style object or list of style objects the same length as comment vector. See \code{\link[=createStyle]{createStyle()}}.}
 
-
 \item{visible}{TRUE or FALSE. Is comment visible.}
 
 \item{width, height}{Width and height of textbook (in number of cells);
