@@ -20,6 +20,10 @@
 * `setStyles()` accepts `halign="justify"`
 ([#305](https://github.com/ycphs/openxlsx/issues/305))
 
+## Improvements
+
+* `options()` are more consistently set in functions (see: [#289](https://github.com/ychps/openxlsx/issues/262))
+
 # openxlsx 4.2.4
 
 ## Fixes

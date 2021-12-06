@@ -84,9 +84,8 @@
 #' }
 #'
 makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
   
   if (missing(sheet)) {
     if (!missing(row) || !missing(col)) warning("Option for col and/or row found, but no sheet was provided.")
