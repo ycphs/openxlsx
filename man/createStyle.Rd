@@ -98,6 +98,7 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 \item{\strong{left}}{ Left horizontal align cell contents}
 \item{\strong{right}}{ Right horizontal align cell contents}
 \item{\strong{center}}{ Center horizontal align cell contents}
+\item{\strong{justify}}{ Justify horizontal align cell contents}
 }}
 
 \item{valign}{A name
