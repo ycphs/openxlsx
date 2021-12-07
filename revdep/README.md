@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-11-20                   |
+|date     |2021-12-07                   |
 |pandoc   |2.7.3 @ /usr/bin/pandoc      |
 
 # Dependencies
@@ -19,42 +19,35 @@
 |:--------|:-----|:----------|:--|
 |openxlsx |4.2.4 |4.2.4.9000 |*  |
 |Rcpp     |1.0.7 |1.0.7      |   |
-|stringi  |1.7.5 |1.7.5      |   |
+|stringi  |1.7.6 |1.7.6      |   |
 |zip      |2.2.0 |2.2.0      |   |
 
 # Revdeps
 
-## Failed to check (29)
+## Failed to check (22)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
 |appreci8R      |?       |      |        |     |
 |artMS          |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
-|cbaf           |?       |      |        |     |
+|bruceR         |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
-|CNVPanelizer   |?       |      |        |     |
 |CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |2.1.0   |1     |        |     |
-|fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
-|genekitr       |?       |      |        |     |
-|hypeR          |1.8.0   |1     |        |     |
+|hypeR          |1.10.0  |1     |        |     |
 |isoreader      |?       |      |        |     |
 |maEndToEnd     |?       |      |        |     |
-|MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
 |parameters     |?       |      |        |     |
-|PloGO2         |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
-|SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
-|structToolbox  |?       |      |        |     |
-|TPP            |3.20.1  |1     |        |3    |
+|Pigengene      |?       |      |        |     |
+|sangeranalyseR |1.4.0   |1     |1       |2    |
+|structToolbox  |1.6.0   |1     |        |1    |
+|TPP            |3.22.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
+|word.alignment |?       |      |        |     |
 
