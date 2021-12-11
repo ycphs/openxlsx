@@ -130,7 +130,73 @@
 
 
 ```
+# cbaf
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # CHRONOS
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CNVPanelizer
 
 <details>
 
@@ -262,6 +328,39 @@
 
 
 ```
+# Ecfun
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # emdi
 
 <details>
@@ -297,10 +396,9 @@ Run `revdep_details(, "emdi")` for more info
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libgdal.so.20: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘raster’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/emdi’
@@ -318,13 +416,45 @@ ERROR: lazy loading failed for package ‘emdi’
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libgdal.so.20: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘raster’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/old/emdi.Rcheck/emdi’
+
+
+```
+# fedup
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
@@ -487,6 +617,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
+# MatrixQCvis
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # MicroSEC
 
 <details>
@@ -521,6 +684,39 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 ```
 # nanotatoR
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# openPrimeR
 
 <details>
 
@@ -619,109 +815,234 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# sangeranalyseR
+# PloGO2
 
 <details>
 
-* Version: 1.4.0
-* GitHub: NA
-* Source code: https://github.com/cran/sangeranalyseR
-* Date/Publication: 2021-10-26
-* Number of recursive dependencies: 135
-
-Run `revdep_details(, "sangeranalyseR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
-
-*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
-    ```
-
-*   checking for portable file names ... WARNING
-    ```
-    Found the following file with a non-portable file name:
-      docs/wallpaperflare.com_wallpaper (1).jpg
-    These are not fully portable file names.
-    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
-    Found the following non-portable file paths:
-      sangeranalyseR/docs/build/html/_downloads/081987116457968e1b81ae1616525c7d/Sanger_contigs_unalignment.fa
-      sangeranalyseR/docs/build/html/_downloads/13b875bc704f73b8bd67dc07d86fc474/Sanger_contigs_alignment.fa
-      sangeranalyseR/docs/build/html/_downloads/144d09562ae5b2c7dc079e4bc2b33fb7/Sanger_contigs_alignment.fa
-      sangeranalyseR/docs/build/html/_downloads/165af37e8893cfdfa4dba91c44cd791b/Sanger_contigs_unalignment.fa
-      sangeranalyseR/docs/build/html/_downloads/345ac400befc4f176c75732770ec3fcb/Achl_RBNII384-13_contig.fa
-    ...
-      sangeranalyseR/docs/build/html/_downloads/a664bed9cc5d32924dc2ce60f8c60554/Sanger_all_trimmed_reads.fa
-      sangeranalyseR/docs/build/html/_downloads/b608796fffaaa7335a7341cffc9a9db7/Achl_ACHLO006-09_contig.fa
-      sangeranalyseR/docs/build/html/_downloads/b6b18aa3e34c6ae0be86c3940972dd38/Sanger_contigs_alignment.fa
-      sangeranalyseR/docs/build/html/_downloads/eeb554b575ee5b29ef733dafbf876c36/Achl_RBNII384-13_reads_alignment.fa
-      sangeranalyseR/docs/build/html/_downloads/fef71e7b2e1e49c01df301435e972047/Sanger_contigs_unalignment.fa
-    
-    Tarballs are only required to store paths of up to 100 bytes and cannot
-    store those of more than 256 bytes, with restrictions including to 100
-    bytes for the final component.
-    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
-      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
-      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
-      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
-      'rmarkdown', 'knitr', 'seqinr', 'BiocStyle', 'logger'
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-      docs/build/html/.buildinfo
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
 
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘sangeranalyseR’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
-  libglpk.so.40: cannot open shared object file: No such file or directory
-Execution halted
-ERROR: lazy loading failed for package ‘sangeranalyseR’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
+
+
+
+
+
+
+```
+# rbiom
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# RIPAT
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# sangeranalyseR
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# SEtools
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# sigFeature
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# struct
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
 
 
 ```
@@ -729,29 +1050,68 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 1.6.0
-* GitHub: NA
-* Source code: https://github.com/cran/structToolbox
-* Date/Publication: 2021-10-26
-* Number of recursive dependencies: 216
-
-Run `revdep_details(, "structToolbox")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.7Mb
-      sub-directories of 1Mb or more:
-        R     3.3Mb
-        doc   3.1Mb
-    ```
+```
 
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# TarSeqQC
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # TPP
 
 <details>
@@ -830,62 +1190,6 @@ Run `revdep_details(, "TPP")` for more info
 ### Devel
 
 ```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# word.alignment
-
-<details>
-
-* Version: 1.1
-* GitHub: NA
-* Source code: https://github.com/cran/word.alignment
-* Date/Publication: 2019-04-15 09:10:03 UTC
-* Number of recursive dependencies: 5
-
-Run `revdep_details(, "word.alignment")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/word.alignment/new/word.alignment.Rcheck’
-* using R version 4.1.2 (2021-11-01)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘word.alignment/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘word.alignment’ version ‘1.1’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-...
-* checking if this is a source package ... ERROR
-Only *source* packages can be checked.
-* DONE
-
-Status: 1 ERROR
-See
-  ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/word.alignment/new/word.alignment.Rcheck/00check.log’
-for details.
-
 
 
 
