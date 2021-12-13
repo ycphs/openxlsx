@@ -20,3 +20,4 @@ cran-comments.md
 ^openxlsx.*\.tar\.gz$
 ^openxlsx.*\.tgz$
 ^data-raw$
+^CRAN-SUBMISSION$
