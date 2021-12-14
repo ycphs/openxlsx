@@ -10,7 +10,7 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-12-11                   |
+|date     |2021-12-14                   |
 |pandoc   |2.7.3 @ /usr/bin/pandoc      |
 
 # Dependencies
@@ -24,7 +24,7 @@
 
 # Revdeps
 
-## Failed to check (34)
+## Failed to check (33)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -38,7 +38,6 @@
 |CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
-|Ecfun          |?       |      |        |     |
 |emdi           |2.1.0   |1     |        |     |
 |fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |

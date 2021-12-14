@@ -328,39 +328,6 @@
 
 
 ```
-# Ecfun
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # emdi
 
 <details>
@@ -396,9 +363,10 @@ Run `revdep_details(, "emdi")` for more info
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘raster’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
+  libgdal.so.20: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/emdi’
@@ -416,9 +384,10 @@ ERROR: lazy loading failed for package ‘emdi’
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘raster’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
+  libgdal.so.20: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
 * removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/old/emdi.Rcheck/emdi’
