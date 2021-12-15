@@ -1,3 +1,9 @@
+# openxlsx (development version)
+
+## Improvements
+
+* Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
+
 # openxlsx 4.2.5
 
 ## Fixes
