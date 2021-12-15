@@ -354,7 +354,7 @@ read.xlsx.default <- function(
     getDates = detectDates
   )
   
-  if (missing(cols)) {
+  if (missing(cols) | is.null(cols)) {
     cols <- col2int(unique(unlist(stringi::stri_extract_all_regex(cell_info$r, "[A-Z]+"))))
   }
 
