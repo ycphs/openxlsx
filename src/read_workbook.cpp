@@ -559,7 +559,7 @@ SEXP read_workbook(IntegerVector cols_in,
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
-        if(col_names[i] == "NA"){
+        if(col_names[i]==NA_STRING){
           sprintf(&(name[0]), "X%hu", i+1);
           // sprintf(&(name[0]), "X%du", i+1);
           // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);

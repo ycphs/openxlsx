@@ -371,7 +371,7 @@ read.xlsx.default <- function(
   ## cell_info is lacking information on missing cells. This can lead to an
   ## issue, if these missing cols or rows were requested
   rf <- requested_frame(rows = sel_rows, cols = sel_cols, fill = TRUE)
-  requested_cells <- as.character(unlist(rf))
+  requested_cells <- as.character(unlist(t(rf)))
   
   # remove unneeded cells
   if (!all(cell_info$r %in% requested_cells)) {
@@ -396,6 +396,16 @@ read.xlsx.default <- function(
     cell_info$r <- c(cell_info$r, missing_cells)
     cell_info$v <- c(cell_info$v, rep(as.character(NA), length(missing_cells)))
     cell_info$s <- c(cell_info$s, rep(NA, length(missing_cells)))
+    
+    # for now we have appended data to the end of the vectors. now we have to
+    # order them for read_workbook() to get the char names correct.
+    ordr <- match(cell_info$r, requested_cells)
+    ordr <- order(ordr)
+    
+    cell_info$r <- cell_info$r[ordr]
+    cell_info$v <- cell_info$v[ordr]
+    cell_info$s <- cell_info$s[ordr]
+    
     cell_info$nRows <- NROW(rf)    
   }
 
@@ -589,7 +599,9 @@ read.xlsx.default <- function(
     clean_names   = clean_names
   )
 
+  nams <- names(m)
   m <- m[,sel_cols, drop = FALSE]
+  names(m) <- nams[sel_cols]
   
   if (rowNames) {
     # set the first column as the rownames
@@ -610,7 +622,9 @@ read.xlsx.default <- function(
 
   if (skipEmptyCols) {
     keep <- apply(m, 2, FUN = function(x) !all(is.na(x)) )
+    nams <- names(m)
     m <- m[, keep, drop = FALSE]
+    names(m) <- nams[keep]
   }
 
   if (skipEmptyRows) {
