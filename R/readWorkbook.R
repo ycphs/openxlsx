@@ -133,6 +133,14 @@ read.xlsx.default <- function(
   assert_length(sheet, 1L)
   assert_length(startRow, 1L)
   
+  sel_cols <- NULL
+  if (!is.null(cols))
+    sel_cols <- cols
+
+  sel_rows <- NULL
+  if (!is.null(rows))
+    sel_rows <- rows
+
   if (is.null(rows)) {
     rows <- NA
   } else if (length(rows) > 1L) {
@@ -346,6 +354,52 @@ read.xlsx.default <- function(
     getDates = detectDates
   )
   
+  if (missing(cols)) {
+    cols <- col2int(unique(unlist(stringi::stri_extract_all_regex(cell_info$r, "[A-Z]+"))))
+  }
+
+  if (is.null(sel_cols))
+    sel_cols <- cols
+
+  if (all(is.na(rows))) { # similar to missing
+    rows <- as.numeric(unique(gsub("[^0-9.-]", "", cell_info$r)))
+  }
+
+  if (is.null(sel_rows))
+    sel_rows <- rows
+
+  ## cell_info is lacking information on missing cells. This can lead to an
+  ## issue, if these missing cols or rows were requested
+  rf <- requested_frame(rows = sel_rows, cols = sel_cols, fill = TRUE)
+  requested_cells <- as.character(unlist(rf))
+  
+  # remove unneeded cells
+  if (!all(cell_info$r %in% requested_cells)) {
+    
+    # warning("remove cells")
+
+    keep_cells <- cell_info$r %in% requested_cells
+    
+    cell_info$r <- cell_info$r[keep_cells]
+    cell_info$v <- cell_info$v[keep_cells]
+    cell_info$s <- cell_info$s[keep_cells]
+    cell_info$nRows <- NROW(rf)
+  }
+
+  # add needed cells
+  if (!all(requested_cells %in% cell_info$r)) {
+
+    # warning("add cells")
+    
+    missing_cells <- requested_cells[!requested_cells %in% cell_info$r]
+    
+    cell_info$r <- c(cell_info$r, missing_cells)
+    cell_info$v <- c(cell_info$v, rep(as.character(NA), length(missing_cells)))
+    cell_info$s <- c(cell_info$s, rep(NA, length(missing_cells)))
+    cell_info$nRows <- NROW(rf)    
+  }
+
+  
   if (fillMergedCells & length(cell_info$cellMerge) > 0) {
     # stop("Not implemented")
     
@@ -411,10 +465,11 @@ read.xlsx.default <- function(
     return(NULL)
   }
   
-  keep <- !is.na(cell_info$v)
-  if (!is.null(cols)) {
-    keep <- keep & (cell_cols %in% cols)
-  }
+  #keep <- !is.na(cell_info$v)
+  #if (!is.null(cols)) {
+  #  keep <- keep & (cell_cols %in% cols)
+  #}
+  keep <- rep(TRUE, length(cell_info$v))
   
   ## End of subsetting
   
@@ -528,11 +583,13 @@ read.xlsx.default <- function(
     is_date       = isDate,
     hasColNames   = colNames,
     hasSepNames   = sep.names,
-    skipEmptyRows = skipEmptyRows,
-    skipEmptyCols = skipEmptyCols,
+    skipEmptyRows = FALSE,
+    skipEmptyCols = FALSE,
     nRows         = nRows,
     clean_names   = clean_names
   )
+
+  m <- m[,sel_cols, drop = FALSE]
   
   if (rowNames) {
     # set the first column as the rownames
@@ -549,6 +606,16 @@ read.xlsx.default <- function(
     if (rowNames) {
       colnames(m) <- make.names(seq_along(m))
     }
+  }
+
+  if (skipEmptyCols) {
+    keep <- apply(m, 2, FUN = function(x) !all(is.na(x)) )
+    m <- m[, keep, drop = FALSE]
+  }
+
+  if (skipEmptyRows) {
+    keep <- apply(m, 1, FUN = function(x) !all(is.na(x)) )
+    m <- m[keep, , drop = FALSE]
   }
   
   m

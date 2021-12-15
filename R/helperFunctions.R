@@ -865,6 +865,27 @@ getSharedStringsFromFile <- function(sharedStringsFile, isFile) {
 }
 
 
+requested_frame <- function(rows, cols, fill = FALSE) {
+  
+  cols <- int2col(cols)
+  
+  data <- as.character(NA)
+  if (fill) {
+    data <- expand.grid(cols, rows, stringsAsFactors = FALSE)
+    data <- paste0(data$Var1, data$Var2)
+  }
+  
+  # matrix as.data.frame
+  mm <- matrix(data = data,
+               nrow = length(rows),
+               ncol = length(cols),
+               dimnames = list(rows, cols),
+               byrow = TRUE)
+  
+  z <- as.data.frame(mm)
+  z
+}
+
 clean_names <- function(x, schar) {
   x <- gsub("^[[:space:]]+|[[:space:]]+$", "", x)
   x <- gsub("[[:space:]]+", schar, x)
