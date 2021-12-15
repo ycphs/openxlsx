@@ -10,21 +10,21 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-12-07                   |
+|date     |2021-12-14                   |
 |pandoc   |2.7.3 @ /usr/bin/pandoc      |
 
 # Dependencies
 
-|package  |old   |new        |Δ  |
-|:--------|:-----|:----------|:--|
-|openxlsx |4.2.4 |4.2.4.9000 |*  |
-|Rcpp     |1.0.7 |1.0.7      |   |
-|stringi  |1.7.6 |1.7.6      |   |
-|zip      |2.2.0 |2.2.0      |   |
+|package  |old   |new   |Δ  |
+|:--------|:-----|:-----|:--|
+|openxlsx |4.2.4 |4.2.5 |*  |
+|Rcpp     |1.0.7 |1.0.7 |   |
+|stringi  |1.7.6 |1.7.6 |   |
+|zip      |2.2.0 |2.2.0 |   |
 
 # Revdeps
 
-## Failed to check (22)
+## Failed to check (33)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -32,22 +32,33 @@
 |artMS          |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
 |bruceR         |?       |      |        |     |
+|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
+|CNVPanelizer   |?       |      |        |     |
 |CoTiMA         |?       |      |        |     |
 |DAPAR          |?       |      |        |     |
 |ddPCRclust     |?       |      |        |     |
 |emdi           |2.1.0   |1     |        |     |
+|fedup          |?       |      |        |     |
 |GA4GHshiny     |?       |      |        |     |
 |hypeR          |1.10.0  |1     |        |     |
 |isoreader      |?       |      |        |     |
 |maEndToEnd     |?       |      |        |     |
+|MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
+|openPrimeR     |?       |      |        |     |
 |parameters     |?       |      |        |     |
 |Pigengene      |?       |      |        |     |
-|sangeranalyseR |1.4.0   |1     |1       |2    |
-|structToolbox  |1.6.0   |1     |        |1    |
+|PloGO2         |?       |      |        |     |
+|rbiom          |?       |      |        |     |
+|RIPAT          |?       |      |        |     |
+|sangeranalyseR |?       |      |        |     |
+|SEtools        |?       |      |        |     |
+|sigFeature     |?       |      |        |     |
+|struct         |?       |      |        |     |
+|structToolbox  |?       |      |        |     |
+|TarSeqQC       |?       |      |        |     |
 |TPP            |3.22.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
-|word.alignment |?       |      |        |     |
 

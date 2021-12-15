@@ -13,7 +13,7 @@
 
 ## Improvements
 
-* `options()` are more consistently set in functions (see: [#289](https://github.com/ychps/openxlsx/issues/262))
+* `options()` are more consistently set in functions (see: [#289](https://github.com/ycphs/openxlsx/issues/262))
 * `Workbook$show()` no longer fails when called in a 0 sheet workbook([#240](https://github.com/ycphs/openxlsx/issues/240))
 * `read.xlsx()` again accepts `.xlsm` files ([#205](https://github.com/ycphs/openxlsx/issues/205),
 [#209](https://github.com/ycphs/openxlsx/issues/209))

@@ -11,3 +11,9 @@ We checked 117 reverse dependencies (64 from CRAN + 53 from Bioconductor), compa
  * We saw 0 new problems
  * We failed to check 0 packages
 
+
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Corrected URLs 
+
