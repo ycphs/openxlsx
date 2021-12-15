@@ -1,5 +1,8 @@
-#openxlsx (development version)
+# openxlsx (development version)
 
+## Improvements
+
+* Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
 * Preserve window size and position, also `getWindowSize()` and `setWindowSize()`  ([466](https://github.com/ycphs/openxlsx/pull/466))
 
 # openxlsx 4.2.6

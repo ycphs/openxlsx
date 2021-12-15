@@ -198,7 +198,8 @@ SEXP buildMatrixMixed(CharacterVector v,
   for(int i = 0;i < k; i++)
     m(rowInd[i], colInd[i]) = v[i];
   
-  
+  // convert numerics to dates
+  Rcpp::Function cTD("convertToDate");
   
   // this will be the return data.frame
   List dfList(nCols); 
@@ -231,7 +232,6 @@ SEXP buildMatrixMixed(CharacterVector v,
           try{
             // Some values are incorrectly detected as dates. This regex determines if they are numerics.
             // If so, they are converted to Dates. 
-            Rcpp::Function cTD("convertToDate");
             if (std::regex_match( dt_str, std::regex( ( "((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?" ) ) )) {
               datetmp[ri] = as<Rcpp::Date>(cTD(dt_str));
             } else {
