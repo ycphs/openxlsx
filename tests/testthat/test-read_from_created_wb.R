@@ -2,7 +2,7 @@
 context("Reading from wb object is identical to reading from file")
 
 test_that("Reading from new workbook", {
-  curr_wd <- getwd()
+  curr_wd <- tempdir()
 
   wb <- createWorkbook()
   for (i in 1:4) {
@@ -34,12 +34,11 @@ test_that("Reading from new workbook", {
   x <- read.xlsx(wb, sheet = 4, colNames = FALSE, rowNames = FALSE)
   expect_equal(object = mtcars, expected = x, check.attributes = FALSE)
 
-  expect_equal(object = getwd(), curr_wd)
   rm(wb)
 })
 
 test_that("Empty workbook", {
-  curr_wd <- getwd()
+  curr_wd <- tempdir()
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
 
@@ -144,7 +143,7 @@ test_that("Empty workbook", {
   expect_equal(NULL, x)
 
 
-  expect_equal(object = getwd(), curr_wd)
+  # expect_equal(object = getwd(), curr_wd)
 })
 
 
@@ -195,7 +194,7 @@ test_that("Reading NAs and NaN values", {
   row.names = c(NA, 3L), class = "data.frame"
   )
 
-  expect_equal(read.xlsx(fileName), expected_df)
+  expect_equal(read.xlsx(fileName, skipEmptyCols = FALSE), expected_df)
 
   ## from workbook
   expected_df <- structure(list(
@@ -211,17 +210,17 @@ test_that("Reading NAs and NaN values", {
   expect_equal(read.xlsx(wb), expected_df)
 
   ## keepNA = FALSE
-  expect_equal(read.xlsx(wb), read.xlsx(fileName))
+  expect_equal(read.xlsx(wb), read.xlsx(fileName, skipEmptyCols = FALSE))
   expect_equal(b, read.xlsx(wb))
-  expect_equal(b, read.xlsx(fileName))
+  expect_equal(b, read.xlsx(fileName, skipEmptyCols = FALSE))
 
   ## keepNA = TRUE
 
   expect_equal(read.xlsx(wb), expected_df)
-  expect_equal(read.xlsx(fileName), expected_df)
+  expect_equal(read.xlsx(fileName, skipEmptyCols = FALSE), expected_df)
 
   expect_equal(b, read.xlsx(wb, sheet = 2))
-  expect_equal(b, read.xlsx(fileName, sheet = 2))
+  expect_equal(b, read.xlsx(fileName, sheet = 2, skipEmptyCols = FALSE))
 
   ## keepNA = TRUE, na.string = "*"
   expect_equal(c, read.xlsx(wb, sheet = 3))
@@ -306,7 +305,7 @@ test_that("Reading from new workbook cols/rows", {
   cols <- 1:300
   rows <- 1:1000
   x <- read.xlsx(wb, sheet = 2, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
-  y <- read.xlsx(tempFile, sheet = 2, colNames = TRUE, rowNames = FALSE, rows = rows, cols = cols)
+  y <- read.xlsx(tempFile, sheet = 2, colNames = TRUE, rowNames = FALSE, rows = rows+9, cols = cols)
 
   #
   expect_equal(object = mtcars, expected = x, check.attributes = FALSE)

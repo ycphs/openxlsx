@@ -632,6 +632,9 @@ read.xlsx.default <- function(
     m <- m[keep, , drop = FALSE]
   }
   
+  if (NROW(m) == 0)
+    m <- NULL
+  
   m
 }
 
