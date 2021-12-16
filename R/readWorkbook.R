@@ -348,14 +348,31 @@ read.xlsx.default <- function(
   cell_info <- getCellInfo(
     xmlFile = worksheet,
     sharedStrings = sharedStrings,
-    skipEmptyRows = FALSE,
+    skipEmptyRows = skipEmptyRows,
     startRow = startRow,
     rows = rows,
     getDates = detectDates
   )
   
-  if (missing(cols) | is.null(cols)) {
-    cols <- col2int(unique(unlist(stringi::stri_extract_all_regex(cell_info$r, "[A-Z]+"))))
+  
+  if (missing(cols) | is.null(cols) | !is.null(namedRegion)) {
+    tmp_cols <- col2int(unique(unlist(stringi::stri_extract_all_regex(cell_info$r, "[A-Z]+"))))
+    tmp_cols <- sort(tmp_cols)
+    
+    # namedRegion brings its own cols
+    if (!is.null(namedRegion)) {
+      # if skipEmptyCols, we reduce the cols object to cells found in the dataset
+      if (skipEmptyCols) {
+        tmp_cols  <- cols[cols %in% tmp_cols]
+      } else {
+        tmp_cols <- cols
+      }
+    }
+    
+    if (!skipEmptyCols)
+      tmp_cols <- seq(min(tmp_cols), max(tmp_cols))
+    
+    cols <- tmp_cols
   }
 
   if (is.null(sel_cols))
@@ -370,8 +387,11 @@ read.xlsx.default <- function(
 
   ## cell_info is lacking information on missing cells. This can lead to an
   ## issue, if these missing cols or rows were requested
-  rf <- requested_frame(rows = sel_rows, cols = sel_cols, fill = TRUE)
+  rf <- requested_frame(rows = sel_rows, cols = sort(sel_cols), fill = TRUE)
   requested_cells <- as.character(unlist(t(rf)))
+
+  # assign("cell_info", cell_info, globalenv())
+  # assign("rf", rf, globalenv())
   
   # remove unneeded cells
   if (!all(cell_info$r %in% requested_cells)) {
@@ -476,10 +496,10 @@ read.xlsx.default <- function(
   }
   
   #keep <- !is.na(cell_info$v)
-  #if (!is.null(cols)) {
-  #  keep <- keep & (cell_cols %in% cols)
-  #}
   keep <- rep(TRUE, length(cell_info$v))
+  # if (!is.null(cols)) {
+  #  keep <- keep & (cell_cols %in% cols)
+  # }
   
   ## End of subsetting
   
@@ -572,12 +592,12 @@ read.xlsx.default <- function(
     isDate[not_an_integer] <- FALSE
     if (origin == 25569L) {
       earlyDates <- suppressWarnings(as.integer(v) < 60)
-      v[earlyDates & isDate] <- as.integer(v[earlyDates & isDate]) + 1L
+      v[earlyDates & isDate & !is.na(v)] <- as.integer(v[earlyDates & isDate & !is.na(v)]) + 1L
     }
     
     ## perform int to date to character conversion (way too slow)
-    v[isDate] <- format(
-      as.Date(as.integer(v[isDate]) - origin, origin = "1970-01-01"),
+    v[isDate & !is.na(v)] <- format(
+      as.Date(as.integer(v[isDate  & !is.na(v)]) - origin, origin = "1970-01-01"),
       "%Y-%m-%d"
     )
   } else {
@@ -598,14 +618,18 @@ read.xlsx.default <- function(
     nRows         = length(seq(min(sel_rows), max(sel_rows))),
     clean_names   = clean_names
   )
-
+  
   nams <- names(m)
-  m <- m[,sel_cols, drop = FALSE]
-  names(m) <- nams[sel_cols]
+  m <- m[, sel_cols, drop = FALSE]
+  m <- m[, order(ordered(sel_cols)), drop = FALSE]
+  nams <- nams[sel_cols]
+  names(m) <- nams[order(ordered(sel_cols))]
   
   if (rowNames) {
     # set the first column as the rownames
-    rownames(m) <- make.names(m[[1]], unique = TRUE)
+    rnam <- m[[1]]
+    rnam[is.na(rnam)] <- seq_along(rnam[is.na(rnam)])
+    rownames(m) <- rnam
     m[[1]] <- NULL
   }
   
@@ -620,16 +644,25 @@ read.xlsx.default <- function(
     }
   }
 
-  if (skipEmptyCols) {
-    keep <- apply(m, 2, FUN = function(x) !all(is.na(x)) )
-    nams <- names(m)
-    m <- m[, keep, drop = FALSE]
-    names(m) <- nams[keep]
-  }
+  # if (skipEmptyCols) {
+  #   keep <- apply(m, 2, FUN = function(x) !all(is.na(x)) )
+  #   nams <- names(m)
+  #   m <- m[, keep, drop = FALSE]
+  #   names(m) <- nams[keep]
+  # }
 
   if (skipEmptyRows) {
     keep <- apply(m, 1, FUN = function(x) !all(is.na(x)) )
     m <- m[keep, , drop = FALSE]
+  }
+  
+  # if a sort order was provided, return the dataframe in requested order
+  # otherwise it is sorted lowest to highest, this sorts as requested e.g. 2,3,1
+  if ((length(sel_cols) == ncol(m)) & (length(sel_cols) > 0)) {
+    nams <- names(m)
+    m <- m[order(order(ordered(sel_cols)))]
+    nams <- nams[order(order(ordered(sel_cols)))]
+    names(m) <- nams
   }
   
   if (NROW(m) == 0)

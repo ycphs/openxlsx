@@ -201,7 +201,7 @@ test_that("Writing then reading returns identical data.frame 3", {
   expect_equal(x, exp)
 
   rows <- 1:4
-  cols <- 1:9
+  cols <- 1:7
   x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols)
   exp <- df[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])]
   expect_equal(x, exp)
@@ -210,7 +210,7 @@ test_that("Writing then reading returns identical data.frame 3", {
   cols <- c(5, 99, 2)
   x <- read.xlsx(xlsxFile = fileName, detectDates = TRUE, rows = rows, cols = cols)
   exp <- df[sort((rows - 1)[(rows - 1) <= nrow(df)]), sort(cols[cols <= ncol(df)])]
-  expect_equal(x, exp)
+  expect_equal(x[names(exp)], exp)
 
 
   rows <- 1000:900
