@@ -348,7 +348,7 @@ read.xlsx.default <- function(
   cell_info <- getCellInfo(
     xmlFile = worksheet,
     sharedStrings = sharedStrings,
-    skipEmptyRows = skipEmptyRows,
+    skipEmptyRows = FALSE,
     startRow = startRow,
     rows = rows,
     getDates = detectDates
@@ -461,7 +461,7 @@ read.xlsx.default <- function(
       cell_info$s <- c(cell_info$s, cell_info$s[inds])[ord]
     }
     
-    cell_info$nRows <- calc_number_rows(x = cell_info$r, skipEmptyRows = skipEmptyRows)
+    cell_info$nRows <- calc_number_rows(x = cell_info$r, skipEmptyRows = FALSE)
   }
   
   cell_rows <- as.integer(gsub("[A-Z]", "", cell_info$r, perl = TRUE))
@@ -520,8 +520,8 @@ read.xlsx.default <- function(
         string_refs <- string_refs[!string_refs %in% r[toRemove]]
         v <- v[-toRemove]
         r <- r[-toRemove]
-        nRows <-
-          calc_number_rows(x = r, skipEmptyRows = skipEmptyRows)
+        # nRows <-
+        #   calc_number_rows(x = r, skipEmptyRows = skipEmptyRows)
       }
     }
   }
@@ -595,7 +595,7 @@ read.xlsx.default <- function(
     hasSepNames   = sep.names,
     skipEmptyRows = FALSE,
     skipEmptyCols = FALSE,
-    nRows         = nRows,
+    nRows         = length(seq(min(sel_rows), max(sel_rows))),
     clean_names   = clean_names
   )
 
@@ -605,7 +605,7 @@ read.xlsx.default <- function(
   
   if (rowNames) {
     # set the first column as the rownames
-    rownames(m) <- m[[1]]
+    rownames(m) <- make.names(m[[1]], unique = TRUE)
     m[[1]] <- NULL
   }
   
