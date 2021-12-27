@@ -368,7 +368,7 @@ Workbook$methods(
     styleObjects <<- c(
       styleObjects,
       Map(function(s) {
-        s$sheet <- sheetName
+        s$sheet <- clonedSheet
         s
       }, sheetStyles)
     )
