@@ -10,21 +10,21 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2021-12-14                   |
+|date     |2022-01-01                   |
 |pandoc   |2.7.3 @ /usr/bin/pandoc      |
 
 # Dependencies
 
 |package  |old   |new   |Δ  |
 |:--------|:-----|:-----|:--|
-|openxlsx |4.2.4 |4.2.5 |*  |
-|Rcpp     |1.0.7 |1.0.7 |   |
-|stringi  |1.7.6 |1.7.6 |   |
-|zip      |2.2.0 |2.2.0 |   |
+|openxlsx |4.2.5 |4.2.5 |NA |
+|Rcpp     |1.0.7 |1.0.7 |NA |
+|stringi  |1.7.6 |1.7.6 |NA |
+|zip      |2.2.0 |2.2.0 |NA |
 
 # Revdeps
 
-## Failed to check (33)
+## Failed to check (27)
 
 |package        |version |error |warning |note |
 |:--------------|:-------|:-----|:-------|:----|
@@ -32,7 +32,6 @@
 |artMS          |?       |      |        |     |
 |BoneProfileR   |?       |      |        |     |
 |bruceR         |?       |      |        |     |
-|cbaf           |?       |      |        |     |
 |CHRONOS        |?       |      |        |     |
 |CNVPanelizer   |?       |      |        |     |
 |CoTiMA         |?       |      |        |     |
@@ -47,18 +46,13 @@
 |MatrixQCvis    |?       |      |        |     |
 |MicroSEC       |?       |      |        |     |
 |nanotatoR      |?       |      |        |     |
-|openPrimeR     |?       |      |        |     |
 |parameters     |?       |      |        |     |
 |Pigengene      |?       |      |        |     |
 |PloGO2         |?       |      |        |     |
 |rbiom          |?       |      |        |     |
-|RIPAT          |?       |      |        |     |
-|sangeranalyseR |?       |      |        |     |
+|sangeranalyseR |1.4.0   |1     |1       |2    |
 |SEtools        |?       |      |        |     |
-|sigFeature     |?       |      |        |     |
-|struct         |?       |      |        |     |
 |structToolbox  |?       |      |        |     |
-|TarSeqQC       |?       |      |        |     |
 |TPP            |3.22.1  |1     |        |3    |
 |uncoverappLib  |?       |      |        |     |
 

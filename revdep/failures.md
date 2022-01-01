@@ -17,7 +17,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1472127733 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1472127733 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -27,7 +41,21 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1472127733 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1472127733 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -98,39 +126,6 @@
 
 ```
 # bruceR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# cbaf
 
 <details>
 
@@ -685,39 +680,6 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# openPrimeR
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # parameters
 
 <details>
@@ -850,69 +812,109 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# RIPAT
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # sangeranalyseR
 
 <details>
 
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
+* Version: 1.4.0
+* GitHub: NA
+* Source code: https://github.com/cran/sangeranalyseR
+* Date/Publication: 2021-10-26
+* Number of recursive dependencies: 135
+
+Run `revdep_details(, "sangeranalyseR")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘sangeranalyseR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/00install.out’ for details.
+    ```
+
+*   checking for portable file names ... WARNING
+    ```
+    Found the following file with a non-portable file name:
+      docs/wallpaperflare.com_wallpaper (1).jpg
+    These are not fully portable file names.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    Found the following non-portable file paths:
+      sangeranalyseR/docs/build/html/_downloads/081987116457968e1b81ae1616525c7d/Sanger_contigs_unalignment.fa
+      sangeranalyseR/docs/build/html/_downloads/13b875bc704f73b8bd67dc07d86fc474/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/144d09562ae5b2c7dc079e4bc2b33fb7/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/165af37e8893cfdfa4dba91c44cd791b/Sanger_contigs_unalignment.fa
+      sangeranalyseR/docs/build/html/_downloads/345ac400befc4f176c75732770ec3fcb/Achl_RBNII384-13_contig.fa
+    ...
+      sangeranalyseR/docs/build/html/_downloads/a664bed9cc5d32924dc2ce60f8c60554/Sanger_all_trimmed_reads.fa
+      sangeranalyseR/docs/build/html/_downloads/b608796fffaaa7335a7341cffc9a9db7/Achl_ACHLO006-09_contig.fa
+      sangeranalyseR/docs/build/html/_downloads/b6b18aa3e34c6ae0be86c3940972dd38/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/eeb554b575ee5b29ef733dafbf876c36/Achl_RBNII384-13_reads_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/fef71e7b2e1e49c01df301435e972047/Sanger_contigs_unalignment.fa
+    
+    Tarballs are only required to store paths of up to 100 bytes and cannot
+    store those of more than 256 bytes, with restrictions including to 100
+    bytes for the final component.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Depends: includes the non-default packages:
+      'stringr', 'ape', 'Biostrings', 'DECIPHER', 'parallel', 'reshape2',
+      'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
+      'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
+      'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
+      'rmarkdown', 'knitr', 'seqinr', 'BiocStyle', 'logger'
+    Adding so many packages to the search path is excessive and importing
+    selectively is preferable.
+    ```
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+      docs/build/html/.buildinfo
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/new/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
 ### CRAN
 
 ```
-
-
-
-
+* installing *source* package ‘sangeranalyseR’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘phangorn’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/sangeranalyseR/igraph/libs/igraph.so':
+  libglpk.so.40: cannot open shared object file: No such file or directory
+Execution halted
+ERROR: lazy loading failed for package ‘sangeranalyseR’
+* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/sangeranalyseR/old/sangeranalyseR.Rcheck/sangeranalyseR’
 
 
 ```
@@ -949,106 +951,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# sigFeature
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# struct
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # structToolbox
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# TarSeqQC
 
 <details>
 
