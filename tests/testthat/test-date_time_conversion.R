@@ -1,7 +1,5 @@
 
-
 context("Date/Time Conversions")
-
 
 
 test_that("convert to date", {
@@ -18,7 +16,6 @@ test_that("convert to date", {
 })
 
 
-
 test_that("convert to datetime", {
   x <- 43037 + 2 / 1440
   expect_equal(object = convertToDateTime(x, tx = Sys.timezone()), expected = as.POSIXct("2017-10-29 00:02:00", tz = Sys.timezone()))
@@ -32,4 +29,20 @@ test_that("convert to datetime", {
   x <- 43037 + 2 / 1440 + 12.12 / 86400
   x_datetime <- convertToDateTime(x, tx = "UTC")
   attr(x_datetime, "tzone") <- "UTC"
+})
+
+
+test_that("read.xlsx detectDates", {
+  
+  xlsxFile <- system.file("extdata", "gh_issue_288.xlsx", package = "openxlsx")
+  
+  ref_dat <- data.frame(Date = c(as.Date(c("2021-10-20", "2021-11-03"))))
+  ref_num <- data.frame(Date = c(44489.4, 44503.0))
+  
+  tst_dat <- read.xlsx(xlsxFile, detectDates = TRUE)
+  tst_num <- read.xlsx(xlsxFile, detectDates = FALSE)
+  
+  expect_equal(ref_dat, tst_dat)
+  expect_equal(ref_num, tst_num)
+  
 })
