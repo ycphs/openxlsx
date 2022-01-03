@@ -4476,11 +4476,39 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param rows Indices of rows to group
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
 #' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
+#' @examples 
+#' wb <- createWorkbook()
+#' addWorksheet(wb, 'Sheet1')
+#' addWorksheet(wb, 'Sheet2')
+#' 
+#' writeData(wb, "Sheet1", iris) 
+#' writeData(wb, "Sheet2", iris)
+#' 
+#' ## create list of groups
+#' # lines used for grouping (here: species)
+#' grp <- list(
+#'   seq(2, 51),
+#'   seq(52, 101),
+#'   seq(102, 151)
+#' )
+#' # assign group levels
+#' names(grp) <- c("1","0","1") 
+#' groupRows(wb, "Sheet1", rows = grp)
+#' 
+#' # different grouping
+#' names(grp) <- c("1","2","3")
+#' groupRows(wb, "Sheet2", rows = grp)
 #' @export
-
 groupRows <- function(wb, sheet, rows, hidden = FALSE) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
+
+  if(is.list(rows)) {
+    levels <- unlist(lapply(names(rows), function(x)rep(as.character(x), length(rows[[x]]))))
+    rows <- unlist(rows)
+  } else {
+    levels <- rep("1", length(rows))
   }
 
   sheet <- wb$validateSheet(sheet)
@@ -4493,7 +4521,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
   }
 
-  if (any(rows) < 1L) {
+  if (any(rows < 1L)) {
     stop("Invalid rows entered (<= 0).")
   }
 
@@ -4501,8 +4529,6 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
-
-  levels <- rep("1", length(rows))
 
   # Remove duplicates
   hidden <- hidden[!duplicated(rows)]
