@@ -57,3 +57,30 @@ test_that("topN/bottomN conditions correspond to 'top10' type", {
   expect_true(object = grepl(paste('type="top10"'), wb$worksheets[[1]]$conditionalFormatting[5]))
   expect_true(object = grepl(paste('type="top10"'), wb$worksheets[[1]]$conditionalFormatting[6]))
 })
+
+
+context("Testing 'blanks' and 'notBlanks' conditions in conditionalFormatting")
+BNB_test_data <- data.frame(col1 = sample(c("X", NA_character_), 10, replace = TRUE),
+                             col2 = sample(c("Y", NA_character_), 10, replace = TRUE))
+
+bg_blue <- createStyle(bgFill = "skyblue")
+bg_red <- createStyle(bgFill = "red")
+
+wb <- createWorkbook()
+sht <- "Blanks_NonBlanks_TEST"
+addWorksheet(wb, sht)
+writeData(wb, sht, BNB_test_data)
+conditionalFormatting(wb, sht, cols = 1, rows = 2:11, type = "blanks",    style = bg_red)
+conditionalFormatting(wb, sht, cols = 2, rows = 2:11, type = "notBlanks", style = bg_blue)
+
+test_that("Number of conditionalFormatting rules added equal to 2", {
+  expect_equal(object = length(wb$worksheets[[1]]$conditionalFormatting), expected = 2)
+})
+
+test_that("type='blanks' calls type='containsBlanks'", {
+  expect_true(object = grepl(paste('containsBlanks'), wb$worksheets[[1]]$conditionalFormatting[1]))
+})
+
+test_that("type='notBlanks' calls type='notContainsBlanks'", {
+  expect_true(object = grepl(paste('notContainsBlanks'), wb$worksheets[[1]]$conditionalFormatting[2]))
+})

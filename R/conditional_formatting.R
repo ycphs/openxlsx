@@ -254,13 +254,13 @@
 #'  style = negStyle, type = "topN", rank = 20, percent = TRUE)
 #'  
 #' ## cells containing blanks
-#' sample_data <- sample(c("X", NA_character_), 10)
+#' sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
 #' writeData(wb, "containsBlanks", sample_data)
 #' conditionalFormatting(wb, "containsBlanks", cols = 1, rows = 1:10, 
 #' type = "blanks", style = negStyle)
 #' 
 #' ## cells not containing blanks
-#' sample_data <- sample(c("X", NA_character_), 10)
+#' sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
 #' writeData(wb, "notContainsBlanks", sample_data)
 #' conditionalFormatting(wb, "notContainsBlanks", cols = 1, rows = 1:10, 
 #' type = "notBlanks", style = posStyle)
