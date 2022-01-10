@@ -15,7 +15,7 @@
 #' @param rule The condition under which to apply the formatting. See examples.
 #' @param style A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
 #' @param type Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
-#' 'endsWith', 'topN', 'bottomN','blanks','notblanks', 'contains' or 'notContains' (case insensitive).
+#' 'endsWith', 'topN', 'bottomN', 'blanks', 'notBlanks', 'contains' or 'notContains' (case insensitive).
 #' @param ... See below
 #' @details See Examples.
 #'
@@ -67,7 +67,7 @@
 #'   \item{rule is ignored.}
 #' }
 #'
-#' If type == "notblanks"
+#' If type == "notBlanks"
 #' \itemize{
 #'   \item{style is a Style object. See [createStyle()]}
 #'   \item{rule is ignored.}
@@ -263,7 +263,7 @@
 #' sample_data <- sample(c("X", NA_character_), 10)
 #' writeData(wb, "notContainsBlanks", sample_data)
 #' conditionalFormatting(wb, "notContainsBlanks", cols = 1, rows = 1:10, 
-#' type = "notblanks", style = posStyle)
+#' type = "notBlanks", style = posStyle)
 #'
 #' ## Logical Operators
 #' # You can use Excels logical Operators
@@ -352,7 +352,7 @@ conditionalFormatting <-
       type <- "notContainsBlanks"
     }else if (type != "expression") {
       stop(
-        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 'endsWith', 'blanks', 'notblanks', 'contains' or 'notContains'"
+        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 'endsWith', 'blanks', 'notBlanks', 'contains' or 'notContains'"
       )
     }
 
@@ -681,7 +681,7 @@ conditionalFormatting <-
       }
       
       if (!"Style" %in% class(style)) {
-        stop("If type == 'notblanks', style must be a Style object.")
+        stop("If type == 'notBlanks', style must be a Style object.")
       }
       
       invisible(dxfId <- wb$addDXFS(style))
