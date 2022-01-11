@@ -37,15 +37,6 @@ test_that("writeData() forces evaluation of x (#264)", {
 })
 
 
-test_that("colnames with NA are appropriately handled", {
-  x <- data.frame(a = 1, b = 2)
-  colnames(x) <- c("a", NA)
-  wbfile <- temp_xlsx()
-  write.xlsx(x, wbfile)
-  waldo::compare(read.xlsx(wbfile), x)
-})
-
-
 test_that("as.character.formula() works [312]", {
   skip_if_not_installed(
     "formula.tools",
