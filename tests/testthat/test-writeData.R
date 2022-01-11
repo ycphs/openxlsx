@@ -35,3 +35,40 @@ test_that("writeData() forces evaluation of x (#264)", {
   options(op)
   file.remove(wbfile)
 })
+
+
+test_that("colnames with NA are appropriately handled", {
+  x <- data.frame(a = 1, b = 2)
+  colnames(x) <- c("a", NA)
+  wbfile <- temp_xlsx()
+  write.xlsx(x, wbfile)
+  waldo::compare(read.xlsx(wbfile), x)
+})
+
+
+test_that("as.character.formula() works [312]", {
+  skip_if_not_installed(
+    "formula.tools",
+    "tests specifically for as.character.formula conflict"
+  )
+  
+  foo <- function() {
+    wb <- openxlsx::buildWorkbook(
+      data.frame(
+        x = structure("A2 + B2", class = c("character", "formula")),
+        stringsAsFactors = FALSE
+      )
+    )
+    as.list(wb$worksheets[[1]]$sheet_data)
+  }
+  
+  before <- foo()
+  require("formula.tools", character.only = TRUE)
+  middle <- foo()
+  detach("package:formula.tools", character.only = TRUE, force = TRUE)
+  end <- foo()
+  
+  expect_identical(before, middle, ignore.environment = TRUE)
+  expect_identical(before, end,    ignore.environment = TRUE)
+})
+
