@@ -16,7 +16,7 @@ Name of worksheet(s) for a given index
 DEPRECATED. Use names().
 }
 \details{
-DEPRECATED. Use \code{\link{names}}
+DEPRECATED. Use \code{\link[=names]{names()}}
 }
 \examples{
 
@@ -37,7 +37,7 @@ names(wb)
 # openXL(wb)
 }
 \seealso{
-\code{\link{names}} to rename a worksheet in a Workbook
+\code{\link[=names]{names()}} to rename a worksheet in a Workbook
 }
 \author{
 Alexander Walker

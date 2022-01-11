@@ -38,13 +38,13 @@ Set document headers and footers
 \details{
 Headers and footers can contain special tags
 \itemize{
-  \item{\bold{&[Page]}}{ Page number}
-  \item{\bold{&[Pages]}}{ Number of pages}
-  \item{\bold{&[Date]}}{ Current date}
-  \item{\bold{&[Time]}}{ Current time}
-  \item{\bold{&[Path]}}{ File path}
-  \item{\bold{&[File]}}{ File name}
-  \item{\bold{&[Tab]}}{ Worksheet name}
+\item{\strong{&[Page]}}{ Page number}
+\item{\strong{&[Pages]}}{ Number of pages}
+\item{\strong{&[Date]}}{ Current date}
+\item{\strong{&[Time]}}{ Current time}
+\item{\strong{&[Path]}}{ File path}
+\item{\strong{&[File]}}{ File name}
+\item{\strong{&[Tab]}}{ Worksheet name}
 }
 }
 \examples{
@@ -94,7 +94,7 @@ saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{addWorksheet}} to set headers and footers when adding a worksheet
+\code{\link[=addWorksheet]{addWorksheet()}} to set headers and footers when adding a worksheet
 }
 \author{
 Alexander Walker

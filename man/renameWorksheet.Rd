@@ -17,7 +17,7 @@ renameWorksheet(wb, sheet, newName)
 Rename a worksheet
 }
 \details{
-DEPRECATED. Use \code{\link{names}}
+DEPRECATED. Use \code{\link[=names]{names()}}
 }
 \examples{
 

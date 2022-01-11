@@ -9,8 +9,8 @@
 #' @author Alexander Walker
 #' @return Workbook object
 #' @export
-#' @seealso \code{\link{loadWorkbook}}
-#' @seealso \code{\link{saveWorkbook}}
+#' @seealso [loadWorkbook()]
+#' @seealso [saveWorkbook()]
 #' @import methods
 #' @examples
 #' ## Create a new workbook
@@ -32,9 +32,8 @@ createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.
                            title = NULL,
                            subject = NULL,
                            category = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## check all inputs are valid
   if (length(creator) > 1) creator <- creator[[1]]
@@ -73,14 +72,14 @@ createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.
 #' @author Alexander Walker, Philipp Schauberger
 #' @param wb A Workbook object to write to file
 #' @param file A character string naming an xlsx file
-#' @param overwrite If \code{TRUE}, overwrite any existing file.
-#' @param returnValue  If \code{TRUE}, returns  \code{TRUE} in case of a success, else \code{FALSE}.
-#' If flag is \code{FALSE}, then no return value is returned.
-#' @seealso \code{\link{createWorkbook}}
-#' @seealso \code{\link{addWorksheet}}
-#' @seealso \code{\link{loadWorkbook}}
-#' @seealso \code{\link{writeData}}
-#' @seealso \code{\link{writeDataTable}}
+#' @param overwrite If `TRUE`, overwrite any existing file.
+#' @param returnValue  If `TRUE`, returns  `TRUE` in case of a success, else `FALSE`.
+#' If flag is `FALSE`, then no return value is returned.
+#' @seealso [createWorkbook()]
+#' @seealso [addWorksheet()]
+#' @seealso [loadWorkbook()]
+#' @seealso [writeData()]
+#' @seealso [writeDataTable()]
 #' @export
 #' @examples
 #' ## Create a new workbook and add a worksheet
@@ -92,14 +91,8 @@ createWorkbook <- function(creator = ifelse(.Platform$OS.type == "windows", Sys.
 #' saveWorkbook(wb, file = "saveWorkbookExample.xlsx", overwrite = TRUE)
 #' }
 saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
-
-  ## increase scipen to avoid writing in scientific
-  sci_pen <- getOption("scipen")
-  options("scipen" = 10000)
-  on.exit(options("scipen" = sci_pen), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -140,7 +133,7 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 #' @param rows corresponding rows to merge
 #' @details As merged region must be rectangular, only min and max of cols and rows are used.
 #' @author Alexander Walker
-#' @seealso \code{\link{removeCellMerge}}
+#' @seealso [removeCellMerge()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -196,9 +189,8 @@ mergeCells <- function(wb, sheet, cols, rows) {
 #' @examples
 #' int2col(1:10)
 int2col <- function(x) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!is.numeric(x)) {
     stop("x must be numeric.")
@@ -234,11 +226,10 @@ col2int <- function(x) {
 #' @param rows vector of row indices
 #' @author Alexander Walker
 #' @export
-#' @seealso \code{\link{mergeCells}}
+#' @seealso [mergeCells()]
 removeCellMerge <- function(wb, sheet, cols, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -257,8 +248,8 @@ removeCellMerge <- function(wb, sheet, cols, rows) {
 #' @param wb A workbook object
 #' @return Name of worksheet(s) for a given index
 #' @author Alexander Walker
-#' @seealso \code{\link{names}} to rename a worksheet in a Workbook
-#' @details DEPRECATED. Use \code{\link{names}}
+#' @seealso [names()] to rename a worksheet in a Workbook
+#' @details DEPRECATED. Use [names()]
 #' @export
 #' @examples
 #'
@@ -278,9 +269,8 @@ removeCellMerge <- function(wb, sheet, cols, rows) {
 #' names(wb)
 #' # openXL(wb)
 sheets <- function(wb) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -300,7 +290,7 @@ sheets <- function(wb) {
 #' @author Alexander Walker
 #' @param wb A Workbook object to attach the new worksheet
 #' @param sheetName A name for the new worksheet
-#' @param gridLines A logical. If \code{FALSE}, the worksheet grid lines will be hidden.
+#' @param gridLines A logical. If `FALSE`, the worksheet grid lines will be hidden.
 #' @param tabColour Colour of the worksheet tab. A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 #' @param zoom A numeric between 10 and 400. Worksheet zoom level as a percentage.
 #' @param header document header. Character vector of length 3 corresponding to positions left, center, right. Use NA to skip a position.
@@ -316,13 +306,13 @@ sheets <- function(wb) {
 #' @param vdpi Vertical DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.vdpi" = X)
 #' @details Headers and footers can contain special tags
 #' \itemize{
-#'   \item{\bold{&[Page]}}{ Page number}
-#'   \item{\bold{&[Pages]}}{ Number of pages}
-#'   \item{\bold{&[Date]}}{ Current date}
-#'   \item{\bold{&[Time]}}{ Current time}
-#'   \item{\bold{&[Path]}}{ File path}
-#'   \item{\bold{&[File]}}{ File name}
-#'   \item{\bold{&[Tab]}}{ Worksheet name}
+#'   \item{**&\[Page\]**}{ Page number}
+#'   \item{**&\[Pages\]**}{ Number of pages}
+#'   \item{**&\[Date\]**}{ Current date}
+#'   \item{**&\[Time\]**}{ Current time}
+#'   \item{**&\[Path\]**}{ File path}
+#'   \item{**&\[File\]**}{ File name}
+#'   \item{**&\[Tab\]**}{ Worksheet name}
 #' }
 #' @return XML tree
 #' @export
@@ -389,9 +379,8 @@ addWorksheet <- function(wb,
                          orientation = openxlsx_getOp("orientation", "portrait"),
                          vdpi = openxlsx_getOp("vdpi", 300),
                          hdpi = openxlsx_getOp("hdpi", 300)) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (inherits(wb, "list")) {
     wb <- wb[[1]]
@@ -552,7 +541,7 @@ cloneWorksheet <- function(wb, sheetName, clonedSheet) {
 #' @param wb A Workbook object containing a worksheet
 #' @param sheet The name or index of the worksheet to rename
 #' @param newName The new name of the worksheet. No longer than 31 chars.
-#' @details DEPRECATED. Use \code{\link{names}}
+#' @details DEPRECATED. Use [names()]
 #' @export
 #' @examples
 #'
@@ -582,9 +571,8 @@ renameWorksheet <- function(wb, sheet, newName) {
     stop("First argument must be a Workbook.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   invisible(wb$setSheetName(sheet, newName))
 }
@@ -604,13 +592,8 @@ renameWorksheet <- function(wb, sheet, newName) {
 convertFromExcelRef <- function(col) {
 
   ## increase scipen to avoid writing in scientific
-  exSciPen <- getOption("scipen")
-  od <- getOption("OutDec")
-  options("scipen" = 10000)
-  options("OutDec" = ".")
-
-  on.exit(options("scipen" = exSciPen), add = TRUE)
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   col <- toupper(col)
   charFlag <- grepl("[A-Z]", col)
@@ -634,7 +617,7 @@ convertFromExcelRef <- function(col) {
 #' @title Create a cell style
 #' @description Create a new style to apply to worksheet cells
 #' @author Alexander Walker
-#' @seealso \code{\link{addStyle}}
+#' @seealso [addStyle()]
 #' @param fontName A name of a font. Note the font name is not validated. If fontName is NULL,
 #' the workbook base font is used. (Defaults to Calibri)
 #' @param fontColour Colour of text in cell.  A valid hex colour beginning with "#"
@@ -644,32 +627,32 @@ convertFromExcelRef <- function(col) {
 #' If fontSize is NULL, the workbook base font size is used. (Defaults to 11)
 #' @param numFmt Cell formatting
 #' \itemize{
-#'   \item{\bold{GENERAL}}
-#'   \item{\bold{NUMBER}}
-#'   \item{\bold{CURRENCY}}
-#'   \item{\bold{ACCOUNTING}}
-#'   \item{\bold{DATE}}
-#'   \item{\bold{LONGDATE}}
-#'   \item{\bold{TIME}}
-#'   \item{\bold{PERCENTAGE}}
-#'   \item{\bold{FRACTION}}
-#'   \item{\bold{SCIENTIFIC}}
-#'   \item{\bold{TEXT}}
-#'   \item{\bold{COMMA}{  for comma separated thousands}}
+#'   \item{**GENERAL**}
+#'   \item{**NUMBER**}
+#'   \item{**CURRENCY**}
+#'   \item{**ACCOUNTING**}
+#'   \item{**DATE**}
+#'   \item{**LONGDATE**}
+#'   \item{**TIME**}
+#'   \item{**PERCENTAGE**}
+#'   \item{**FRACTION**}
+#'   \item{**SCIENTIFIC**}
+#'   \item{**TEXT**}
+#'   \item{**COMMA**{  for comma separated thousands}}
 #'   \item{For date/datetime styling a combination of d, m, y and punctuation marks}
 #'   \item{For numeric rounding use "0.00" with the preferred number of decimal places}
 #' }
 #'
 #' @param border Cell border. A vector of "top", "bottom", "left", "right" or a single string).
 #' \itemize{
-#'    \item{\bold{"top"}}{ Top border}
-#'    \item{\bold{bottom}}{ Bottom border}
-#'    \item{\bold{left}}{ Left border}
-#'    \item{\bold{right}}{ Right border}
-#'    \item{\bold{TopBottom} or \bold{c("top", "bottom")}}{ Top and bottom border}
-#'    \item{\bold{LeftRight} or \bold{c("left", "right")}}{ Left and right border}
-#'    \item{\bold{TopLeftRight} or \bold{c("top", "left", "right")}}{ Top, Left and right border}
-#'    \item{\bold{TopBottomLeftRight} or \bold{c("top", "bottom", "left", "right")}}{ All borders}
+#'    \item{**"top"**}{ Top border}
+#'    \item{**bottom**}{ Bottom border}
+#'    \item{**left**}{ Left border}
+#'    \item{**right**}{ Right border}
+#'    \item{**TopBottom** or **c("top", "bottom")**}{ Top and bottom border}
+#'    \item{**LeftRight** or **c("left", "right")**}{ Left and right border}
+#'    \item{**TopLeftRight** or **c("top", "left", "right")**}{ Top, Left and right border}
+#'    \item{**TopBottomLeftRight** or **c("top", "bottom", "left", "right")**}{ All borders}
 #'   }
 #'
 #' @param borderColour Colour of cell border vector the same length as the number of sides specified in "border"
@@ -677,57 +660,58 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param borderStyle Border line style vector the same length as the number of sides specified in "border"
 #' \itemize{
-#'    \item{\bold{none}}{ No Border}
-#'    \item{\bold{thin}}{ thin border}
-#'    \item{\bold{medium}}{ medium border}
-#'    \item{\bold{dashed}}{ dashed border}
-#'    \item{\bold{dotted}}{ dotted border}
-#'    \item{\bold{thick}}{ thick border}
-#'    \item{\bold{double}}{ double line border}
-#'    \item{\bold{hair}}{ Hairline border}
-#'    \item{\bold{mediumDashed}}{ medium weight dashed border}
-#'    \item{\bold{dashDot}}{ dash-dot border}
-#'    \item{\bold{mediumDashDot}}{ medium weight dash-dot border}
-#'    \item{\bold{dashDotDot}}{ dash-dot-dot border}
-#'    \item{\bold{mediumDashDotDot}}{ medium weight dash-dot-dot border}
-#'    \item{\bold{slantDashDot}}{ slanted dash-dot border}
+#'    \item{**none**}{ No Border}
+#'    \item{**thin**}{ thin border}
+#'    \item{**medium**}{ medium border}
+#'    \item{**dashed**}{ dashed border}
+#'    \item{**dotted**}{ dotted border}
+#'    \item{**thick**}{ thick border}
+#'    \item{**double**}{ double line border}
+#'    \item{**hair**}{ Hairline border}
+#'    \item{**mediumDashed**}{ medium weight dashed border}
+#'    \item{**dashDot**}{ dash-dot border}
+#'    \item{**mediumDashDot**}{ medium weight dash-dot border}
+#'    \item{**dashDotDot**}{ dash-dot-dot border}
+#'    \item{**mediumDashDotDot**}{ medium weight dash-dot-dot border}
+#'    \item{**slantDashDot**}{ slanted dash-dot border}
 #'   }
 #'
 #' @param bgFill Cell background fill colour.
 #' A valid colour (belonging to colours()) or a valid hex colour beginning with "#".
-#' --  \bold{Use for conditional formatting styles only.}
+#' --  **Use for conditional formatting styles only.**
 #' @param fgFill Cell foreground fill colour.
 #' A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 #'
 #' @param halign
 #' Horizontal alignment of cell contents
 #' \itemize{
-#'    \item{\bold{left}}{ Left horizontal align cell contents}
-#'    \item{\bold{right}}{ Right horizontal align cell contents}
-#'    \item{\bold{center}}{ Center horizontal align cell contents}
+#'    \item{**left**}{ Left horizontal align cell contents}
+#'    \item{**right**}{ Right horizontal align cell contents}
+#'    \item{**center**}{ Center horizontal align cell contents}
+#'    \item{**justify**}{ Justify horizontal align cell contents}
 #'   }
 #'
 #' @param valign A name
 #' Vertical alignment of cell contents
 #' \itemize{
-#'    \item{\bold{top}}{ Top vertical align cell contents}
-#'    \item{\bold{center}}{ Center vertical align cell contents}
-#'    \item{\bold{bottom}}{ Bottom vertical align cell contents}
+#'    \item{**top**}{ Top vertical align cell contents}
+#'    \item{**center**}{ Center vertical align cell contents}
+#'    \item{**bottom**}{ Bottom vertical align cell contents}
 #'   }
 #'
 #' @param textDecoration
 #' Text styling.
 #' \itemize{
-#'    \item{\bold{bold}}{ Bold cell contents}
-#'    \item{\bold{strikeout}}{ Strikeout cell contents}
-#'    \item{\bold{italic}}{ Italicise cell contents}
-#'    \item{\bold{underline}}{ Underline cell contents}
-#'    \item{\bold{underline2}}{ Double underline cell contents}
-#'    \item{\bold{accounting}}{ Single accounting underline cell contents}
-#'    \item{\bold{accounting2}}{ Double accounting underline cell contents}
+#'    \item{**bold**}{ Bold cell contents}
+#'    \item{**strikeout**}{ Strikeout cell contents}
+#'    \item{**italic**}{ Italicise cell contents}
+#'    \item{**underline**}{ Underline cell contents}
+#'    \item{**underline2**}{ Double underline cell contents}
+#'    \item{**accounting**}{ Single accounting underline cell contents}
+#'    \item{**accounting2**}{ Double accounting underline cell contents}
 #'   }
 #'
-#' @param wrapText Logical. If \code{TRUE} cell contents will wrap to fit in column.
+#' @param wrapText Logical. If `TRUE` cell contents will wrap to fit in column.
 #' @param textRotation Rotation of text in degrees. 255 for vertical text.
 #' @param indent Horizontal indentation of cell contents.
 #' @param hidden Whether the formula of the cell contents will be hidden (if worksheet protection is turned on)
@@ -780,9 +764,8 @@ createStyle <- function(fontName = NULL,
                         hidden = NULL) {
 
   ### Error checking
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## if num fmt is made up of dd, mm, yy
   numFmt_original <- numFmt[[1]]
@@ -822,7 +805,7 @@ createStyle <- function(fontName = NULL,
 
   if (!is.null(halign)) {
     halign <- tolower(halign[[1]])
-    if (!halign %in% c("left", "right", "center")) {
+    if (!halign %in% c("left", "right", "center", "justify")) {
       stop("Invalid halign argument!")
     }
   }
@@ -1010,10 +993,10 @@ createStyle <- function(fontName = NULL,
 #' @param style A style object returned from createStyle()
 #' @param rows Rows to apply style to.
 #' @param cols columns to apply style to.
-#' @param gridExpand If \code{TRUE}, style will be applied to all combinations of rows and cols.
-#' @param stack If \code{TRUE} the new style is merged with any existing cell styles.  If FALSE, any
+#' @param gridExpand If `TRUE`, style will be applied to all combinations of rows and cols.
+#' @param stack If `TRUE` the new style is merged with any existing cell styles.  If FALSE, any
 #' existing style is replaced by the new style.
-#' @seealso \code{\link{createStyle}}
+#' @seealso [createStyle()]
 #' @seealso expand.grid
 #' @export
 #' @examples
@@ -1048,9 +1031,8 @@ addStyle <- function(wb,
                      cols,
                      gridExpand = FALSE,
                      stack = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
 
   if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
@@ -1130,26 +1112,12 @@ getCellRefs <- function(cellCoords) {
     stop("Provide a data.frame containing integers!")
   }
 
-
-
-
-
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   l <- convert_to_excel_ref(cols = unlist(cellCoords[, 2]), LETTERS = LETTERS)
   paste0(l, cellCoords[, 1])
 }
-
-
-
-
-
-
-
-
-
 
 
 #' @name freezePane
@@ -1160,8 +1128,8 @@ getCellRefs <- function(cellCoords) {
 #' @param sheet A name or index of a worksheet
 #' @param firstActiveRow Top row of active region
 #' @param firstActiveCol Furthest left column of active region
-#' @param firstRow If \code{TRUE}, freezes the first row (equivalent to firstActiveRow = 2)
-#' @param firstCol If \code{TRUE}, freezes the first column (equivalent to firstActiveCol = 2)
+#' @param firstRow If `TRUE`, freezes the first row (equivalent to firstActiveRow = 2)
+#' @param firstCol If `TRUE`, freezes the first column (equivalent to firstActiveCol = 2)
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1184,9 +1152,8 @@ getCellRefs <- function(cellCoords) {
 #' saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)
 #' }
 freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, firstRow = FALSE, firstCol = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (is.null(firstActiveRow) & is.null(firstActiveCol) & !firstRow & !firstCol) {
     return(invisible(0))
@@ -1199,8 +1166,6 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   if (!is.logical(firstCol)) {
     stop("firstCol must be TRUE/FALSE")
   }
-
-
 
 
   if (firstRow & !firstCol) {
@@ -1258,7 +1223,7 @@ convert2EMU <- function(d, units) {
 #' @param units Units of width and height. Can be "in", "cm" or "px"
 #' @param dpi Image resolution used for conversion between units.
 #' @importFrom grDevices bmp png jpeg
-#' @seealso \code{\link{insertPlot}}
+#' @seealso [insertPlot()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1280,9 +1245,8 @@ convert2EMU <- function(d, units) {
 #' saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
 #' }
 insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, startCol = 1, units = "in", dpi = 300) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!file.exists(file)) {
     stop("File does not exist.")
@@ -1337,7 +1301,7 @@ pixels2ExcelColWidth <- function(pixels) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Indices of rows to set height
 #' @param heights Heights to set rows to specified in Excel column height units.
-#' @seealso \code{\link{removeRowHeights}}
+#' @seealso [removeRowHeights()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1367,9 +1331,8 @@ setRowHeights <- function(wb, sheet, rows, heights) {
     stop("Greater number of height values than rows.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## Remove duplicates
   heights <- heights[!duplicated(rows)]
@@ -1401,9 +1364,9 @@ setRowHeights <- function(wb, sheet, rows, heights) {
 #'
 #' NOTE: The calculation of column widths can be slow for large worksheets.
 #'
-#' NOTE: The \code{hidden} parameter may conflict with the one set in \code{groupColumns}; changing one will update the other.
+#' NOTE: The `hidden` parameter may conflict with the one set in `groupColumns`; changing one will update the other.
 #'
-#' @seealso \code{\link{removeColWidths}}
+#' @seealso [removeColWidths()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1427,9 +1390,8 @@ setRowHeights <- function(wb, sheet, rows, heights) {
 #' }
 #'
 setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, length(cols)), ignoreMergedCells = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -1532,7 +1494,7 @@ setColWidths <- function(wb, sheet, cols, widths = 8.43, hidden = rep(FALSE, len
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param cols Indices of columns to remove custom width (if any) from.
-#' @seealso \code{\link{setColWidths}}
+#' @seealso [setColWidths()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1550,9 +1512,8 @@ removeColWidths <- function(wb, sheet, cols) {
     cols <- convertFromExcelRef(cols)
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colWidths[[sheet]]))
   removeInds <- which(customCols %in% cols)
@@ -1577,7 +1538,7 @@ removeColWidths <- function(wb, sheet, cols) {
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
 #' @param rows Indices of rows to remove custom height (if any) from.
-#' @seealso \code{\link{setRowHeights}}
+#' @seealso [setRowHeights()]
 #' @export
 #' @examples
 #' ## Create a new workbook
@@ -1589,9 +1550,8 @@ removeColWidths <- function(wb, sheet, cols) {
 #' saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)
 #' }
 removeRowHeights <- function(wb, sheet, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -1610,15 +1570,15 @@ removeRowHeights <- function(wb, sheet, rows) {
 #' This file is then written to the workbook using insertImage.
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param startRow Row coordinate of upper left corner of figure. xy[[2]] when xy is given.
-#' @param startCol Column coordinate of upper left corner of figure. xy[[1]] when xy is given.
+#' @param startRow Row coordinate of upper left corner of figure.` xy[[2]]` when xy is given.
+#' @param startCol Column coordinate of upper left corner of figure. `xy[[1]]` when xy is given.
 #' @param xy Alternate way to specify startRow and startCol.  A vector of length 2 of form (startcol, startRow)
 #' @param width Width of figure. Defaults to 6in.
 #' @param height Height of figure . Defaults to 4in.
 #' @param fileType File type of image
 #' @param units Units of width and height. Can be "in", "cm" or "px"
 #' @param dpi Image resolution
-#' @seealso \code{\link{insertImage}}
+#' @seealso [insertImage()]
 #' @export
 #' @importFrom grDevices bmp png jpeg tiff dev.copy dev.list dev.off
 #' @examples
@@ -1652,9 +1612,8 @@ removeRowHeights <- function(wb, sheet, rows) {
 #' }
 insertPlot <- function(wb, sheet, width = 6, height = 4, xy = NULL,
                        startRow = 1, startCol = 1, fileType = "png", units = "in", dpi = 300) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (is.null(dev.list()[[1]])) {
     warning("No plot to insert.")
@@ -1714,7 +1673,7 @@ insertPlot <- function(wb, sheet, width = 6, height = 4, xy = NULL,
 #' @param newStyle A style to replace the existing style as position index
 #' @description Replace a style object
 #' @export
-#' @seealso \code{\link{getStyles}}
+#' @seealso [getStyles()]
 #' @examples
 #'
 #' ## load a workbook
@@ -1756,7 +1715,7 @@ replaceStyle <- function(wb, index, newStyle) {
 #' @description Returns list of style objects in the workbook
 #' @param wb A workbook object
 #' @export
-#' @seealso \code{\link{replaceStyle}}
+#' @seealso [replaceStyle()]
 #' @examples
 #' ## load a workbook
 #' wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
@@ -1817,7 +1776,7 @@ removeWorksheet <- function(wb, sheet) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Rows to delete data from.
 #' @param cols columns to delete data from.
-#' @param gridExpand If \code{TRUE}, all data in rectangle min(rows):max(rows) X min(cols):max(cols)
+#' @param gridExpand If `TRUE`, all data in rectangle min(rows):max(rows) X min(cols):max(cols)
 #' will be removed.
 #' @export
 #' @examples
@@ -1877,9 +1836,8 @@ modifyBaseFont <- function(wb, fontSize = 11, fontColour = "black", fontName = "
     stop("First argument must be a Workbook.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (fontSize < 0) stop("Invalid fontSize")
   fontColour <- validateColour(fontColour)
@@ -1927,16 +1885,16 @@ getBaseFont <- function(wb) {
 #' @param firstFooter document footer for first page only.
 #' @details Headers and footers can contain special tags
 #' \itemize{
-#'   \item{\bold{&[Page]}}{ Page number}
-#'   \item{\bold{&[Pages]}}{ Number of pages}
-#'   \item{\bold{&[Date]}}{ Current date}
-#'   \item{\bold{&[Time]}}{ Current time}
-#'   \item{\bold{&[Path]}}{ File path}
-#'   \item{\bold{&[File]}}{ File name}
-#'   \item{\bold{&[Tab]}}{ Worksheet name}
+#'   \item{**&\[Page\]**}{ Page number}
+#'   \item{**&\[Pages\]**}{ Number of pages}
+#'   \item{**&\[Date\]**}{ Current date}
+#'   \item{**&\[Time\]**}{ Current time}
+#'   \item{**&\[Path\]**}{ File path}
+#'   \item{**&\[File\]**}{ File name}
+#'   \item{**&\[Tab\]**}{ Worksheet name}
 #' }
 #' @export
-#' @seealso \code{\link{addWorksheet}} to set headers and footers when adding a worksheet
+#' @seealso [addWorksheet()] to set headers and footers when adding a worksheet
 #' @examples
 #' wb <- createWorkbook()
 #'
@@ -2019,9 +1977,8 @@ setHeaderFooter <- function(wb, sheet,
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   oddHeader <- headerFooterSub(header)
   oddFooter <- headerFooterSub(footer)
@@ -2073,8 +2030,8 @@ setHeaderFooter <- function(wb, sheet,
 #' @param bottom bottom page margin in inches
 #' @param header header margin in inches
 #' @param footer footer margin in inches
-#' @param fitToWidth If \code{TRUE}, worksheet is scaled to fit to page width on printing.
-#' @param fitToHeight If \code{TRUE}, worksheet is scaled to fit to page height on printing.
+#' @param fitToWidth If `TRUE`, worksheet is scaled to fit to page width on printing.
+#' @param fitToHeight If `TRUE`, worksheet is scaled to fit to page height on printing.
 #' @param paperSize See details. Default value is 9 (A4 paper).
 #' @param printTitleRows Rows to repeat at top of page when printing. Integer vector.
 #' @param printTitleCols Columns to repeat at left when printing. Integer vector.
@@ -2084,72 +2041,72 @@ setHeaderFooter <- function(wb, sheet,
 #' @details
 #' paperSize is an integer corresponding to:
 #' \itemize{
-#' \item{\bold{1}}{ Letter paper (8.5 in. by 11 in.)}
-#' \item{\bold{2}}{ Letter small paper (8.5 in. by 11 in.)}
-#' \item{\bold{3}}{ Tabloid paper (11 in. by 17 in.)}
-#' \item{\bold{4}}{ Ledger paper (17 in. by 11 in.)}
-#' \item{\bold{5}}{ Legal paper (8.5 in. by 14 in.)}
-#' \item{\bold{6}}{ Statement paper (5.5 in. by 8.5 in.)}
-#' \item{\bold{7}}{ Executive paper (7.25 in. by 10.5 in.)}
-#' \item{\bold{8}}{ A3 paper (297 mm by 420 mm)}
-#' \item{\bold{9}}{ A4 paper (210 mm by 297 mm)}
-#' \item{\bold{10}}{ A4 small paper (210 mm by 297 mm)}
-#' \item{\bold{11}}{ A5 paper (148 mm by 210 mm)}
-#' \item{\bold{12}}{ B4 paper (250 mm by 353 mm)}
-#' \item{\bold{13}}{ B5 paper (176 mm by 250 mm)}
-#' \item{\bold{14}}{ Folio paper (8.5 in. by 13 in.)}
-#' \item{\bold{15}}{ Quarto paper (215 mm by 275 mm)}
-#' \item{\bold{16}}{ Standard paper (10 in. by 14 in.)}
-#' \item{\bold{17}}{ Standard paper (11 in. by 17 in.)}
-#' \item{\bold{18}}{ Note paper (8.5 in. by 11 in.)}
-#' \item{\bold{19}}{ #9 envelope (3.875 in. by 8.875 in.)}
-#' \item{\bold{20}}{ #10 envelope (4.125 in. by 9.5 in.)}
-#' \item{\bold{21}}{ #11 envelope (4.5 in. by 10.375 in.)}
-#' \item{\bold{22}}{ #12 envelope (4.75 in. by 11 in.)}
-#' \item{\bold{23}}{ #14 envelope (5 in. by 11.5 in.)}
-#' \item{\bold{24}}{ C paper (17 in. by 22 in.)}
-#' \item{\bold{25}}{ D paper (22 in. by 34 in.)}
-#' \item{\bold{26}}{ E paper (34 in. by 44 in.)}
-#' \item{\bold{27}}{ DL envelope (110 mm by 220 mm)}
-#' \item{\bold{28}}{ C5 envelope (162 mm by 229 mm)}
-#' \item{\bold{29}}{ C3 envelope (324 mm by 458 mm)}
-#' \item{\bold{30}}{ C4 envelope (229 mm by 324 mm)}
-#' \item{\bold{31}}{ C6 envelope (114 mm by 162 mm)}
-#' \item{\bold{32}}{ C65 envelope (114 mm by 229 mm)}
-#' \item{\bold{33}}{ B4 envelope (250 mm by 353 mm)}
-#' \item{\bold{34}}{ B5 envelope (176 mm by 250 mm)}
-#' \item{\bold{35}}{ B6 envelope (176 mm by 125 mm)}
-#' \item{\bold{36}}{ Italy envelope (110 mm by 230 mm)}
-#' \item{\bold{37}}{ Monarch envelope (3.875 in. by 7.5 in.).}
-#' \item{\bold{38}}{ 6 3/4 envelope (3.625 in. by 6.5 in.)}
-#' \item{\bold{39}}{ US standard fanfold (14.875 in. by 11 in.)}
-#' \item{\bold{40}}{ German standard fanfold (8.5 in. by 12 in.)}
-#' \item{\bold{41}}{ German legal fanfold (8.5 in. by 13 in.)}
-#' \item{\bold{42}}{ ISO B4 (250 mm by 353 mm)}
-#' \item{\bold{43}}{ Japanese double postcard (200 mm by 148 mm)}
-#' \item{\bold{44}}{ Standard paper (9 in. by 11 in.)}
-#' \item{\bold{45}}{ Standard paper (10 in. by 11 in.)}
-#' \item{\bold{46}}{ Standard paper (15 in. by 11 in.)}
-#' \item{\bold{47}}{ Invite envelope (220 mm by 220 mm)}
-#' \item{\bold{50}}{ Letter extra paper (9.275 in. by 12 in.)}
-#' \item{\bold{51}}{ Legal extra paper (9.275 in. by 15 in.)}
-#' \item{\bold{52}}{ Tabloid extra paper (11.69 in. by 18 in.)}
-#' \item{\bold{53}}{ A4 extra paper (236 mm by 322 mm)}
-#' \item{\bold{54}}{ Letter transverse paper (8.275 in. by 11 in.)}
-#' \item{\bold{55}}{ A4 transverse paper (210 mm by 297 mm)}
-#' \item{\bold{56}}{ Letter extra transverse paper (9.275 in. by 12 in.)}
-#' \item{\bold{57}}{ SuperA/SuperA/A4 paper (227 mm by 356 mm)}
-#' \item{\bold{58}}{ SuperB/SuperB/A3 paper (305 mm by 487 mm)}
-#' \item{\bold{59}}{ Letter plus paper (8.5 in. by 12.69 in.)}
-#' \item{\bold{60}}{ A4 plus paper (210 mm by 330 mm)}
-#' \item{\bold{61}}{ A5 transverse paper (148 mm by 210 mm)}
-#' \item{\bold{62}}{ JIS B5 transverse paper (182 mm by 257 mm)}
-#' \item{\bold{63}}{ A3 extra paper (322 mm by 445 mm)}
-#' \item{\bold{64}}{ A5 extra paper (174 mm by 235 mm)}
-#' \item{\bold{65}}{ ISO B5 extra paper (201 mm by 276 mm)}
-#' \item{\bold{66}}{ A2 paper (420 mm by 594 mm)}
-#' \item{\bold{67}}{ A3 transverse paper (297 mm by 420 mm)}
-#' \item{\bold{68}}{ A3 extra transverse paper (322 mm by 445 mm)}
+#' \item{**1**}{ Letter paper (8.5 in. by 11 in.)}
+#' \item{**2**}{ Letter small paper (8.5 in. by 11 in.)}
+#' \item{**3**}{ Tabloid paper (11 in. by 17 in.)}
+#' \item{**4**}{ Ledger paper (17 in. by 11 in.)}
+#' \item{**5**}{ Legal paper (8.5 in. by 14 in.)}
+#' \item{**6**}{ Statement paper (5.5 in. by 8.5 in.)}
+#' \item{**7**}{ Executive paper (7.25 in. by 10.5 in.)}
+#' \item{**8**}{ A3 paper (297 mm by 420 mm)}
+#' \item{**9**}{ A4 paper (210 mm by 297 mm)}
+#' \item{**10**}{ A4 small paper (210 mm by 297 mm)}
+#' \item{**11**}{ A5 paper (148 mm by 210 mm)}
+#' \item{**12**}{ B4 paper (250 mm by 353 mm)}
+#' \item{**13**}{ B5 paper (176 mm by 250 mm)}
+#' \item{**14**}{ Folio paper (8.5 in. by 13 in.)}
+#' \item{**15**}{ Quarto paper (215 mm by 275 mm)}
+#' \item{**16**}{ Standard paper (10 in. by 14 in.)}
+#' \item{**17**}{ Standard paper (11 in. by 17 in.)}
+#' \item{**18**}{ Note paper (8.5 in. by 11 in.)}
+#' \item{**19**}{ #9 envelope (3.875 in. by 8.875 in.)}
+#' \item{**20**}{ #10 envelope (4.125 in. by 9.5 in.)}
+#' \item{**21**}{ #11 envelope (4.5 in. by 10.375 in.)}
+#' \item{**22**}{ #12 envelope (4.75 in. by 11 in.)}
+#' \item{**23**}{ #14 envelope (5 in. by 11.5 in.)}
+#' \item{**24**}{ C paper (17 in. by 22 in.)}
+#' \item{**25**}{ D paper (22 in. by 34 in.)}
+#' \item{**26**}{ E paper (34 in. by 44 in.)}
+#' \item{**27**}{ DL envelope (110 mm by 220 mm)}
+#' \item{**28**}{ C5 envelope (162 mm by 229 mm)}
+#' \item{**29**}{ C3 envelope (324 mm by 458 mm)}
+#' \item{**30**}{ C4 envelope (229 mm by 324 mm)}
+#' \item{**31**}{ C6 envelope (114 mm by 162 mm)}
+#' \item{**32**}{ C65 envelope (114 mm by 229 mm)}
+#' \item{**33**}{ B4 envelope (250 mm by 353 mm)}
+#' \item{**34**}{ B5 envelope (176 mm by 250 mm)}
+#' \item{**35**}{ B6 envelope (176 mm by 125 mm)}
+#' \item{**36**}{ Italy envelope (110 mm by 230 mm)}
+#' \item{**37**}{ Monarch envelope (3.875 in. by 7.5 in.).}
+#' \item{**38**}{ 6 3/4 envelope (3.625 in. by 6.5 in.)}
+#' \item{**39**}{ US standard fanfold (14.875 in. by 11 in.)}
+#' \item{**40**}{ German standard fanfold (8.5 in. by 12 in.)}
+#' \item{**41**}{ German legal fanfold (8.5 in. by 13 in.)}
+#' \item{**42**}{ ISO B4 (250 mm by 353 mm)}
+#' \item{**43**}{ Japanese double postcard (200 mm by 148 mm)}
+#' \item{**44**}{ Standard paper (9 in. by 11 in.)}
+#' \item{**45**}{ Standard paper (10 in. by 11 in.)}
+#' \item{**46**}{ Standard paper (15 in. by 11 in.)}
+#' \item{**47**}{ Invite envelope (220 mm by 220 mm)}
+#' \item{**50**}{ Letter extra paper (9.275 in. by 12 in.)}
+#' \item{**51**}{ Legal extra paper (9.275 in. by 15 in.)}
+#' \item{**52**}{ Tabloid extra paper (11.69 in. by 18 in.)}
+#' \item{**53**}{ A4 extra paper (236 mm by 322 mm)}
+#' \item{**54**}{ Letter transverse paper (8.275 in. by 11 in.)}
+#' \item{**55**}{ A4 transverse paper (210 mm by 297 mm)}
+#' \item{**56**}{ Letter extra transverse paper (9.275 in. by 12 in.)}
+#' \item{**57**}{ SuperA/SuperA/A4 paper (227 mm by 356 mm)}
+#' \item{**58**}{ SuperB/SuperB/A3 paper (305 mm by 487 mm)}
+#' \item{**59**}{ Letter plus paper (8.5 in. by 12.69 in.)}
+#' \item{**60**}{ A4 plus paper (210 mm by 330 mm)}
+#' \item{**61**}{ A5 transverse paper (148 mm by 210 mm)}
+#' \item{**62**}{ JIS B5 transverse paper (182 mm by 257 mm)}
+#' \item{**63**}{ A3 extra paper (322 mm by 445 mm)}
+#' \item{**64**}{ A5 extra paper (174 mm by 235 mm)}
+#' \item{**65**}{ ISO B5 extra paper (201 mm by 276 mm)}
+#' \item{**66**}{ A2 paper (420 mm by 594 mm)}
+#' \item{**67**}{ A3 transverse paper (297 mm by 420 mm)}
+#' \item{**68**}{ A3 extra transverse paper (322 mm by 445 mm)}
 #' }
 #' @examples
 #' wb <- createWorkbook()
@@ -2183,9 +2140,8 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
                       fitToWidth = FALSE, fitToHeight = FALSE, paperSize = NULL,
                       printTitleRows = NULL, printTitleCols = NULL,
                       summaryRow = NULL, summaryCol = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -2478,7 +2434,7 @@ protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure =
 #' @author Alexander Walker
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param showGridLines A logical. If \code{FALSE}, grid lines are hidden.
+#' @param showGridLines A logical. If `FALSE`, grid lines are hidden.
 #' @export
 #' @examples
 #' wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
@@ -2489,9 +2445,8 @@ protectWorkbook <- function(wb, protect = TRUE, password = NULL, lockStructure =
 #' saveWorkbook(wb, "showGridLinesExample.xlsx", overwrite = TRUE)
 #' }
 showGridLines <- function(wb, sheet, showGridLines = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -2601,7 +2556,7 @@ worksheetOrder <- function(wb) {
 #' @param origin date. Default value is for Windows Excel 2010
 #' @param ... additional parameters passed to as.Date()
 #' @details Excel stores dates as number of days from some origin day
-#' @seealso \code{\link{writeData}}
+#' @seealso [writeData()]
 #' @export
 #' @examples
 #' ## 2014 April 21st to 25th
@@ -2635,9 +2590,8 @@ convertToDate <- function(x, origin = "1900-01-01", ...) {
 #' convertToDateTime(x, tz = "Australia/Perth")
 #' convertToDateTime(x, tz = "UTC")
 convertToDateTime <- function(x, origin = "1900-01-01", ...) {
-  sci_pen <- getOption("scipen")
-  options("scipen" = 10000)
-  on.exit(options("scipen" = sci_pen), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   x <- as.numeric(x)
   date <- convertToDate(x, origin)
@@ -2668,7 +2622,7 @@ convertToDateTime <- function(x, origin = "1900-01-01", ...) {
 #' @aliases names.Workbook
 #' @export
 #' @method names Workbook
-#' @param x A \code{Workbook} object
+#' @param x A `Workbook` object
 #' @examples
 #'
 #' wb <- createWorkbook()
@@ -2689,9 +2643,8 @@ names.Workbook <- function(x) {
 #' @param value a character vector the same length as wb
 #' @export
 `names<-.Workbook` <- function(x, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (any(duplicated(tolower(value)))) {
     stop("Worksheet names must be unique.")
@@ -2735,7 +2688,7 @@ names.Workbook <- function(x) {
 #' 
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
 #' @export
-#' @seealso \code{\link{getNamedRegions}}
+#' @seealso [getNamedRegions()]
 #' @examples
 #' ## create named regions
 #' wb <- createWorkbook()
@@ -2777,9 +2730,8 @@ names.Workbook <- function(x) {
 #' 
 #' @rdname NamedRegion
 createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -2858,7 +2810,7 @@ deleteNamedRegion <- function(wb, name) {
 #' Workbook object
 #' @param x An xlsx file or Workbook object
 #' @export
-#' @seealso \code{\link{createNamedRegion}}
+#' @seealso [createNamedRegion()]
 #' @examples
 #' ## create named regions
 #' wb <- createWorkbook()
@@ -2946,12 +2898,12 @@ getNamedRegions.Workbook <- function(x) {
 #' @param sheet A name or index of a worksheet
 #' @param cols columns to add filter to.
 #' @param rows A row number.
-#' @seealso \code{\link{writeData}}
+#' @seealso [writeData()]
 #' @details adds filters to worksheet columns, same as filter parameters in writeData.
 #' writeDataTable automatically adds filters to first row of a table.
 #' NOTE Can only have a single filter per worksheet unless using tables.
 #' @export
-#' @seealso \code{\link{addFilter}}
+#' @seealso [addFilter()]
 #' @examples
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "Sheet 1")
@@ -2970,9 +2922,8 @@ getNamedRegions.Workbook <- function(x) {
 #' saveWorkbook(wb, file = "addFilterExample.xlsx", overwrite = TRUE)
 #' }
 addFilter <- function(wb, sheet, rows, cols) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -3217,9 +3168,8 @@ setFooter <- function(wb, text, position = "center") {
 #'
 #' # openXL(wb)
 dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBlank = TRUE, showInputMsg = TRUE, showErrorMsg = TRUE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   ## rows and cols
   if (!is.numeric(cols)) {
@@ -3345,9 +3295,9 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
 #' @author Alexander Walker
 #' @param xlsxFile An xlsx or xlsm file.
 #' @details Excel stores dates as the number of days from either 1904-01-01 or 1900-01-01. This function
-#' checks the date origin being used in an Excel file and returns is so it can be used in \code{\link{convertToDate}}
+#' checks the date origin being used in an Excel file and returns is so it can be used in [convertToDate()]
 #' @return One of "1900-01-01" or "1904-01-01".
-#' @seealso \code{\link{convertToDate}}
+#' @seealso [convertToDate()]
 #' @examples
 #'
 #' ## create a file with some dates
@@ -3476,9 +3426,8 @@ sheetVisibility <- function(wb) {
 #' @param value a logical/character vector the same length as sheetVisibility(wb)
 #' @export
 `sheetVisibility<-` <- function(wb, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   value <- tolower(as.character(value))
   if (!any(value %in% c("true", "visible"))) {
@@ -3525,7 +3474,7 @@ sheetVisibility <- function(wb) {
 #' @param i row or column number to insert page break.
 #' @param type One of "row" or "column" for a row break or column break.
 #' @export
-#' @seealso \code{\link{addWorksheet}}
+#' @seealso [addWorksheet()]
 #' @examples
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "Sheet 1")
@@ -3539,9 +3488,8 @@ sheetVisibility <- function(wb) {
 #' }
 #' ## In Excel: View tab -> Page Break Preview
 pageBreak <- function(wb, sheet, i, type = "row") {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -3596,7 +3544,7 @@ pageBreak <- function(wb, sheet, i, type = "row") {
 
 #' @name conditionalFormat
 #' @title Add conditional formatting to cells
-#' @description DEPRECATED! USE \code{\link{conditionalFormatting}}
+#' @description DEPRECATED! USE [conditionalFormatting()]
 #' @author Alexander Walker
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
@@ -3604,13 +3552,13 @@ pageBreak <- function(wb, sheet, i, type = "row") {
 #' @param rows Rows to apply conditional formatting to
 #' @param rule The condition under which to apply the formatting or a vector of colours. See examples.
 #' @param style A style to apply to those cells that satisfy the rule. A Style object returned from createStyle()
-#' @details DEPRECATED! USE \code{\link{conditionalFormatting}}
+#' @details DEPRECATED! USE [conditionalFormatting()]
 #'
 #' Valid operators are "<", "<=", ">", ">=", "==", "!=". See Examples.
 #' Default style given by: createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
 #' @param type Either 'expression', 'colorscale' or 'databar'. If 'expression' the formatting is determined
 #' by a formula.  If colorScale cells are coloured based on cell value. See examples.
-#' @seealso \code{\link{createStyle}}
+#' @seealso [createStyle()]
 #' @export
 conditionalFormat <- function(wb, sheet, cols, rows, rule = NULL, style = NULL, type = "expression") {
   warning("conditionalFormat() has been deprecated. Use conditionalFormatting().")
@@ -3692,8 +3640,8 @@ conditionalFormat <- function(wb, sheet, cols, rows, rule = NULL, style = NULL, 
 #' @title Check equality of workbooks
 #' @description Check equality of workbooks
 #' @method all.equal Workbook
-#' @param target A \code{Workbook} object
-#' @param current A \code{Workbook} object
+#' @param target A `Workbook` object
+#' @param current A `Workbook` object
 #' @param ... ignored
 all.equal.Workbook <- function(target, current, ...) {
 
@@ -4281,7 +4229,7 @@ getTables <- function(wb, sheet) {
 #' @description List Excel tables in a workbook
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param table Name of table to remove. See \code{\link{getTables}}
+#' @param table Name of table to remove. See [getTables()]
 #' @return character vector of table names on the specified sheet
 #' @examples
 #'
@@ -4374,14 +4322,13 @@ removeTable <- function(wb, sheet, table) {
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
 #' @details Group columns together, with the option to hide them.
 #'
-#' NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will update the other.
-#' @seealso \code{\link{ungroupColumns}} to ungroup columns. \code{\link{groupRows}} for grouping rows.
+#' NOTE: [setColWidths()] has a conflicting `hidden` parameter; changing one will update the other.
+#' @seealso [ungroupColumns()] to ungroup columns. [groupRows()] for grouping rows.
 #' @export
 #'
 groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   sheet <- wb$validateSheet(sheet)
 
@@ -4476,7 +4423,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
 #' @param sheet A name or index of a worksheet
 #' @param cols Indices of columns to ungroup
 #' @details If column was previously hidden, it will now be shown
-#' @seealso \code{\link{ungroupRows}} To ungroup rows
+#' @seealso [ungroupRows()] To ungroup rows
 #' @export
 
 ungroupColumns <- function(wb, sheet, cols) {
@@ -4494,9 +4441,8 @@ ungroupColumns <- function(wb, sheet, cols) {
     stop("Invalid columns selected (<= 0).")
   }
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
   removeInds <- which(customCols %in% cols)
@@ -4529,7 +4475,7 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Indices of rows to group
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
-#' @seealso \code{\link{ungroupRows}} to ungroup rows. \code{\link{groupColumns}} for grouping columns.
+#' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
 #' @export
 
 groupRows <- function(wb, sheet, rows, hidden = FALSE) {
@@ -4553,9 +4499,8 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   hidden <- rep(as.character(as.integer(hidden)), length.out = length(rows))
 
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   levels <- rep("1", length(rows))
 
@@ -4577,13 +4522,12 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Indices of rows to ungroup
 #' @details If row was previously hidden, it will now be shown
-#' @seealso \code{\link{ungroupColumns}}
+#' @seealso [ungroupColumns()]
 #' @export
 
 ungroupRows <- function(wb, sheet, rows) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
@@ -4701,17 +4645,13 @@ activeSheet <- function(wb) {
 #' @param value index of the active sheet or name of the active sheet
 #' @export
 `activeSheet<-` <- function(wb, value) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
 
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
 
-
-
   invisible(wb$setactiveSheet(value))
-
   invisible(wb)
 }

@@ -15,7 +15,7 @@ writeComment(wb, sheet, col, row, comment, xy = NULL)
 
 \item{row}{A row number.}
 
-\item{comment}{A Comment object. See \code{\link{createComment}}.}
+\item{comment}{A Comment object. See \code{\link[=createComment]{createComment()}}.}
 
 \item{xy}{An alternative to specifying \code{col} and
 \code{row} individually.  A vector of the form
@@ -43,5 +43,5 @@ saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)
 }
 }
 \seealso{
-\code{\link{createComment}}
+\code{\link[=createComment]{createComment()}}
 }

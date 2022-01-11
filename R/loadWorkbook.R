@@ -11,7 +11,7 @@
 #' formatting of the original .xlsx file.
 #' @return Workbook object.
 #' @export
-#' @seealso \code{\link{removeWorksheet}}
+#' @seealso [removeWorksheet()]
 #' @examples
 #' ## load existing workbook from package folder
 #' wb <- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
@@ -223,6 +223,11 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$workbook$calcPr <- calcPr
     }
 
+    ## additional workbook attributes
+    extLst <- getChildlessNode(xml = workbook, tag = "extLst")
+    if (length(extLst) > 0) {
+      wb$workbook$extLst <- extLst
+    }
 
     workbookPr <- getChildlessNode(xml = workbook, tag = "workbookPr")
     if (length(workbookPr) > 0) {

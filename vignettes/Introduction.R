@@ -242,8 +242,8 @@
 #  
 #  ## read historical prices from yahoo finance
 #  ticker <- "CBA.AX"
-#  csv.url <- paste("http://ichart.finance.yahoo.com/table.csv?s=",
-#  ticker, "&a=01&b=9&c=2009&d=01&e=9&f=2014&g=d&ignore=.csv")
+#  csv.url <- paste0("https://query1.finance.yahoo.com/v7/finance/download/",
+#  ticker, "?period1=1597597610&period2=1629133610&interval=1d&events=history&includeAdjustedClose=true")
 #  prices <- read.csv(url(csv.url), as.is = TRUE)
 #  prices$Date <- as.Date(prices$Date)
 #  close <- prices$Close

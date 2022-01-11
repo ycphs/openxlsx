@@ -21,10 +21,10 @@ Group a selection of columns
 \details{
 Group columns together, with the option to hide them.
 
-NOTE: \code{\link{setColWidths}} has a conflicting \code{hidden} parameter; changing one will update the other.
+NOTE: \code{\link[=setColWidths]{setColWidths()}} has a conflicting \code{hidden} parameter; changing one will update the other.
 }
 \seealso{
-\code{\link{ungroupColumns}} to ungroup columns. \code{\link{groupRows}} for grouping rows.
+\code{\link[=ungroupColumns]{ungroupColumns()}} to ungroup columns. \code{\link[=groupRows]{groupRows()}} for grouping rows.
 }
 \author{
 Joshua Sturm

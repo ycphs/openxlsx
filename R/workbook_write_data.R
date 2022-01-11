@@ -100,7 +100,13 @@ Workbook$methods(writeData = function(
   ##
   if ("list" %in% allColClasses) {
     for (i in which(sapply(colClasses, function(x) "list" %in% x))) {
-      df[[i]] <- sapply(lapply(df[[i]], unlist), stri_join, collapse = list_sep)
+      # check for and replace NA
+      df_i <- lapply(df[[i]], unlist)
+      df_i <- lapply(df_i, function(x) {
+        x[is.na(x)] <- na.string
+        x
+      })
+      df[[i]] <- sapply(df_i, stri_join, collapse = list_sep)
     }
   }
 

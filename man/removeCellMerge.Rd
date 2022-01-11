@@ -20,7 +20,7 @@ Unmerges any merged cells that intersect
 with the region specified by, min(cols):max(cols) X min(rows):max(rows)
 }
 \seealso{
-\code{\link{mergeCells}}
+\code{\link[=mergeCells]{mergeCells()}}
 }
 \author{
 Alexander Walker

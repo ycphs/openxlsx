@@ -10,7 +10,7 @@
 #' @param col column number of letter for hyperlink to link to
 #' @param text display text
 #' @param file Excel file name to point to. If NULL hyperlink is internal.
-#' @seealso \code{\link{writeFormula}}
+#' @seealso [writeFormula()]
 #' @export makeHyperlinkString
 #' @examples
 #'
@@ -84,9 +84,8 @@
 #' }
 #'
 makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NULL) {
-  od <- getOption("OutDec")
-  options("OutDec" = ".")
-  on.exit(expr = options("OutDec" = od), add = TRUE)
+  op <- get_set_options()
+  on.exit(options(op), add = TRUE)
   
   if (missing(sheet)) {
     if (!missing(row) || !missing(col)) warning("Option for col and/or row found, but no sheet was provided.")

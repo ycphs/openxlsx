@@ -18,20 +18,20 @@
 
 
 Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 305430528 != reported length 913353230
+  downloaded length 1472127733 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 305430528 != reported length 913353230
+  downloaded length 1472127733 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -42,20 +42,20 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz' failed
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
 In addition: Warning messages:
 1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 305430528 != reported length 913353230
+  downloaded length 1472127733 != reported length 1623464748
 2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 305430528 != reported length 913353230
+  downloaded length 1472127733 != reported length 1623464748
 3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.13/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
 
 
 ```
@@ -125,7 +125,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
-# cbaf
+# bruceR
 
 <details>
 
@@ -192,6 +192,39 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 ```
 # CNVPanelizer
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# CoTiMA
 
 <details>
 
@@ -327,7 +360,7 @@ Run `revdep_details(, "emdi")` for more info
 ** byte-compile and prepare package for lazy loading
 Error in dyn.load(file, DLLpath = DLLpath, ...) : 
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
+  libgdal.so.20: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
@@ -348,7 +381,7 @@ ERROR: lazy loading failed for package ‘emdi’
 ** byte-compile and prepare package for lazy loading
 Error in dyn.load(file, DLLpath = DLLpath, ...) : 
   unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
+  libgdal.so.20: cannot open shared object file: No such file or directory
 Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘emdi’
@@ -422,47 +455,14 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# genekitr
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # hypeR
 
 <details>
 
-* Version: 1.8.0
+* Version: 1.10.0
 * GitHub: https://github.com/montilab/hypeR
 * Source code: https://github.com/cran/hypeR
-* Date/Publication: 2021-05-19
+* Date/Publication: 2021-10-26
 * Number of recursive dependencies: 154
 
 Run `revdep_details(, "hypeR")` for more info
@@ -680,42 +680,40 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# openPrimeR
+# parameters
 
 <details>
 
-* Version: 1.14.0
-* GitHub: NA
-* Source code: https://github.com/cran/openPrimeR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 165
-
-Run `revdep_details(, "openPrimeR")` for more info
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
 
 </details>
 
-## In both
+## Error before installation
 
-*   R CMD check timed out
-    
+### Devel
 
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .travis.yml
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
+```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is 12.8Mb
-      sub-directories of 1Mb or more:
-        R         1.3Mb
-        extdata  10.3Mb
-    ```
 
-# parameters
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# Pigengene
 
 <details>
 
@@ -818,11 +816,11 @@ Run `revdep_details(, "openPrimeR")` for more info
 
 <details>
 
-* Version: 1.2.0
+* Version: 1.4.0
 * GitHub: NA
 * Source code: https://github.com/cran/sangeranalyseR
-* Date/Publication: 2021-05-19
-* Number of recursive dependencies: 142
+* Date/Publication: 2021-10-26
+* Number of recursive dependencies: 135
 
 Run `revdep_details(, "sangeranalyseR")` for more info
 
@@ -842,6 +840,23 @@ Run `revdep_details(, "sangeranalyseR")` for more info
       docs/wallpaperflare.com_wallpaper (1).jpg
     These are not fully portable file names.
     See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    Found the following non-portable file paths:
+      sangeranalyseR/docs/build/html/_downloads/081987116457968e1b81ae1616525c7d/Sanger_contigs_unalignment.fa
+      sangeranalyseR/docs/build/html/_downloads/13b875bc704f73b8bd67dc07d86fc474/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/144d09562ae5b2c7dc079e4bc2b33fb7/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/165af37e8893cfdfa4dba91c44cd791b/Sanger_contigs_unalignment.fa
+      sangeranalyseR/docs/build/html/_downloads/345ac400befc4f176c75732770ec3fcb/Achl_RBNII384-13_contig.fa
+    ...
+      sangeranalyseR/docs/build/html/_downloads/a664bed9cc5d32924dc2ce60f8c60554/Sanger_all_trimmed_reads.fa
+      sangeranalyseR/docs/build/html/_downloads/b608796fffaaa7335a7341cffc9a9db7/Achl_ACHLO006-09_contig.fa
+      sangeranalyseR/docs/build/html/_downloads/b6b18aa3e34c6ae0be86c3940972dd38/Sanger_contigs_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/eeb554b575ee5b29ef733dafbf876c36/Achl_RBNII384-13_reads_alignment.fa
+      sangeranalyseR/docs/build/html/_downloads/fef71e7b2e1e49c01df301435e972047/Sanger_contigs_unalignment.fa
+    
+    Tarballs are only required to store paths of up to 100 bytes and cannot
+    store those of more than 256 bytes, with restrictions including to 100
+    bytes for the final component.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
     ```
 
 *   checking package dependencies ... NOTE
@@ -851,7 +866,7 @@ Run `revdep_details(, "sangeranalyseR")` for more info
       'phangorn', 'sangerseqR', 'gridExtra', 'shiny', 'shinydashboard',
       'shinyjs', 'data.table', 'plotly', 'DT', 'zeallot', 'excelR',
       'shinycssloaders', 'ggdendro', 'shinyWidgets', 'openxlsx', 'tools',
-      'rmarkdown', 'kableExtra', 'seqinr', 'BiocStyle', 'logger'
+      'rmarkdown', 'knitr', 'seqinr', 'BiocStyle', 'logger'
     Adding so many packages to the search path is excessive and importing
     selectively is preferable.
     ```
@@ -973,10 +988,10 @@ ERROR: lazy loading failed for package ‘sangeranalyseR’
 
 <details>
 
-* Version: 3.20.1
+* Version: 3.22.1
 * GitHub: NA
 * Source code: https://github.com/cran/TPP
-* Date/Publication: 2021-07-27
+* Date/Publication: 2021-11-04
 * Number of recursive dependencies: 95
 
 Run `revdep_details(, "TPP")` for more info

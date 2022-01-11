@@ -11,19 +11,19 @@
 #'
 #' @seealso
 #' \itemize{
-#'    \item{\code{vignette("Introduction", package = "openxlsx")}}
-#'    \item{\code{vignette("formatting", package = "openxlsx")}}
-#'    \item{\code{\link{writeData}}}
-#'    \item{\code{\link{writeDataTable}}}
-#'    \item{\code{\link{write.xlsx}}}
-#'    \item{\code{\link{read.xlsx}}}
-#'    \item{\code{\link{op.openxlsx}}}
+#'    \item{`vignette("Introduction", package = "openxlsx")`}
+#'    \item{`vignette("formatting", package = "openxlsx")`}
+#'    \item{[writeData()]}
+#'    \item{[writeDataTable()]}
+#'    \item{[write.xlsx()]}
+#'    \item{[read.xlsx()]}
+#'    \item{[op.openxlsx()]}
 #'   }
 #' for examples
 #'
 #' @details
 #' The openxlsx package uses global options, most to simplify formatting.  These
-#'   are stored in the \code{op.openxlsx} object.
+#'   are stored in the `op.openxlsx` object.
 #'
 #' \describe{
 #'  \item{openxlsx.bandedCols}{FALSE}
@@ -44,8 +44,8 @@
 #'  \item{openxlsx.tabColour}{"TableStyleLight9"}
 #'  \item{openxlsx.tableStyle}{"TableStyleLight9"}
 #'  \item{openxlsx.withFilter}{NA Whether to write data with or without a 
-#'  filter. If NA will make filters with \code{writeDataTable} and will not for
-#'  \code{writeData}}
+#'  filter. If NA will make filters with `writeDataTable` and will not for
+#'  `writeData`}
 #' }
 #' 
 #' See the Formatting vignette for examples.
@@ -61,13 +61,13 @@
 #' 
 #' @details
 #' 
-#' \code{openxlsx_getOp()} retrieves the \code{"openxlsx"} options found in
-#'   \code{op.openxlsx}.  If none are set (currently `NULL`) retrieves the 
-#'   default option from \code{op.openxlsx}.  This will also check that the
-#'   intended option is a standard option (listed in \code{op.openxlsx}) and
+#' `openxlsx_getOp()` retrieves the `"openxlsx"` options found in
+#'   `op.openxlsx`.  If none are set (currently `NULL`) retrieves the 
+#'   default option from `op.openxlsx`.  This will also check that the
+#'   intended option is a standard option (listed in `op.openxlsx`) and
 #'    will provide a warning otherwise.
 #'   
-#' \code{openxlsx_setOp()} is a safer way to set an option as it will first
+#' `openxlsx_setOp()` is a safer way to set an option as it will first
 #'   check that the option is a standard option (as above) before setting.
 #' 
 #' @examples
@@ -114,8 +114,8 @@ op.openxlsx <- list(
   openxlsx.withFilter       = NULL
 )
 
-#' @param x An option name (\code{"openxlsx."} prefix optional)
-#' @param default A default value if \code{NULL}
+#' @param x An option name (`"openxlsx."` prefix optional)
+#' @param default A default value if `NULL`
 #' @rdname openxlsx_options
 #' @export
 openxlsx_getOp <- function(x, default = NULL) {

@@ -10,29 +10,29 @@ and removes the dependency on Java.
 }
 \details{
 The openxlsx package uses global options, most to simplify formatting.  These
-  are stored in the \code{op.openxlsx} object.
+are stored in the \code{op.openxlsx} object.
 
 \describe{
- \item{openxlsx.bandedCols}{FALSE}
- \item{openxlsx.bandedRows}{TRUE}
- \item{openxlsx.borderColour}{"black"}
- \item{openxlsx.borders}{"none"}
- \item{openxlsx.borderStyle}{"thin"}
- \item{openxlsx.compressionLevel}{"9"}
- \item{openxlsx.creator}{""}
- \item{openxlsx.dateFormat}{"mm/dd/yyyy"}
- \item{openxlsx.datetimeFormat}{"yyyy-mm-dd hh:mm:ss"}
- \item{openxlsx.headerStyle}{NULL}
- \item{openxlsx.keepNA}{FALSE}
- \item{openxlsx.na.string}{NULL}
- \item{openxlsx.numFmt}{NULL}
- \item{openxlsx.orientation}{"portrait"}
- \item{openxlsx.paperSize}{9}
- \item{openxlsx.tabColour}{"TableStyleLight9"}
- \item{openxlsx.tableStyle}{"TableStyleLight9"}
- \item{openxlsx.withFilter}{NA Whether to write data with or without a 
- filter. If NA will make filters with \code{writeDataTable} and will not for
- \code{writeData}}
+\item{openxlsx.bandedCols}{FALSE}
+\item{openxlsx.bandedRows}{TRUE}
+\item{openxlsx.borderColour}{"black"}
+\item{openxlsx.borders}{"none"}
+\item{openxlsx.borderStyle}{"thin"}
+\item{openxlsx.compressionLevel}{"9"}
+\item{openxlsx.creator}{""}
+\item{openxlsx.dateFormat}{"mm/dd/yyyy"}
+\item{openxlsx.datetimeFormat}{"yyyy-mm-dd hh:mm:ss"}
+\item{openxlsx.headerStyle}{NULL}
+\item{openxlsx.keepNA}{FALSE}
+\item{openxlsx.na.string}{NULL}
+\item{openxlsx.numFmt}{NULL}
+\item{openxlsx.orientation}{"portrait"}
+\item{openxlsx.paperSize}{9}
+\item{openxlsx.tabColour}{"TableStyleLight9"}
+\item{openxlsx.tableStyle}{"TableStyleLight9"}
+\item{openxlsx.withFilter}{NA Whether to write data with or without a
+filter. If NA will make filters with \code{writeDataTable} and will not for
+\code{writeData}}
 }
 
 See the Formatting vignette for examples.
@@ -41,13 +41,13 @@ Additional options
 }
 \seealso{
 \itemize{
-   \item{\code{vignette("Introduction", package = "openxlsx")}}
-   \item{\code{vignette("formatting", package = "openxlsx")}}
-   \item{\code{\link{writeData}}}
-   \item{\code{\link{writeDataTable}}}
-   \item{\code{\link{write.xlsx}}}
-   \item{\code{\link{read.xlsx}}}
-   \item{\code{\link{op.openxlsx}}}
-  }
+\item{\code{vignette("Introduction", package = "openxlsx")}}
+\item{\code{vignette("formatting", package = "openxlsx")}}
+\item{\code{\link[=writeData]{writeData()}}}
+\item{\code{\link[=writeDataTable]{writeDataTable()}}}
+\item{\code{\link[=write.xlsx]{write.xlsx()}}}
+\item{\code{\link[=read.xlsx]{read.xlsx()}}}
+\item{\code{\link[=op.openxlsx]{op.openxlsx()}}}
+}
 for examples
 }
