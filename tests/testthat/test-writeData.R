@@ -54,7 +54,8 @@ test_that("as.character.formula() works [312]", {
   }
   
   before <- foo()
-  require("formula.tools", character.only = TRUE)
+  # don't required the "require" function for deps  check
+  match.fun("require")("formula.tools", character.only = TRUE)
   middle <- foo()
   detach("package:formula.tools", character.only = TRUE, force = TRUE)
   end <- foo()
