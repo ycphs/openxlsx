@@ -559,8 +559,8 @@ writeFormula <- function(
 #' 
 #' @inheritParams base::as.character
 #' @param ... Not implemented
-#' @returns `x`
+#' @returns `base::as.character.default(x)`
 #' @export
 as.character.formula <- function(x, ...) {
-  x
+  base::as.character.default(x)
 }

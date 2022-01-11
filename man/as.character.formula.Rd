@@ -12,7 +12,7 @@
 \item{...}{Not implemented}
 }
 \value{
-\code{x}
+\code{base::as.character.default(x)}
 }
 \description{
 This function exists to prevent conflicts with \code{as.character.formula} methods
