@@ -2,7 +2,7 @@
 % Please edit documentation in R/writeData.R
 \name{as.character.formula}
 \alias{as.character.formula}
-\title{`as.character.formula()`}
+\title{\code{as.character.formula()}}
 \usage{
 \method{as.character}{formula}(x, ...)
 }
@@ -12,9 +12,9 @@
 \item{...}{Not implemented}
 }
 \value{
-`x`
+\code{x}
 }
 \description{
-This function exists to prevent conflicts with `as.character.formula` methods
+This function exists to prevent conflicts with \code{as.character.formula} methods
 from other packages
 }
