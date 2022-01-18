@@ -2856,6 +2856,24 @@ Workbook$methods(
           values[1],
           values[2]
         )
+    } else if (type == "containsBlanks") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="containsBlanks" dxfId="%s" priority="1">
+                        	<formula>LEN(TRIM(%s))=0</formula>
+                       </cfRule>',
+          dxfId,
+          unlist(strsplit(sqref, split = ":"))[[1]]
+        )
+    } else if (type == "notContainsBlanks") {
+      cfRule <-
+        sprintf(
+          '<cfRule type="notContainsBlanks" dxfId="%s" priority="1">
+                        	<formula>LEN(TRIM(%s))&gt;0</formula>
+                       </cfRule>',
+          dxfId,
+          unlist(strsplit(sqref, split = ":"))[[1]]
+        )
     }
 
     worksheets[[sheet]]$conditionalFormatting <<-

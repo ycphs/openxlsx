@@ -15,7 +15,7 @@
 #' @param rule The condition under which to apply the formatting. See examples.
 #' @param style A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
 #' @param type Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 
-#' 'endsWith', 'topN', 'bottomN', 'contains' or 'notContains' (case insensitive).
+#' 'endsWith', 'topN', 'bottomN', 'blanks', 'notBlanks', 'contains' or 'notContains' (case insensitive).
 #' @param ... See below
 #' @details See Examples.
 #'
@@ -61,6 +61,18 @@
 #'   \item{style is a Style object. See [createStyle()]}
 #'   \item{rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)}
 #' }
+#' If type == "blanks"
+#' \itemize{
+#'   \item{style is a Style object. See [createStyle()]}
+#'   \item{rule is ignored.}
+#' }
+#'
+#' If type == "notBlanks"
+#' \itemize{
+#'   \item{style is a Style object. See [createStyle()]}
+#'   \item{rule is ignored.}
+#' }
+
 #'
 #' If type == "topN"
 #' \itemize{
@@ -104,6 +116,8 @@
 #' addWorksheet(wb, "between")
 #' addWorksheet(wb, "topN")
 #' addWorksheet(wb, "bottomN")
+#' addWorksheet(wb, "containsBlanks")
+#' addWorksheet(wb, "notContainsBlanks")
 #' addWorksheet(wb, "logical operators")
 #'
 #' negStyle <- createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
@@ -238,6 +252,18 @@
 #' # Highlight bottom 20 percentage in column y
 #' conditionalFormatting(wb, "bottomN", cols = 2, rows = 2:11, 
 #'  style = negStyle, type = "topN", rank = 20, percent = TRUE)
+#'  
+#' ## cells containing blanks
+#' sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
+#' writeData(wb, "containsBlanks", sample_data)
+#' conditionalFormatting(wb, "containsBlanks", cols = 1, rows = 1:10, 
+#' type = "blanks", style = negStyle)
+#' 
+#' ## cells not containing blanks
+#' sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
+#' writeData(wb, "notContainsBlanks", sample_data)
+#' conditionalFormatting(wb, "notContainsBlanks", cols = 1, rows = 1:10, 
+#' type = "notBlanks", style = posStyle)
 #'
 #' ## Logical Operators
 #' # You can use Excels logical Operators
@@ -320,9 +346,13 @@ conditionalFormatting <-
       type <- "topN"
     } else if (type == "bottomn") {
       type <- "bottomN"
-    } else if (type != "expression") {
+    } else if (type == "blanks") {
+      type <- "containsBlanks"
+    } else if (type == "notblanks") {
+      type <- "notContainsBlanks"
+    }else if (type != "expression") {
       stop(
-        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 'endsWith', 'contains' or 'notContains'"
+        "Invalid type argument.  Type must be one of 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith', 'endsWith', 'blanks', 'notBlanks', 'contains' or 'notContains'"
       )
     }
 
@@ -629,6 +659,32 @@ conditionalFormatting <-
       invisible(dxfId <- wb$addDXFS(style))
       values <- params
       rule <- style
+    }  else if (type == "containsBlanks") {
+      # rule is ignored
+      
+      if (is.null(style)) {
+        style <-
+          createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
+      }
+      
+      if (!"Style" %in% class(style)) {
+        stop("If type == 'blanks', style must be a Style object.")
+      }
+      
+      invisible(dxfId <- wb$addDXFS(style))
+    } else if (type == "notContainsBlanks") {
+      # rule is ignored
+      
+      if (is.null(style)) {
+        style <-
+          createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
+      }
+      
+      if (!"Style" %in% class(style)) {
+        stop("If type == 'notBlanks', style must be a Style object.")
+      }
+      
+      invisible(dxfId <- wb$addDXFS(style))
     }
 
 
