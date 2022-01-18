@@ -17,21 +17,7 @@
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1472127733 != reported length 1623464748
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1472127733 != reported length 1623464748
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
 
 
 ```
@@ -41,21 +27,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 
-Error in download.file(url, destfile, method, mode = "wb", ...) : 
-  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
-In addition: Warning messages:
-1: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1472127733 != reported length 1623464748
-2: In download.file(url, destfile, method, mode = "wb", ...) :
-  downloaded length 1472127733 != reported length 1623464748
-3: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-4: In download.file(url, destfile, method, mode = "wb", ...) :
-  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
-Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
-  download of package ‘MafDb.1Kgenomes.phase3.hs37d5’ failed
+
 
 
 ```
@@ -191,39 +163,6 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
-# CNVPanelizer
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
 # CoTiMA
 
 <details>
@@ -323,73 +262,7 @@ Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
 
 
 ```
-# emdi
-
-<details>
-
-* Version: 2.1.0
-* GitHub: https://github.com/SoerenPannier/emdi
-* Source code: https://github.com/cran/emdi
-* Date/Publication: 2021-07-07 16:20:05 UTC
-* Number of recursive dependencies: 136
-
-Run `revdep_details(, "emdi")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘emdi’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘emdi’ ...
-** package ‘emdi’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libgdal.so.20: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘emdi’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/new/emdi.Rcheck/emdi’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘emdi’ ...
-** package ‘emdi’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/home/runner/work/openxlsx/openxlsx/revdep/library/emdi/terra/libs/terra.so':
-  libgdal.so.20: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘emdi’
-* removing ‘/home/runner/work/openxlsx/openxlsx/revdep/checks/emdi/old/emdi.Rcheck/emdi’
-
-
-```
-# fedup
+# GA4GHshiny
 
 <details>
 
@@ -422,7 +295,7 @@ ERROR: lazy loading failed for package ‘emdi’
 
 
 ```
-# GA4GHshiny
+# genekitr
 
 <details>
 
@@ -615,39 +488,6 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 ```
 # MicroSEC
-
-<details>
-
-* Version: 
-* GitHub: https://github.com/ycphs/openxlsx
-* Source code: NA
-* Number of recursive dependencies: 0
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# nanotatoR
 
 <details>
 
