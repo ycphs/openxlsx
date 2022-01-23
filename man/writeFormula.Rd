@@ -19,7 +19,7 @@ writeFormula(
 
 \item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
 
-\item{x}{A character vector.}
+\item{x}{A character vector. Arguments must be comma-separated.}
 
 \item{startCol}{A vector specifying the starting column to write to.}
 
@@ -42,6 +42,7 @@ The examples below show a small list of possible formulas:
 \item{AVERAGE(B2:B4)}
 \item{MIN(B2:B4)}
 \item{MAX(B2:B4)}
+\item{MAX(1,2)}
 \item{...}
 
 }
