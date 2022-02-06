@@ -4599,8 +4599,12 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @author Joshua Sturm
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param rows Indices of rows to group
+#' @param rows Indices of rows to group. Can be either a vector of indices to group at the same level or a (named) list of numeric vectors of indices to create multiple groupings at once. The names of the entries determine the grouping level. If no names are given, the parameter level is used as default.
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
+#' @param level Grouping level (higher value indicates multiple nestings) for the 
+#'              group. A vector to assign different grouping levels to the indices. 
+#'              A value of -1 indicates that the grouping level should be derived 
+#'              from the existing grouping (one level added)
 #' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
 #' @examples
 #' wb <- createWorkbook()
@@ -4624,17 +4628,42 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' # different grouping
 #' names(grp) <- c("1","2","3")
 #' groupRows(wb, "Sheet2", rows = grp)
+#' 
+#' # alternatively, one can call groupRows multiple times
+#' addWorksheet(wb, 'Sheet3')
+#' writeData(wb, "Sheet3", iris)
+#' groupRows(wb, "Sheet3", 2:51, level = 1)
+#' groupRows(wb, "Sheet3", 102:151, level = 1)
+#' 
+#' addWorksheet(wb, 'Sheet4')
+#' writeData(wb, "Sheet4", iris)
+#' groupRows(wb, "Sheet4", 2:51, level = 1)
+#' groupRows(wb, "Sheet4", 52:101, level = 2)
+#' groupRows(wb, "Sheet4", 102:151, level = 3)
+#' 
+#' # Nested grouping can also be achieved without explicitly given the levels
+#' addWorksheet(wb, 'Sheet5')
+#' writeData(wb, "Sheet5", iris)
+#' groupRows(wb, "Sheet5", 2:151)
+#' groupRows(wb, "Sheet5", 52:151)
+#' groupRows(wb, "Sheet5", 102:151)
+#' 
+#' 
 #' @export
-groupRows <- function(wb, sheet, rows, hidden = FALSE) {
+groupRows <- function(wb, sheet, rows, hidden = FALSE, level = -1) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
 
   if(is.list(rows)) {
-    levels <- unlist(lapply(names(rows), function(x)rep(as.character(x), length(rows[[x]]))))
+    if (!is.null(names(rows))){
+      levels <- unlist(lapply(names(rows), function(x)rep(as.character(x), length(rows[[x]]))))
+    } else {
+      levels <- rep(as.character(level), length(unlist(rows)))
+    }
     rows <- unlist(rows)
   } else {
-    levels <- rep("1", length(rows))
+    levels <- rep(level, length(rows))
   }
 
   sheet <- wb$validateSheet(sheet)
