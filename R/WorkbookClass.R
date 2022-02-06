@@ -2183,9 +2183,13 @@ Workbook$methods(
 
     hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
     cols <- names(colOutlineLevels[[sheet]])
-
+    max_outline <- max(colOutlineLevels[[sheet]])
+    
+    outline_attr <- paste0(' outlineLevelCol="', max_outline, '"')
     if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelCol="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
 
     # Check if column is already created (by `setColWidths()` or on import)
@@ -2194,11 +2198,12 @@ Workbook$methods(
 
       for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
         outline_hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") == i]
+        outline_level <- colOutlineLevels[[sheet]][[i]]
 
         if (grepl("outlineLevel", worksheets[[sheet]]$cols[[i]], perl = TRUE)) {
           worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         } else {
-          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"", outline_level, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         }
       }
 
@@ -2207,7 +2212,7 @@ Workbook$methods(
     }
 
     if (length(cols) > 0) {
-      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="%s" hidden="%s"/>', cols, cols, colOutlineLevels[[sheet]][cols], hidden)
       names(colNodes) <- cols
       worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
     }
@@ -2239,9 +2244,12 @@ Workbook$methods(
 
     attr(outlineLevels[[sheet]], "hidden") <<- as.character(as.integer(all_hidden))
 
-
+    max_outline = max(outlineLevels[[sheet]])
+    outline_attr <- paste0(' outlineLevelRow="', max_outline, '"')
     if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelRow="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
   }
 )
