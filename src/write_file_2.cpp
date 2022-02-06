@@ -134,17 +134,27 @@ SEXP write_worksheet_xml_2( std::string prior
       
     }
 
+    std::string hidden;
+    std::string outline_level;
+    if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) { // If there are grouped rows
+      outline_level = " outlineLevel=\"" + outline_levels[l] + "\"";
+      // Ignore empty / null / NA values for hidden (accessing NULL would crash R / Rcpp!)
+      if ((outline_levels_hidden[l] != R_NilValue) && (outline_levels_hidden[l] != NA_STRING) && (outline_levels_hidden[l] != "")) {
+        hidden = " hidden=\"" + outline_levels_hidden[l] + "\"";
+      }
+    }
+    
     if ((h < n_row_heights) && (!Rf_isNull(row_heights_))) { // If there are custom row heights
 
       if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) { // If there are grouped rows
-
+        
         if ((unique_rows[i] == row_heights_rows[h]) && (unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
           // Row is grouped and has a custom height
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+          xmlFile << "<row r=\"" + unique_rows[i] + "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\"" + outline_level + hidden + ">" + cell_xml + "</row>";
           h++;
           l++;
         } else if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-          xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+          xmlFile << "<row r=\"" + unique_rows[i] + "\"" + outline_level + hidden + ">" + cell_xml + "</row>";
           l++;
         } else if ((unique_rows[i] == row_heights_rows[h]) && row_has_data) {
           // Row has custom height
@@ -154,7 +164,7 @@ SEXP write_worksheet_xml_2( std::string prior
           // Row has data
           xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
         } else {
-          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] +"\"/>";
+          xmlFile << "<row r=\"" + unique_rows[i] +  "\" ht=\"" + row_heights[h] + "\" customHeight=\"1\"" + outline_level + hidden + "/>";
           h++;
           l++;
         }
@@ -175,7 +185,7 @@ SEXP write_worksheet_xml_2( std::string prior
     } else if ((l < n_outline_levels) && (!Rf_isNull(outline_levels_))) {
 
       if ((unique_rows[i] == outline_levels_rows[l]) && row_has_data) {
-        xmlFile << "<row r=\"" + unique_rows[i] + "\" outlineLevel=\"" +  outline_levels[l] + "\" hidden=\"" + outline_levels_hidden[l] + "\">" + cell_xml + "</row>";
+        xmlFile << "<row r=\"" + unique_rows[i] + "\"" + outline_level+ hidden + ">" + cell_xml + "</row>";
         l++;
       } else if (row_has_data) {
         xmlFile << "<row r=\"" + unique_rows[i] + "\">" + cell_xml + "</row>";
