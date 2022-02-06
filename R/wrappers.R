@@ -4571,20 +4571,25 @@ ungroupColumns <- function(wb, sheet, cols) {
   on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
-  removeInds <- which(customCols %in% cols)
-
-  # Check if any selected columns are already grouped
-  if (length(removeInds) > 0) {
-    remainingCols <- customCols[-removeInds]
-    if (length(remainingCols) == 0) {
-      wb$colOutlineLevels[[sheet]] <- list()
-      wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
-    } else {
-      rem_widths <- wb$colOutlineLevels[[sheet]][-removeInds]
-      names(rem_widths) <- as.character(remainingCols)
-      wb$colOutlineLevels[[sheet]] <- rem_widths
-    }
+  ungroupInds <- which(customCols %in% cols)
+  if (length(ungroupInds) > 0) {
+    # decrement the outline level by 1, set to visible and remove all columns that are no longer grouped at all (i.e. have a level "0" or "-1" (just in case))
+    levels <- as.character(as.integer(wb$colOutlineLevels[[sheet]][ungroupInds]) - 1)
+    wb$colOutlineLevels[[sheet]][ungroupInds] <<- levels
+    attr(wb$colOutlineLevels[[sheet]], "hidden")[ungroupInds] <<- "0"
+    
+    removeInds <- which(wb$colOutlineLevels[[sheet]] %in% c("-1", "0"))
+    wb$colOutlineLevels[[sheet]] <<- wb$colOutlineLevels[[sheet]][-removeInds]
+    attr(wb$colOutlineLevels[[sheet]], "hidden") = attr(wb$colOutlineLevels[[sheet]], "hidden")[-removeInds]
   }
+  
+  if (length(wb$outlineLevels[[sheet]]) == 0) {
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+  } else {
+    max_level = max(as.integer(wb$colOutlineLevels[[sheet]]))
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="1"', paste0(" outlineLevelCol=\"", max_level, "\""), wb$worksheets[[sheet]]$sheetFormatPr)
+  }
+  
 
   if (length(wb$colWidths[[sheet]]) > 0) {
     if (any(cols %in% names(wb$colWidths[[sheet]]))) {
@@ -4592,6 +4597,7 @@ ungroupColumns <- function(wb, sheet, cols) {
     }
   }
 }
+
 
 #' @name groupRows
 #' @title Group Rows
@@ -4721,13 +4727,23 @@ ungroupRows <- function(wb, sheet, rows) {
   }
 
   customRows <- as.integer(names(wb$outlineLevels[[sheet]]))
-  removeInds <- which(customRows %in% rows)
-  if (length(removeInds) > 0) {
-    wb$outlineLevels[[sheet]] <- wb$outlineLevels[[sheet]][-removeInds]
+  ungroupInds <- which(customRows %in% rows)
+  if (length(ungroupInds) > 0) {
+    # decrement the outline level by 1, set to visible and remove all rows that are no longer grouped at all (i.e. have a level "0" or "-1" (just in case))
+    levels <- as.character(as.integer(wb$outlineLevels[[sheet]][ungroupInds]) - 1)
+    wb$outlineLevels[[sheet]][ungroupInds] <<- levels
+    attr(wb$outlineLevels[[sheet]], "hidden")[ungroupInds] <<- "0"
+
+    removeInds <- which(wb$outlineLevels[[sheet]] %in% c("-1", "0"))
+    wb$outlineLevels[[sheet]] <<- wb$outlineLevels[[sheet]][-removeInds]
+    attr(wb$outlineLevels[[sheet]], "hidden") = attr(wb$outlineLevels[[sheet]], "hidden")[-removeInds]
   }
 
   if (length(wb$outlineLevels[[sheet]]) == 0) {
     wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+  } else {
+    max_level = max(as.integer(wb$outlineLevels[[sheet]]))
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="1"', paste0(" outlineLevelRow=\"", max_level, "\""), wb$worksheets[[sheet]]$sheetFormatPr)
   }
 }
 

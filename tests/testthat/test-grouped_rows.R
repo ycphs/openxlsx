@@ -110,13 +110,22 @@ test_that("parsing border xml", {
   groupColumns(wb, "Manually", 5:6, TRUE); wb$colOutlineLevels[[1]]
   # nested grouping
   groupColumns(wb, "Manually", 9:15); wb$colOutlineLevels[[1]]
-  groupColumns(wb, "Manually", 10:11); wb$colOutlineLevels[[1]]
-  groupColumns(wb, "Manually", 13:14); wb$colOutlineLevels[[1]]
+  groupColumns(wb, "Manually", 10:11); wb$colOutlineLevels[[1]] # BUG: Level not increased to 2
+  groupColumns(wb, "Manually", 13:14); wb$colOutlineLevels[[1]] # BUG: Level not increased to 2
   expect_equal(c(`2` = "1", `3` = "1", `5` = "1", `6` = "1", `9` = "1", `10` = "2", `11` = "2", `12` = "1", `13` = "2", `14` = "2", `15` = "1"),
                stripAttributes(wb$colOutlineLevels[[1]], "hidden"))
   
-  # openxlsx::saveWorkbook(wb, file = here("height.xlsx"), overwrite = TRUE)
   
+  #### 5. Ungrouping rows/cols simply decrements the level (and removes the entry if no longer grouped)
+  ungroupRows(wb, "Manually", 11:13)
+  expect_equal(c(`2` = "1", `3` = "1", `5` = "1", `6` = "1", `9` = "1", `10` = "2", `11` = "1", `13` = "1", `14` = "2", `15` = "1"),
+               stripAttributes(wb$outlineLevels[[1]], "hidden"))
+  
+  ungroupColumns(wb, "Manually", 11:13)
+  expect_equal(c(`2` = "1", `3` = "1", `5` = "1", `6` = "1", `9` = "1", `10` = "2", `11` = "1", `13` = "1", `14` = "2", `15` = "1"),
+               stripAttributes(wb$colOutlineLevels[[1]], "hidden"))  # BUG: 11:13 completely ungrouped, since level was never increased to 2 (see BUG above)
+  
+
   #### CLEANUP
   
   unlink(fileName, recursive = TRUE, force = TRUE)
