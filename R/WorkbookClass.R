@@ -2229,10 +2229,10 @@ Workbook$methods(
     # browser()
     
     # disassemble outlineLevels (extract rows, levels and hidden components)
-    ol.rows <- names(outlineLevels[[sheet]])
-    ol.levels <- outlineLevels[[sheet]]
-    attributes(ol.levels) <- NULL
-    ol.hidden <-  attr(outlineLevels[[sheet]], "hidden")
+    existing_rows <- names(outlineLevels[[sheet]])
+    existing_levels <- outlineLevels[[sheet]]
+    attributes(existing_levels) <- NULL
+    existing_hidden <-  attr(outlineLevels[[sheet]], "hidden")
 
     # 1. existing entries: 
     #       - if levels==-1 => set outlineLevel to max of existing level + 1
@@ -2242,43 +2242,43 @@ Workbook$methods(
     #       - Append new entries to the end (hidden and levels vector), potentially out-of-order
     # 3. Reorder all entries to be in the correct order
     
-    flag <- ol.rows %in% rows
+    flag <- existing_rows %in% rows
 
     # Find indices of rows that already exist
     existing_outline_indices = which(flag)
-    existing_outline = ol.rows[existing_outline_indices]
+    existing_outline = existing_rows[existing_outline_indices]
     existing_rows_indices = match(existing_outline, rows)
     
     # Auto-detect new level if required
     new_level <- "1"
     if (any(flag)) {
-      new_level <- as.character(max(as.numeric(ol.levels[flag])) + 1)
+      new_level <- as.character(max(as.numeric(existing_levels[flag])) + 1)
     }
     levels[levels < 0] = as.character(new_level)
     
     if (any(flag)) {
       # Assign the given values to existing row definitions (indices were extracted above)
-      ol.hidden[existing_outline_indices] <- hidden[existing_rows_indices]
-      ol.levels[existing_outline_indices] <- levels[existing_rows_indices]
+      existing_hidden[existing_outline_indices] <- hidden[existing_rows_indices]
+      existing_levels[existing_outline_indices] <- levels[existing_rows_indices]
       
       # Append all remaining new entries:
-      ol.rows <- c(ol.rows, rows[-existing_rows_indices])
-      ol.levels <- c(ol.levels, levels[-existing_rows_indices])
-      ol.hidden <- c(ol.hidden, hidden[-existing_rows_indices])
+      all_names <- c(existing_rows, rows[-existing_rows_indices])
+      all_levels <- c(existing_levels, levels[-existing_rows_indices])
+      all_hidden <- c(existing_hidden, hidden[-existing_rows_indices])
     } else {
       # only new rows were added, no existing modified
-      ol.rows = c(ol.rows, rows)
-      ol.levels = c(ol.levels, levels)
-      ol.hidden = c(ol.hidden, hidden)
+      all_names = c(existing_rows, rows)
+      all_levels = c(existing_levels, levels)
+      all_hidden = c(existing_hidden, hidden)
     }
     
     # re-order and then re-assamble the outlineLevels object (vector with proper attributes)
-    ord <- order(as.numeric(ol.rows))
-    ol.levels <- as.character(ol.levels[ord])
-    names(ol.levels) <- ol.rows[ord]
-    attr(ol.levels, "hidden") <- as.character(as.integer(ol.hidden[ord]))
+    ord <- order(as.numeric(all_names))
+    all_levels <- as.character(all_levels[ord])
+    names(all_levels) <- all_names[ord]
+    attr(all_levels, "hidden") <- as.character(as.integer(all_hidden[ord]))
     
-    outlineLevels[[sheet]] <<- ol.levels
+    outlineLevels[[sheet]] <<- all_levels
     
 
     # Finally, update the sheetFormatPr XML element with the maximum outline level
