@@ -30,7 +30,11 @@ Authors@R:
       person(given = "David",
              family = "Zimmermann",
              role = "ctb",
-             email = "david_j_zimmermann@hotmail.com"))
+             email = "david_j_zimmermann@hotmail.com"),
+      person(given = "Reinhold",
+             family = "Kainhofer",
+             role = "ctb",
+             email = "reinhold@kainhofer.com"))
 Description: Simplifies the creation of Excel .xlsx files by providing a
     high level interface to writing, styling and editing worksheets.
     Through the use of 'Rcpp', read/write times are comparable to the
