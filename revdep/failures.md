@@ -17,7 +17,27 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1539145728 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1539145728 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 839696384 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -27,7 +47,27 @@
 
 
 
-
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1539145728 != reported length 1623464748
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 1539145728 != reported length 1623464748
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/MafDb.1Kgenomes.phase3.hs37d5_3.10.0.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+...
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 839696384 != reported length 913353230
+3: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+4: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://bioconductor.org/packages/3.14/data/annotation/src/contrib/SNPlocs.Hsapiens.dbSNP144.GRCh37_0.99.20.tar.gz': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘SNPlocs.Hsapiens.dbSNP144.GRCh37’ failed
 
 
 ```
@@ -454,7 +494,7 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# MatrixQCvis
+# MicroSEC
 
 <details>
 
@@ -487,7 +527,40 @@ ERROR: lazy loading failed for package ‘hypeR’
 
 
 ```
-# MicroSEC
+# MSEtool
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/ycphs/openxlsx
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# nanotatoR
 
 <details>
 
