@@ -1,5 +1,7 @@
 # openxlsx (development version)
 
+* Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
+
 # openxlsx 4.2.5
 
 ## Fixes
