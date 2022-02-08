@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.5.9000</span>
       </span>
     </div>
 
@@ -62,8 +62,12 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="openxlsx-development-version">openxlsx (development version)<a class="anchor" aria-label="anchor" href="#openxlsx-development-version"></a></h2>
+<ul><li>Add type blanks and not blanks to conditional formatting (<a href="https://github.com/ycphs/openxlsx/pull/311" class="external-link">#311</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="4.2.5" id="openxlsx-425">openxlsx 4.2.5<small>2021-12-14</small><a class="anchor" aria-label="anchor" href="#openxlsx-425"></a></h2>
 <div class="section level3">
-<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<h3 id="fixes-4-2-5">Fixes<a class="anchor" aria-label="anchor" href="#fixes-4-2-5"></a></h3>
 <ul><li>
 <code><a href="../reference/openxlsx_options.html">openxlsx_setOp()</a></code> now works with named list (<a href="https://github.com/ycphs/openxlsx/issues/215" class="external-link">#215</a>)<br></li>
 <li>
@@ -71,30 +75,30 @@
 <li>
 <code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> no longer changes random seed (<a href="https://github.com/ycphs/openxlsx/issues/183" class="external-link">#183</a>)</li>
 <li>fixed a regression that caused fonts to be read in incorrectly (<a href="https://github.com/ycphs/openxlsx/issues/207" class="external-link">#207</a>)</li>
-<li>add option to save as read only recommended (<a href="https://github.com/ychps/openxlsx/issues/201" class="external-link">#201</a>)</li>
-<li>fixed writing hyperlink formulas (<a href="https://github.com/ychps/openxlsx/issues/200" class="external-link">#200</a>)</li>
+<li>add option to save as read only recommended (<a href="https://github.com/ycphs/openxlsx/issues/201" class="external-link">#201</a>)</li>
+<li>fixed writing hyperlink formulas (<a href="https://github.com/ycphs/openxlsx/issues/200" class="external-link">#200</a>)</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> now throws an error if it doesn’t have write permissions (<a href="https://github.com/ycphs/openxlsx/issues/190" class="external-link">#190</a>)</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> now again uses the default of <code>overwrite = TRUE</code> for saving files (<a href="https://github.com/ycphs/openxlsx/issues/249" class="external-link">#249</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="improvements-4-2-5">Improvements<a class="anchor" aria-label="anchor" href="#improvements-4-2-5"></a></h3>
+<ul><li>
+<code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> are more consistently set in functions (see: <a href="https://github.com/ycphs/openxlsx/issues/262" class="external-link">#289</a>)</li>
 <li>
-<code>Workbook$show()</code> no longer fails when called in a 0 sheet workbook(<a href="https://github.com/ychps/openxlsx/issues/240" class="external-link">#240</a>)</li>
+<code>Workbook$show()</code> no longer fails when called in a 0 sheet workbook(<a href="https://github.com/ycphs/openxlsx/issues/240" class="external-link">#240</a>)</li>
 <li>
-<code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> again accepts <code>.xlsm</code> files (<a href="https://github.com/ychps/openxlsx/issues/205" class="external-link">#205</a>, <a href="https://github.com/ychps/openxlsx/issues/209" class="external-link">#209</a>)</li>
+<code><a href="../reference/read.xlsx.html">read.xlsx()</a></code> again accepts <code>.xlsm</code> files (<a href="https://github.com/ycphs/openxlsx/issues/205" class="external-link">#205</a>, <a href="https://github.com/ycphs/openxlsx/issues/209" class="external-link">#209</a>)</li>
 <li>
-<code><a href="../reference/makeHyperlinkString.html">makeHyperlinkString()</a></code> does no longer require a sheet argument (<a href="https://github.com/ychps/openxlsx/issues/57" class="external-link">#57</a>, <a href="https://github.com/ychps/openxlsx/issues/58" class="external-link">#58</a>)</li>
-<li>improvements in how <code>openxlsx</code> creates temporary directories (see <a href="https://github.com/ychps/openxlsx/issues/262" class="external-link">#262</a>)</li>
+<code><a href="../reference/makeHyperlinkString.html">makeHyperlinkString()</a></code> does no longer require a sheet argument (<a href="https://github.com/ycphs/openxlsx/issues/57" class="external-link">#57</a>, <a href="https://github.com/ycphs/openxlsx/issues/58" class="external-link">#58</a>)</li>
+<li>improvements in how <code>openxlsx</code> creates temporary directories (see <a href="https://github.com/ycphs/openxlsx/issues/262" class="external-link">#262</a>)</li>
 <li>
 <code><a href="../reference/writeData.html">writeData()</a></code> calls <code>force(x)</code> to evaluate the object before options are set (<a href="https://github.com/ycphs/openxlsx/issues/264" class="external-link">#264</a>)</li>
 <li>
 <code><a href="../reference/createComment.html">createComment()</a></code> now correctly handles <code>integers</code> in <code>width</code> and <code>height</code> (<a href="https://github.com/ycphs/openxlsx/issues/275" class="external-link">#275</a>)</li>
 <li>
 <code>setStyles()</code> accepts <code>halign="justify"</code> (<a href="https://github.com/ycphs/openxlsx/issues/305" class="external-link">#305</a>)</li>
-</ul></div>
-<div class="section level3">
-<h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
-<ul><li>
-<code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> are more consistently set in functions (see: <a href="https://github.com/ychps/openxlsx/issues/262" class="external-link">#289</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -164,7 +168,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-4-2-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-4-2-2"></a></h3>
-<ul><li>Solved CRAN check errors based on the change discussed in <a href="https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=17277" class="external-link">PR#17277</a>
+<ul><li>Solved CRAN check errors based on the change discussed in <a href="https://bugs.r-project.org/show_bug.cgi?id=17277" class="external-link">PR#17277</a>
 </li>
 </ul></div>
 </div>
@@ -480,7 +484,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

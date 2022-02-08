@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.5.9000</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
 <dd><p>A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")</p></dd>
 <dt>type</dt>
 <dd><p>Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith',
-'endsWith', 'topN', 'bottomN', 'contains' or 'notContains' (case insensitive).</p></dd>
+'endsWith', 'topN', 'bottomN', 'blanks', 'notBlanks', 'contains' or 'notContains' (case insensitive).</p></dd>
 <dt>...</dt>
 <dd><p>See below</p></dd>
 </dl></div>
@@ -118,6 +118,10 @@
 <li><p>rule is the text to look for within cells</p></li>
 </ul><p>If type == "between"</p><ul><li><p>style is a Style object. See <code><a href="createStyle.html">createStyle()</a></code></p></li>
 <li><p>rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)</p></li>
+</ul><p>If type == "blanks"</p><ul><li><p>style is a Style object. See <code><a href="createStyle.html">createStyle()</a></code></p></li>
+<li><p>rule is ignored.</p></li>
+</ul><p>If type == "notBlanks"</p><ul><li><p>style is a Style object. See <code><a href="createStyle.html">createStyle()</a></code></p></li>
+<li><p>rule is ignored.</p></li>
 </ul><p>If type == "topN"</p><ul><li><p>style is a Style object. See <code><a href="createStyle.html">createStyle()</a></code></p></li>
 <li><p>rule is ignored</p></li>
 <li><p>...
@@ -157,6 +161,8 @@
 <span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"between"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"topN"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"bottomN"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsBlanks"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"notContainsBlanks"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"logical operators"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">negStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="createStyle.html">createStyle</a></span><span class="op">(</span>fontColour <span class="op">=</span> <span class="st">"#9C0006"</span>, bgFill <span class="op">=</span> <span class="st">"#FFC7CE"</span><span class="op">)</span></span>
@@ -291,6 +297,18 @@
 <span class="r-in"><span class="co"># Highlight bottom 20 percentage in column y</span></span>
 <span class="r-in"><span class="fu">conditionalFormatting</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"bottomN"</span>, cols <span class="op">=</span> <span class="fl">2</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">11</span>, </span>
 <span class="r-in"> style <span class="op">=</span> <span class="va">negStyle</span>, type <span class="op">=</span> <span class="st">"topN"</span>, rank <span class="op">=</span> <span class="fl">20</span>, percent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"> </span>
+<span class="r-in"><span class="co">## cells containing blanks</span></span>
+<span class="r-in"><span class="va">sample_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsBlanks"</span>, <span class="va">sample_data</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">conditionalFormatting</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"containsBlanks"</span>, cols <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, </span>
+<span class="r-in">type <span class="op">=</span> <span class="st">"blanks"</span>, style <span class="op">=</span> <span class="va">negStyle</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## cells not containing blanks</span></span>
+<span class="r-in"><span class="va">sample_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="cn">NA_character_</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"notContainsBlanks"</span>, <span class="va">sample_data</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">conditionalFormatting</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"notContainsBlanks"</span>, cols <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, </span>
+<span class="r-in">type <span class="op">=</span> <span class="st">"notBlanks"</span>, style <span class="op">=</span> <span class="va">posStyle</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Logical Operators</span></span>
 <span class="r-in"><span class="co"># You can use Excels logical Operators</span></span>
@@ -352,7 +370,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
