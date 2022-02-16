@@ -5,7 +5,7 @@ context("Group visibility and nested Grouping")
 
 
 
-test_that("parsing border xml", {
+test_that("row and column grouping", {
   # Test file has several worksheets:
   #   1. "simple visible grouping": One simple grouping (rows 1:2, columns 1:2), visible
   #   2. "simple hidden grouping": One simple grouping (rows 1:2, columns 1:2), hidden

@@ -2214,7 +2214,9 @@ Workbook$methods(
     if (length(cols) > 0) {
       colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="%s" hidden="%s"/>', cols, cols, colOutlineLevels[[sheet]][cols], hidden)
       names(colNodes) <- cols
-      worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+      colNodes = append(worksheets[[sheet]]$cols, colNodes)
+      # Order by column name (=index)
+      worksheets[[sheet]]$cols <<- colNodes[order(names(colNodes))]
     }
   }
 )
