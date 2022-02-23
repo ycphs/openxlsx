@@ -141,12 +141,12 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   names(colClasses) <- NULL
   
   # For custom number formats, ensure unique IDs (extract the current maximum and add 1 for each new format)
-  maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+  maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
     as.integer(
       max(c(i$style$numFmt$numFmtId, 0))
     )
-  }), 165))
-  
+  })), 165)
+
   
   if ("hyperlink" %in% allColClasses) {
     

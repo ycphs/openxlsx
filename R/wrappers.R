@@ -1037,11 +1037,11 @@ addStyle <- function(wb,
 
   if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
     if (style$numFmt$numFmtId == 165) {
-      maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+      maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
         as.integer(
           max(c(i$style$numFmt$numFmtId, 0))
         )
-      }), 165))
+      })), 165)
       style$numFmt$numFmtId <- maxnumFmtId + 1
     }
   }
