@@ -140,6 +140,14 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   newStylesElements <- NULL
   names(colClasses) <- NULL
   
+  # For custom number formats, ensure unique IDs (extract the current maximum and add 1 for each new format)
+  maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+    as.integer(
+      max(c(i$style$numFmt$numFmtId, 0))
+    )
+  }), 165))
+  
+  
   if ("hyperlink" %in% allColClasses) {
     
     ## style hyperlinks
@@ -162,8 +170,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style dates
     inds <- which(sapply(colClasses, function(x) "date" %in% x))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "date")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "date"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
@@ -177,8 +192,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style POSIX
     inds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "LONGDATE")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "LONGDATE"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
