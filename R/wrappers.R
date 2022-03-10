@@ -2546,7 +2546,15 @@ worksheetOrder <- function(wb) {
   invisible(wb)
 }
 
-
+#' @name as_POSIXct_utc
+#' @title Convert to POSIXct with timezone UTC
+#' @param x something as.POSIXct can convert
+#' @keywords internal
+as_POSIXct_utc <- function(x) {
+  z <- as.POSIXct(x, tz = "UTC")
+  attr(z, "tzone") <- "UTC"
+  z
+}
 
 
 #' @name convertToDate
