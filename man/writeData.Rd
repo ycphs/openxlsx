@@ -57,7 +57,7 @@ a surrounding border is drawn with a border around each row. If
 "\code{columns}", a surrounding border is drawn with a border between
 each column. If "\code{all}" all cell borders are drawn.}
 
-\item{borderColour}{Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.w3schools.com/colors/colors_picker.asp}{here}).}
+\item{borderColour}{Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.w3schools.com/web-design/color-picker/}{here}).}
 
 \item{borderStyle}{Border line style
 \itemize{
