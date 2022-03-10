@@ -902,47 +902,6 @@ mergeCell2mapping <- function(x) {
 
 
 
-
-splitHeaderFooter <- function(x) {
-  tmp <- gsub("<(/|)(odd|even|first)(Header|Footer)>(&amp;|)", "", x, perl = TRUE)
-  special_tags <- regmatches(tmp, regexpr("&amp;[^LCR]", tmp))
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(special_tags[i], sprintf("openxlsx__%s67298679", i), tmp, fixed = TRUE)
-    }
-  }
-  
-  tmp <- strsplit(tmp, split = "&amp;")[[1]]
-  
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(sprintf("openxlsx__%s67298679", i), special_tags[i], tmp, fixed = TRUE)
-    }
-  }
-  
-  
-  res <- rep(list(NULL), 3)
-  ind <- substr(tmp, 1, 1) == "L"
-  if (any(ind)) {
-    res[[1]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "C"
-  if (any(ind)) {
-    res[[2]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "R"
-  if (any(ind)) {
-    res[[3]] <- substring(tmp, 2)[ind]
-  }
-  
-  res
-}
-
-
-
-
 getFile <- function(xlsxFile) {
   
   ## Is this a file or URL (code taken from read.table())

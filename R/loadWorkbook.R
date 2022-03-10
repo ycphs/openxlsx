@@ -495,7 +495,29 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   for (i in seq_along(worksheetsXML)) {
     if (!is_chart_sheet[i]) {
       if (length(wb$worksheets[[i]]$headerFooter) > 0) {
-        wb$worksheets[[i]]$headerFooter <- lapply(wb$worksheets[[i]]$headerFooter, splitHeaderFooter)
+        amp_split <- function(x) {
+          z <- stri_split_regex(x, "&amp;[LCR]")
+          z <- unlist(z)
+          z[-1]
+        }
+        
+        head_foot <- c("oddHeader", "oddFooter",
+                       "evenHeader", "evenFooter",
+                       "firstHeader", "firstFooter")
+        
+        headerFooter <- vector("list", length = length(head_foot))
+        names(headerFooter) <- head_foot
+        
+        headerFooterXMl <- paste0(wb$worksheets[[i]]$headerFooter,
+                                  collapse = "")
+        
+        for (hf in head_foot) {
+          node <- getChildlessNode(xml = headerFooterXMl, tag = hf)
+          node <- gsub(paste0("<", hf, ">(.+)</", hf, ">"), "\\1", node)
+          headerFooter[[hf]] <- amp_split(node)
+        }
+        
+        wb$worksheets[[i]]$headerFooter <- headerFooter
       }
     }
   }
