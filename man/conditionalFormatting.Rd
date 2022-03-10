@@ -30,7 +30,7 @@ conditionalFormatting(
 \item{style}{A style to apply to those cells that satisfy the rule. Default is createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")}
 
 \item{type}{Either 'expression', 'colourScale', 'databar', 'duplicates', 'beginsWith',
-'endsWith', 'topN', 'bottomN', 'contains' or 'notContains' (case insensitive).}
+'endsWith', 'topN', 'bottomN', 'blanks', 'notBlanks', 'contains' or 'notContains' (case insensitive).}
 
 \item{...}{See below}
 }
@@ -82,6 +82,17 @@ If type == "between"
 \item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
 \item{rule is a numeric vector of length 2 specifying lower and upper bound (Inclusive)}
 }
+If type == "blanks"
+\itemize{
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is ignored.}
+}
+
+If type == "notBlanks"
+\itemize{
+\item{style is a Style object. See \code{\link[=createStyle]{createStyle()}}}
+\item{rule is ignored.}
+}
 
 If type == "topN"
 \itemize{
@@ -123,6 +134,8 @@ addWorksheet(wb, "databar")
 addWorksheet(wb, "between")
 addWorksheet(wb, "topN")
 addWorksheet(wb, "bottomN")
+addWorksheet(wb, "containsBlanks")
+addWorksheet(wb, "notContainsBlanks")
 addWorksheet(wb, "logical operators")
 
 negStyle <- createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")
@@ -257,6 +270,18 @@ conditionalFormatting(wb, "bottomN", cols = 1, rows = 2:11,
 # Highlight bottom 20 percentage in column y
 conditionalFormatting(wb, "bottomN", cols = 2, rows = 2:11, 
  style = negStyle, type = "topN", rank = 20, percent = TRUE)
+ 
+## cells containing blanks
+sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
+writeData(wb, "containsBlanks", sample_data)
+conditionalFormatting(wb, "containsBlanks", cols = 1, rows = 1:10, 
+type = "blanks", style = negStyle)
+
+## cells not containing blanks
+sample_data <- sample(c("X", NA_character_), 10, replace = TRUE)
+writeData(wb, "notContainsBlanks", sample_data)
+conditionalFormatting(wb, "notContainsBlanks", cols = 1, rows = 1:10, 
+type = "notBlanks", style = posStyle)
 
 ## Logical Operators
 # You can use Excels logical Operators
