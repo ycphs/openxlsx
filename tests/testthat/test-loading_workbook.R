@@ -1042,3 +1042,56 @@ test_that("sheet visibility", {
   expect_equal(exp_vis, wb2_vis)
   
 })
+
+test_that("test headerFooter", {
+  
+  # Plain text headers and footers
+  header = c('ODD HEAD LEFT', 'ODD HEAD CENTER', 'ODD HEAD RIGHT')
+  footer = c('ODD FOOT RIGHT', 'ODD FOOT CENTER', 'ODD FOOT RIGHT')
+  evenHeader = c('EVEN HEAD LEFT', 'EVEN HEAD CENTER', 'EVEN HEAD RIGHT')
+  evenFooter = c('EVEN FOOT RIGHT', 'EVEN FOOT CENTER', 'EVEN FOOT RIGHT')
+  firstHeader = c('TOP', 'OF FIRST', 'PAGE')
+  firstFooter = c('BOTTOM', 'OF FIRST', 'PAGE')
+  
+  # Add Sheet 1
+  wb=createWorkbook()
+  addWorksheet(wb, 'Sheet 1',
+               header = header,
+               footer = footer,
+               evenHeader = evenHeader,
+               evenFooter = evenFooter,
+               firstHeader = firstHeader,
+               firstFooter = firstFooter)
+  
+  # Modified headers and footers to make them Arial 8
+  header <- paste0('&"Arial"&8', header)
+  footer <- paste0('&"Arial"&8', footer)
+  evenHeader <- paste0('&"Arial"&8', evenHeader)
+  evenFooter <- paste0('&"Arial"&8', evenFooter)
+  firstHeader <- paste0('&"Arial"&8', firstHeader)
+  firstFooter <- paste0('&"Arial"&8', firstFooter)
+  
+  # Add Sheet 2
+  addWorksheet(wb, 'Sheet 2',
+               header = header,
+               footer = footer,
+               evenHeader = evenHeader,
+               evenFooter = evenFooter,
+               firstHeader = firstHeader,
+               firstFooter = firstFooter)
+  writeData(wb, sheet = 1, 1:400)
+  writeData(wb, sheet = 2, 1:400)
+  
+  tmp1 <- temp_xlsx()
+  # Save workbook
+  saveWorkbook(wb, tmp1, overwrite = T)
+  # Load workbook and save again
+  wb2 <- loadWorkbook(tmp1)
+  
+  expect_equal(wb$worksheets[[1]]$headerFooter,
+               wb2$worksheets[[1]]$headerFooter)
+  
+  expect_equal(wb$worksheets[[2]]$headerFooter,
+               wb2$worksheets[[2]]$headerFooter)
+  
+})
