@@ -1,6 +1,11 @@
 
 context("Date/Time Conversions")
 
+test_that("as_POSIXct_utc", {
+  exp <- "2022-03-02 19:27:35"
+  got <- as_POSIXct_utc("2022-03-02 19:27:35")
+  expect_equal(exp, as.character(got))
+})
 
 test_that("convert to date", {
   dates <- as.Date("2015-02-07") + -10:10
