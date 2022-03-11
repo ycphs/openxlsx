@@ -1,7 +1,3 @@
-
-
-
-
 #' @name makeHyperlinkString
 #' @title create Excel hyperlink string
 #' @description Wrapper to create internal hyperlink string to pass to writeFormula(). Either link to external urls or local files or straight to cells of local Excel sheets.
@@ -30,19 +26,22 @@
 #'
 #'
 #' ## Internal Hyperlink - create hyperlink formula manually
-#' writeFormula(wb, "Sheet1",
-#'   x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")',
+#' writeFormula(
+#'   wb, "Sheet1",
+#'   x = '=HYPERLINK(\"#Sheet2!B3\", "Text to Display - Link to Sheet2")',
 #'   startCol = 3
 #' )
 #'
 #' ## Internal - No text to display using makeHyperlinkString() function
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 1,
 #'   x = makeHyperlinkString(sheet = "Sheet 3", row = 1, col = 2)
 #' )
 #'
 #' ## Internal - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 2,
 #'   x = makeHyperlinkString(
 #'     sheet = "Sheet 3", row = 1, col = 2,
@@ -51,7 +50,8 @@
 #' )
 #'
 #' ## Link to file - No text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 4,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -60,7 +60,8 @@
 #' )
 #'
 #' ## Link to file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 3,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -70,11 +71,12 @@
 #' )
 #'
 #' ## Link to external file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 10, startCol = 1,
-#'   x = '=HYPERLINK(\\"[C:/Users]\\", \\"Link to an external file\\")'
+#'   x = '=HYPERLINK("[C:/Users]", "Link to an external file")'
 #' )
-#' 
+#'
 #' ## Link to internal file
 #' x = makeHyperlinkString(text = "test.png", file = "D:/somepath/somepicture.png")
 #' writeFormula(wb, "Sheet1", startRow = 11, startCol = 1, x = x)
@@ -89,20 +91,27 @@ makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NUL
   
   if (missing(sheet)) {
     if (!missing(row) || !missing(col)) warning("Option for col and/or row found, but no sheet was provided.")
-
-    str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
+    
+    if (is.null(text))
+      str <- sprintf("=HYPERLINK(\"%s\")", file)
+    
+    if (is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\")", text)
+    
+    if (!is.null(text) & !is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
   } else {
     cell <- paste0(int2col(col), row)
     if (!is.null(file)) {
-      dest <- sprintf("[%s]'%s'!%s", file, sheet, cell)
+      dest <- sprintf('"[%s]%s!%s"', file, sheet, cell)
     } else {
-      dest <- sprintf("#'%s'!%s", sheet, cell)
+      dest <- sprintf('"#\'%s\'!%s"', sheet, cell)
     }
     
     if (is.null(text)) {
-      str <- sprintf("=HYPERLINK(\"%s\")", dest)
+      str <- sprintf('=HYPERLINK(%s)', dest)
     } else {
-      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", dest, text)
+      str <- sprintf('=HYPERLINK(%s, \"%s\")', dest, text)
     }
   }
   
