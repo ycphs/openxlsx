@@ -112,7 +112,12 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 
   xlsx_file <- wb$saveWorkbook()
 
+
+  file.create(file)
+  def_mode <- file.info(file)$mode
   result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite)
+  Sys.chmod(file, def_mode)
+
 
   ## delete temporary dir
   unlink(dirname(xlsx_file), force = TRUE, recursive = TRUE)
