@@ -112,16 +112,7 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 
   xlsx_file <- wb$saveWorkbook()
 
-  # # file did not exist, create it and overwrite
-  # if (!file.exists(file)) {
-  #   file.create(file)
-  #   overwrite <- TRUE
-  # }
-  #
-  # def_mode <- file.info(file)$mode
   result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite, copy.mode = FALSE)
-  # Sys.chmod(file, def_mode, FALSE)
-
 
   ## delete temporary dir
   unlink(dirname(xlsx_file), force = TRUE, recursive = TRUE)
