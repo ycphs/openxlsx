@@ -495,10 +495,20 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   for (i in seq_along(worksheetsXML)) {
     if (!is_chart_sheet[i]) {
       if (length(wb$worksheets[[i]]$headerFooter) > 0) {
+        
         amp_split <- function(x) {
-          z <- stri_split_regex(x, "&amp;[LCR]")
-          z <- unlist(z)
-          z[-1]
+          if (length(x) == 0) return (NULL)
+          # create output string of width 3
+          res <- vector("character", 3)
+          # Identify the names found in the string: returns them as matrix: strip the &amp;
+          nam <- gsub(pattern = "&amp;", "", unlist(stri_match_all_regex(x, "&amp;[LCR]")))
+          # split the string and assign names to join
+          z <- unlist(stri_split_regex(x, "&amp;[LCR]", omit_empty = TRUE))
+          names(z) <- as.character(nam)
+          res[c("L", "C", "R") %in% names(z)] <- z
+          
+          # return the string vector
+          unname(res)
         }
         
         head_foot <- c("oddHeader", "oddFooter",
