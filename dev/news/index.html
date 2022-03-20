@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -399,7 +399,7 @@
 <li><p>Headers &amp; footers extended, can now be set with <code>addWorksheet</code> and <code>setHeaderFooter</code>. <code>setHeader</code> &amp; <code>setFooter</code> deprecated.</p></li>
 <li><p>“fitToWidth” and “fitToHeight” logicals in <code>pageSetup</code>.</p></li>
 <li><p>“zoom” parameter in addWorksheet to set worksheet zoom level.</p></li>
-<li><p>“withFilter”" parameter to writeDataTable and writeData to remove table filters</p></li>
+<li><p>“withFilter”” parameter to writeDataTable and writeData to remove table filters</p></li>
 <li><p><code>keepNa</code> parameter to <code>writeDataTable</code> and <code>writeData</code> to write NA values as #N/A</p></li>
 <li><p>auto column widths can now be set with width = “auto”</p></li>
 </ul></div>
@@ -461,7 +461,7 @@
 <li><p><code>readWorkbook</code>/<code>read.xlsx</code> should work now. Empty values are now padded with NA. Many other bugs fixed.</p></li>
 <li><p>borders on single row and/or column data.frames now work.</p></li>
 <li><p><code>readWorkbook</code>/<code>read.xlsx</code> check for TRUE/FALSE values is now case-insensitive.</p></li>
-<li><p>sheet names containing invalid xml characters (&amp;, &lt;, &gt;, ’, ") now work when referencing by name and will not result in a corrupt workbook.</p></li>
+<li><p>sheet names containing invalid xml characters (&amp;, &lt;, &gt;, ’, “) now work when referencing by name and will not result in a corrupt workbook.</p></li>
 <li><p>sheet names containing non-local characters can now be referenced by name.</p></li>
 <li><p>Invalid factor level when missing values in <code>writeData</code></p></li>
 <li><p><code>saveWorkbook</code> now accepts relative paths.</p></li>
