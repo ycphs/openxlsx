@@ -45,6 +45,7 @@
 #' @param na.string If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
+#' @param mergeCols A numeric vector indicating in which columns repeated cells need to be merged.
 #' @seealso [writeDataTable()]
 #' @export writeData
 #' @details Formulae written using writeFormula to a Workbook object will not get picked up by read.xlsx().
@@ -175,6 +176,7 @@ writeData <- function(
   na.string    = openxlsx_getOp("na.string"),
   name         = NULL,
   sep          = ", ",
+  mergeCols    = NULL,
   col.names,
   row.names
 ) {
@@ -424,6 +426,24 @@ writeData <- function(
       borderColour = list("rgb" = borderColour),
       borderStyle  = borderStyle
     )
+  }
+
+  ## merge repeated cells by one or more variables
+  if (!is.null(mergeCols)) {
+    mergeCols <- mergeCols + rowNames
+    strata <- Reduce(paste, x[mergeCols], accumulate = TRUE)
+    for(i in seq_along(strata)) {
+      end.pos <- cumsum(rle(strata[[i]])$lengths)
+      Reduce(function(y1, y2) {
+        mergeCells(
+          wb,
+          sheet = sheet,
+          cols = startCol + mergeCols[i] - 1L,
+          rows = startRow + colNames + c(y1 + 1L, y2) - 1L
+        )
+        return(y2)
+      }, end.pos, init = 0L)
+    }
   }
 
   invisible(0)
