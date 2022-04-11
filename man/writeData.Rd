@@ -23,6 +23,7 @@ writeData(
   na.string = openxlsx_getOp("na.string"),
   name = NULL,
   sep = ", ",
+  mergeCols = NULL,
   col.names,
   row.names
 )
@@ -57,7 +58,7 @@ a surrounding border is drawn with a border around each row. If
 "\code{columns}", a surrounding border is drawn with a border between
 each column. If "\code{all}" all cell borders are drawn.}
 
-\item{borderColour}{Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.w3schools.com/colors/colors_picker.asp}{here}).}
+\item{borderColour}{Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.w3schools.com/web-design/color-picker/}{here}).}
 
 \item{borderStyle}{Border line style
 \itemize{
@@ -86,6 +87,8 @@ each column. If "\code{all}" all cell borders are drawn.}
 \item{name}{If not NULL, a named region is defined.}
 
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
+
+\item{mergeCols}{A numeric vector indicating in which columns repeated cells need to be merged.}
 
 \item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
