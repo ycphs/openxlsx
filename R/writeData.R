@@ -431,8 +431,7 @@ writeData <- function(
   ## merge repeated cells by one or more variables
   if (!is.null(mergeCols)) {
     mergeCols <- mergeCols + rowNames
-    grp <- Reduce(paste, x[mergeCols], accumulate = TRUE)
-    grp[[1]] <- as.character(grp[[1]])
+    grp <- Reduce(paste, x[mergeCols], accumulate = TRUE, init = "")[-1]
     for(i in seq_along(grp)) {
       end.pos <- cumsum(rle(grp[[i]])$lengths)
       Reduce(function(y1, y2) {
