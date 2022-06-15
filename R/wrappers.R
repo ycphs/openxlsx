@@ -4602,14 +4602,14 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param rows Indices of rows to group
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
 #' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
-#' @examples 
+#' @examples
 #' wb <- createWorkbook()
 #' addWorksheet(wb, 'Sheet1')
 #' addWorksheet(wb, 'Sheet2')
-#' 
-#' writeData(wb, "Sheet1", iris) 
+#'
+#' writeData(wb, "Sheet1", iris)
 #' writeData(wb, "Sheet2", iris)
-#' 
+#'
 #' ## create list of groups
 #' # lines used for grouping (here: species)
 #' grp <- list(
@@ -4618,9 +4618,9 @@ ungroupColumns <- function(wb, sheet, cols) {
 #'   seq(102, 151)
 #' )
 #' # assign group levels
-#' names(grp) <- c("1","0","1") 
+#' names(grp) <- c("1","0","1")
 #' groupRows(wb, "Sheet1", rows = grp)
-#' 
+#'
 #' # different grouping
 #' names(grp) <- c("1","2","3")
 #' groupRows(wb, "Sheet2", rows = grp)
