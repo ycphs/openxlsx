@@ -2691,7 +2691,7 @@ names.Workbook <- function(x) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Numeric vector specifying rows to include in region
 #' @param cols Numeric vector specifying columns to include in region
-#' @param name Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.
+#' @param name Name for region. A character vector of length 1. Note region names must be case-insensitive unique.
 #' @param overwrite Boolean. Overwrite if exists ? Default to FALSE
 #' 
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
@@ -3227,15 +3227,15 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
   }
 
   if (!is.logical(allowBlank)) {
-    stop("Argument 'allowBlank' musts be logical!")
+    stop("Argument 'allowBlank' must be logical!")
   }
 
   if (!is.logical(showInputMsg)) {
-    stop("Argument 'showInputMsg' musts be logical!")
+    stop("Argument 'showInputMsg' must be logical!")
   }
 
   if (!is.logical(showErrorMsg)) {
-    stop("Argument 'showErrorMsg' musts be logical!")
+    stop("Argument 'showErrorMsg' must be logical!")
   }
 
   ## All inputs validated
