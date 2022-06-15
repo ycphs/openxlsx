@@ -1,5 +1,7 @@
 # openxlsx (development version)
 
+* Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
+
 ## Improvements
 
 * Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
