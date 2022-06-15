@@ -2569,8 +2569,7 @@ Workbook$methods(
         '<x14:dataValidation type="list" allowBlank="%s" showInputMessage="%s" showErrorMessage="%s">',
         allowBlank,
         showInputMsg,
-        showErrorMsg,
-        sqref
+        showErrorMsg
       )
 
     formula <-
