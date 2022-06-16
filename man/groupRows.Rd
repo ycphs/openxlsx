@@ -23,7 +23,7 @@ wb <- createWorkbook()
 addWorksheet(wb, 'Sheet1')
 addWorksheet(wb, 'Sheet2')
 
-writeData(wb, "Sheet1", iris) 
+writeData(wb, "Sheet1", iris)
 writeData(wb, "Sheet2", iris)
 
 ## create list of groups
@@ -34,7 +34,7 @@ grp <- list(
   seq(102, 151)
 )
 # assign group levels
-names(grp) <- c("1","0","1") 
+names(grp) <- c("1","0","1")
 groupRows(wb, "Sheet1", rows = grp)
 
 # different grouping
