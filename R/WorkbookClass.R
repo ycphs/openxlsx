@@ -37,7 +37,7 @@ Workbook$methods(
     headFoot <<- NULL
 
     media <<- list()
-    
+
     persons <<- NULL
 
     pivotTables <<- NULL
@@ -56,7 +56,7 @@ Workbook$methods(
 
     sheet_names <<- character(0)
     sheetOrder <<- integer(0)
-   
+
     sharedStrings <<- list()
     attr(sharedStrings, "uniqueCount") <<- 0
 
@@ -106,7 +106,7 @@ Workbook$methods(
       }
     }
     newSheetIndex <- length(worksheets) + 1L
-    
+
     if (newSheetIndex > 1) {
       sheetId <-
         max(as.integer(regmatches(
@@ -121,7 +121,7 @@ Workbook$methods(
 
     ## fix visible value
     visible <- tolower(visible)
-    
+
     if (visible == "true") {
       visible <- "visible"
     } else if (visible == "false") {
@@ -129,7 +129,7 @@ Workbook$methods(
     } else if (visible == "veryhidden") {
       visible <- "veryHidden"
     }
-    
+
     ##  Add sheet to workbook.xml
     workbook$sheets <<-
       c(
@@ -678,12 +678,12 @@ Workbook$methods(
 
       .self$writeDrawingVML(xldrawingsDir)
     }
-    
+
     ## Threaded Comments xl/threadedComments/threadedComment.xml
     if (nThreadComments > 0){
       xlThreadComments <- file.path(tmpDir, "xl", "threadedComments")
       dir.create(path = xlThreadComments, recursive = TRUE)
-      
+
       for (i in seq_len(nSheets)) {
         if (length(threadComments[[i]]) > 0) {
           fl <- threadComments[[i]]
@@ -714,10 +714,10 @@ Workbook$methods(
         to = personDir,
         overwrite = TRUE
       )
-      
+
     }
-    
-    
+
+
     if (length(embeddings) > 0) {
       embeddingsDir <- file.path(tmpDir, "xl", "embeddings")
       dir.create(path = embeddingsDir, recursive = TRUE)
@@ -1179,7 +1179,7 @@ Workbook$methods(
       )
     # because tableName might be native encoded non-ASCII strings, we need to ensure
     # it's UTF-8 encoded
-    table <- enc2utf8(table) 
+    table <- enc2utf8(table)
 
     nms <- names(tables)
     tSheets <- attr(tables, "sheet")
@@ -1768,7 +1768,7 @@ Workbook$methods(
     if ("ACCOUNTING2" %in% style$fontDecoration) {
       fontNode <- stri_join(fontNode, '<u val="doubleAccounting"/>')
     }
-    
+
     if ("STRIKEOUT" %in% style$fontDecoration) {
       fontNode <- stri_join(fontNode, "<strike/>")
     }
@@ -1985,7 +1985,7 @@ Workbook$methods(
                                xlworksheetsRelsDir) {
     ## write worksheets
     # nSheets <- length(worksheets)
-    
+
     for (i in seq_along(worksheets)) {
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
@@ -2183,7 +2183,7 @@ Workbook$methods(
 
     hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
     cols <- names(colOutlineLevels[[sheet]])
-    
+
     if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
       worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
     }
@@ -2569,8 +2569,7 @@ Workbook$methods(
         '<x14:dataValidation type="list" allowBlank="%s" showInputMessage="%s" showErrorMessage="%s">',
         allowBlank,
         showInputMsg,
-        showErrorMsg,
-        sqref
+        showErrorMsg
       )
 
     formula <-
@@ -2622,10 +2621,10 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
-        
+
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
-        
+
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
@@ -2814,7 +2813,7 @@ Workbook$methods(
                        </cfRule>',
           dxfId,
           values,
-          
+
           unlist(strsplit(sqref, split = ":"))[[1]],
           values,
           values
@@ -2827,7 +2826,7 @@ Workbook$methods(
                        </cfRule>',
           dxfId,
           values,
-          
+
           unlist(strsplit(sqref, split = ":"))[[1]],
           values,
           values
@@ -3251,7 +3250,7 @@ Workbook$methods(
         visible_sheet_index - 1L,
         ActiveSheet - 1L
       )
-    
+
     for(i in seq_len(nSheets)) {
       worksheets[[i]]$sheetViews <<-
         sub(
@@ -3266,7 +3265,7 @@ Workbook$methods(
         )
     }
     # worksheets[[visible_sheet_index]]$sheetViews
-    
+
     # worksheets[[visible_sheet_index]]$sheetViews <<-
     #   sub(
     #     '( tabSelected="0")|( tabSelected="false")',
@@ -3459,8 +3458,8 @@ Workbook$methods(
       if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
       }
-      
-      
+
+
       if(ActiveSheet==i) {
         worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
@@ -3733,7 +3732,7 @@ Workbook$methods(
     aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
-    
+
     if (length(aSheet) == 0) {
       aSheet <- 1
     }
@@ -3847,9 +3846,9 @@ Workbook$methods(
           stri_join(sheetOrder, sep = " ", collapse = ", ")
         ))
     }
-    
-    
-    
+
+
+
     if (aSheet >= 1 & nSheets > 0) {
       showText <-
         c(
@@ -4374,11 +4373,11 @@ Workbook$methods(
                            paste0("tabSelected=\"",
                                   ifelse(sheetOrder[ActiveSheet]  == i,"true","false")
                                   ,"\""))
-      
-      
+
+
     }
-    
-    
-  
+
+
+
   }
 )
