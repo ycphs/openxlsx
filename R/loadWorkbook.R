@@ -265,7 +265,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     vals <- getNodes(xml = sharedStrings, tagIn = "<si>")
 
     if ("<si><t/></si>" %in% vals) {
-      if (na.convert == TRUE){
+      if (na.convert){
         vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
       }
       Encoding(vals) <- "UTF-8"
