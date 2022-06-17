@@ -7,6 +7,7 @@
 #' @param file A path to an existing .xlsx or .xlsm file
 #' @param xlsxFile alias for file
 #' @param isUnzipped Set to TRUE if the xlsx file is already unzipped
+#' @param na.convert Should empty/blank cells be converted to `NA_character_`. Defaults to TRUE.
 #' @description  loadWorkbook returns a workbook object conserving styles and
 #' formatting of the original .xlsx file.
 #' @return Workbook object.
@@ -25,7 +26,7 @@
 #' saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
 #' }
 #'
-loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
+loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert = TRUE) {
 
   ## If this is a unzipped workbook, skip the temp dir stuff
   if (isUnzipped) {
@@ -264,7 +265,9 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     vals <- getNodes(xml = sharedStrings, tagIn = "<si>")
 
     if ("<si><t/></si>" %in% vals) {
-      vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
+      if (na.convert == TRUE){
+        vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
+      }
       Encoding(vals) <- "UTF-8"
       attr(vals, "uniqueCount") <- uniqueCount - 1L
     } else {
