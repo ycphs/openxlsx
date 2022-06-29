@@ -1,9 +1,12 @@
 # openxlsx (development version)
 
+## Fixes
+
 * Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
 
 ## Improvements
 
+* Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
 * Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
 * Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
 
