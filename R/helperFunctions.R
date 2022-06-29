@@ -1,7 +1,3 @@
-
-
-
-
 #' @name makeHyperlinkString
 #' @title create Excel hyperlink string
 #' @description Wrapper to create internal hyperlink string to pass to writeFormula(). Either link to external urls or local files or straight to cells of local Excel sheets.
@@ -30,19 +26,22 @@
 #'
 #'
 #' ## Internal Hyperlink - create hyperlink formula manually
-#' writeFormula(wb, "Sheet1",
-#'   x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")',
+#' writeFormula(
+#'   wb, "Sheet1",
+#'   x = '=HYPERLINK(\"#Sheet2!B3\", "Text to Display - Link to Sheet2")',
 #'   startCol = 3
 #' )
 #'
 #' ## Internal - No text to display using makeHyperlinkString() function
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 1,
 #'   x = makeHyperlinkString(sheet = "Sheet 3", row = 1, col = 2)
 #' )
 #'
 #' ## Internal - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 2,
 #'   x = makeHyperlinkString(
 #'     sheet = "Sheet 3", row = 1, col = 2,
@@ -51,7 +50,8 @@
 #' )
 #'
 #' ## Link to file - No text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 4,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -60,7 +60,8 @@
 #' )
 #'
 #' ## Link to file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 3,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -70,11 +71,12 @@
 #' )
 #'
 #' ## Link to external file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 10, startCol = 1,
-#'   x = '=HYPERLINK(\\"[C:/Users]\\", \\"Link to an external file\\")'
+#'   x = '=HYPERLINK("[C:/Users]", "Link to an external file")'
 #' )
-#' 
+#'
 #' ## Link to internal file
 #' x = makeHyperlinkString(text = "test.png", file = "D:/somepath/somepicture.png")
 #' writeFormula(wb, "Sheet1", startRow = 11, startCol = 1, x = x)
@@ -89,20 +91,27 @@ makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NUL
   
   if (missing(sheet)) {
     if (!missing(row) || !missing(col)) warning("Option for col and/or row found, but no sheet was provided.")
-
-    str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
+    
+    if (is.null(text))
+      str <- sprintf("=HYPERLINK(\"%s\")", file)
+    
+    if (is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\")", text)
+    
+    if (!is.null(text) & !is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
   } else {
     cell <- paste0(int2col(col), row)
     if (!is.null(file)) {
-      dest <- sprintf("[%s]'%s'!%s", file, sheet, cell)
+      dest <- sprintf('"[%s]%s!%s"', file, sheet, cell)
     } else {
-      dest <- sprintf("#'%s'!%s", sheet, cell)
+      dest <- sprintf('"#\'%s\'!%s"', sheet, cell)
     }
     
     if (is.null(text)) {
-      str <- sprintf("=HYPERLINK(\"%s\")", dest)
+      str <- sprintf('=HYPERLINK(%s)', dest)
     } else {
-      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", dest, text)
+      str <- sprintf('=HYPERLINK(%s, \"%s\")', dest, text)
     }
   }
   
@@ -131,6 +140,14 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   newStylesElements <- NULL
   names(colClasses) <- NULL
   
+  # For custom number formats, ensure unique IDs (extract the current maximum and add 1 for each new format)
+  maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
+    as.integer(
+      max(c(i$style$numFmt$numFmtId, 0))
+    )
+  })), 165)
+
+  
   if ("hyperlink" %in% allColClasses) {
     
     ## style hyperlinks
@@ -153,8 +170,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style dates
     inds <- which(sapply(colClasses, function(x) "date" %in% x))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "date")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "date"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
@@ -168,8 +192,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style POSIX
     inds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "LONGDATE")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "LONGDATE"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
@@ -899,47 +930,6 @@ mergeCell2mapping <- function(x) {
   
   return(refs)
 }
-
-
-
-
-splitHeaderFooter <- function(x) {
-  tmp <- gsub("<(/|)(odd|even|first)(Header|Footer)>(&amp;|)", "", x, perl = TRUE)
-  special_tags <- regmatches(tmp, regexpr("&amp;[^LCR]", tmp))
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(special_tags[i], sprintf("openxlsx__%s67298679", i), tmp, fixed = TRUE)
-    }
-  }
-  
-  tmp <- strsplit(tmp, split = "&amp;")[[1]]
-  
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(sprintf("openxlsx__%s67298679", i), special_tags[i], tmp, fixed = TRUE)
-    }
-  }
-  
-  
-  res <- rep(list(NULL), 3)
-  ind <- substr(tmp, 1, 1) == "L"
-  if (any(ind)) {
-    res[[1]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "C"
-  if (any(ind)) {
-    res[[2]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "R"
-  if (any(ind)) {
-    res[[3]] <- substring(tmp, 2)[ind]
-  }
-  
-  res
-}
-
 
 
 

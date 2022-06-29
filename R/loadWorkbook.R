@@ -498,7 +498,39 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
   for (i in seq_along(worksheetsXML)) {
     if (!is_chart_sheet[i]) {
       if (length(wb$worksheets[[i]]$headerFooter) > 0) {
-        wb$worksheets[[i]]$headerFooter <- lapply(wb$worksheets[[i]]$headerFooter, splitHeaderFooter)
+        
+        amp_split <- function(x) {
+          if (length(x) == 0) return (NULL)
+          # create output string of width 3
+          res <- vector("character", 3)
+          # Identify the names found in the string: returns them as matrix: strip the &amp;
+          nam <- gsub(pattern = "&amp;", "", unlist(stri_match_all_regex(x, "&amp;[LCR]")))
+          # split the string and assign names to join
+          z <- unlist(stri_split_regex(x, "&amp;[LCR]", omit_empty = TRUE))
+          names(z) <- as.character(nam)
+          res[c("L", "C", "R") %in% names(z)] <- z
+          
+          # return the string vector
+          unname(res)
+        }
+        
+        head_foot <- c("oddHeader", "oddFooter",
+                       "evenHeader", "evenFooter",
+                       "firstHeader", "firstFooter")
+        
+        headerFooter <- vector("list", length = length(head_foot))
+        names(headerFooter) <- head_foot
+        
+        headerFooterXMl <- paste0(wb$worksheets[[i]]$headerFooter,
+                                  collapse = "")
+        
+        for (hf in head_foot) {
+          node <- getChildlessNode(xml = headerFooterXMl, tag = hf)
+          node <- gsub(paste0("<", hf, ">(.+)</", hf, ">"), "\\1", node)
+          headerFooter[[hf]] <- amp_split(node)
+        }
+        
+        wb$worksheets[[i]]$headerFooter <- headerFooter
       }
     }
   }

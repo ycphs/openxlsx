@@ -112,7 +112,7 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
 
   xlsx_file <- wb$saveWorkbook()
 
-  result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite)
+  result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite, copy.mode = FALSE)
 
   ## delete temporary dir
   unlink(dirname(xlsx_file), force = TRUE, recursive = TRUE)
@@ -207,11 +207,11 @@ int2col <- function(x) {
 #' @examples
 #' col2int(LETTERS)
 col2int <- function(x) {
-  
+
   if (!is.character(x)) {
     stop("x must be character")
   }
-  
+
   as.integer(sapply(x, cell_ref_to_col))
 }
 
@@ -1037,11 +1037,11 @@ addStyle <- function(wb,
 
   if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
     if (style$numFmt$numFmtId == 165) {
-      maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+      maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
         as.integer(
           max(c(i$style$numFmt$numFmtId, 0))
         )
-      }), 165))
+      })), 165)
       style$numFmt$numFmtId <- maxnumFmtId + 1
     }
   }
@@ -2546,7 +2546,15 @@ worksheetOrder <- function(wb) {
   invisible(wb)
 }
 
-
+#' @name as_POSIXct_utc
+#' @title Convert to POSIXct with timezone UTC
+#' @param x something as.POSIXct can convert
+#' @keywords internal
+as_POSIXct_utc <- function(x) {
+  z <- as.POSIXct(x, tz = "UTC")
+  attr(z, "tzone") <- "UTC"
+  z
+}
 
 
 #' @name convertToDate
@@ -2683,9 +2691,9 @@ names.Workbook <- function(x) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Numeric vector specifying rows to include in region
 #' @param cols Numeric vector specifying columns to include in region
-#' @param name Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.
+#' @param name Name for region. A character vector of length 1. Note region names must be case-insensitive unique.
 #' @param overwrite Boolean. Overwrite if exists ? Default to FALSE
-#' 
+#'
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
 #' @export
 #' @seealso [getNamedRegions()]
@@ -2719,7 +2727,7 @@ names.Workbook <- function(x) {
 #' ## delete one
 #' deleteNamedRegion(wb = wb, name = "iris2")
 #' getNamedRegions(wb)
-#' 
+#'
 #' ## read named regions
 #' df <- read.xlsx(wb, namedRegion = "iris")
 #' head(df)
@@ -2727,7 +2735,7 @@ names.Workbook <- function(x) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
-#' 
+#'
 #' @rdname NamedRegion
 createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   op <- get_set_options()
@@ -2757,12 +2765,12 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
     stop(sprintf("Named region with name '%s' already exists! Use overwrite  = TRUE if you want to replace it", name))
   } else if (tolower(name) %in% ex_names & overwrite) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
-  }  
-  
+  }
+
   if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
     stop("name cannot look like a cell reference.")
   }
-  
+
   cols <- round(cols)
   rows <- round(rows)
 
@@ -2784,20 +2792,20 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
 #' @export
 #' @rdname NamedRegion
 deleteNamedRegion <- function(wb, name) {
-  
+
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
-  
+
   ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
   ex_names <- tolower(replaceXMLEntities(ex_names))
-  
+
   if (tolower(name) %in% ex_names) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   } else {
     warning(sprintf("Cannot find Named region with name '%s'", name))
   }
-  
+
   invisible(0)
 }
 
@@ -2844,7 +2852,7 @@ deleteNamedRegion <- function(wb, name) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
-#' 
+#'
 getNamedRegions <- function(x) {
   UseMethod("getNamedRegions", x)
 }
@@ -3219,15 +3227,15 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
   }
 
   if (!is.logical(allowBlank)) {
-    stop("Argument 'allowBlank' musts be logical!")
+    stop("Argument 'allowBlank' must be logical!")
   }
 
   if (!is.logical(showInputMsg)) {
-    stop("Argument 'showInputMsg' musts be logical!")
+    stop("Argument 'showInputMsg' must be logical!")
   }
 
   if (!is.logical(showErrorMsg)) {
-    stop("Argument 'showErrorMsg' musts be logical!")
+    stop("Argument 'showErrorMsg' must be logical!")
   }
 
   ## All inputs validated
@@ -4476,11 +4484,39 @@ ungroupColumns <- function(wb, sheet, cols) {
 #' @param rows Indices of rows to group
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
 #' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
+#' @examples
+#' wb <- createWorkbook()
+#' addWorksheet(wb, 'Sheet1')
+#' addWorksheet(wb, 'Sheet2')
+#'
+#' writeData(wb, "Sheet1", iris)
+#' writeData(wb, "Sheet2", iris)
+#'
+#' ## create list of groups
+#' # lines used for grouping (here: species)
+#' grp <- list(
+#'   seq(2, 51),
+#'   seq(52, 101),
+#'   seq(102, 151)
+#' )
+#' # assign group levels
+#' names(grp) <- c("1","0","1")
+#' groupRows(wb, "Sheet1", rows = grp)
+#'
+#' # different grouping
+#' names(grp) <- c("1","2","3")
+#' groupRows(wb, "Sheet2", rows = grp)
 #' @export
-
 groupRows <- function(wb, sheet, rows, hidden = FALSE) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
+
+  if(is.list(rows)) {
+    levels <- unlist(lapply(names(rows), function(x)rep(as.character(x), length(rows[[x]]))))
+    rows <- unlist(rows)
+  } else {
+    levels <- rep("1", length(rows))
   }
 
   sheet <- wb$validateSheet(sheet)
@@ -4493,7 +4529,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
   }
 
-  if (any(rows) < 1L) {
+  if (any(rows < 1L)) {
     stop("Invalid rows entered (<= 0).")
   }
 
@@ -4501,8 +4537,6 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
-
-  levels <- rep("1", length(rows))
 
   # Remove duplicates
   hidden <- hidden[!duplicated(rows)]

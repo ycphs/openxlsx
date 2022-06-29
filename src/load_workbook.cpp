@@ -119,7 +119,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
 
           buf = cols[ci];
           // If either custom widths or groupings, get column index
-          if ((buf.find("customWidth", 0) != string::npos) | (buf.find("outlineLevel", 0) != string::npos)) {
+          if ((buf.find("customWidth", 0) != string::npos) || (buf.find("outlineLevel", 0) != string::npos)) {
             
             tmp_pos = buf.find("min=\"", 0);
             endPos = buf.find(tagEnd, tmp_pos + 5);
@@ -139,7 +139,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             }
 
             // If column has both a custom width and is part of a group
-            if ((buf.find("customWidth", 0) != string::npos) & (buf.find("outlineLevel", 0) != string::npos)) {
+            if ((buf.find("customWidth", 0) != string::npos) && (buf.find("outlineLevel", 0) != string::npos)) {
               tmp_pos = buf.find("width=\"", 0);
               endPos = buf.find(tagEnd, tmp_pos + 7);
               tmp_width = atof(buf.substr(tmp_pos + 7, endPos - tmp_pos - 7).c_str()) - 0.71;
