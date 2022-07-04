@@ -501,16 +501,20 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
         
         amp_split <- function(x) {
           if (length(x) == 0) return (NULL)
-          # create output string of width 3
-          res <- vector("character", 3)
-          # Identify the names found in the string: returns them as matrix: strip the &amp;
-          nam <- gsub(pattern = "&amp;", "", unlist(stri_match_all_regex(x, "&amp;[LCR]")))
-          # split the string and assign names to join
-          z <- unlist(stri_split_regex(x, "&amp;[LCR]", omit_empty = TRUE))
-          names(z) <- as.character(nam)
-          res[c("L", "C", "R") %in% names(z)] <- z
+          # First split the entry before &L, &C, &R => left/center/right header/footer entries
+          parts <- unlist(stri_split_regex(x, "(?=&amp;[LCR])", omit_empty = TRUE))
+          # Then extract from each entry the justification (LCR) and the content 
+          matches <- stri_match(parts, regex = "^(?:&amp;([LRC])|)(.*)$")
+          # The OOXML standard says that entries without an &[LRC] are to be understood as centered
+          matches[(matches[,2]==""),2] = "C"
+                   
+          # => convert to named character vector
+          z <- matches[,3]
+          names(z) <- matches[,2]
           
-          # return the string vector
+          # return 3-string vector for left/center/right content:
+          res <- z[c("L", "C", "R")]
+          res[is.na(res)] <- ""
           unname(res)
         }
         
