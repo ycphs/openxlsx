@@ -85,8 +85,8 @@ op.openxlsx <- list(
   # Where is compressionLevel called?
   openxlsx.compressionLevel = 9,
   openxlsx.creator          = "",
-  openxlsx.dateFormat       = "mm/dd/yyyy",
-  openxlsx.datetimeFormat   = "yyyy-mm-dd hh:mm:ss",
+  openxlsx.dateFormat       = "date",
+  openxlsx.datetimeFormat   = "longdate",
   openxlsx.hdpi             = 300,
   openxlsx.header           = NULL,
   openxlsx.headerStyle      = NULL,
