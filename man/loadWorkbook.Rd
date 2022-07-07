@@ -4,7 +4,7 @@
 \alias{loadWorkbook}
 \title{Load an existing .xlsx file}
 \usage{
-loadWorkbook(file, xlsxFile = NULL, isUnzipped = FALSE)
+loadWorkbook(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert = TRUE)
 }
 \arguments{
 \item{file}{A path to an existing .xlsx or .xlsm file}
@@ -12,6 +12,8 @@ loadWorkbook(file, xlsxFile = NULL, isUnzipped = FALSE)
 \item{xlsxFile}{alias for file}
 
 \item{isUnzipped}{Set to TRUE if the xlsx file is already unzipped}
+
+\item{na.convert}{Should empty/blank cells be converted to \code{NA_character_}. Defaults to TRUE.}
 }
 \value{
 Workbook object.
