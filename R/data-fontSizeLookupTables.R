@@ -3,8 +3,15 @@
 #' Lookup tables for font size 
 #' 
 #' @format A data.frame with column names corresponding to font names
-"openxlsxFontSizeLookupTable"
+#' @name openxlsxFontSizeLookupTable
+#' @docType data
+#' @keywords data
+#' @noRd
+NULL
 
 #' @rdname openxlsxFontSizeLookupTable
-#' @format NULL
-"openxlsxFontSizeLookupTableBold"
+#' @name openxlsxFontSizeLookupTable
+#' @docType data
+#' @keywords data
+#' @noRd
+NULL
