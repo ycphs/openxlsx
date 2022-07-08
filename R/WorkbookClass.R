@@ -562,11 +562,11 @@ Workbook$methods(
     ## temp directory to save XML files prior to compressing
     tmpDir <- file.path(tempfile(pattern = "workbookTemp_"))
 
-    if (file.exists(tmpDir)) {
+    if (dir.exists(tmpDir)) {
       unlink(tmpDir, recursive = TRUE, force = TRUE)
     }
 
-    success <- dir.create(path = tmpDir, recursive = TRUE)
+    success <- dir.create(path = tmpDir, recursive = FALSE)
     if (!success) {
       stop(sprintf("Failed to create temporary directory '%s'", tmpDir))
     }
