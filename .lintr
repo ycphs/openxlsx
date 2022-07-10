@@ -1,11 +1,10 @@
-linters: with_defaults(
+linters: linters_with_defaults(
   line_length_linter = NULL,               # we have many long lines
   cyclocomp_linter = NULL,                 #
   commented_code_linter = NULL,            #
-  snake_case_linter = NULL,                # we prefered camel case
   trailing_whitespace_linter = NULL,       # have a few cases
   commas_linter = NULL,                    #
-  paren_brace_linter = NULL,               #
+  brace_linter = NULL,                     #
   object_name_linter = NULL,               # more camel case
   infix_spaces_linter = NULL,              #
   function_left_parentheses_linter = NULL, #
