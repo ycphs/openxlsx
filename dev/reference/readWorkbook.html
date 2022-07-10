@@ -66,66 +66,97 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">readWorkbook</span><span class="op">(</span>
-  <span class="va">xlsxFile</span>,
-  sheet <span class="op">=</span> <span class="fl">1</span>,
-  startRow <span class="op">=</span> <span class="fl">1</span>,
-  colNames <span class="op">=</span> <span class="cn">TRUE</span>,
-  rowNames <span class="op">=</span> <span class="cn">FALSE</span>,
-  detectDates <span class="op">=</span> <span class="cn">FALSE</span>,
-  skipEmptyRows <span class="op">=</span> <span class="cn">TRUE</span>,
-  skipEmptyCols <span class="op">=</span> <span class="cn">TRUE</span>,
-  rows <span class="op">=</span> <span class="cn">NULL</span>,
-  cols <span class="op">=</span> <span class="cn">NULL</span>,
-  check.names <span class="op">=</span> <span class="cn">FALSE</span>,
-  sep.names <span class="op">=</span> <span class="st">"."</span>,
-  namedRegion <span class="op">=</span> <span class="cn">NULL</span>,
-  na.strings <span class="op">=</span> <span class="st">"NA"</span>,
-  fillMergedCells <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">readWorkbook</span><span class="op">(</span></span>
+<span>  <span class="va">xlsxFile</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  startRow <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  colNames <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rowNames <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  detectDates <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  skipEmptyRows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  skipEmptyCols <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  check.names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  sep.names <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  namedRegion <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na.strings <span class="op">=</span> <span class="st">"NA"</span>,</span>
+<span>  fillMergedCells <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>xlsxFile</dt>
 <dd><p>An xlsx file, Workbook object or URL to xlsx file.</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>The name or index of the sheet to read data from.</p></dd>
+
+
 <dt>startRow</dt>
 <dd><p>first row to begin looking for data.  Empty rows at the top of a file are always skipped,
 regardless of the value of startRow.</p></dd>
+
+
 <dt>colNames</dt>
 <dd><p>If <code>TRUE</code>, the first row of data will be used as column names.</p></dd>
+
+
 <dt>rowNames</dt>
 <dd><p>If <code>TRUE</code>, first column of data will be used as row names.</p></dd>
+
+
 <dt>detectDates</dt>
 <dd><p>If <code>TRUE</code>, attempt to recognise dates and perform conversion.</p></dd>
+
+
 <dt>skipEmptyRows</dt>
 <dd><p>If <code>TRUE</code>, empty rows are skipped else empty rows after the first row containing data
 will return a row of NAs.</p></dd>
+
+
 <dt>skipEmptyCols</dt>
 <dd><p>If <code>TRUE</code>, empty columns are skipped.</p></dd>
+
+
 <dt>rows</dt>
 <dd><p>A numeric vector specifying which rows in the Excel file to read.
 If NULL, all rows are read.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>A numeric vector specifying which columns in the Excel file to read.
 If NULL, all columns are read.</p></dd>
+
+
 <dt>check.names</dt>
 <dd><p>logical. If TRUE then the names of the variables in the data frame
 are checked to ensure that they are syntactically valid variable names</p></dd>
+
+
 <dt>sep.names</dt>
 <dd><p>One character which substitutes blanks in column names. By default, "."</p></dd>
+
+
 <dt>namedRegion</dt>
 <dd><p>A named region in the Workbook. If not NULL startRow, rows and cols parameters are ignored.</p></dd>
+
+
 <dt>na.strings</dt>
 <dd><p>A character vector of strings which are to be interpreted as NA. Blank cells will be returned as NA.</p></dd>
+
+
 <dt>fillMergedCells</dt>
 <dd><p>If TRUE, the value in a merged cell is given to all cells within the merge.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data.frame</p>
+    
+
+<p>data.frame</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -143,11 +174,11 @@ are checked to ensure that they are syntactically valid variable names</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">xlsxFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">readWorkbook</span><span class="op">(</span>xlsxFile <span class="op">=</span> <span class="va">xlsxFile</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">xlsxFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">readWorkbook</span><span class="op">(</span>xlsxFile <span class="op">=</span> <span class="va">xlsxFile</span>, sheet <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">xlsxFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">readWorkbook</span><span class="op">(</span>xlsxFile <span class="op">=</span> <span class="va">xlsxFile</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">xlsxFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"readTest.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu">readWorkbook</span><span class="op">(</span>xlsxFile <span class="op">=</span> <span class="va">xlsxFile</span>, sheet <span class="op">=</span> <span class="fl">1</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -162,7 +193,7 @@ are checked to ensure that they are syntactically valid variable names</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -66,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">x</span>, <span class="va">file</span>, asTable <span class="op">=</span> <span class="cn">FALSE</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">x</span>, <span class="va">file</span>, asTable <span class="op">=</span> <span class="cn">FALSE</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,20 +74,31 @@
     <dl><dt>x</dt>
 <dd><p>A data.frame or a (named) list of objects that can be handled by
 <code><a href="writeData.html">writeData()</a></code> or <code><a href="writeDataTable.html">writeDataTable()</a></code> to write to file</p></dd>
+
+
 <dt>file</dt>
 <dd><p>A file path to save the xlsx file</p></dd>
+
+
 <dt>asTable</dt>
 <dd><p>If <code>TRUE</code> will use <code><a href="writeDataTable.html">writeDataTable()</a></code> rather
 than <code><a href="writeData.html">writeData()</a></code> to write <code>x</code> to the file (default:
 <code>FALSE</code>)</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Overwrite existing file (Defaults to <code>TRUE</code> as with <code>write.table</code>)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="buildWorkbook.html">buildWorkbook()</a></code>; see details</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A workbook object</p>
+    
+
+<p>A workbook object</p>
     </div>
     <div id="optional-parameters">
     <h2>Optional Parameters</h2>
@@ -134,47 +145,47 @@ between each column.  If "<code>all</code>" all cell borders are drawn.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## write to working directory</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span> <span class="co">## set default border colour</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX1.xlsx"</span>, colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"columns"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX2.xlsx"</span>, colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"surrounding"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="createStyle.html">createStyle</a></span><span class="op">(</span></span>
-<span class="r-in">  textDecoration <span class="op">=</span> <span class="st">"BOLD"</span>, fontColour <span class="op">=</span> <span class="st">"#FFFFFF"</span>, fontSize <span class="op">=</span> <span class="fl">12</span>,</span>
-<span class="r-in">  fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>,</span>
-<span class="r-in">  file <span class="op">=</span> <span class="st">"writeXLSX3.xlsx"</span>,</span>
-<span class="r-in">  colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"rows"</span>, headerStyle <span class="op">=</span> <span class="va">hs</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Lists elements are written to individual worksheets, using list names as sheet names if available</span></span>
-<span class="r-in"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"MTCATS"</span> <span class="op">=</span> <span class="va">mtcars</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList1.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"auto"</span>, <span class="st">"auto"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## different sheets can be given different parameters</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>,</span>
-<span class="r-in">  startCol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, startRow <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  asTable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, withFilter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># specify column widths for multiple sheets</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">11</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## write to working directory</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span> <span class="co">## set default border colour</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX1.xlsx"</span>, colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"columns"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"writeXLSX2.xlsx"</span>, colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"surrounding"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="createStyle.html">createStyle</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  textDecoration <span class="op">=</span> <span class="st">"BOLD"</span>, fontColour <span class="op">=</span> <span class="st">"#FFFFFF"</span>, fontSize <span class="op">=</span> <span class="fl">12</span>,</span></span>
+<span class="r-in"><span>  fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">iris</span>,</span></span>
+<span class="r-in"><span>  file <span class="op">=</span> <span class="st">"writeXLSX3.xlsx"</span>,</span></span>
+<span class="r-in"><span>  colNames <span class="op">=</span> <span class="cn">TRUE</span>, borders <span class="op">=</span> <span class="st">"rows"</span>, headerStyle <span class="op">=</span> <span class="va">hs</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Lists elements are written to individual worksheets, using list names as sheet names if available</span></span></span>
+<span class="r-in"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"IRIS"</span> <span class="op">=</span> <span class="va">iris</span>, <span class="st">"MTCATS"</span> <span class="op">=</span> <span class="va">mtcars</span>, <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList1.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"auto"</span>, <span class="st">"auto"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## different sheets can be given different parameters</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>,</span></span>
+<span class="r-in"><span>  startCol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, startRow <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  asTable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, withFilter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># specify column widths for multiple sheets</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">l</span>, <span class="st">"writeList2.xlsx"</span>, colWidths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">11</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -189,7 +200,7 @@ between each column.  If "<code>all</code>" all cell borders are drawn.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

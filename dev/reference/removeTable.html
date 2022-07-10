@@ -66,56 +66,63 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">removeTable</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="va">table</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">removeTable</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="va">table</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>A name or index of a worksheet</p></dd>
+
+
 <dt>table</dt>
 <dd><p>Name of table to remove. See <code><a href="getTables.html">getTables()</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>character vector of table names on the specified sheet</p>
+    
+
+<p>character vector of table names on the specified sheet</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>, tableName <span class="op">=</span> <span class="st">"mtcars"</span>, startCol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="removeWorksheet.html">removeWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co">## delete worksheet removes table objects</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>, tableName <span class="op">=</span> <span class="st">"mtcars"</span>, startCol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## removeTable() deletes table object and all data</span></span>
-<span class="r-in"><span class="fu"><a href="getTables.html">getTables</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"Sheet 1"</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>, tableName <span class="op">=</span> <span class="st">"mtcars"</span>, startCol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="removeWorksheet.html">removeWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co">## delete worksheet removes table objects</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">mtcars</span>, tableName <span class="op">=</span> <span class="st">"mtcars"</span>, startCol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## removeTable() deletes table object and all data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getTables.html">getTables</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "iris"   "mtcars"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"refs")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A1:E151" "J1:T33" </span>
-<span class="r-in"><span class="fu">removeTable</span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, table <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span>, startCol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="getTables.html">getTables</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">removeTable</span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, table <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span>, startCol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getTables.html">getTables</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mtcars" "iris"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"refs")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "J1:T33"  "A1:E151"</span>
-<span class="r-in"><span class="fu">removeTable</span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, table <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span>, startCol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, file <span class="op">=</span> <span class="st">"removeTableExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu">removeTable</span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, table <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span>, tableName <span class="op">=</span> <span class="st">"iris"</span>, startCol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, file <span class="op">=</span> <span class="st">"removeTableExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -130,7 +137,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

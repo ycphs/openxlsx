@@ -66,69 +66,106 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">protectWorksheet</span><span class="op">(</span>
-  <span class="va">wb</span>,
-  <span class="va">sheet</span>,
-  protect <span class="op">=</span> <span class="cn">TRUE</span>,
-  password <span class="op">=</span> <span class="cn">NULL</span>,
-  lockSelectingLockedCells <span class="op">=</span> <span class="cn">NULL</span>,
-  lockSelectingUnlockedCells <span class="op">=</span> <span class="cn">NULL</span>,
-  lockFormattingCells <span class="op">=</span> <span class="cn">NULL</span>,
-  lockFormattingColumns <span class="op">=</span> <span class="cn">NULL</span>,
-  lockFormattingRows <span class="op">=</span> <span class="cn">NULL</span>,
-  lockInsertingColumns <span class="op">=</span> <span class="cn">NULL</span>,
-  lockInsertingRows <span class="op">=</span> <span class="cn">NULL</span>,
-  lockInsertingHyperlinks <span class="op">=</span> <span class="cn">NULL</span>,
-  lockDeletingColumns <span class="op">=</span> <span class="cn">NULL</span>,
-  lockDeletingRows <span class="op">=</span> <span class="cn">NULL</span>,
-  lockSorting <span class="op">=</span> <span class="cn">NULL</span>,
-  lockAutoFilter <span class="op">=</span> <span class="cn">NULL</span>,
-  lockPivotTables <span class="op">=</span> <span class="cn">NULL</span>,
-  lockObjects <span class="op">=</span> <span class="cn">NULL</span>,
-  lockScenarios <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">protectWorksheet</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheet</span>,</span>
+<span>  protect <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  password <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockSelectingLockedCells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockSelectingUnlockedCells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockFormattingCells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockFormattingColumns <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockFormattingRows <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockInsertingColumns <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockInsertingRows <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockInsertingHyperlinks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockDeletingColumns <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockDeletingRows <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockSorting <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockAutoFilter <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockPivotTables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockObjects <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lockScenarios <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>A name or index of a worksheet</p></dd>
+
+
 <dt>protect</dt>
 <dd><p>Whether to protect or unprotect the sheet (default=TRUE)</p></dd>
+
+
 <dt>password</dt>
 <dd><p>(optional) password required to unprotect the worksheet</p></dd>
+
+
 <dt>lockSelectingLockedCells</dt>
 <dd><p>Whether selecting locked cells is locked</p></dd>
+
+
 <dt>lockSelectingUnlockedCells</dt>
 <dd><p>Whether selecting unlocked cells is locked</p></dd>
+
+
 <dt>lockFormattingCells</dt>
 <dd><p>Whether formatting cells is locked</p></dd>
+
+
 <dt>lockFormattingColumns</dt>
 <dd><p>Whether formatting columns is locked</p></dd>
+
+
 <dt>lockFormattingRows</dt>
 <dd><p>Whether formatting rows is locked</p></dd>
+
+
 <dt>lockInsertingColumns</dt>
 <dd><p>Whether inserting columns is locked</p></dd>
+
+
 <dt>lockInsertingRows</dt>
 <dd><p>Whether inserting rows is locked</p></dd>
+
+
 <dt>lockInsertingHyperlinks</dt>
 <dd><p>Whether inserting hyperlinks is locked</p></dd>
+
+
 <dt>lockDeletingColumns</dt>
 <dd><p>Whether deleting columns is locked</p></dd>
+
+
 <dt>lockDeletingRows</dt>
 <dd><p>Whether deleting rows is locked</p></dd>
+
+
 <dt>lockSorting</dt>
 <dd><p>Whether sorting is locked</p></dd>
+
+
 <dt>lockAutoFilter</dt>
 <dd><p>Whether auto-filter is locked</p></dd>
+
+
 <dt>lockPivotTables</dt>
 <dd><p>Whether pivot tables are locked</p></dd>
+
+
 <dt>lockObjects</dt>
 <dd><p>Whether objects are locked</p></dd>
+
+
 <dt>lockScenarios</dt>
 <dd><p>Whether scenarios are locked</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -137,21 +174,21 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Formatting cells / columns is allowed , but inserting / deleting columns is protected:</span></span>
-<span class="r-in"><span class="fu">protectWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span>,</span>
-<span class="r-in">  protect <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  lockFormattingCells <span class="op">=</span> <span class="cn">FALSE</span>, lockFormattingColumns <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  lockInsertingColumns <span class="op">=</span> <span class="cn">TRUE</span>, lockDeletingColumns <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Remove the protection</span></span>
-<span class="r-in"><span class="fu">protectWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span>, protect <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"pageSetupExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Formatting cells / columns is allowed , but inserting / deleting columns is protected:</span></span></span>
+<span class="r-in"><span><span class="fu">protectWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span>,</span></span>
+<span class="r-in"><span>  protect <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  lockFormattingCells <span class="op">=</span> <span class="cn">FALSE</span>, lockFormattingColumns <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  lockInsertingColumns <span class="op">=</span> <span class="cn">TRUE</span>, lockDeletingColumns <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Remove the protection</span></span></span>
+<span class="r-in"><span><span class="fu">protectWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span>, protect <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"pageSetupExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -166,7 +203,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

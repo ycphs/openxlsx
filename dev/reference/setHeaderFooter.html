@@ -66,36 +66,51 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">setHeaderFooter</span><span class="op">(</span>
-  <span class="va">wb</span>,
-  <span class="va">sheet</span>,
-  header <span class="op">=</span> <span class="cn">NULL</span>,
-  footer <span class="op">=</span> <span class="cn">NULL</span>,
-  evenHeader <span class="op">=</span> <span class="cn">NULL</span>,
-  evenFooter <span class="op">=</span> <span class="cn">NULL</span>,
-  firstHeader <span class="op">=</span> <span class="cn">NULL</span>,
-  firstFooter <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setHeaderFooter</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheet</span>,</span>
+<span>  header <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  footer <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  evenHeader <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  evenFooter <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  firstHeader <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  firstFooter <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>A name or index of a worksheet</p></dd>
+
+
 <dt>header</dt>
 <dd><p>document header. Character vector of length 3 corresponding to positions left, center, right. Use NA to skip a position.</p></dd>
+
+
 <dt>footer</dt>
 <dd><p>document footer. Character vector of length 3 corresponding to positions left, center, right. Use NA to skip a position.</p></dd>
+
+
 <dt>evenHeader</dt>
 <dd><p>document header for even pages.</p></dd>
+
+
 <dt>evenFooter</dt>
 <dd><p>document footer for even pages.</p></dd>
+
+
 <dt>firstHeader</dt>
 <dd><p>document header for first page only.</p></dd>
+
+
 <dt>firstFooter</dt>
 <dd><p>document footer for first page only.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -118,50 +133,50 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S3"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S4"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">4</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span>
-<span class="r-in">  sheet <span class="op">=</span> <span class="st">"S1"</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD HEAD LEFT"</span>, <span class="st">"ODD HEAD CENTER"</span>, <span class="st">"ODD HEAD RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD FOOT RIGHT"</span>, <span class="st">"ODD FOOT CENTER"</span>, <span class="st">"ODD FOOT RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  evenHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN HEAD LEFT"</span>, <span class="st">"EVEN HEAD CENTER"</span>, <span class="st">"EVEN HEAD RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  evenFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN FOOT RIGHT"</span>, <span class="st">"EVEN FOOT CENTER"</span>, <span class="st">"EVEN FOOT RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TOP"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BOTTOM"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span>
-<span class="r-in">  sheet <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Date]"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"&amp;[Page] / &amp;[Pages]"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Path]&amp;[File]"</span>, <span class="cn">NA</span>, <span class="st">"&amp;[Tab]"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Header of First Page"</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Footer of First Page"</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span>
-<span class="r-in">  sheet <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL HEAD LEFT 2"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"ALL HEAD RIGHT 2"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL FOOT RIGHT 2"</span>, <span class="st">"ALL FOOT CENTER 2"</span>, <span class="st">"ALL FOOT RIGHT 2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span>
-<span class="r-in">  sheet <span class="op">=</span> <span class="fl">4</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"setHeaderFooterExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">4</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span></span>
+<span class="r-in"><span>  sheet <span class="op">=</span> <span class="st">"S1"</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD HEAD LEFT"</span>, <span class="st">"ODD HEAD CENTER"</span>, <span class="st">"ODD HEAD RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD FOOT RIGHT"</span>, <span class="st">"ODD FOOT CENTER"</span>, <span class="st">"ODD FOOT RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  evenHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN HEAD LEFT"</span>, <span class="st">"EVEN HEAD CENTER"</span>, <span class="st">"EVEN HEAD RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  evenFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN FOOT RIGHT"</span>, <span class="st">"EVEN FOOT CENTER"</span>, <span class="st">"EVEN FOOT RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TOP"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BOTTOM"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span></span>
+<span class="r-in"><span>  sheet <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Date]"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"&amp;[Page] / &amp;[Pages]"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Path]&amp;[File]"</span>, <span class="cn">NA</span>, <span class="st">"&amp;[Tab]"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Header of First Page"</span>, <span class="cn">NA</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Footer of First Page"</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span></span>
+<span class="r-in"><span>  sheet <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL HEAD LEFT 2"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"ALL HEAD RIGHT 2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL FOOT RIGHT 2"</span>, <span class="st">"ALL FOOT CENTER 2"</span>, <span class="st">"ALL FOOT RIGHT 2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">setHeaderFooter</span><span class="op">(</span><span class="va">wb</span>,</span></span>
+<span class="r-in"><span>  sheet <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"setHeaderFooterExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -176,7 +191,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

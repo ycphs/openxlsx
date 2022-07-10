@@ -66,29 +66,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">createWorkbook</span><span class="op">(</span>
-  creator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"USERNAME"</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"USER"</span><span class="op">)</span><span class="op">)</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  subject <span class="op">=</span> <span class="cn">NULL</span>,
-  category <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createWorkbook</span><span class="op">(</span></span>
+<span>  creator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.Platform</span><span class="op">$</span><span class="va">OS.type</span> <span class="op">==</span> <span class="st">"windows"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"USERNAME"</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"USER"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subject <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  category <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>creator</dt>
 <dd><p>Creator of the workbook (your name). Defaults to login username</p></dd>
+
+
 <dt>title</dt>
 <dd><p>Workbook properties title</p></dd>
+
+
 <dt>subject</dt>
 <dd><p>Workbook properties subject</p></dd>
+
+
 <dt>category</dt>
 <dd><p>Workbook properties category</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Workbook object</p>
+    
+
+<p>Workbook object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -102,21 +111,21 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Create a new workbook</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">createWorkbook</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Save workbook to working directory</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="st">"createWorkbookExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Set Workbook properties</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">createWorkbook</span><span class="op">(</span></span>
-<span class="r-in">  creator <span class="op">=</span> <span class="st">"Me"</span>,</span>
-<span class="r-in">  title <span class="op">=</span> <span class="st">"title here"</span>,</span>
-<span class="r-in">  subject <span class="op">=</span> <span class="st">"this &amp; that"</span>,</span>
-<span class="r-in">  category <span class="op">=</span> <span class="st">"something"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Create a new workbook</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">createWorkbook</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Save workbook to working directory</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="st">"createWorkbookExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Set Workbook properties</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">createWorkbook</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  creator <span class="op">=</span> <span class="st">"Me"</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"title here"</span>,</span></span>
+<span class="r-in"><span>  subject <span class="op">=</span> <span class="st">"this &amp; that"</span>,</span></span>
+<span class="r-in"><span>  category <span class="op">=</span> <span class="st">"something"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -131,7 +140,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

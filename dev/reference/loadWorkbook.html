@@ -68,21 +68,28 @@ formatting of the original .xlsx file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">loadWorkbook</span><span class="op">(</span><span class="va">file</span>, xlsxFile <span class="op">=</span> <span class="cn">NULL</span>, isUnzipped <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">loadWorkbook</span><span class="op">(</span><span class="va">file</span>, xlsxFile <span class="op">=</span> <span class="cn">NULL</span>, isUnzipped <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>A path to an existing .xlsx or .xlsm file</p></dd>
+
+
 <dt>xlsxFile</dt>
 <dd><p>alias for file</p></dd>
+
+
 <dt>isUnzipped</dt>
 <dd><p>Set to TRUE if the xlsx file is already unzipped</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Workbook object.</p>
+    
+
+<p>Workbook object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -95,11 +102,11 @@ formatting of the original .xlsx file.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## load existing workbook from package folder</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">loadWorkbook</span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"loadExample.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co"># list worksheets</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load existing workbook from package folder</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">loadWorkbook</span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"loadExample.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co"># list worksheets</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "IrisSample"   "testing"      "mtcars"       "mtCars Pivot"</span>
-<span class="r-in"><span class="va">wb</span> <span class="co">## view object</span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="co">## view object</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A Workbook object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Worksheets:</span>
@@ -131,30 +138,30 @@ formatting of the original .xlsx file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Images:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Image 1: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/media/image2.jpeg"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Image 2: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/media/image1.jpeg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Image 1: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/media/image2.jpeg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Image 2: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/media/image1.jpeg"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Charts:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 1: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/colors2.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 2: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/style2.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 3: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/chart2.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 4: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/chart1.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 5: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/style1.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 6: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/colors1.xml"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 7: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/_rels/chart2.xml.rels"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 8: "/tmp/RtmpN6DKZ7/file2a199baf42/xl/charts/_rels/chart1.xml.rels"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 1: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/colors2.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 2: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/style2.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 3: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/chart2.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 4: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/chart1.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 5: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/style1.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 6: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/colors1.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 7: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/_rels/chart2.xml.rels"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Chart 8: "/tmp/RtmpJtGwkR/file28cb3ae81581/xl/charts/_rels/chart1.xml.rels"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Worksheet write order: 1, 2, 3, 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Active Sheet 2: "testing" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Position: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co">## Add a worksheet</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"A new worksheet"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Save workbook</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"loadExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co">## Add a worksheet</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"A new worksheet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Save workbook</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"loadExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -169,7 +176,7 @@ formatting of the original .xlsx file.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

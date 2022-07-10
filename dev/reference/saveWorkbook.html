@@ -66,20 +66,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">saveWorkbook</span><span class="op">(</span><span class="va">wb</span>, <span class="va">file</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, returnValue <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">saveWorkbook</span><span class="op">(</span><span class="va">wb</span>, <span class="va">file</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, returnValue <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A Workbook object to write to file</p></dd>
+
+
 <dt>file</dt>
 <dd><p>A character string naming an xlsx file</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>If <code>TRUE</code>, overwrite any existing file.</p></dd>
+
+
 <dt>returnValue</dt>
 <dd><p>If <code>TRUE</code>, returns  <code>TRUE</code> in case of a success, else <code>FALSE</code>.
 If flag is <code>FALSE</code>, then no return value is returned.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -96,14 +103,14 @@ If flag is <code>FALSE</code>, then no return value is returned.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Create a new workbook and add a worksheet</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="st">"Creator of workbook"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"My first worksheet"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Save workbook to working directory</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">saveWorkbook</span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="st">"saveWorkbookExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Create a new workbook and add a worksheet</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="st">"Creator of workbook"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"My first worksheet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Save workbook to working directory</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">saveWorkbook</span><span class="op">(</span><span class="va">wb</span>, file <span class="op">=</span> <span class="st">"saveWorkbookExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -118,7 +125,7 @@ If flag is <code>FALSE</code>, then no return value is returned.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

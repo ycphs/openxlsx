@@ -66,63 +66,96 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pageSetup</span><span class="op">(</span>
-  <span class="va">wb</span>,
-  <span class="va">sheet</span>,
-  orientation <span class="op">=</span> <span class="cn">NULL</span>,
-  scale <span class="op">=</span> <span class="fl">100</span>,
-  left <span class="op">=</span> <span class="fl">0.7</span>,
-  right <span class="op">=</span> <span class="fl">0.7</span>,
-  top <span class="op">=</span> <span class="fl">0.75</span>,
-  bottom <span class="op">=</span> <span class="fl">0.75</span>,
-  header <span class="op">=</span> <span class="fl">0.3</span>,
-  footer <span class="op">=</span> <span class="fl">0.3</span>,
-  fitToWidth <span class="op">=</span> <span class="cn">FALSE</span>,
-  fitToHeight <span class="op">=</span> <span class="cn">FALSE</span>,
-  paperSize <span class="op">=</span> <span class="cn">NULL</span>,
-  printTitleRows <span class="op">=</span> <span class="cn">NULL</span>,
-  printTitleCols <span class="op">=</span> <span class="cn">NULL</span>,
-  summaryRow <span class="op">=</span> <span class="cn">NULL</span>,
-  summaryCol <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pageSetup</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheet</span>,</span>
+<span>  orientation <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  left <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  right <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  top <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  bottom <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  header <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  footer <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  fitToWidth <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  fitToHeight <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  paperSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  printTitleRows <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  printTitleCols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  summaryRow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  summaryCol <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>A name or index of a worksheet</p></dd>
+
+
 <dt>orientation</dt>
 <dd><p>Page orientation. One of "portrait" or "landscape"</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>Print scaling. Numeric value between 10 and 400</p></dd>
+
+
 <dt>left</dt>
 <dd><p>left page margin in inches</p></dd>
+
+
 <dt>right</dt>
 <dd><p>right page margin in inches</p></dd>
+
+
 <dt>top</dt>
 <dd><p>top page margin in inches</p></dd>
+
+
 <dt>bottom</dt>
 <dd><p>bottom page margin in inches</p></dd>
+
+
 <dt>header</dt>
 <dd><p>header margin in inches</p></dd>
+
+
 <dt>footer</dt>
 <dd><p>footer margin in inches</p></dd>
+
+
 <dt>fitToWidth</dt>
 <dd><p>If <code>TRUE</code>, worksheet is scaled to fit to page width on printing.</p></dd>
+
+
 <dt>fitToHeight</dt>
 <dd><p>If <code>TRUE</code>, worksheet is scaled to fit to page height on printing.</p></dd>
+
+
 <dt>paperSize</dt>
 <dd><p>See details. Default value is 9 (A4 paper).</p></dd>
+
+
 <dt>printTitleRows</dt>
 <dd><p>Rows to repeat at top of page when printing. Integer vector.</p></dd>
+
+
 <dt>printTitleCols</dt>
 <dd><p>Columns to repeat at left when printing. Integer vector.</p></dd>
+
+
 <dt>summaryRow</dt>
 <dd><p>Location of summary rows in groupings. One of "Above" or "Below".</p></dd>
+
+
 <dt>summaryCol</dt>
 <dd><p>Location of summary columns in groupings. One of "Right" or "Left".</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -200,31 +233,31 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## landscape page scaled to 50%</span></span>
-<span class="r-in"><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, orientation <span class="op">=</span> <span class="st">"landscape"</span>, scale <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## portrait page scales to 300% with 0.5in left and right margins</span></span>
-<span class="r-in"><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, orientation <span class="op">=</span> <span class="st">"portrait"</span>, scale <span class="op">=</span> <span class="fl">300</span>, left <span class="op">=</span> <span class="fl">0.5</span>, right <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## print titles</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_rows"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_cols"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_rows"</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">iris</span>, <span class="va">iris</span>, <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_cols"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">)</span>, rowNames <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"print_title_rows"</span>, printTitleRows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co">## first row</span></span>
-<span class="r-in"><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"print_title_cols"</span>, printTitleCols <span class="op">=</span> <span class="fl">1</span>, printTitleRows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"pageSetupExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"S2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="op">]</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## landscape page scaled to 50%</span></span></span>
+<span class="r-in"><span><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, orientation <span class="op">=</span> <span class="st">"landscape"</span>, scale <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## portrait page scales to 300% with 0.5in left and right margins</span></span></span>
+<span class="r-in"><span><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, orientation <span class="op">=</span> <span class="st">"portrait"</span>, scale <span class="op">=</span> <span class="fl">300</span>, left <span class="op">=</span> <span class="fl">0.5</span>, right <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## print titles</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_rows"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_cols"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_rows"</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">iris</span>, <span class="va">iris</span>, <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"print_title_cols"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">)</span>, rowNames <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"print_title_rows"</span>, printTitleRows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co">## first row</span></span></span>
+<span class="r-in"><span><span class="fu">pageSetup</span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"print_title_cols"</span>, printTitleCols <span class="op">=</span> <span class="fl">1</span>, printTitleRows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"pageSetupExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -239,7 +272,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

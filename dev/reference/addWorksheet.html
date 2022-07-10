@@ -66,64 +66,97 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">addWorksheet</span><span class="op">(</span>
-  <span class="va">wb</span>,
-  <span class="va">sheetName</span>,
-  gridLines <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"gridLines"</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  tabColour <span class="op">=</span> <span class="cn">NULL</span>,
-  zoom <span class="op">=</span> <span class="fl">100</span>,
-  header <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"header"</span><span class="op">)</span>,
-  footer <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"footer"</span><span class="op">)</span>,
-  evenHeader <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"evenHeader"</span><span class="op">)</span>,
-  evenFooter <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"evenFooter"</span><span class="op">)</span>,
-  firstHeader <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"firstHeader"</span><span class="op">)</span>,
-  firstFooter <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"firstFooter"</span><span class="op">)</span>,
-  visible <span class="op">=</span> <span class="cn">TRUE</span>,
-  paperSize <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"paperSize"</span>, <span class="fl">9</span><span class="op">)</span>,
-  orientation <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"orientation"</span>, <span class="st">"portrait"</span><span class="op">)</span>,
-  vdpi <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"vdpi"</span>, <span class="fl">300</span><span class="op">)</span>,
-  hdpi <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"hdpi"</span>, <span class="fl">300</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">addWorksheet</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheetName</span>,</span>
+<span>  gridLines <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"gridLines"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  tabColour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zoom <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  header <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"header"</span><span class="op">)</span>,</span>
+<span>  footer <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"footer"</span><span class="op">)</span>,</span>
+<span>  evenHeader <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"evenHeader"</span><span class="op">)</span>,</span>
+<span>  evenFooter <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"evenFooter"</span><span class="op">)</span>,</span>
+<span>  firstHeader <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"firstHeader"</span><span class="op">)</span>,</span>
+<span>  firstFooter <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"firstFooter"</span><span class="op">)</span>,</span>
+<span>  visible <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  paperSize <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"paperSize"</span>, <span class="fl">9</span><span class="op">)</span>,</span>
+<span>  orientation <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"orientation"</span>, <span class="st">"portrait"</span><span class="op">)</span>,</span>
+<span>  vdpi <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"vdpi"</span>, <span class="fl">300</span><span class="op">)</span>,</span>
+<span>  hdpi <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"hdpi"</span>, <span class="fl">300</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A Workbook object to attach the new worksheet</p></dd>
+
+
 <dt>sheetName</dt>
 <dd><p>A name for the new worksheet</p></dd>
+
+
 <dt>gridLines</dt>
 <dd><p>A logical. If <code>FALSE</code>, the worksheet grid lines will be hidden.</p></dd>
+
+
 <dt>tabColour</dt>
 <dd><p>Colour of the worksheet tab. A valid colour (belonging to colours()) or a valid hex colour beginning with "#"</p></dd>
+
+
 <dt>zoom</dt>
 <dd><p>A numeric between 10 and 400. Worksheet zoom level as a percentage.</p></dd>
+
+
 <dt>header</dt>
 <dd><p>document header. Character vector of length 3 corresponding to positions left, center, right. Use NA to skip a position.</p></dd>
+
+
 <dt>footer</dt>
 <dd><p>document footer. Character vector of length 3 corresponding to positions left, center, right. Use NA to skip a position.</p></dd>
+
+
 <dt>evenHeader</dt>
 <dd><p>document header for even pages.</p></dd>
+
+
 <dt>evenFooter</dt>
 <dd><p>document footer for even pages.</p></dd>
+
+
 <dt>firstHeader</dt>
 <dd><p>document header for first page only.</p></dd>
+
+
 <dt>firstFooter</dt>
 <dd><p>document footer for first page only.</p></dd>
+
+
 <dt>visible</dt>
 <dd><p>If FALSE, sheet is hidden else visible.</p></dd>
+
+
 <dt>paperSize</dt>
 <dd><p>An integer corresponding to a paper size. See ?pageSetup for details.</p></dd>
+
+
 <dt>orientation</dt>
 <dd><p>One of "portrait" or "landscape"</p></dd>
+
+
 <dt>vdpi</dt>
 <dd><p>Vertical DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.vdpi" = X)</p></dd>
+
+
 <dt>hdpi</dt>
 <dd><p>Horizontal DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.hdpi" = X)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>XML tree</p>
+    
+
+<p>XML tree</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -142,52 +175,52 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Create a new workbook</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="st">"Fred"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Add 3 worksheets</span></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 2"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 3"</span>, tabColour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 4"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span>, tabColour <span class="op">=</span> <span class="st">"#4F81BD"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Headers and Footers</span></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 5"</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD HEAD LEFT"</span>, <span class="st">"ODD HEAD CENTER"</span>, <span class="st">"ODD HEAD RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD FOOT RIGHT"</span>, <span class="st">"ODD FOOT CENTER"</span>, <span class="st">"ODD FOOT RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  evenHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN HEAD LEFT"</span>, <span class="st">"EVEN HEAD CENTER"</span>, <span class="st">"EVEN HEAD RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  evenFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN FOOT RIGHT"</span>, <span class="st">"EVEN FOOT CENTER"</span>, <span class="st">"EVEN FOOT RIGHT"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TOP"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BOTTOM"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 6"</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Date]"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"&amp;[Page] / &amp;[Pages]"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Path]&amp;[File]"</span>, <span class="cn">NA</span>, <span class="st">"&amp;[Tab]"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Header of First Page"</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Footer of First Page"</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 7"</span>,</span>
-<span class="r-in">  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL HEAD LEFT 2"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"ALL HEAD RIGHT 2"</span><span class="op">)</span>,</span>
-<span class="r-in">  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL FOOT RIGHT 2"</span>, <span class="st">"ALL FOOT CENTER 2"</span>, <span class="st">"ALL FOOT RIGHT 2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 8"</span>,</span>
-<span class="r-in">  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span>,</span>
-<span class="r-in">  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Need data on worksheet to see all headers and footers</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">7</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">8</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Save workbook</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"addWorksheetExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Create a new workbook</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="st">"Fred"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Add 3 worksheets</span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 2"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 3"</span>, tabColour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 4"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span>, tabColour <span class="op">=</span> <span class="st">"#4F81BD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Headers and Footers</span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 5"</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD HEAD LEFT"</span>, <span class="st">"ODD HEAD CENTER"</span>, <span class="st">"ODD HEAD RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ODD FOOT RIGHT"</span>, <span class="st">"ODD FOOT CENTER"</span>, <span class="st">"ODD FOOT RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  evenHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN HEAD LEFT"</span>, <span class="st">"EVEN HEAD CENTER"</span>, <span class="st">"EVEN HEAD RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  evenFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EVEN FOOT RIGHT"</span>, <span class="st">"EVEN FOOT CENTER"</span>, <span class="st">"EVEN FOOT RIGHT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TOP"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BOTTOM"</span>, <span class="st">"OF FIRST"</span>, <span class="st">"PAGE"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 6"</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Date]"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"&amp;[Page] / &amp;[Pages]"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&amp;[Path]&amp;[File]"</span>, <span class="cn">NA</span>, <span class="st">"&amp;[Tab]"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Header of First Page"</span>, <span class="cn">NA</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Center Footer of First Page"</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 7"</span>,</span></span>
+<span class="r-in"><span>  header <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL HEAD LEFT 2"</span>, <span class="st">"ALL HEAD CENTER 2"</span>, <span class="st">"ALL HEAD RIGHT 2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ALL FOOT RIGHT 2"</span>, <span class="st">"ALL FOOT CENTER 2"</span>, <span class="st">"ALL FOOT RIGHT 2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 8"</span>,</span></span>
+<span class="r-in"><span>  firstHeader <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  firstFooter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FIRST ONLY L"</span>, <span class="cn">NA</span>, <span class="st">"FIRST ONLY R"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Need data on worksheet to see all headers and footers</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">7</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">8</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">400</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Save workbook</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"addWorksheetExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -202,7 +235,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

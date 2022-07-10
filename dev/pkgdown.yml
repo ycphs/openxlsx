@@ -1,8 +1,8 @@
 pandoc: 2.14.2
-pkgdown: 2.0.2
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   Formatting: Formatting.html
   Introduction: Introduction.html
-last_built: 2022-03-20T09:54Z
+last_built: 2022-07-10T09:17Z
 

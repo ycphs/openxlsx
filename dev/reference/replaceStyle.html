@@ -68,17 +68,22 @@ Replace a style object"><meta name="robots" content="noindex"><!-- mathjax --><s
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">replaceStyle</span><span class="op">(</span><span class="va">wb</span>, <span class="va">index</span>, <span class="va">newStyle</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">replaceStyle</span><span class="op">(</span><span class="va">wb</span>, <span class="va">index</span>, <span class="va">newStyle</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>index</dt>
 <dd><p>Index of style object to replace</p></dd>
+
+
 <dt>newStyle</dt>
 <dd><p>A style to replace the existing style as position index</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -91,16 +96,16 @@ Replace a style object"><meta name="robots" content="noindex"><!-- mathjax --><s
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## load a workbook</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"loadExample.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## create a new style and replace style 2</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">newStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="createStyle.html">createStyle</a></span><span class="op">(</span>fgFill <span class="op">=</span> <span class="st">"#00FF00"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## replace style 2</span></span>
-<span class="r-in"><span class="fu"><a href="getStyles.html">getStyles</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co">## prints styles</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## load a workbook</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="loadWorkbook.html">loadWorkbook</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"loadExample.xlsx"</span>, package <span class="op">=</span> <span class="st">"openxlsx"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## create a new style and replace style 2</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">newStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="createStyle.html">createStyle</a></span><span class="op">(</span>fgFill <span class="op">=</span> <span class="st">"#00FF00"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## replace style 2</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getStyles.html">getStyles</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co">## prints styles</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A custom cell style. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -128,12 +133,12 @@ Replace a style object"><meta name="robots" content="noindex"><!-- mathjax --><s
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">replaceStyle</span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, newStyle <span class="op">=</span> <span class="va">newStyle</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Save workbook</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"replaceStyleExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span><span class="fu">replaceStyle</span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, newStyle <span class="op">=</span> <span class="va">newStyle</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Save workbook</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"replaceStyleExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -148,7 +153,7 @@ Replace a style object"><meta name="robots" content="noindex"><!-- mathjax --><s
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

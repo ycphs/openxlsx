@@ -90,13 +90,14 @@ Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">openXL</span><span class="op">(</span>file<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">openXL</span><span class="op">(</span>file<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>path to the Excel (xls/xlsx) file or Workbook object.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -105,8 +106,8 @@ Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># file example</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">writeData</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># file example</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">writeData</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> writDt&gt; ## See formatting vignette for further examples.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> writDt&gt; </span>
@@ -214,14 +215,14 @@ Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
 <span class="r-out co"><span class="r-pr">#&gt;</span> writDt&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> writDt&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> writDt&gt; </span>
-<span class="r-in"><span class="co"># openXL("writeDataExample.xlsx")</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># (not yet saved) Workbook example</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Cars"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Cars"</span>, <span class="va">x</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">3</span>, rowNames <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># openXL(wb)</span></span>
+<span class="r-in"><span><span class="co"># openXL("writeDataExample.xlsx")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># (not yet saved) Workbook example</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Cars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Cars"</span>, <span class="va">x</span>, startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">3</span>, rowNames <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># openXL(wb)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -236,7 +237,7 @@ Libreoffice/Openoffice (<code>soffice</code> bin), Gnumeric
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

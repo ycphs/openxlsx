@@ -66,25 +66,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">createStyle</span><span class="op">(</span>
-  fontName <span class="op">=</span> <span class="cn">NULL</span>,
-  fontSize <span class="op">=</span> <span class="cn">NULL</span>,
-  fontColour <span class="op">=</span> <span class="cn">NULL</span>,
-  numFmt <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"numFmt"</span>, <span class="st">"GENERAL"</span><span class="op">)</span>,
-  border <span class="op">=</span> <span class="cn">NULL</span>,
-  borderColour <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"borderColour"</span>, <span class="st">"black"</span><span class="op">)</span>,
-  borderStyle <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"borderStyle"</span>, <span class="st">"thin"</span><span class="op">)</span>,
-  bgFill <span class="op">=</span> <span class="cn">NULL</span>,
-  fgFill <span class="op">=</span> <span class="cn">NULL</span>,
-  halign <span class="op">=</span> <span class="cn">NULL</span>,
-  valign <span class="op">=</span> <span class="cn">NULL</span>,
-  textDecoration <span class="op">=</span> <span class="cn">NULL</span>,
-  wrapText <span class="op">=</span> <span class="cn">FALSE</span>,
-  textRotation <span class="op">=</span> <span class="cn">NULL</span>,
-  indent <span class="op">=</span> <span class="cn">NULL</span>,
-  locked <span class="op">=</span> <span class="cn">NULL</span>,
-  hidden <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createStyle</span><span class="op">(</span></span>
+<span>  fontName <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fontSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fontColour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  numFmt <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"numFmt"</span>, <span class="st">"GENERAL"</span><span class="op">)</span>,</span>
+<span>  border <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  borderColour <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"borderColour"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>  borderStyle <span class="op">=</span> <span class="fu"><a href="openxlsx_options.html">openxlsx_getOp</a></span><span class="op">(</span><span class="st">"borderStyle"</span>, <span class="st">"thin"</span><span class="op">)</span>,</span>
+<span>  bgFill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fgFill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  halign <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  valign <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  textDecoration <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  wrapText <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  textRotation <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  indent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  locked <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hidden <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,13 +92,19 @@
     <dl><dt>fontName</dt>
 <dd><p>A name of a font. Note the font name is not validated. If fontName is NULL,
 the workbook base font is used. (Defaults to Calibri)</p></dd>
+
+
 <dt>fontSize</dt>
 <dd><p>Font size. A numeric greater than 0.
 If fontSize is NULL, the workbook base font size is used. (Defaults to 11)</p></dd>
+
+
 <dt>fontColour</dt>
 <dd><p>Colour of text in cell.  A valid hex colour beginning with "#"
 or one of colours(). If fontColour is NULL, the workbook base font colours is used.
 (Defaults to black)</p></dd>
+
+
 <dt>numFmt</dt>
 <dd><p>Cell formatting</p><ul><li><p><strong>GENERAL</strong></p></li>
 <li><p><strong>NUMBER</strong></p></li>
@@ -115,6 +121,8 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
 <li><p>For date/datetime styling a combination of d, m, y and punctuation marks</p></li>
 <li><p>For numeric rounding use "0.00" with the preferred number of decimal places</p></li>
 </ul></dd>
+
+
 <dt>border</dt>
 <dd><p>Cell border. A vector of "top", "bottom", "left", "right" or a single string).</p><ul><li><p><strong>"top"</strong> Top border</p></li>
 <li><p><strong>bottom</strong> Bottom border</p></li>
@@ -125,9 +133,13 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
 <li><p><strong>TopLeftRight</strong> or <strong>c("top", "left", "right")</strong> Top, Left and right border</p></li>
 <li><p><strong>TopBottomLeftRight</strong> or <strong>c("top", "bottom", "left", "right")</strong> All borders</p></li>
 </ul></dd>
+
+
 <dt>borderColour</dt>
 <dd><p>Colour of cell border vector the same length as the number of sides specified in "border"
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#"</p></dd>
+
+
 <dt>borderStyle</dt>
 <dd><p>Border line style vector the same length as the number of sides specified in "border"</p><ul><li><p><strong>none</strong> No Border</p></li>
 <li><p><strong>thin</strong> thin border</p></li>
@@ -144,25 +156,35 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 <li><p><strong>mediumDashDotDot</strong> medium weight dash-dot-dot border</p></li>
 <li><p><strong>slantDashDot</strong> slanted dash-dot border</p></li>
 </ul></dd>
+
+
 <dt>bgFill</dt>
 <dd><p>Cell background fill colour.
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#".
 --  <strong>Use for conditional formatting styles only.</strong></p></dd>
+
+
 <dt>fgFill</dt>
 <dd><p>Cell foreground fill colour.
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#"</p></dd>
+
+
 <dt>halign</dt>
 <dd><p>Horizontal alignment of cell contents</p><ul><li><p><strong>left</strong> Left horizontal align cell contents</p></li>
 <li><p><strong>right</strong> Right horizontal align cell contents</p></li>
 <li><p><strong>center</strong> Center horizontal align cell contents</p></li>
 <li><p><strong>justify</strong> Justify horizontal align cell contents</p></li>
 </ul></dd>
+
+
 <dt>valign</dt>
 <dd><p>A name
 Vertical alignment of cell contents</p><ul><li><p><strong>top</strong> Top vertical align cell contents</p></li>
 <li><p><strong>center</strong> Center vertical align cell contents</p></li>
 <li><p><strong>bottom</strong> Bottom vertical align cell contents</p></li>
 </ul></dd>
+
+
 <dt>textDecoration</dt>
 <dd><p>Text styling.</p><ul><li><p><strong>bold</strong> Bold cell contents</p></li>
 <li><p><strong>strikeout</strong> Strikeout cell contents</p></li>
@@ -172,20 +194,33 @@ Vertical alignment of cell contents</p><ul><li><p><strong>top</strong> Top verti
 <li><p><strong>accounting</strong> Single accounting underline cell contents</p></li>
 <li><p><strong>accounting2</strong> Double accounting underline cell contents</p></li>
 </ul></dd>
+
+
 <dt>wrapText</dt>
 <dd><p>Logical. If <code>TRUE</code> cell contents will wrap to fit in column.</p></dd>
+
+
 <dt>textRotation</dt>
 <dd><p>Rotation of text in degrees. 255 for vertical text.</p></dd>
+
+
 <dt>indent</dt>
 <dd><p>Horizontal indentation of cell contents.</p></dd>
+
+
 <dt>locked</dt>
 <dd><p>Whether cell contents are locked (if worksheet protection is turned on)</p></dd>
+
+
 <dt>hidden</dt>
 <dd><p>Whether the formula of the cell contents will be hidden (if worksheet protection is turned on)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A style object</p>
+    
+
+<p>A style object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -198,29 +233,29 @@ Vertical alignment of cell contents</p><ul><li><p><strong>top</strong> Top verti
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## See package vignettes for further examples</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Modify default values of border colour and border line style</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Size 18 Arial, Bold, left horz. aligned, fill colour #1A33CC, all borders,</span></span>
-<span class="r-in"><span class="va">style</span> <span class="op">&lt;-</span> <span class="fu">createStyle</span><span class="op">(</span></span>
-<span class="r-in">  fontSize <span class="op">=</span> <span class="fl">18</span>, fontName <span class="op">=</span> <span class="st">"Arial"</span>,</span>
-<span class="r-in">  textDecoration <span class="op">=</span> <span class="st">"bold"</span>, halign <span class="op">=</span> <span class="st">"left"</span>, fgFill <span class="op">=</span> <span class="st">"#1A33CC"</span>, border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Red, size 24, Bold, italic, underline, center aligned Font, bottom border</span></span>
-<span class="r-in"><span class="va">style</span> <span class="op">&lt;-</span> <span class="fu">createStyle</span><span class="op">(</span></span>
-<span class="r-in">  fontSize <span class="op">=</span> <span class="fl">24</span>, fontColour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">  textDecoration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span>, <span class="st">"underline"</span><span class="op">)</span>,</span>
-<span class="r-in">  halign <span class="op">=</span> <span class="st">"center"</span>, valign <span class="op">=</span> <span class="st">"center"</span>, border <span class="op">=</span> <span class="st">"Bottom"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># borderColour is recycled for each border or all colours can be supplied</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># colour is recycled 3 times for "Top", "Bottom" &amp; "Right" sides.</span></span>
-<span class="r-in"><span class="fu">createStyle</span><span class="op">(</span>border <span class="op">=</span> <span class="st">"TopBottomRight"</span>, borderColour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## See package vignettes for further examples</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Modify default values of border colour and border line style</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Size 18 Arial, Bold, left horz. aligned, fill colour #1A33CC, all borders,</span></span></span>
+<span class="r-in"><span><span class="va">style</span> <span class="op">&lt;-</span> <span class="fu">createStyle</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  fontSize <span class="op">=</span> <span class="fl">18</span>, fontName <span class="op">=</span> <span class="st">"Arial"</span>,</span></span>
+<span class="r-in"><span>  textDecoration <span class="op">=</span> <span class="st">"bold"</span>, halign <span class="op">=</span> <span class="st">"left"</span>, fgFill <span class="op">=</span> <span class="st">"#1A33CC"</span>, border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Red, size 24, Bold, italic, underline, center aligned Font, bottom border</span></span></span>
+<span class="r-in"><span><span class="va">style</span> <span class="op">&lt;-</span> <span class="fu">createStyle</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  fontSize <span class="op">=</span> <span class="fl">24</span>, fontColour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  textDecoration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"italic"</span>, <span class="st">"underline"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  halign <span class="op">=</span> <span class="st">"center"</span>, valign <span class="op">=</span> <span class="st">"center"</span>, border <span class="op">=</span> <span class="st">"Bottom"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># borderColour is recycled for each border or all colours can be supplied</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># colour is recycled 3 times for "Top", "Bottom" &amp; "Right" sides.</span></span></span>
+<span class="r-in"><span><span class="fu">createStyle</span><span class="op">(</span>border <span class="op">=</span> <span class="st">"TopBottomRight"</span>, borderColour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A custom cell style. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Cell formatting: GENERAL </span>
@@ -228,9 +263,9 @@ Vertical alignment of cell contents</p><ul><li><p><strong>top</strong> Top verti
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Cell border colours: #FF0000, #FF0000, #FF0000 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># supply all colours</span></span>
-<span class="r-in"><span class="fu">createStyle</span><span class="op">(</span>border <span class="op">=</span> <span class="st">"TopBottomLeft"</span>, borderColour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># supply all colours</span></span></span>
+<span class="r-in"><span><span class="fu">createStyle</span><span class="op">(</span>border <span class="op">=</span> <span class="st">"TopBottomLeft"</span>, borderColour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A custom cell style. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Cell formatting: GENERAL </span>
@@ -252,7 +287,7 @@ Vertical alignment of cell contents</p><ul><li><p><strong>top</strong> Top verti
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

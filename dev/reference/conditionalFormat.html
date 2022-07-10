@@ -66,34 +66,47 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">conditionalFormat</span><span class="op">(</span>
-  <span class="va">wb</span>,
-  <span class="va">sheet</span>,
-  <span class="va">cols</span>,
-  <span class="va">rows</span>,
-  rule <span class="op">=</span> <span class="cn">NULL</span>,
-  style <span class="op">=</span> <span class="cn">NULL</span>,
-  type <span class="op">=</span> <span class="st">"expression"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">conditionalFormat</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheet</span>,</span>
+<span>  <span class="va">cols</span>,</span>
+<span>  <span class="va">rows</span>,</span>
+<span>  rule <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  style <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"expression"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>A name or index of a worksheet</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>Columns to apply conditional formatting to</p></dd>
+
+
 <dt>rows</dt>
 <dd><p>Rows to apply conditional formatting to</p></dd>
+
+
 <dt>rule</dt>
 <dd><p>The condition under which to apply the formatting or a vector of colours. See examples.</p></dd>
+
+
 <dt>style</dt>
 <dd><p>A style to apply to those cells that satisfy the rule. A Style object returned from createStyle()</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Either 'expression', 'colorscale' or 'databar'. If 'expression' the formatting is determined
 by a formula.  If colorScale cells are coloured based on cell value. See examples.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -122,7 +135,7 @@ Default style given by: createStyle(fontColour = "#9C0006", bgFill = "#FFC7CE")<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

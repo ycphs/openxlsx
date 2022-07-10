@@ -66,21 +66,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span>
-
-<span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>value</dt>
 <dd><p>index of the active sheet or name of the active sheet</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>return the active sheet of the workbook</p>
+    
+
+<p>return the active sheet of the workbook</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -89,19 +94,19 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S2"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S3"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co"># default value is the first sheet active</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"S3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co"># default value is the first sheet active</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co">## active sheet S1</span></span>
-<span class="r-in"><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co">## active sheet S1</span></span></span>
+<span class="r-in"><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"S2"</span> <span class="co">## active sheet S2</span></span>
-<span class="r-in"><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"S2"</span> <span class="co">## active sheet S2</span></span></span>
+<span class="r-in"><span><span class="fu">activeSheet</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 </code></pre></div>
     </div>
@@ -117,7 +122,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

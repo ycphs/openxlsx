@@ -66,17 +66,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span>
-
-<span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>wb</dt>
 <dd><p>A workbook object</p></dd>
+
+
 <dt>value</dt>
 <dd><p>Vector specifying order to write worksheets to file</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -86,34 +89,34 @@ shuffles the order when writing to file.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## setup a workbook with 3 worksheets</span></span>
-<span class="r-in"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 1"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"mtcars (Sheet 2)"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 3"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="va">Formaldehyde</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## setup a workbook with 3 worksheets</span></span></span>
+<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 1"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeDataTable.html">writeDataTable</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"mtcars (Sheet 2)"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"Sheet 3"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="va">Formaldehyde</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3</span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Sheet 1"          "mtcars (Sheet 2)" "Sheet 3"         </span>
-<span class="r-in"><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># switch position of sheets 2 &amp; 3</span></span>
-<span class="r-in"><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="st">'This is still the "mtcars" worksheet'</span>, startCol <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># switch position of sheets 2 &amp; 3</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, <span class="st">'This is still the "mtcars" worksheet'</span>, startCol <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3 2</span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co">## ordering within workbook is not changed</span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="co">## ordering within workbook is not changed</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Sheet 1"          "mtcars (Sheet 2)" "Sheet 3"         </span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"worksheetOrderExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"worksheetOrderExample2.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"worksheetOrderExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">worksheetOrder</span><span class="op">(</span><span class="va">wb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"worksheetOrderExample2.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -128,7 +131,7 @@ shuffles the order when writing to file.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
