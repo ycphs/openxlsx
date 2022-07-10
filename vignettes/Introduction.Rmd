@@ -505,6 +505,6 @@ file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
 if(length(file_list)>0){
 rm(file_list)
 }
-
+}
 ```
 
