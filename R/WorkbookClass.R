@@ -206,8 +206,8 @@ Workbook$methods(
 
     rowHeights[[newSheetIndex]] <<- list()
     colWidths[[newSheetIndex]] <<- list()
-    colOutlineLevels[[newSheetIndex]] <<- list()
-    outlineLevels[[newSheetIndex]] <<- list()
+    colOutlineLevels[[newSheetIndex]] <<- vector("character")
+    outlineLevels[[newSheetIndex]] <<- vector("character")
 
     sheetOrder <<- c(sheetOrder, as.integer(newSheetIndex))
     sheet_names <<- c(sheet_names, sheetName)
@@ -2183,9 +2183,13 @@ Workbook$methods(
 
     hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
     cols <- names(colOutlineLevels[[sheet]])
-
+    max_outline <- max(colOutlineLevels[[sheet]])
+    
+    outline_attr <- paste0(' outlineLevelCol="', max_outline, '"')
     if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelCol="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
 
     # Check if column is already created (by `setColWidths()` or on import)
@@ -2194,11 +2198,12 @@ Workbook$methods(
 
       for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
         outline_hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") == i]
+        outline_level <- colOutlineLevels[[sheet]][[i]]
 
         if (grepl("outlineLevel", worksheets[[sheet]]$cols[[i]], perl = TRUE)) {
           worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         } else {
-          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"", outline_level, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         }
       }
 
@@ -2207,41 +2212,84 @@ Workbook$methods(
     }
 
     if (length(cols) > 0) {
-      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="%s" hidden="%s"/>', cols, cols, colOutlineLevels[[sheet]][cols], hidden)
       names(colNodes) <- cols
-      worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+      colNodes = append(worksheets[[sheet]]$cols, colNodes)
+      # Order by column name (=index)
+      worksheets[[sheet]]$cols <<- colNodes[order(names(colNodes))]
     }
   }
 )
 
 Workbook$methods(
-  groupRows = function(sheet, rows, hidden, levels) {
+  groupRows = function(sheet, rows, hidden = 0, levels = -1) {
+    # Validation, input data cleanup / preparation
     sheet <- validateSheet(sheet)
+    hidden = rep(hidden, length.out = length(rows))
+    levels = rep(levels, length.out = length(rows))
+    
+    # browser()
+    
+    # disassemble outlineLevels (extract rows, levels and hidden components)
+    existing_rows <- names(outlineLevels[[sheet]])
+    existing_levels <- outlineLevels[[sheet]]
+    attributes(existing_levels) <- NULL
+    existing_hidden <-  attr(outlineLevels[[sheet]], "hidden")
 
+    # 1. existing entries: 
+    #       - if levels==-1 => set outlineLevel to max of existing level + 1
+    #       - Otherwise, set outlineLevel to given levels
+    #       - update hidden flag correspondingly
+    # 2. New entries
+    #       - Append new entries to the end (hidden and levels vector), potentially out-of-order
+    # 3. Reorder all entries to be in the correct order
+    
+    flag <- existing_rows %in% rows
 
-    flag <- names(outlineLevels[[sheet]]) %in% rows
+    # Find indices of rows that already exist
+    existing_outline_indices = which(flag)
+    existing_outline = existing_rows[existing_outline_indices]
+    existing_rows_indices = match(existing_outline, rows)
+    
+    # Auto-detect new level if required
+    new_level <- "1"
     if (any(flag)) {
-      outlineLevels[[sheet]] <<- outlineLevels[[sheet]][!flag]
+      new_level <- as.character(max(as.numeric(existing_levels[flag])) + 1)
     }
+    levels[levels < 0] = as.character(new_level)
+    
+    if (any(flag)) {
+      # Assign the given values to existing row definitions (indices were extracted above)
+      existing_hidden[existing_outline_indices] <- hidden[existing_rows_indices]
+      existing_levels[existing_outline_indices] <- levels[existing_rows_indices]
+      
+      # Append all remaining new entries:
+      all_names <- c(existing_rows, rows[-existing_rows_indices])
+      all_levels <- c(existing_levels, levels[-existing_rows_indices])
+      all_hidden <- c(existing_hidden, hidden[-existing_rows_indices])
+    } else {
+      # only new rows were added, no existing modified
+      all_names = c(existing_rows, rows)
+      all_levels = c(existing_levels, levels)
+      all_hidden = c(existing_hidden, hidden)
+    }
+    
+    # re-order and then re-assamble the outlineLevels object (vector with proper attributes)
+    ord <- order(as.numeric(all_names))
+    all_levels <- as.character(all_levels[ord])
+    names(all_levels) <- all_names[ord]
+    attr(all_levels, "hidden") <- as.character(as.integer(all_hidden[ord]))
+    
+    outlineLevels[[sheet]] <<- all_levels
+    
 
-    nms <- c(names(outlineLevels[[sheet]]), rows)
-
-    allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
-    names(allOutlineLevels) <- nms
-
-    existing_hidden <- attr(outlineLevels[[sheet]], "hidden", exact = TRUE)
-    all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
-
-    allOutlineLevels <-
-      allOutlineLevels[order(as.integer(names(allOutlineLevels)))]
-
-    outlineLevels[[sheet]] <<- allOutlineLevels
-
-    attr(outlineLevels[[sheet]], "hidden") <<- as.character(as.integer(all_hidden))
-
-
+    # Finally, update the sheetFormatPr XML element with the maximum outline level
+    max_outline = max(as.numeric(outlineLevels[[sheet]]))
+    outline_attr <- paste0(' outlineLevelRow="', max_outline, '"')
     if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelRow="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
   }
 )
