@@ -57,7 +57,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'

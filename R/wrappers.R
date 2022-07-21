@@ -1297,8 +1297,8 @@ pixels2ExcelColWidth <- function(pixels) {
 #' @title Set worksheet row heights
 #' @description Set worksheet row heights
 #' @author Alexander Walker
-#' @param wb A workbook object
-#' @param sheet A name or index of a worksheet
+#' @param wb workbook object
+#' @param sheet name or index of a worksheet
 #' @param rows Indices of rows to set height
 #' @param heights Heights to set rows to specified in Excel column height units.
 #' @seealso [removeRowHeights()]
@@ -1308,19 +1308,29 @@ pixels2ExcelColWidth <- function(pixels) {
 #' wb <- createWorkbook()
 #'
 #' ## Add a worksheet
-#' addWorksheet(wb, "Sheet 1")
-#'
-#' ## set row heights
-#' setRowHeights(wb, 1, rows = c(1, 4, 22, 2, 19), heights = c(24, 28, 32, 42, 33))
-#'
-#' ## overwrite row 1 height
-#' setRowHeights(wb, 1, rows = 1, heights = 40)
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#' 
+#' ## Write dummy data
+#' writeData(wb, sheet, "fixed w/fixed h", startCol = 1, startRow = 1)
+#' writeData(wb, sheet, "fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC", startCol = 2, startRow = 2)
+#' writeData(wb, sheet, "variable w/fixed h", startCol = 3, startRow = 3)
+#' 
+#' ## Set column widths and row heights
+#' setColWidths(wb, sheet, cols = c(1, 2, 3, 4), widths = c(10, 20, "auto", 20))
+#' setRowHeights(wb, sheet, rows = c(1, 2, 8, 4, 6), heights = c(30, "auto", 15, 15, 30))
+#' 
+#' ## Overwrite row 1 height
+#' setRowHeights(wb, sheet, rows = 1, heights = 40)
 #'
 #' ## Save workbook
 #' \dontrun{
 #' saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
 #' }
-setRowHeights <- function(wb, sheet, rows, heights) {
+setRowHeights <- function(wb, sheet, rows, heights,
+                          fontsize = NULL, factor = 1.0,
+                          base_height = 15, extra_height = 12, wrap = TRUE) {
+  # validate sheet
   sheet <- wb$validateSheet(sheet)
 
   if (length(rows) > length(heights)) {
@@ -1330,17 +1340,29 @@ setRowHeights <- function(wb, sheet, rows, heights) {
   if (length(heights) > length(rows)) {
     stop("Greater number of height values than rows.")
   }
-
-  op <- get_set_options()
-  on.exit(options(op), add = TRUE)
-
-  ## Remove duplicates
+  
+  od <- getOption("OutDec")
+  options(OutDec = ".")
+  on.exit(expr = options(OutDec = od), add = TRUE)
+  
+  # clean duplicates
   heights <- heights[!duplicated(rows)]
   rows <- rows[!duplicated(rows)]
 
-
-  heights <- as.character(as.numeric(heights))
+  # auto adjust row heights
+  ida <- which(heights == "auto")
+  selected <- rows[ida]
+  out <- auto_heights(wb, sheet, selected, fontsize = fontsize, factor = factor,
+                      base_height = base_height, extra_height = extra_height)
+  cols <- out[[1]]
+  new <- out[[2]]
+  heights[ida] <- new
   names(heights) <- rows
+  # wrap text in cells
+  if (wrap == TRUE) {
+    wrap <- openxlsx::createStyle(wrapText = TRUE)
+    openxlsx::addStyle(wb, sheet, wrap, rows = ida, cols = cols, gridExpand = T, stack = T)
+  }
 
   wb$setRowHeights(sheet, rows, heights)
 }
