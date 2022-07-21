@@ -949,6 +949,121 @@ getFile <- function(xlsxFile) {
   return(xlsxFile)
 }
 
+#' @name get_worksheet_entries
+#' @title Get entries from workbook worksheet
+#' @description Get all entries from workbook worksheet without xml tags
+#' @param wb workbook
+#' @param sheet worksheet
+#' @author David Breuer
+#' @return vector of strings
+#' @export
+#' @examples
+#' ## Create new workbook
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#'
+#' ## Write dummy data
+#' writeData(wb, sheet, c("A", "BB", "CCC"), startCol = 2, startRow = 3)
+#' writeData(wb, sheet, c(4, 5), startCol = 4, startRow = 3)
+#'
+#' ## Get text entries
+#' get_worksheet_text(wb, sheet)
+#'
+get_worksheet_entries <- function(wb, sheet) {
+  # get worksheet data
+  dat <- wb$worksheets[[sheet]]$sheet_data
+  # get vector of entries
+  val <- dat$v
+  # get boolean vector of text entries
+  typ <- (dat$t == 1) & !is.na(dat$t)
+  # get text entry strings
+  str <- unlist(wb$sharedStrings[as.integer(val)[typ] + 1])
+  # remove xml tags
+  str <- gsub("<.*?>", "", str)
+  # write strings to vector of entries
+  val[typ] <- str
+  # return vector of entries
+  val
+}
+
+#' @name auto_heights
+#' @title Compute optimal row heights
+#' @description Compute optimal row heights for cell with fixed with and
+#' enabled automatic row heights parameter
+#' @param wb workbook
+#' @param sheet worksheet
+#' @param selected selected rows
+#' @param fontsize font size, optional (get base font size by default)
+#' @param factor factor to manually adjust font width, e.g., for bold fonts,
+#' optional
+#' @param base_height basic row height, optional
+#' @param extra_height additional row height per new line of text, optional
+#' @author David Breuer
+#' @return list of indices of columns with fixed widths and optimal row heights
+#' @export
+#' @examples
+#' ## Create new workbook
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#'
+#' ## Write dummy data
+#' long_string <- "ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC"
+#' writeData(wb, sheet, c("A", long_string, "CCC"), startCol = 2, startRow = 3)
+#' writeData(wb, sheet, c(4, 5), startCol = 4, startRow = 3)
+#'
+#' ## Set column widths and get optimal row heights
+#' setColWidths(wb, sheet, c(1,2,3,4), c(10,20,10,20))
+#' auto_heights(wb, sheet, 1:5)
+#'
+auto_heights <- function(wb, sheet, selected, fontsize = NULL, factor = 1.0,
+                         base_height = 15, extra_height = 12) {
+  # get base font size
+  if (is.null(fontsize)) {
+    fontsize <- as.integer(openxlsx::getBaseFont(wb)$size$val)
+  }
+  # set factor to adjust font width (empiricially found scale factor 4 here)
+  factor <- 4 * factor / fontsize
+  # get worksheet data
+  dat <- wb$worksheets[[sheet]]$sheet_data
+  # get columns widths
+  colWidths <- wb$colWidths[[sheet]]
+  # select fixed (non-auto) and visible (non-hidden) columns only
+  specified <- (colWidths != "auto") & (attr(colWidths, "hidden") == "0")
+  # return default row heights if no column widths are fixed
+  if (length(specified) == 0) {
+    message("No column widths specified, returning default row heights.")
+    cols <- integer(0)
+    heights <- rep(base_height, length(selected))
+    return(list(cols, heights))
+  }
+  # get fixed column indices
+  cols <- as.integer(names(specified)[specified])
+  # get fixed column widths
+  widths <- as.numeric(colWidths[specified])
+  # get all worksheet entries
+  val <- get_worksheet_entries(wb, sheet)
+  # compute optimal height per selected row
+  heights <- sapply(selected, function(row) {
+    # select entries in given row and columns of fixed widths
+    index <- (dat$rows == row) & (dat$cols %in% cols)
+    # remove line break characters
+    chr <- gsub("\\r|\\n", "", val[index])
+    # measure width of entry (in pixels)
+    wdt <- strwidth(chr, unit = "in") * 20 / 1.43 # 20 px = 1.43 in
+    # compute optimal height
+    if (length(wdt) == 0) {
+      base_height
+    } else {
+      base_height + extra_height * as.integer(max(wdt / widths * factor))
+    }
+  })
+  # return list of indices of columns with fixed widths and optimal row heights
+  list(cols, heights)
+}
+
+
 # Rotate the 15-bit integer by n bits to the
 hashPassword <- function(password) {
   # password limited to 15 characters
