@@ -21,9 +21,20 @@ setRowHeights(
 
 \item{sheet}{name or index of a worksheet}
 
-\item{rows}{Indices of rows to set height}
+\item{rows}{indices of rows to set height}
 
-\item{heights}{Heights to set rows to specified in Excel column height units.}
+\item{heights}{heights to set rows to specified in Excel column height units}
+
+\item{fontsize}{font size, optional (get base font size by default)}
+
+\item{factor}{factor to manually adjust font width, e.g., for bold fonts,
+optional}
+
+\item{base_height}{basic row height, optional}
+
+\item{extra_height}{additional row height per new line of text, optional}
+
+\item{wrap}{wrap text of entries which exceed the column width, optional}
 }
 \description{
 Set worksheet row heights
