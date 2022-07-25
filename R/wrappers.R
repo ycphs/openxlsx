@@ -1299,8 +1299,14 @@ pixels2ExcelColWidth <- function(pixels) {
 #' @author Alexander Walker
 #' @param wb workbook object
 #' @param sheet name or index of a worksheet
-#' @param rows Indices of rows to set height
-#' @param heights Heights to set rows to specified in Excel column height units.
+#' @param rows indices of rows to set height
+#' @param heights heights to set rows to specified in Excel column height units
+#' @param fontsize font size, optional (get base font size by default)
+#' @param factor factor to manually adjust font width, e.g., for bold fonts,
+#' optional
+#' @param base_height basic row height, optional
+#' @param extra_height additional row height per new line of text, optional
+#' @param wrap wrap text of entries which exceed the column width, optional
 #' @seealso [removeRowHeights()]
 #' @export
 #' @examples
@@ -1344,7 +1350,6 @@ setRowHeights <- function(wb, sheet, rows, heights,
   od <- getOption("OutDec")
   options(OutDec = ".")
   on.exit(expr = options(OutDec = od), add = TRUE)
-  
   # clean duplicates
   heights <- heights[!duplicated(rows)]
   rows <- rows[!duplicated(rows)]
