@@ -680,7 +680,7 @@ Workbook$methods(
     }
 
     ## Threaded Comments xl/threadedComments/threadedComment.xml
-    if (nThreadComments > 0){
+    if (nThreadComments > 0) {
       xlThreadComments <- file.path(tmpDir, "xl", "threadedComments")
       dir.create(path = xlThreadComments, recursive = TRUE)
 
@@ -706,7 +706,7 @@ Workbook$methods(
     }
 
     ## xl/persons/person.xml
-    if (nPersons > 0){
+    if (nPersons > 0) {
       personDir <- file.path(tmpDir, "xl", "persons")
       dir.create(path = personDir, recursive = TRUE)
       file.copy(
@@ -4378,7 +4378,7 @@ Workbook$methods(
     current_creator_vec <- as.character(stri_split_fixed(
       str = current_creator,
       pattern = ";",
-      simplify = T
+      simplify = TRUE
     ))
 
     return(current_creator_vec)

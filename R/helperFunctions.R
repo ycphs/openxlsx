@@ -98,7 +98,7 @@ makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NUL
     if (is.null(file))
       str <- sprintf("=HYPERLINK(\"%s\")", text)
     
-    if (!is.null(text) & !is.null(file))
+    if (!is.null(text) && !is.null(file))
       str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
   } else {
     cell <- paste0(int2col(col), row)
@@ -267,7 +267,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   }
   
   ## style big mark
-  if ("3" %in% allColClasses | "comma" %in% allColClasses) {
+  if ("3" %in% allColClasses || "comma" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "3" %in% tolower(x) | "comma" %in% tolower(x)))
     
     styleElements <- list(
@@ -281,7 +281,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   }
   
   ## numeric sigfigs (Col must be numeric and numFmt options must only have 0s and \\.)
-  if ("numeric" %in% allColClasses & !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
+  if ("numeric" %in% allColClasses && !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
     inds <- which(sapply(colClasses, function(x) "numeric" %in% tolower(x)))
     
     styleElements <- list(

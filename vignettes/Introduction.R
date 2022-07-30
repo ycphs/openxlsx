@@ -272,7 +272,7 @@
 #  insertPlot(wb, sheet = 1, startRow=25, startCol = "J")
 #  
 #  ## Add conditional formatting to show where logReturn > 0.01 using default style
-#  conditionalFormat(wb, sheet = 1, cols = 1:ncol(prices), rows = 2:(nrow(prices)+1),
+#  conditionalFormat(wb, sheet = 1, cols = seq_len((prices)), rows = 2:(nrow(prices)+1),
 #  rule = "$H2 > 0.01")
 #  
 #  ## style log return col as a percentage
@@ -292,12 +292,12 @@
 #  require(jpeg)
 #  require(ggplot2)
 #  
-#  plotFn <- function(x, ...){
+#  plotFn <- function(x, ...) {
 #    colvec <- grey(x)
 #    colmat <- array(match(colvec, unique(colvec)), dim = dim(x)[1:2])
-#    image(x = 0:(dim(colmat)[2]), y = 0:(dim(colmat)[1]), z = t(colmat[nrow(colmat):1, ]),
+#    image(x = 0:(dim(colmat)[2]), y = 0:(dim(colmat)[1]), z = t(colmat[rev(seq_len(nrow(colmat))) , ]),
 #      col = unique(colvec), xlab = "", ylab = "", axes = FALSE, asp = 1,
-#      bty ="n", frame.plot=F, ann=FALSE)
+#      bty ="n", frame.plot=FALSE, ann=FALSE)
 #  }
 #  
 #  ## Create workbook and add a worksheet, hide gridlines
@@ -305,7 +305,8 @@
 #  addWorksheet(wb, "Original Image", gridLines = FALSE)
 #  
 #  A <- readJPEG(file.path(path.package("openxlsx"), "einstein.jpg"))
-#  height <- nrow(A); width <- ncol(A)
+#  height <- nrow(A)
+#  width <- ncol(A)
 #  
 #  ## write "Original Image" to cell B2
 #  writeData(wb, 1, "Original Image", xy = c(2,2))
@@ -316,14 +317,15 @@
 #            xy = c(2,3))  ## equivalent to startCol = 2, startRow = 3
 #  
 #  ## Plot image
-#  par(mar=rep(0, 4), xpd = NA); plotFn(A)
+#  par(mar=rep(0, 4), xpd = NA)
+#  plotFn(A)
 #  
 #  ## insert plot currently showing in plot window
 #  insertPlot(wb, 1, width, height, units="px", startRow= 5, startCol = 2)
 #  
 #  ## SVD of covariance matrix
 #  rMeans <- rowMeans(A)
-#  rowMeans <- do.call("cbind", lapply(1:ncol(A), function(X) rMeans))
+#  rowMeans <- do.call("cbind", lapply(seq_len(ncol(A)), function(X) rMeans))
 #  A <- A - rowMeans
 #  E <- svd(A %*% t(A) / (ncol(A) - 1)) # SVD on covariance matrix of A
 #  pve <- data.frame("Eigenvalues" = E$d,
@@ -343,7 +345,7 @@
 #  writeData(wb, 2, x=pve, startRow = 3, startCol = 1, borders="rows", headerStyle=hs)
 #  
 #  ## Plots
-#  pve <- cbind(pve, "Ind" = 1:nrow(pve))
+#  pve <- cbind(pve, "Ind" = seq_len(nrow(pve)))
 #  ggplot(data = pve[1:20,], aes(x = Ind, y = 100*PVE)) +
 #    geom_bar(stat="identity", position = "dodge") +
 #    xlab("Principal Component Index") + ylab("Proportion of Variance Explained") +
@@ -367,7 +369,7 @@
 #  ## create a worksheet to save reconstructed images to
 #  addWorksheet(wb, "Reconstructed Images", zoom = 90)
 #  
-#  for(i in 1:length(nPCs)){
+#  for(i in seq_len(length(nPCs))) {
 #  
 #    V <- E$v[, 1:nPCs[i]]
 #    imgHat <- t(V) %*% A  ## project img data on to PCs
@@ -411,11 +413,11 @@
 #  
 #  ## remove example files for cran test
 #  if (identical(Sys.getenv("NOT_CRAN", unset = "true"), "false")) {
-#  file_list<-list.files(pattern="\\.xlsx",recursive = T)
-#  file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
+#    file_list<-list.files(pattern="\\.xlsx",recursive = TRUE)
+#    file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
 #  
-#  if(length(file_list)>0){
-#  rm(file_list)
-#  }
+#    if(length(file_list)>0) {
+#      rm(file_list)
+#    }
 #  }
 

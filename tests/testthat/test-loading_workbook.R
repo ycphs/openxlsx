@@ -1084,7 +1084,7 @@ test_that("test headerFooter", {
   
   tmp1 <- temp_xlsx()
   # Save workbook
-  saveWorkbook(wb, tmp1, overwrite = T)
+  saveWorkbook(wb, tmp1, overwrite = TRUE)
   # Load workbook and save again
   wb2 <- loadWorkbook(tmp1)
   
