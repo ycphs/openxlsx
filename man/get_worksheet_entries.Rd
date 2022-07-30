@@ -28,7 +28,7 @@ writeData(wb, sheet, c("A", "BB", "CCC"), startCol = 2, startRow = 3)
 writeData(wb, sheet, c(4, 5), startCol = 4, startRow = 3)
 
 ## Get text entries
-get_worksheet_text(wb, sheet)
+get_worksheet_entries(wb, sheet)
 
 }
 \author{
