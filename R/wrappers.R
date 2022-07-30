@@ -1361,7 +1361,7 @@ setRowHeights <- function(wb, sheet, rows, heights,
                       base_height = base_height, extra_height = extra_height)
   cols <- out[[1]]
   new <- out[[2]]
-  heights[ida] <- new
+  heights[ida] <- as.character(new)
   names(heights) <- rows
   # wrap text in cells
   if (wrap == TRUE) {
