@@ -259,7 +259,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     vals <- getNodes(xml = sharedStrings, tagIn = "<si>")
 
     if ("<si><t/></si>" %in% vals) {
-      if (na.convert){
+      if (na.convert) {
         vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
       }
       Encoding(vals) <- "UTF-8"
@@ -880,7 +880,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
 
 
             wb$comments[[i]] <- lapply(seq_along(comments), function(j) {
-              comment_list <- list(
+              list(
                 "ref" = refs[j],
                 "author" = authors[j],
                 "comment" = comments[[j]],
@@ -916,7 +916,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     }
     
     ## Persons (needed for Threaded Comment)
-    if(length(personXML) > 0){
+    if (length(personXML) > 0) {
       wb$persons <- personXML
       wb$Content_Types <- c(
         wb$Content_Types,
@@ -1070,7 +1070,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
   
   wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
   
-  if(length(wb$ActiveSheet) == 0){
+  if (length(wb$ActiveSheet) == 0) {
     wb$ActiveSheet <- 1L
   }
 

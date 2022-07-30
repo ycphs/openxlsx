@@ -246,7 +246,7 @@ read.xlsx.default <- function(
     }
     
     # Do not print warning if a specific sheet is requested
-    if ((length(dn) > 1) & (!sheetselected)) {
+    if ((length(dn) > 1) && (!sheetselected)) {
       msg <- c(sprintf("Region '%s' found on multiple sheets: \n", namedRegion),
         paste(dn_sheetNames, collapse = "\n"),
         "\nUsing the first appearance.")
@@ -346,7 +346,7 @@ read.xlsx.default <- function(
     getDates = detectDates
   )
   
-  if (fillMergedCells & length(cell_info$cellMerge) > 0) {
+  if (fillMergedCells && length(cell_info$cellMerge) > 0) {
     # stop("Not implemented")
     
     merge_mapping <- mergeCell2mapping(cell_info$cellMerge)
@@ -437,7 +437,7 @@ read.xlsx.default <- function(
     nRows <- max(cell_rows) - min(cell_rows) + 1
   }
   
-  if (nRows == 0 | length(cell_rows) == 0) {
+  if (nRows == 0 || length(cell_rows) == 0) {
     warning("No data found on worksheet.", call. = FALSE)
     return(NULL)
   }

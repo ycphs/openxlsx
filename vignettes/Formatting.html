@@ -12,7 +12,7 @@
 
 <meta name="author" content="Alexander Walker, Philipp Schauberger" />
 
-<meta name="date" content="2022-07-25" />
+<meta name="date" content="2022-07-30" />
 
 <title>Formating with xlsx</title>
 
@@ -334,7 +334,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Formating with xlsx</h1>
 <h4 class="author">Alexander Walker, Philipp Schauberger</h4>
-<h4 class="date">2022-07-25</h4>
+<h4 class="date">2022-07-30</h4>
 
 
 
@@ -556,13 +556,13 @@ setting the timezone with (for example)</p>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="do">## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())</span></span>
 <span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="do">## If rule is NULL, min and max of cells is used. Rule must be the same length as style or NULL.</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">conditionalFormatting</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">cols=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df), <span class="at">rows=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df),</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">conditionalFormatting</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">cols=</span><span class="fu">seq_len</span>(<span class="fu">ncol</span>(df)), <span class="at">rows=</span><span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)),</span>
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>   <span class="at">style =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), </span>
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>   <span class="at">rule =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">255</span>), </span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>   <span class="at">type =</span> <span class="st">&quot;colourScale&quot;</span>)</span>
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df), <span class="at">widths =</span> <span class="fl">1.07</span>)</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">setRowHeights</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">rows =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">heights =</span> <span class="fl">7.5</span>) </span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">cols =</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(df)), <span class="at">widths =</span> <span class="fl">1.07</span>)</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">setRowHeights</span>(wb, <span class="st">&quot;colourScale&quot;</span>, <span class="at">rows =</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)), <span class="at">heights =</span> <span class="fl">7.5</span>) </span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="do">## Databars</span></span>
 <span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="st">&quot;databar&quot;</span>, <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>)</span>
@@ -613,17 +613,18 @@ options(“openxlsx.numFmt” = “#,#0.00”)</p>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Using default numFmt to round to 2 dp (Any numeric column will be affected)</span></span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">&quot;Sheet 2&quot;</span>)</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> iris; df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df, <span class="at">startCol =</span> <span class="dv">7</span>)</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df, <span class="at">startCol =</span> <span class="dv">13</span>, <span class="at">borders =</span> <span class="st">&quot;rows&quot;</span>)</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="do">## To stop auto-formatting numerics set</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;openxlsx.numFmt&quot;</span> <span class="ot">=</span> <span class="cn">NULL</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">&quot;Sheet 3&quot;</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">3</span>, <span class="at">x =</span> df)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="fu">openXL</span>(wb)</span></code></pre></div>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> iris</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df, <span class="at">startCol =</span> <span class="dv">7</span>)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">x =</span> df, <span class="at">startCol =</span> <span class="dv">13</span>, <span class="at">borders =</span> <span class="st">&quot;rows&quot;</span>)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="do">## To stop auto-formatting numerics set</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;openxlsx.numFmt&quot;</span> <span class="ot">=</span> <span class="cn">NULL</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">&quot;Sheet 3&quot;</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">3</span>, <span class="at">x =</span> df)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="fu">openXL</span>(wb)</span></code></pre></div>
 </div>
 
 
