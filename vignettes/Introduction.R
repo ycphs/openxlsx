@@ -304,7 +304,7 @@
 #  wb <- createWorkbook("Einstein")
 #  addWorksheet(wb, "Original Image", gridLines = FALSE)
 #  
-#  A <- readJPEG(file.path(path.package("openxlsx"), "einstein.jpg"))
+#  A <- readJPEG(file.path(path.package("openxlsx"), "extdata", "einstein.jpg"))
 #  height <- nrow(A); width <- ncol(A)
 #  
 #  ## write "Original Image" to cell B2
