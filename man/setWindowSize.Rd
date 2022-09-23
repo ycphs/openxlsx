@@ -27,8 +27,7 @@ getWindowSize(wb)
 \item{windowHeight}{the height of the window
 
 Set the size and position of the window when you open the xlsx file.  The units are in twips.  See
-\link{Microsoft's documentation for the xlsx standard}
-(https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.workbookview?view=openxml-2.8.1)}
+\href{https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.workbookview?view=openxml-2.8.1}{Microsoft's documentation for the xlsx standard}}
 }
 \description{
 Set and Get Window Size for xlsx file
