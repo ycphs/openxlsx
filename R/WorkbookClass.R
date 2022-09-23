@@ -3238,7 +3238,12 @@ Workbook$methods(
       workbook$sheets <<- workbook$sheets[sheetOrder]
     }
 
-
+    ## preserve window size and position on save
+    bookViews <-workbook$bookViews
+    xWindow <- getAttrs(bookViews, "xWindow")$xWindow
+    yWindow <- getAttrs(bookViews, "yWindow")$yWindow
+    windowWidth <- getAttrs(bookViews, "windowWidth")$windowWidth
+    windowHeight <- getAttrs(bookViews, "windowHeight")$windowHeight
 
     ## re-assign tabSelected
     state <- rep.int("visible", nSheets)
@@ -3247,7 +3252,8 @@ Workbook$methods(
     visible_sheets <- which(state %in% "visible")
     workbook$bookViews <<-
       sprintf(
-        '<bookViews><workbookView xWindow="0" yWindow="0" windowWidth="13125" windowHeight="6105" firstSheet="%s" activeTab="%s"/></bookViews>',
+        '<bookViews><workbookView xWindow="%s" yWindow="%s" windowWidth="%s" windowHeight="%s" firstSheet="%s" activeTab="%s"/></bookViews>',
+        xWindow, yWindow, windowWidth, windowHeight,
         visible_sheet_index - 1L,
         ActiveSheet - 1L
       )
