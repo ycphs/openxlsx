@@ -1041,5 +1041,18 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     wb$ActiveSheet <- 1L
   }
 
+  # Preserve window size and position:
+  xWindow <- getAttrs(activesheet,c("xWindow"))$xWindow
+  yWindow <- getAttrs(activesheet,c("yWindow"))$yWindow
+  windowWidth <- getAttrs(activesheet,c("windowWidth"))$windowWidth
+  windowHeight <- getAttrs(activesheet,c("windowHeight"))$windowHeight
+  
+  bookViews <- wb$workbook$bookViews
+  bookViews <- sub("xWindow=\"0", paste0("xWindow=\"", xWindow), bookViews)
+  bookViews <- sub("yWindow=\"0", paste0("yWindow=\"", yWindow), bookViews)
+  bookViews <- sub("windowWidth=\"13125", paste0("windowWidth=\"", windowWidth), bookViews)
+  bookViews <- sub("windowHeight=\"6105", paste0("windowHeight=\"", windowHeight), bookViews)
+  wb$workbook$bookViews <- bookViews
+  
   return(wb)
 }
