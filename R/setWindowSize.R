@@ -17,36 +17,36 @@
 #' addWorksheet(wb, "S1")
 #' getWindowSize(wb)
 #' setWindowSize(wb, windowWidth = 10000)
-setWindowSize <- function(wb, xWindow = NULL, yWindow = NULL, windowWidth = NULL, windowHeight= NULL){
+setWindowSize <- function(wb, xWindow = NULL, yWindow = NULL, windowWidth = NULL, windowHeight= NULL) {
   
   bookViews <- wb$workbook$bookViews
   
-  if(!is.null(xWindow)){
-    if(as.integer(xWindow) >= 0L){
+  if(!is.null(xWindow)) {
+    if(as.integer(xWindow) >= 0L) {
       bookViews <- sub("xWindow=\"\\d+", paste0("xWindow=\"", xWindow), bookViews)
     } else {
       stop("xWindow must be >= 0")
     }
   }
   
-  if(!is.null(yWindow)){
-    if(as.integer(yWindow) >= 0L){
+  if(!is.null(yWindow)) {
+    if(as.integer(yWindow) >= 0L) {
       bookViews <- sub("yWindow=\"\\d+", paste0("yWindow=\"", yWindow), bookViews)
     } else {
       stop("yWindow must be >= 0")
     }
   }
   
-  if(!is.null(windowWidth)){
-    if(as.integer(windowWidth) >= 100L){
+  if(!is.null(windowWidth)) {
+    if(as.integer(windowWidth) >= 100L) {
       bookViews <- sub("windowWidth=\"\\d+", paste0("windowWidth=\"", windowWidth), bookViews)
     } else {
       stop("windowWidth must be >= 100")
     }
   }
   
-  if(!is.null(windowHeight)){
-    if(as.integer(windowHeight) >= 100L){
+  if(!is.null(windowHeight)) {
+    if(as.integer(windowHeight) >= 100L) {
       bookViews <- sub("windowHeight=\"\\d+", paste0("windowHeight=\"", windowHeight), bookViews)
     } else {
       stop("windowHeight must be >= 100")
@@ -59,7 +59,7 @@ setWindowSize <- function(wb, xWindow = NULL, yWindow = NULL, windowWidth = NULL
 #' @rdname setWindowSize
 #' @export
 
-getWindowSize <- function(wb){
+getWindowSize <- function(wb) {
   bookViews <- wb$workbook$bookViews
   
   c(getAttrs(bookViews, "xWindow"),

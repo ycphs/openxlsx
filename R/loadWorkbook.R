@@ -883,7 +883,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
     
     ## Persons (needed for Threaded Comment)
-    if(length(personXML) > 0){
+    if(length(personXML) > 0) {
       wb$persons <- personXML
       wb$Content_Types <- c(
         wb$Content_Types,
@@ -1037,7 +1037,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   
   wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
   
-  if(length(wb$ActiveSheet) == 0){
+  if(length(wb$ActiveSheet) == 0) {
     wb$ActiveSheet <- 1L
   }
 

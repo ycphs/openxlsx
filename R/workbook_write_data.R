@@ -56,7 +56,7 @@ Workbook$methods(writeData = function(
     
     for (i in dInds) {
       df[[i]] <- as.integer(df[[i]]) + origin
-      if (origin == 25569L){
+      if (origin == 25569L) {
         earlyDate <- which(df[[i]] < 60)
         df[[i]][earlyDate] <- df[[i]][earlyDate] - 1
       }
@@ -263,7 +263,7 @@ Workbook$methods(writeData = function(
     
     for (i in which(vl > 32767)) {
       
-      if(vl[i]>32768+30){
+      if(vl[i]>32768+30) {
         warning(
           paste0(
             stri_sub(newStrs[i], 32768, 32768 + 15),
