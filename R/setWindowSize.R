@@ -57,6 +57,7 @@ setWindowSize <- function(wb, xWindow = NULL, yWindow = NULL, windowWidth = NULL
 }
 
 #' @rdname setWindowSize
+#' @export
 
 getWindowSize <- function(wb){
   bookViews <- wb$workbook$bookViews
