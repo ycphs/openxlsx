@@ -71,7 +71,6 @@ Collate:
     'build_workbook.R'
     'chartsheet_class.R'
     'conditional_formatting.R'
-    'data-fontSizeLookupTables.R'
     'helperFunctions.R'
     'loadWorkbook.R'
     'onUnload.R'
