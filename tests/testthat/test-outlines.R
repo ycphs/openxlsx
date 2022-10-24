@@ -8,16 +8,16 @@ test_that("group columns", {
   # Grouping then setting widths updates hidden
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
-  groupColumns(wb, "Sheet 1", 2:3, hidden = T)
-  setColWidths(wb, "Sheet 1", 2, widths = "18", hidden = F)
+  groupColumns(wb, "Sheet 1", 2:3, hidden = TRUE)
+  setColWidths(wb, "Sheet 1", 2, widths = "18", hidden = FALSE)
 
   expect_equal(attr(wb$colOutlineLevels[[1]], "hidden")[attr(wb$colOutlineLevels[[1]], "names") == 2], "0")
 
   # Setting column widths then grouping
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
-  setColWidths(wb, "Sheet 1", 2:3, widths = "18", hidden = F)
-  groupColumns(wb, "Sheet 1", 1:2, hidden = T)
+  setColWidths(wb, "Sheet 1", 2:3, widths = "18", hidden = FALSE)
+  groupColumns(wb, "Sheet 1", 1:2, hidden = TRUE)
 
   expect_equal(attr(wb$colWidths[[1]], "hidden")[attr(wb$colWidths[[1]], "names") == 2], "1")
 })
@@ -28,7 +28,7 @@ test_that("group rows", {
   wb <- createWorkbook()
   assign("wb", wb, envir = .GlobalEnv)
   addWorksheet(wb, "Sheet 1")
-  groupRows(wb, "Sheet 1", 1:4, hidden = T)
+  groupRows(wb, "Sheet 1", 1:4, hidden = TRUE)
 
   expect_equal(names(wb$outlineLevels[[1]]), c("1", "2", "3", "4"))
   expect_equal(unique(attr(wb$outlineLevels[[1]], "hidden")), "1")
@@ -70,8 +70,8 @@ test_that("ungroup columns", {
   # column groupings left
   wb <- createWorkbook()
   addWorksheet(wb, "Sheet 1")
-  setColWidths(wb, "Sheet 1", 2:3, widths = "18", hidden = F)
-  groupColumns(wb, "Sheet 1", 1:3, hidden = T)
+  setColWidths(wb, "Sheet 1", 2:3, widths = "18", hidden = FALSE)
+  groupColumns(wb, "Sheet 1", 1:3, hidden = TRUE)
   ungroupColumns(wb, "Sheet 1", 1:3)
 
   expect_equal(unique(attr(wb$colWidths[[1]], "hidden")[attr(wb$colWidths[[1]], "names") %in% c(2, 3)]), "0")
@@ -82,7 +82,7 @@ test_that("ungroup rows", {
   wb <- createWorkbook()
   assign("wb", wb, envir = .GlobalEnv)
   addWorksheet(wb, "Sheet 1")
-  groupRows(wb, "Sheet 1", 1:3, hidden = T)
+  groupRows(wb, "Sheet 1", 1:3, hidden = TRUE)
   ungroupRows(wb, "Sheet 1", 1:3)
 
   expect_equal(length(wb$outlineLevels[[1]]), 0L)
@@ -112,11 +112,11 @@ test_that("loading workbook preserves outlines", {
   tf <- temp_xlsx("test")
   tf2 <- temp_xlsx("test2")
 
-  saveWorkbook(wbb, tf, overwrite = T)
+  saveWorkbook(wbb, tf, overwrite = TRUE)
   test <- wbb$worksheets[[1]]$copy()
 
   wb <- loadWorkbook(tf)
-  saveWorkbook(wb, tf2, overwrite = T)
+  saveWorkbook(wb, tf2, overwrite = TRUE)
 
   testthat::expect_equal(wb$worksheets[[1]], test)
 
@@ -158,10 +158,10 @@ test_that("Consecutive calls to saveWorkbook doesn't corrupt attributes", {
   tf <- temp_xlsx("test")
   tf2 <- temp_xlsx("test2")
 
-  saveWorkbook(wbb, tf, overwrite = T)
+  saveWorkbook(wbb, tf, overwrite = TRUE)
   test <- wbb$worksheets[[1]]$copy()
 
-  saveWorkbook(wbb, tf2, overwrite = T)
+  saveWorkbook(wbb, tf2, overwrite = TRUE)
 
   testthat::expect_equal(wbb$worksheets[[1]], test)
 

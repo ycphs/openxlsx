@@ -131,4 +131,3 @@ test_that("row and column grouping", {
   unlink(fileName, recursive = TRUE, force = TRUE)
   
 })
-

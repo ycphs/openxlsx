@@ -11,7 +11,7 @@ test_that("Writing then reading returns identical data.frame 1", {
   write.xlsx(
     file = tmp_file,
     x = x,
-    gridLines = c(F, T),
+    gridLines = c(FALSE, TRUE),
     sheetName = c("a", "b"),
     zoom = c(50, 90),
     tabColour = c("red", "blue")

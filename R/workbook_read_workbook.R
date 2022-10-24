@@ -41,7 +41,7 @@ read.xlsx.Workbook <- function(xlsxFile,
     stop("check.names must be TRUE/FALSE.")
   }
 
-  if (!is.character(sep.names) | nchar(sep.names) != 1) {
+  if (!is.character(sep.names) || nchar(sep.names) != 1) {
     stop("sep.names must be a character and only one.")
   }
 
@@ -256,7 +256,7 @@ read.xlsx.Workbook <- function(xlsxFile,
   vn <- as.numeric(v)
 
   ## Using -1 as a flag for no strings
-  if (length(sharedStrings) == 0 | string_refs[1] == -1L) {
+  if (length(sharedStrings) == 0 || string_refs[1] == -1L) {
     string_refs <- as.integer(NA)
   } else {
 

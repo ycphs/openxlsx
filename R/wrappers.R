@@ -106,7 +106,7 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
     returnValue <- FALSE
   }
 
-  if (file.exists(file) & !overwrite) {
+  if (file.exists(file) && !overwrite) {
     stop("File already exists!")
   }
 
@@ -401,7 +401,7 @@ addWorksheet <- function(wb,
     stop(paste0("A worksheet by the name '", sheetName, "' already exists! Sheet names must be unique case-insensitive."))
   }
 
-  if (!is.logical(gridLines) | length(gridLines) > 1) {
+  if (!is.logical(gridLines) || length(gridLines) > 1) {
     stop("gridLines must be a logical of length 1.")
   }
 
@@ -421,27 +421,27 @@ addWorksheet <- function(wb,
     sheetName <- as.character(sheetName)
   }
 
-  if (!is.null(header) & length(header) != 3) {
+  if (!is.null(header) && length(header) != 3) {
     stop("header must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(footer) & length(footer) != 3) {
+  if (!is.null(footer) && length(footer) != 3) {
     stop("footer must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenHeader) & length(evenHeader) != 3) {
+  if (!is.null(evenHeader) && length(evenHeader) != 3) {
     stop("evenHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenFooter) & length(evenFooter) != 3) {
+  if (!is.null(evenFooter) && length(evenFooter) != 3) {
     stop("evenFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstHeader) & length(firstHeader) != 3) {
+  if (!is.null(firstHeader) && length(firstHeader) != 3) {
     stop("firstHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstFooter) & length(firstFooter) != 3) {
+  if (!is.null(firstFooter) && length(firstFooter) != 3) {
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
@@ -822,7 +822,7 @@ createStyle <- function(fontName = NULL,
   }
 
   if (!is.null(indent)) {
-    if (!is.numeric(indent) & !is.integer(indent)) {
+    if (!is.numeric(indent) && !is.integer(indent)) {
       stop("indent must be numeric")
     }
   }
@@ -955,7 +955,7 @@ createStyle <- function(fontName = NULL,
       stop("textRotation must be numeric.")
     }
 
-    if (textRotation < 0 & textRotation >= -90) {
+    if (textRotation < 0 && textRotation >= -90) {
       textRotation <- (textRotation * -1) + 90
     }
 
@@ -1035,7 +1035,7 @@ addStyle <- function(wb,
   on.exit(options(op), add = TRUE)
 
 
-  if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
+  if (!is.null(style$numFmt) && length(wb$styleObjects) > 0) {
     if (style$numFmt$numFmtId == 165) {
       maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
         as.integer(
@@ -1059,7 +1059,7 @@ addStyle <- function(wb,
     stop("stack parameter must be a logical!")
   }
 
-  if (length(cols) == 0 | length(rows) == 0) {
+  if (length(cols) == 0 || length(rows) == 0) {
     return(invisible(0))
   }
 
@@ -1071,9 +1071,9 @@ addStyle <- function(wb,
     n <- length(cols)
     cols <- rep.int(cols, times = length(rows))
     rows <- rep(rows, each = n)
-  } else if (length(rows) == 1 & length(cols) > 1) {
+  } else if (length(rows) == 1 && length(cols) > 1) {
     rows <- rep.int(rows, times = length(cols))
-  } else if (length(cols) == 1 & length(rows) > 1) {
+  } else if (length(cols) == 1 && length(rows) > 1) {
     cols <- rep.int(cols, times = length(rows))
   } else if (length(rows) != length(cols)) {
     stop("Length of rows and cols must be equal.")
@@ -1103,9 +1103,9 @@ getCellRefs <- function(cellCoords) {
 
 
 
-  if (!("numeric" %in% sapply(cellCoords[, 1], class) |
-    "integer" %in% sapply(cellCoords[, 1], class)) &
-    ("numeric" %in% sapply(cellCoords[, 2], class) |
+  if (!("numeric" %in% sapply(cellCoords[, 1], class) ||
+    "integer" %in% sapply(cellCoords[, 1], class)) &&
+    ("numeric" %in% sapply(cellCoords[, 2], class) ||
       "integer" %in% sapply(cellCoords[, 2], class))
 
   ) {
@@ -1155,7 +1155,7 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
 
-  if (is.null(firstActiveRow) & is.null(firstActiveCol) & !firstRow & !firstCol) {
+  if (is.null(firstActiveRow) && is.null(firstActiveCol) && !firstRow && !firstCol) {
     return(invisible(0))
   }
 
@@ -1168,11 +1168,11 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   }
 
 
-  if (firstRow & !firstCol) {
+  if (firstRow && !firstCol) {
     invisible(wb$freezePanes(sheet, firstRow = firstRow))
-  } else if (firstCol & !firstRow) {
+  } else if (firstCol && !firstRow) {
     invisible(wb$freezePanes(sheet, firstCol = firstCol))
-  } else if (firstRow & firstCol) {
+  } else if (firstRow && firstCol) {
     invisible(wb$freezePanes(sheet, firstActiveRow = 2L, firstActiveCol = 2L))
   } else { ## else both firstRow and firstCol are FALSE
 
@@ -1297,10 +1297,16 @@ pixels2ExcelColWidth <- function(pixels) {
 #' @title Set worksheet row heights
 #' @description Set worksheet row heights
 #' @author Alexander Walker
-#' @param wb A workbook object
-#' @param sheet A name or index of a worksheet
-#' @param rows Indices of rows to set height
-#' @param heights Heights to set rows to specified in Excel column height units.
+#' @param wb workbook object
+#' @param sheet name or index of a worksheet
+#' @param rows indices of rows to set height
+#' @param heights heights to set rows to specified in Excel column height units
+#' @param fontsize font size, optional (get base font size by default)
+#' @param factor factor to manually adjust font width, e.g., for bold fonts,
+#' optional
+#' @param base_height basic row height, optional
+#' @param extra_height additional row height per new line of text, optional
+#' @param wrap wrap text of entries which exceed the column width, optional
 #' @seealso [removeRowHeights()]
 #' @export
 #' @examples
@@ -1308,19 +1314,29 @@ pixels2ExcelColWidth <- function(pixels) {
 #' wb <- createWorkbook()
 #'
 #' ## Add a worksheet
-#' addWorksheet(wb, "Sheet 1")
-#'
-#' ## set row heights
-#' setRowHeights(wb, 1, rows = c(1, 4, 22, 2, 19), heights = c(24, 28, 32, 42, 33))
-#'
-#' ## overwrite row 1 height
-#' setRowHeights(wb, 1, rows = 1, heights = 40)
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#' 
+#' ## Write dummy data
+#' writeData(wb, sheet, "fixed w/fixed h", startCol = 1, startRow = 1)
+#' writeData(wb, sheet, "fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC", startCol = 2, startRow = 2)
+#' writeData(wb, sheet, "variable w/fixed h", startCol = 3, startRow = 3)
+#' 
+#' ## Set column widths and row heights
+#' setColWidths(wb, sheet, cols = c(1, 2, 3, 4), widths = c(10, 20, "auto", 20))
+#' setRowHeights(wb, sheet, rows = c(1, 2, 8, 4, 6), heights = c(30, "auto", 15, 15, 30))
+#' 
+#' ## Overwrite row 1 height
+#' setRowHeights(wb, sheet, rows = 1, heights = 40)
 #'
 #' ## Save workbook
 #' \dontrun{
 #' saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
 #' }
-setRowHeights <- function(wb, sheet, rows, heights) {
+setRowHeights <- function(wb, sheet, rows, heights,
+                          fontsize = NULL, factor = 1.0,
+                          base_height = 15, extra_height = 12, wrap = TRUE) {
+  # validate sheet
   sheet <- wb$validateSheet(sheet)
 
   if (length(rows) > length(heights)) {
@@ -1330,17 +1346,28 @@ setRowHeights <- function(wb, sheet, rows, heights) {
   if (length(heights) > length(rows)) {
     stop("Greater number of height values than rows.")
   }
-
-  op <- get_set_options()
-  on.exit(options(op), add = TRUE)
-
-  ## Remove duplicates
+  
+  od <- getOption("OutDec")
+  options(OutDec = ".")
+  on.exit(expr = options(OutDec = od), add = TRUE)
+  # clean duplicates
   heights <- heights[!duplicated(rows)]
   rows <- rows[!duplicated(rows)]
 
-
-  heights <- as.character(as.numeric(heights))
+  # auto adjust row heights
+  ida <- which(heights == "auto")
+  selected <- rows[ida]
+  out <- auto_heights(wb, sheet, selected, fontsize = fontsize, factor = factor,
+                      base_height = base_height, extra_height = extra_height)
+  cols <- out[[1]]
+  new <- out[[2]]
+  heights[ida] <- as.character(new)
   names(heights) <- rows
+  # wrap text in cells
+  if (wrap == TRUE) {
+    wrap <- openxlsx::createStyle(wrapText = TRUE)
+    openxlsx::addStyle(wb, sheet, wrap, rows = ida, cols = cols, gridExpand = TRUE, stack = TRUE)
+  }
 
   wb$setRowHeights(sheet, rows, heights)
 }
@@ -1953,27 +1980,27 @@ setHeaderFooter <- function(wb, sheet,
 
   sheet <- wb$validateSheet(sheet)
 
-  if (!is.null(header) & length(header) != 3) {
+  if (!is.null(header) && length(header) != 3) {
     stop("header must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(footer) & length(footer) != 3) {
+  if (!is.null(footer) && length(footer) != 3) {
     stop("footer must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenHeader) & length(evenHeader) != 3) {
+  if (!is.null(evenHeader) && length(evenHeader) != 3) {
     stop("evenHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenFooter) & length(evenFooter) != 3) {
+  if (!is.null(evenFooter) && length(evenFooter) != 3) {
     stop("evenFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstHeader) & length(firstHeader) != 3) {
+  if (!is.null(firstHeader) && length(firstHeader) != 3) {
     stop("firstHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstFooter) & length(firstFooter) != 3) {
+  if (!is.null(firstFooter) && length(firstFooter) != 3) {
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
@@ -2157,7 +2184,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
     orientation <- ifelse(grepl("landscape", xml), "landscape", "portrait") ## get existing
   }
 
-  if (scale < 10 | scale > 400) {
+  if (scale < 10 || scale > 400) {
     stop("Scale must be between 10 and 400.")
   }
 
@@ -2186,7 +2213,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
     paperSize, orientation, scale, as.integer(fitToWidth), as.integer(fitToHeight), hdpi, vdpi
   )
 
-  if (fitToHeight | fitToWidth) {
+  if (fitToHeight || fitToWidth) {
     wb$worksheets[[sheet]]$sheetPr <- unique(c(wb$worksheets[[sheet]]$sheetPr, '<pageSetUpPr fitToPage="1"/>'))
   }
 
@@ -2227,7 +2254,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
   }
 
   ## print Titles
-  if (!is.null(printTitleRows) & is.null(printTitleCols)) {
+  if (!is.null(printTitleRows) && is.null(printTitleCols)) {
     if (!is.numeric(printTitleRows)) {
       stop("printTitleRows must be numeric.")
     }
@@ -2239,7 +2266,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
       sheet = names(wb)[[sheet]],
       localSheetId = sheet - 1L
     )
-  } else if (!is.null(printTitleCols) & is.null(printTitleRows)) {
+  } else if (!is.null(printTitleCols) && is.null(printTitleRows)) {
     if (!is.numeric(printTitleCols)) {
       stop("printTitleCols must be numeric.")
     }
@@ -2252,7 +2279,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
       sheet = names(wb)[[sheet]],
       localSheetId = sheet - 1L
     )
-  } else if (!is.null(printTitleCols) & !is.null(printTitleRows)) {
+  } else if (!is.null(printTitleCols) && !is.null(printTitleRows)) {
     if (!is.numeric(printTitleRows)) {
       stop("printTitleRows must be numeric.")
     }
@@ -2761,9 +2788,9 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
   ex_names <- tolower(replaceXMLEntities(ex_names))
 
-  if (tolower(name) %in% ex_names & !overwrite) {
+  if (tolower(name) %in% ex_names && !overwrite) {
     stop(sprintf("Named region with name '%s' already exists! Use overwrite  = TRUE if you want to replace it", name))
-  } else if (tolower(name) %in% ex_names & overwrite) {
+  } else if (tolower(name) %in% ex_names && overwrite) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   }
 
@@ -3243,11 +3270,11 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
   type <- valid_types[tolower(valid_types) %in% tolower(type)][1]
 
   ## check input combinations
-  if (type == "date" & !"Date" %in% class(value)) {
+  if (type == "date" && !"Date" %in% class(value)) {
     stop("If type == 'date' value argument must be a Date vector.")
   }
 
-  if (type == "time" & !any(tolower(class(value)) %in% c("posixct", "posixt"))) {
+  if (type == "time" && !any(tolower(class(value)) %in% c("posixct", "posixt"))) {
     stop("If type == 'date' value argument must be a POSIXct or POSIXlt vector.")
   }
 
@@ -4365,8 +4392,8 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE, level = -1) {
   }
 
   if(is.list(cols)) {
-    if (!is.null(names(cols))){
-      levels <- unlist(lapply(names(cols), function(x)rep(as.character(x), length(cols[[x]]))))
+    if (!is.null(names(cols))) {
+      levels <- unlist(lapply(names(cols), function(x) rep(as.character(x), length(cols[[x]]))))
     } else {
       levels <- rep(as.character(level), length(unlist(cols)))
     }
@@ -4590,8 +4617,8 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE, level = -1) {
   }
 
   if(is.list(rows)) {
-    if (!is.null(names(rows))){
-      levels <- unlist(lapply(names(rows), function(x)rep(as.character(x), length(rows[[x]]))))
+    if (!is.null(names(rows))) {
+      levels <- unlist(lapply(names(rows), function(x) rep(as.character(x), length(rows[[x]]))))
     } else {
       levels <- rep(as.character(level), length(unlist(rows)))
     }

@@ -257,7 +257,7 @@ writeData <- function(
     }
   }
 
-  if (is.vector(x) | is.factor(x) | inherits(x, "Date")) {
+  if (is.vector(x) || is.factor(x) || inherits(x, "Date")) {
     colNames <- FALSE
   } ## this will go to coerce.default and rowNames will be ignored
 
@@ -268,12 +268,12 @@ writeData <- function(
   nRow <- nrow(x)
 
   ## If no rows and not writing column names return as nothing to write
-  if (nRow == 0 & !colNames) {
+  if (nRow == 0 && !colNames) {
     return(invisible(0))
   }
 
   ## If no columns and not writing row names return as nothing to write
-  if (nCol == 0 & !rowNames) {
+  if (nCol == 0 && !rowNames) {
     return(invisible(0))
   }
 
@@ -344,7 +344,7 @@ writeData <- function(
   )
 
   ## header style
-  if (inherits(headerStyle, "Style") & colNames) {
+  if (inherits(headerStyle, "Style") && colNames) {
     addStyle(
       wb         = wb,
       sheet      = sheet, 
