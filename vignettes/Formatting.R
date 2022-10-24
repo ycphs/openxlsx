@@ -1,5 +1,7 @@
-## ----include=TRUE,tidy=TRUE, eval = FALSE,highlight=TRUE----------------------
-#  
+## ----setup, include = FALSE---------------------------------------------------
+library(openxlsx)
+
+## ----include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE--------------
 #  ## data.frame to write
 #  df <- data.frame("Date" = Sys.Date()-0:4,
 #                   "Logical" = c(TRUE, FALSE, TRUE, TRUE, FALSE),
@@ -51,8 +53,7 @@
 #  
 #  openXL(wb) ## opens a temp version
 
-## ----include=TRUE,tidy=TRUE, eval = FALSE,highlight=TRUE----------------------
-#  
+## ----include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE--------------
 #  # data.frame of dates
 #  dates <- data.frame("d1" = Sys.Date() - 0:4)
 #  for(i in 1:3) dates <- cbind(dates, dates)
@@ -105,10 +106,8 @@
 #  writeData(wb, "Date Formatting", dates, startRow  = 15)
 #  
 #  saveWorkbook(wb, "Date Formatting.xlsx", overwrite = TRUE)
-#  
 
-## ----include=TRUE,tidy=TRUE, eval = FALSE,highlight=TRUE----------------------
-#  
+## ----include = TRUE,tidy = TRUE, eval = FALSE, highlight = TRUE---------------
 #  Sys.setenv(TZ = "Australia/Sydney")
 #  
 #  dateTimes <- data.frame("d1" = Sys.time() - 0:4*10000)
@@ -153,10 +152,8 @@
 #  
 #  saveWorkbook(wb, "DateTime Formatting.xlsx", overwrite = TRUE)
 #  openXL("DateTime Formatting.xlsx")
-#  
 
-## ----include=TRUE,tidy=TRUE, eval = FALSE,highlight=TRUE----------------------
-#  
+## ----include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE--------------
 #  wb <- createWorkbook()
 #  addWorksheet(wb, "cellIs")
 #  addWorksheet(wb, "Moving Row")
@@ -204,7 +201,7 @@
 #  conditionalFormatting(wb, "containsText", cols = 1, rows = 1:10, type = "contains", rule = "A")
 #  
 #  ## colourscale colours cells based on cell value
-#  df <- read.xlsx(system.file("readTest.xlsx", package = "openxlsx"), sheet = 4)
+#  df <- read.xlsx(system.file("extdata", "readTest.xlsx", package = "openxlsx"), sheet = 5)
 #  writeData(wb, "colourScale", df, colNames=FALSE)  ## write data.frame
 #  
 #  ## rule is a vector or colours of length 2 or 3 (any hex colour or any of colours())
@@ -224,10 +221,8 @@
 #  saveWorkbook(wb, "conditionalFormattingExample.xlsx", TRUE)
 #  
 #  openXL(wb)
-#  
 
-## ----include=TRUE,tidy=TRUE, eval = FALSE,highlight=TRUE----------------------
-#  
+## ----include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE--------------
 #  options("openxlsx.numFmt" = NULL)
 #  wb <- createWorkbook()
 #  addWorksheet(wb, "Sheet 1")
@@ -276,3 +271,11 @@
 #  writeDataTable(wb, sheet = 3, x = df)
 #  
 #  openXL(wb)
+<<<<<<< HEAD
+=======
+
+## ----cleanup, eval = FALSE, include = FALSE-----------------------------------
+#  xlsx_files <- dir(pattern = "*.xlsx")
+#  unlink(xlsx_files)
+
+>>>>>>> development

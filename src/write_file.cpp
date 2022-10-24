@@ -254,7 +254,7 @@ SEXP buildMatrixMixed(CharacterVector v,
       bool logCol = true;
       for(int ri = 0; ri < nRows; ri++){
         if(notNAElements[ri]){
-          if((m(ri, i) != "TRUE") && (m(ri, i) != "FALSE")){
+          if((m(ri, i) != "TRUE") & (m(ri, i) != "FALSE")){
             logCol = false;
             break;
           }
