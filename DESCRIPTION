@@ -53,6 +53,7 @@ Suggests:
     testthat
 LinkingTo: 
     Rcpp
+SystemRequirements: C++11
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
