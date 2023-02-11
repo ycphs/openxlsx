@@ -102,6 +102,8 @@ WorkSheet$methods(get_prior_sheet_data = function() {
     tmp <- sheetPr
     if (!any(grepl("<sheetPr>", tmp, fixed = TRUE))) {
       tmp <- paste0("<sheetPr>", paste(tmp, collapse = ""), "</sheetPr>")
+    } else if (grepl("^<sheetPr>", tmp)) {
+      tmp <- paste0(paste(tmp, collapse = ""), "</sheetPr>")
     }
 
     xml <- paste(xml, tmp, collapse = "")
