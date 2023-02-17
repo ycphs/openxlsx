@@ -100,7 +100,7 @@ WorkSheet$methods(get_prior_sheet_data = function() {
 
   if (length(sheetPr) > 0) {
     tmp <- sheetPr
-    if (!any(grepl("<sheetPr>", tmp, fixed = TRUE))) {
+    if (!any(grepl("<sheetPr", tmp, fixed = TRUE))) {
       tmp <- paste0("<sheetPr>", paste(tmp, collapse = ""), "</sheetPr>")
     }
 
