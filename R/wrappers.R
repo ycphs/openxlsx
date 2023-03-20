@@ -1808,6 +1808,107 @@ deleteData <- function(wb, sheet, cols, rows, gridExpand = FALSE) {
 }
 
 
+#' @name deleteDataColumn
+#' @title Deletes a whole column from a workbook
+#' @description Deletes the whole column from a workbook, shifting the remaining columns to the left
+#' @author David Zimmermann
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param col A column to delete
+#' @export
+#' @examples
+#' ## write some data 
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "tester")
+#' 
+#' for (i in seq(5)) {
+#'   mat <- data.frame(x = rep(paste0(int2col(i), i), 10))
+#'   writeData(wb, sheet = 1, startRow = 1, startCol = i, mat)
+#'   writeFormula(wb, sheet = 1, startRow = 12, startCol = i,
+#'                x = sprintf("=COUNTA(%s2:%s11)", int2col(i), int2col(i)))
+#' }
+#' deleteDataColumn(wb, 1, col = 3)
+#' #' \dontrun{
+#' saveWorkbook(wb, "deleteDataColumnExample.xlsx", overwrite = TRUE)
+#' }
+deleteDataColumn <- function(wb, sheet, col) {
+  sheet <- wb$validateSheet(sheet)
+  if (is.character(col)) col <- col2int(col)
+
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  ## internal helper function which corrects columns > col (reduces their col ref by 1)
+  updateFormula <- function(x, col) {
+    has_formula <- !is.na(x) & stringi::stri_detect(x, regex = "[A-Z]+\\d")
+    if (!any(has_formula)) return(x)
+    
+    xx <- x[has_formula]
+    cols <- stringi::stri_extract_all(xx, regex = "\\b[A-Z]+(?=\\d)")
+    
+    # create the replacement values for the formula
+    # eg when the third column (C) is taken out, reduce all columns > 3 by 1
+    repl <- lapply(cols, function(c) {
+      cc <- col2int(c)
+      int2col(ifelse(cc > col, cc - 1, cc))
+    })
+    
+    # loop over the cols/replacements; if they are different: replace the values
+    for (i in seq_along(repl)) {
+      for (j in seq_along(repl[[i]]))
+        if (any(cols[[i]][[j]] != repl[[i]][[j]])) {
+          xx[[i]] <- stringi::stri_replace_all(
+            xx[[i]], 
+            regex = sprintf("\\b%s(\\d)", cols[[i]][[j]]),
+            sprintf("%s\\1", repl[[i]][[j]])
+          )
+        } else if (cols[[i]][[j]] == int2col(col)) { # if this column is deleted -> #REF!
+          xx[[i]] <- stringi::stri_replace_all(
+            xx[[i]],
+            regex = sprintf("\\b%s(\\d)", cols[[i]][[j]]),
+            "#REF!\\1"
+          )
+        }
+    }
+
+    x[has_formula] <- xx
+    x
+  }
+
+  a <- wb$worksheets[[sheet]]$sheet_data
+  
+  # check which elements to delete
+  keep <- a$cols != col
+  # delete cols in cols "col" move higher cols one down
+  a$cols <- as.integer(a$cols[keep] - 1 * (a$cols[keep] > col))
+  a$rows <- a$rows[keep]
+  # v == values?! -> sharedStrings
+  # rem_v holds values of strings which to remove
+  # take only those that are not needed anymore
+  rem_v <- setdiff(a$v[!keep], a$v[keep])
+  # remove and update the references to the sharedStrings
+  a$v <- a$v[keep]
+  for (v in rem_v) {
+    to_reduce <- as.numeric(a$v) > as.numeric(v)
+    to_reduce[is.na(a$v) | is.na(v)] <- FALSE
+    if (any(to_reduce))
+      a$v[to_reduce] <- as.character(as.numeric(a$v[to_reduce]) - 1)
+  }
+  if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
+  a$t <- a$t[keep]
+  # update formula
+  a$f <- updateFormula(a$f[keep], col = col)
+  a$n_elements <- sum(keep)
+  
+  # remove the unneede strings from sharedStrings
+  rv <- as.numeric(rem_v) + 1
+  wb$sharedStrings <- wb$sharedStrings[-rv]
+  attr(wb$sharedStrings, "uniqueCount") <- length(unique(wb$sharedStrings))
+
+  invisible(0)
+}
+
+
 #' @name modifyBaseFont
 #' @title Modify the default font
 #' @description Modify the default font for this workbook
