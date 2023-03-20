@@ -23,23 +23,46 @@ test_that("deleteDataColumn", {
     writeFormula(wb, sheet = 1, startRow = 12, startCol = i,
                  x = sprintf("=COUNTA(%s2:%s11)", int2col(i), int2col(i)))
   }
+  expect_equal(
+    setdiff(wb$worksheets[[1]]$sheet_data$f, NA),
+    c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>", "<f>=COUNTA(C2:C11)</f>", 
+      "<f>=COUNTA(D2:D11)</f>", "<f>=COUNTA(E2:E11)</f>")
+  )
+
+
   deleteDataColumn(wb, 1, col = 3)
-  
   expect_equal(read.xlsx(wb),
                data.frame(x = rep("A1", 10), x = "B2", x = "D4", x = "E5", # no C3!
                           check.names = FALSE))
+  expect_equal(
+    setdiff(wb$worksheets[[1]]$sheet_data$f, NA),
+    c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>", 
+      "<f>=COUNTA(C2:C11)</f>", "<f>=COUNTA(D2:D11)</f>")
+  )
+  
   
   deleteDataColumn(wb, 1, col = 2)
   expect_equal(read.xlsx(wb),
                data.frame(x = rep("A1", 10), x = "D4", x = "E5", # no B2!
                           check.names = FALSE))
-
+  expect_equal(
+    setdiff(wb$worksheets[[1]]$sheet_data$f, NA),
+    c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>", "<f>=COUNTA(C2:C11)</f>")
+  )
+  
+  
   deleteDataColumn(wb, 1, col = 1)
   expect_equal(read.xlsx(wb),
                data.frame(x = rep("D4", 10), x = "E5", # no A1!
                           check.names = FALSE))
-  
-  # works with formula as well!
+  expect_equal(
+    setdiff(wb$worksheets[[1]]$sheet_data$f, NA),
+    c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>")
+  )
+
+
+
+  # works with more complicated formula as well!
   wb <- createWorkbook()
   addWorksheet(wb, "tester")
   writeData(wb, sheet = 1, startRow = 1, startCol = 1,
@@ -63,12 +86,8 @@ test_that("deleteDataColumn", {
   expect_equal(read.xlsx(wb), data.frame(`1` = 1, check.names = FALSE))
   expect_equal(
     wb$worksheets[[1]]$sheet_data$f,
-    c(NA, "<f>A1 + 1</f>", "<f>#REF!1 + 1</f>", "<f>C1 + 1</f>", 
-      "<f>D1 + 1</f>", "<f>E1 + 1</f>", "<f>F1 + 1</f>", "<f>G1 + 1</f>", 
-      "<f>H1 + 1</f>", NA, "<f>B1 + A2</f>", "<f>#REF!1 + #REF!1</f>", 
-      "<f>C1 + C1</f>", "<f>D1 + D1</f>", "<f>E1 + E1</f>", "<f>F1 + F1</f>", 
-      "<f>G1 + G1</f>", "<f>H1 + H1</f>", "<f>B2 + #REF!1</f>", "<f>C1 + D1</f>", 
-      "<f>D1 + E1</f>", "<f>E1 + F1</f>", "<f>F1 + G1</f>", "<f>G1 + H1</f>", 
-      "<f>H1 + I1</f>", "<f>I1 + J1</f>")
+    c(NA, "<f>A1 + 1</f>", "<f>#REF!1 + 1</f>", "<f>C1 + 1</f>", "<f>D1 + 1</f>", "<f>E1 + 1</f>", "<f>F1 + 1</f>", "<f>G1 + 1</f>", "<f>H1 + 1</f>",
+      NA, "<f>B1 + A2</f>", "<f>C1 + #REF!2</f>", "<f>D1 + C2</f>", "<f>E1 + D2</f>", "<f>F1 + E2</f>", "<f>G1 + F2</f>", "<f>H1 + G2</f>", "<f>I1 + H2</f>",
+      "<f>B2 + #REF!2</f>", "<f>C2 + D2</f>", "<f>D2 + E2</f>", "<f>E2 + F2</f>", "<f>F2 + G2</f>", "<f>G2 + H2</f>", "<f>H2 + I2</f>", "<f>I2 + J2</f>")
   )
 })
