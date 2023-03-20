@@ -1,7 +1,7 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.5.9000
+Version: 4.2.5.9001
 Date: 2021-12-13
 Authors@R: 
     c(person(given = "Philipp",
@@ -26,7 +26,11 @@ Authors@R:
              family = "Barbone",
              role = "ctb",
              email = "jmbarbone@gmail.com",
-             comment = c(ORCID = "0000-0001-9788-3628")))
+             comment = c(ORCID = "0000-0001-9788-3628")),
+      person(given = "David",
+             family = "Zimmermann",
+             role = "ctb",
+             email = "david_j_zimmermann@hotmail.com"))
 Description: Simplifies the creation of Excel .xlsx files by providing a
     high level interface to writing, styling and editing worksheets.
     Through the use of 'Rcpp', read/write times are comparable to the
@@ -57,7 +61,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
