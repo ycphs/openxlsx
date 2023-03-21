@@ -1849,9 +1849,11 @@ deleteDataColumn <- function(wb, sheet, col) {
     
     x[has_formula] <- sapply(forms, function(form) {
       cols_to_decrease <- form[-1]
-      cols <- col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
+      cols <- openxlsx::col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
       repl <- ifelse(cols == col, "#REF!",
-                     ifelse(cols > col, int2col(cols - 1), int2col(cols)))
+                     ifelse(cols > col,
+                            openxlsx::int2col(cols - 1),
+                            openxlsx::int2col(cols)))
       
       paste(c(form[[1]],
               stringi::stri_replace(form[-1], regex = "^[A-Z]+", repl)),
@@ -1873,17 +1875,20 @@ deleteDataColumn <- function(wb, sheet, col) {
   a$rows <- a$rows[keep]
   
   # reduce the shared strings pointers if they are not used anymore
-  used_shared <- a$v[a$t == 1] # a reference to all shared strings
-  keep_t <- keep[a$t == 1] # these shared strings are kept
+  has_t <- !is.na(a$t) & a$t == 1
+  used_shared <- a$v[has_t] # a reference to all shared strings
+  keep_t <- keep[has_t] # these shared strings are kept
+  keep_t[is.na(keep_t)] <- FALSE
   keep_shared <- used_shared[keep_t]
   rem_shared <- setdiff(unique(used_shared[!keep_t]), unique(keep_shared))
   for (v in rem_shared) {
     to_reduce <- as.numeric(keep_shared) > as.numeric(v)
+    to_reduce[is.na(to_reduce)] <- FALSE
     if (any(to_reduce))
       keep_shared[to_reduce] <- as.character(as.numeric(keep_shared[to_reduce]) - 1)
   }
   used_shared[keep_t] <- keep_shared
-  a$v[a$t == 1] <- used_shared
+  a$v[has_t] <- used_shared
   
   a$v <- a$v[keep]
   a$t <- a$t[keep]
