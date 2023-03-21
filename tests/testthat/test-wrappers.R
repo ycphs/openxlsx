@@ -121,3 +121,22 @@ test_that("deleteDataColumn with wide data", {
     deleteDataColumn(wb, 1, 1)
   expect_warning(read.xlsx(wb), "No data found on worksheet")
 })
+
+test_that("deleteDataColumn with formatting data", {
+  wb <- createWorkbook()
+  addWorksheet(wb, "tester")
+  df <- data.frame(x = 1:10, y = letters[1:10], z = 10:1)
+  writeData(wb, sheet = 1, startRow = 1, startCol = 1, x = df, colNames = TRUE)
+  
+  st <- openxlsx::createStyle(textDecoration = "Bold", fontSize = 20, fontColour = "red")
+  openxlsx::addStyle(wb, 1, style = st, rows = 1, cols = seq(ncol(df)))
+
+  sst <- wb$styleObjects[[1]]
+  sst$rows <- c(1, 1)
+  sst$cols <- c(1, 2)
+  deleteDataColumn(wb, 1, 2)
+  
+  expect_length(wb$styleObjects, 1)
+  expect_equal(wb$styleObjects[[1]],
+               sst)
+})
