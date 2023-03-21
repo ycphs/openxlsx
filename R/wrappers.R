@@ -1845,37 +1845,19 @@ deleteDataColumn <- function(wb, sheet, col) {
     
     xx <- x[has_formula]
     
-    cols <- stringi::stri_extract_all(xx, regex = "\\b[A-Z]+")
-    cells <- stringi::stri_extract_all(xx, regex = "\\b[A-Z]+\\d+")
+    forms <- stringi::stri_split(xx, regex = "\\b(?=[A-Z]+\\d+)")
     
-    # create the replacement values for the formula
-    # eg when the third column (C) is taken out, reduce all columns > 3 by 1
-    repl <- lapply(cells, function(c) {
-      cc <- col2int(stringi::stri_extract(c, regex = "[A-Z]+"))
-      paste0(
-        int2col(ifelse(cc > col, cc - 1, cc)),
-        stringi::stri_extract(c, regex = "\\d+")
-      )
+    x[has_formula] <- sapply(forms, function(form) {
+      cols_to_decrease <- form[-1]
+      cols <- col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
+      repl <- ifelse(cols == col, "#REF!",
+                     ifelse(cols > col, int2col(cols - 1), int2col(cols)))
+      
+      paste(c(form[[1]],
+              stringi::stri_replace(form[-1], regex = "^[A-Z]+", repl)),
+            collapse = "")
     })
     
-    # loop over the cols/replacements; if they are different: replace the values
-    for (i in rev(seq_along(repl))) {
-      for (j in rev(seq_along(repl[[i]]))) {
-        if (cols[[i]][[j]] == int2col(col)) { # if this column is deleted -> #REF!
-          xx[[i]] <- stringi::stri_replace(
-            xx[[i]],
-            regex = sprintf("\\b%s(?=\\d+)", cols[[i]][[j]]),
-            "#REF!"
-          )
-        } else if (cells[[i]][[j]] != repl[[i]][[j]]) {
-          xx[[i]] <- stringi::stri_replace(
-            xx[[i]], fixed = cells[[i]][[j]], repl[[i]][[j]]
-          )
-        }
-      }
-    }
-
-    x[has_formula] <- xx
     x
   }
 

@@ -51,7 +51,6 @@ test_that("deleteDataColumn basics", {
     c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>", "<f>=COUNTA(C2:C11)</f>")
   )
   
-  
   deleteDataColumn(wb, 1, col = 1)
   expect_equal(read.xlsx(wb),
                data.frame(x = rep("D4", 10), x = "E5", # no A1!
