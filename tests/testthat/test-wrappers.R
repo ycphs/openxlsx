@@ -13,7 +13,8 @@ test_that("int2col and col2int", {
   
 })
 
-test_that("deleteDataColumn", {
+
+test_that("deleteDataColumn basics", {
   wb <- createWorkbook()
   addWorksheet(wb, "tester")
 
@@ -59,9 +60,10 @@ test_that("deleteDataColumn", {
     setdiff(wb$worksheets[[1]]$sheet_data$f, NA),
     c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>")
   )
+})
 
 
-
+test_that("deleteDataColumn with more complicated formulae", {
   # works with more complicated formula as well!
   wb <- createWorkbook()
   addWorksheet(wb, "tester")
@@ -90,4 +92,33 @@ test_that("deleteDataColumn", {
       NA, "<f>B1 + A2</f>", "<f>C1 + #REF!2</f>", "<f>D1 + C2</f>", "<f>E1 + D2</f>", "<f>F1 + E2</f>", "<f>G1 + F2</f>", "<f>H1 + G2</f>", "<f>I1 + H2</f>",
       "<f>B2 + #REF!2</f>", "<f>C2 + D2</f>", "<f>D2 + E2</f>", "<f>E2 + F2</f>", "<f>F2 + G2</f>", "<f>G2 + H2</f>", "<f>H2 + I2</f>", "<f>I2 + J2</f>")
   )
+})
+
+
+test_that("deleteDataColumn with wide data", {
+  wb <- createWorkbook()
+  addWorksheet(wb, "tester")
+  ncols <- 30
+  nrows <- 100
+  df <- as.data.frame(matrix(seq(ncols * nrows), ncol = ncols))
+  colnames(df) <- int2col(seq(ncols))
+  writeData(wb, sheet = 1, startRow = 1, startCol = 1, x = df, colNames = TRUE)
+  expect_equal(read.xlsx(wb), df)
+  
+  deleteDataColumn(wb, 1, 2)
+  expect_equal(read.xlsx(wb), df[, -2])
+  
+  deleteDataColumn(wb, 1, 100)
+  expect_equal(read.xlsx(wb), df[, -2])
+  
+  deleteDataColumn(wb, 1, 55)
+  expect_equal(read.xlsx(wb), df[, -c(2, 56)]) # 56 b.c. one col was already taken out
+  
+  deleteDataColumn(wb, 1, 1)
+  expect_equal(read.xlsx(wb), df[, -c(1, 2, 56)])
+  
+  # delete all data
+  for (i in seq(ncols - 2))
+    deleteDataColumn(wb, 1, 1)
+  expect_warning(read.xlsx(wb), "No data found on worksheet")
 })

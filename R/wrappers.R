@@ -1883,29 +1883,36 @@ deleteDataColumn <- function(wb, sheet, col) {
   
   # check which elements to delete
   keep <- a$cols != col
+  # if there is no column to delete, exit early
+  if (all(keep)) return(invisible(0))
+  
   # delete cols in cols "col" move higher cols one down
   a$cols <- as.integer(a$cols[keep] - 1 * (a$cols[keep] > col))
   a$rows <- a$rows[keep]
-  # v == values?! -> sharedStrings
-  # rem_v holds values of strings which to remove
-  # take only those that are not needed anymore
-  rem_v <- setdiff(a$v[!keep], a$v[keep])
-  # remove and update the references to the sharedStrings
-  a$v <- a$v[keep]
-  for (v in rem_v) {
-    to_reduce <- as.numeric(a$v) > as.numeric(v)
-    to_reduce[is.na(a$v) | is.na(v)] <- FALSE
+  
+  # reduce the shared strings pointers if they are not used anymore
+  used_shared <- a$v[a$t == 1] # a reference to all shared strings
+  keep_t <- keep[a$t == 1] # these shared strings are kept
+  keep_shared <- used_shared[keep_t]
+  rem_shared <- setdiff(unique(used_shared[!keep_t]), unique(keep_shared))
+  for (v in rem_shared) {
+    to_reduce <- as.numeric(keep_shared) > as.numeric(v)
     if (any(to_reduce))
-      a$v[to_reduce] <- as.character(as.numeric(a$v[to_reduce]) - 1)
+      keep_shared[to_reduce] <- as.character(as.numeric(keep_shared[to_reduce]) - 1)
   }
-  if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
+  used_shared[keep_t] <- keep_shared
+  a$v[a$t == 1] <- used_shared
+  
+  a$v <- a$v[keep]
   a$t <- a$t[keep]
-  # update formula
+
   a$f <- updateFormula(a$f[keep], col = col)
   a$n_elements <- sum(keep)
+
+  if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
   
-  # remove the unneede strings from sharedStrings
-  rv <- as.numeric(rem_v) + 1
+  # remove the unneeded strings from sharedStrings
+  rv <- as.numeric(rem_shared) + 1
   wb$sharedStrings <- wb$sharedStrings[-rv]
   attr(wb$sharedStrings, "uniqueCount") <- length(unique(wb$sharedStrings))
 
