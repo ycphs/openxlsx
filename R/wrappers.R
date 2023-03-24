@@ -1828,7 +1828,7 @@ deleteData <- function(wb, sheet, cols, rows, gridExpand = FALSE) {
 #'                x = sprintf("=COUNTA(%s2:%s11)", int2col(i), int2col(i)))
 #' }
 #' deleteDataColumn(wb, 1, col = 3)
-#' #' \dontrun{
+#' \dontrun{
 #' saveWorkbook(wb, "deleteDataColumnExample.xlsx", overwrite = TRUE)
 #' }
 deleteDataColumn <- function(wb, sheet, col) {
