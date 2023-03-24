@@ -89,9 +89,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Formating with xlsx</h1>
-                        <h4 data-toc-skip class="author">Alexander Walker, Philipp Schauberger</h4>
+                        <h4 data-toc-skip class="author">Alexander
+Walker, Philipp Schauberger</h4>
             
-            <h4 data-toc-skip class="date">2022-09-22</h4>
+            <h4 data-toc-skip class="date">2023-03-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/HEAD/vignettes/Formatting.Rmd" class="external-link"><code>vignettes/Formatting.Rmd</code></a></small>
       <div class="hidden name"><code>Formatting.Rmd</code></div>
@@ -158,7 +159,8 @@
 <div class="section level2">
 <h2 id="use-of-pre-defined-table-styles">Use of pre-defined table styles<a class="anchor" aria-label="anchor" href="#use-of-pre-defined-table-styles"></a>
 </h2>
-<p>The ‘tableStyle’ argument in writeDataTable can be any of the predefined tableStyles in Excel.</p>
+<p>The ‘tableStyle’ argument in writeDataTable can be any of the
+predefined tableStyles in Excel.</p>
 <p><img src="tableStyles.PNG"></p>
 </div>
 <div class="section level2">
@@ -221,7 +223,9 @@
 <div class="section level2">
 <h2 id="datetime-formatting">DateTime Formatting<a class="anchor" aria-label="anchor" href="#datetime-formatting"></a>
 </h2>
-<p>The conversion from POSIX to Excel datetimes is dependent on the timezone you are in. If POSIX values are being written incorrectly, try setting the timezone with (for example)</p>
+<p>The conversion from POSIX to Excel datetimes is dependent on the
+timezone you are in. If POSIX values are being written incorrectly, try
+setting the timezone with (for example)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TZ <span class="op">=</span> <span class="st">"Australia/Sydney"</span><span class="op">)</span></span>
 <span></span>
@@ -343,7 +347,9 @@
 <div class="section level2">
 <h2 id="numeric-formatting">Numeric Formatting<a class="anchor" aria-label="anchor" href="#numeric-formatting"></a>
 </h2>
-<p>numeric columns styling can be set using the numFmt parameter in createStyle or a default can be set with, for example, options(“openxlsx.numFmt” = “#,#0.00”)</p>
+<p>numeric columns styling can be set using the numFmt parameter in
+createStyle or a default can be set with, for example,
+options(“openxlsx.numFmt” = “#,#0.00”)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.numFmt"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -412,7 +418,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

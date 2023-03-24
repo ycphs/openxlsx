@@ -62,7 +62,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="openxlsx-development-version">openxlsx (development version)<a class="anchor" aria-label="anchor" href="#openxlsx-development-version"></a></h2>
-<ul><li>Add type blanks and not blanks to conditional formatting (<a href="https://github.com/ycphs/openxlsx/pull/311" class="external-link">#311</a>)</li></ul></div>
+<ul><li>Add type blanks and not blanks to conditional formatting (<a href="https://github.com/ycphs/openxlsx/pull/311" class="external-link">#311</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.2.5" id="openxlsx-425">openxlsx 4.2.5<small>2021-12-14</small><a class="anchor" aria-label="anchor" href="#openxlsx-425"></a></h2>
 <div class="section level3">
@@ -113,7 +114,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-4-2-4">New features<a class="anchor" aria-label="anchor" href="#new-features-4-2-4"></a></h3>
-<ul><li>adds <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> to generate a <code>Workbook</code> object from a (named) list or a data.frame (<a href="https://github.com/ycphs/openxlsx/issues/192" class="external-link">#192</a>, <a href="https://github.com/ycphs/openxlsx/issues/187" class="external-link">#187</a>)<ul><li>this is now recommended rather than the <code>write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</code> functionality before</li>
+<ul><li>adds <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> to generate a <code>Workbook</code> object from a (named) list or a data.frame (<a href="https://github.com/ycphs/openxlsx/issues/192" class="external-link">#192</a>, <a href="https://github.com/ycphs/openxlsx/issues/187" class="external-link">#187</a>)
+<ul><li>this is now recommended rather than the <code>write.xlsx(x, file) ; wb &lt;- read.xlsx(file)</code> functionality before</li>
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> is now a wrapper for <code>wb &lt;- buildWorkbook(x); saveWorkbook(x, file)</code>
 </li>
@@ -129,7 +131,9 @@
 <li>
 <code><a href="../reference/write.xlsx.html">write.xlsx()</a></code> &gt;&gt; <code><a href="../reference/buildWorkbook.html">buildWorkbook()</a></code> can now handle <code>colWidths</code> passed as either a single element or a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>
 </li>
-<li>Added ability to change positioning of summary columns and rows.<ul><li>These can be set with the <code>summaryCol</code> and <code>summaryRow</code> arguments in <code><a href="../reference/pageSetup.html">pageSetup()</a></code>.</li></ul></li>
+<li>Added ability to change positioning of summary columns and rows.
+<ul><li>These can be set with the <code>summaryCol</code> and <code>summaryRow</code> arguments in <code><a href="../reference/pageSetup.html">pageSetup()</a></code>.</li>
+</ul></li>
 <li>
 <code>activeSheet</code> allows to set and get the active (displayed) sheet of a workbook.</li>
 <li>Adds new global options for workbook formatting (<a href="https://github.com/ycphs/openxlsx/issues/165" class="external-link">#165</a>; see <code><a href="../reference/openxlsx_options.html">?op.openxlsx</a></code>)</li>
@@ -165,26 +169,31 @@
 <div class="section level3">
 <h3 id="bug-fixes-4-2-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-4-2-2"></a></h3>
 <ul><li>Solved CRAN check errors based on the change discussed in <a href="https://bugs.r-project.org/show_bug.cgi?id=17277" class="external-link">PR#17277</a>
-</li></ul></div>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.2.0" id="openxlsx-420">openxlsx 4.2.0<a class="anchor" aria-label="anchor" href="#openxlsx-420"></a></h2>
 <div class="section level3">
 <h3 id="new-features-4-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-4-2-0"></a></h3>
-<ul><li>Added <code><a href="../reference/groupColumns.html">groupColumns()</a></code>, <code><a href="../reference/groupRows.html">groupRows()</a></code>, <code><a href="../reference/ungroupColumns.html">ungroupColumns()</a></code>, and <code><a href="../reference/ungroupRows.html">ungroupRows()</a></code> to group/ugroup columns/rows (<a href="https://github.com/ycphs/openxlsx/issues/32" class="external-link">#32</a>)</li></ul></div>
+<ul><li>Added <code><a href="../reference/groupColumns.html">groupColumns()</a></code>, <code><a href="../reference/groupRows.html">groupRows()</a></code>, <code><a href="../reference/ungroupColumns.html">ungroupColumns()</a></code>, and <code><a href="../reference/ungroupRows.html">ungroupRows()</a></code> to group/ugroup columns/rows (<a href="https://github.com/ycphs/openxlsx/issues/32" class="external-link">#32</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-4-2-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-4-2-0"></a></h3>
-<ul><li>Allow xml-sensitive characters in sheetnames (<a href="https://github.com/ycphs/openxlsx/issues/78" class="external-link">#78</a>)</li></ul></div>
+<ul><li>Allow xml-sensitive characters in sheetnames (<a href="https://github.com/ycphs/openxlsx/issues/78" class="external-link">#78</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="internal-4-2-0">Internal<a class="anchor" aria-label="anchor" href="#internal-4-2-0"></a></h3>
-<ul><li>Updated roxygen2 to 7.1.1</li></ul></div>
+<ul><li>Updated roxygen2 to 7.1.1</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.1.5.1" id="openxlsx-4151">openxlsx 4.1.5.1<a class="anchor" aria-label="anchor" href="#openxlsx-4151"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-4-1-5-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-4-1-5-1"></a></h3>
 <ul><li>fixed issue <a href="https://github.com/ycphs/openxlsx/issues/68%5D" class="external-link">#68</a>
-</li></ul></div>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.1.5" id="openxlsx-415">openxlsx 4.1.5<small>2020-05-06</small><a class="anchor" aria-label="anchor" href="#openxlsx-415"></a></h2>
@@ -222,7 +231,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="internal-4-1-4">Internal<a class="anchor" aria-label="anchor" href="#internal-4-1-4"></a></h3>
-<ul><li>update to roxygen2 7.0.0</li></ul></div>
+<ul><li>update to roxygen2 7.0.0</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.1.3" id="openxlsx-413">openxlsx 4.1.3<small>2019-11-07</small><a class="anchor" aria-label="anchor" href="#openxlsx-413"></a></h2>
@@ -239,7 +249,8 @@
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.1.2" id="openxlsx-412">openxlsx 4.1.2<small>2019-10-29</small><a class="anchor" aria-label="anchor" href="#openxlsx-412"></a></h2>
-<ul><li>Changed maintainer</li></ul></div>
+<ul><li>Changed maintainer</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.1.1" id="openxlsx-411">openxlsx 4.1.1<a class="anchor" aria-label="anchor" href="#openxlsx-411"></a></h2>
 <div class="section level3">
@@ -325,7 +336,8 @@
 <h3 id="bug-fixes-3-0-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-0-2"></a></h3>
 <ul><li>
 <code>keepNA</code> parameter added to <code>write.xlsx</code>. Passed to <code>writeData</code>/<code>writeDataTable</code>
-</li></ul></div>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="3.0.1" id="openxlsx-301">openxlsx 3.0.1<a class="anchor" aria-label="anchor" href="#openxlsx-301"></a></h2>
@@ -393,7 +405,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="vignette-2-1-3">VIGNETTE<a class="anchor" aria-label="anchor" href="#vignette-2-1-3"></a></h3>
-<ul><li>section on <code>write.xlsx</code> in Introductory vignette</li></ul></div>
+<ul><li>section on <code>write.xlsx</code> in Introductory vignette</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-2-1-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-3"></a></h3>
 <ul><li><p>Fix reading in of apostrophes</p></li>
@@ -471,7 +484,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
