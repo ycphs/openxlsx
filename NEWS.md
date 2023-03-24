@@ -1,5 +1,6 @@
 # openxlsx (development version)
 
+* Add support for `namedRegion`s having dots and other special characters ([#338](https://github.com/ycphs/openxlsx/issues/338)).
 * Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
 
 # openxlsx 4.2.5
