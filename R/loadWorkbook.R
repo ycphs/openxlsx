@@ -916,7 +916,10 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     }
     
     ## Persons (needed for Threaded Comment)
-    if (length(personXML) > 0) {
+
+    if(length(personXML) > 0) {
+
+
       wb$persons <- personXML
       wb$Content_Types <- c(
         wb$Content_Types,
@@ -1070,9 +1073,24 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
   
   wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
   
-  if (length(wb$ActiveSheet) == 0) {
+
+  if(length(wb$ActiveSheet) == 0) {
+
     wb$ActiveSheet <- 1L
   }
 
+  # Preserve window size and position:
+  xWindow <- getAttrs(activesheet,c("xWindow"))$xWindow
+  yWindow <- getAttrs(activesheet,c("yWindow"))$yWindow
+  windowWidth <- getAttrs(activesheet,c("windowWidth"))$windowWidth
+  windowHeight <- getAttrs(activesheet,c("windowHeight"))$windowHeight
+  
+  bookViews <- wb$workbook$bookViews
+  bookViews <- sub("xWindow=\"0", paste0("xWindow=\"", xWindow), bookViews)
+  bookViews <- sub("yWindow=\"0", paste0("yWindow=\"", yWindow), bookViews)
+  bookViews <- sub("windowWidth=\"13125", paste0("windowWidth=\"", windowWidth), bookViews)
+  bookViews <- sub("windowHeight=\"6105", paste0("windowHeight=\"", windowHeight), bookViews)
+  wb$workbook$bookViews <- bookViews
+  
   return(wb)
 }
