@@ -43,7 +43,7 @@ test_that("Support non-ASCII strings not in UTF-8 encodings", {
   non_ascii <- c("\u4f60\u597d", "\u4e2d\u6587", "\u6c49\u5b57", 
                  "\u5de5\u4f5c\u7c3f1", "\u6d4b\u8bd5\u540d\u5b571",
                  "\u6d4b2", "\u5de52", "\u5de5\u4f5c3")
-  # Ideally, we should test agains native encodings. However, the testing machine's
+  # Ideally, we should test against native encodings. However, the testing machine's
   #   locale encoding may not be able to represent the non-ascii letters, when
   #   it's the case, we use the UTF-8 encoding as it is.
   if (identical( enc2utf8(enc2native(non_ascii)), non_ascii )) {

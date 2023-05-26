@@ -263,7 +263,9 @@ Workbook$methods(writeData = function(
     
     for (i in which(vl > 32767)) {
       
+
       if(vl[i]>32768+30) {
+
         warning(
           paste0(
             stri_sub(newStrs[i], 32768, 32768 + 15),

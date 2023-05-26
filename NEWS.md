@@ -1,12 +1,20 @@
 # openxlsx (development version)
 
+## Fixes
+
+* Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
+
+## Improvements
+
+* Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
+* Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
 * Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
 
 # openxlsx 4.2.5
 
 ## Fixes
 
-* `openxlsx_setOp()` now works with named list ([#215](https://github.com/ycphs/openxlsx/issues/215))  
+* `openxlsx_setOp()` now works with named list ([#215](https://github.com/ycphs/openxlsx/issues/215))
 * `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing the workbook with `saveWorkbook()`. Similar `read.xlsx` and `readWorkbook` import `inlineStr`.
 * `read.xlsx()` no longer changes random seed ([#183](https://github.com/ycphs/openxlsx/issues/183))
 * fixed a regression that caused fonts to be read in incorrectly ([#207](https://github.com/ycphs/openxlsx/issues/207))
@@ -380,7 +388,7 @@
 *  functions `addFilter` & `removeFilter` to add filters to columns
 
 *  Headers & footers extended, can now be set with `addWorksheet` and `setHeaderFooter`.
-  `setHeader` & `setFooter` deprecated.  
+  `setHeader` & `setFooter` deprecated.
 
 *  "fitToWidth" and "fitToHeight" logicals in `pageSetup`.
 

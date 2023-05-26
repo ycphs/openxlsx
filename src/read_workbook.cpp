@@ -550,20 +550,14 @@ SEXP read_workbook(IntegerVector cols_in,
       
       if(missing_header[i]){  // a missing header element
         
-        sprintf(&(name[0]), "X%hu", i+1);
-        // sprintf(&(name[0]), "X%u", i+1);
-        // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-        // snprintf(&(name[0]), 10, "X%d", i+1);
+        snprintf(&(name[0]), 6, "X%d", i+1);
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          sprintf(&(name[0]), "X%hu", i+1);
-          // sprintf(&(name[0]), "X%du", i+1);
-          // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-          // snprintf(&(name[0]), 10, "X%d", i+1);
+          snprintf(&(name[0]), 6, "X%d", i+1);
           col_names[i] = name;
         }
         
@@ -620,9 +614,7 @@ SEXP read_workbook(IntegerVector cols_in,
   }else{ // else col_names is FALSE
     char name[6];
     for(int i =0; i < nCols; i++){
-      sprintf(&(name[0]), "X%hu", i+1);
-       // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-      // sprintf(&(name[0]), "X%u", i+1);
+      snprintf(&(name[0]), 6, "X%d", i+1);
       col_names[i] = name;
     }
   }
@@ -637,7 +629,7 @@ SEXP read_workbook(IntegerVector cols_in,
   // Possible there are no string_inds to begin with and value of string_inds is 0
   // Possible we have string_inds but they have now all been used up by headers
   bool allNumeric = false;
-  if((string_inds.size() == 0) | all(is_na(string_inds)))
+  if((string_inds.size() == 0) | is_true(all(is_na(string_inds))))
     allNumeric = true;
   
   if(has_date){
@@ -645,8 +637,8 @@ SEXP read_workbook(IntegerVector cols_in,
       allNumeric = false;
   }
   
-  // If we have colnames some elements where used to create these -so we remove the corresponding number of elements
-  if(hasColNames & has_date)
+  // If we have colnames some elements were used to create these -so we remove the corresponding number of elements
+  if(hasColNames && has_date)
     is_date.erase(is_date.begin(), is_date.begin() + pos);
   
   

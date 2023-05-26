@@ -35,6 +35,34 @@ test_that("group rows", {
   rm(wb)
 })
 
+test_that("group rows 2", {
+ 
+  wb <- createWorkbook()
+  addWorksheet(wb, 'Sheet1')
+  addWorksheet(wb, 'Sheet2')
+  writeData(wb, "Sheet1", iris) 
+  writeData(wb, "Sheet2", iris)
+
+  ## create list of groups
+  # lines used for grouping (here: species)
+  grp <- list(
+    seq(2, 51),
+    seq(52, 101),
+    seq(102, 151)
+  )
+  # assign group levels
+  names(grp) <- c("1","0","1") 
+  groupRows(wb, "Sheet1", rows = grp)
+
+  # different grouping
+  names(grp) <- c("1","2","3")
+  groupRows(wb, "Sheet2", rows = grp)
+
+  expect_equal(unique(wb$outlineLevels[[1]]), c("1", "0"))
+  expect_equal(unique(wb$outlineLevels[[2]]), c("1", "2", "3"))
+})
+
+
 
 test_that("ungroup columns", {
 

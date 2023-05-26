@@ -1,7 +1,3 @@
-
-
-
-
 #' @name makeHyperlinkString
 #' @title create Excel hyperlink string
 #' @description Wrapper to create internal hyperlink string to pass to writeFormula(). Either link to external urls or local files or straight to cells of local Excel sheets.
@@ -30,19 +26,22 @@
 #'
 #'
 #' ## Internal Hyperlink - create hyperlink formula manually
-#' writeFormula(wb, "Sheet1",
-#'   x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")',
+#' writeFormula(
+#'   wb, "Sheet1",
+#'   x = '=HYPERLINK(\"#Sheet2!B3\", "Text to Display - Link to Sheet2")',
 #'   startCol = 3
 #' )
 #'
 #' ## Internal - No text to display using makeHyperlinkString() function
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 1,
 #'   x = makeHyperlinkString(sheet = "Sheet 3", row = 1, col = 2)
 #' )
 #'
 #' ## Internal - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 2,
 #'   x = makeHyperlinkString(
 #'     sheet = "Sheet 3", row = 1, col = 2,
@@ -51,7 +50,8 @@
 #' )
 #'
 #' ## Link to file - No text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 4,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -60,7 +60,8 @@
 #' )
 #'
 #' ## Link to file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 3,
 #'   x = makeHyperlinkString(
 #'     sheet = "testing", row = 3, col = 10,
@@ -70,11 +71,12 @@
 #' )
 #'
 #' ## Link to external file - Text to display
-#' writeFormula(wb, "Sheet1",
+#' writeFormula(
+#'   wb, "Sheet1",
 #'   startRow = 10, startCol = 1,
-#'   x = '=HYPERLINK(\\"[C:/Users]\\", \\"Link to an external file\\")'
+#'   x = '=HYPERLINK("[C:/Users]", "Link to an external file")'
 #' )
-#' 
+#'
 #' ## Link to internal file
 #' x = makeHyperlinkString(text = "test.png", file = "D:/somepath/somepicture.png")
 #' writeFormula(wb, "Sheet1", startRow = 11, startCol = 1, x = x)
@@ -89,20 +91,27 @@ makeHyperlinkString <- function(sheet, row = 1, col = 1, text = NULL, file = NUL
   
   if (missing(sheet)) {
     if (!missing(row) || !missing(col)) warning("Option for col and/or row found, but no sheet was provided.")
-
-    str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
+    
+    if (is.null(text))
+      str <- sprintf("=HYPERLINK(\"%s\")", file)
+    
+    if (is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\")", text)
+    
+    if (!is.null(text) && !is.null(file))
+      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", file, text)
   } else {
     cell <- paste0(int2col(col), row)
     if (!is.null(file)) {
-      dest <- sprintf("[%s]'%s'!%s", file, sheet, cell)
+      dest <- sprintf('"[%s]%s!%s"', file, sheet, cell)
     } else {
-      dest <- sprintf("#'%s'!%s", sheet, cell)
+      dest <- sprintf('"#\'%s\'!%s"', sheet, cell)
     }
     
     if (is.null(text)) {
-      str <- sprintf("=HYPERLINK(\"%s\")", dest)
+      str <- sprintf('=HYPERLINK(%s)', dest)
     } else {
-      str <- sprintf("=HYPERLINK(\"%s\", \"%s\")", dest, text)
+      str <- sprintf('=HYPERLINK(%s, \"%s\")', dest, text)
     }
   }
   
@@ -131,6 +140,14 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   newStylesElements <- NULL
   names(colClasses) <- NULL
   
+  # For custom number formats, ensure unique IDs (extract the current maximum and add 1 for each new format)
+  maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
+    as.integer(
+      max(c(i$style$numFmt$numFmtId, 0))
+    )
+  })), 165)
+
+  
   if ("hyperlink" %in% allColClasses) {
     
     ## style hyperlinks
@@ -153,8 +170,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style dates
     inds <- which(sapply(colClasses, function(x) "date" %in% x))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "date")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "date"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
@@ -168,8 +192,15 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
     ## style POSIX
     inds <- which(sapply(colClasses, function(x) any(c("posixct", "posixt", "posixlt") %in% x)))
     
+    # make sure the style has a unique ID:
+    style = createStyle(numFmt = "LONGDATE")
+    if (style$numFmt$numFmtId == 165) {
+      style$numFmt$numFmtId <- maxnumFmtId + 1
+      maxnumFmtId <- style$numFmt$numFmtId
+    }
+
     styleElements <- list(
-      "style" = createStyle(numFmt = "LONGDATE"),
+      "style" = style,
       "sheet" = wb$sheet_names[sheet],
       "rows" = rep.int(rowInds, times = length(inds)),
       "cols" = rep(inds + startCol, each = length(rowInds))
@@ -236,7 +267,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   }
   
   ## style big mark
-  if ("3" %in% allColClasses | "comma" %in% allColClasses) {
+  if ("3" %in% allColClasses || "comma" %in% allColClasses) {
     inds <- which(sapply(colClasses, function(x) "3" %in% tolower(x) | "comma" %in% tolower(x)))
     
     styleElements <- list(
@@ -250,7 +281,7 @@ classStyles <- function(wb, sheet, startRow, startCol, colNames, nRow, colClasse
   }
   
   ## numeric sigfigs (Col must be numeric and numFmt options must only have 0s and \\.)
-  if ("numeric" %in% allColClasses & !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
+  if ("numeric" %in% allColClasses && !grepl("[^0\\.,#\\$\\* %]", getOption("openxlsx.numFmt", "GENERAL"))) {
     inds <- which(sapply(colClasses, function(x) "numeric" %in% tolower(x)))
     
     styleElements <- list(
@@ -902,47 +933,6 @@ mergeCell2mapping <- function(x) {
 
 
 
-
-splitHeaderFooter <- function(x) {
-  tmp <- gsub("<(/|)(odd|even|first)(Header|Footer)>(&amp;|)", "", x, perl = TRUE)
-  special_tags <- regmatches(tmp, regexpr("&amp;[^LCR]", tmp))
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(special_tags[i], sprintf("openxlsx__%s67298679", i), tmp, fixed = TRUE)
-    }
-  }
-  
-  tmp <- strsplit(tmp, split = "&amp;")[[1]]
-  
-  if (length(special_tags) > 0) {
-    for (i in seq_along(special_tags)) {
-      tmp <- gsub(sprintf("openxlsx__%s67298679", i), special_tags[i], tmp, fixed = TRUE)
-    }
-  }
-  
-  
-  res <- rep(list(NULL), 3)
-  ind <- substr(tmp, 1, 1) == "L"
-  if (any(ind)) {
-    res[[1]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "C"
-  if (any(ind)) {
-    res[[2]] <- substring(tmp, 2)[ind]
-  }
-  
-  ind <- substr(tmp, 1, 1) == "R"
-  if (any(ind)) {
-    res[[3]] <- substring(tmp, 2)[ind]
-  }
-  
-  res
-}
-
-
-
-
 getFile <- function(xlsxFile) {
   
   ## Is this a file or URL (code taken from read.table())
@@ -958,6 +948,121 @@ getFile <- function(xlsxFile) {
   
   return(xlsxFile)
 }
+
+#' @name get_worksheet_entries
+#' @title Get entries from workbook worksheet
+#' @description Get all entries from workbook worksheet without xml tags
+#' @param wb workbook
+#' @param sheet worksheet
+#' @author David Breuer
+#' @return vector of strings
+#' @export
+#' @examples
+#' ## Create new workbook
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#'
+#' ## Write dummy data
+#' writeData(wb, sheet, c("A", "BB", "CCC"), startCol = 2, startRow = 3)
+#' writeData(wb, sheet, c(4, 5), startCol = 4, startRow = 3)
+#'
+#' ## Get text entries
+#' get_worksheet_entries(wb, sheet)
+#'
+get_worksheet_entries <- function(wb, sheet) {
+  # get worksheet data
+  dat <- wb$worksheets[[sheet]]$sheet_data
+  # get vector of entries
+  val <- dat$v
+  # get boolean vector of text entries
+  typ <- (dat$t == 1) & !is.na(dat$t)
+  # get text entry strings
+  str <- unlist(wb$sharedStrings[as.integer(val)[typ] + 1])
+  # remove xml tags
+  str <- gsub("<.*?>", "", str)
+  # write strings to vector of entries
+  val[typ] <- str
+  # return vector of entries
+  val
+}
+
+#' @name auto_heights
+#' @title Compute optimal row heights
+#' @description Compute optimal row heights for cell with fixed with and
+#' enabled automatic row heights parameter
+#' @param wb workbook
+#' @param sheet worksheet
+#' @param selected selected rows
+#' @param fontsize font size, optional (get base font size by default)
+#' @param factor factor to manually adjust font width, e.g., for bold fonts,
+#' optional
+#' @param base_height basic row height, optional
+#' @param extra_height additional row height per new line of text, optional
+#' @author David Breuer
+#' @return list of indices of columns with fixed widths and optimal row heights
+#' @export
+#' @examples
+#' ## Create new workbook
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#'
+#' ## Write dummy data
+#' long_string <- "ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC"
+#' writeData(wb, sheet, c("A", long_string, "CCC"), startCol = 2, startRow = 3)
+#' writeData(wb, sheet, c(4, 5), startCol = 4, startRow = 3)
+#'
+#' ## Set column widths and get optimal row heights
+#' setColWidths(wb, sheet, c(1,2,3,4), c(10,20,10,20))
+#' auto_heights(wb, sheet, 1:5)
+#'
+auto_heights <- function(wb, sheet, selected, fontsize = NULL, factor = 1.0,
+                         base_height = 15, extra_height = 12) {
+  # get base font size
+  if (is.null(fontsize)) {
+    fontsize <- as.integer(openxlsx::getBaseFont(wb)$size$val)
+  }
+  # set factor to adjust font width (empiricially found scale factor 4 here)
+  factor <- 4 * factor / fontsize
+  # get worksheet data
+  dat <- wb$worksheets[[sheet]]$sheet_data
+  # get columns widths
+  colWidths <- wb$colWidths[[sheet]]
+  # select fixed (non-auto) and visible (non-hidden) columns only
+  specified <- (colWidths != "auto") & (attr(colWidths, "hidden") == "0")
+  # return default row heights if no column widths are fixed
+  if (length(specified) == 0) {
+    message("No column widths specified, returning default row heights.")
+    cols <- integer(0)
+    heights <- rep(base_height, length(selected))
+    return(list(cols, heights))
+  }
+  # get fixed column indices
+  cols <- as.integer(names(specified)[specified])
+  # get fixed column widths
+  widths <- as.numeric(colWidths[specified])
+  # get all worksheet entries
+  val <- get_worksheet_entries(wb, sheet)
+  # compute optimal height per selected row
+  heights <- sapply(selected, function(row) {
+    # select entries in given row and columns of fixed widths
+    index <- (dat$rows == row) & (dat$cols %in% cols)
+    # remove line break characters
+    chr <- gsub("\\r|\\n", "", val[index])
+    # measure width of entry (in pixels)
+    wdt <- graphics::strwidth(chr, unit = "in") * 20 / 1.43 # 20 px = 1.43 in
+    # compute optimal height
+    if (length(wdt) == 0) {
+      base_height
+    } else {
+      base_height + extra_height * as.integer(max(wdt / widths * factor))
+    }
+  })
+  # return list of indices of columns with fixed widths and optimal row heights
+  list(cols, heights)
+}
+
 
 # Rotate the 15-bit integer by n bits to the
 hashPassword <- function(password) {
