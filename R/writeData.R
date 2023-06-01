@@ -180,6 +180,8 @@ writeData <- function(
 ) {
 
   x <- force(x)
+  # transforms NA to "NA" for bad names
+  names(x) <- paste(names(x))
   
   op <- get_set_options()
   on.exit(options(op), add = TRUE)

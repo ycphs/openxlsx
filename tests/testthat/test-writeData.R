@@ -35,3 +35,17 @@ test_that("writeData() forces evaluation of x (#264)", {
   options(op)
   file.remove(wbfile)
 })
+
+test_that("colnames with NA are appropriately handled [292]", {
+  x <- data.frame(a = 1, b = 2)
+  colnames(x) <- c("a", NA)
+  wbfile <- temp_xlsx()
+  wb <- buildWorkbook(x)
+  wb$worksheets[[1]]$sheet_data
+  saveWorkbook(wb, wbfile)
+  
+  # what could I look for 
+  # openXL(wb)
+  # openXL(wbfile)
+  # read.xlsx(wbfile)
+})
