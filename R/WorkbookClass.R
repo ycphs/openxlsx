@@ -3345,6 +3345,17 @@ Workbook$methods(
     }
 
 
+    ## create existing_cells for each sheet so they will not be created repeated 
+    existing_cells_lst <- list()
+    for (sheet in seq_along(sheet_names)) {
+      existing_cells_lst[[sheet]] <-
+        stringi::stri_join(
+          worksheets[[sheet]]$sheet_data$rows,
+          worksheets[[sheet]]$sheet_data$cols,
+          sep = ","
+        )
+    }
+
     for (x in styleObjects) {
       if (length(x$rows) > 0 & length(x$cols) > 0) {
         this.sty <- x$style$copy()
@@ -3363,11 +3374,7 @@ Workbook$methods(
           .self$updateStyles(this.sty) ## this creates the XML for styles.XML
 
         cells_to_style <- stri_join(x$rows, x$cols, sep = ",")
-        existing_cells <-
-          stri_join(worksheets[[sheet]]$sheet_data$rows,
-            worksheets[[sheet]]$sheet_data$cols,
-            sep = ","
-          )
+        existing_cells <-  existing_cells_lst[[sheet]]
 
         ## In here we create any style_ids that don't yet exist in sheet_data
         worksheets[[sheet]]$sheet_data$style_id[existing_cells %in% cells_to_style] <<-
