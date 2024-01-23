@@ -551,3 +551,16 @@ writeFormula <- function(
 
   invisible(0)
 }
+
+#' `as.character.formula()`
+#'
+#' This function exists to prevent conflicts with `as.character.formula` methods
+#' from other packages
+#' 
+#' @inheritParams base::as.character
+#' @param ... Not implemented
+#' @returns `base::as.character.default(x)`
+#' @export
+as.character.formula <- function(x, ...) {
+  base::as.character.default(x)
+}

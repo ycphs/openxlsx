@@ -15,6 +15,7 @@
 * fixed writing hyperlink formulas ([#200](https://github.com/ycphs/openxlsx/issues/200))
 * `write.xlsx()` now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
 * `write.xlsx()` now again uses the default of `overwrite = TRUE` for saving files ([#249](https://github.com/ycphs/openxlsx/issues/249))
+* `as.character.formula()` exported to warn about potential conflicts with other packages ([#312](https://github.com/ycphs/openxlsx/issues/312), [#315](https://github.com/ycphs/openxlsx/pull/315))
 
 ## Improvements
 
