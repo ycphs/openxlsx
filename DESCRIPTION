@@ -53,7 +53,6 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    roxygen2,
     testthat
 LinkingTo: 
     Rcpp
