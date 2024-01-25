@@ -57,6 +57,7 @@
 #'   \item{**borderStyle**}{ Border line style.}
 #'   \item{**keepNA**} {If `TRUE`, NA values are converted to #N/A (or `na.string`, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
 #'   \item{**na.string**} {If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel. Defaults to NULL.}
+#'   \item{**mergeCols**} {A list of numeric vectors indicating in which columns repeated cells need to be merged. The list will be recycled for each sheet.}
 #' }
 #'
 #' **freezePane Parameters**

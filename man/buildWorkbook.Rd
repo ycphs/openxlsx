@@ -68,6 +68,7 @@ between each column.  If "\code{all}" all cell borders are drawn.}
 \item{\strong{borderStyle}}{ Border line style.}
 \item{\strong{keepNA}} {If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
 \item{\strong{na.string}} {If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel. Defaults to NULL.}
+\item{\strong{mergeCols}} {A list of numeric vectors indicating in which columns repeated cells need to be merged. The list will be recycled for each sheet.}
 }
 
 \strong{freezePane Parameters}
