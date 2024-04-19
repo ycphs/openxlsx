@@ -60,7 +60,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.1
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
@@ -74,7 +74,6 @@ Collate:
     'build_workbook.R'
     'chartsheet_class.R'
     'conditional_formatting.R'
-    'data-fontSizeLookupTables.R'
     'helperFunctions.R'
     'loadWorkbook.R'
     'onUnload.R'
@@ -83,6 +82,7 @@ Collate:
     'openxlsx.R'
     'openxlsxCoerce.R'
     'readWorkbook.R'
+    'setWindowSize.R'
     'sheet_data_class.R'
     'utils.R'
     'workbook_column_widths.R'
