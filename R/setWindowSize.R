@@ -7,8 +7,7 @@
 #' @param windowHeight the height of the window
 #' 
 #' Set the size and position of the window when you open the xlsx file.  The units are in twips.  See
-#' [Microsoft's documentation for the xlsx standard]
-#' (https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.workbookview?view=openxml-2.8.1)
+#' [Microsoft's documentation for the xlsx standard](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.workbookview?view=openxml-2.8.1)
 #'
 #' @export
 #'
@@ -58,6 +57,7 @@ setWindowSize <- function(wb, xWindow = NULL, yWindow = NULL, windowWidth = NULL
 }
 
 #' @rdname setWindowSize
+#' @export
 
 getWindowSize <- function(wb){
   bookViews <- wb$workbook$bookViews
