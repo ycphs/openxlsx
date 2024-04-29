@@ -33,7 +33,7 @@ Sheet_Data$methods(delete = function(rows_in, cols_in, grid_expand) {
     stop("Length of rows and cols must be equal.")
   }
 
-  inds <- which(paste(rows, cols, sep = ",") %in% paste(rows_in, cols_in, sep = ","))
+  inds <- which(pair_rc(rows, cols) %in% pair_rc(rows_in, cols_in))
 
   if (length(inds) > 0) { ## writing over existing data
 
@@ -80,7 +80,7 @@ Sheet_Data$methods(write = function(rows_in, cols_in, t_in, v_in, f_in, any_func
 
   inds <- integer(0)
   if (possible_overlap) {
-    inds <- which(paste(rows, cols, sep = ",") %in% paste(rows_in, cols_in, sep = ","))
+    inds <- which(pair_rc(rows, cols) %in% pair_rc(rows_in, cols_in))
   }
 
   if (length(inds) > 0) {

@@ -3362,12 +3362,9 @@ Workbook$methods(
         sId <-
           .self$updateStyles(this.sty) ## this creates the XML for styles.XML
 
-        cells_to_style <- stri_join(x$rows, x$cols, sep = ",")
-        existing_cells <-
-          stri_join(worksheets[[sheet]]$sheet_data$rows,
-            worksheets[[sheet]]$sheet_data$cols,
-            sep = ","
-          )
+        cells_to_style <- pair_rc(x$rows, x$cols)
+        existing_cells <- pair_rc(worksheets[[sheet]]$sheet_data$rows,
+                                  worksheets[[sheet]]$sheet_data$cols)
 
         ## In here we create any style_ids that don't yet exist in sheet_data
         worksheets[[sheet]]$sheet_data$style_id[existing_cells %in% cells_to_style] <<-
@@ -3506,9 +3503,9 @@ Workbook$methods(
           ## toRemove are the elements that the new style doesn't apply to, we remove these from the style object as it
           ## is copied, merged with the new style and given the new data points
 
-          ex_row_cols <-
-            stri_join(styleObjects[[i]]$rows, styleObjects[[i]]$cols, sep = "-")
-          new_row_cols <- stri_join(rows, cols, sep = "-")
+          ex_row_cols  <- pair_rc(styleObjects[[i]]$rows, 
+                                  styleObjects[[i]]$cols)
+          new_row_cols <- pair_rc(rows, cols)
 
 
           ## mergeInds are the intersection of the two styles that will need to merge
