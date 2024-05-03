@@ -3345,6 +3345,7 @@ Workbook$methods(
     }
 
 
+    prev_sheet <- 0L
     for (x in styleObjects) {
       if (length(x$rows) > 0 & length(x$cols) > 0) {
         this.sty <- x$style$copy()
@@ -3363,8 +3364,12 @@ Workbook$methods(
           .self$updateStyles(this.sty) ## this creates the XML for styles.XML
 
         cells_to_style <- pair_rc(x$rows, x$cols)
-        existing_cells <- pair_rc(worksheets[[sheet]]$sheet_data$rows,
-                                  worksheets[[sheet]]$sheet_data$cols)
+        
+        # Avoid recreating this if we're looking at the same sheet over and over
+        if (sheet != prev_sheet) {
+          existing_cells <- pair_rc(worksheets[[sheet]]$sheet_data$rows,
+                                    worksheets[[sheet]]$sheet_data$cols)  
+        }
 
         ## In here we create any style_ids that don't yet exist in sheet_data
         worksheets[[sheet]]$sheet_data$style_id[existing_cells %in% cells_to_style] <<-
