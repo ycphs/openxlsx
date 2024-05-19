@@ -387,7 +387,7 @@ addWorksheet <- function(wb,
   }
 
   if (!inherits(wb, "Workbook")) {
-    stop("wb must be a Workbok", call. = FALSE)
+    stop("wb must be a Workbook", call. = FALSE)
   }
 
   # Set NULL defaults
@@ -1803,6 +1803,125 @@ deleteData <- function(wb, sheet, cols, rows, gridExpand = FALSE) {
 
   wb$worksheets[[sheet]]$sheet_data$delete(rows_in = rows, cols_in = cols, grid_expand = gridExpand)
 
+
+  invisible(0)
+}
+
+
+#' @name deleteDataColumn
+#' @title Deletes a whole column from a workbook
+#' @description Deletes the whole column from a workbook, shifting the remaining columns to the left
+#' @author David Zimmermann
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param col A column to delete
+#' @export
+#' @examples
+#' ## write some data 
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "tester")
+#' 
+#' for (i in seq(5)) {
+#'   mat <- data.frame(x = rep(paste0(int2col(i), i), 10))
+#'   writeData(wb, sheet = 1, startRow = 1, startCol = i, mat)
+#'   writeFormula(wb, sheet = 1, startRow = 12, startCol = i,
+#'                x = sprintf("=COUNTA(%s2:%s11)", int2col(i), int2col(i)))
+#' }
+#' deleteDataColumn(wb, 1, col = 3)
+#' \dontrun{
+#' saveWorkbook(wb, "deleteDataColumnExample.xlsx", overwrite = TRUE)
+#' }
+deleteDataColumn <- function(wb, sheet, col) {
+  sheet <- wb$validateSheet(sheet)
+  if (is.character(col)) col <- col2int(col)
+
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  ## internal helper function which corrects columns > col (reduces their col ref by 1)
+  updateFormula <- function(x, col) {
+    has_formula <- !is.na(x) & stringi::stri_detect(x, regex = "[A-Z]+\\d")
+    if (!any(has_formula)) return(x)
+
+    xx <- x[has_formula]
+
+    forms <- stringi::stri_split(xx, regex = "\\b(?=[A-Z]+\\d+)")
+
+    x[has_formula] <- sapply(forms, function(form) {
+      cols_to_decrease <- form[-1]
+      cols <- openxlsx::col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
+      repl <- ifelse(cols == col, "#REF!",
+                     ifelse(cols > col,
+                            openxlsx::int2col(cols - 1),
+                            openxlsx::int2col(cols)))
+
+      paste(c(form[[1]],
+              stringi::stri_replace(form[-1], regex = "^[A-Z]+", repl)),
+            collapse = "")
+    })
+
+    x
+  }
+
+  a <- wb$worksheets[[sheet]]$sheet_data
+
+  # check which elements to delete
+  keep <- a$cols != col
+  # if there is no column to delete, exit early
+  if (all(keep)) return(invisible(0))
+
+  # delete cols in cols "col" move higher cols one down
+  a$cols <- as.integer(a$cols[keep] - 1 * (a$cols[keep] > col))
+  a$rows <- a$rows[keep]
+
+  # reduce the shared strings pointers if they are not used anymore
+  has_t <- !is.na(a$t) & a$t == 1
+  used_shared <- a$v[has_t] # a reference to all shared strings
+  keep_t <- keep[has_t] # these shared strings are kept
+  keep_t[is.na(keep_t)] <- FALSE
+  keep_shared <- used_shared[keep_t]
+  rem_shared <- setdiff(unique(used_shared[!keep_t]), unique(keep_shared))
+  for (v in rem_shared) {
+    to_reduce <- as.numeric(keep_shared) > as.numeric(v)
+    to_reduce[is.na(to_reduce)] <- FALSE
+    if (any(to_reduce))
+      keep_shared[to_reduce] <- as.character(as.numeric(keep_shared[to_reduce]) - 1)
+  }
+  used_shared[keep_t] <- keep_shared
+  a$v[has_t] <- used_shared
+
+  a$v <- a$v[keep]
+  a$t <- a$t[keep]
+
+  a$f <- updateFormula(a$f[keep], col = col)
+  a$n_elements <- sum(keep)
+
+  if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
+
+  # remove the unneeded strings from sharedStrings
+  rv <- as.numeric(rem_shared) + 1
+  wb$sharedStrings <- wb$sharedStrings[-rv]
+  attr(wb$sharedStrings, "uniqueCount") <- length(unique(wb$sharedStrings))
+
+  # adjust styles
+  sheet_name <- wb$sheet_names[[sheet]]
+  this_sheet <- sapply(wb$styleObjects, function(o) {
+    if (!"sheet" %in% names(o)) return(FALSE)
+    o$sheet == sheet_name
+  })
+  if (!is.null(this_sheet) && any(this_sheet)) {
+    wb$styleObjects[this_sheet] <- lapply(
+      wb$styleObjects[this_sheet],
+      function(style) {
+        if (all(style$cols == col)) return(NULL) # only in this col
+        if (!any(style$cols > col)) return(style)
+        take <- style$cols != col
+        style$cols <- style$cols[take]
+        style$rows <- style$rows[take]
+        style$cols[style$cols > col] <- style$cols[style$cols > col] - 1L
+        style
+      })
+  }
 
   invisible(0)
 }

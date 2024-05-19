@@ -248,6 +248,17 @@ writeDataTable <- function(
     if (any(char0)) {
       colNames[char0] <- colnames(x)[char0] <- paste0("Column", which(char0))
     }
+    
+    # Compatibility with MS Excel: throw warning if a table column name exceeds
+    # the length of 255 chars.
+    char_over255 <- nchar(colNames) > 255
+    if (any(char_over255)) {
+      warning_msg <- sprintf(
+        "Column name exceeds 255 chars, possible incompatibility with MS Excel. Index: %s",
+        toString(which(char_over255)))
+      warning(warning_msg)
+    }
+
   } else {
     colNames <- paste0("Column", seq_along(x))
     names(x) <- colNames

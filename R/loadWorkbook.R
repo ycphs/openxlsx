@@ -411,15 +411,15 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     nChartCol <- sum(grepl("colors[0-9]+.xml", chartNames))
 
     if (nCharts > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/chart%s.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>', 1:nCharts))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/chart%s.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>', seq_len(nCharts)))
     }
 
     if (nChartStyles > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/style%s.xml" ContentType="application/vnd.ms-office.chartstyle+xml"/>', 1:nChartStyles))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/style%s.xml" ContentType="application/vnd.ms-office.chartstyle+xml"/>', seq_len(nChartStyles)))
     }
 
     if (nChartCol > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/colors%s.xml" ContentType="application/vnd.ms-office.chartcolorstyle+xml"/>', 1:nChartCol))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/colors%s.xml" ContentType="application/vnd.ms-office.chartcolorstyle+xml"/>', seq_len(nChartCol)))
     }
 
     if (length(chartsRels)) {
@@ -452,7 +452,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     )
 
     wb$workbook.xml.rels <- c(wb$workbook.xml.rels, sprintf(
-      '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink" Target="externalLinks/externalLink1.xml"/>',
+      '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink" Target="externalLinks/externalLink%s.xml"/>',
       seq_along(extLinksXML)
     ))
   }

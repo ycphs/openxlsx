@@ -8,6 +8,7 @@ context("Read Sources")
 
 
 test_that("read.xlsx from different sources", {
+  skip_if_offline()
 
   ## URL
   xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
@@ -34,6 +35,7 @@ test_that("read.xlsx from different sources", {
 
 
 test_that("loadWorkbook from different sources", {
+  skip_if_offline()
 
   ## URL
   xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
@@ -50,6 +52,7 @@ test_that("loadWorkbook from different sources", {
 
 
 test_that("getDateOrigin from different sources", {
+  skip_if_offline()
 
   ## URL
   xlsxFile <- "https://github.com/ycphs/openxlsx/raw/master/inst/extdata/readTest.xlsx"
