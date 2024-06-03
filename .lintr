@@ -10,8 +10,6 @@ linters: linters_with_defaults(
   function_left_parentheses_linter = NULL, #
   spaces_inside_linter = NULL,             #
   spaces_left_parentheses_linter = NULL,   #
-  no_tab_linter = NULL,                    #
-  single_quotes_linter = NULL,             #
   object_length_linter = NULL,             #
   assignment_linter = NULL                 # just one case
   )
