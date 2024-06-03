@@ -51,6 +51,7 @@ Imports:
     utils,
     zip
 Suggests:
+    curl,
     knitr,
     rmarkdown,
     testthat
