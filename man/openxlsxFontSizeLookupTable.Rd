@@ -16,4 +16,8 @@ openxlsxFontSizeLookupTableBold
 \description{
 Lookup tables for font size
 }
+\examples{
+data(openxlsxFontSizeLookupTable)
+data(openxlsxFontSizeLookupTableBold)
+}
 \keyword{datasets}

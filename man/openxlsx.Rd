@@ -2,6 +2,7 @@
 % Please edit documentation in R/openxlsx.R
 \docType{package}
 \name{openxlsx}
+\alias{openxlsx-package}
 \alias{openxlsx}
 \title{xlsx reading, writing and editing.}
 \description{
@@ -50,4 +51,22 @@ Additional options
 \item{\code{\link[=op.openxlsx]{op.openxlsx()}}}
 }
 for examples
+}
+\author{
+\strong{Maintainer}: Philipp Schauberger \email{philipp@schauberger.co.at}
+
+Authors:
+\itemize{
+  \item Alexander Walker \email{Alexander.Walker1989@gmail.com}
+}
+
+Other contributors:
+\itemize{
+  \item Luca Braglia [contributor]
+  \item Joshua Sturm [contributor]
+  \item Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de} [contributor]
+  \item Jordan Mark Barbone \email{jmbarbone@gmail.com} (\href{https://orcid.org/0000-0001-9788-3628}{ORCID}) [contributor]
+  \item David Zimmermann \email{david_j_zimmermann@hotmail.com} [contributor]
+}
+
 }
