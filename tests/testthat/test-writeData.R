@@ -41,7 +41,7 @@ test_that("as.character.formula() works [312]", {
   form <- y ~ x1 * x2 + x3
   expect_identical(
     as.character.default(form),
-    openxlsx::as.character.formula(form)
+    openxlsx:::as.character.formula(form)
   )
   
   skip_if_not_installed(

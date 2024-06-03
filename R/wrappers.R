@@ -1754,7 +1754,7 @@ getStyles <- function(wb) {
 #' saveWorkbook(wb, "removeWorksheetExample.xlsx", overwrite = TRUE)
 #' }
 removeWorksheet <- function(wb, sheet) {
-  if (class(wb) != "Workbook") {
+  if (!inherits(wb, "Workbook")) {
     stop("wb must be a Workbook object!")
   }
 
