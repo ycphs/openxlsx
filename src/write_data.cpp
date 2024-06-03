@@ -103,7 +103,7 @@ IntegerVector build_cell_types_integer(CharacterVector classes, int n_rows){
 
   for(size_t i = 0; i < n_cols; i++){
     
-    if((classes[i] == "numeric") | (classes[i] == "integer") | (classes[i] == "raw") ){
+    if((classes[i] == "numeric") || (classes[i] == "integer") || (classes[i] == "raw") ){
       col_t[i] = 0; 
     }else if(classes[i] == "character"){
       col_t[i] = 1; 
@@ -134,7 +134,7 @@ CharacterVector buildCellTypes(CharacterVector classes, int nRows){
   CharacterVector colLabels(nCols);
   for(int i=0; i < nCols; i++){
     
-    if((classes[i] == "numeric") | (classes[i] == "integer") | (classes[i] == "raw") ){
+    if((classes[i] == "numeric") || (classes[i] == "integer") || (classes[i] == "raw") ){
       colLabels[i] = "n"; 
     }else if(classes[i] == "character"){
       colLabels[i] = "s"; 
@@ -195,7 +195,7 @@ List build_cell_merges(List comps){
     for(size_t j = 0; j < ck; j++){
       for(size_t k = 0; k < rk; k++){
         char name[30];
-        sprintf(&(name[0]), "%d-%d", r[k], v[j]);
+        snprintf(&(name[0]), sizeof(name), "%d-%d", r[k], v[j]);
         M(ind) = name;
         ind++;
       }
