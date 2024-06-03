@@ -19,3 +19,4 @@ docs/
 openxlsx.Rcheck/
 openxlsx*.tar.gz
 openxlsx*.tgz
+vignettes/*
