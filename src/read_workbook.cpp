@@ -500,7 +500,10 @@ SEXP read_workbook(IntegerVector cols_in,
   
   bool has_strings = true;
   IntegerVector st_inds0 (1);
-  st_inds0[0] = string_inds[0];
+  
+  if (string_inds.size()) 
+    st_inds0[0] = string_inds[0];
+  
   if(is_true(all(is_na(st_inds0))))
     has_strings = false;
   
