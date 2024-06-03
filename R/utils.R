@@ -22,6 +22,13 @@ is_true_false <- function(x) {
   is.logical(x) && length(x) == 1L && !is.na(x)
 }
 
+pair_rc <- function(r, c) {
+  # Assumes that there can't be more than 10M columns
+  # Excel allows 16,384
+  # Google Sheets allows 18,278
+  r+c*1e-7
+}
+
 do_call_params <- function(fun, params, ..., .map = FALSE) {
   fun <- match.fun(fun)
   call_params <- c(list(...), params[names(params) %in% names(formals(fun))])

@@ -4455,7 +4455,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     stop("First argument must be a Workbook.")
   }
 
-  if (any(cols) < 1L) {
+  if (any(cols < 1L)) {
     stop("Invalid columns selected (<= 0).")
   }
 
@@ -4612,7 +4612,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
   }
 
-  if (any(rows) < 1L) {
+  if (any(rows < 1L)) {
     stop("Invalid rows entered (<= 0).")
   }
 
