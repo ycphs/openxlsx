@@ -37,7 +37,7 @@ Set document headers and footers
 }
 \details{
 Headers and footers can contain special tags
-\itemize{
+\describe{
 \item{\strong{&[Page]}}{ Page number}
 \item{\strong{&[Pages]}}{ Number of pages}
 \item{\strong{&[Date]}}{ Current date}

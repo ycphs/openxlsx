@@ -207,11 +207,11 @@ int2col <- function(x) {
 #' @examples
 #' col2int(LETTERS)
 col2int <- function(x) {
-  
+
   if (!is.character(x)) {
     stop("x must be character")
   }
-  
+
   as.integer(sapply(x, cell_ref_to_col))
 }
 
@@ -305,7 +305,7 @@ sheets <- function(wb) {
 #' @param hdpi Horizontal DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.hdpi" = X)
 #' @param vdpi Vertical DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.vdpi" = X)
 #' @details Headers and footers can contain special tags
-#' \itemize{
+#' \describe{
 #'   \item{**&\[Page\]**}{ Page number}
 #'   \item{**&\[Pages\]**}{ Number of pages}
 #'   \item{**&\[Date\]**}{ Current date}
@@ -638,13 +638,13 @@ convertFromExcelRef <- function(col) {
 #'   \item{**FRACTION**}
 #'   \item{**SCIENTIFIC**}
 #'   \item{**TEXT**}
-#'   \item{**COMMA**{  for comma separated thousands}}
+#'   \item{**COMMA**  for comma separated thousands}
 #'   \item{For date/datetime styling a combination of d, m, y and punctuation marks}
 #'   \item{For numeric rounding use "0.00" with the preferred number of decimal places}
 #' }
 #'
 #' @param border Cell border. A vector of "top", "bottom", "left", "right" or a single string).
-#' \itemize{
+#' \describe{
 #'    \item{**"top"**}{ Top border}
 #'    \item{**bottom**}{ Bottom border}
 #'    \item{**left**}{ Left border}
@@ -659,7 +659,7 @@ convertFromExcelRef <- function(col) {
 #' A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 #'
 #' @param borderStyle Border line style vector the same length as the number of sides specified in "border"
-#' \itemize{
+#' \describe{
 #'    \item{**none**}{ No Border}
 #'    \item{**thin**}{ thin border}
 #'    \item{**medium**}{ medium border}
@@ -684,7 +684,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param halign
 #' Horizontal alignment of cell contents
-#' \itemize{
+#' \describe{
 #'    \item{**left**}{ Left horizontal align cell contents}
 #'    \item{**right**}{ Right horizontal align cell contents}
 #'    \item{**center**}{ Center horizontal align cell contents}
@@ -693,7 +693,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param valign A name
 #' Vertical alignment of cell contents
-#' \itemize{
+#' \describe{
 #'    \item{**top**}{ Top vertical align cell contents}
 #'    \item{**center**}{ Center vertical align cell contents}
 #'    \item{**bottom**}{ Bottom vertical align cell contents}
@@ -701,7 +701,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param textDecoration
 #' Text styling.
-#' \itemize{
+#' \describe{
 #'    \item{**bold**}{ Bold cell contents}
 #'    \item{**strikeout**}{ Strikeout cell contents}
 #'    \item{**italic**}{ Italicise cell contents}
@@ -1817,10 +1817,10 @@ deleteData <- function(wb, sheet, cols, rows, gridExpand = FALSE) {
 #' @param col A column to delete
 #' @export
 #' @examples
-#' ## write some data 
+#' ## write some data
 #' wb <- createWorkbook()
 #' addWorksheet(wb, "tester")
-#' 
+#'
 #' for (i in seq(5)) {
 #'   mat <- data.frame(x = rep(paste0(int2col(i), i), 10))
 #'   writeData(wb, sheet = 1, startRow = 1, startCol = i, mat)
@@ -2003,7 +2003,7 @@ getBaseFont <- function(wb) {
 #' @param firstHeader document header for first page only.
 #' @param firstFooter document footer for first page only.
 #' @details Headers and footers can contain special tags
-#' \itemize{
+#' \describe{
 #'   \item{**&\[Page\]**}{ Page number}
 #'   \item{**&\[Pages\]**}{ Number of pages}
 #'   \item{**&\[Date\]**}{ Current date}
@@ -2159,7 +2159,7 @@ setHeaderFooter <- function(wb, sheet,
 #' @export
 #' @details
 #' paperSize is an integer corresponding to:
-#' \itemize{
+#' \describe{
 #' \item{**1**}{ Letter paper (8.5 in. by 11 in.)}
 #' \item{**2**}{ Letter small paper (8.5 in. by 11 in.)}
 #' \item{**3**}{ Tabloid paper (11 in. by 17 in.)}
@@ -2804,7 +2804,7 @@ names.Workbook <- function(x) {
 #' @param cols Numeric vector specifying columns to include in region
 #' @param name Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.
 #' @param overwrite Boolean. Overwrite if exists ? Default to FALSE
-#' 
+#'
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
 #' @export
 #' @seealso [getNamedRegions()]
@@ -2838,7 +2838,7 @@ names.Workbook <- function(x) {
 #' ## delete one
 #' deleteNamedRegion(wb = wb, name = "iris2")
 #' getNamedRegions(wb)
-#' 
+#'
 #' ## read named regions
 #' df <- read.xlsx(wb, namedRegion = "iris")
 #' head(df)
@@ -2846,7 +2846,7 @@ names.Workbook <- function(x) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
-#' 
+#'
 #' @rdname NamedRegion
 createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   op <- get_set_options()
@@ -2876,12 +2876,12 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
     stop(sprintf("Named region with name '%s' already exists! Use overwrite  = TRUE if you want to replace it", name))
   } else if (tolower(name) %in% ex_names & overwrite) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
-  }  
-  
+  }
+
   if (grepl("^[A-Z]{1,3}[0-9]+$", name)) {
     stop("name cannot look like a cell reference.")
   }
-  
+
   cols <- round(cols)
   rows <- round(rows)
 
@@ -2903,20 +2903,20 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
 #' @export
 #' @rdname NamedRegion
 deleteNamedRegion <- function(wb, name) {
-  
+
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
   }
-  
+
   ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
   ex_names <- tolower(replaceXMLEntities(ex_names))
-  
+
   if (tolower(name) %in% ex_names) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   } else {
     warning(sprintf("Cannot find Named region with name '%s'", name))
   }
-  
+
   invisible(0)
 }
 
@@ -2963,7 +2963,7 @@ deleteNamedRegion <- function(wb, name) {
 #' df <- read.xlsx(out_file, namedRegion = "iris2")
 #' head(df)
 #' }
-#' 
+#'
 getNamedRegions <- function(x) {
   UseMethod("getNamedRegions", x)
 }
