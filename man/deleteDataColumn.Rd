@@ -17,7 +17,7 @@ deleteDataColumn(wb, sheet, col)
 Deletes the whole column from a workbook, shifting the remaining columns to the left
 }
 \examples{
-## write some data 
+## write some data
 wb <- createWorkbook()
 addWorksheet(wb, "tester")
 

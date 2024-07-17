@@ -22,9 +22,9 @@
 #' a surrounding border is drawn with a border around each row. If
 #' "`columns`", a surrounding border is drawn with a border between
 #' each column. If "`all`" all cell borders are drawn.
-#' @param borderColour Colour of cell border.  A valid colour (belonging to `colours()` or a hex colour code, eg see [here](https://www.w3schools.com/web-design/color-picker/)).
+#' @param borderColour Colour of cell border.  A valid colour (belonging to `colours()` or a hex colour code, eg see [here](https://www.w3schools.com/colors/colors_picker.asp)).
 #' @param borderStyle Border line style
-#' \itemize{
+#' \describe{
 #'    \item{**none**}{ no border}
 #'    \item{**thin**}{ thin border}
 #'    \item{**medium**}{ medium border}
@@ -180,20 +180,20 @@ writeData <- function(
 ) {
 
   x <- force(x)
-  
+
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
-  
+
   if (!missing(row.names)) {
     warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
     rowNames <- row.names
   }
-  
+
   if (!missing(col.names)) {
     warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
     colNames <- col.names
   }
-  
+
   # Set NULLs
   borders      <- borders      %||% "none"
   borderColour <- borderColour %||% "black"
@@ -220,7 +220,7 @@ writeData <- function(
   }
 
   startRow <- as.integer(startRow)
-  
+
   assert_class(wb, "Workbook")
   assert_true_false(colNames)
   assert_true_false(rowNames)
@@ -311,7 +311,7 @@ writeData <- function(
       x = c(startRow, startRow + nRow + colNames - 1L),
       y = c(startCol, startCol + nCol - 1L)
     )
-    
+
     ref <- stri_join(getCellRefs(coords), collapse = ":")
     wb$worksheets[[sheetX]]$autoFilter <- sprintf('<autoFilter ref="%s"/>', ref)
     l <- convert_to_excel_ref(cols = unlist(coords[, 2]), LETTERS = LETTERS)
@@ -347,7 +347,7 @@ writeData <- function(
   if (inherits(headerStyle, "Style") & colNames) {
     addStyle(
       wb         = wb,
-      sheet      = sheet, 
+      sheet      = sheet,
       style      = headerStyle,
       rows       = startRow,
       cols       = 0:(nCol - 1) + startCol,
@@ -525,7 +525,7 @@ writeFormula <- function(
   array = FALSE,
   xy = NULL
 ) {
-  
+
   if (!is.character(x)) {
     stop("x must be a character vector.")
   }
@@ -556,7 +556,7 @@ writeFormula <- function(
 #'
 #' This function exists to prevent conflicts with `as.character.formula` methods
 #' from other packages
-#' 
+#'
 #' @inheritParams base::as.character
 #' @param ... Not implemented
 #' @returns `base::as.character.default(x)`

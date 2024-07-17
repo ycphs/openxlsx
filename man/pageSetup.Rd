@@ -64,7 +64,7 @@ Set page margins, orientation and print scaling
 }
 \details{
 paperSize is an integer corresponding to:
-\itemize{
+\describe{
 \item{\strong{1}}{ Letter paper (8.5 in. by 11 in.)}
 \item{\strong{2}}{ Letter small paper (8.5 in. by 11 in.)}
 \item{\strong{3}}{ Tabloid paper (11 in. by 17 in.)}
