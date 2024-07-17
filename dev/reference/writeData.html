@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.5.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.5.9002</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -44,20 +44,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/ycphs/openxlsx/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Write an object to a worksheet</h1>
-    <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/HEAD/R/writeData.R" class="external-link"><code>R/writeData.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/ycphs/openxlsx/blob/master/R/writeData.R" class="external-link"><code>R/writeData.R</code></a></small>
     <div class="hidden name"><code>writeData.Rd</code></div>
     </div>
 
@@ -92,49 +92,51 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>wb</dt>
+
+
+<dl><dt id="arg-wb">wb<a class="anchor" aria-label="anchor" href="#arg-wb"></a></dt>
 <dd><p>A Workbook object containing a worksheet.</p></dd>
 
 
-<dt>sheet</dt>
+<dt id="arg-sheet">sheet<a class="anchor" aria-label="anchor" href="#arg-sheet"></a></dt>
 <dd><p>The worksheet to write to. Can be the worksheet index or name.</p></dd>
 
 
-<dt>x</dt>
+<dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>Object to be written. For classes supported look at the examples.</p></dd>
 
 
-<dt>startCol</dt>
+<dt id="arg-startcol">startCol<a class="anchor" aria-label="anchor" href="#arg-startcol"></a></dt>
 <dd><p>A vector specifying the starting column to write to.</p></dd>
 
 
-<dt>startRow</dt>
+<dt id="arg-startrow">startRow<a class="anchor" aria-label="anchor" href="#arg-startrow"></a></dt>
 <dd><p>A vector specifying the starting row to write to.</p></dd>
 
 
-<dt>array</dt>
+<dt id="arg-array">array<a class="anchor" aria-label="anchor" href="#arg-array"></a></dt>
 <dd><p>A bool if the function written is of type array</p></dd>
 
 
-<dt>xy</dt>
+<dt id="arg-xy">xy<a class="anchor" aria-label="anchor" href="#arg-xy"></a></dt>
 <dd><p>An alternative to specifying <code>startCol</code> and
 <code>startRow</code> individually.  A vector of the form
 <code>c(startCol, startRow)</code>.</p></dd>
 
 
-<dt>colNames</dt>
+<dt id="arg-colnames">colNames<a class="anchor" aria-label="anchor" href="#arg-colnames"></a></dt>
 <dd><p>If <code>TRUE</code>, column names of x are written.</p></dd>
 
 
-<dt>rowNames</dt>
+<dt id="arg-rownames">rowNames<a class="anchor" aria-label="anchor" href="#arg-rownames"></a></dt>
 <dd><p>If <code>TRUE</code>, data.frame row names of x are written.</p></dd>
 
 
-<dt>headerStyle</dt>
+<dt id="arg-headerstyle">headerStyle<a class="anchor" aria-label="anchor" href="#arg-headerstyle"></a></dt>
 <dd><p>Custom style to apply to column names.</p></dd>
 
 
-<dt>borders</dt>
+<dt id="arg-borders">borders<a class="anchor" aria-label="anchor" href="#arg-borders"></a></dt>
 <dd><p>Either "<code>none</code>" (default), "<code>surrounding</code>",
 "<code>columns</code>", "<code>rows</code>" or <em>respective abbreviations</em>.  If
 "<code>surrounding</code>", a border is drawn around the data.  If "<code>rows</code>",
@@ -143,57 +145,84 @@ a surrounding border is drawn with a border around each row. If
 each column. If "<code>all</code>" all cell borders are drawn.</p></dd>
 
 
-<dt>borderColour</dt>
-<dd><p>Colour of cell border.  A valid colour (belonging to <code><a href="https://rdrr.io/r/grDevices/colors.html" class="external-link">colours()</a></code> or a hex colour code, eg see <a href="https://www.w3schools.com/web-design/color-picker/" class="external-link">here</a>).</p></dd>
+<dt id="arg-bordercolour">borderColour<a class="anchor" aria-label="anchor" href="#arg-bordercolour"></a></dt>
+<dd><p>Colour of cell border.  A valid colour (belonging to <code><a href="https://rdrr.io/r/grDevices/colors.html" class="external-link">colours()</a></code> or a hex colour code, eg see <a href="https://www.w3schools.com/colors/colors_picker.asp" class="external-link">here</a>).</p></dd>
 
 
-<dt>borderStyle</dt>
-<dd><p>Border line style</p><ul><li><p><strong>none</strong> no border</p></li>
-<li><p><strong>thin</strong> thin border</p></li>
-<li><p><strong>medium</strong> medium border</p></li>
-<li><p><strong>dashed</strong> dashed border</p></li>
-<li><p><strong>dotted</strong> dotted border</p></li>
-<li><p><strong>thick</strong> thick border</p></li>
-<li><p><strong>double</strong> double line border</p></li>
-<li><p><strong>hair</strong> hairline border</p></li>
-<li><p><strong>mediumDashed</strong> medium weight dashed border</p></li>
-<li><p><strong>dashDot</strong> dash-dot border</p></li>
-<li><p><strong>mediumDashDot</strong> medium weight dash-dot border</p></li>
-<li><p><strong>dashDotDot</strong> dash-dot-dot border</p></li>
-<li><p><strong>mediumDashDotDot</strong> medium weight dash-dot-dot border</p></li>
-<li><p><strong>slantDashDot</strong> slanted dash-dot border</p></li>
-</ul></dd>
+<dt id="arg-borderstyle">borderStyle<a class="anchor" aria-label="anchor" href="#arg-borderstyle"></a></dt>
+<dd><p>Border line style</p><dl><dt><strong>none</strong></dt>
+<dd><p>no border</p></dd>
+
+<dt><strong>thin</strong></dt>
+<dd><p>thin border</p></dd>
+
+<dt><strong>medium</strong></dt>
+<dd><p>medium border</p></dd>
+
+<dt><strong>dashed</strong></dt>
+<dd><p>dashed border</p></dd>
+
+<dt><strong>dotted</strong></dt>
+<dd><p>dotted border</p></dd>
+
+<dt><strong>thick</strong></dt>
+<dd><p>thick border</p></dd>
+
+<dt><strong>double</strong></dt>
+<dd><p>double line border</p></dd>
+
+<dt><strong>hair</strong></dt>
+<dd><p>hairline border</p></dd>
+
+<dt><strong>mediumDashed</strong></dt>
+<dd><p>medium weight dashed border</p></dd>
+
+<dt><strong>dashDot</strong></dt>
+<dd><p>dash-dot border</p></dd>
+
+<dt><strong>mediumDashDot</strong></dt>
+<dd><p>medium weight dash-dot border</p></dd>
+
+<dt><strong>dashDotDot</strong></dt>
+<dd><p>dash-dot-dot border</p></dd>
+
+<dt><strong>mediumDashDotDot</strong></dt>
+<dd><p>medium weight dash-dot-dot border</p></dd>
+
+<dt><strong>slantDashDot</strong></dt>
+<dd><p>slanted dash-dot border</p></dd>
 
 
-<dt>withFilter</dt>
+</dl></dd>
+
+
+<dt id="arg-withfilter">withFilter<a class="anchor" aria-label="anchor" href="#arg-withfilter"></a></dt>
 <dd><p>If <code>TRUE</code> or <code>NA</code>, add filters to the column name row. NOTE can only have one filter per worksheet.</p></dd>
 
 
-<dt>keepNA</dt>
+<dt id="arg-keepna">keepNA<a class="anchor" aria-label="anchor" href="#arg-keepna"></a></dt>
 <dd><p>If <code>TRUE</code>, NA values are converted to #N/A (or <code>na.string</code>, if not NULL) in Excel, else NA cells will be empty.</p></dd>
 
 
-<dt>na.string</dt>
+<dt id="arg-na-string">na.string<a class="anchor" aria-label="anchor" href="#arg-na-string"></a></dt>
 <dd><p>If not NULL, and if <code>keepNA</code> is <code>TRUE</code>, NA values are converted to this string in Excel.</p></dd>
 
 
-<dt>name</dt>
+<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>If not NULL, a named region is defined.</p></dd>
 
 
-<dt>sep</dt>
+<dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
 <dd><p>Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).</p></dd>
 
 
-<dt>row.names, col.names</dt>
+<dt id="arg-row-names-col-names">row.names, col.names<a class="anchor" aria-label="anchor" href="#arg-row-names-col-names"></a></dt>
 <dd><p>Deprecated, please use <code>rowNames</code>, <code>colNames</code> instead</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>invisible(0)</p>
+    <p>invisible(0)</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -312,9 +341,9 @@ This is because only the formula is written and left to Excel to evaluate the fo
 <span class="r-in"><span><span class="co">#####################################################################################</span></span></span>
 <span class="r-in"><span><span class="co">## Save workbook</span></span></span>
 <span class="r-in"><span><span class="co">## Open in excel without saving file: openXL(wb)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"writeDataExample.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -329,15 +358,15 @@ This is because only the formula is written and left to Excel to evaluate the fo
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
