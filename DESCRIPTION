@@ -1,12 +1,12 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.5.9002
-Date: 2024-07-17
+Version: 4.2.6
+Date: 2024-07-20
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "philipp@schauberger.co.at"),
       person(given = "Alexander",
              family = "Walker",
@@ -20,7 +20,7 @@ Authors@R:
              role = "ctb"),
       person(given = "Jan Marvin",
              family = "Garbuszus",
-             role = "ctb",
+             role = c("ctb", "cre"),
              email = "jan.garbuszus@ruhr-uni-bochum.de"),
       person(given = "Jordan Mark",
              family = "Barbone",
