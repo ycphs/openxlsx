@@ -1,5 +1,7 @@
-# openxlsx (development version)
+# openxlsx 4.2.6
 
+* Fix external links ([#410](https://github.com/ycphs/openxlsx/pull/410))
+* Do not add unneccessary sheetPr node ([#409](https://github.com/ycphs/openxlsx/pull/409))
 * Add support for `namedRegion`s having dots and other special characters ([#338](https://github.com/ycphs/openxlsx/issues/338)).
 * Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
 
