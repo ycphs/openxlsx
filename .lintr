@@ -11,5 +11,13 @@ linters: linters_with_defaults(
   spaces_inside_linter = NULL,             #
   spaces_left_parentheses_linter = NULL,   #
   object_length_linter = NULL,             #
-  assignment_linter = NULL                 # just one case
+  assignment_linter = NULL,                # just one case
+  vector_logic_linter = NULL,              # many
+  indentation_linter = NULL,               # many
+  quotes_linter = NULL,
+  T_and_F_symbol_linter = NULL,
+  seq_linter = NULL,
+  trailing_blank_lines_linter = NULL,
+  paren_body_linter = NULL,
+  semicolon_linter = NULL
   )

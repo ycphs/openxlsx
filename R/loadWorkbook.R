@@ -851,7 +851,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
 
 
             wb$comments[[i]] <- lapply(seq_along(comments), function(j) {
-              comment_list <- list(
+              list(
                 "ref" = refs[j],
                 "author" = authors[j],
                 "comment" = comments[[j]],
