@@ -387,7 +387,7 @@ addWorksheet <- function(wb,
   }
 
   if (!inherits(wb, "Workbook")) {
-    stop("wb must be a Workbook", call. = FALSE)
+    stop("wb must be a Workbok", call. = FALSE)
   }
 
   # Set NULL defaults
@@ -1848,7 +1848,6 @@ deleteDataColumn <- function(wb, sheet, col) {
     forms <- stringi::stri_split(xx, regex = "\\b(?=[A-Z]+\\d+)")
 
     x[has_formula] <- sapply(forms, function(form) {
-      cols_to_decrease <- form[-1]
       cols <- openxlsx::col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
       repl <- ifelse(cols == col, "#REF!",
                      ifelse(cols > col,
