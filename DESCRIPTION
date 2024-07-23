@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.6
-Date: 2024-07-20
+Version: 4.2.6.1
+Date: 2024-07-23
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -52,6 +52,7 @@ Imports:
     zip
 Suggests:
     curl,
+    formula.tools,
     knitr,
     rmarkdown,
     testthat
