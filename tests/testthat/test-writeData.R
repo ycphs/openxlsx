@@ -44,10 +44,8 @@ test_that("as.character.formula() works [312]", {
     openxlsx:::as.character.formula(form)
   )
   
-  skip_if_not_installed(
-    "formula.tools",
-    "tests specifically for as.character.formula conflict"
-  )
+  skip_if_not_installed("formula.tools")
+  # "tests specifically for as.character.formula conflict"
   
   foo <- function() {
     wb <- openxlsx::buildWorkbook(
@@ -69,4 +67,3 @@ test_that("as.character.formula() works [312]", {
   expect_identical(before, middle, ignore.environment = TRUE)
   expect_identical(before, end,    ignore.environment = TRUE)
 })
-
