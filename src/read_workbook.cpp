@@ -536,12 +536,12 @@ SEXP read_workbook(IntegerVector cols_in,
   CharacterVector col_names(nCols);
   IntegerVector removeFlag;
   int pos = 0;
+  char name[7];
   
   // If we are told col_names exist take the first row and fill any gaps with X.i
   if(hasColNames){
     
     int row_1 = rows[0];
-    char name[6];
     
     IntegerVector row1_inds = which_cpp(rows == row_1);
     IntegerVector header_cols = cols[row1_inds];
@@ -552,21 +552,14 @@ SEXP read_workbook(IntegerVector cols_in,
     for(unsigned short i=0; i < nCols; i++){
       
       if(missing_header[i]){  // a missing header element
-        snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-        // sprintf(&(name[0]), "X%u", i+1);
-        // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-        // snprintf(&(name[0]), 10, "X%d", i+1);
+        snprintf(&(name[0]), sizeof(name), "X%hu", (unsigned short)(i + 1));
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-          
-          // sprintf(&(name[0]), "X%du", i+1);
-          // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-          // snprintf(&(name[0]), 10, "X%d", i+1);
+          snprintf(&(name[0]), sizeof(name), "X%hu", (unsigned short)(i + 1));
           col_names[i] = name;
         }
         
@@ -621,12 +614,8 @@ SEXP read_workbook(IntegerVector cols_in,
     
     
   }else{ // else col_names is FALSE
-    char name[6];
-    for(int i =0; i < nCols; i++){
-      snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-      
-       // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-      // sprintf(&(name[0]), "X%u", i+1);
+    for(unsigned short i =0; i < nCols; i++){
+      snprintf(&(name[0]), sizeof(name), "X%hu", (unsigned short)(i + 1));
       col_names[i] = name;
     }
   }
