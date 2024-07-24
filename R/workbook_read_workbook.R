@@ -320,7 +320,7 @@ read.xlsx.Workbook <- function(xlsxFile,
     if (length(sO) > 0) {
       style_rows <- unlist(lapply(sO, "[[", "rows"))
       style_cols <- unlist(lapply(sO, "[[", "cols"))
-      isDate <- paste(rows, cols, sep = ",") %in% paste(style_rows, style_cols, sep = ",")
+      isDate <- pair_rc(rows, cols) %in% pair_rc(style_rows, style_cols)
 
       ## check numbers are also integers
       not_an_integer <- suppressWarnings(as.numeric(v[isDate]))
