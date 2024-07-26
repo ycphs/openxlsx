@@ -201,9 +201,8 @@ read.xlsx.default <- function(
       # name, the name will be "'sheet 1'" instead of "sheet 1.
       dn_sheetNames[wsp] <- gsub("^'+|'+$", "\\1", dn_sheetNames[wsp])
     }
-    
     # namedRegion in between 'name="' and '"'
-    dn_namedRegion <- gsub(".*name=\"(\\w+)\".*", "\\1", dn)
+    dn_namedRegion <- gsub(".*name=\"([[:graph:]_]+)\".*", "\\1", dn)
     
     if (length(dn) == 0) {
       warning("Workbook has no named region.")

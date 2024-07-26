@@ -376,7 +376,7 @@ conditionalFormatting <-
         stop("If type == 'colourScale', style must be a vector of colours of length 2 or 3.")
       }
 
-      if (class(style) != "character") {
+      if (!inherits(style, "character")) {
         stop("If type == 'colourScale', style must be a vector of colours of length 2 or 3.")
       }
 
@@ -404,7 +404,7 @@ conditionalFormatting <-
         style <- "#638EC6"
       }
 
-      if (class(style) != "character") {
+      if (!inherits(style, "character")) {
         stop("If type == 'dataBar', style must be a vector of colours of length 1 or 2.")
       }
 

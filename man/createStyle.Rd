@@ -48,13 +48,13 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
 \item{\strong{FRACTION}}
 \item{\strong{SCIENTIFIC}}
 \item{\strong{TEXT}}
-\item{\strong{COMMA}{  for comma separated thousands}}
+\item{\strong{COMMA}  for comma separated thousands}
 \item{For date/datetime styling a combination of d, m, y and punctuation marks}
 \item{For numeric rounding use "0.00" with the preferred number of decimal places}
 }}
 
 \item{border}{Cell border. A vector of "top", "bottom", "left", "right" or a single string).
-\itemize{
+\describe{
 \item{\strong{"top"}}{ Top border}
 \item{\strong{bottom}}{ Bottom border}
 \item{\strong{left}}{ Left border}
@@ -69,7 +69,7 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#"}
 
 \item{borderStyle}{Border line style vector the same length as the number of sides specified in "border"
-\itemize{
+\describe{
 \item{\strong{none}}{ No Border}
 \item{\strong{thin}}{ thin border}
 \item{\strong{medium}}{ medium border}
@@ -94,7 +94,7 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 A valid colour (belonging to colours()) or a valid hex colour beginning with "#"}
 
 \item{halign}{Horizontal alignment of cell contents
-\itemize{
+\describe{
 \item{\strong{left}}{ Left horizontal align cell contents}
 \item{\strong{right}}{ Right horizontal align cell contents}
 \item{\strong{center}}{ Center horizontal align cell contents}
@@ -103,14 +103,14 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 
 \item{valign}{A name
 Vertical alignment of cell contents
-\itemize{
+\describe{
 \item{\strong{top}}{ Top vertical align cell contents}
 \item{\strong{center}}{ Center vertical align cell contents}
 \item{\strong{bottom}}{ Bottom vertical align cell contents}
 }}
 
 \item{textDecoration}{Text styling.
-\itemize{
+\describe{
 \item{\strong{bold}}{ Bold cell contents}
 \item{\strong{strikeout}}{ Strikeout cell contents}
 \item{\strong{italic}}{ Italicise cell contents}

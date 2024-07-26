@@ -8,6 +8,17 @@
 
 * Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
 * Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
+
+# openxlsx 4.2.6
+
+## Fixes
+
+* Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
+
+## Improvements
+
+* Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
+* Improve detectDates ([#288](https://github.com/ycphs/openxlsx/issues/288))
 * Add type blanks and not blanks to conditional formatting ([#311](https://github.com/ycphs/openxlsx/pull/311))
 
 # openxlsx 4.2.5
@@ -22,6 +33,7 @@
 * fixed writing hyperlink formulas ([#200](https://github.com/ycphs/openxlsx/issues/200))
 * `write.xlsx()` now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
 * `write.xlsx()` now again uses the default of `overwrite = TRUE` for saving files ([#249](https://github.com/ycphs/openxlsx/issues/249))
+* `as.character.formula()` exported to warn about potential conflicts with other packages ([#312](https://github.com/ycphs/openxlsx/issues/312), [#315](https://github.com/ycphs/openxlsx/pull/315))
 
 ## Improvements
 

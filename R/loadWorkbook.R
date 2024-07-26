@@ -408,15 +408,15 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     nChartCol <- sum(grepl("colors[0-9]+.xml", chartNames))
 
     if (nCharts > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/chart%s.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>', 1:nCharts))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/chart%s.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>', seq_len(nCharts)))
     }
 
     if (nChartStyles > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/style%s.xml" ContentType="application/vnd.ms-office.chartstyle+xml"/>', 1:nChartStyles))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/style%s.xml" ContentType="application/vnd.ms-office.chartstyle+xml"/>', seq_len(nChartStyles)))
     }
 
     if (nChartCol > 0) {
-      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/colors%s.xml" ContentType="application/vnd.ms-office.chartcolorstyle+xml"/>', 1:nChartCol))
+      wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/charts/colors%s.xml" ContentType="application/vnd.ms-office.chartcolorstyle+xml"/>', seq_len(nChartCol)))
     }
 
     if (length(chartsRels)) {
@@ -449,7 +449,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
     )
 
     wb$workbook.xml.rels <- c(wb$workbook.xml.rels, sprintf(
-      '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink" Target="externalLinks/externalLink1.xml"/>',
+      '<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink" Target="externalLinks/externalLink%s.xml"/>',
       seq_along(extLinksXML)
     ))
   }
@@ -642,7 +642,11 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
       wb$Content_Types <- c(wb$Content_Types, sprintf('<Override PartName="/xl/slicerCaches/slicerCache%s.xml" ContentType="application/vnd.ms-excel.slicerCache+xml"/>', inds))
       wb$slicerCaches <- sapply(slicerCachesXML[order(nchar(slicerCachesXML), slicerCachesXML)], function(x) removeHeadTag(cppReadFile(x)))
       wb$workbook.xml.rels <- c(wb$workbook.xml.rels, sprintf('<Relationship Id="rId%s" Type="http://schemas.microsoft.com/office/2007/relationships/slicerCache" Target="slicerCaches/slicerCache%s.xml"/>', 1E5 + inds, inds))
-      wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
+      
+      if (!grepl("slicerCaches", wb$workbook$extLst))
+        wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
+      else
+        wb$workbook$extLst <- genSlicerCachesExtLst(1E5 + inds)
     }
 
 

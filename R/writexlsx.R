@@ -60,6 +60,9 @@
 #'
 #' @export
 write.xlsx <- function(x, file, asTable = FALSE, overwrite = TRUE, ...) {
+  if ("matrix" %in% class(x)){
+    x <- as.data.frame(x)
+  }
   wb <- buildWorkbook(x, asTable = asTable, ...)
   saveWorkbook(wb, file = file, overwrite = overwrite)
   invisible(wb)

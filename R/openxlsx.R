@@ -53,7 +53,7 @@
 #' Additional options
 #'
 #'
- NULL
+ "_PACKAGE"
 
 #' openxlsx Options
 #' 

@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+.DS_Store
 src/*.o
 src/*.so
 src/*.dll
@@ -19,3 +20,4 @@ docs/
 openxlsx.Rcheck/
 openxlsx*.tar.gz
 openxlsx*.tgz
+vignettes/*

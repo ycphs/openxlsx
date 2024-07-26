@@ -30,12 +30,12 @@ write a data.frame or list of data.frames to an xlsx file
 
 
 \strong{createWorkbook Parameters}
-\itemize{
+\describe{
 \item{\strong{creator}}{ A string specifying the workbook author}
 }
 
 \strong{addWorksheet Parameters}
-\itemize{
+\describe{
 \item{\strong{sheetName}}{ Name of the worksheet}
 \item{\strong{gridLines}}{ A logical. If \code{FALSE}, the worksheet grid lines will be hidden.}
 \item{\strong{tabColour}}{ Colour of the worksheet tab. A valid colour (belonging to colours())
@@ -44,7 +44,7 @@ or a valid hex colour beginning with "#".}
 }
 
 \strong{writeData/writeDataTable Parameters}
-\itemize{
+\describe{
 \item{\strong{startCol}}{ A vector specifying the starting column(s) to write df}
 \item{\strong{startRow}}{ A vector specifying the starting row(s) to write df}
 \item{\strong{xy}}{ An alternative to specifying startCol and startRow individually.
@@ -57,21 +57,21 @@ data.  If "rows", a surrounding border is drawn a border around each row. If "co
 between each column.  If "\code{all}" all cell borders are drawn.}
 \item{\strong{borderColour}}{ Colour of cell border}
 \item{\strong{borderStyle}}{ Border line style.}
-\item{\strong{keepNA}} {If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
-\item{\strong{na.string}} {If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel. Defaults to NULL.}
+\item{\strong{keepNA}}{If \code{TRUE}, NA values are converted to #N/A (or \code{na.string}, if not NULL) in Excel, else NA cells will be empty. Defaults to FALSE.}
+\item{\strong{na.string}}{If not NULL, and if \code{keepNA} is \code{TRUE}, NA values are converted to this string in Excel. Defaults to NULL.}
 }
 
 \strong{freezePane Parameters}
-\itemize{
-\item{\strong{firstActiveRow}} {Top row of active region to freeze pane.}
-\item{\strong{firstActiveCol}} {Furthest left column of active region to freeze pane.}
-\item{\strong{firstRow}} {If \code{TRUE}, freezes the first row (equivalent to firstActiveRow = 2)}
-\item{\strong{firstCol}} {If \code{TRUE}, freezes the first column (equivalent to firstActiveCol = 2)}
+\describe{
+\item{\strong{firstActiveRow}}{Top row of active region to freeze pane.}
+\item{\strong{firstActiveCol}}{Furthest left column of active region to freeze pane.}
+\item{\strong{firstRow}}{If \code{TRUE}, freezes the first row (equivalent to firstActiveRow = 2)}
+\item{\strong{firstCol}}{If \code{TRUE}, freezes the first column (equivalent to firstActiveCol = 2)}
 }
 
 \strong{colWidths Parameters}
-\itemize{
-\item{\strong{colWidths}} {May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
+\describe{
+\item{\strong{colWidths}}{May be a single value for all columns (or "auto"), or a list of vectors that will be recycled for each sheet (see examples)}
 }
 }
 

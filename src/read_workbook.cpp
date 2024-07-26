@@ -500,7 +500,10 @@ SEXP read_workbook(IntegerVector cols_in,
   
   bool has_strings = true;
   IntegerVector st_inds0 (1);
-  st_inds0[0] = string_inds[0];
+  
+  if (string_inds.size()) 
+    st_inds0[0] = string_inds[0];
+  
   if(is_true(all(is_na(st_inds0))))
     has_strings = false;
   
@@ -629,7 +632,7 @@ SEXP read_workbook(IntegerVector cols_in,
   // Possible there are no string_inds to begin with and value of string_inds is 0
   // Possible we have string_inds but they have now all been used up by headers
   bool allNumeric = false;
-  if((string_inds.size() == 0) | is_true(all(is_na(string_inds))))
+  if((string_inds.size() == 0) || is_true(all(is_na(string_inds))))
     allNumeric = true;
   
   if(has_date){

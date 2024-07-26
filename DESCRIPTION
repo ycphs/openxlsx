@@ -1,12 +1,12 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.5.1
-Date: 2021-12-13
+Version: 4.2.6.1.9000
+Date: 2024-07-23
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "philipp@schauberger.co.at"),
       person(given = "Alexander",
              family = "Walker",
@@ -20,7 +20,7 @@ Authors@R:
              role = "ctb"),
       person(given = "Jan Marvin",
              family = "Garbuszus",
-             role = "ctb",
+             role = c("ctb", "cre"),
              email = "jan.garbuszus@ruhr-uni-bochum.de"),
       person(given = "Jordan Mark",
              family = "Barbone",
@@ -30,7 +30,11 @@ Authors@R:
       person(given = "Reinhold",
              family = "Kainhofer",
              role = "ctb",
-             email = "reinhold@kainhofer.com"))
+             email = "reinhold@kainhofer.com"),
+      person(given = "David",
+             family = "Zimmermann",
+             role = "ctb",
+             email = "david_j_zimmermann@hotmail.com"))
 Description: Simplifies the creation of Excel .xlsx files by providing a
     high level interface to writing, styling and editing worksheets.
     Through the use of 'Rcpp', read/write times are comparable to the
@@ -51,9 +55,10 @@ Imports:
     utils,
     zip
 Suggests:
+    curl,
+    formula.tools,
     knitr,
     rmarkdown,
-    roxygen2,
     testthat
 LinkingTo: 
     Rcpp
@@ -61,7 +66,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
@@ -96,3 +101,4 @@ Collate:
     'writexlsx.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
+LazyData: true

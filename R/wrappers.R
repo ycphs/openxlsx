@@ -305,7 +305,7 @@ sheets <- function(wb) {
 #' @param hdpi Horizontal DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.hdpi" = X)
 #' @param vdpi Vertical DPI. Can be set with options("openxlsx.dpi" = X) or options("openxlsx.vdpi" = X)
 #' @details Headers and footers can contain special tags
-#' \itemize{
+#' \describe{
 #'   \item{**&\[Page\]**}{ Page number}
 #'   \item{**&\[Pages\]**}{ Number of pages}
 #'   \item{**&\[Date\]**}{ Current date}
@@ -638,13 +638,13 @@ convertFromExcelRef <- function(col) {
 #'   \item{**FRACTION**}
 #'   \item{**SCIENTIFIC**}
 #'   \item{**TEXT**}
-#'   \item{**COMMA**{  for comma separated thousands}}
+#'   \item{**COMMA**  for comma separated thousands}
 #'   \item{For date/datetime styling a combination of d, m, y and punctuation marks}
 #'   \item{For numeric rounding use "0.00" with the preferred number of decimal places}
 #' }
 #'
 #' @param border Cell border. A vector of "top", "bottom", "left", "right" or a single string).
-#' \itemize{
+#' \describe{
 #'    \item{**"top"**}{ Top border}
 #'    \item{**bottom**}{ Bottom border}
 #'    \item{**left**}{ Left border}
@@ -659,7 +659,7 @@ convertFromExcelRef <- function(col) {
 #' A valid colour (belonging to colours()) or a valid hex colour beginning with "#"
 #'
 #' @param borderStyle Border line style vector the same length as the number of sides specified in "border"
-#' \itemize{
+#' \describe{
 #'    \item{**none**}{ No Border}
 #'    \item{**thin**}{ thin border}
 #'    \item{**medium**}{ medium border}
@@ -684,7 +684,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param halign
 #' Horizontal alignment of cell contents
-#' \itemize{
+#' \describe{
 #'    \item{**left**}{ Left horizontal align cell contents}
 #'    \item{**right**}{ Right horizontal align cell contents}
 #'    \item{**center**}{ Center horizontal align cell contents}
@@ -693,7 +693,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param valign A name
 #' Vertical alignment of cell contents
-#' \itemize{
+#' \describe{
 #'    \item{**top**}{ Top vertical align cell contents}
 #'    \item{**center**}{ Center vertical align cell contents}
 #'    \item{**bottom**}{ Bottom vertical align cell contents}
@@ -701,7 +701,7 @@ convertFromExcelRef <- function(col) {
 #'
 #' @param textDecoration
 #' Text styling.
-#' \itemize{
+#' \describe{
 #'    \item{**bold**}{ Bold cell contents}
 #'    \item{**strikeout**}{ Strikeout cell contents}
 #'    \item{**italic**}{ Italicise cell contents}
@@ -1781,7 +1781,7 @@ getStyles <- function(wb) {
 #' saveWorkbook(wb, "removeWorksheetExample.xlsx", overwrite = TRUE)
 #' }
 removeWorksheet <- function(wb, sheet) {
-  if (class(wb) != "Workbook") {
+  if (!inherits(wb, "Workbook")) {
     stop("wb must be a Workbook object!")
   }
 
@@ -1830,6 +1830,124 @@ deleteData <- function(wb, sheet, cols, rows, gridExpand = FALSE) {
 
   wb$worksheets[[sheet]]$sheet_data$delete(rows_in = rows, cols_in = cols, grid_expand = gridExpand)
 
+
+  invisible(0)
+}
+
+
+#' @name deleteDataColumn
+#' @title Deletes a whole column from a workbook
+#' @description Deletes the whole column from a workbook, shifting the remaining columns to the left
+#' @author David Zimmermann
+#' @param wb A workbook object
+#' @param sheet A name or index of a worksheet
+#' @param col A column to delete
+#' @export
+#' @examples
+#' ## write some data
+#' wb <- createWorkbook()
+#' addWorksheet(wb, "tester")
+#'
+#' for (i in seq(5)) {
+#'   mat <- data.frame(x = rep(paste0(int2col(i), i), 10))
+#'   writeData(wb, sheet = 1, startRow = 1, startCol = i, mat)
+#'   writeFormula(wb, sheet = 1, startRow = 12, startCol = i,
+#'                x = sprintf("=COUNTA(%s2:%s11)", int2col(i), int2col(i)))
+#' }
+#' deleteDataColumn(wb, 1, col = 3)
+#' \dontrun{
+#' saveWorkbook(wb, "deleteDataColumnExample.xlsx", overwrite = TRUE)
+#' }
+deleteDataColumn <- function(wb, sheet, col) {
+  sheet <- wb$validateSheet(sheet)
+  if (is.character(col)) col <- col2int(col)
+
+  if (!"Workbook" %in% class(wb)) {
+    stop("First argument must be a Workbook.")
+  }
+  ## internal helper function which corrects columns > col (reduces their col ref by 1)
+  updateFormula <- function(x, col) {
+    has_formula <- !is.na(x) & stringi::stri_detect(x, regex = "[A-Z]+\\d")
+    if (!any(has_formula)) return(x)
+
+    xx <- x[has_formula]
+
+    forms <- stringi::stri_split(xx, regex = "\\b(?=[A-Z]+\\d+)")
+
+    x[has_formula] <- sapply(forms, function(form) {
+      cols <- openxlsx::col2int(stringi::stri_extract(form[-1], regex = "^[A-Z]+"))
+      repl <- ifelse(cols == col, "#REF!",
+                     ifelse(cols > col,
+                            openxlsx::int2col(cols - 1),
+                            openxlsx::int2col(cols)))
+
+      paste(c(form[[1]],
+              stringi::stri_replace(form[-1], regex = "^[A-Z]+", repl)),
+            collapse = "")
+    })
+
+    x
+  }
+
+  a <- wb$worksheets[[sheet]]$sheet_data
+
+  # check which elements to delete
+  keep <- a$cols != col
+  # if there is no column to delete, exit early
+  if (all(keep)) return(invisible(0))
+
+  # delete cols in cols "col" move higher cols one down
+  a$cols <- as.integer(a$cols[keep] - 1 * (a$cols[keep] > col))
+  a$rows <- a$rows[keep]
+
+  # reduce the shared strings pointers if they are not used anymore
+  has_t <- !is.na(a$t) & a$t == 1
+  used_shared <- a$v[has_t] # a reference to all shared strings
+  keep_t <- keep[has_t] # these shared strings are kept
+  keep_t[is.na(keep_t)] <- FALSE
+  keep_shared <- used_shared[keep_t]
+  rem_shared <- setdiff(unique(used_shared[!keep_t]), unique(keep_shared))
+  for (v in rem_shared) {
+    to_reduce <- as.numeric(keep_shared) > as.numeric(v)
+    to_reduce[is.na(to_reduce)] <- FALSE
+    if (any(to_reduce))
+      keep_shared[to_reduce] <- as.character(as.numeric(keep_shared[to_reduce]) - 1)
+  }
+  used_shared[keep_t] <- keep_shared
+  a$v[has_t] <- used_shared
+
+  a$v <- a$v[keep]
+  a$t <- a$t[keep]
+
+  a$f <- updateFormula(a$f[keep], col = col)
+  a$n_elements <- sum(keep)
+
+  if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
+
+  # remove the unneeded strings from sharedStrings
+  rv <- as.numeric(rem_shared) + 1
+  wb$sharedStrings <- wb$sharedStrings[-rv]
+  attr(wb$sharedStrings, "uniqueCount") <- length(unique(wb$sharedStrings))
+
+  # adjust styles
+  sheet_name <- wb$sheet_names[[sheet]]
+  this_sheet <- sapply(wb$styleObjects, function(o) {
+    if (!"sheet" %in% names(o)) return(FALSE)
+    o$sheet == sheet_name
+  })
+  if (!is.null(this_sheet) && any(this_sheet)) {
+    wb$styleObjects[this_sheet] <- lapply(
+      wb$styleObjects[this_sheet],
+      function(style) {
+        if (all(style$cols == col)) return(NULL) # only in this col
+        if (!any(style$cols > col)) return(style)
+        take <- style$cols != col
+        style$cols <- style$cols[take]
+        style$rows <- style$rows[take]
+        style$cols[style$cols > col] <- style$cols[style$cols > col] - 1L
+        style
+      })
+  }
 
   invisible(0)
 }
@@ -1911,7 +2029,7 @@ getBaseFont <- function(wb) {
 #' @param firstHeader document header for first page only.
 #' @param firstFooter document footer for first page only.
 #' @details Headers and footers can contain special tags
-#' \itemize{
+#' \describe{
 #'   \item{**&\[Page\]**}{ Page number}
 #'   \item{**&\[Pages\]**}{ Number of pages}
 #'   \item{**&\[Date\]**}{ Current date}
@@ -2067,7 +2185,7 @@ setHeaderFooter <- function(wb, sheet,
 #' @export
 #' @details
 #' paperSize is an integer corresponding to:
-#' \itemize{
+#' \describe{
 #' \item{**1**}{ Letter paper (8.5 in. by 11 in.)}
 #' \item{**2**}{ Letter small paper (8.5 in. by 11 in.)}
 #' \item{**3**}{ Tabloid paper (11 in. by 17 in.)}
