@@ -18,7 +18,7 @@ deleteNamedRegion(wb, name)
 
 \item{rows}{Numeric vector specifying rows to include in region}
 
-\item{name}{Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.}
+\item{name}{Name for region. A character vector of length 1. Note region names must be case-insensitive unique.}
 
 \item{overwrite}{Boolean. Overwrite if exists ? Default to FALSE}
 }

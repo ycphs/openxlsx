@@ -552,21 +552,15 @@ SEXP read_workbook(IntegerVector cols_in,
     for(unsigned short i=0; i < nCols; i++){
       
       if(missing_header[i]){  // a missing header element
-        snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-        // sprintf(&(name[0]), "X%u", i+1);
-        // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-        // snprintf(&(name[0]), 10, "X%d", i+1);
+        
+        snprintf(&(name[0]), 6, "X%hu", i+1);
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-          
-          // sprintf(&(name[0]), "X%du", i+1);
-          // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-          // snprintf(&(name[0]), 10, "X%d", i+1);
+          snprintf(&(name[0]), 6, "X%hu", i+1);
           col_names[i] = name;
         }
         
@@ -623,10 +617,7 @@ SEXP read_workbook(IntegerVector cols_in,
   }else{ // else col_names is FALSE
     char name[6];
     for(int i =0; i < nCols; i++){
-      snprintf(&(name[0]), sizeof(name), "X%hu", i+1);
-      
-       // snprintf(&(name[0]), sizeof(&(name[0])), "X%d", i+1);
-      // sprintf(&(name[0]), "X%u", i+1);
+      snprintf(&(name[0]), 6, "X%hu", i+1);
       col_names[i] = name;
     }
   }
@@ -649,8 +640,8 @@ SEXP read_workbook(IntegerVector cols_in,
       allNumeric = false;
   }
   
-  // If we have colnames some elements where used to create these -so we remove the corresponding number of elements
-  if(hasColNames & has_date)
+  // If we have colnames some elements were used to create these -so we remove the corresponding number of elements
+  if(hasColNames && has_date)
     is_date.erase(is_date.begin(), is_date.begin() + pos);
   
   

@@ -74,7 +74,7 @@ genBaseCore <- function(creator = "", title = NULL, subject = NULL, category = N
 
   core <- stri_c(core, sprintf("<dc:creator>%s</dc:creator>", replaceIllegalCharacters(creator)))
   core <- stri_c(core, sprintf("<cp:lastModifiedBy>%s</cp:lastModifiedBy>", replaceIllegalCharacters(creator)))
-  core <- stri_c(core, sprintf('<dcterms:created xsi:type="dcterms:W3CDTF">%s</dcterms:created>', format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ")))
+  core <- stri_c(core, sprintf('<dcterms:created xsi:type="dcterms:W3CDTF">%s</dcterms:created>', format(as_POSIXct_utc(Sys.time()), "%Y-%m-%dT%H:%M:%SZ")))
 
   if (!is.null(title)) {
     core <- stri_c(core, sprintf("<dc:title>%s</dc:title>", replaceIllegalCharacters(title)))

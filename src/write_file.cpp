@@ -1,5 +1,6 @@
 
 #include "openxlsx.h"
+#include <regex>
 
 
 //' @import Rcpp
@@ -197,7 +198,8 @@ SEXP buildMatrixMixed(CharacterVector v,
   for(int i = 0;i < k; i++)
     m(rowInd[i], colInd[i]) = v[i];
   
-  
+  // convert numerics to dates
+  Rcpp::Function cTD("convertToDate");
   
   // this will be the return data.frame
   List dfList(nCols); 
@@ -225,16 +227,20 @@ SEXP buildMatrixMixed(CharacterVector v,
         if(!notNAElements[ri]){
           datetmp[ri] = NA_REAL; //IF TRUE, TRUE else FALSE
         }else{
-          // dt_str = as<std::string>(m(ri,i));
           dt_str = m(ri,i);
+
           try{
-            datetmp[ri] = Rcpp::Date(atoi(dt_str.substr(5,2).c_str()), atoi(dt_str.substr(8,2).c_str()), atoi(dt_str.substr(0,4).c_str()) );
-          }catch(...) {
+            // Some values are incorrectly detected as dates. This regex determines if they are numerics.
+            // If so, they are converted to Dates. 
+            if (std::regex_match( dt_str, std::regex( ( "((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?" ) ) )) {
+              datetmp[ri] = as<Rcpp::Date>(cTD(dt_str));
+            } else {
+              datetmp[ri] = Rcpp::Date(atoi(dt_str.substr(5,2).c_str()), atoi(dt_str.substr(8,2).c_str()), atoi(dt_str.substr(0,4).c_str()) );
+            }
+          } catch(...) {
             Rcpp::Rcerr << "Error reading date:\n" << dt_str << "\nrow: " << ri+1 << "\ncol: " << i+1 << "\n";
             throw;
           }
-          //datetmp[ri] = Date(atoi(m(ri,i)) - originAdj);
-          //datetmp[ri] = Date(as<std::string>(m(ri,i)));
         }
       }
       

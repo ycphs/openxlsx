@@ -283,7 +283,7 @@ test_that("write hyperlinks", {
   unzip(tmp, exdir = tmp_dir)
   sheet1 <- readLines(paste0(tmp_dir, "/xl/worksheets/sheet1.xml"), warn = FALSE)
   res <- sapply(replaceIllegalCharacters(channels$formula),
-                FUN = function(str)grepl(str, x = sheet1, fixed = TRUE))
+                FUN = function(str) grepl(str, x = sheet1, fixed = TRUE))
   
   
   expect_true(all(res))

@@ -666,11 +666,15 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
 
         outlineRows = outlineRows[!is_na(outlines)];
         if (outlineRows.size() > 0) {
-        	outline_hidden = outline_hidden[!is_na(outline_hidden)];
-        	outlines = outlines[!is_na(outlines)];
-        	outlines.attr("names") = outlineRows;
-        	outlines.attr("hidden") = outline_hidden;
-        	outlineLevels[i] = outlines;
+          // If a row is grouped, we need to preserve the visibility flag, even
+          // if the cell is visible and the flag is NA. Otherwise, hidden
+          // rows/columns would be shifted or saving would break (Issue
+          // ycphs/openxlsx#138)
+          outline_hidden = outline_hidden[!is_na(outlines)];
+          outlines = outlines[!is_na(outlines)];
+          outlines.attr("names") = outlineRows;
+          outlines.attr("hidden") = outline_hidden;
+          outlineLevels[i] = outlines;
         }
 
 

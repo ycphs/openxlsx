@@ -1,7 +1,7 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.6.1
+Version: 4.2.6.1.9000
 Date: 2024-07-23
 Authors@R: 
     c(person(given = "Philipp",
@@ -27,6 +27,10 @@ Authors@R:
              role = "ctb",
              email = "jmbarbone@gmail.com",
              comment = c(ORCID = "0000-0001-9788-3628")),
+      person(given = "Reinhold",
+             family = "Kainhofer",
+             role = "ctb",
+             email = "reinhold@kainhofer.com"),
       person(given = "David",
              family = "Zimmermann",
              role = "ctb",
