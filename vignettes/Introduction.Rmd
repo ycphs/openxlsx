@@ -392,14 +392,8 @@ plotFn <- function(x, ...) {
 wb <- createWorkbook("Einstein")
 addWorksheet(wb, "Original Image", gridLines = FALSE)
 
-<<<<<<< HEAD
-A <- readJPEG(file.path(path.package("openxlsx"), "einstein.jpg"))
-height <- nrow(A)
-width <- ncol(A)
-=======
 A <- readJPEG(system.file("extdata", "einstein.jpg", package = "openxlsx"))
 height <- nrow(A); width <- ncol(A)
->>>>>>> development
 
 ## write "Original Image" to cell B2
 writeData(wb, 1, "Original Image", xy = c(2,2))
@@ -506,26 +500,16 @@ saveWorkbook(wb, "Image dimensionality reduction.xlsx", overwrite = TRUE)
 
 ## remove example files for cran test
 if (identical(Sys.getenv("NOT_CRAN", unset = "true"), "false")) {
-<<<<<<< HEAD
-  file_list<-list.files(pattern="\\.xlsx",recursive = TRUE)
-  file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
-  
-  if(length(file_list)>0) {
-=======
   file_list<-list.files(pattern="\\.xlsx",recursive = T)
   file_list<-fl[!grepl("inst/extdata",file_list)&!grepl("man/",file_list)]
   
   if(length(file_list)>0){
->>>>>>> development
     rm(file_list)
   }
 }
 ```
-<<<<<<< HEAD
-=======
 
 ```{r cleanup, eval = FALSE, include = FALSE}
 xlsx_files <- dir(pattern = "*.xlsx")
 unlink(xlsx_files)
 ```
->>>>>>> development

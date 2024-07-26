@@ -271,11 +271,8 @@ library(openxlsx)
 #  writeDataTable(wb, sheet = 3, x = df)
 #  
 #  openXL(wb)
-<<<<<<< HEAD
-=======
 
 ## ----cleanup, eval = FALSE, include = FALSE-----------------------------------
 #  xlsx_files <- dir(pattern = "*.xlsx")
 #  unlink(xlsx_files)
 
->>>>>>> development
