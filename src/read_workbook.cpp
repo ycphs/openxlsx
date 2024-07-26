@@ -553,14 +553,14 @@ SEXP read_workbook(IntegerVector cols_in,
       
       if(missing_header[i]){  // a missing header element
         
-        snprintf(&(name[0]), 6, "X%d", i+1);
+        snprintf(&(name[0]), 6, "X%hu", i+1);
         col_names[i] = name;
         
       }else{  // this is a header elements 
         
         col_names[i] = v[pos];
         if(col_names[i] == "NA"){
-          snprintf(&(name[0]), 6, "X%d", i+1);
+          snprintf(&(name[0]), 6, "X%hu", i+1);
           col_names[i] = name;
         }
         
@@ -617,7 +617,7 @@ SEXP read_workbook(IntegerVector cols_in,
   }else{ // else col_names is FALSE
     char name[6];
     for(int i =0; i < nCols; i++){
-      snprintf(&(name[0]), 6, "X%d", i+1);
+      snprintf(&(name[0]), 6, "X%hu", i+1);
       col_names[i] = name;
     }
   }
