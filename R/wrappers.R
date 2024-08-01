@@ -4611,7 +4611,7 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
     stop("Hidden should be a logical value (TRUE/FALSE).")
   }
 
-  if (any(rows) < 1L) {
+  if (any(rows < 1L)) {
     stop("Invalid rows entered (<= 0).")
   }
 
@@ -4653,7 +4653,7 @@ ungroupRows <- function(wb, sheet, rows) {
 
   sheet <- wb$validateSheet(sheet)
 
-  if (any(rows) < 1L) {
+  if (any(rows < 1L)) {
     stop("Invalid rows entered (<= 0).")
   }
 

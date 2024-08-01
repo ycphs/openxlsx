@@ -52,13 +52,34 @@ test_that("ungroup columns", {
 
 test_that("ungroup rows", {
   wb <- createWorkbook()
-  assign("wb", wb, envir = .GlobalEnv)
   addWorksheet(wb, "Sheet 1")
   groupRows(wb, "Sheet 1", 1:3, hidden = T)
   ungroupRows(wb, "Sheet 1", 1:3)
 
   expect_equal(length(wb$outlineLevels[[1]]), 0L)
-  rm(wb)
+})
+
+test_that("no warnings #485", {
+
+  wb <- createWorkbook()
+  addWorksheet(wb, "Sheet 1")
+
+  expect_silent(
+    groupRows(
+      rows = c(1),
+      sheet = "Sheet 1",
+      wb = wb
+    )
+  )
+
+  expect_silent(
+    ungroupRows(
+      rows = c(1),
+      sheet = "Sheet 1",
+      wb = wb
+    )
+  )
+
 })
 
 
