@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.6.1
-Date: 2024-07-23
+Version: 4.2.6.9000
+Date: 2024-08-01
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",

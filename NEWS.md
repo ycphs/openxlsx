@@ -1,3 +1,7 @@
+#openxlsx (development version)
+
+* Preserve window size and position, also `getWindowSize()` and `setWindowSize()`  ([466](https://github.com/ycphs/openxlsx/pull/466))
+
 # openxlsx 4.2.6
 
 * Fix external links ([#410](https://github.com/ycphs/openxlsx/pull/410))
