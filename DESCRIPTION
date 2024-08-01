@@ -85,6 +85,7 @@ Collate:
     'openxlsx.R'
     'openxlsxCoerce.R'
     'readWorkbook.R'
+    'setWindowSize.R'
     'sheet_data_class.R'
     'utils.R'
     'workbook_column_widths.R'
