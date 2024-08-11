@@ -1,0 +1,6 @@
+comment: no # do not comment PR with the result
+
+coverage:
+  status:
+    project: false
+    patch: false

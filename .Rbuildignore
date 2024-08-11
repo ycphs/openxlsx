@@ -20,4 +20,5 @@ cran-comments.md
 ^openxlsx.*\.tar\.gz$
 ^openxlsx.*\.tgz$
 ^data-raw$
+^codecov.yml$
 ^CRAN-SUBMISSION$
