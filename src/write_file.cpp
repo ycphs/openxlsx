@@ -199,8 +199,8 @@ SEXP buildMatrixMixed(CharacterVector v,
     m(rowInd[i], colInd[i]) = v[i];
   
   // convert numerics to dates
-  Rcpp::Function cTD("convertToDate");
-  
+  Rcpp::Environment pkg = Rcpp::Environment::namespace_env("openxlsx");
+  Rcpp::Function cTD = pkg["convertToDate"];
   // this will be the return data.frame
   List dfList(nCols); 
   
