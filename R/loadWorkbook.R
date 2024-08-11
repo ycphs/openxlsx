@@ -643,10 +643,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert =
       wb$slicerCaches <- sapply(slicerCachesXML[order(nchar(slicerCachesXML), slicerCachesXML)], function(x) removeHeadTag(cppReadFile(x)))
       wb$workbook.xml.rels <- c(wb$workbook.xml.rels, sprintf('<Relationship Id="rId%s" Type="http://schemas.microsoft.com/office/2007/relationships/slicerCache" Target="slicerCaches/slicerCache%s.xml"/>', 1E5 + inds, inds))
       
-      if (!grepl("slicerCaches", wb$workbook$extLst))
-        wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
-      else
-        wb$workbook$extLst <- genSlicerCachesExtLst(1E5 + inds)
+      wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
     }
 
 

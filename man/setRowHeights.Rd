@@ -49,7 +49,8 @@ sheet <- 1
 
 ## Write dummy data
 writeData(wb, sheet, "fixed w/fixed h", startCol = 1, startRow = 1)
-writeData(wb, sheet, "fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC", startCol = 2, startRow = 2)
+writeData(wb, sheet, "fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC",
+ startCol = 2, startRow = 2)
 writeData(wb, sheet, "variable w/fixed h", startCol = 3, startRow = 3)
 
 ## Set column widths and row heights
