@@ -4498,7 +4498,7 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE, level = -1) {
     stop("First argument must be a Workbook.")
   }
 
-  if (any(cols) < 1L) {
+  if (any(cols < 1L)) {
     stop("Invalid columns selected (<= 0).")
   }
 
