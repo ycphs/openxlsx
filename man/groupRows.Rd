@@ -4,19 +4,68 @@
 \alias{groupRows}
 \title{Group Rows}
 \usage{
-groupRows(wb, sheet, rows, hidden = FALSE)
+groupRows(wb, sheet, rows, hidden = FALSE, level = -1)
 }
 \arguments{
 \item{wb}{A workbook object}
 
 \item{sheet}{A name or index of a worksheet}
 
-\item{rows}{Indices of rows to group}
+\item{rows}{Indices of rows to group. Can be either a vector of indices to group at the same level or a (named) list of numeric vectors of indices to create multiple groupings at once. The names of the entries determine the grouping level. If no names are given, the parameter level is used as default.}
 
 \item{hidden}{Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE}
+
+\item{level}{Grouping level (higher value indicates multiple nestings) for the
+group. A vector to assign different grouping levels to the indices.
+A value of -1 indicates that the grouping level should be derived
+from the existing grouping (one level added)}
 }
 \description{
 Group a selection of rows
+}
+\examples{
+wb <- createWorkbook()
+addWorksheet(wb, 'Sheet1')
+addWorksheet(wb, 'Sheet2')
+
+writeData(wb, "Sheet1", iris)
+writeData(wb, "Sheet2", iris)
+
+## create list of groups
+# lines used for grouping (here: species)
+grp <- list(
+  seq(2, 51),
+  seq(52, 101),
+  seq(102, 151)
+)
+# assign group levels
+names(grp) <- c("1","0","1")
+groupRows(wb, "Sheet1", rows = grp)
+
+# different grouping
+names(grp) <- c("1","2","3")
+groupRows(wb, "Sheet2", rows = grp)
+
+# alternatively, one can call groupRows multiple times
+addWorksheet(wb, 'Sheet3')
+writeData(wb, "Sheet3", iris)
+groupRows(wb, "Sheet3", 2:51, level = 1)
+groupRows(wb, "Sheet3", 102:151, level = 1)
+
+addWorksheet(wb, 'Sheet4')
+writeData(wb, "Sheet4", iris)
+groupRows(wb, "Sheet4", 2:51, level = 1)
+groupRows(wb, "Sheet4", 52:101, level = 2)
+groupRows(wb, "Sheet4", 102:151, level = 3)
+
+# Nested grouping can also be achieved without explicitly given the levels
+addWorksheet(wb, 'Sheet5')
+writeData(wb, "Sheet5", iris)
+groupRows(wb, "Sheet5", 2:151)
+groupRows(wb, "Sheet5", 52:151)
+groupRows(wb, "Sheet5", 102:151)
+
+
 }
 \seealso{
 \code{\link[=ungroupRows]{ungroupRows()}} to ungroup rows. \code{\link[=groupColumns]{groupColumns()}} for grouping columns.

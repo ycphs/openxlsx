@@ -636,8 +636,8 @@ SEXP read_workbook(IntegerVector cols_in,
       allNumeric = false;
   }
   
-  // If we have colnames some elements where used to create these -so we remove the corresponding number of elements
-  if(hasColNames & has_date)
+  // If we have colnames some elements were used to create these -so we remove the corresponding number of elements
+  if(hasColNames && has_date)
     is_date.erase(is_date.begin(), is_date.begin() + pos);
   
   

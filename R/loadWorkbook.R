@@ -7,6 +7,7 @@
 #' @param file A path to an existing .xlsx or .xlsm file
 #' @param xlsxFile alias for file
 #' @param isUnzipped Set to TRUE if the xlsx file is already unzipped
+#' @param na.convert Should empty/blank cells be converted to `NA_character_`. Defaults to TRUE.
 #' @description  loadWorkbook returns a workbook object conserving styles and
 #' formatting of the original .xlsx file.
 #' @return Workbook object.
@@ -25,7 +26,7 @@
 #' saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
 #' }
 #'
-loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
+loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE, na.convert = TRUE) {
 
   ## If this is a unzipped workbook, skip the temp dir stuff
   if (isUnzipped) {
@@ -223,12 +224,6 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$workbook$calcPr <- calcPr
     }
 
-    ## additional workbook attributes
-    extLst <- getChildlessNode(xml = workbook, tag = "extLst")
-    if (length(extLst) > 0) {
-      wb$workbook$extLst <- extLst
-    }
-
     workbookPr <- getChildlessNode(xml = workbook, tag = "workbookPr")
     if (length(workbookPr) > 0) {
       wb$workbook$workbookPr <- workbookPr
@@ -264,7 +259,9 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     vals <- getNodes(xml = sharedStrings, tagIn = "<si>")
 
     if ("<si><t/></si>" %in% vals) {
-      vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
+      if (na.convert) {
+        vals[vals == "<si><t/></si>"] <- "<si><t>NA</t></si>"
+      }
       Encoding(vals) <- "UTF-8"
       attr(vals, "uniqueCount") <- uniqueCount - 1L
     } else {
@@ -495,7 +492,43 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   for (i in seq_along(worksheetsXML)) {
     if (!is_chart_sheet[i]) {
       if (length(wb$worksheets[[i]]$headerFooter) > 0) {
-        wb$worksheets[[i]]$headerFooter <- lapply(wb$worksheets[[i]]$headerFooter, splitHeaderFooter)
+        
+        amp_split <- function(x) {
+          if (length(x) == 0) return (NULL)
+          # First split the entry before &L, &C, &R => left/center/right header/footer entries
+          parts <- unlist(stri_split_regex(x, "(?=&amp;[LCR])", omit_empty = TRUE))
+          # Then extract from each entry the justification (LCR) and the content 
+          matches <- stri_match(parts, regex = "^(?:&amp;([LRC])|)(.*)$")
+          # The OOXML standard says that entries without an &[LRC] are to be understood as centered
+          matches[(matches[,2]==""),2] = "C"
+                   
+          # => convert to named character vector
+          z <- matches[,3]
+          names(z) <- matches[,2]
+          
+          # return 3-string vector for left/center/right content:
+          res <- z[c("L", "C", "R")]
+          res[is.na(res)] <- ""
+          unname(res)
+        }
+        
+        head_foot <- c("oddHeader", "oddFooter",
+                       "evenHeader", "evenFooter",
+                       "firstHeader", "firstFooter")
+        
+        headerFooter <- vector("list", length = length(head_foot))
+        names(headerFooter) <- head_foot
+        
+        headerFooterXMl <- paste0(wb$worksheets[[i]]$headerFooter,
+                                  collapse = "")
+        
+        for (hf in head_foot) {
+          node <- getChildlessNode(xml = headerFooterXMl, tag = hf)
+          node <- gsub(paste0("<", hf, ">(.+)</", hf, ">"), "\\1", node)
+          headerFooter[[hf]] <- amp_split(node)
+        }
+        
+        wb$worksheets[[i]]$headerFooter <- headerFooter
       }
     }
   }
@@ -610,10 +643,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
       wb$slicerCaches <- sapply(slicerCachesXML[order(nchar(slicerCachesXML), slicerCachesXML)], function(x) removeHeadTag(cppReadFile(x)))
       wb$workbook.xml.rels <- c(wb$workbook.xml.rels, sprintf('<Relationship Id="rId%s" Type="http://schemas.microsoft.com/office/2007/relationships/slicerCache" Target="slicerCaches/slicerCache%s.xml"/>', 1E5 + inds, inds))
       
-      if (!grepl("slicerCaches", wb$workbook$extLst))
-        wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
-      else
-        wb$workbook$extLst <- genSlicerCachesExtLst(1E5 + inds)
+      wb$workbook$extLst <- c(wb$workbook$extLst, genSlicerCachesExtLst(1E5 + inds))
     }
 
 
@@ -887,7 +917,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
     }
     
     ## Persons (needed for Threaded Comment)
-    if(length(personXML) > 0){
+    if (length(personXML) > 0) {
       wb$persons <- personXML
       wb$Content_Types <- c(
         wb$Content_Types,
@@ -1041,7 +1071,7 @@ loadWorkbook <- function(file, xlsxFile = NULL, isUnzipped = FALSE) {
   
   wb$ActiveSheet <- as.integer(getAttrs(activesheet,"activeTab")$activeTab) + 1L
   
-  if(length(wb$ActiveSheet) == 0){
+  if (length(wb$ActiveSheet) == 0) {
     wb$ActiveSheet <- 1L
   }
 

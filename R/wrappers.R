@@ -106,13 +106,13 @@ saveWorkbook <- function(wb, file, overwrite = FALSE, returnValue = FALSE) {
     returnValue <- FALSE
   }
 
-  if (file.exists(file) & !overwrite) {
+  if (file.exists(file) && !overwrite) {
     stop("File already exists!")
   }
 
   xlsx_file <- wb$saveWorkbook()
 
-  result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite)
+  result <- file.copy(from = xlsx_file, to = file, overwrite = overwrite, copy.mode = FALSE)
 
   ## delete temporary dir
   unlink(dirname(xlsx_file), force = TRUE, recursive = TRUE)
@@ -401,7 +401,7 @@ addWorksheet <- function(wb,
     stop(paste0("A worksheet by the name '", sheetName, "' already exists! Sheet names must be unique case-insensitive."))
   }
 
-  if (!is.logical(gridLines) | length(gridLines) > 1) {
+  if (!is.logical(gridLines) || length(gridLines) > 1) {
     stop("gridLines must be a logical of length 1.")
   }
 
@@ -421,27 +421,27 @@ addWorksheet <- function(wb,
     sheetName <- as.character(sheetName)
   }
 
-  if (!is.null(header) & length(header) != 3) {
+  if (!is.null(header) && length(header) != 3) {
     stop("header must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(footer) & length(footer) != 3) {
+  if (!is.null(footer) && length(footer) != 3) {
     stop("footer must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenHeader) & length(evenHeader) != 3) {
+  if (!is.null(evenHeader) && length(evenHeader) != 3) {
     stop("evenHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenFooter) & length(evenFooter) != 3) {
+  if (!is.null(evenFooter) && length(evenFooter) != 3) {
     stop("evenFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstHeader) & length(firstHeader) != 3) {
+  if (!is.null(firstHeader) && length(firstHeader) != 3) {
     stop("firstHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstFooter) & length(firstFooter) != 3) {
+  if (!is.null(firstFooter) && length(firstFooter) != 3) {
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
@@ -822,7 +822,7 @@ createStyle <- function(fontName = NULL,
   }
 
   if (!is.null(indent)) {
-    if (!is.numeric(indent) & !is.integer(indent)) {
+    if (!is.numeric(indent) && !is.integer(indent)) {
       stop("indent must be numeric")
     }
   }
@@ -955,7 +955,7 @@ createStyle <- function(fontName = NULL,
       stop("textRotation must be numeric.")
     }
 
-    if (textRotation < 0 & textRotation >= -90) {
+    if (textRotation < 0 && textRotation >= -90) {
       textRotation <- (textRotation * -1) + 90
     }
 
@@ -1035,13 +1035,13 @@ addStyle <- function(wb,
   on.exit(options(op), add = TRUE)
 
 
-  if (!is.null(style$numFmt) & length(wb$styleObjects) > 0) {
+  if (!is.null(style$numFmt) && length(wb$styleObjects) > 0) {
     if (style$numFmt$numFmtId == 165) {
-      maxnumFmtId <- max(c(sapply(wb$styleObjects, function(i) {
+      maxnumFmtId <- max(unlist(sapply(wb$styleObjects, function(i) {
         as.integer(
           max(c(i$style$numFmt$numFmtId, 0))
         )
-      }), 165))
+      })), 165)
       style$numFmt$numFmtId <- maxnumFmtId + 1
     }
   }
@@ -1059,7 +1059,7 @@ addStyle <- function(wb,
     stop("stack parameter must be a logical!")
   }
 
-  if (length(cols) == 0 | length(rows) == 0) {
+  if (length(cols) == 0 || length(rows) == 0) {
     return(invisible(0))
   }
 
@@ -1071,9 +1071,9 @@ addStyle <- function(wb,
     n <- length(cols)
     cols <- rep.int(cols, times = length(rows))
     rows <- rep(rows, each = n)
-  } else if (length(rows) == 1 & length(cols) > 1) {
+  } else if (length(rows) == 1 && length(cols) > 1) {
     rows <- rep.int(rows, times = length(cols))
-  } else if (length(cols) == 1 & length(rows) > 1) {
+  } else if (length(cols) == 1 && length(rows) > 1) {
     cols <- rep.int(cols, times = length(rows))
   } else if (length(rows) != length(cols)) {
     stop("Length of rows and cols must be equal.")
@@ -1103,9 +1103,9 @@ getCellRefs <- function(cellCoords) {
 
 
 
-  if (!("numeric" %in% sapply(cellCoords[, 1], class) |
-    "integer" %in% sapply(cellCoords[, 1], class)) &
-    ("numeric" %in% sapply(cellCoords[, 2], class) |
+  if (!("numeric" %in% sapply(cellCoords[, 1], class) ||
+    "integer" %in% sapply(cellCoords[, 1], class)) &&
+    ("numeric" %in% sapply(cellCoords[, 2], class) ||
       "integer" %in% sapply(cellCoords[, 2], class))
 
   ) {
@@ -1155,7 +1155,7 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
 
-  if (is.null(firstActiveRow) & is.null(firstActiveCol) & !firstRow & !firstCol) {
+  if (is.null(firstActiveRow) && is.null(firstActiveCol) && !firstRow && !firstCol) {
     return(invisible(0))
   }
 
@@ -1168,11 +1168,11 @@ freezePane <- function(wb, sheet, firstActiveRow = NULL, firstActiveCol = NULL, 
   }
 
 
-  if (firstRow & !firstCol) {
+  if (firstRow && !firstCol) {
     invisible(wb$freezePanes(sheet, firstRow = firstRow))
-  } else if (firstCol & !firstRow) {
+  } else if (firstCol && !firstRow) {
     invisible(wb$freezePanes(sheet, firstCol = firstCol))
-  } else if (firstRow & firstCol) {
+  } else if (firstRow && firstCol) {
     invisible(wb$freezePanes(sheet, firstActiveRow = 2L, firstActiveCol = 2L))
   } else { ## else both firstRow and firstCol are FALSE
 
@@ -1297,10 +1297,16 @@ pixels2ExcelColWidth <- function(pixels) {
 #' @title Set worksheet row heights
 #' @description Set worksheet row heights
 #' @author Alexander Walker
-#' @param wb A workbook object
-#' @param sheet A name or index of a worksheet
-#' @param rows Indices of rows to set height
-#' @param heights Heights to set rows to specified in Excel column height units.
+#' @param wb workbook object
+#' @param sheet name or index of a worksheet
+#' @param rows indices of rows to set height
+#' @param heights heights to set rows to specified in Excel column height units
+#' @param fontsize font size, optional (get base font size by default)
+#' @param factor factor to manually adjust font width, e.g., for bold fonts,
+#' optional
+#' @param base_height basic row height, optional
+#' @param extra_height additional row height per new line of text, optional
+#' @param wrap wrap text of entries which exceed the column width, optional
 #' @seealso [removeRowHeights()]
 #' @export
 #' @examples
@@ -1308,19 +1314,30 @@ pixels2ExcelColWidth <- function(pixels) {
 #' wb <- createWorkbook()
 #'
 #' ## Add a worksheet
-#' addWorksheet(wb, "Sheet 1")
-#'
-#' ## set row heights
-#' setRowHeights(wb, 1, rows = c(1, 4, 22, 2, 19), heights = c(24, 28, 32, 42, 33))
-#'
-#' ## overwrite row 1 height
-#' setRowHeights(wb, 1, rows = 1, heights = 40)
+#' addWorksheet(wb, "Sheet")
+#' sheet <- 1
+#' 
+#' ## Write dummy data
+#' writeData(wb, sheet, "fixed w/fixed h", startCol = 1, startRow = 1)
+#' writeData(wb, sheet, "fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC",
+#'  startCol = 2, startRow = 2)
+#' writeData(wb, sheet, "variable w/fixed h", startCol = 3, startRow = 3)
+#' 
+#' ## Set column widths and row heights
+#' setColWidths(wb, sheet, cols = c(1, 2, 3, 4), widths = c(10, 20, "auto", 20))
+#' setRowHeights(wb, sheet, rows = c(1, 2, 8, 4, 6), heights = c(30, "auto", 15, 15, 30))
+#' 
+#' ## Overwrite row 1 height
+#' setRowHeights(wb, sheet, rows = 1, heights = 40)
 #'
 #' ## Save workbook
 #' \dontrun{
 #' saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
 #' }
-setRowHeights <- function(wb, sheet, rows, heights) {
+setRowHeights <- function(wb, sheet, rows, heights,
+                          fontsize = NULL, factor = 1.0,
+                          base_height = 15, extra_height = 12, wrap = TRUE) {
+  # validate sheet
   sheet <- wb$validateSheet(sheet)
 
   if (length(rows) > length(heights)) {
@@ -1330,17 +1347,28 @@ setRowHeights <- function(wb, sheet, rows, heights) {
   if (length(heights) > length(rows)) {
     stop("Greater number of height values than rows.")
   }
-
-  op <- get_set_options()
-  on.exit(options(op), add = TRUE)
-
-  ## Remove duplicates
+  
+  od <- getOption("OutDec")
+  options(OutDec = ".")
+  on.exit(expr = options(OutDec = od), add = TRUE)
+  # clean duplicates
   heights <- heights[!duplicated(rows)]
   rows <- rows[!duplicated(rows)]
 
-
-  heights <- as.character(as.numeric(heights))
+  # auto adjust row heights
+  ida <- which(heights == "auto")
+  selected <- rows[ida]
+  out <- auto_heights(wb, sheet, selected, fontsize = fontsize, factor = factor,
+                      base_height = base_height, extra_height = extra_height)
+  cols <- out[[1]]
+  new <- out[[2]]
+  heights[ida] <- as.character(new)
   names(heights) <- rows
+  # wrap text in cells
+  if (wrap == TRUE) {
+    wrap <- openxlsx::createStyle(wrapText = TRUE)
+    openxlsx::addStyle(wb, sheet, wrap, rows = ida, cols = cols, gridExpand = TRUE, stack = TRUE)
+  }
 
   wb$setRowHeights(sheet, rows, heights)
 }
@@ -2071,27 +2099,27 @@ setHeaderFooter <- function(wb, sheet,
 
   sheet <- wb$validateSheet(sheet)
 
-  if (!is.null(header) & length(header) != 3) {
+  if (!is.null(header) && length(header) != 3) {
     stop("header must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(footer) & length(footer) != 3) {
+  if (!is.null(footer) && length(footer) != 3) {
     stop("footer must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenHeader) & length(evenHeader) != 3) {
+  if (!is.null(evenHeader) && length(evenHeader) != 3) {
     stop("evenHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(evenFooter) & length(evenFooter) != 3) {
+  if (!is.null(evenFooter) && length(evenFooter) != 3) {
     stop("evenFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstHeader) & length(firstHeader) != 3) {
+  if (!is.null(firstHeader) && length(firstHeader) != 3) {
     stop("firstHeader must have length 3 where elements correspond to positions: left, center, right.")
   }
 
-  if (!is.null(firstFooter) & length(firstFooter) != 3) {
+  if (!is.null(firstFooter) && length(firstFooter) != 3) {
     stop("firstFooter must have length 3 where elements correspond to positions: left, center, right.")
   }
 
@@ -2275,7 +2303,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
     orientation <- ifelse(grepl("landscape", xml), "landscape", "portrait") ## get existing
   }
 
-  if (scale < 10 | scale > 400) {
+  if (scale < 10 || scale > 400) {
     stop("Scale must be between 10 and 400.")
   }
 
@@ -2304,7 +2332,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
     paperSize, orientation, scale, as.integer(fitToWidth), as.integer(fitToHeight), hdpi, vdpi
   )
 
-  if (fitToHeight | fitToWidth) {
+  if (fitToHeight || fitToWidth) {
     wb$worksheets[[sheet]]$sheetPr <- unique(c(wb$worksheets[[sheet]]$sheetPr, '<pageSetUpPr fitToPage="1"/>'))
   }
 
@@ -2345,7 +2373,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
   }
 
   ## print Titles
-  if (!is.null(printTitleRows) & is.null(printTitleCols)) {
+  if (!is.null(printTitleRows) && is.null(printTitleCols)) {
     if (!is.numeric(printTitleRows)) {
       stop("printTitleRows must be numeric.")
     }
@@ -2357,7 +2385,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
       sheet = names(wb)[[sheet]],
       localSheetId = sheet - 1L
     )
-  } else if (!is.null(printTitleCols) & is.null(printTitleRows)) {
+  } else if (!is.null(printTitleCols) && is.null(printTitleRows)) {
     if (!is.numeric(printTitleCols)) {
       stop("printTitleCols must be numeric.")
     }
@@ -2370,7 +2398,7 @@ pageSetup <- function(wb, sheet, orientation = NULL, scale = 100,
       sheet = names(wb)[[sheet]],
       localSheetId = sheet - 1L
     )
-  } else if (!is.null(printTitleCols) & !is.null(printTitleRows)) {
+  } else if (!is.null(printTitleCols) && !is.null(printTitleRows)) {
     if (!is.numeric(printTitleRows)) {
       stop("printTitleRows must be numeric.")
     }
@@ -2664,7 +2692,15 @@ worksheetOrder <- function(wb) {
   invisible(wb)
 }
 
-
+#' @name as_POSIXct_utc
+#' @title Convert to POSIXct with timezone UTC
+#' @param x something as.POSIXct can convert
+#' @keywords internal
+as_POSIXct_utc <- function(x) {
+  z <- as.POSIXct(x, tz = "UTC")
+  attr(z, "tzone") <- "UTC"
+  z
+}
 
 
 #' @name convertToDate
@@ -2801,7 +2837,7 @@ names.Workbook <- function(x) {
 #' @param sheet A name or index of a worksheet
 #' @param rows Numeric vector specifying rows to include in region
 #' @param cols Numeric vector specifying columns to include in region
-#' @param name Name for region. A character vector of length 1. Note region names musts be case-insensitive unique.
+#' @param name Name for region. A character vector of length 1. Note region names must be case-insensitive unique.
 #' @param overwrite Boolean. Overwrite if exists ? Default to FALSE
 #'
 #' @details Region is given by: min(cols):max(cols) X min(rows):max(rows)
@@ -2871,9 +2907,9 @@ createNamedRegion <- function(wb, sheet, cols, rows, name, overwrite = FALSE) {
   ex_names <- regmatches(wb$workbook$definedNames, regexpr('(?<=name=")[^"]+', wb$workbook$definedNames, perl = TRUE))
   ex_names <- tolower(replaceXMLEntities(ex_names))
 
-  if (tolower(name) %in% ex_names & !overwrite) {
+  if (tolower(name) %in% ex_names && !overwrite) {
     stop(sprintf("Named region with name '%s' already exists! Use overwrite  = TRUE if you want to replace it", name))
-  } else if (tolower(name) %in% ex_names & overwrite) {
+  } else if (tolower(name) %in% ex_names && overwrite) {
     wb$workbook$definedNames <- wb$workbook$definedNames[!ex_names %in% tolower(name)]
   }
 
@@ -3337,15 +3373,15 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
   }
 
   if (!is.logical(allowBlank)) {
-    stop("Argument 'allowBlank' musts be logical!")
+    stop("Argument 'allowBlank' must be logical!")
   }
 
   if (!is.logical(showInputMsg)) {
-    stop("Argument 'showInputMsg' musts be logical!")
+    stop("Argument 'showInputMsg' must be logical!")
   }
 
   if (!is.logical(showErrorMsg)) {
-    stop("Argument 'showErrorMsg' musts be logical!")
+    stop("Argument 'showErrorMsg' must be logical!")
   }
 
   ## All inputs validated
@@ -3353,11 +3389,11 @@ dataValidation <- function(wb, sheet, cols, rows, type, operator, value, allowBl
   type <- valid_types[tolower(valid_types) %in% tolower(type)][1]
 
   ## check input combinations
-  if (type == "date" & !"Date" %in% class(value)) {
+  if (type == "date" && !"Date" %in% class(value)) {
     stop("If type == 'date' value argument must be a Date vector.")
   }
 
-  if (type == "time" & !any(tolower(class(value)) %in% c("posixct", "posixt"))) {
+  if (type == "time" && !any(tolower(class(value)) %in% c("posixct", "posixt"))) {
     stop("If type == 'date' value argument must be a POSIXct or POSIXlt vector.")
   }
 
@@ -4433,18 +4469,26 @@ removeTable <- function(wb, sheet, table) {
 #' @name groupColumns
 #' @title Group columns
 #' @description Group a selection of columns
-#' @author Joshua Sturm
+#' @author Joshua Sturm, Reinhold Kainhofer
 #' @param wb A workbook object.
 #' @param sheet A name or index of a worksheet.
-#' @param cols Indices of cols to group.
+#' @param cols Indices of cols to group. Can be either a vector of indices to 
+#'             group at the same level or a (named) list of numeric vectors of 
+#'             indices to create multiple groupings at once. The names of the 
+#'             entries determine the grouping level. If no names are given, 
+#'             the `level` parameter is used as default.
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.
+#' @param level Grouping level (higher value indicates multiple nestings) for the 
+#'              group. A vector to assign different grouping levels to the indices. 
+#'              A value of -1 indicates that the grouping level should be derived 
+#'              from the existing grouping (one level added)
 #' @details Group columns together, with the option to hide them.
 #'
 #' NOTE: [setColWidths()] has a conflicting `hidden` parameter; changing one will update the other.
 #' @seealso [ungroupColumns()] to ungroup columns. [groupRows()] for grouping rows.
 #' @export
 #'
-groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
+groupColumns <- function(wb, sheet, cols, hidden = FALSE, level = -1) {
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
 
@@ -4466,14 +4510,25 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     stop("Hidden argument is of greater length than number of cols.")
   }
 
-  levels <- rep("1", length(cols))
-  hidden <- rep(hidden, length.out = length(cols))
+  if(is.list(cols)) {
+    if (!is.null(names(cols))) {
+      levels <- unlist(lapply(names(cols), function(x) rep(as.character(x), length(cols[[x]]))))
+    } else {
+      levels <- rep(as.character(level), length(unlist(cols)))
+    }
+    cols <- unlist(cols)
+  } else {
+    levels <- rep(level, length(cols))
+  }
+  
+  hidden <- as.character(as.integer(rep(hidden, length.out = length(cols))))
 
   hidden <- hidden[!duplicated(cols)]
   levels <- levels[!duplicated(cols)]
   cols <- cols[!duplicated(cols)]
   cols <- convertFromExcelRef(cols)
-
+  names(levels) <- cols
+  
   if (length(wb$colWidths[[sheet]]) > 0) {
     existing_cols <- names(wb$colWidths[[sheet]])
     existing_hidden <- attr(wb$colWidths[[sheet]], "hidden", exact = TRUE)
@@ -4500,24 +4555,41 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     existing_cols <- names(wb$colOutlineLevels[[sheet]])
     existing_levels <- unname(wb$colOutlineLevels[[sheet]])
     existing_hidden <- attr(wb$colOutlineLevels[[sheet]], "hidden")
-
+    
     # check if column is already grouped
     flag <- existing_cols %in% cols
+    # Find indices of cols that already exist
+    existing_outline_indices = which(flag)
+    existing_outline = existing_cols[existing_outline_indices]
+    existing_cols_indices = match(existing_outline, cols)
+    
+    # Auto-detect new level if required
+    new_level <- "1"
     if (any(flag)) {
-      existing_cols <- existing_cols[!flag]
-      existing_levels <- existing_levels[!flag]
-      existing_hidden <- existing_hidden[!flag]
+      new_level <- as.character(max(as.numeric(existing_levels[flag])) + 1)
     }
-
-    all_names <- c(existing_cols, cols)
-    all_levels <- c(existing_levels, levels)
-    all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
+    levels[levels < 0] = as.character(new_level)
+    
+    if (any(flag)) {
+      # Assign the given values to existing col definitions (indices were extracted above)
+      existing_hidden[existing_outline_indices] <- hidden[existing_cols_indices]
+      existing_levels[existing_outline_indices] <- levels[existing_cols_indices]
+      
+      # Append all remaining new entries:
+      all_names <- c(existing_cols, cols[-existing_cols_indices])
+      all_levels <- c(existing_levels, levels[-existing_cols_indices])
+      all_hidden <- c(existing_hidden, hidden[-existing_cols_indices])
+    } else {
+      # only new cols were added, no existing modified
+      all_names = c(existing_cols, cols)
+      all_levels = c(existing_levels, levels)
+      all_hidden = c(existing_hidden, hidden)
+    }
 
     ord <- order(as.integer(all_names))
     all_names <- all_names[ord]
-    all_levels <- all_levels[ord]
+    all_levels <- as.character(all_levels[ord])
     all_hidden <- all_hidden[ord]
-
 
     names(all_levels) <- all_names
     wb$colOutlineLevels[[sheet]] <- all_levels
@@ -4525,11 +4597,21 @@ groupColumns <- function(wb, sheet, cols, hidden = FALSE) {
     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(all_hidden))
     hidden <- all_hidden
   } else {
+    levels[levels < 1] = "1"
     names(levels) <- cols
     wb$colOutlineLevels[[sheet]] <- levels
     attr(wb$colOutlineLevels[[sheet]], "hidden") <- as.character(as.integer(hidden))
   }
-
+  
+  # Finally, update the sheetFormatPr XML element with the maximum outline level
+  max_outline = max(as.numeric(wb$colOutlineLevels[[sheet]]))
+  outline_attr <- paste0(' outlineLevelCol="', max_outline, '"')
+  if (!grepl("outlineLevelCol", wb$worksheets[[sheet]]$sheetFormatPr)) {
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub("/>", paste0(outline_attr, "/>"), wb$worksheets[[sheet]]$sheetFormatPr)
+  } else {
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="[0-9]+"', outline_attr, wb$worksheets[[sheet]]$sheetFormatPr)
+  }
+  
   invisible(0)
 }
 
@@ -4563,20 +4645,25 @@ ungroupColumns <- function(wb, sheet, cols) {
   on.exit(options(op), add = TRUE)
 
   customCols <- as.integer(names(wb$colOutlineLevels[[sheet]]))
-  removeInds <- which(customCols %in% cols)
-
-  # Check if any selected columns are already grouped
-  if (length(removeInds) > 0) {
-    remainingCols <- customCols[-removeInds]
-    if (length(remainingCols) == 0) {
-      wb$colOutlineLevels[[sheet]] <- list()
-      wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
-    } else {
-      rem_widths <- wb$colOutlineLevels[[sheet]][-removeInds]
-      names(rem_widths) <- as.character(remainingCols)
-      wb$colOutlineLevels[[sheet]] <- rem_widths
-    }
+  ungroupInds <- which(customCols %in% cols)
+  if (length(ungroupInds) > 0) {
+    # decrement the outline level by 1, set to visible and remove all columns that are no longer grouped at all (i.e. have a level "0" or "-1" (just in case))
+    levels <- as.character(as.integer(wb$colOutlineLevels[[sheet]][ungroupInds]) - 1)
+    wb$colOutlineLevels[[sheet]][ungroupInds] <- levels
+    attr(wb$colOutlineLevels[[sheet]], "hidden")[ungroupInds] <- "0"
+    
+    removeInds <- which(wb$colOutlineLevels[[sheet]] %in% c("-1", "0"))
+    wb$colOutlineLevels[[sheet]] <- wb$colOutlineLevels[[sheet]][-removeInds]
+    attr(wb$colOutlineLevels[[sheet]], "hidden") = attr(wb$colOutlineLevels[[sheet]], "hidden")[-removeInds]
   }
+  
+  if (length(wb$outlineLevels[[sheet]]) == 0) {
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="[0-9]+"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+  } else {
+    max_level = max(as.integer(wb$colOutlineLevels[[sheet]]))
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelCol="[0-9]+"', paste0(" outlineLevelCol=\"", max_level, "\""), wb$worksheets[[sheet]]$sheetFormatPr)
+  }
+  
 
   if (length(wb$colWidths[[sheet]]) > 0) {
     if (any(cols %in% names(wb$colWidths[[sheet]]))) {
@@ -4585,20 +4672,78 @@ ungroupColumns <- function(wb, sheet, cols) {
   }
 }
 
+
 #' @name groupRows
 #' @title Group Rows
 #' @description Group a selection of rows
 #' @author Joshua Sturm
 #' @param wb A workbook object
 #' @param sheet A name or index of a worksheet
-#' @param rows Indices of rows to group
+#' @param rows Indices of rows to group. Can be either a vector of indices to group at the same level or a (named) list of numeric vectors of indices to create multiple groupings at once. The names of the entries determine the grouping level. If no names are given, the parameter level is used as default.
 #' @param hidden Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE
+#' @param level Grouping level (higher value indicates multiple nestings) for the 
+#'              group. A vector to assign different grouping levels to the indices. 
+#'              A value of -1 indicates that the grouping level should be derived 
+#'              from the existing grouping (one level added)
 #' @seealso [ungroupRows()] to ungroup rows. [groupColumns()] for grouping columns.
+#' @examples
+#' wb <- createWorkbook()
+#' addWorksheet(wb, 'Sheet1')
+#' addWorksheet(wb, 'Sheet2')
+#'
+#' writeData(wb, "Sheet1", iris)
+#' writeData(wb, "Sheet2", iris)
+#'
+#' ## create list of groups
+#' # lines used for grouping (here: species)
+#' grp <- list(
+#'   seq(2, 51),
+#'   seq(52, 101),
+#'   seq(102, 151)
+#' )
+#' # assign group levels
+#' names(grp) <- c("1","0","1")
+#' groupRows(wb, "Sheet1", rows = grp)
+#'
+#' # different grouping
+#' names(grp) <- c("1","2","3")
+#' groupRows(wb, "Sheet2", rows = grp)
+#' 
+#' # alternatively, one can call groupRows multiple times
+#' addWorksheet(wb, 'Sheet3')
+#' writeData(wb, "Sheet3", iris)
+#' groupRows(wb, "Sheet3", 2:51, level = 1)
+#' groupRows(wb, "Sheet3", 102:151, level = 1)
+#' 
+#' addWorksheet(wb, 'Sheet4')
+#' writeData(wb, "Sheet4", iris)
+#' groupRows(wb, "Sheet4", 2:51, level = 1)
+#' groupRows(wb, "Sheet4", 52:101, level = 2)
+#' groupRows(wb, "Sheet4", 102:151, level = 3)
+#' 
+#' # Nested grouping can also be achieved without explicitly given the levels
+#' addWorksheet(wb, 'Sheet5')
+#' writeData(wb, "Sheet5", iris)
+#' groupRows(wb, "Sheet5", 2:151)
+#' groupRows(wb, "Sheet5", 52:151)
+#' groupRows(wb, "Sheet5", 102:151)
+#' 
+#' 
 #' @export
-
-groupRows <- function(wb, sheet, rows, hidden = FALSE) {
+groupRows <- function(wb, sheet, rows, hidden = FALSE, level = -1) {
   if (!"Workbook" %in% class(wb)) {
     stop("First argument must be a Workbook.")
+  }
+
+  if(is.list(rows)) {
+    if (!is.null(names(rows))) {
+      levels <- unlist(lapply(names(rows), function(x) rep(as.character(x), length(rows[[x]]))))
+    } else {
+      levels <- rep(as.character(level), length(unlist(rows)))
+    }
+    rows <- unlist(rows)
+  } else {
+    levels <- rep(level, length(rows))
   }
 
   sheet <- wb$validateSheet(sheet)
@@ -4619,8 +4764,6 @@ groupRows <- function(wb, sheet, rows, hidden = FALSE) {
 
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
-
-  levels <- rep("1", length(rows))
 
   # Remove duplicates
   hidden <- hidden[!duplicated(rows)]
@@ -4658,13 +4801,23 @@ ungroupRows <- function(wb, sheet, rows) {
   }
 
   customRows <- as.integer(names(wb$outlineLevels[[sheet]]))
-  removeInds <- which(customRows %in% rows)
-  if (length(removeInds) > 0) {
+  ungroupInds <- which(customRows %in% rows)
+  if (length(ungroupInds) > 0) {
+    # decrement the outline level by 1, set to visible and remove all rows that are no longer grouped at all (i.e. have a level "0" or "-1" (just in case))
+    levels <- as.character(as.integer(wb$outlineLevels[[sheet]][ungroupInds]) - 1)
+    wb$outlineLevels[[sheet]][ungroupInds] <- levels
+    attr(wb$outlineLevels[[sheet]], "hidden")[ungroupInds] <- "0"
+
+    removeInds <- which(wb$outlineLevels[[sheet]] %in% c("-1", "0"))
     wb$outlineLevels[[sheet]] <- wb$outlineLevels[[sheet]][-removeInds]
+    attr(wb$outlineLevels[[sheet]], "hidden") = attr(wb$outlineLevels[[sheet]], "hidden")[-removeInds]
   }
 
   if (length(wb$outlineLevels[[sheet]]) == 0) {
-    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="1"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="[0-9]+"', "", wb$worksheets[[sheet]]$sheetFormatPr)
+  } else {
+    max_level = max(as.integer(wb$outlineLevels[[sheet]]))
+    wb$worksheets[[sheet]]$sheetFormatPr <- sub(' outlineLevelRow="[0-9]+"', paste0(" outlineLevelRow=\"", max_level, "\""), wb$worksheets[[sheet]]$sheetFormatPr)
   }
 }
 

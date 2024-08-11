@@ -67,6 +67,7 @@ Other contributors:
   \item Joshua Sturm [contributor]
   \item Jordan Mark Barbone \email{jmbarbone@gmail.com} (\href{https://orcid.org/0000-0001-9788-3628}{ORCID}) [contributor]
   \item David Zimmermann \email{david_j_zimmermann@hotmail.com} [contributor]
+  \item Reinhold Kainhofer \email{reinhold@kainhofer.com} [contributor]
 }
 
 }

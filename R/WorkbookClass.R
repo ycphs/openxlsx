@@ -37,7 +37,7 @@ Workbook$methods(
     headFoot <<- NULL
 
     media <<- list()
-    
+
     persons <<- NULL
 
     pivotTables <<- NULL
@@ -56,7 +56,7 @@ Workbook$methods(
 
     sheet_names <<- character(0)
     sheetOrder <<- integer(0)
-   
+
     sharedStrings <<- list()
     attr(sharedStrings, "uniqueCount") <<- 0
 
@@ -106,7 +106,7 @@ Workbook$methods(
       }
     }
     newSheetIndex <- length(worksheets) + 1L
-    
+
     if (newSheetIndex > 1) {
       sheetId <-
         max(as.integer(regmatches(
@@ -121,7 +121,7 @@ Workbook$methods(
 
     ## fix visible value
     visible <- tolower(visible)
-    
+
     if (visible == "true") {
       visible <- "visible"
     } else if (visible == "false") {
@@ -129,7 +129,7 @@ Workbook$methods(
     } else if (visible == "veryhidden") {
       visible <- "veryHidden"
     }
-    
+
     ##  Add sheet to workbook.xml
     workbook$sheets <<-
       c(
@@ -206,8 +206,8 @@ Workbook$methods(
 
     rowHeights[[newSheetIndex]] <<- list()
     colWidths[[newSheetIndex]] <<- list()
-    colOutlineLevels[[newSheetIndex]] <<- list()
-    outlineLevels[[newSheetIndex]] <<- list()
+    colOutlineLevels[[newSheetIndex]] <<- vector("character")
+    outlineLevels[[newSheetIndex]] <<- vector("character")
 
     sheetOrder <<- c(sheetOrder, as.integer(newSheetIndex))
     sheet_names <<- c(sheet_names, sheetName)
@@ -562,11 +562,11 @@ Workbook$methods(
     ## temp directory to save XML files prior to compressing
     tmpDir <- file.path(tempfile(pattern = "workbookTemp_"))
 
-    if (file.exists(tmpDir)) {
+    if (dir.exists(tmpDir)) {
       unlink(tmpDir, recursive = TRUE, force = TRUE)
     }
 
-    success <- dir.create(path = tmpDir, recursive = TRUE)
+    success <- dir.create(path = tmpDir, recursive = FALSE)
     if (!success) {
       stop(sprintf("Failed to create temporary directory '%s'", tmpDir))
     }
@@ -678,12 +678,12 @@ Workbook$methods(
 
       .self$writeDrawingVML(xldrawingsDir)
     }
-    
+
     ## Threaded Comments xl/threadedComments/threadedComment.xml
-    if (nThreadComments > 0){
+    if (nThreadComments > 0) {
       xlThreadComments <- file.path(tmpDir, "xl", "threadedComments")
       dir.create(path = xlThreadComments, recursive = TRUE)
-      
+
       for (i in seq_len(nSheets)) {
         if (length(threadComments[[i]]) > 0) {
           fl <- threadComments[[i]]
@@ -706,7 +706,7 @@ Workbook$methods(
     }
 
     ## xl/persons/person.xml
-    if (nPersons > 0){
+    if (nPersons > 0) {
       personDir <- file.path(tmpDir, "xl", "persons")
       dir.create(path = personDir, recursive = TRUE)
       file.copy(
@@ -714,10 +714,10 @@ Workbook$methods(
         to = personDir,
         overwrite = TRUE
       )
-      
+
     }
-    
-    
+
+
     if (length(embeddings) > 0) {
       embeddingsDir <- file.path(tmpDir, "xl", "embeddings")
       dir.create(path = embeddingsDir, recursive = TRUE)
@@ -1179,7 +1179,7 @@ Workbook$methods(
       )
     # because tableName might be native encoded non-ASCII strings, we need to ensure
     # it's UTF-8 encoded
-    table <- enc2utf8(table) 
+    table <- enc2utf8(table)
 
     nms <- names(tables)
     tSheets <- attr(tables, "sheet")
@@ -1768,7 +1768,7 @@ Workbook$methods(
     if ("ACCOUNTING2" %in% style$fontDecoration) {
       fontNode <- stri_join(fontNode, '<u val="doubleAccounting"/>')
     }
-    
+
     if ("STRIKEOUT" %in% style$fontDecoration) {
       fontNode <- stri_join(fontNode, "<strike/>")
     }
@@ -1985,7 +1985,7 @@ Workbook$methods(
                                xlworksheetsRelsDir) {
     ## write worksheets
     # nSheets <- length(worksheets)
-    
+
     for (i in seq_along(worksheets)) {
       ## Write drawing i (will always exist) skip those that are empty
       if (any(drawings[[i]] != "")) {
@@ -2183,9 +2183,13 @@ Workbook$methods(
 
     hidden <- attr(colOutlineLevels[[sheet]], "hidden", exact = TRUE)
     cols <- names(colOutlineLevels[[sheet]])
+    max_outline <- max(colOutlineLevels[[sheet]])
     
+    outline_attr <- paste0(' outlineLevelCol="', max_outline, '"')
     if (!grepl("outlineLevelCol", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", ' outlineLevelCol="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelCol="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
 
     # Check if column is already created (by `setColWidths()` or on import)
@@ -2194,11 +2198,12 @@ Workbook$methods(
 
       for (i in intersect(cols, names(worksheets[[sheet]]$cols))) {
         outline_hidden <- attr(colOutlineLevels[[sheet]], "hidden")[attr(colOutlineLevels[[sheet]], "names") == i]
+        outline_level <- colOutlineLevels[[sheet]][[i]]
 
         if (grepl("outlineLevel", worksheets[[sheet]]$cols[[i]], perl = TRUE)) {
           worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         } else {
-          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"1\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
+          worksheets[[sheet]]$cols[[i]] <<- sub("((?<=hidden=\")(\\w+)\")", paste0(outline_hidden, "\" outlineLevel=\"", outline_level, "\""), worksheets[[sheet]]$cols[[i]], perl = TRUE)
         }
       }
 
@@ -2207,41 +2212,84 @@ Workbook$methods(
     }
 
     if (length(cols) > 0) {
-      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="1" hidden="%s"/>', cols, cols, hidden)
+      colNodes <- sprintf('<col min="%s" max="%s" outlineLevel="%s" hidden="%s"/>', cols, cols, colOutlineLevels[[sheet]][cols], hidden)
       names(colNodes) <- cols
-      worksheets[[sheet]]$cols <<- append(worksheets[[sheet]]$cols, colNodes)
+      colNodes = append(worksheets[[sheet]]$cols, colNodes)
+      # Order by column name (=index)
+      worksheets[[sheet]]$cols <<- colNodes[order(names(colNodes))]
     }
   }
 )
 
 Workbook$methods(
-  groupRows = function(sheet, rows, hidden, levels) {
+  groupRows = function(sheet, rows, hidden = 0, levels = -1) {
+    # Validation, input data cleanup / preparation
     sheet <- validateSheet(sheet)
+    hidden = rep(hidden, length.out = length(rows))
+    levels = rep(levels, length.out = length(rows))
+    
+    # browser()
+    
+    # disassemble outlineLevels (extract rows, levels and hidden components)
+    existing_rows <- names(outlineLevels[[sheet]])
+    existing_levels <- outlineLevels[[sheet]]
+    attributes(existing_levels) <- NULL
+    existing_hidden <-  attr(outlineLevels[[sheet]], "hidden")
 
+    # 1. existing entries: 
+    #       - if levels==-1 => set outlineLevel to max of existing level + 1
+    #       - Otherwise, set outlineLevel to given levels
+    #       - update hidden flag correspondingly
+    # 2. New entries
+    #       - Append new entries to the end (hidden and levels vector), potentially out-of-order
+    # 3. Reorder all entries to be in the correct order
+    
+    flag <- existing_rows %in% rows
 
-    flag <- names(outlineLevels[[sheet]]) %in% rows
+    # Find indices of rows that already exist
+    existing_outline_indices = which(flag)
+    existing_outline = existing_rows[existing_outline_indices]
+    existing_rows_indices = match(existing_outline, rows)
+    
+    # Auto-detect new level if required
+    new_level <- "1"
     if (any(flag)) {
-      outlineLevels[[sheet]] <<- outlineLevels[[sheet]][!flag]
+      new_level <- as.character(max(as.numeric(existing_levels[flag])) + 1)
     }
+    levels[levels < 0] = as.character(new_level)
+    
+    if (any(flag)) {
+      # Assign the given values to existing row definitions (indices were extracted above)
+      existing_hidden[existing_outline_indices] <- hidden[existing_rows_indices]
+      existing_levels[existing_outline_indices] <- levels[existing_rows_indices]
+      
+      # Append all remaining new entries:
+      all_names <- c(existing_rows, rows[-existing_rows_indices])
+      all_levels <- c(existing_levels, levels[-existing_rows_indices])
+      all_hidden <- c(existing_hidden, hidden[-existing_rows_indices])
+    } else {
+      # only new rows were added, no existing modified
+      all_names = c(existing_rows, rows)
+      all_levels = c(existing_levels, levels)
+      all_hidden = c(existing_hidden, hidden)
+    }
+    
+    # re-order and then re-assamble the outlineLevels object (vector with proper attributes)
+    ord <- order(as.numeric(all_names))
+    all_levels <- as.character(all_levels[ord])
+    names(all_levels) <- all_names[ord]
+    attr(all_levels, "hidden") <- as.character(as.integer(all_hidden[ord]))
+    
+    outlineLevels[[sheet]] <<- all_levels
+    
 
-    nms <- c(names(outlineLevels[[sheet]]), rows)
-
-    allOutlineLevels <- unlist(c(outlineLevels[[sheet]], levels))
-    names(allOutlineLevels) <- nms
-
-    existing_hidden <- attr(outlineLevels[[sheet]], "hidden", exact = TRUE)
-    all_hidden <- c(existing_hidden, as.character(as.integer(hidden)))
-
-    allOutlineLevels <-
-      allOutlineLevels[order(as.integer(names(allOutlineLevels)))]
-
-    outlineLevels[[sheet]] <<- allOutlineLevels
-
-    attr(outlineLevels[[sheet]], "hidden") <<- as.character(as.integer(all_hidden))
-
-
+    # Finally, update the sheetFormatPr XML element with the maximum outline level
+    max_outline = max(as.numeric(outlineLevels[[sheet]]))
+    outline_attr <- paste0(' outlineLevelRow="', max_outline, '"')
     if (!grepl("outlineLevelRow", worksheets[[sheet]]$sheetFormatPr)) {
-      worksheets[[sheet]]$sheetFormatPr <<- gsub("/>", ' outlineLevelRow="1"/>', worksheets[[sheet]]$sheetFormatPr)
+      worksheets[[sheet]]$sheetFormatPr <<- sub("/>", paste0(outline_attr, "/>"), worksheets[[sheet]]$sheetFormatPr)
+    } else {
+      worksheets[[sheet]]$sheetFormatPr <<- sub(' outlineLevelRow="[0-9]+"', outline_attr, worksheets[[sheet]]$sheetFormatPr)
     }
   }
 )
@@ -2569,8 +2617,7 @@ Workbook$methods(
         '<x14:dataValidation type="list" allowBlank="%s" showInputMessage="%s" showErrorMessage="%s">',
         allowBlank,
         showInputMsg,
-        showErrorMsg,
-        sqref
+        showErrorMsg
       )
 
     formula <-
@@ -2622,10 +2669,10 @@ Workbook$methods(
             )
           )
         priority_new <- as.integer(priority) + 1L
-        
+
         priority_pattern <- sprintf('priority="%s"', priority)
         priority_new <- sprintf('priority="%s"', priority_new)
-        
+
         ## now replace
         worksheets[[sheet]]$conditionalFormatting[[i]] <<-
           gsub(priority_pattern,
@@ -2814,7 +2861,7 @@ Workbook$methods(
                        </cfRule>',
           dxfId,
           values,
-          
+
           unlist(strsplit(sqref, split = ":"))[[1]],
           values,
           values
@@ -2827,7 +2874,7 @@ Workbook$methods(
                        </cfRule>',
           dxfId,
           values,
-          
+
           unlist(strsplit(sqref, split = ":"))[[1]],
           values,
           values
@@ -3258,7 +3305,7 @@ Workbook$methods(
         visible_sheet_index - 1L,
         ActiveSheet - 1L
       )
-    
+
     for(i in seq_len(nSheets)) {
       worksheets[[i]]$sheetViews <<-
         sub(
@@ -3273,7 +3320,7 @@ Workbook$methods(
         )
     }
     # worksheets[[visible_sheet_index]]$sheetViews
-    
+
     # worksheets[[visible_sheet_index]]$sheetViews <<-
     #   sub(
     #     '( tabSelected="0")|( tabSelected="false")',
@@ -3466,8 +3513,8 @@ Workbook$methods(
       if (length(colOutlineLevels[[i]]) > 0) {
         invisible(.self$groupColumns(i))
       }
-      
-      
+
+
       if(ActiveSheet==i) {
         worksheets[[sheetOrder[i]]]$sheetViews <<-
           stri_replace_all_regex(
@@ -3740,7 +3787,7 @@ Workbook$methods(
     aSheet <- ActiveSheet
     exSheets <- replaceXMLEntities(exSheets)
     showText <- "A Workbook object.\n"
-    
+
     if (length(aSheet) == 0) {
       aSheet <- 1
     }
@@ -3854,9 +3901,9 @@ Workbook$methods(
           stri_join(sheetOrder, sep = " ", collapse = ", ")
         ))
     }
-    
-    
-    
+
+
+
     if (aSheet >= 1 & nSheets > 0) {
       showText <-
         c(
@@ -4331,7 +4378,7 @@ Workbook$methods(
     current_creator_vec <- as.character(stri_split_fixed(
       str = current_creator,
       pattern = ";",
-      simplify = T
+      simplify = TRUE
     ))
 
     return(current_creator_vec)
@@ -4381,11 +4428,11 @@ Workbook$methods(
                            paste0("tabSelected=\"",
                                   ifelse(sheetOrder[ActiveSheet]  == i,"true","false")
                                   ,"\""))
-      
-      
+
+
     }
-    
-    
-  
+
+
+
   }
 )
