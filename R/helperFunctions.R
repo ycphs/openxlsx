@@ -1033,7 +1033,7 @@ auto_heights <- function(wb, sheet, selected, fontsize = NULL, factor = 1.0,
   specified <- (colWidths != "auto") & (attr(colWidths, "hidden") == "0")
   # return default row heights if no column widths are fixed
   if (length(specified) == 0) {
-    message("No column widths specified, returning default row heights.")
+    # message("No column widths specified, returning default row heights.")
     cols <- integer(0)
     heights <- rep(base_height, length(selected))
     return(list(cols, heights))
