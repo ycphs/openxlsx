@@ -66,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">groupColumns</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="va">cols</span>, hidden <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">groupColumns</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="va">cols</span>, hidden <span class="op">=</span> <span class="cn">FALSE</span>, level <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,11 +82,22 @@
 
 
 <dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
-<dd><p>Indices of cols to group.</p></dd>
+<dd><p>Indices of cols to group. Can be either a vector of indices to
+group at the same level or a (named) list of numeric vectors of
+indices to create multiple groupings at once. The names of the
+entries determine the grouping level. If no names are given,
+the <code>level</code> parameter is used as default.</p></dd>
 
 
 <dt id="arg-hidden">hidden<a class="anchor" aria-label="anchor" href="#arg-hidden"></a></dt>
 <dd><p>Logical vector. If TRUE the grouped columns are hidden. Defaults to FALSE.</p></dd>
+
+
+<dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>
+<dd><p>Grouping level (higher value indicates multiple nestings) for the
+group. A vector to assign different grouping levels to the indices.
+A value of -1 indicates that the grouping level should be derived
+from the existing grouping (one level added)</p></dd>
 
 </dl></div>
     <div id="details">
@@ -100,7 +111,7 @@
     </div>
     <div id="author">
     <h2>Author</h2>
-    <p>Joshua Sturm</p>
+    <p>Joshua Sturm, Reinhold Kainhofer</p>
     </div>
 
   </div>

@@ -66,7 +66,17 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setRowHeights</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="va">rows</span>, <span class="va">heights</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setRowHeights</span><span class="op">(</span></span>
+<span>  <span class="va">wb</span>,</span>
+<span>  <span class="va">sheet</span>,</span>
+<span>  <span class="va">rows</span>,</span>
+<span>  <span class="va">heights</span>,</span>
+<span>  fontsize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  factor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  base_height <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  extra_height <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  wrap <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,19 +84,40 @@
 
 
 <dl><dt id="arg-wb">wb<a class="anchor" aria-label="anchor" href="#arg-wb"></a></dt>
-<dd><p>A workbook object</p></dd>
+<dd><p>workbook object</p></dd>
 
 
 <dt id="arg-sheet">sheet<a class="anchor" aria-label="anchor" href="#arg-sheet"></a></dt>
-<dd><p>A name or index of a worksheet</p></dd>
+<dd><p>name or index of a worksheet</p></dd>
 
 
 <dt id="arg-rows">rows<a class="anchor" aria-label="anchor" href="#arg-rows"></a></dt>
-<dd><p>Indices of rows to set height</p></dd>
+<dd><p>indices of rows to set height</p></dd>
 
 
 <dt id="arg-heights">heights<a class="anchor" aria-label="anchor" href="#arg-heights"></a></dt>
-<dd><p>Heights to set rows to specified in Excel column height units.</p></dd>
+<dd><p>heights to set rows to specified in Excel column height units</p></dd>
+
+
+<dt id="arg-fontsize">fontsize<a class="anchor" aria-label="anchor" href="#arg-fontsize"></a></dt>
+<dd><p>font size, optional (get base font size by default)</p></dd>
+
+
+<dt id="arg-factor">factor<a class="anchor" aria-label="anchor" href="#arg-factor"></a></dt>
+<dd><p>factor to manually adjust font width, e.g., for bold fonts,
+optional</p></dd>
+
+
+<dt id="arg-base-height">base_height<a class="anchor" aria-label="anchor" href="#arg-base-height"></a></dt>
+<dd><p>basic row height, optional</p></dd>
+
+
+<dt id="arg-extra-height">extra_height<a class="anchor" aria-label="anchor" href="#arg-extra-height"></a></dt>
+<dd><p>additional row height per new line of text, optional</p></dd>
+
+
+<dt id="arg-wrap">wrap<a class="anchor" aria-label="anchor" href="#arg-wrap"></a></dt>
+<dd><p>wrap text of entries which exceed the column width, optional</p></dd>
 
 </dl></div>
     <div id="see-also">
@@ -104,13 +135,21 @@
 <span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Add a worksheet</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Sheet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sheet</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## set row heights</span></span></span>
-<span class="r-in"><span><span class="fu">setRowHeights</span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">22</span>, <span class="fl">2</span>, <span class="fl">19</span><span class="op">)</span>, heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">24</span>, <span class="fl">28</span>, <span class="fl">32</span>, <span class="fl">42</span>, <span class="fl">33</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Write dummy data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="st">"fixed w/fixed h"</span>, startCol <span class="op">=</span> <span class="fl">1</span>, startRow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="st">"fixed w/auto h ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC ABC"</span>,</span></span>
+<span class="r-in"><span> startCol <span class="op">=</span> <span class="fl">2</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, <span class="st">"variable w/fixed h"</span>, startCol <span class="op">=</span> <span class="fl">3</span>, startRow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## overwrite row 1 height</span></span></span>
-<span class="r-in"><span><span class="fu">setRowHeights</span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, rows <span class="op">=</span> <span class="fl">1</span>, heights <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Set column widths and row heights</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="st">"auto"</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">setRowHeights</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">8</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span>, heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="st">"auto"</span>, <span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Overwrite row 1 height</span></span></span>
+<span class="r-in"><span><span class="fu">setRowHeights</span><span class="op">(</span><span class="va">wb</span>, <span class="va">sheet</span>, rows <span class="op">=</span> <span class="fl">1</span>, heights <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Save workbook</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
