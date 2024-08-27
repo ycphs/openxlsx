@@ -2,6 +2,7 @@
 
 * Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
 * Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
+* `saveWorkbook()` now succeeds when called after the user has set column widths for a range of columns (e.g. 1:2), saved the workbook, then set column widths for a new range that is inclusive of the previous one (e.g. 1:5) ([#493](https://github.com/ycphs/openxlsx/issues/493)).
 
 ## Improvements
 
