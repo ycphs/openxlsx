@@ -64,6 +64,8 @@
 <h2 class="page-header" data-toc-text="development version" id="openxlsx-development-version">openxlsx (development version)<a class="anchor" aria-label="anchor" href="#openxlsx-development-version"></a></h2>
 <ul><li>Fixed warning on <code>dataValidation(..., type = "list")</code> (<a href="https://github.com/ycphs/openxlsx/issues/342" class="external-link">#342</a>)</li>
 <li>Added optional argument to <code>loadWorkbook</code> to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is</li>
+<li>
+<code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code> now succeeds when called after the user has set column widths for a range of columns (e.g. 1:2), saved the workbook, then set column widths for a new range that is inclusive of the previous one (e.g. 1:5) (<a href="https://github.com/ycphs/openxlsx/issues/493" class="external-link">#493</a>).</li>
 </ul><div class="section level3">
 <h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
 <ul><li>Improve detectDates (<a href="https://github.com/ycphs/openxlsx/issues/288" class="external-link">#288</a>)</li>
