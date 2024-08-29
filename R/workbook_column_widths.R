@@ -154,7 +154,10 @@ Workbook$methods(setColWidths = function(sheet) {
       }
     }
 
-    cols <- cols[!cols %in% names(worksheets[[sheet]]$cols)]
+    remaining_cols <- !cols %in% names(worksheets[[sheet]]$cols)
+    cols <- cols[remaining_cols]
+    widths <- widths[remaining_cols]
+    hidden <- hidden[remaining_cols]
   }
 
   # Add remaining columns
