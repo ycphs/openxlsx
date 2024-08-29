@@ -387,7 +387,7 @@ addWorksheet <- function(wb,
   }
 
   if (!inherits(wb, "Workbook")) {
-    stop("wb must be a Workbok", call. = FALSE)
+    stop("wb must be a Workbook", call. = FALSE)
   }
 
   # Set NULL defaults
