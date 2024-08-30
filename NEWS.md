@@ -1,4 +1,4 @@
-# openxlsx (development version)
+# openxlsx 4.2.7
 
 * Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
 * Added optional argument to `loadWorkbook` to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is
