@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.7</span>
       </span>
     </div>
 
@@ -57,11 +57,23 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/ycphs/openxlsx/blob/v4.2.6/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/ycphs/openxlsx/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="4.2.6" id="openxlsx-426">openxlsx 4.2.6<a class="anchor" aria-label="anchor" href="#openxlsx-426"></a></h2>
+<h2 class="page-header" data-toc-text="4.2.7" id="openxlsx-427">openxlsx 4.2.7<a class="anchor" aria-label="anchor" href="#openxlsx-427"></a></h2>
+<ul><li>Fixed warning on <code>dataValidation(..., type = "list")</code> (<a href="https://github.com/ycphs/openxlsx/issues/342" class="external-link">#342</a>)</li>
+<li>Added optional argument to <code>loadWorkbook</code> to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is</li>
+<li>
+<code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code> now succeeds when called after the user has set column widths for a range of columns (e.g. 1:2), saved the workbook, then set column widths for a new range that is inclusive of the previous one (e.g. 1:5) (<a href="https://github.com/ycphs/openxlsx/issues/493" class="external-link">#493</a>).</li>
+</ul><div class="section level3">
+<h3 id="improvements-4-2-7">Improvements<a class="anchor" aria-label="anchor" href="#improvements-4-2-7"></a></h3>
+<ul><li>Improve detectDates (<a href="https://github.com/ycphs/openxlsx/issues/288" class="external-link">#288</a>)</li>
+<li>Preserve window size and position, also <code><a href="../reference/setWindowSize.html">getWindowSize()</a></code> and <code><a href="../reference/setWindowSize.html">setWindowSize()</a></code> (<a href="https://github.com/ycphs/openxlsx/pull/466" class="external-link">466</a>)</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="4.2.6" id="openxlsx-426">openxlsx 4.2.6<small>2024-07-23</small><a class="anchor" aria-label="anchor" href="#openxlsx-426"></a></h2>
 <ul><li>Fix external links (<a href="https://github.com/ycphs/openxlsx/pull/410" class="external-link">#410</a>)</li>
 <li>Do not add unneccessary sheetPr node (<a href="https://github.com/ycphs/openxlsx/pull/409" class="external-link">#409</a>)</li>
 <li>Add support for <code>namedRegion</code>s having dots and other special characters (<a href="https://github.com/ycphs/openxlsx/issues/338" class="external-link">#338</a>).</li>
@@ -72,7 +84,7 @@
 <div class="section level3">
 <h3 id="fixes-4-2-5">Fixes<a class="anchor" aria-label="anchor" href="#fixes-4-2-5"></a></h3>
 <ul><li>
-<code><a href="../reference/openxlsx_options.html">openxlsx_setOp()</a></code> now works with named list (<a href="https://github.com/ycphs/openxlsx/issues/215" class="external-link">#215</a>)<br></li>
+<code><a href="../reference/openxlsx_options.html">openxlsx_setOp()</a></code> now works with named list (<a href="https://github.com/ycphs/openxlsx/issues/215" class="external-link">#215</a>)</li>
 <li>
 <code><a href="../reference/loadWorkbook.html">loadWorkbook()</a></code> imports <code>inlineStr</code>. Values remain <code>inlineStr</code> when writing the workbook with <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code>. Similar <code>read.xlsx</code> and <code>readWorkbook</code> import <code>inlineStr</code>.</li>
 <li>

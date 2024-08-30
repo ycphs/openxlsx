@@ -18,6 +18,8 @@
 <url><loc>/reference/addWorksheet.html</loc></url>
 <url><loc>/reference/all.equal.html</loc></url>
 <url><loc>/reference/as.character.formula.html</loc></url>
+<url><loc>/reference/as_POSIXct_utc.html</loc></url>
+<url><loc>/reference/auto_heights.html</loc></url>
 <url><loc>/reference/buildWorkbook.html</loc></url>
 <url><loc>/reference/cloneWorksheet.html</loc></url>
 <url><loc>/reference/col2int.html</loc></url>
@@ -42,6 +44,7 @@
 <url><loc>/reference/getSheetNames.html</loc></url>
 <url><loc>/reference/getStyles.html</loc></url>
 <url><loc>/reference/getTables.html</loc></url>
+<url><loc>/reference/get_worksheet_entries.html</loc></url>
 <url><loc>/reference/groupColumns.html</loc></url>
 <url><loc>/reference/groupRows.html</loc></url>
 <url><loc>/reference/if_null_then.html</loc></url>
@@ -80,6 +83,7 @@
 <url><loc>/reference/setHeaderFooter.html</loc></url>
 <url><loc>/reference/setLastModifiedBy.html</loc></url>
 <url><loc>/reference/setRowHeights.html</loc></url>
+<url><loc>/reference/setWindowSize.html</loc></url>
 <url><loc>/reference/sheetVisibility.html</loc></url>
 <url><loc>/reference/sheetVisible.html</loc></url>
 <url><loc>/reference/sheets.html</loc></url>
