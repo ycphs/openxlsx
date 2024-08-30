@@ -16,7 +16,7 @@ vignette: >
 library(openxlsx)
 ```
 
-```{r include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE}
+```{r include = TRUE, eval = FALSE, highlight = TRUE}
 ## data.frame to write
 df <- data.frame("Date" = Sys.Date()-0:4,
                  "Logical" = c(TRUE, FALSE, TRUE, TRUE, FALSE),
@@ -79,7 +79,7 @@ The 'tableStyle' argument in writeDataTable can be any of the predefined tableSt
 
 ## Date Formatting
 
-```{r include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE}
+```{r include = TRUE, eval = FALSE, highlight = TRUE}
 # data.frame of dates
 dates <- data.frame("d1" = Sys.Date() - 0:4)
 for(i in 1:3) dates <- cbind(dates, dates)
@@ -140,7 +140,7 @@ saveWorkbook(wb, "Date Formatting.xlsx", overwrite = TRUE)
 The conversion from POSIX to Excel datetimes is dependent on the timezone you are in.
 If POSIX values are being written incorrectly, try setting the timezone with (for example)
 
-```{r include = TRUE,tidy = TRUE, eval = FALSE, highlight = TRUE}
+```{r include = TRUE, eval = FALSE, highlight = TRUE}
 Sys.setenv(TZ = "Australia/Sydney")
 
 dateTimes <- data.frame("d1" = Sys.time() - 0:4*10000)
@@ -190,7 +190,7 @@ openXL("DateTime Formatting.xlsx")
 
 ## Conditional Formatting
 
-```{r include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE}
+```{r include = TRUE, eval = FALSE, highlight = TRUE}
 wb <- createWorkbook()
 addWorksheet(wb, "cellIs")
 addWorksheet(wb, "Moving Row")
@@ -266,7 +266,7 @@ openXL(wb)
 numeric columns styling can be set using the numFmt parameter in createStyle or a default can be 
 set with, for example, options("openxlsx.numFmt" = "#,#0.00")
 
-```{r include = TRUE, tidy = TRUE, eval = FALSE, highlight = TRUE}
+```{r include = TRUE, eval = FALSE, highlight = TRUE}
 options("openxlsx.numFmt" = NULL)
 wb <- createWorkbook()
 addWorksheet(wb, "Sheet 1")

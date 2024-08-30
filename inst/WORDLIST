@@ -1,4 +1,5 @@
 Arial
+Breuer
 CMD
 Calibri
 Calligra
@@ -12,7 +13,6 @@ Generalised
 Gnumeric
 Italicise
 JIS
-Kainhofer
 LONGDATE
 LastModifiedBy
 Libreoffice
@@ -59,6 +59,7 @@ dateFormat
 datetime
 datetimeFormat
 datetimes
+detectDates
 dev
 df
 eg
@@ -89,6 +90,7 @@ loadWorkbook
 maxWidth
 minWidth
 na
+nestings
 notBetween
 notBlanks
 notContains
