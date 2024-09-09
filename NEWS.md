@@ -1,3 +1,7 @@
+# openxlsx (development version)
+
+* 
+
 # openxlsx 4.2.7
 
 * Fixed warning on `dataValidation(..., type = "list")` ([#342](https://github.com/ycphs/openxlsx/issues/342))
