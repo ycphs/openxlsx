@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">4.2.7.1</span>
       </span>
     </div>
 
@@ -61,13 +61,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="openxlsx-development-version">openxlsx (development version)<a class="anchor" aria-label="anchor" href="#openxlsx-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="4.2.7" id="openxlsx-427">openxlsx 4.2.7<small>2024-08-30</small><a class="anchor" aria-label="anchor" href="#openxlsx-427"></a></h2>
 <ul><li>Fixed warning on <code>dataValidation(..., type = "list")</code> (<a href="https://github.com/ycphs/openxlsx/issues/342" class="external-link">#342</a>)</li>
 <li>Added optional argument to <code>loadWorkbook</code> to decide if empty/blank cells should be converted to NA_character_ (the default) or left blank as is</li>
 <li>
 <code><a href="../reference/saveWorkbook.html">saveWorkbook()</a></code> now succeeds when called after the user has set column widths for a range of columns (e.g. 1:2), saved the workbook, then set column widths for a new range that is inclusive of the previous one (e.g. 1:5) (<a href="https://github.com/ycphs/openxlsx/issues/493" class="external-link">#493</a>).</li>
 </ul><div class="section level3">
-<h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
+<h3 id="improvements-4-2-7">Improvements<a class="anchor" aria-label="anchor" href="#improvements-4-2-7"></a></h3>
 <ul><li>Improve detectDates (<a href="https://github.com/ycphs/openxlsx/issues/288" class="external-link">#288</a>)</li>
 <li>Preserve window size and position, also <code><a href="../reference/setWindowSize.html">getWindowSize()</a></code> and <code><a href="../reference/setWindowSize.html">setWindowSize()</a></code> (<a href="https://github.com/ycphs/openxlsx/pull/466" class="external-link">466</a>)</li>
 </ul></div>
