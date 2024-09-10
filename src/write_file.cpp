@@ -1,6 +1,5 @@
 
 #include "openxlsx.h"
-#include <regex>
 
 
 //' @import Rcpp
@@ -161,6 +160,19 @@ SEXP buildMatrixNumeric(CharacterVector v, IntegerVector rowInd, IntegerVector c
 }
 
 
+// from openxlsx2:
+// similar to is.numeric(x)
+// returns true if string can be written as numeric and is not Inf
+// @param x a string input
+bool is_double(std::string x) {
+  char *endp;
+  double res;
+  res = R_strtod(x.c_str(), &endp);
+  if (isBlankString(endp) && std::isfinite(res)) {
+    return 1;
+  }
+  return 0;
+}
 
 
 // [[Rcpp::export]]
@@ -232,7 +244,7 @@ SEXP buildMatrixMixed(CharacterVector v,
           try{
             // Some values are incorrectly detected as dates. This regex determines if they are numerics.
             // If so, they are converted to Dates. 
-            if (std::regex_match( dt_str, std::regex( ( "((\\+|-)?[[:digit:]]+)(\\.(([[:digit:]]+)?))?" ) ) )) {
+            if (is_double(dt_str)) {
               datetmp[ri] = as<Rcpp::Date>(cTD(dt_str));
             } else {
               datetmp[ri] = Rcpp::Date(atoi(dt_str.substr(5,2).c_str()), atoi(dt_str.substr(8,2).c_str()), atoi(dt_str.substr(0,4).c_str()) );
