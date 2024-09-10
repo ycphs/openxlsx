@@ -1222,6 +1222,7 @@ convert2EMU <- function(d, units) {
 #' @param startCol Column coordinate of upper left corner of the image
 #' @param units Units of width and height. Can be "in", "cm" or "px"
 #' @param dpi Image resolution used for conversion between units.
+#' @param address An optional character string specifying an external URL, relative or absolute path to a file, or mailto string (e.g. "mailto:example@@example.com") that will be opened when the image is clicked.
 #' @importFrom grDevices bmp png jpeg
 #' @seealso [insertPlot()]
 #' @export
@@ -1233,18 +1234,20 @@ convert2EMU <- function(d, units) {
 #' addWorksheet(wb, "Sheet 1")
 #' addWorksheet(wb, "Sheet 2")
 #' addWorksheet(wb, "Sheet 3")
+#' addWorksheet(wb, "Sheet 4")
 #'
 #' ## Insert images
 #' img <- system.file("extdata", "einstein.jpg", package = "openxlsx")
 #' insertImage(wb, "Sheet 1", img, startRow = 5, startCol = 3, width = 6, height = 5)
 #' insertImage(wb, 2, img, startRow = 2, startCol = 2)
 #' insertImage(wb, 3, img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
+#' insertImage(wb, 4, img, address = "https://github.com/ycphs/openxlsx")
 #'
 #' ## Save workbook
 #' \dontrun{
 #' saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
 #' }
-insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, startCol = 1, units = "in", dpi = 300) {
+insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, startCol = 1, units = "in", dpi = 300, address) {
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
 
@@ -1260,6 +1263,12 @@ insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, st
 
   if (!units %in% c("cm", "in", "px")) {
     stop("Invalid units.\nunits must be one of: cm, in, px")
+  }
+
+  if (!missing(address)) {
+    if (!is.character(address) || length(address) != 1 || is.na(address)) {
+      stop("Invalid address. address must be a string and have a length of one.")
+    } 
   }
 
   startCol <- convertFromExcelRef(startCol)
@@ -1278,7 +1287,7 @@ insertImage <- function(wb, sheet, file, width = 6, height = 3, startRow = 1, st
   widthEMU <- as.integer(round(width * 914400L, 0)) # (EMUs per inch)
   heightEMU <- as.integer(round(height * 914400L, 0)) # (EMUs per inch)
 
-  wb$insertImage(sheet, file = file, startRow = startRow, startCol = startCol, width = widthEMU, height = heightEMU)
+  wb$insertImage(sheet, file = file, startRow = startRow, startCol = startCol, width = widthEMU, height = heightEMU, address = address)
 }
 
 pixels2ExcelColWidth <- function(pixels) {

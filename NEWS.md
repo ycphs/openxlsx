@@ -1,6 +1,6 @@
 # openxlsx (development version)
 
-* 
+* It's now possible to insert a hyperlinked image by passing a URL, relative or absolute file path, or mailto string to the new `address` parameter of `insertImage()`.
 
 # openxlsx 4.2.7
 

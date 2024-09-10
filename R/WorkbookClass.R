@@ -3100,10 +3100,11 @@ Workbook$methods(
                          width,
                          height,
                          rowOffset = 0,
-                         colOffset = 0) {
+                         colOffset = 0,
+                         address) {
     ## within the sheet the drawing node's Id refernce an id in the sheetRels
     ## sheet rels reference the drawingi.xml file
-    ## drawingi.xml refernece drawingRels
+    ## drawingi.xml reference drawingRels
     ## drawing rels reference an image in the media folder
     ## worksheetRels(sheet(i)) references drawings(j)
 
@@ -3113,6 +3114,8 @@ Workbook$methods(
     imageType <- gsub("^\\.", "", imageType)
 
     imageNo <- length((drawings[[sheet]])) + 1L
+    imageRelNo <- length((drawings_rels[[sheet]])) + 1L
+    linkRelNo <- length((drawings_rels[[sheet]])) + 2L
     mediaNo <- length(media) + 1L
 
     startCol <- convertFromExcelRef(startCol)
@@ -3135,10 +3138,17 @@ Workbook$methods(
       drawings_rels[[sheet]],
       sprintf(
         '<Relationship Id="rId%s" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/image%s.%s"/>',
-        imageNo,
+        imageRelNo,
         mediaNo,
         imageType
-      )
+      ), 
+      if (!missing(address)) {
+        sprintf(
+          '<Relationship Id="rId%s" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="%s" TargetMode="External"/>',
+          linkRelNo,
+          address
+        )
+      }
     )
 
     ## write file path to media slot to copy across on save
@@ -3171,7 +3181,11 @@ Workbook$methods(
         width,
         height
       ),
-      genBasePic(imageNo),
+      if (missing(address)) {
+        genBasePic(imageNo, imageRelNo)
+      } else {
+        genLinkedPic(imageNo, imageRelNo, linkRelNo)
+      },
       "<xdr:clientData/>",
       "</xdr:oneCellAnchor>"
     )
