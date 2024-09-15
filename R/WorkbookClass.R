@@ -3181,11 +3181,20 @@ Workbook$methods(
         width,
         height
       ),
-      if (missing(address)) {
-        genBasePic(imageNo, imageRelNo)
-      } else {
-        genLinkedPic(imageNo, imageRelNo, linkRelNo)
-      },
+      genBasePic(
+        imageNo, 
+        imageRelNo, 
+        ifelse(
+          missing(address),
+          "/",
+          sprintf(
+            '>
+              <a:hlinkClick xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId%s"/>
+            </xdr:cNvPr',
+            linkRelNo
+          )
+        )
+      ),
       "<xdr:clientData/>",
       "</xdr:oneCellAnchor>"
     )
