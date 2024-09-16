@@ -13,7 +13,8 @@ insertImage(
   startRow = 1,
   startCol = 1,
   units = "in",
-  dpi = 300
+  dpi = 300,
+  address
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ insertImage(
 \item{units}{Units of width and height. Can be "in", "cm" or "px"}
 
 \item{dpi}{Image resolution used for conversion between units.}
+
+\item{address}{An optional character string specifying an external URL, relative or absolute path to a file, or mailto string (e.g. "mailto:example@example.com") that will be opened when the image is clicked.}
 }
 \description{
 Insert an image into a worksheet
@@ -46,12 +49,14 @@ wb <- createWorkbook("Ayanami")
 addWorksheet(wb, "Sheet 1")
 addWorksheet(wb, "Sheet 2")
 addWorksheet(wb, "Sheet 3")
+addWorksheet(wb, "Sheet 4")
 
 ## Insert images
 img <- system.file("extdata", "einstein.jpg", package = "openxlsx")
 insertImage(wb, "Sheet 1", img, startRow = 5, startCol = 3, width = 6, height = 5)
 insertImage(wb, 2, img, startRow = 2, startCol = 2)
 insertImage(wb, 3, img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
+insertImage(wb, 4, img, address = "https://github.com/ycphs/openxlsx")
 
 ## Save workbook
 \dontrun{

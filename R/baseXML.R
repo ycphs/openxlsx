@@ -236,10 +236,10 @@ genBaseStyleSheet <- function(dxfs = NULL, tableStyles = NULL, extLst = NULL) {
 }
 
 
-genBasePic <- function(imageNo) {
+genBasePic <- function(imageNo, imageRelNo, hyperlinkXML) {
   sprintf('<xdr:pic xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing">
       <xdr:nvPicPr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing">
-        <xdr:cNvPr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" id="%s" name="Picture %s"/>
+        <xdr:cNvPr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" id="%s" name="Picture %s"%s>
         <xdr:cNvPicPr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing">
           <a:picLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
         </xdr:cNvPicPr>
@@ -256,10 +256,8 @@ genBasePic <- function(imageNo) {
           <a:avLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
         </a:prstGeom>
       </xdr:spPr>
-    </xdr:pic>', imageNo, imageNo, imageNo)
+    </xdr:pic>', imageNo, imageNo, hyperlinkXML, imageRelNo)
 }
-
-
 
 
 
