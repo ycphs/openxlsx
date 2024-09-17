@@ -168,7 +168,7 @@ bool is_double(std::string x) {
   char *endp;
   double res;
   res = R_strtod(x.c_str(), &endp);
-  if (isBlankString(endp) && std::isfinite(res)) {
+  if (strlen(endp) == 0 && std::isfinite(res)) {
     return 1;
   }
   return 0;
