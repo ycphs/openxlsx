@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrappers.R
 \name{setLastModifiedBy}
 \alias{setLastModifiedBy}
-\title{Add another author to the meta data of the file.}
+\title{Set the author who modified the file last.}
 \usage{
 setLastModifiedBy(wb, LastModifiedBy)
 }

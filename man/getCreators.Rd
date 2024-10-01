@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrappers.R
 \name{getCreators}
 \alias{getCreators}
-\title{Add another author to the meta data of the file.}
+\title{Get the names of the authors from the meta data of the file.}
 \usage{
 getCreators(wb)
 }
@@ -14,7 +14,6 @@ vector of creators
 }
 \description{
 Just a wrapper of wb$getCreators()
-Get the names of the
 }
 \examples{
 

@@ -4853,7 +4853,7 @@ addCreator <- function(wb, Creator) {
 }
 
 #' @name setLastModifiedBy
-#' @title Add another author to the meta data of the file.
+#' @title Set the author who modified the file last.
 #' @author Philipp Schauberger
 #' @description Just a wrapper of wb$changeLastModifiedBy()
 #' @param wb A workbook object
@@ -4874,9 +4874,8 @@ setLastModifiedBy <- function(wb, LastModifiedBy) {
 
 
 #' @name getCreators
-#' @title Add another author to the meta data of the file.
+#' @title Get the names of the authors from the meta data of the file.
 #' @description Just a wrapper of wb$getCreators()
-#' Get the names of the
 #' @param wb A workbook object
 #' @author Philipp Schauberger
 #' @return vector of creators
