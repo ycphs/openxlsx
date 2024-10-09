@@ -978,7 +978,7 @@ get_worksheet_entries <- function(wb, sheet) {
   # get boolean vector of text entries
   typ <- (dat$t == 1) & !is.na(dat$t)
   # get text entry strings
-  str <- unlist(wb$sharedStrings[as.integer(val)[typ] + 1])
+  str <- unlist(wb$sharedStrings[as.numeric(val)[typ] + 1])
   # remove xml tags
   str <- gsub("<.*?>", "", str)
   # write strings to vector of entries
