@@ -1916,14 +1916,17 @@ deleteDataColumn <- function(wb, sheet, col) {
   a$rows <- a$rows[keep]
 
   # reduce the shared strings pointers if they are not used anymore
-  ss <- data.frame(
-    # the old index 0 indexed, as used in a$v
-    old = as.numeric(seq(length(wb$sharedStrings)) - 1),
-    # will hold the new index 0 indexed, as used in a$v
-    new = NA,
-    # the actual strings
-    string = wb$sharedStrings
-  )
+  ss <- data.frame(old = numeric(0), new = numeric(0), string = character(0))
+  if (length(wb$sharedStrings) > 0) {
+    ss <- data.frame(
+      # the old index 0 indexed, as used in a$v
+      old = as.numeric(seq(length(wb$sharedStrings)) - 1),
+      # will hold the new index 0 indexed, as used in a$v
+      new = NA,
+      # the actual strings
+      string = wb$sharedStrings
+    )
+  }
   
   # 1. remove the values from sheet_data (a)
   a$v <- a$v[keep]
