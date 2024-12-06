@@ -1900,44 +1900,65 @@ deleteDataColumn <- function(wb, sheet, col) {
   }
 
   a <- wb$worksheets[[sheet]]$sheet_data
+  
+  # t: if a shared string is used or if the string is a value itself
+  # v: the shared string index or the string itself (if t == 0)
+  # in wb$sharedStrings we find the values of the shared strings by index + 1 (0 indexed!)
+  
 
   # check which elements to delete
   keep <- a$cols != col
   # if there is no column to delete, exit early
   if (all(keep)) return(invisible(0))
 
-  # delete cols in cols "col" move higher cols one down
+  # delete cols in cols "col", move higher cols one down
   a$cols <- as.integer(a$cols[keep] - 1 * (a$cols[keep] > col))
   a$rows <- a$rows[keep]
 
   # reduce the shared strings pointers if they are not used anymore
-  has_t <- !is.na(a$t) & a$t == 1
-  used_shared <- a$v[has_t] # a reference to all shared strings
-  keep_t <- keep[has_t] # these shared strings are kept
-  keep_t[is.na(keep_t)] <- FALSE
-  keep_shared <- used_shared[keep_t]
-  rem_shared <- setdiff(unique(used_shared[!keep_t]), unique(keep_shared))
-  for (v in rem_shared) {
-    to_reduce <- as.numeric(keep_shared) > as.numeric(v)
-    to_reduce[is.na(to_reduce)] <- FALSE
-    if (any(to_reduce))
-      keep_shared[to_reduce] <- as.character(as.numeric(keep_shared[to_reduce]) - 1)
-  }
-  used_shared[keep_t] <- keep_shared
-  a$v[has_t] <- used_shared
-
+  ss <- data.frame(
+    # the old index 0 indexed, as used in a$v
+    old = as.numeric(seq(length(wb$sharedStrings)) - 1),
+    # will hold the new index 0 indexed, as used in a$v
+    new = NA,
+    # the actual strings
+    string = wb$sharedStrings
+  )
+  
+  # 1. remove the values from sheet_data (a)
   a$v <- a$v[keep]
   a$t <- a$t[keep]
-
+  
+  # update the shared strings map (ss) with the new indices
+  
+  # v_this_sheet etc are the indices that are still used
+  v_this_sheet <- as.numeric(a$v[!is.na(a$t) & a$t == 1])
+  # get all string indices from other sheets, so that strings used in other sheets are not deleted!
+  v_other_sheets <- unlist(lapply(setdiff(seq_along(wb$worksheets), sheet), function(sh) {
+    a <- wb$worksheets[[sh]]$sheet_data
+    as.numeric(a$v[!is.na(a$t) & a$t == 1])
+  }))
+  
+  idx <- sort(unique(c(v_this_sheet, v_other_sheets)))
+  ss$new[ss$old %in% idx] <- seq_along(idx) - 1
+  
+  # 2. remove the values from the sharedStrings object
+  wb$sharedStrings <- wb$sharedStrings[idx + 1]
+  attr(wb$sharedStrings, "uniqueCount") <- length(idx)
+  
+  # 3. reindex the values from the sheet_data to use new shared strings indices
+  a$v[a$t == 1] <- as.character(ss$new[as.numeric(a$v[a$t == 1]) + 1])
+  
+  # update the shared strings for all other sheets
+  for (s in setdiff(seq_along(wb$worksheets), sheet)) {
+    a <- wb$worksheets[[s]]$sheet_data
+    a$v[a$t == 1] <- as.character(ss$new[as.numeric(a$v[a$t == 1]) + 1])
+  }
+  
   a$f <- updateFormula(a$f[keep], col = col)
   a$n_elements <- sum(keep)
 
   if ("data_count" %in% names(a)) a$data_count <- length(unique(a$v))
-
-  # remove the unneeded strings from sharedStrings
-  rv <- as.numeric(rem_shared) + 1
-  wb$sharedStrings <- wb$sharedStrings[-rv]
-  attr(wb$sharedStrings, "uniqueCount") <- length(unique(wb$sharedStrings))
 
   # adjust styles
   sheet_name <- wb$sheet_names[[sheet]]
