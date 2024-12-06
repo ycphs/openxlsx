@@ -17,7 +17,7 @@ test_that("int2col and col2int", {
 test_that("deleteDataColumn basics", {
   wb <- createWorkbook()
   addWorksheet(wb, "tester")
-
+  
   for (i in seq(5)) {
     mat <- data.frame(x = rep(paste0(int2col(i), i), 10))
     writeData(wb, sheet = 1, startRow = 1, startCol = i, mat)
@@ -29,8 +29,8 @@ test_that("deleteDataColumn basics", {
     c("<f>=COUNTA(A2:A11)</f>", "<f>=COUNTA(B2:B11)</f>", "<f>=COUNTA(C2:C11)</f>", 
       "<f>=COUNTA(D2:D11)</f>", "<f>=COUNTA(E2:E11)</f>")
   )
-
-
+  
+  
   deleteDataColumn(wb, 1, col = 3)
   expect_equal(read.xlsx(wb),
                data.frame(x = rep("A1", 10), x = "B2", x = "D4", x = "E5", # no C3!
@@ -130,7 +130,7 @@ test_that("deleteDataColumn with formatting data", {
   
   st <- openxlsx::createStyle(textDecoration = "Bold", fontSize = 20, fontColour = "red")
   openxlsx::addStyle(wb, 1, style = st, rows = 1, cols = seq(ncol(df)))
-
+  
   sst <- wb$styleObjects[[1]]
   sst$rows <- c(1, 1)
   sst$cols <- c(1, 2)
@@ -139,4 +139,113 @@ test_that("deleteDataColumn with formatting data", {
   expect_length(wb$styleObjects, 1)
   expect_equal(wb$styleObjects[[1]],
                sst)
+})
+
+test_that("deleteDataColumn with shared strings does not crash or change inputs", {
+  df <- data.frame("Col 1" = "Row 2 Col 1",
+                   "Col 2" = "Row 2 Col 2",
+                   "Col 3" = "Row 2 Col 3",
+                   check.names = FALSE)
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, "tester")
+  writeData(wb, sheet = 1, startRow = 1, startCol = 1, x = df, colNames = TRUE)
+  
+  deleteDataColumn(wb, sheet =  1, col =  2)
+  
+  expect_equal(
+    wb$sharedStrings,
+    structure(
+      list(
+        "<si><t xml:space=\"preserve\">Col 1</t></si>",
+        "<si><t xml:space=\"preserve\">Col 3</t></si>",
+        "<si><t xml:space=\"preserve\">Row 2 Col 1</t></si>",
+        "<si><t xml:space=\"preserve\">Row 2 Col 3</t></si>"
+      ),
+      uniqueCount = 4L
+    )
+  )
+  expect_equal(
+    read.xlsx(wb),
+    data.frame(
+      "Col 1" = "Row 2 Col 1",
+      "Col 3" = "Row 2 Col 3"
+    )
+  )
+})
+
+
+test_that("deleteDataColumn with shared strings on other sheets", {
+  df <- data.frame("ABC" = "I am a shared string with sheet 2!")
+  df2 <- data.frame("AB" = "I am a shared string with sheet 2!")
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, "tester")
+  writeData(wb, sheet = 1, startRow = 1, startCol = 1, x = df, colNames = TRUE)
+  
+  simplify <- function(sd) data.frame(rows = sd$rows, cols = sd$cols, t = sd$t, v = sd$v)
+  expect_equal(
+    simplify(wb$worksheets[[1]]$sheet_data),
+    data.frame(rows = c(1, 2), cols = 1, t = 1, v = c("0", "1"))
+  )
+  expect_equal(
+    wb$sharedStrings,
+    structure(
+      list(
+        "<si><t xml:space=\"preserve\">ABC</t></si>",
+        "<si><t xml:space=\"preserve\">I am a shared string with sheet 2!</t></si>"
+      ),
+      uniqueCount = 2L
+    )
+  )
+  
+  addWorksheet(wb, "tester2")
+  writeData(wb, sheet = 2, startRow = 1, startCol = 1, x = df2, colNames = TRUE)
+  
+  expect_equal(
+    simplify(wb$worksheets[[2]]$sheet_data),
+    data.frame(rows = c(1, 2), cols = 1, t = 1, v = c("2", "1"))
+  )
+  expect_equal(
+    wb$sharedStrings,
+    structure(
+      list(
+        "<si><t xml:space=\"preserve\">ABC</t></si>",
+        "<si><t xml:space=\"preserve\">I am a shared string with sheet 2!</t></si>",
+        "<si><t xml:space=\"preserve\">AB</t></si>"
+      ),
+      uniqueCount = 3L
+    )
+  )
+  
+  
+  # deleting from sheet 1 does not delete the string from sheet 2!
+  deleteDataColumn(wb, sheet =  1, col =  1)
+  
+  expect_equal(
+    simplify(wb$worksheets[[1]]$sheet_data),
+    data.frame(rows = numeric(0), cols = numeric(0), t = numeric(0), v = character(0))
+  )
+  
+  # note on sheet 2, the indices v to the shared strings have to change as well!
+  expect_equal(
+    simplify(wb$worksheets[[2]]$sheet_data),
+    data.frame(rows = c(1, 2), cols = 1, t = 1, v = c("1", "0"))
+  )
+  
+  expect_equal(
+    wb$sharedStrings,
+    structure(
+      list(
+        "<si><t xml:space=\"preserve\">I am a shared string with sheet 2!</t></si>",
+        "<si><t xml:space=\"preserve\">AB</t></si>"
+      ),
+      uniqueCount = 2L
+    )
+  )
+  
+  expect_equal(
+    read.xlsx(wb, sheet = 2),
+    data.frame(AB = "I am a shared string with sheet 2!")
+  )
 })
