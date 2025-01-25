@@ -134,7 +134,7 @@
 
 ## Bug Fixes
 
-*  fixed issue [#68](https://github.com/ycphs/openxlsx/issues/68])
+*  fixed issue [#68](https://github.com/ycphs/openxlsx/issues/68)
 
 # openxlsx 4.1.5
 
@@ -172,7 +172,7 @@
 
 *  Use `zip::zipr()` instead of `zip::zip()`.
 
-*  Keep correct visibility option for loadWorkbook. [#12](https://github.com/ycphs/openxlsx/issues/12])
+*  Keep correct visibility option for loadWorkbook. [#12](https://github.com/ycphs/openxlsx/issues/12)
 
 *  Add space surrounding "wrapText" [#17](https://github.com/ycphs/openxlsx/issues/17)
 
