@@ -1,3 +1,10 @@
+# openxlsx 4.2.8
+
+* Fix the docs for `setLastModifiedBy()` and `getCreators()` (@PBfordev, [#505](https://github.com/ycphs/openxlsx/pull/505))
+* Fix an integer overflow in `setRowHeights()`
+* Fix a coercion warning in `get_worksheet_entries()` (@philaris, [#512](https://github.com/ycphs/openxlsx/pull/512))
+* Fix a bug in `deleteDataColumn()` (@DavZim, [#515](https://github.com/ycphs/openxlsx/pull/515))
+
 # openxlsx 4.2.7.1
 
 * It's now possible to insert a hyperlink image by passing a URL, relative or absolute file path, or mailto string to the new `address` parameter of `insertImage()`.
