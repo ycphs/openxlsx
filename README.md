@@ -1,4 +1,4 @@
-[openxlsx](https://ycphs.github.io/openxlsx/) <img src="img/badge.png" align="right" height="139" />
+[openxlsx](https://ycphs.github.io/openxlsx/) <img src="man/figures/logo.png" align="right" height="139" />
 ========
 
 
