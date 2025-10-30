@@ -25,8 +25,8 @@
 #' \cr\cr
 #' \cr**The below options correspond to Excel table options:**
 #' \cr
-#' \if{html}{\figure{tableoptions.png}{options: width="40\%" alt="Figure: table_options.png"}}
-#' \if{latex}{\figure{tableoptions.pdf}{options: width=7cm}}
+#' \if{html}{\figure{tableoptions.png}{options: alt="Figure: table_options.png"}}
+#' \if{latex}{\figure{tableoptions.pdf}{options: width=265px}}
 #'
 #' @param firstColumn logical. If TRUE, the first column is bold
 #' @param lastColumn logical. If TRUE, the last column is bold
@@ -161,19 +161,19 @@ writeDataTable <- function(
   ) {
   op <- get_set_options()
   on.exit(options(op), add = TRUE)
-  
+
   ## increase scipen to avoid writing in scientific
-  
+
   if (!missing(row.names)) {
     warning("Please use 'rowNames' instead of 'row.names'", call. = FALSE)
     row.names <- rowNames
   }
-  
+
   if (!missing(col.names)) {
     warning("Please use 'colNames' instead of 'col.names'", call. = FALSE)
     colNames <- col.names
   }
-  
+
   # Set NULLs
   withFilter  <- withFilter  %||% TRUE
   keepNA      <- keepNA      %||% FALSE
@@ -182,7 +182,7 @@ writeDataTable <- function(
   bandedRows  <- bandedRows  %||% TRUE
   bandedCols  <- bandedCols  %||% FALSE
   withFilter  <- withFilter  %||% TRUE
-  
+
   if (!is.null(xy)) {
     if (length(xy) != 2) {
       stop("xy parameter must have length 2")
@@ -203,7 +203,7 @@ writeDataTable <- function(
   assert_true_false(lastColumn)
   assert_true_false(bandedRows)
   assert_true_false(bandedCols)
-  
+
   if (is.null(tableName)) {
     tableName <- sprintf("Table%i", length(wb$tables) + 3L)
   } else {
@@ -222,13 +222,13 @@ writeDataTable <- function(
   }
 
   ## If 0 rows append a blank row
-  
+
   tableStyle <- validate_StyleName(tableStyle)
 
   ## header style
   if (inherits(headerStyle, "Style")) {
     addStyle(
-      wb         = wb, 
+      wb         = wb,
       sheet      = sheet,
       style      = headerStyle,
       rows       = startRow,
@@ -248,7 +248,7 @@ writeDataTable <- function(
     if (any(char0)) {
       colNames[char0] <- colnames(x)[char0] <- paste0("Column", which(char0))
     }
-    
+
     # Compatibility with MS Excel: throw warning if a table column name exceeds
     # the length of 255 chars.
     char_over255 <- nchar(colNames) > 255
@@ -263,7 +263,7 @@ writeDataTable <- function(
     colNames <- paste0("Column", seq_along(x))
     names(x) <- colNames
   }
-  
+
   ## If zero rows, append an empty row (prevent XML from corrupting)
   if (nrow(x) == 0) {
     x <- rbind(
@@ -291,11 +291,11 @@ writeDataTable <- function(
   classStyles(
     wb,
     sheet      = sheet,
-    startRow   = startRow, 
-    startCol   = startCol, 
+    startRow   = startRow,
+    startCol   = startCol,
     colNames   = TRUE,
     nRow       = nrow(x),
-    colClasses = colClasses, 
+    colClasses = colClasses,
     stack      = stack
   )
 
