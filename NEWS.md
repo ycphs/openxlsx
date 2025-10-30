@@ -1,3 +1,7 @@
+# openxlsx 4.2.7.1
+
+* Fix for upcoming `testthat` release (@hadley, [#530](https://github.com/ycphs/openxlsx/pull/530))
+
 # openxlsx 4.2.8
 
 * Fix the docs for `setLastModifiedBy()` and `getCreators()` (@PBfordev, [#505](https://github.com/ycphs/openxlsx/pull/505))
