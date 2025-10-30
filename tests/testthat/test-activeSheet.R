@@ -24,7 +24,7 @@ test_that("get and set active sheet of a workbook", {
   expect_equal(activeSheet(wbook),loadWorkbook(tempFile2)$ActiveSheet)
   activeSheet(wbook) <- "S2" ## active sheet S2
   saveWorkbook(wbook,tempFile3)
-  expect(activeSheet(wbook),2)
+  expect_equal(activeSheet(wbook),2)
   expect_equal(activeSheet(wbook),loadWorkbook(tempFile3)$ActiveSheet)
   
   unlink(tempFile1, recursive = TRUE, force = TRUE)
