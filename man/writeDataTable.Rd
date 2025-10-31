@@ -67,8 +67,8 @@ existing style is replaced by the new style.
 \cr\cr
 \cr\strong{The below options correspond to Excel table options:}
 \cr
-\if{html}{\figure{tableoptions.png}{options: width="40\%" alt="Figure: table_options.png"}}
-\if{latex}{\figure{tableoptions.pdf}{options: width=7cm}}}
+\if{html}{\figure{tableoptions.png}{options: alt="Figure: table_options.png"}}
+\if{latex}{\figure{tableoptions.pdf}{options: width=265px}}}
 
 \item{firstColumn}{logical. If TRUE, the first column is bold}
 

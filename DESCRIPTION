@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.8
-Date: 2025-01-25
+Version: 4.2.8.1
+Date: 2025-10-30
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -66,7 +66,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Collate: 
     'CommentClass.R'
     'HyperlinkClass.R'
