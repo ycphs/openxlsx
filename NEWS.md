@@ -1,4 +1,6 @@
-# openxlsx 4.2.7.1
+**Note:** `openxlsx` is no longer under active development. The package is maintained, and CRAN warnings will be fixed, but non-critical issues will not be addressed unless accompanied by a pull request. Packages that depend on `openxlsx` do not need to take any action, but for new developments, users are encouraged to use alternatives like `readxl`, `writexl`, or `openxlsx2`. The first two packages provide support for reading and writing `.xlsx` files. The latter package is a modern reinterpretation of `openxlsx` and provides similar functions to modify worksheets. However, it is not a drop-in replacement, so you may want to consult resources like [the update vignette](https://janmarvin.github.io/openxlsx2/articles/Update-from-openxlsx.html).
+
+# openxlsx 4.2.8.1
 
 * Fix for upcoming `testthat` release (@hadley, [#530](https://github.com/ycphs/openxlsx/pull/530))
 
