@@ -88,7 +88,7 @@ each column. If "\code{all}" all cell borders are drawn.}
 
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
 
-\item{overwrite}{If \code{TRUE}, remove existing cell values in the target worksheet before writing \code{x}.}
+\item{overwrite}{If \code{TRUE}, clear all existing cell contents on the target worksheet before writing \code{x}.}
 
 \item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
 }
