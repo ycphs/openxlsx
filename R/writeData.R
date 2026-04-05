@@ -45,7 +45,7 @@
 #' @param na.string If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
-#' @param overwrite If `TRUE`, remove existing cell values in the target worksheet before writing `x`.
+#' @param overwrite If `TRUE`, remove all existing cell values from the entire target worksheet before writing `x` (not just the cells in the target write range).
 #' @seealso [writeDataTable()]
 #' @export writeData
 #' @details Formulae written using writeFormula to a Workbook object will not get picked up by read.xlsx().
