@@ -299,6 +299,14 @@ writeData <- function(
     stop("Cannot write to chart sheet.")
   }
 
+  ## Check not overwriting existing table headers
+  wb$check_overwrite_tables(
+    sheet                   = sheet,
+    new_rows                = c(startRow, startRow + nRow - 1L + colNames),
+    new_cols                = c(startCol, startCol + nCol - 1L),
+    check_table_header_only = TRUE,
+    error_msg               = "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
+  )
 
   if (overwrite) {
     sheet_data <- wb$worksheets[[sheetX]]$sheet_data
@@ -310,15 +318,6 @@ writeData <- function(
       )
     }
   }
-
-  ## Check not overwriting existing table headers
-  wb$check_overwrite_tables(
-    sheet                   = sheet,
-    new_rows                = c(startRow, startRow + nRow - 1L + colNames),
-    new_cols                = c(startCol, startCol + nCol - 1L),
-    check_table_header_only = TRUE,
-    error_msg               = "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
-  )
 
   ## write autoFilter, can only have a single filter per worksheet
   if (withFilter) {
