@@ -3,6 +3,7 @@
 # openxlsx 4.2.8.1
 
 * Fix for upcoming `testthat` release (@hadley, [#530](https://github.com/ycphs/openxlsx/pull/530))
+* Add overwrite support to writeData() to clear stale cells when rewriting with a smaller data range ([#536](https://github.com/ycphs/openxlsx/pull/536))
 
 # openxlsx 4.2.8
 
