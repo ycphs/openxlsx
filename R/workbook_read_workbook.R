@@ -314,7 +314,7 @@ read.xlsx.Workbook <- function(xlsxFile,
 
       ## this regex defines what "looks" like a date
       format_codes <- gsub(".*(?<=\\])|@", "", format_codes, perl = TRUE)
-      sO <- sO[(!grepl("[^mdyhsapAMP[:punct:] ]", format_codes) & nchar(format_codes > 3)) | format_codes == 14]
+      sO <- sO[(!grepl("[^mdyhsapAMP[:punct:] ]", format_codes) & nchar(format_codes) > 3) | format_codes == 14]
     }
 
     if (length(sO) > 0) {
