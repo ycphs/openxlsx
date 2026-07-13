@@ -483,7 +483,7 @@ read.xlsx.default <- function(
       
       ## this regex defines what "looks" like a date
       dateIds <- numFmtsIds[!grepl("[^mdyhsapAMP[:punct:] ]", formatCodes) &
-          nchar(formatCodes > 3)]
+          nchar(formatCodes) > 3]
     }
     
     dateIds <- c(dateIds, 14)
