@@ -191,7 +191,7 @@ test_that("Reading NAs and NaN values", {
     Z = c(NA, 99, NA),
     Z2 = c(1, NA, NA)
   ),
-  .Names = c("X", "Y", "Z", "Z2"),
+  "names" = c("X", "Y", "Z", "Z2"),
   row.names = c(NA, 3L), class = "data.frame"
   )
 
@@ -204,7 +204,7 @@ test_that("Reading NAs and NaN values", {
     Z = c(NA, 99, NA),
     Z2 = c(1, NA, NA)
   ),
-  .Names = c("X", "Y", "Z", "Z2"),
+  "names" = c("X", "Y", "Z", "Z2"),
   row.names = c(NA, 3L), class = "data.frame"
   )
 

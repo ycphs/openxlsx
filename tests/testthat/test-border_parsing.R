@@ -81,64 +81,64 @@ test_that("parsing border xml", {
   expected_borders <- list(
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, structure(list(theme = "6"), .Names = "theme"), structure(list(
+    ), "names" = "indexed"), NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, structure(list(theme = "6"), "names" = "theme"), structure(list(
       theme = "6"
-    ), .Names = "theme"), NULL, structure(list(
+    ), "names" = "theme"), NULL, structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), NULL, structure(list(
+    ), "names" = "indexed"), NULL, structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "3"
-    ), .Names = "theme"), structure(list(theme = "3"), .Names = "theme"),
-    structure(list(theme = "3"), .Names = "theme"), structure(list(
+    ), "names" = "theme"), structure(list(theme = "3"), "names" = "theme"),
+    structure(list(theme = "3"), "names" = "theme"), structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(theme = "6"), .Names = "theme"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(theme = "6"), "names" = "theme"), structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure(list(theme = "6"), .Names = "theme"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure(list(theme = "6"), "names" = "theme"), structure(list(
       theme = "7\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "7\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "7\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "9\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "9\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "9\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    NULL, structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    NULL, NULL, NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
+    ), "names" = "theme"),
+    NULL, structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    NULL, NULL, NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
     NULL, NULL, NULL, NULL, NULL, NULL
   )
 
@@ -147,58 +147,58 @@ test_that("parsing border xml", {
 
   expected_borders <- list(
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    structure(list(theme = "6"), .Names = "theme"), structure(list(
+    NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    structure(list(theme = "6"), "names" = "theme"), structure(list(
       theme = "6"
-    ), .Names = "theme"), NULL, NULL, NULL, NULL,
-    structure(list(indexed = "64"), .Names = "indexed"), NULL,
-    NULL, NULL, NULL, NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), NULL, NULL, NULL, NULL,
+    structure(list(indexed = "64"), "names" = "indexed"), NULL,
+    NULL, NULL, NULL, NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "7\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "7\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "9\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "9\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, NULL, NULL, NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
+    ), "names" = "indexed"), structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, NULL, NULL, NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
     NULL, NULL, NULL, NULL, NULL, NULL
   )
 
@@ -207,53 +207,53 @@ test_that("parsing border xml", {
 
 
   expected_borders <- list(
-    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), NULL,
-    NULL, NULL, NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), NULL,
+    NULL, NULL, NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), NULL, structure(list(
+    ), "names" = "indexed"), NULL, structure(list(
       indexed = "64"
-    ), .Names = "indexed"), NULL, NULL, NULL,
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), NULL, NULL, NULL,
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "3"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), NULL,
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), NULL,
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
+    ), "names" = "indexed"), structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
   )
 
@@ -262,58 +262,58 @@ test_that("parsing border xml", {
 
 
   expected_borders <- list(
-    NULL, NULL, NULL, NULL, NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, NULL, NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, NULL, NULL, structure(list(theme = "6"), .Names = "theme"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    NULL, structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    NULL, NULL, NULL, NULL, NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, NULL, NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, NULL, NULL, NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, NULL, NULL, structure(list(theme = "6"), "names" = "theme"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    NULL, structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    NULL, structure(list(theme = "5\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "3"), .Names = "theme"), structure(list(
+    ), "names" = "theme"),
+    NULL, structure(list(theme = "5\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "3"), "names" = "theme"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "6"
-    ), .Names = "theme"), NULL, structure(list(
+    ), "names" = "theme"), NULL, structure(list(
       theme = "6"
-    ), .Names = "theme"), structure(list(indexed = "64"), .Names = "indexed"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"), structure(list(indexed = "64"), "names" = "indexed"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "7\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "7\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "7\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    structure(list(theme = "9\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(theme = "9\" tint=\"-0.249977111117893"), .Names = "theme"),
-    structure(list(indexed = "64"), .Names = "indexed"), structure(list(
+    ), "names" = "theme"),
+    structure(list(theme = "9\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(theme = "9\" tint=\"-0.249977111117893"), "names" = "theme"),
+    structure(list(indexed = "64"), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), structure(list(
+    ), "names" = "indexed"), structure(list(
       indexed = "64"
-    ), .Names = "indexed"), NULL, structure(list(
+    ), "names" = "indexed"), NULL, structure(list(
       theme = "5\" tint=\"-0.249977111117893"
-    ), .Names = "theme"),
-    NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
-    NULL, NULL, structure("9\" tint=\"-0.249977111117893", .Names = "theme"),
+    ), "names" = "theme"),
+    NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
+    NULL, NULL, structure("9\" tint=\"-0.249977111117893", "names" = "theme"),
     NULL, NULL, NULL, NULL, NULL, NULL
   )
 

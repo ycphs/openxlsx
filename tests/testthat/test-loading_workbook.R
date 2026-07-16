@@ -81,7 +81,7 @@ test_that("Loading readTest.xlsx Sheet 1", {
 
   ## Sheet 3
   expected_col_widths <- structure(c("41.430625", "11.29", "11.0009375", "8.71578125"),
-    .Names = c("3", "4", "5", "6")
+    "names" = c("3", "4", "5", "6")
   )
 
   attr(expected_col_widths, "hidden") <- rep("0", 4)
@@ -183,7 +183,7 @@ test_that("Loading readTest.xlsx Sheet 1", {
 
 
   ## Column Widths
-  expected_col_widths <- structure("10.8603125", .Names = "6")
+  expected_col_widths <- structure("10.8603125", "names" = "6")
   attr(expected_col_widths, "hidden") <- "0"
   expect_equal(wb$colWidths[[1]], expected_col_widths)
 
@@ -907,16 +907,16 @@ test_that("Loading multiple pivot tables: loadPivotTables.xlsx works",{
   ## loadPivotTables.xlsx is a file with 3 pivot tables and 2 of them have the same reference data (pivotCacheDefinition)
   fl <- system.file("extdata", "loadPivotTables.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
-  
+
   # Check that wb is correctly loaded
   sheet_names <- c("iris",
                    "iris_pivot",
                    "penguins",
                    "penguins_pivot1",
                    "penguins_pivot2")
-  
+
   expect_equal(wb$sheet_names, sheet_names)
-  
+
   # Check number of 'pivotTables'
   expect_equal(length(wb$pivotTables),
                3)
@@ -931,7 +931,7 @@ test_that("Load and saving a file with Threaded Comments works", {
   wb <- loadWorkbook(fl)
   # Check that wb can be saved without error
   expect_silent(saveWorkbook(wb, file = temp_xlsx()))
-  
+
 })
 
 test_that("Read and save file with inlineStr", {
@@ -939,27 +939,27 @@ test_that("Read and save file with inlineStr", {
   fl <- system.file("extdata", "inlineStr.xlsx", package = "openxlsx")
   wb <- loadWorkbook(fl)
   wb_df <- readWorkbook(wb)
-  
+
   df <- data.frame(
     this = c("is an xlsx file", "written with writexl::write_xlsx"),
     it = c("cannot be read", "with open.xlsx::read.xlsx"),
     stringsAsFactors = FALSE)
-  
+
   # compare file imported with inlineStr
   expect_true(all.equal(df, wb_df, compare.attributes = FALSE))
-  
+
   df_read_xlsx <- read.xlsx(fl)
   df_readWorkbook <- readWorkbook(fl)
-  
+
   expect_true(all.equal(df, df_read_xlsx, compare.attributes = FALSE))
   expect_true(all.equal(df, df_readWorkbook, compare.attributes = FALSE))
-  
+
   tmp_xlsx <- temp_xlsx()
   # Check that wb can be saved without error and reimported
   expect_silent(saveWorkbook(wb, file = tmp_xlsx))
   wb_df_re <- readWorkbook(loadWorkbook(tmp_xlsx))
   expect_true(all.equal(wb_df, wb_df_re, compare.attributes = FALSE))
-  
+
 })
 
 # tests for getChildlessNode returns the content of every node, single node or not. the name has only historical meaning
@@ -973,14 +973,14 @@ test_that("read nodes", {
   # real life example <foo/> and <foo>...</foo> mixed
   cellXfs <- "<cellXfs count=\"8\"><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/><xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"3\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"5\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"6\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"7\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/><xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/></cellXfs>"
   that <- openxlsx:::getChildlessNode(cellXfs, "xf")
-  test <- c("<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"3\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"5\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"6\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"7\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>", 
-            "<xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf>", 
+  test <- c("<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>",
+            "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"3\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"5\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"6\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"7\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>",
+            "<xf numFmtId=\"0\" fontId=\"4\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\"/></xf>",
             "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>"
   )
   expect_equal(test, that)
@@ -1010,7 +1010,7 @@ test_that("read nodes", {
   that <- openxlsx:::getChildlessNode(test, "xf")
   test <- "<xf/>"
   expect_equal(test, that)
-  
+
 })
 
 test_that("sheet visibility", {
@@ -1018,7 +1018,7 @@ test_that("sheet visibility", {
   # example is rather slow (lots of hidden cols)
   fl <- system.file("extdata", "ColorTabs3.xlsx", package = "openxlsx")
   tmp_dir <- temp_xlsx()
-  
+
   exp_sheets <- c("Nums", "Chars", "hidden")
   exp_vis <- c("visible", "visible", "hidden")
 
@@ -1026,25 +1026,25 @@ test_that("sheet visibility", {
   wb <- loadWorkbook(fl)
   wb_sheets <- openxlsx::sheets(wb)
   wb_vis <- openxlsx::sheetVisibility(wb)
-  
+
   # save
   saveWorkbook(wb, tmp_dir)
-  
+
   # re-import
   wb2 <- loadWorkbook(tmp_dir)
   wb2_sheets <- openxlsx::sheets(wb)
   wb2_vis <- openxlsx::sheetVisibility(wb)
-  
+
   expect_equal(exp_sheets, wb_sheets)
   expect_equal(exp_vis, wb_vis)
-  
+
   expect_equal(exp_sheets, wb2_sheets)
   expect_equal(exp_vis, wb2_vis)
-  
+
 })
 
 test_that("test headerFooter", {
-  
+
   # Plain text headers and footers
   header = c('ODD HEAD LEFT', 'ODD HEAD CENTER', 'ODD HEAD RIGHT')
   footer = c('ODD FOOT RIGHT', 'ODD FOOT CENTER', 'ODD FOOT RIGHT')
@@ -1052,7 +1052,7 @@ test_that("test headerFooter", {
   evenFooter = c('EVEN FOOT RIGHT', 'EVEN FOOT CENTER', 'EVEN FOOT RIGHT')
   firstHeader = c('TOP', 'OF FIRST', 'PAGE')
   firstFooter = c('BOTTOM', 'OF FIRST', 'PAGE')
-  
+
   # Add Sheet 1
   wb=createWorkbook()
   addWorksheet(wb, 'Sheet 1',
@@ -1062,7 +1062,7 @@ test_that("test headerFooter", {
                evenFooter = evenFooter,
                firstHeader = firstHeader,
                firstFooter = firstFooter)
-  
+
   # Modified headers and footers to make them Arial 8
   header <- paste0('&"Arial"&8', header)
   footer <- paste0('&"Arial"&8', footer)
@@ -1070,7 +1070,7 @@ test_that("test headerFooter", {
   evenFooter <- paste0('&"Arial"&8', evenFooter)
   firstHeader <- paste0('&"Arial"&8', firstHeader)
   firstFooter <- paste0('&"Arial"&8', firstFooter)
-  
+
   # Add Sheet 2
   addWorksheet(wb, 'Sheet 2',
                header = header,
@@ -1081,17 +1081,17 @@ test_that("test headerFooter", {
                firstFooter = firstFooter)
   writeData(wb, sheet = 1, 1:400)
   writeData(wb, sheet = 2, 1:400)
-  
+
   tmp1 <- temp_xlsx()
   # Save workbook
   saveWorkbook(wb, tmp1, overwrite = TRUE)
   # Load workbook and save again
   wb2 <- loadWorkbook(tmp1)
-  
+
   expect_equal(wb$worksheets[[1]]$headerFooter,
                wb2$worksheets[[1]]$headerFooter)
-  
+
   expect_equal(wb$worksheets[[2]]$headerFooter,
                wb2$worksheets[[2]]$headerFooter)
-  
+
 })
