@@ -3830,6 +3830,7 @@ conditionalFormat <- function(wb, sheet, cols, rows, rule = NULL, style = NULL, 
 #' @param target A `Workbook` object
 #' @param current A `Workbook` object
 #' @param ... ignored
+#' @export
 all.equal.Workbook <- function(target, current, ...) {
 
 
