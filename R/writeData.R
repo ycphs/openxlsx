@@ -45,6 +45,7 @@
 #' @param na.string If not NULL, and if `keepNA` is `TRUE`, NA values are converted to this string in Excel.
 #' @param name If not NULL, a named region is defined.
 #' @param sep Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).
+#' @param overwrite If `TRUE`, remove all existing cell values from the entire target worksheet before writing `x` (not just the cells in the target write range).
 #' @seealso [writeDataTable()]
 #' @export writeData
 #' @details Formulae written using writeFormula to a Workbook object will not get picked up by read.xlsx().
@@ -176,7 +177,8 @@ writeData <- function(
   name         = NULL,
   sep          = ", ",
   col.names,
-  row.names
+  row.names,
+  overwrite    = FALSE
 ) {
 
   x <- force(x)
@@ -224,6 +226,7 @@ writeData <- function(
   assert_class(wb, "Workbook")
   assert_true_false(colNames)
   assert_true_false(rowNames)
+  assert_true_false(overwrite)
   assert_character1(sep)
   assert_class(headerStyle, "Style", or_null = TRUE)
 
@@ -304,6 +307,17 @@ writeData <- function(
     check_table_header_only = TRUE,
     error_msg               = "Cannot overwrite table headers. Avoid writing over the header row or see getTables() & removeTables() to remove the table object."
   )
+
+  if (overwrite) {
+    sheet_data <- wb$worksheets[[sheetX]]$sheet_data
+    if (sheet_data$n_elements > 0) {
+      sheet_data$delete(
+        rows_in = sheet_data$rows,
+        cols_in = sheet_data$cols,
+        grid_expand = FALSE
+      )
+    }
+  }
 
   ## write autoFilter, can only have a single filter per worksheet
   if (withFilter) {

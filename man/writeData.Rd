@@ -24,7 +24,8 @@ writeData(
   name = NULL,
   sep = ", ",
   col.names,
-  row.names
+  row.names,
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -88,6 +89,8 @@ each column. If "\code{all}" all cell borders are drawn.}
 \item{sep}{Only applies to list columns. The separator used to collapse list columns to a character vector e.g. sapply(x$list_column, paste, collapse = sep).}
 
 \item{row.names, col.names}{Deprecated, please use \code{rowNames}, \code{colNames} instead}
+
+\item{overwrite}{If \code{TRUE}, remove all existing cell values from the entire target worksheet before writing \code{x} (not just the cells in the target write range).}
 }
 \value{
 invisible(0)

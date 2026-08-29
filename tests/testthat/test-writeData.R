@@ -67,3 +67,35 @@ test_that("as.character.formula() works [312]", {
   expect_identical(before, middle, ignore.environment = TRUE)
   expect_identical(before, end,    ignore.environment = TRUE)
 })
+
+
+test_that("writeData(overwrite = TRUE) works (#536)", {
+  wb <- createWorkbook()
+  addWorksheet(wb, "sheet")
+
+  old <- data.frame(a = 1:6, b = letters[1:6], stringsAsFactors = FALSE)
+  new <- old[1:4, , drop = FALSE]
+
+  writeData(wb, "sheet", old)
+  writeData(wb, "sheet", new)
+  out_no_overwrite <- readWorkbook(wb, "sheet")
+  expect_equal(nrow(out_no_overwrite), 6)
+
+  writeData(wb, "sheet", new, overwrite = TRUE)
+  out_overwrite <- readWorkbook(wb, "sheet")
+  expect_equal(out_overwrite, new)
+
+  wb2 <- createWorkbook()
+  addWorksheet(wb2, "sheet")
+  tab_df <- data.frame(x = 1:2)
+  writeDataTable(wb2, "sheet", tab_df)
+  before <- readWorkbook(wb2, "sheet")
+
+  expect_error(
+    writeData(wb2, "sheet", data.frame(y = 1), overwrite = TRUE),
+    "Cannot overwrite table headers"
+  )
+
+  after <- readWorkbook(wb2, "sheet")
+  expect_equal(after, before)
+})
