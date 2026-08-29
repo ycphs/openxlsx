@@ -1,6 +1,5 @@
 linters: linters_with_defaults(
   line_length_linter = NULL,               # we have many long lines
-  cyclocomp_linter = NULL,                 #
   commented_code_linter = NULL,            #
   trailing_whitespace_linter = NULL,       # have a few cases
   commas_linter = NULL,                    #
@@ -19,5 +18,6 @@ linters: linters_with_defaults(
   seq_linter = NULL,
   trailing_blank_lines_linter = NULL,
   paren_body_linter = NULL,
-  semicolon_linter = NULL
+  semicolon_linter = NULL,
+  return_linter = NULL
   )
