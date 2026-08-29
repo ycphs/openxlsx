@@ -198,12 +198,13 @@ elements<a class="anchor" aria-label="anchor" href="#when-writing-a-list-the-sty
 <div class="section level3">
 <h3 id="create-workbook-and-set-default-border-colour-and-style">create workbook and set default border Colour and style<a class="anchor" aria-label="anchor" href="#create-workbook-and-set-default-border-colour-and-style"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderColour"</span> <span class="op">=</span> <span class="st">"#4F80BD"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openxlsx.borderStyle"</span> <span class="op">=</span> <span class="st">"thin"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/modifyBaseFont.html">modifyBaseFont</a></span><span class="op">(</span><span class="va">wb</span>, fontSize <span class="op">=</span> <span class="fl">10</span>, fontName <span class="op">=</span> <span class="st">"Arial Narrow"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">"ggplot2"</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"openxlsx.borderColour"</span> <span class="ot">=</span> <span class="st">"#4F80BD"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"openxlsx.borderStyle"</span> <span class="ot">=</span> <span class="st">"thin"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">modifyBaseFont</span>(wb, <span class="at">fontSize =</span> <span class="dv">10</span>, <span class="at">fontName =</span> <span class="st">"Arial Narrow"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="add-sheets">Add Sheets<a class="anchor" aria-label="anchor" href="#add-sheets"></a>
@@ -272,130 +273,131 @@ elements<a class="anchor" aria-label="anchor" href="#when-writing-a-list-the-sty
 <div class="section level2">
 <h2 id="gallery">Gallery<a class="anchor" aria-label="anchor" href="#gallery"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## inspired by xtable gallery</span></span>
-<span><span class="co">#https://CRAN.R-project.org/package=xtable/vignettes/xtableGallery.pdf</span></span>
-<span></span>
-<span><span class="co">## Create a new workbook</span></span>
-<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tli</span>, package <span class="op">=</span> <span class="st">"xtable"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## data.frame</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"data.frame"</span></span>
-<span><span class="va">my.df</span> <span class="op">&lt;-</span> <span class="va">tli</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.df</span>, borders <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## matrix</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"matrix"</span></span>
-<span><span class="va">design.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">grade</span>, data <span class="op">=</span> <span class="va">my.df</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">design.matrix</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## aov</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"aov"</span></span>
-<span><span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">ethnicty</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">disadvg</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## lm</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"lm"</span></span>
-<span><span class="va">fm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">sex</span><span class="op">*</span><span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## anova 1 </span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"anova"</span></span>
-<span><span class="va">my.anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">fm2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.anova</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## anova 2</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"anova2"</span></span>
-<span><span class="va">fm2b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tlimth</span> <span class="op">~</span> <span class="va">ethnicty</span>, data <span class="op">=</span> <span class="va">tli</span><span class="op">)</span></span>
-<span><span class="va">my.anova2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">fm2b</span>, <span class="va">fm2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.anova2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## glm</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"glm"</span></span>
-<span><span class="va">fm3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">disadvg</span> <span class="op">~</span> <span class="va">ethnicty</span><span class="op">*</span><span class="va">grade</span>, data <span class="op">=</span> <span class="va">tli</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">fm3</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## prcomp</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"prcomp"</span></span>
-<span><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">pr1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## summary.prcomp</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.prcomp"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## simple table</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"table"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span>
-<span><span class="va">airquality</span><span class="op">$</span><span class="va">OzoneG80</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&gt;</span> <span class="fl">80</span>,</span>
-<span>levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oz &lt;= 80"</span>, <span class="st">"Oz &gt; 80"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">airquality</span><span class="op">$</span><span class="va">Month</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Month</span>,</span>
-<span>levels <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">9</span>,</span>
-<span>labels <span class="op">=</span> <span class="va">month.abb</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">my.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">OzoneG80</span>,<span class="va">Month</span><span class="op">)</span> <span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">my.table</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## survdiff 1</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"survdiff1"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html" class="external-link">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">ovarian</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## survdiff 2</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"survdiff2"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">expect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survexp.html" class="external-link">survexp</a></span><span class="op">(</span><span class="va">futime</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/ratetable.html" class="external-link">ratetable</a></span><span class="op">(</span>age<span class="op">=</span><span class="op">(</span><span class="va">accept.dt</span> <span class="op">-</span> <span class="va">birth.dt</span><span class="op">)</span>,</span>
-<span>      sex<span class="op">=</span><span class="fl">1</span>,year<span class="op">=</span><span class="va">accept.dt</span>,race<span class="op">=</span><span class="st">"white"</span><span class="op">)</span>, <span class="va">jasa</span>, cohort<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>      ratetable<span class="op">=</span><span class="va">survexp.usr</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survdiff.html" class="external-link">survdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">jasa</span><span class="op">$</span><span class="va">futime</span>, <span class="va">jasa</span><span class="op">$</span><span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html" class="external-link">offset</a></span><span class="op">(</span><span class="va">expect</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## coxph 1</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"coxph1"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">bladder</span><span class="op">$</span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">bladder</span><span class="op">$</span><span class="va">rx</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pla"</span>,<span class="st">"Thi"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## coxph 2</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"coxph2"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html" class="external-link">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## cox.zph</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"cox.zph"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cox.zph.html" class="external-link">cox.zph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">futime</span>, <span class="va">fustat</span><span class="op">)</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">ecog.ps</span>,  data<span class="op">=</span><span class="va">ovarian</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## summary.coxph 1</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.coxph1"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## summary.coxph 2</span></span>
-<span><span class="va">test.n</span> <span class="op">&lt;-</span> <span class="st">"summary.coxph2"</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheetName <span class="op">=</span> <span class="va">test.n</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">stop</span>,<span class="va">event</span><span class="op">)</span> <span class="op">~</span> <span class="va">rx</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/cluster.html" class="external-link">cluster</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">bladder</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span>wb <span class="op">=</span> <span class="va">wb</span>, sheet <span class="op">=</span> <span class="va">test.n</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## view without saving</span></span>
-<span><span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="va">wb</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## inspired by xtable gallery</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co">#https://CRAN.R-project.org/package=xtable/vignettes/xtableGallery.pdf</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="do">## Create a new workbook</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="fu">data</span>(tli, <span class="at">package =</span> <span class="st">"xtable"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="do">## data.frame</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"data.frame"</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>my.df <span class="ot">&lt;-</span> tli[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> my.df, <span class="at">borders =</span> <span class="st">"n"</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="do">## matrix</span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"matrix"</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>design.matrix <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> sex <span class="sc">*</span> grade, <span class="at">data =</span> my.df)</span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> design.matrix)</span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="do">## aov</span></span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"aov"</span></span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(tlimth <span class="sc">~</span> sex <span class="sc">+</span> ethnicty <span class="sc">+</span> grade <span class="sc">+</span> disadvg, <span class="at">data =</span> tli)</span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> fm1)</span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a><span class="do">## lm</span></span>
+<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"lm"</span></span>
+<span id="cb15-28"><a href="#cb15-28" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(tlimth <span class="sc">~</span> sex<span class="sc">*</span>ethnicty, <span class="at">data =</span> tli)</span>
+<span id="cb15-29"><a href="#cb15-29" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-30"><a href="#cb15-30" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> fm2)</span>
+<span id="cb15-31"><a href="#cb15-31" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" tabindex="-1"></a><span class="do">## anova 1 </span></span>
+<span id="cb15-33"><a href="#cb15-33" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"anova"</span></span>
+<span id="cb15-34"><a href="#cb15-34" tabindex="-1"></a>my.anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(fm2)</span>
+<span id="cb15-35"><a href="#cb15-35" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-36"><a href="#cb15-36" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> my.anova)</span>
+<span id="cb15-37"><a href="#cb15-37" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" tabindex="-1"></a><span class="do">## anova 2</span></span>
+<span id="cb15-39"><a href="#cb15-39" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"anova2"</span></span>
+<span id="cb15-40"><a href="#cb15-40" tabindex="-1"></a>fm2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(tlimth <span class="sc">~</span> ethnicty, <span class="at">data =</span> tli)</span>
+<span id="cb15-41"><a href="#cb15-41" tabindex="-1"></a>my.anova2 <span class="ot">&lt;-</span> <span class="fu">anova</span>(fm2b, fm2)</span>
+<span id="cb15-42"><a href="#cb15-42" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-43"><a href="#cb15-43" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> my.anova2)</span>
+<span id="cb15-44"><a href="#cb15-44" tabindex="-1"></a></span>
+<span id="cb15-45"><a href="#cb15-45" tabindex="-1"></a><span class="do">## glm</span></span>
+<span id="cb15-46"><a href="#cb15-46" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"glm"</span></span>
+<span id="cb15-47"><a href="#cb15-47" tabindex="-1"></a>fm3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(disadvg <span class="sc">~</span> ethnicty<span class="sc">*</span>grade, <span class="at">data =</span> tli, <span class="at">family =</span> <span class="fu">binomial</span>())</span>
+<span id="cb15-48"><a href="#cb15-48" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-49"><a href="#cb15-49" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> fm3)</span>
+<span id="cb15-50"><a href="#cb15-50" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" tabindex="-1"></a><span class="do">## prcomp</span></span>
+<span id="cb15-52"><a href="#cb15-52" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"prcomp"</span></span>
+<span id="cb15-53"><a href="#cb15-53" tabindex="-1"></a>pr1 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(USArrests)</span>
+<span id="cb15-54"><a href="#cb15-54" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-55"><a href="#cb15-55" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> pr1)</span>
+<span id="cb15-56"><a href="#cb15-56" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" tabindex="-1"></a><span class="do">## summary.prcomp</span></span>
+<span id="cb15-58"><a href="#cb15-58" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"summary.prcomp"</span></span>
+<span id="cb15-59"><a href="#cb15-59" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-60"><a href="#cb15-60" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> <span class="fu">summary</span>(pr1))</span>
+<span id="cb15-61"><a href="#cb15-61" tabindex="-1"></a></span>
+<span id="cb15-62"><a href="#cb15-62" tabindex="-1"></a><span class="do">## simple table</span></span>
+<span id="cb15-63"><a href="#cb15-63" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"table"</span></span>
+<span id="cb15-64"><a href="#cb15-64" tabindex="-1"></a><span class="fu">data</span>(airquality)</span>
+<span id="cb15-65"><a href="#cb15-65" tabindex="-1"></a>airquality<span class="sc">$</span>OzoneG80 <span class="ot">&lt;-</span> <span class="fu">factor</span>(airquality<span class="sc">$</span>Ozone <span class="sc">&gt;</span> <span class="dv">80</span>,</span>
+<span id="cb15-66"><a href="#cb15-66" tabindex="-1"></a><span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb15-67"><a href="#cb15-67" tabindex="-1"></a><span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Oz &lt;= 80"</span>, <span class="st">"Oz &gt; 80"</span>))</span>
+<span id="cb15-68"><a href="#cb15-68" tabindex="-1"></a>airquality<span class="sc">$</span>Month <span class="ot">&lt;-</span> <span class="fu">factor</span>(airquality<span class="sc">$</span>Month,</span>
+<span id="cb15-69"><a href="#cb15-69" tabindex="-1"></a><span class="at">levels =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb15-70"><a href="#cb15-70" tabindex="-1"></a><span class="at">labels =</span> month.abb[<span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>])</span>
+<span id="cb15-71"><a href="#cb15-71" tabindex="-1"></a>my.table <span class="ot">&lt;-</span> <span class="fu">with</span>(airquality, <span class="fu">table</span>(OzoneG80,Month) )</span>
+<span id="cb15-72"><a href="#cb15-72" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-73"><a href="#cb15-73" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> my.table)</span>
+<span id="cb15-74"><a href="#cb15-74" tabindex="-1"></a></span>
+<span id="cb15-75"><a href="#cb15-75" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">"survival"</span>) {</span>
+<span id="cb15-76"><a href="#cb15-76" tabindex="-1"></a><span class="do">## survdiff 1</span></span>
+<span id="cb15-77"><a href="#cb15-77" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb15-78"><a href="#cb15-78" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"survdiff1"</span></span>
+<span id="cb15-79"><a href="#cb15-79" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-80"><a href="#cb15-80" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, fustat) <span class="sc">~</span> rx, <span class="at">data =</span> ovarian)</span>
+<span id="cb15-81"><a href="#cb15-81" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-82"><a href="#cb15-82" tabindex="-1"></a>}</span>
+<span id="cb15-83"><a href="#cb15-83" tabindex="-1"></a></span>
+<span id="cb15-84"><a href="#cb15-84" tabindex="-1"></a><span class="do">## survdiff 2</span></span>
+<span id="cb15-85"><a href="#cb15-85" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"survdiff2"</span></span>
+<span id="cb15-86"><a href="#cb15-86" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-87"><a href="#cb15-87" tabindex="-1"></a>expect <span class="ot">&lt;-</span> <span class="fu">survexp</span>(futime <span class="sc">~</span> <span class="fu">ratetable</span>(<span class="at">age=</span>(accept.dt <span class="sc">-</span> birth.dt),</span>
+<span id="cb15-88"><a href="#cb15-88" tabindex="-1"></a>      <span class="at">sex=</span><span class="dv">1</span>,<span class="at">year=</span>accept.dt,<span class="at">race=</span><span class="st">"white"</span>), jasa, <span class="at">cohort=</span><span class="cn">FALSE</span>,</span>
+<span id="cb15-89"><a href="#cb15-89" tabindex="-1"></a>      <span class="at">ratetable=</span>survexp.usr)</span>
+<span id="cb15-90"><a href="#cb15-90" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">Surv</span>(jasa<span class="sc">$</span>futime, jasa<span class="sc">$</span>fustat) <span class="sc">~</span> <span class="fu">offset</span>(expect))</span>
+<span id="cb15-91"><a href="#cb15-91" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-92"><a href="#cb15-92" tabindex="-1"></a></span>
+<span id="cb15-93"><a href="#cb15-93" tabindex="-1"></a><span class="do">## coxph 1</span></span>
+<span id="cb15-94"><a href="#cb15-94" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"coxph1"</span></span>
+<span id="cb15-95"><a href="#cb15-95" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-96"><a href="#cb15-96" tabindex="-1"></a>bladder<span class="sc">$</span>rx <span class="ot">&lt;-</span> <span class="fu">factor</span>(bladder<span class="sc">$</span>rx, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Pla"</span>,<span class="st">"Thi"</span>))</span>
+<span id="cb15-97"><a href="#cb15-97" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(stop,event) <span class="sc">~</span> rx, <span class="at">data =</span> bladder)</span>
+<span id="cb15-98"><a href="#cb15-98" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-99"><a href="#cb15-99" tabindex="-1"></a></span>
+<span id="cb15-100"><a href="#cb15-100" tabindex="-1"></a><span class="do">## coxph 2</span></span>
+<span id="cb15-101"><a href="#cb15-101" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"coxph2"</span></span>
+<span id="cb15-102"><a href="#cb15-102" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-103"><a href="#cb15-103" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(stop,event) <span class="sc">~</span> rx <span class="sc">+</span> <span class="fu">cluster</span>(id), <span class="at">data =</span> bladder)</span>
+<span id="cb15-104"><a href="#cb15-104" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-105"><a href="#cb15-105" tabindex="-1"></a></span>
+<span id="cb15-106"><a href="#cb15-106" tabindex="-1"></a><span class="do">## cox.zph</span></span>
+<span id="cb15-107"><a href="#cb15-107" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"cox.zph"</span></span>
+<span id="cb15-108"><a href="#cb15-108" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-109"><a href="#cb15-109" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(futime, fustat) <span class="sc">~</span> age <span class="sc">+</span> ecog.ps,  <span class="at">data=</span>ovarian))</span>
+<span id="cb15-110"><a href="#cb15-110" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-111"><a href="#cb15-111" tabindex="-1"></a></span>
+<span id="cb15-112"><a href="#cb15-112" tabindex="-1"></a><span class="do">## summary.coxph 1</span></span>
+<span id="cb15-113"><a href="#cb15-113" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"summary.coxph1"</span></span>
+<span id="cb15-114"><a href="#cb15-114" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-115"><a href="#cb15-115" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(stop,event) <span class="sc">~</span> rx, <span class="at">data =</span> bladder))</span>
+<span id="cb15-116"><a href="#cb15-116" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-117"><a href="#cb15-117" tabindex="-1"></a></span>
+<span id="cb15-118"><a href="#cb15-118" tabindex="-1"></a><span class="do">## summary.coxph 2</span></span>
+<span id="cb15-119"><a href="#cb15-119" tabindex="-1"></a>test.n <span class="ot">&lt;-</span> <span class="st">"summary.coxph2"</span></span>
+<span id="cb15-120"><a href="#cb15-120" tabindex="-1"></a><span class="fu">addWorksheet</span>(<span class="at">wb =</span> wb, <span class="at">sheetName =</span> test.n)</span>
+<span id="cb15-121"><a href="#cb15-121" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(stop,event) <span class="sc">~</span> rx <span class="sc">+</span> <span class="fu">cluster</span>(id), <span class="at">data =</span> bladder))</span>
+<span id="cb15-122"><a href="#cb15-122" tabindex="-1"></a><span class="fu">writeData</span>(<span class="at">wb =</span> wb, <span class="at">sheet =</span> test.n, <span class="at">x =</span> x)</span>
+<span id="cb15-123"><a href="#cb15-123" tabindex="-1"></a></span>
+<span id="cb15-124"><a href="#cb15-124" tabindex="-1"></a><span class="do">## view without saving</span></span>
+<span id="cb15-125"><a href="#cb15-125" tabindex="-1"></a><span class="fu">openXL</span>(wb)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="further-examples">Further Examples<a class="anchor" aria-label="anchor" href="#further-examples"></a>
@@ -403,194 +405,196 @@ elements<a class="anchor" aria-label="anchor" href="#when-writing-a-list-the-sty
 <div class="section level3">
 <h3 id="stock-price">Stock Price<a class="anchor" aria-label="anchor" href="#stock-price"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## read historical prices from yahoo finance</span></span>
-<span><span class="va">ticker</span> <span class="op">&lt;-</span> <span class="st">"CBA.AX"</span></span>
-<span><span class="va">csv.url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://query1.finance.yahoo.com/v7/finance/download/"</span>,</span>
-<span><span class="va">ticker</span>, <span class="st">"?period1=1597597610&amp;period2=1629133610&amp;interval=1d&amp;events=history&amp;includeAdjustedClose= TRue"</span><span class="op">)</span></span>
-<span><span class="va">prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="va">csv.url</span><span class="op">)</span>, as.is <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">prices</span><span class="op">$</span><span class="va">Date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span></span>
-<span><span class="va">close</span> <span class="op">&lt;-</span> <span class="va">prices</span><span class="op">$</span><span class="va">Close</span></span>
-<span><span class="va">prices</span><span class="op">$</span><span class="va">logReturns</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">close</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">]</span><span class="op">/</span><span class="va">close</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Create plot of price series and add to worksheet</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">prices</span>, <span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Close</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu">geom_line</span><span class="op">(</span>colour<span class="op">=</span><span class="st">"royalblue2"</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Price"</span>, title <span class="op">=</span> <span class="va">ticker</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu">geom_area</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"royalblue1"</span>,alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu">coord_cartesian</span><span class="op">(</span>ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">+</span><span class="fl">1.5</span><span class="op">)</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="co">## Add worksheet and write plot to sheet</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, sheetName <span class="op">=</span> <span class="st">"CBA"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Histogram of log returns</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">prices</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">logReturns</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_histogram</span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">0.0025</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Histogram of log returns"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## currency </span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">prices</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"currency"</span> <span class="co">## styles as currency in workbook</span></span>
-<span></span>
-<span><span class="co">## write historical data and  histogram of returns</span></span>
-<span><span class="fu"><a href="../reference/writeDataTable.html">writeDataTable</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="st">"CBA"</span>, x <span class="op">=</span> <span class="va">prices</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, startRow<span class="op">=</span><span class="fl">25</span>, startCol <span class="op">=</span> <span class="st">"J"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Add conditional formatting to show where logReturn &gt; 0.01 using default style</span></span>
-<span><span class="fu"><a href="../reference/conditionalFormat.html">conditionalFormat</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">1</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="op">(</span><span class="va">prices</span><span class="op">)</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,</span>
-<span>rule <span class="op">=</span> <span class="st">"$H2 &gt; 0.01"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## style log return col as a percentage  </span></span>
-<span><span class="va">logRetStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>numFmt <span class="op">=</span> <span class="st">"percentage"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, style <span class="op">=</span> <span class="va">logRetStyle</span>, rows <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>, </span>
-<span>cols <span class="op">=</span> <span class="st">"H"</span>, gridExpand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, sheet<span class="op">=</span><span class="fl">1</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span><span class="op">)</span>, widths <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## save workbook to working directory</span></span>
-<span><span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"stockPrice.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/openXL.html">openXL</a></span><span class="op">(</span><span class="st">"stockPrice.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">"ggplot2"</span>) {</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="do">## read historical prices from yahoo finance</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>ticker <span class="ot">&lt;-</span> <span class="st">"CBA.AX"</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>csv.url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://query1.finance.yahoo.com/v7/finance/download/"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>ticker, <span class="st">"?period1=1597597610&amp;period2=1629133610&amp;interval=1d&amp;events=history&amp;includeAdjustedClose= TRue"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>prices <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(csv.url), <span class="at">as.is =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>prices<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(prices<span class="sc">$</span>Date)</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>close <span class="ot">&lt;-</span> prices<span class="sc">$</span>Close</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>prices<span class="sc">$</span>logReturns <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">log</span>(close[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(close)]<span class="sc">/</span>close[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(close)<span class="sc">-</span><span class="dv">1</span>)]))</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="do">## Create plot of price series and add to worksheet</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> prices, <span class="fu">aes</span>(<span class="fu">as.Date</span>(Date), <span class="fu">as.numeric</span>(Close))) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">colour=</span><span class="st">"royalblue2"</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Price"</span>, <span class="at">title =</span> ticker) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"royalblue1"</span>,<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="fu">min</span>(prices<span class="sc">$</span>Close)<span class="sc">-</span><span class="fl">1.5</span>, <span class="fu">max</span>(prices<span class="sc">$</span>Close)<span class="sc">+</span><span class="fl">1.5</span>)) </span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="do">## Add worksheet and write plot to sheet</span></span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="at">sheetName =</span> <span class="st">"CBA"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">xy =</span> <span class="fu">c</span>(<span class="st">"J"</span>, <span class="dv">3</span>))</span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" tabindex="-1"></a><span class="do">## Histogram of log returns</span></span>
+<span id="cb16-27"><a href="#cb16-27" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> prices, <span class="fu">aes</span>(<span class="at">x =</span> logReturns)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.0025</span>) <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of log returns"</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" tabindex="-1"></a><span class="do">## currency </span></span>
+<span id="cb16-31"><a href="#cb16-31" tabindex="-1"></a><span class="fu">class</span>(prices<span class="sc">$</span>Close) <span class="ot">&lt;-</span> <span class="st">"currency"</span> <span class="do">## styles as currency in workbook</span></span>
+<span id="cb16-32"><a href="#cb16-32" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" tabindex="-1"></a><span class="do">## write historical data and  histogram of returns</span></span>
+<span id="cb16-34"><a href="#cb16-34" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="st">"CBA"</span>, <span class="at">x =</span> prices)</span>
+<span id="cb16-35"><a href="#cb16-35" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">startRow=</span><span class="dv">25</span>, <span class="at">startCol =</span> <span class="st">"J"</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" tabindex="-1"></a><span class="do">## Add conditional formatting to show where logReturn &gt; 0.01 using default style</span></span>
+<span id="cb16-38"><a href="#cb16-38" tabindex="-1"></a><span class="fu">conditionalFormat</span>(wb, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">cols =</span> <span class="fu">seq_len</span>((prices)), <span class="at">rows =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">nrow</span>(prices)<span class="sc">+</span><span class="dv">1</span>),</span>
+<span id="cb16-39"><a href="#cb16-39" tabindex="-1"></a><span class="at">rule =</span> <span class="st">"$H2 &gt; 0.01"</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" tabindex="-1"></a><span class="do">## style log return col as a percentage  </span></span>
+<span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a>logRetStyle <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">numFmt =</span> <span class="st">"percentage"</span>)</span>
+<span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="dv">1</span>, <span class="at">style =</span> logRetStyle, <span class="at">rows =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">nrow</span>(prices) <span class="sc">+</span> <span class="dv">1</span>), </span>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a><span class="at">cols =</span> <span class="st">"H"</span>, <span class="at">gridExpand =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="at">sheet=</span><span class="dv">1</span>, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span>), <span class="at">widths =</span> <span class="dv">15</span>)</span>
+<span id="cb16-48"><a href="#cb16-48" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" tabindex="-1"></a><span class="do">## save workbook to working directory</span></span>
+<span id="cb16-50"><a href="#cb16-50" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="st">"stockPrice.xlsx"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-51"><a href="#cb16-51" tabindex="-1"></a><span class="fu">openXL</span>(<span class="st">"stockPrice.xlsx"</span>)</span>
+<span id="cb16-52"><a href="#cb16-52" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="image-compression-using-pca">Image Compression using PCA<a class="anchor" aria-label="anchor" href="#image-compression-using-pca"></a>
 </h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html" class="external-link">openxlsx</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://www.rforge.net/jpeg/" class="external-link">jpeg</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">plotFn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">colvec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">colmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">colvec</span>, <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">colvec</span><span class="op">)</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">colmat</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">colmat</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">colmat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">colmat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> , <span class="op">]</span><span class="op">)</span>,</span>
-<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">colvec</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, asp <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>    bty <span class="op">=</span><span class="st">"n"</span>, frame.plot<span class="op">=</span><span class="cn">FALSE</span>, ann<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co">## Create workbook and add a worksheet, hide gridlines</span></span>
-<span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createWorkbook.html">createWorkbook</a></span><span class="op">(</span><span class="st">"Einstein"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Original Image"</span>, gridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu">readJPEG</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html" class="external-link">path.package</a></span><span class="op">(</span><span class="st">"openxlsx"</span><span class="op">)</span>, <span class="st">"einstein.jpg"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span><span class="va">width</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## write "Original Image" to cell B2</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="st">"Original Image"</span>, xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## write Object size to cell B3</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Image object size: %s bytes"</span>,</span>
-<span>                         <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="fl">0</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, big.mark<span class="op">=</span><span class="st">','</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>          xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>  <span class="co">## equivalent to startCol = 2, startRow = 3</span></span>
-<span></span>
-<span><span class="co">## Plot image</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span>, xpd <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="fu">plotFn</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## insert plot currently showing in plot window</span></span>
-<span><span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">1</span>, <span class="va">width</span>, <span class="va">height</span>, units<span class="op">=</span><span class="st">"px"</span>, startRow<span class="op">=</span> <span class="fl">5</span>, startCol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>       </span>
-<span></span>
-<span><span class="co">## SVD of covariance matrix</span></span>
-<span><span class="va">rMeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
-<span><span class="va">rowMeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"cbind"</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="va">rMeans</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">rowMeans</span></span>
-<span><span class="va">E</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">A</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># SVD on covariance matrix of A</span></span>
-<span><span class="va">pve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"Eigenvalues"</span> <span class="op">=</span> <span class="va">E</span><span class="op">$</span><span class="va">d</span>, </span>
-<span>                  <span class="st">"PVE"</span> <span class="op">=</span> <span class="va">E</span><span class="op">$</span><span class="va">d</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">E</span><span class="op">$</span><span class="va">d</span><span class="op">)</span>,</span>
-<span>                  <span class="st">"Cumulative PVE"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">E</span><span class="op">$</span><span class="va">d</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">E</span><span class="op">$</span><span class="va">d</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## write eigenvalues to worksheet</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Principal Component Analysis"</span><span class="op">)</span></span>
-<span><span class="va">hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>fontColour <span class="op">=</span> <span class="st">"#ffffff"</span>, fgFill <span class="op">=</span> <span class="st">"#4F80BD"</span>,</span>
-<span>                  halign <span class="op">=</span> <span class="st">"CENTER"</span>, textDecoration <span class="op">=</span> <span class="st">"Bold"</span>,</span>
-<span>                  border <span class="op">=</span> <span class="st">"TopBottomLeftRight"</span>, borderColour <span class="op">=</span> <span class="st">"#4F81BD"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x<span class="op">=</span><span class="st">"Proportions of variance explained by Eigenvector"</span> ,startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/mergeCells.html">mergeCells</a></span><span class="op">(</span><span class="va">wb</span>, sheet<span class="op">=</span><span class="fl">2</span>, cols<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, rows<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/setColWidths.html">setColWidths</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">12</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, x<span class="op">=</span><span class="va">pve</span>, startRow <span class="op">=</span> <span class="fl">3</span>, startCol <span class="op">=</span> <span class="fl">1</span>, borders<span class="op">=</span><span class="st">"rows"</span>, headerStyle<span class="op">=</span><span class="va">hs</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Plots</span></span>
-<span><span class="va">pve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">pve</span>, <span class="st">"Ind"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">pve</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">pve</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Ind</span>, y <span class="op">=</span> <span class="fl">100</span><span class="op">*</span><span class="va">PVE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_bar</span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Principal Component Index"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"Proportion of Variance Explained"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_line</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Write plot to worksheet 2</span></span>
-<span><span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, width <span class="op">=</span> <span class="fl">5</span>, height <span class="op">=</span> <span class="fl">4</span>, startCol <span class="op">=</span> <span class="st">"E"</span>, startRow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="co">## Plot of cumulative explained variance</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">pve</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>,<span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Ind</span>, y <span class="op">=</span> <span class="fl">100</span><span class="op">*</span><span class="va">Cumulative.PVE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span>size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"Number of PCs"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Cumulative Proportion of Variance Explained"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="fl">2</span>, width <span class="op">=</span> <span class="fl">5</span>, height <span class="op">=</span> <span class="fl">4</span>, xy<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> </span>
-<span></span>
-<span></span>
-<span><span class="co">## Reconstruct image using increasing number of PCs</span></span>
-<span><span class="va">nPCs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">200</span><span class="op">)</span></span>
-<span><span class="va">startRow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">24</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">startCol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="st">"H"</span>, <span class="st">"N"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## create a worksheet to save reconstructed images to</span></span>
-<span><span class="fu"><a href="../reference/addWorksheet.html">addWorksheet</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Reconstructed Images"</span>, zoom <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">nPCs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="va">E</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="va">nPCs</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span></span>
-<span>  <span class="va">imgHat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">A</span>  <span class="co">## project img data on to PCs</span></span>
-<span>  <span class="va">imgSize</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">V</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">imgHat</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">rMeans</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">imgHat</span> <span class="op">&lt;-</span> <span class="va">V</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">imgHat</span> <span class="op">+</span> <span class="va">rowMeans</span>  <span class="co">## reconstruct from PCs and add back row means</span></span>
-<span>  <span class="va">imgHat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">imgHat</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">imgHat</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">imgHat</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">imgHat</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">255</span><span class="op">)</span> <span class="co"># scale</span></span>
-<span>  <span class="fu">plotFn</span><span class="op">(</span><span class="va">imgHat</span><span class="op">/</span><span class="fl">255</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">## write strings to worksheet 3</span></span>
-<span>  <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Reconstructed Images"</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Number of principal components used:  %s"</span>, </span>
-<span>                    <span class="va">nPCs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="va">startCol</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">startRow</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="../reference/writeData.html">writeData</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Reconstructed Images"</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Sum of component object sizes: %s bytes"</span>,</span>
-<span>                    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">imgSize</span><span class="op">)</span>, big.mark<span class="op">=</span><span class="st">','</span><span class="op">)</span><span class="op">)</span>, <span class="va">startCol</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">startRow</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">## write reconstruced image</span></span>
-<span>  <span class="fu"><a href="../reference/insertPlot.html">insertPlot</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Reconstructed Images"</span>, <span class="va">width</span>, <span class="va">height</span>, units<span class="op">=</span><span class="st">"px"</span>,</span>
-<span>             xy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">startCol</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">startRow</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># hide grid lines</span></span>
-<span><span class="fu"><a href="../reference/showGridLines.html">showGridLines</a></span><span class="op">(</span><span class="va">wb</span>, sheet <span class="op">=</span> <span class="fl">3</span>, showGridLines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Make text above images BOLD</span></span>
-<span><span class="va">boldStyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createStyle.html">createStyle</a></span><span class="op">(</span>textDecoration<span class="op">=</span><span class="st">"BOLD"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## only want to apply style to specified cells (not all combinations of rows &amp; cols)</span></span>
-<span><span class="fu"><a href="../reference/addStyle.html">addStyle</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Reconstructed Images"</span>, style<span class="op">=</span><span class="va">boldStyle</span>, </span>
-<span>         rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">startRow</span>, <span class="va">startRow</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">startCol</span>, <span class="fl">2</span><span class="op">)</span>, </span>
-<span>         gridExpand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>  </span>
-<span></span>
-<span><span class="co">## save workbook to working directory</span></span>
-<span><span class="fu"><a href="../reference/saveWorkbook.html">saveWorkbook</a></span><span class="op">(</span><span class="va">wb</span>, <span class="st">"Image dimensionality reduction.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="co">## remove example files for cran test</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NOT_CRAN"</span>, unset <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span>, <span class="st">"false"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">file_list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"\\.xlsx"</span>,recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  <span class="va">file_list</span><span class="op">&lt;-</span><span class="va">fl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"inst/extdata"</span>,<span class="va">file_list</span><span class="op">)</span><span class="op">&amp;</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"man/"</span>,<span class="va">file_list</span><span class="op">)</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">file_list</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">file_list</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"jpeg"</span>)) {</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="fu">library</span>(jpeg)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>plotFn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>  colvec <span class="ot">&lt;-</span> <span class="fu">grey</span>(x)</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>  colmat <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">match</span>(colvec, <span class="fu">unique</span>(colvec)), <span class="at">dim =</span> <span class="fu">dim</span>(x)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  <span class="fu">image</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>(<span class="fu">dim</span>(colmat)[<span class="dv">2</span>]), <span class="at">y =</span> <span class="dv">0</span><span class="sc">:</span>(<span class="fu">dim</span>(colmat)[<span class="dv">1</span>]), <span class="at">z =</span> <span class="fu">t</span>(colmat[<span class="fu">rev</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(colmat))) , ]),</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">unique</span>(colvec), <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>    <span class="at">bty =</span><span class="st">"n"</span>, <span class="at">frame.plot=</span><span class="cn">FALSE</span>, <span class="at">ann=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>}</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="do">## Create workbook and add a worksheet, hide gridlines</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>(<span class="st">"Einstein"</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Original Image"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">readJPEG</span>(<span class="fu">file.path</span>(<span class="fu">path.package</span>(<span class="st">"openxlsx"</span>), <span class="st">"einstein.jpg"</span>))</span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">nrow</span>(A)</span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a>width <span class="ot">&lt;-</span> <span class="fu">ncol</span>(A)</span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a><span class="do">## write "Original Image" to cell B2</span></span>
+<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">1</span>, <span class="st">"Original Image"</span>, <span class="at">xy =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a><span class="do">## write Object size to cell B3</span></span>
+<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">1</span>, <span class="fu">sprintf</span>(<span class="st">"Image object size: %s bytes"</span>,</span>
+<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a>                         <span class="fu">format</span>(<span class="fu">object.size</span>(A<span class="sc">+</span><span class="dv">0</span>)[[<span class="dv">1</span>]], <span class="at">big.mark=</span><span class="st">','</span>)), </span>
+<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a>          <span class="at">xy =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))  <span class="do">## equivalent to startCol = 2, startRow = 3</span></span>
+<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a><span class="do">## Plot image</span></span>
+<span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">xpd =</span> <span class="cn">NA</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" tabindex="-1"></a><span class="fu">plotFn</span>(A)</span>
+<span id="cb17-33"><a href="#cb17-33" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a><span class="do">## insert plot currently showing in plot window</span></span>
+<span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">1</span>, width, height, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">startRow=</span> <span class="dv">5</span>, <span class="at">startCol =</span> <span class="dv">2</span>)       </span>
+<span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a><span class="do">## SVD of covariance matrix</span></span>
+<span id="cb17-38"><a href="#cb17-38" tabindex="-1"></a>rMeans <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(A)</span>
+<span id="cb17-39"><a href="#cb17-39" tabindex="-1"></a>rowMeans <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"cbind"</span>, <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">ncol</span>(A)), <span class="cf">function</span>(X) rMeans))</span>
+<span id="cb17-40"><a href="#cb17-40" tabindex="-1"></a>A <span class="ot">&lt;-</span> A <span class="sc">-</span> rowMeans</span>
+<span id="cb17-41"><a href="#cb17-41" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fu">svd</span>(A <span class="sc">%*%</span> <span class="fu">t</span>(A) <span class="sc">/</span> (<span class="fu">ncol</span>(A) <span class="sc">-</span> <span class="dv">1</span>)) <span class="co"># SVD on covariance matrix of A</span></span>
+<span id="cb17-42"><a href="#cb17-42" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Eigenvalues"</span> <span class="ot">=</span> E<span class="sc">$</span>d, </span>
+<span id="cb17-43"><a href="#cb17-43" tabindex="-1"></a>                  <span class="st">"PVE"</span> <span class="ot">=</span> E<span class="sc">$</span>d<span class="sc">/</span><span class="fu">sum</span>(E<span class="sc">$</span>d),</span>
+<span id="cb17-44"><a href="#cb17-44" tabindex="-1"></a>                  <span class="st">"Cumulative PVE"</span> <span class="ot">=</span> <span class="fu">cumsum</span>(E<span class="sc">$</span>d<span class="sc">/</span><span class="fu">sum</span>(E<span class="sc">$</span>d)))</span>
+<span id="cb17-45"><a href="#cb17-45" tabindex="-1"></a></span>
+<span id="cb17-46"><a href="#cb17-46" tabindex="-1"></a><span class="do">## write eigenvalues to worksheet</span></span>
+<span id="cb17-47"><a href="#cb17-47" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Principal Component Analysis"</span>)</span>
+<span id="cb17-48"><a href="#cb17-48" tabindex="-1"></a>hs <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">fontColour =</span> <span class="st">"#ffffff"</span>, <span class="at">fgFill =</span> <span class="st">"#4F80BD"</span>,</span>
+<span id="cb17-49"><a href="#cb17-49" tabindex="-1"></a>                  <span class="at">halign =</span> <span class="st">"CENTER"</span>, <span class="at">textDecoration =</span> <span class="st">"Bold"</span>,</span>
+<span id="cb17-50"><a href="#cb17-50" tabindex="-1"></a>                  <span class="at">border =</span> <span class="st">"TopBottomLeftRight"</span>, <span class="at">borderColour =</span> <span class="st">"#4F81BD"</span>)</span>
+<span id="cb17-51"><a href="#cb17-51" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">2</span>, <span class="at">x=</span><span class="st">"Proportions of variance explained by Eigenvector"</span> ,<span class="at">startRow =</span> <span class="dv">2</span>)</span>
+<span id="cb17-53"><a href="#cb17-53" tabindex="-1"></a><span class="fu">mergeCells</span>(wb, <span class="at">sheet=</span><span class="dv">2</span>, <span class="at">cols=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">rows=</span><span class="dv">2</span>)</span>
+<span id="cb17-54"><a href="#cb17-54" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" tabindex="-1"></a><span class="fu">setColWidths</span>(wb, <span class="dv">2</span>, <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">15</span>))</span>
+<span id="cb17-56"><a href="#cb17-56" tabindex="-1"></a><span class="fu">writeData</span>(wb, <span class="dv">2</span>, <span class="at">x=</span>pve, <span class="at">startRow =</span> <span class="dv">3</span>, <span class="at">startCol =</span> <span class="dv">1</span>, <span class="at">borders=</span><span class="st">"rows"</span>, <span class="at">headerStyle=</span>hs)</span>
+<span id="cb17-57"><a href="#cb17-57" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" tabindex="-1"></a><span class="do">## Plots</span></span>
+<span id="cb17-59"><a href="#cb17-59" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pve, <span class="st">"Ind"</span> <span class="ot">=</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(pve)))</span>
+<span id="cb17-60"><a href="#cb17-60" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pve[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,], <span class="fu">aes</span>(<span class="at">x =</span> Ind, <span class="at">y =</span> <span class="dv">100</span><span class="sc">*</span>PVE)) <span class="sc">+</span></span>
+<span id="cb17-61"><a href="#cb17-61" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb17-62"><a href="#cb17-62" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Principal Component Index"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Proportion of Variance Explained"</span>) <span class="sc">+</span></span>
+<span id="cb17-63"><a href="#cb17-63" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb17-64"><a href="#cb17-64" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" tabindex="-1"></a><span class="do">## Write plot to worksheet 2</span></span>
+<span id="cb17-66"><a href="#cb17-66" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">2</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">startCol =</span> <span class="st">"E"</span>, <span class="at">startRow =</span> <span class="dv">2</span>) </span>
+<span id="cb17-67"><a href="#cb17-67" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" tabindex="-1"></a><span class="do">## Plot of cumulative explained variance</span></span>
+<span id="cb17-69"><a href="#cb17-69" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pve[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,], <span class="fu">aes</span>(<span class="at">x =</span> Ind, <span class="at">y =</span> <span class="dv">100</span><span class="sc">*</span>Cumulative.PVE)) <span class="sc">+</span></span>
+<span id="cb17-70"><a href="#cb17-70" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Number of PCs"</span>) <span class="sc">+</span></span>
+<span id="cb17-71"><a href="#cb17-71" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Cumulative Proportion of Variance Explained"</span>)</span>
+<span id="cb17-72"><a href="#cb17-72" tabindex="-1"></a><span class="fu">insertPlot</span>(wb, <span class="dv">2</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">xy=</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="dv">2</span>)) </span>
+<span id="cb17-73"><a href="#cb17-73" tabindex="-1"></a></span>
+<span id="cb17-74"><a href="#cb17-74" tabindex="-1"></a></span>
+<span id="cb17-75"><a href="#cb17-75" tabindex="-1"></a><span class="do">## Reconstruct image using increasing number of PCs</span></span>
+<span id="cb17-76"><a href="#cb17-76" tabindex="-1"></a>nPCs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">200</span>)</span>
+<span id="cb17-77"><a href="#cb17-77" tabindex="-1"></a>startRow <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">24</span>), <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb17-78"><a href="#cb17-78" tabindex="-1"></a>startCol <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"H"</span>, <span class="st">"N"</span>), <span class="dv">2</span>)</span>
+<span id="cb17-79"><a href="#cb17-79" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" tabindex="-1"></a><span class="do">## create a worksheet to save reconstructed images to</span></span>
+<span id="cb17-81"><a href="#cb17-81" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="at">zoom =</span> <span class="dv">90</span>)</span>
+<span id="cb17-82"><a href="#cb17-82" tabindex="-1"></a></span>
+<span id="cb17-83"><a href="#cb17-83" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">length</span>(nPCs))) {</span>
+<span id="cb17-84"><a href="#cb17-84" tabindex="-1"></a>  </span>
+<span id="cb17-85"><a href="#cb17-85" tabindex="-1"></a>  V <span class="ot">&lt;-</span> E<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span>nPCs[i]]</span>
+<span id="cb17-86"><a href="#cb17-86" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> <span class="fu">t</span>(V) <span class="sc">%*%</span> A  <span class="do">## project img data on to PCs</span></span>
+<span id="cb17-87"><a href="#cb17-87" tabindex="-1"></a>  imgSize <span class="ot">&lt;-</span> <span class="fu">object.size</span>(V) <span class="sc">+</span> <span class="fu">object.size</span>(imgHat) <span class="sc">+</span> <span class="fu">object.size</span>(rMeans)</span>
+<span id="cb17-88"><a href="#cb17-88" tabindex="-1"></a>  </span>
+<span id="cb17-89"><a href="#cb17-89" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> V <span class="sc">%*%</span> imgHat <span class="sc">+</span> rowMeans  <span class="do">## reconstruct from PCs and add back row means</span></span>
+<span id="cb17-90"><a href="#cb17-90" tabindex="-1"></a>  imgHat <span class="ot">&lt;-</span> <span class="fu">round</span>((imgHat <span class="sc">-</span> <span class="fu">min</span>(imgHat)) <span class="sc">/</span> (<span class="fu">max</span>(imgHat) <span class="sc">-</span> <span class="fu">min</span>(imgHat))<span class="sc">*</span><span class="dv">255</span>) <span class="co"># scale</span></span>
+<span id="cb17-91"><a href="#cb17-91" tabindex="-1"></a>  <span class="fu">plotFn</span>(imgHat<span class="sc">/</span><span class="dv">255</span>)</span>
+<span id="cb17-92"><a href="#cb17-92" tabindex="-1"></a>  </span>
+<span id="cb17-93"><a href="#cb17-93" tabindex="-1"></a>  <span class="do">## write strings to worksheet 3</span></span>
+<span id="cb17-94"><a href="#cb17-94" tabindex="-1"></a>  <span class="fu">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
+<span id="cb17-95"><a href="#cb17-95" tabindex="-1"></a>            <span class="fu">sprintf</span>(<span class="st">"Number of principal components used:  %s"</span>, </span>
+<span id="cb17-96"><a href="#cb17-96" tabindex="-1"></a>                    nPCs[[i]]), startCol[i], startRow[i])</span>
+<span id="cb17-97"><a href="#cb17-97" tabindex="-1"></a>  </span>
+<span id="cb17-98"><a href="#cb17-98" tabindex="-1"></a>  <span class="fu">writeData</span>(wb, <span class="st">"Reconstructed Images"</span>, </span>
+<span id="cb17-99"><a href="#cb17-99" tabindex="-1"></a>            <span class="fu">sprintf</span>(<span class="st">"Sum of component object sizes: %s bytes"</span>,</span>
+<span id="cb17-100"><a href="#cb17-100" tabindex="-1"></a>                    <span class="fu">format</span>(<span class="fu">as.numeric</span>(imgSize), <span class="at">big.mark=</span><span class="st">','</span>)), startCol[i], startRow[i]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-101"><a href="#cb17-101" tabindex="-1"></a>  </span>
+<span id="cb17-102"><a href="#cb17-102" tabindex="-1"></a>  <span class="do">## write reconstruced image</span></span>
+<span id="cb17-103"><a href="#cb17-103" tabindex="-1"></a>  <span class="fu">insertPlot</span>(wb, <span class="st">"Reconstructed Images"</span>, width, height, <span class="at">units=</span><span class="st">"px"</span>,</span>
+<span id="cb17-104"><a href="#cb17-104" tabindex="-1"></a>             <span class="at">xy =</span> <span class="fu">c</span>(startCol[i], startRow[i]<span class="sc">+</span><span class="dv">3</span>))</span>
+<span id="cb17-105"><a href="#cb17-105" tabindex="-1"></a>  </span>
+<span id="cb17-106"><a href="#cb17-106" tabindex="-1"></a>}</span>
+<span id="cb17-107"><a href="#cb17-107" tabindex="-1"></a></span>
+<span id="cb17-108"><a href="#cb17-108" tabindex="-1"></a><span class="co"># hide grid lines</span></span>
+<span id="cb17-109"><a href="#cb17-109" tabindex="-1"></a><span class="fu">showGridLines</span>(wb, <span class="at">sheet =</span> <span class="dv">3</span>, <span class="at">showGridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-110"><a href="#cb17-110" tabindex="-1"></a></span>
+<span id="cb17-111"><a href="#cb17-111" tabindex="-1"></a><span class="do">## Make text above images BOLD</span></span>
+<span id="cb17-112"><a href="#cb17-112" tabindex="-1"></a>boldStyle <span class="ot">&lt;-</span> <span class="fu">createStyle</span>(<span class="at">textDecoration=</span><span class="st">"BOLD"</span>)</span>
+<span id="cb17-113"><a href="#cb17-113" tabindex="-1"></a></span>
+<span id="cb17-114"><a href="#cb17-114" tabindex="-1"></a><span class="do">## only want to apply style to specified cells (not all combinations of rows &amp; cols)</span></span>
+<span id="cb17-115"><a href="#cb17-115" tabindex="-1"></a><span class="fu">addStyle</span>(wb, <span class="st">"Reconstructed Images"</span>, <span class="at">style=</span>boldStyle, </span>
+<span id="cb17-116"><a href="#cb17-116" tabindex="-1"></a>         <span class="at">rows =</span> <span class="fu">c</span>(startRow, startRow<span class="sc">+</span><span class="dv">1</span>), <span class="at">cols =</span> <span class="fu">rep</span>(startCol, <span class="dv">2</span>), </span>
+<span id="cb17-117"><a href="#cb17-117" tabindex="-1"></a>         <span class="at">gridExpand =</span> <span class="cn">FALSE</span>)  </span>
+<span id="cb17-118"><a href="#cb17-118" tabindex="-1"></a></span>
+<span id="cb17-119"><a href="#cb17-119" tabindex="-1"></a><span class="do">## save workbook to working directory</span></span>
+<span id="cb17-120"><a href="#cb17-120" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="st">"Image dimensionality reduction.xlsx"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb17-121"><a href="#cb17-121" tabindex="-1"></a></span>
+<span id="cb17-122"><a href="#cb17-122" tabindex="-1"></a></span>
+<span id="cb17-123"><a href="#cb17-123" tabindex="-1"></a></span>
+<span id="cb17-124"><a href="#cb17-124" tabindex="-1"></a></span>
+<span id="cb17-125"><a href="#cb17-125" tabindex="-1"></a><span class="do">## remove example files for cran test</span></span>
+<span id="cb17-126"><a href="#cb17-126" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">Sys.getenv</span>(<span class="st">"NOT_CRAN"</span>, <span class="at">unset =</span> <span class="st">"true"</span>), <span class="st">"false"</span>)) {</span>
+<span id="cb17-127"><a href="#cb17-127" tabindex="-1"></a>  file_list<span class="ot">&lt;-</span><span class="fu">list.files</span>(<span class="at">pattern=</span><span class="st">"</span><span class="sc">\\</span><span class="st">.xlsx"</span>,<span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-128"><a href="#cb17-128" tabindex="-1"></a>  file_list<span class="ot">&lt;-</span>fl[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"inst/extdata"</span>,file_list)<span class="sc">&amp;!</span><span class="fu">grepl</span>(<span class="st">"man/"</span>,file_list)]</span>
+<span id="cb17-129"><a href="#cb17-129" tabindex="-1"></a>  </span>
+<span id="cb17-130"><a href="#cb17-130" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(file_list)<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
+<span id="cb17-131"><a href="#cb17-131" tabindex="-1"></a>    <span class="fu">rm</span>(file_list)</span>
+<span id="cb17-132"><a href="#cb17-132" tabindex="-1"></a>  }</span>
+<span id="cb17-133"><a href="#cb17-133" tabindex="-1"></a>}</span>
+<span id="cb17-134"><a href="#cb17-134" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
   </div>
