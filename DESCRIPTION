@@ -1,7 +1,7 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.8.1
+Version: 4.2.9
 Date: 2025-10-30
 Authors@R: 
     c(person(given = "Philipp",
@@ -57,8 +57,11 @@ Imports:
 Suggests:
     curl,
     formula.tools,
+    ggplot2,
+    jpeg,
     knitr,
     rmarkdown,
+    survival,
     testthat
 LinkingTo: 
     Rcpp
