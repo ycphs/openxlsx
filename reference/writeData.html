@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">openxlsx</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.2.9</span>
       </span>
     </div>
 
@@ -86,7 +86,8 @@
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sep <span class="op">=</span> <span class="st">", "</span>,</span>
 <span>  <span class="va">col.names</span>,</span>
-<span>  <span class="va">row.names</span></span>
+<span>  <span class="va">row.names</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -218,6 +219,10 @@ each column. If "<code>all</code>" all cell borders are drawn.</p></dd>
 
 <dt id="arg-row-names-col-names">row.names, col.names<a class="anchor" aria-label="anchor" href="#arg-row-names-col-names"></a></dt>
 <dd><p>Deprecated, please use <code>rowNames</code>, <code>colNames</code> instead</p></dd>
+
+
+<dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
+<dd><p>If <code>TRUE</code>, remove all existing cell values from the entire target worksheet before writing <code>x</code> (not just the cells in the target write range).</p></dd>
 
 </dl></div>
     <div id="value">
@@ -358,7 +363,7 @@ This is because only the formula is written and left to Excel to evaluate the fo
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>
