@@ -1,8 +1,7 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.8.1
-Date: 2025-10-30
+Version: 4.2.9
 Authors@R: 
     c(person(given = "Philipp",
              family = "Schauberger",
@@ -57,8 +56,11 @@ Imports:
 Suggests:
     curl,
     formula.tools,
+    ggplot2,
+    jpeg,
     knitr,
     rmarkdown,
+    survival,
     testthat
 LinkingTo: 
     Rcpp
@@ -102,4 +104,4 @@ Collate:
     'zzz.R'
 Roxygen: list(markdown = TRUE)
 LazyData: true
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

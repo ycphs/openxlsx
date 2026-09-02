@@ -4,7 +4,6 @@ CMD
 Calibri
 Calligra
 Colour
-Customizable
 DL
 DateTime
 FFC
@@ -37,7 +36,6 @@ asTable
 beginsWith
 bgFill
 bmp
-bool
 bottomN
 changeLastModifiedBy
 choosen
@@ -56,9 +54,7 @@ createStyle
 createWorkbook
 databar
 dateFormat
-datetime
 datetimeFormat
-datetimes
 detectDates
 dev
 df

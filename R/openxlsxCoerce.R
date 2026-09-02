@@ -8,12 +8,14 @@ openxlsxCoerce <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.default <- function(x, rowNames) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   return(x)
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.data.frame <- function(x, rowNames) {
   
   ## cbind rownames to x
@@ -26,6 +28,7 @@ openxlsxCoerce.data.frame <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.data.table <- function(x, rowNames) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   
@@ -39,6 +42,7 @@ openxlsxCoerce.data.table <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.matrix <- function(x, rowNames) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   
@@ -51,11 +55,13 @@ openxlsxCoerce.matrix <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.array <- function(x, rowNames) {
   stop("array in writeData : currently not supported")
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.aov <- function(x, rowNames) {
   x <- summary(x)
   x <- cbind(x[[1]])
@@ -66,6 +72,7 @@ openxlsxCoerce.aov <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.lm <- function(x, rowNames) {
   x <- as.data.frame(summary(x)[["coefficients"]])
   x <- cbind(data.frame("Variable" = rownames(x), stringsAsFactors = FALSE), x)
@@ -75,6 +82,7 @@ openxlsxCoerce.lm <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.anova <- function(x, rowNames) {
   x <- as.data.frame(x)
   
@@ -87,6 +95,7 @@ openxlsxCoerce.anova <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.glm <- function(x, rowNames) {
   x <- as.data.frame(summary(x)[["coefficients"]])
   x <- cbind(data.frame("row name" = rownames(x), stringsAsFactors = FALSE), x)
@@ -96,6 +105,7 @@ openxlsxCoerce.glm <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.table <- function(x, rowNames) {
   x <- as.data.frame(unclass(x))
   x <- cbind(data.frame("Variable" = rownames(x), stringsAsFactors = FALSE), x)
@@ -105,6 +115,7 @@ openxlsxCoerce.table <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.prcomp <- function(x, rowNames) {
   x <- as.data.frame(x$rotation)
   x <- cbind(data.frame("Variable" = rownames(x), stringsAsFactors = FALSE), x)
@@ -114,6 +125,7 @@ openxlsxCoerce.prcomp <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.summary.prcomp <- function(x, rowNames) {
   x <- as.data.frame(x$importance)
   x <- cbind(data.frame("Variable" = rownames(x), stringsAsFactors = FALSE), x)
@@ -131,6 +143,7 @@ openxlsxCoerce.summary.prcomp <- function(x, rowNames) {
 #' @importFrom stats pchisq
 #' @keywords internal
 #' @noRd
+#' @export
 openxlsxCoerce.survdiff <- function(x, rowNames) {
   
   
@@ -175,6 +188,7 @@ openxlsxCoerce.survdiff <- function(x, rowNames) {
 
 
 #' @noRd
+#' @export
 openxlsxCoerce.coxph <- function(x, rowNames) {
   
   ## sligthly modified print.coxph
@@ -203,6 +217,7 @@ openxlsxCoerce.coxph <- function(x, rowNames) {
 
 
 #' @noRd
+#' @export
 openxlsxCoerce.summary.coxph <- function(x, rowNames) {
   coef <- x$coefficients
   ci <- x$conf.int
@@ -223,6 +238,7 @@ openxlsxCoerce.summary.coxph <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.cox.zph <- function(x, rowNames) {
   tmp <- as.data.frame(x$table)
   x <- cbind(data.frame("row names" = rownames(tmp)), tmp)
@@ -232,6 +248,7 @@ openxlsxCoerce.cox.zph <- function(x, rowNames) {
 }
 
 #' @noRd
+#' @export
 openxlsxCoerce.hyperlink <- function(x, rowNames) {
   ## vector of hyperlinks
   class(x) <- c("character", "hyperlink")
