@@ -74,7 +74,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           std::string sp = as<std::string>(sheetPr[j]);
           char ch = *sp.rbegin();  
           if(ch != '>')
-            sp += ">";
+            sp += '>';
           sheetPr[j] = sp;
         }
       }
@@ -241,7 +241,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           if(ps_pos != std::string::npos){
             
             std::string pageSetup_tmp2 = pageSetup_tmp.substr(0, ps_pos + 9) + "2";
-            ps_pos = pageSetup_tmp.find("\"", ps_pos + 9);
+            ps_pos = pageSetup_tmp.find('\"', ps_pos + 9);
             pageSetup_tmp  = pageSetup_tmp2 + pageSetup_tmp.substr(ps_pos);
             
           }
@@ -308,7 +308,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           size_t ps_pos = drawingId_tmp.find("r:id=\"rId", 0);
           
           std::string drawingId_tmp2 = drawingId_tmp.substr(0, ps_pos + 9) + "1";
-          ps_pos = drawingId_tmp.find("\"", ps_pos + 9);
+          ps_pos = drawingId_tmp.find('\"', ps_pos + 9);
           
           drawingId_tmp  = drawingId_tmp2 + drawingId_tmp.substr(ps_pos);
           node_xml[j] = drawingId_tmp;
@@ -334,7 +334,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
           buf = conForm[ci];
           
           tmp_pos = buf.find("sqref=\"", 0);
-          end_pos = buf.find("\"", tmp_pos + 7);
+          end_pos = buf.find('\"', tmp_pos + 7);
           
           sqref = buf.substr(tmp_pos + 7, end_pos - tmp_pos - 7);
           buf = buf.substr(0, buf.find("</conditionalFormatting"));
@@ -467,7 +467,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             endPos = cell.find("</v>", 0);
             if(endPos != std::string::npos){
               pos = cell.find("<v", 0);
-              pos = cell.find(">", pos);
+              pos = cell.find('>', pos);
               v[j] = cell.substr(pos + 1, endPos - pos - 1);
               has_v = true;
             }
@@ -476,7 +476,7 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
             endPos = cell.find("</t></is>", 0);
             if(endPos != std::string::npos){
               pos = cell.find("<is><t", 0);
-              pos = cell.find(">", pos);
+              pos = cell.find('>', pos);
               v[j] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
               has_v = true;
             }

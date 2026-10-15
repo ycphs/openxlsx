@@ -326,7 +326,7 @@ List getCellInfo(std::string xmlFile,
       endPos = cell.find("</v>", 0);
       if(endPos != std::string::npos){
         pos = cell.find("<v", 0);
-        pos = cell.find(">", pos);
+        pos = cell.find('>', pos);
         v[j] = cell.substr(pos + 1, endPos - pos - 1);
         has_v = true;
       }
@@ -335,7 +335,7 @@ List getCellInfo(std::string xmlFile,
       endPos = cell.find("</t></is>", 0);
       if(endPos != std::string::npos){
         pos = cell.find("<is><t", 0);
-        pos = cell.find(">", pos);
+        pos = cell.find('>', pos);
         v[j] = cell.substr(pos + 4, endPos - pos - 4); // skip <t> and </t
         has_v = true;
       }
