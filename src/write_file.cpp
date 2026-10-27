@@ -44,7 +44,6 @@ SEXP write_worksheet_xml(std::string prior
     
   size_t n = cell_row.size();
   size_t k = unique_rows.size();
-  std::string xml;
   std::string cell_xml;
 
   // write sheet_data

@@ -426,7 +426,6 @@ SEXP loadworksheets(Reference wb, List styleObjects, std::vector<std::string> xm
         pos = xml.find("<c ", 0);
         bool has_v = false;
         bool has_f = false;
-        std::string func;
         
         size_t pos_t = pos;
         size_t pos_f = pos;

@@ -155,15 +155,8 @@ List getCellInfo(std::string xmlFile,
   
   std::string xml = read_file_newline(xmlFile);  
   std::string xml2 = "";
-  std::string rtag = "r=";
-  std::string ttag = " t=";
-  std::string stag = " s=";
   
   std::string tagEnd = "\"";
-  
-  std::string vtag = "<v>";
-  std::string vtag2 = "<v ";
-  std::string vtagEnd = "</v>";
   
   std::string cell;
   List res(6);
